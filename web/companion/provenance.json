@@ -1,0 +1,140 @@
+{
+  "source_repository": "https://github.com/YunYueSama/codex-deepseek-pet",
+  "commit": "7661c8b304c5400701f91da01b1a643a207331de",
+  "build_tools": {
+    "pillow": "11.3.0",
+    "node": "audited motion-table export only"
+  },
+  "modifications": [
+    "Selected source frames only; original art and identity retained.",
+    "4-column frame repacking, 256px animation cells and 512px idle/fallback, WebP quality88/92.",
+    "No generated new artwork, no 3D, no recoloring or watermark."
+  ],
+  "sources": {
+    "ASSET_LICENSE.md": {
+      "sha": "ef7cd63ee2672a0da5126cef06057ce0233c5843",
+      "size": 2524,
+      "sha256": "6ec5e61796b95f10eec94d46ec48c287a708fabdd494241f0d1d6cc64864625c"
+    },
+    "LICENSE": {
+      "sha": "57a0bb973d4a0a6ecc25716de05f9598dae11bf9",
+      "size": 2469,
+      "sha256": "a8191ae2c7517f8cb2326d37cd62f84cfd9c2e18cefe113077897c642dc7912b"
+    },
+    "assets/whale/actions.png": {
+      "sha": "811c8496744ad137e305b3fe595a5f4792a35af6",
+      "size": 3898755,
+      "sha256": "b3f5063653a5366f35f93e95a2717076571c67a390a99794c2b7fa35e155146b"
+    },
+    "assets/whale/dense-idle.png": {
+      "sha": "74487a6f23a7c98a2bf3c18383f7d018b0a981d9",
+      "size": 7960979,
+      "sha256": "fdd3990fee0302d41d9809007f1303663440af299e0ff979e3b67bd777d934ef"
+    },
+    "assets/whale/dense-wave.png": {
+      "sha": "f9fc5cf57b041e6b30d2ee6abd10a34602b09554",
+      "size": 8204942,
+      "sha256": "d55956f8d50c321760cefa52d594fd93fd804a9c3efa22a0b371e4a601138246"
+    },
+    "assets/whale/expressions.png": {
+      "sha": "018d1ad59c9775978b77cb29522ed50f4d46acc7",
+      "size": 3905134,
+      "sha256": "26a9b0edbad1ce1a39011f3daa37165a1dce2aff251f371deeba455807f377e1"
+    },
+    "assets/whale/idle-front.png": {
+      "sha": "e19f88b5826aba89ea2aa0d086d31d40c9def912",
+      "size": 1516887,
+      "sha256": "79d3952acfe7620e0c2cfe7b80e9e6793d5f115252962f81cd56778402f4cdcd"
+    },
+    "assets/whale/inbetween-jump.png": {
+      "sha": "57a799bdb58d7347f1ae5a0ef2162d9bc570fc5e",
+      "size": 11809882,
+      "sha256": "bd20261358afc94b31f853185535339fe2bdb3ab41e228d041a291b306bf561e"
+    },
+    "assets/whale/inbetween-sleep.png": {
+      "sha": "f7b68276899a3510c030f48de2800f69cf8aba9b",
+      "size": 10862152,
+      "sha256": "ae84e50e24b100895d4516641f9afba9805facd27175412a58a0d38decde789f"
+    },
+    "assets/whale/inbetween-walk.png": {
+      "sha": "c84213762f8cba68b4d502dd13771983831763e9",
+      "size": 3686066,
+      "sha256": "5099d6537802f7a2c37477f0c28c6970dfb591dd586cdd10ee7a1afacf784bf5"
+    },
+    "assets/whale/manifest.json": {
+      "sha": "3f257c0d39ba7dc0366f187f6f5ea1b052dd7c20",
+      "size": 322,
+      "sha256": "902bb1a74044b3dc6c65abb9b7a6e415d932eae9e9502ce3ef4eba11e6fa5495"
+    },
+    "assets/whale/motion-turn.png": {
+      "sha": "ae0a096e5c1df658bb9626d9c3901e1803c425ac",
+      "size": 1755160,
+      "sha256": "e79e099104e944dde81b0a5b67d1346ed621c093d317f8dea734e4a07611e1b7"
+    },
+    "assets/whale/portrait.png": {
+      "sha": "4afdeae2b6f5212c6c17006ff22847bfa5d4d57e",
+      "size": 769600,
+      "sha256": "305ad2d0fa313df0a3ee16cd72ff4e7a5d89b6253b5a8fca2d06e40e682a563f"
+    },
+    "assets/whale/story-token.png": {
+      "sha": "50edf1bab5aa1de428f6e39bb12c8b8d39fc10f3",
+      "size": 4700739,
+      "sha256": "adea92450d09b804bde8e49b977aa24e7b46088d0cc36c7aaba22811d048b1bf"
+    },
+    "src/renderer/motion.js": {
+      "sha": "2f04719943e4a4a1a36c7d3132b90ba2d12a0085",
+      "size": 12312,
+      "sha256": "9494bb0cc065048fad1678a016ffb847745684243854c94af8e7ab54688d01ed"
+    }
+  },
+  "outputs": {
+    "actions.webp": {
+      "bytes": 29438,
+      "sha256": "8ff2e4687bb7f95bbc22311239313e2c965c3e3af233f3618ce2c5e1ab1c10ad"
+    },
+    "dense-idle.webp": {
+      "bytes": 59996,
+      "sha256": "b0e72e7f8042acb750511327c78e18b0d5f4015b5502225c51876be838eedbdf"
+    },
+    "dense-wave.webp": {
+      "bytes": 238044,
+      "sha256": "a2ef035115ad567d4412f26dd6445bd1c89d942e3e4d730d79b98693863bd338"
+    },
+    "expressions.webp": {
+      "bytes": 14904,
+      "sha256": "3d5df57351088e1ba609cb201c21f91b5acf51064e828d5d94b6219a19f95c32"
+    },
+    "idle-front.webp": {
+      "bytes": 72930,
+      "sha256": "fc43532cd59eb2f15cea795d75c2fc5f97df53f535d2417a7aa3253e3200e2b5"
+    },
+    "inbetween-jump.webp": {
+      "bytes": 159946,
+      "sha256": "f569360d92e608c5b6c834c694e2b9f9f86257bd084024a60188fc06a248a264"
+    },
+    "inbetween-sleep.webp": {
+      "bytes": 243670,
+      "sha256": "996744086c531d54f0a62df8dc36858c49a2811e925ed4d5386a19a27fb73bbf"
+    },
+    "inbetween-walk.webp": {
+      "bytes": 235038,
+      "sha256": "047967b8bd593cbf1f5ff7514f3363728a12d98826abe396c0d199f3fe3b6c84"
+    },
+    "story-token.webp": {
+      "bytes": 44526,
+      "sha256": "8a3d6e7c3730ba375b2e50952000b6ebeff0d7c8fa8a2558fe960ba945ca0c36"
+    },
+    "portrait.webp": {
+      "bytes": 42280,
+      "sha256": "4501a6817946effb7427b206670fc1a4427a07f5381a3346d2c3fc016b29d3ca"
+    }
+  },
+  "runtime_image_bytes": 1140772,
+  "clip_origin": "src/renderer/motion.js final clips, including selected in-between frames and original duration_ms",
+  "standard_license_text": {
+    "url": "https://raw.githubusercontent.com/tegnike/deepseek-chan-vrm/3aceb037df7a8b8126efea89d3a75664d1af868d/LICENSE",
+    "git_blob_sha": "7cdbe0b482f604a06a0988dad8877ae8d9257f7d",
+    "sha256": "e66c269d4819aaab34b49ef5220c4ddab6756f21bb5180761a4eb8561f2b7bbd"
+  },
+  "scope": "Noncommercial course/personal demo; source licenses and underlying character conditions retained."
+}

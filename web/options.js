@@ -1241,6 +1241,7 @@
     let failure;
     let failureCode;
     let failureDiagnostics;
+    const finishActivity = window.FinPilotActivities?.begin('options');
     try {
       await expirationQueue;
       if (controller.signal.aborted) return;
@@ -1300,6 +1301,7 @@
         errorBox.scrollIntoView({ block: 'nearest', behavior: document.documentElement.dataset.motion === 'reduced' ? 'instant' : 'smooth' });
       }
     } finally {
+      finishActivity?.(controller.signal.aborted ? 'cancelled' : failure ? 'failed' : 'completed');
       clearTimeout(timer);
       if (currentRequest === controller) {
         currentRequest = null;

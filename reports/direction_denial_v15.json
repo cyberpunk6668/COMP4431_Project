@@ -1,0 +1,73 @@
+{
+  "checked_at": "2026-11-11T12:39:56.446907+00:00",
+  "status": "narrow_fix_verified_offline",
+  "scope": "A bounded interpretation-denial fix, unit/consumer regressions, and replay of a prior model output over public archived market data. This is NOT a new live model acceptance.",
+  "external_calls": {
+    "llm": 0,
+    "ibkr": 0,
+    "http": 0
+  },
+  "project_credentials_or_user_database_read": false,
+  "dotenv_loading_disabled": true,
+  "changed_files": [
+    "app/options_claims.py",
+    "tests/test_options_claims.py"
+  ],
+  "change": "Only _read_as_denial: add Chinese 说/断言 with the strict financial-term suffix, including 看涨/看跌 and coordinated 放大/缩小; leave the general negation regex unchanged.",
+  "tests": {
+    "passed": 243,
+    "failed": 0,
+    "files": [
+      "tests/test_options_claims.py",
+      "tests/test_history_chat.py",
+      "tests/test_options_chat.py",
+      "tests/test_options_expert_v14.py"
+    ],
+    "coverage": [
+      "Explicit cannot-say/claim increase denials accepted.",
+      "Unrelated forecast/risk disclaimers do not negate later directions.",
+      "A statement after punctuation or 但 remains a direction.",
+      "Factual negatives and affirmative double negatives remain claims.",
+      "The historical consumer still rejects unknown evidence IDs."
+    ]
+  },
+  "prior_output_replay": {
+    "diagnostic_file": "tmp/options-validation-v12-be9f228940894738ae91e5104fb45d03.json",
+    "diagnostic_recorded_at": "2026-11-11T12:33:47.832425+00:00",
+    "diagnostic_sha256": "e89ab03fc28e4e2c6b08c95d1d05f0141e08930e0ff216861db3177b5798dc3b",
+    "original_error": "Incomparable historical changes cannot establish direction",
+    "recognized_directions_after_fix": [
+      [],
+      [],
+      [],
+      [],
+      []
+    ],
+    "retrieved_sources": [
+      "expert.history_bars",
+      "expert.history_volume",
+      "expert.oi_cycle",
+      "expert.put_call",
+      "expert.contract_identity",
+      "expert.history_time"
+    ],
+    "unmodified_output_result": "rejected",
+    "next_error": "paragraph 5: Expert citation is unrelated to recognized claims in its paragraph: expert.contract_identity,expert.oi_cycle",
+    "original_diagnostic_edited": false
+  },
+  "offline_citation_only_draft": {
+    "result": "complete_validate_passed",
+    "not_live_success": true,
+    "edit": "Removed only expert.contract_identity and expert.oi_cycle from paragraph 5; text and all h.* references unchanged.",
+    "draft_used_as_canonical_answer": false
+  },
+  "remaining_limitations": [
+    "Finite lexical checks are not general semantic entailment.",
+    "上行/下行 are not in the existing direction pattern; that separate vocabulary boundary was not expanded for this fix.",
+    "The original second model output remains rejected for unrelated expert citations, despite correcting the direction false positive."
+  ],
+  "source_hashes": {
+    "app/options_claims.py": "92635137fde703a998086e7dc75ad3cc09e710042f2fb470cb686f763cd04048",
+    "tests/test_options_claims.py": "2e96a4fd1614358e27f69413c2a0b84d7a9d761ac7189f00e98b4891198d2f7a"
+  }
+}

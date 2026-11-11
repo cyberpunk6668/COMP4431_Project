@@ -13,13 +13,18 @@ const state = { language: localStorage.getItem('finpilot-language') === 'en' ? '
 Object.assign(state, {
   theme: localStorage.getItem('finpilot-theme') === 'dark' ? 'dark' : 'light',
   engine: localStorage.getItem('finpilot-engine') || 'deepseek', models: [],
-  avatarMode: localStorage.getItem('finpilot-avatar-mode') === '2d' ? '2d' : '3d',
+  avatarCharacter: localStorage.getItem('finpilot-avatar-character') === 'robot' ? 'robot' : 'whale',
+  avatarMode: localStorage.getItem('finpilot-avatar-character') === 'robot' && localStorage.getItem('finpilot-avatar-mode') !== '2d' ? '3d' : '2d',
   avatarState: 'idle', avatar: null, speech: null, speechStarted: false, avatarRenderStatus: null,
   reducedMotion: localStorage.getItem('finpilot-reduced-motion') === 'true',
   panelExpanded: innerWidth > 1180, smallLayout: innerWidth <= 1180,
   osReducedMotion: motionMedia.matches, calculationSequence: 0, menuOpen: false,
   analysisContext: null, analysisHistory: [], contextBusy: false, refreshing: false, sessionSequence: 0, drafts: new Map(),
+  remoteBusy:false, companionClient:null, companionConnection:null, companionActivities:[], pendingSharedSession:null,
 });
+const companionLocalActivities = new Map();
+const companionMessageHighWater = new Map();
+let companionActivityErrorTimer = null;
 
 const translations = {
   zh: {
@@ -166,6 +171,8 @@ function warningText(code, analysisContext = false) {
   return warningLabels[code]?.[state.language === 'zh' ? 0 : 1] || (state.language === 'zh' ? '当前回答存在服务限制，请核实信息来源。' : 'A service limitation applies. Please verify the cited sources.');
 }
 
+Object.assign(translations.zh,{navHelp:'使用指南',helpPromptLabel:'不熟悉操作？',helpHistory:'怎么做历史复盘？',helpPet:'怎么连接桌宠？',helpModels:'怎么切换回答模型？',helpManual:'查看手册 ↗'});
+Object.assign(translations.en,{navHelp:'Usage guide',helpPromptLabel:'Need a hand?',helpHistory:'How do I review history?',helpPet:'How do I connect the pet?',helpModels:'How do I switch models?',helpManual:'Read the guide ↗'});
 function t(key) { return translations[state.language][key] || key; }
 function element(tag, className, content) { const el = document.createElement(tag); if (className) el.className = className; if (content !== undefined) el.textContent = content; return el; }
 function safeURL(url) { try { const parsed = new URL(url); return ['https:', 'http:'].includes(parsed.protocol) ? parsed.href : null; } catch { return null; } }
@@ -175,6 +182,8 @@ function toast(message) { clearTimeout(state.toastTimer); $('#toast').textConten
 async function api(path, options = {}) {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), options.timeout || 70000);
+  const finishActivity = path === '/api/calculate' && options.method === 'POST' ? beginCompanionActivity('calculate') : null;
+  let activityStatus = 'failed';
   try {
     const response = await fetch(path, { ...options, headers: { 'Content-Type': 'application/json', ...options.headers }, signal: controller.signal });
     let data;
@@ -184,12 +193,90 @@ async function api(path, options = {}) {
       const message = Array.isArray(detail) ? detail.map(item => `${(item.loc || []).slice(1).join('.')}: ${item.msg}`).join('; ') : typeof detail === 'string' ? detail : detail.message || JSON.stringify(detail);
       const error = new Error(message); error.detail = detail; error.status = response.status; throw error;
     }
-    return data;
+    activityStatus = 'completed'; return data;
   } catch (error) {
-    if (error.name === 'AbortError') throw new Error(t('timeout'));
+    if (error.name === 'AbortError') { activityStatus = 'cancelled'; throw new Error(t('timeout')); }
     if (error instanceof TypeError) throw new Error(t('disconnected'));
     throw error;
-  } finally { clearTimeout(timer); }
+  } finally { clearTimeout(timer); finishActivity?.(activityStatus); }
+}
+
+function isCurrentSharedSession() {
+  return Boolean(state.sessionId && state.companionConnection?.session_id === state.sessionId);
+}
+function companionText(zh,en) { return state.language === 'zh' ? zh : en; }
+function renderCompanionConnection() {
+  const copy={character:['展示形象','Character'],whale:['鲸鱼娘 · 2D','Whale maid · 2D'],robot:['原有机器人 · 2D/3D','Legacy robot · 2D/3D'],shareTitle:['让桌宠接着聊','Continue with the desktop pet'],connect:['连接当前会话','Connect this conversation'],disconnect:['断开','Disconnect'],preview:['打开桌宠网页预览 ↗','Open pet browser preview ↗'],credits:['角色来源与非商业许可 ↗','Character credits & noncommercial license ↗']};
+  document.querySelectorAll('[data-companion-copy]').forEach(node=>{const pair=copy[node.dataset.companionCopy];if(pair)node.textContent=pair[state.language==='zh'?0:1];});
+  const current=state.companionConnection,status=$('#companion-connection-status');
+  if (!status) return;
+  if(!current)status.textContent=companionText('桌宠同步尚未连接；聊天和计算仍可使用。','Pet sync is not connected; chat and calculations remain available.');
+  else if(!current.session_id)status.textContent=companionText('只同步你明确连接的会话。连接和动作不会调用模型。','Only an explicitly connected conversation is shared. Connecting and gestures make no model calls.');
+  else if(isCurrentSharedSession())status.textContent=current.desktop_connected?companionText('Windows桌宠正在共享当前会话及报告。','The Windows pet shares this conversation and report.'):companionText('当前会话已连接；Windows桌宠未在线，可先启动桌宠。','This conversation is connected; start the Windows pet to continue there.');
+  else status.textContent=companionText('桌宠仍连接另一会话；当前页面不会自动切换。','The pet remains linked to another conversation; this page will not switch automatically.');
+  status.dataset.shared=String(isCurrentSharedSession());status.dataset.desktopConnected=String(Boolean(current?.desktop_connected));
+  $('#companion-connect').disabled=conversationLocked()||!state.companionClient;
+  $('#companion-disconnect').disabled=!current?.session_id;
+}
+function refreshCompanionActivity() {
+  const activities=isCurrentSharedSession()?state.companionActivities:[];
+  state.remoteBusy=activities.some(item=>['chat','refresh'].includes(item.kind));
+  setBusy(state.busy);if(state.avatarState!=='error')settleAvatar();renderCompanionConnection();
+}
+function beginCompanionActivity(kind,phase) {
+  const id=crypto.randomUUID(),sid=state.sessionId;
+  const item={operation_id:id,kind,phase,status:'started'};companionLocalActivities.set(id,item);
+  const publish=status=>state.companionClient?.publishActivity({operationId:id,kind,status,sessionId:sid,phase});
+  publish('started');const heartbeat=setInterval(()=>publish('started'),25000);
+  settleAvatar();let ended=false;
+  const finish=(status='completed')=>{
+    if(ended)return;ended=true;clearInterval(heartbeat);companionLocalActivities.delete(id);publish(status);
+    if(status==='failed'&&!state.busy&&!state.remoteBusy&&!companionLocalActivities.size){setAvatarState('error');clearTimeout(companionActivityErrorTimer);companionActivityErrorTimer=setTimeout(settleAvatar,4000);}
+    else settleAvatar();
+  };
+  item.finish=finish;return finish;
+}
+window.FinPilotActivities=Object.freeze({begin:beginCompanionActivity});
+function applySharedSession(session) {
+  if(!session||session.id!==state.sessionId)return;
+  const highWater=Math.max(0,...(session.messages||[]).map(message=>Number.isInteger(message.id)?message.id:0));
+  if(highWater<(companionMessageHighWater.get(session.id)||0))return;
+  companionMessageHighWater.set(session.id,highWater);
+  state.messages=Array.isArray(session.messages)?session.messages:[];
+  state.analysisContext=session.active_analysis||null;state.analysisHistory=[];syncAnalysisHistory(session.analysis_history);
+  renderMessages();renderAnalysisContext();renderSessions();
+}
+function shareCompanionPreferences() {
+  if(isCurrentSharedSession())state.companionClient?.setPreferences({language:state.language,engine:state.engine}).catch(error=>showError(error.message));
+}
+function initializeCompanionConnection() {
+  if(state.companionClient||!window.FinPilotCompanionClient)return;
+  state.companionClient=window.FinPilotCompanionClient.create({surface:'workspace',shouldSync:sid=>sid===state.sessionId,
+    onConnection:connection=>{
+      state.companionConnection=connection;
+      if(isCurrentSharedSession()) {
+        const changed=state.language!==connection.language;
+        state.language=connection.language;state.engine=connection.engine;
+        localStorage.setItem('finpilot-language',state.language);localStorage.setItem('finpilot-engine',state.engine);
+        if(changed)applyLanguage();else{renderModelOptions();setHealthBadge();renderModelSwitchStatus();}
+      }
+      state.companionActivities=connection.activities||[];refreshCompanionActivity();
+    },
+    onSession:session=>{if(state.busy){state.pendingSharedSession=session;state.analysisContext=session.active_analysis||null;syncAnalysisHistory(session.analysis_history);renderAnalysisContext();}else applySharedSession(session);},
+    onActivity:(activities,event)=>{
+      state.companionActivities=activities;refreshCompanionActivity();
+      if(isCurrentSharedSession()&&event?.payload?.status==='failed'&&!state.busy&&!activities.length){setAvatarState('error');clearTimeout(companionActivityErrorTimer);companionActivityErrorTimer=setTimeout(settleAvatar,4000);}
+    },
+    onStatus:value=>{if(!value.connected&&value.error)$('#companion-connection-status').textContent=companionText('桌宠同步暂时断开；将自动重连，不会自动重新提问。','Pet sync disconnected; reconnecting without resending questions.');},
+  });
+  window.finPilotCompanionClient=state.companionClient;renderCompanionConnection();
+}
+async function connectCurrentCompanion() {
+  if(conversationLocked()||!state.companionClient)return;
+  try {
+    if(!state.sessionId){const session=await api('/api/sessions',{method:'POST',body:JSON.stringify({title:companionText('桌宠对话','Companion conversation')})});state.sessionId=session.id;localStorage.setItem('finpilot-session',session.id);await loadSessions();}
+    await state.companionClient.connect(state.sessionId,{language:state.language,engine:state.engine});renderCompanionConnection();
+  }catch(error){showError(error.message);}
 }
 
 const diagnosticCopy = {
@@ -250,7 +337,7 @@ function showDiagnosticError(message, diagnostics) {
   if (rendered) $('#error-banner').append(rendered);
 }
 
-function conversationLocked() { return state.busy || state.contextBusy; }
+function conversationLocked() { return state.busy || state.contextBusy || state.remoteBusy; }
 function analysisModelName() { return state.models.find(model => model.id === state.engine)?.label || (state.engine === 'local' ? t('localModelLabel') : 'DeepSeek'); }
 function analysisTime(value) {
   const stamp = new Date(value || '');
@@ -460,6 +547,7 @@ async function attachOptionAnalysisReport(report, prompt) {
 window.FinPilotAnalysis = { attach:attachOptionAnalysisReport, isBusy:conversationLocked, renderComparison:renderRefreshComparison };
 
 function renderAnalysisReply(context) {
+  if (window.FinPilotMessages) return window.FinPilotMessages.renderAnalysisParts(context, {language:state.language,onOpenAnalysis:viewSavedAnalysis,renderMetadata:addAnalysisMetadata});
   const wrapper = element('section', 'message-analysis-context'); wrapper.dataset.analysisId = context.analysis_id || '';
   wrapper.append(element('h3', '', context.analysis_kind === 'historical_options' ? (state.language === 'zh' ? '本条回答依据的历史复盘' : 'Historical review used for this answer') : t('analysisReply'))); addAnalysisMetadata(wrapper, context);
   if (context.retrieval?.hits?.length) {
@@ -598,7 +686,9 @@ function setAvatarState(next) {
 }
 
 function settleAvatar() {
-  setAvatarState(state.busy ? 'thinking' : state.recording ? 'listening' : state.speechStarted ? 'speaking' : 'idle');
+  const operations = [...companionLocalActivities.values(), ...(isCurrentSharedSession() ? state.companionActivities : [])];
+  const voice = operations.find(item=>item.kind==='speech' && item.phase==='listening') ? 'listening' : operations.find(item=>item.kind==='speech' && item.phase==='speaking') ? 'speaking' : null;
+  setAvatarState(state.recording ? 'listening' : state.speechStarted ? 'speaking' : voice || (state.busy || state.remoteBusy || operations.length ? 'thinking' : 'idle'));
 }
 
 function syncAssistantPanel() {
@@ -611,25 +701,41 @@ function syncAssistantPanel() {
 }
 
 function setAvatarMode(mode) {
-  state.avatarMode = mode;
-  localStorage.setItem('finpilot-avatar-mode', mode);
-  $('#avatar-2d').setAttribute('aria-pressed', String(mode === '2d'));
-  $('#avatar-3d').setAttribute('aria-pressed', String(mode === '3d'));
-  state.avatar?.setMode(mode);
+  state.avatarMode = state.avatarCharacter === 'whale' ? '2d' : mode;
+  if (state.avatarCharacter === 'robot') localStorage.setItem('finpilot-avatar-mode', state.avatarMode);
+  $('#avatar-2d').setAttribute('aria-pressed', String(state.avatarMode === '2d'));
+  $('#avatar-3d').setAttribute('aria-pressed', String(state.avatarMode === '3d'));
+  $('.avatar-mode-control').hidden = state.avatarCharacter === 'whale';
+  $('#avatar-character').value = state.avatarCharacter;
+  state.avatar?.setMode?.(state.avatarMode);
   renderAvatarStatus();
+}
+
+function setAvatarCharacter(character) {
+  if (!['whale','robot'].includes(character)) return;
+  state.avatar?.destroy(); state.avatar = null; state.avatarRenderStatus = null;
+  state.avatarCharacter = character; localStorage.setItem('finpilot-avatar-character',character);
+  state.avatarMode = character === 'whale' ? '2d' : localStorage.getItem('finpilot-avatar-mode') === '2d' ? '2d' : '3d';
+  $('#avatar-stage').replaceChildren(); setAvatarMode(state.avatarMode); mountAvatar();
 }
 
 function renderAvatarStatus() {
   const status = state.avatarRenderStatus || state.avatar?.getStatus();
   if (!status) return;
-  $('#avatar-renderer').textContent = status.renderer === 'webgl2' ? '3D / WEBGL' : '2D / SVG';
-  $('#avatar-explanation').textContent = status.fallbackReason && state.avatarMode === '3d' ? t('avatarFallback') : t('avatarExplanation');
+  if (state.avatarCharacter === 'whale') {
+    $('#avatar-renderer').textContent = status.renderer === 'canvas2d' ? '2D / SPRITE' : status.renderer === 'static-image' ? '2D / STATIC' : '2D / UNAVAILABLE';
+    $('#avatar-explanation').textContent = state.language === 'zh' ? '同款鲸鱼娘序列动画；动作表示操作状态，不表示市场判断。' : 'Whale-maid sprite animation; motion represents activity, not market judgment.';
+  } else {
+    $('#avatar-renderer').textContent = status.renderer === 'webgl2' ? '3D / WEBGL' : '2D / SVG';
+    $('#avatar-explanation').textContent = status.fallbackReason && state.avatarMode === '3d' ? t('avatarFallback') : t('avatarExplanation');
+  }
 }
 
 function mountAvatar() {
-  if (state.avatar || !window.FinPilotAvatar) return;
+  const renderer = state.avatarCharacter === 'whale' ? window.FinPilotCompanion : window.FinPilotAvatar;
+  if (state.avatar || !renderer) return;
   try {
-    state.avatar = window.FinPilotAvatar.mount($('#avatar-stage'), { language: state.language, mode: state.avatarMode });
+    state.avatar = renderer.mount($('#avatar-stage'), { language: state.language, mode: state.avatarMode, reducedMotion:motionStopped() });
     // Expose the documented renderer status for diagnostics and acceptance checks.
     window.finPilotAvatarInstance = state.avatar;
     state.avatar.setReducedMotion(motionStopped());
@@ -682,6 +788,7 @@ function changeModel(engine) {
   renderModelOptions(); setHealthBadge(); renderModelSwitchStatus(); renderAnalysisContext();
   animateElement($('.model-detail'), [{ opacity:.6, transform:'translateY(5px)' }, { opacity:1, transform:'translateY(0)' }]);
   animateElement($('.composer-context'), [{ backgroundColor:'rgba(219,168,90,.18)' }, { backgroundColor:'rgba(219,168,90,0)' }], { duration:450 });
+  shareCompanionPreferences();
 }
 
 function renderModelOptions() {
@@ -733,6 +840,7 @@ function applyLanguage() {
   applyMotionPreference(); renderModelSwitchStatus();
   state.avatar?.setLanguage(state.language); setAvatarState(state.avatarState); renderAvatarStatus(); updateSpeechControls();
   setHealthBadge(); renderSessions(); renderMessages(); renderAnalysisContext(); renderCalculatorFields(); updateVoiceUI();
+  renderCompanionConnection();
 }
 
 function setHealthBadge() {
@@ -812,6 +920,7 @@ async function selectSession(id) {
     cancelSpeech(); settleAvatar();
     showError(''); renderMessages(); renderSessions(); closeSidebar();
     localStorage.setItem('finpilot-session', session.id);
+    refreshCompanionActivity(); renderCompanionConnection();
   } catch (error) { showError(t('errorPrefix') + error.message); }
   finally { setContextBusy(false); }
 }
@@ -824,6 +933,7 @@ function resetConversation() {
   $('#message-input').value = ''; $('#message-input').style.height = '';
   showError(''); renderMessages(); renderSessions(); closeSidebar();
   cancelSpeech(); settleAvatar();
+  refreshCompanionActivity(); renderCompanionConnection();
   window.scrollTo({ top: 0, behavior: scrollBehavior() }); $('#message-input').focus();
 }
 
@@ -860,6 +970,7 @@ function appendInline(parent, text, sources, depth = 0) {
 }
 
 function renderAnswer(body, content, sourceList, analysisReferences = new Map()) {
+  if (window.FinPilotMessages) return window.FinPilotMessages.renderAnswer(body,content,sourceList,analysisReferences,{language:state.language});
   const sources = new Map(sourceList.map((source, index) => [source.id, { ...source, expertNumber:index + 1 }]));
   for (const [id, record] of analysisReferences) sources.set(id, record);
   let paragraph = [], list = null, fence = null, codeLines = [];
@@ -894,13 +1005,16 @@ function renderAnswer(body, content, sourceList, analysisReferences = new Map())
 
 function renderMessage(message) {
   const isUser = message.role === 'user';
+  const projectHelp = !isUser && window.FinPilotMessages?.extractProjectHelp(message);
   const sources = Array.isArray(message.sources) ? message.sources : [];
   const article = element('article', `message ${isUser ? 'user' : 'assistant'}`);
+  if (message.id !== undefined) article.dataset.messageId = String(message.id);
   const header = element('div', 'message-header');
   header.append(element('span', 'message-avatar', isUser ? (state.language === 'zh' ? '你' : 'Y') : 'F'), element('span', 'message-author', isUser ? t('user') : t('assistant')));
   if (!isUser && message.mode) {
     let modeLabel;
-    if (!sources.length && message.mode === 'deepseek') modeLabel = 'DeepSeek';
+    if (message.mode === 'project-help') modeLabel = state.language === 'zh' ? '项目指南 · 本地手册' : 'Project guide · Local manual';
+    else if (!sources.length && message.mode === 'deepseek') modeLabel = 'DeepSeek';
     else if (!sources.length && message.mode === 'local-lora') modeLabel = state.language === 'zh' ? '本地 LoRA' : 'Local LoRA';
     else if (!sources.length && message.mode === 'offline') modeLabel = state.language === 'zh' ? '本地响应' : 'Local response';
     else modeLabel = t(message.mode === 'deepseek' ? 'modeDeepseek' : message.mode === 'local-lora' ? 'modeLocal' : message.mode === 'calculator' ? 'modeCalculator' : 'modeOffline');
@@ -908,13 +1022,16 @@ function renderMessage(message) {
   }
   const body = element('div', 'message-body');
   const content = message.content || message.answer || '';
-  const analysis = !isUser && message.analysis_context ? renderAnalysisReply(message.analysis_context) : null;
-  if (isUser) body.textContent = content;
+  const analysis = !isUser && !projectHelp && message.analysis_context ? renderAnalysisReply(message.analysis_context) : null;
+  if (isUser || projectHelp) body.textContent = content;
   else renderAnswer(body, content, sources, analysis?.references);
+  if (projectHelp) { body.hidden=true;body.classList.add('project-help-canonical'); }
   article.append(header, body);
   if (analysis) article.append(analysis.wrapper);
-  if (message.warning) article.append(element('div', 'message-warning', warningText(message.warning, Boolean(message.analysis_context))));
-  if (!isUser && sources.length) {
+  if (projectHelp) article.append(window.FinPilotMessages.renderProjectHelp(projectHelp,{language:state.language}));
+  if (message.warning) article.append(element('div', 'message-warning', projectHelp?(state.language==='en'?'Project-guide matching had a limitation; reviewed manual steps remain available.':'教程主题匹配存在限制；已审阅的本地手册步骤仍然可用。'):warningText(message.warning, Boolean(message.analysis_context))));
+  if (!isUser && !projectHelp && sources.length && window.FinPilotMessages) article.append(window.FinPilotMessages.renderSources(sources,{language:state.language}));
+  else if (!isUser && !projectHelp && sources.length) {
     const section = element('div', 'message-sources');
     section.append(element('div', 'sources-heading', t('sources')));
     const cards = element('div', 'source-cards');
@@ -959,20 +1076,21 @@ function setBusy(busy) {
   state.busy = busy;
   const locked = conversationLocked();
   $('#send-button').disabled = locked; $('#message-input').disabled = locked;
-  $('#chat-status').hidden = !busy; $('#export-button').disabled = !state.sessionId || busy;
+  $('#chat-status').hidden = !(busy || state.remoteBusy); $('#export-button').disabled = !state.sessionId || locked;
   $$('.prompt-card').forEach(button => { button.disabled = locked; });
   $('#model-select').disabled = locked;
   $('#language-toggle').disabled = locked;
   $('#sidebar-new').disabled = locked; $('#top-new').disabled = locked;
   $$('.session-open, .session-delete, .analysis-context-actions button, .analysis-refresh-button, .analysis-history-view, .message-analysis-context > button, .options-followup button').forEach(button => { button.disabled = locked; });
-  $('#chat-form').classList.toggle('is-busy', busy);
-  $('#chat-form').setAttribute('aria-busy', String(busy));
+  $('#chat-form').classList.toggle('is-busy', busy || state.remoteBusy);
+  $('#chat-form').setAttribute('aria-busy', String(busy || state.remoteBusy));
   $('#chat-status [data-i18n]').textContent = t(state.refreshing ? 'analysisRefreshing' : state.engine === 'local' ? 'thinkingLocal' : 'thinkingCloud');
   $('#avatar-read-last').disabled = busy || !state.lastAnswer;
   $$('.message-action[data-action="speak"]').forEach(button => { button.disabled = busy; });
-  if (busy) setAvatarState('thinking');
+  if (busy || state.remoteBusy) setAvatarState('thinking');
   else if (state.avatarState !== 'error') settleAvatar();
   updateVoiceUI();
+  renderCompanionConnection();
 }
 
 async function sendMessage(event) {
@@ -983,13 +1101,19 @@ async function sendMessage(event) {
   if (state.recording) state.recognition?.stop();
   cancelSpeech();
   const previousMessages = [...state.messages];
+  const sharedRequest = isCurrentSharedSession();
   state.messages.push({ role:'user', content:message });
   showError(''); renderMessages({ animateLast:true }); setBusy(true);
   $('#chat-status').scrollIntoView({ behavior:scrollBehavior(), block:'nearest' });
   try {
-    const result = await api('/api/chat', { method:'POST', body:JSON.stringify({ message, session_id:state.sessionId, language:state.language, engine:state.engine, analysis_id:state.analysisContext?.analysis_id || null }) });
+    const payload={ message, session_id:state.sessionId, language:state.language, engine:state.engine };
+    if (!sharedRequest) payload.analysis_id=state.analysisContext?.analysis_id || null;
+    const result = await api('/api/chat', { method:'POST', body:JSON.stringify(payload) });
     state.sessionId = result.session_id;
-    state.messages.push({ role:'assistant', content:result.answer, sources:result.sources || [], mode:result.mode, warning:result.warning, calculation:result.calculation, analysis_context:result.analysis_context || null });
+    if (sharedRequest) {
+      const saved=await state.companionClient.sync() || await api(`/api/sessions/${encodeURIComponent(state.sessionId)}`);
+      applySharedSession(saved);state.pendingSharedSession=null;
+    } else state.messages.push({ role:'assistant', content:result.answer, sources:result.sources || [], mode:result.mode, warning:result.warning, calculation:result.calculation, analysis_context:result.analysis_context || null, project_help:result.project_help || null });
     if (Object.hasOwn(result, 'active_analysis')) state.analysisContext = result.active_analysis || null;
     syncAnalysisHistory(result.analysis_history);
     state.drafts.delete(state.sessionId || '__new__');
@@ -997,7 +1121,7 @@ async function sendMessage(event) {
     localStorage.setItem('finpilot-session', state.sessionId);
     state.lastAnswer = result.answer;
     renderMessages({ animateLast:true }); renderAnalysisContext();
-    setAvatarState('idle');
+    settleAvatar();
     // Sidebar refresh must not keep the answer and composer in a loading state.
     loadSessions().catch(() => {});
     $('#chat-messages').lastElementChild?.scrollIntoView({ behavior:scrollBehavior(), block:'start' });
@@ -1005,7 +1129,11 @@ async function sendMessage(event) {
     state.messages = previousMessages; renderMessages(); showError(t('errorPrefix') + error.message);
     setAvatarState('error');
     $('#error-banner').scrollIntoView({ behavior:scrollBehavior(), block:'nearest' });
-  } finally { setBusy(false); if (!matchMedia('(pointer: coarse)').matches) input.focus({ preventScroll:true }); }
+  } finally {
+    setBusy(false);
+    if(state.pendingSharedSession){const saved=state.pendingSharedSession;state.pendingSharedSession=null;applySharedSession(saved);}
+    if (!matchMedia('(pointer: coarse)').matches && !conversationLocked()) input.focus({ preventScroll:true });
+  }
 }
 
 const fields = {
@@ -1110,9 +1238,9 @@ function initVoice() {
   const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
   if (!SpeechRecognition) { $('#mic-button').setAttribute('aria-disabled','true'); $('#mic-button').title=t('unsupportedVoice'); return; }
   const recognition=new SpeechRecognition();state.recognition=recognition;recognition.continuous=false;recognition.interimResults=false;
-  recognition.onstart=()=>{state.recording=true;updateVoiceUI();setAvatarState('listening');};
-  recognition.onend=()=>{state.recording=false;updateVoiceUI();if(state.avatarState!=='error')settleAvatar();};
-  recognition.onerror=()=>{state.recording=false;updateVoiceUI();setAvatarState('error');toast(t('voiceError'));};
+  recognition.onstart=()=>{state.recording=true;state.listeningActivity=beginCompanionActivity('speech','listening');updateVoiceUI();setAvatarState('listening');};
+  recognition.onend=()=>{state.recording=false;state.listeningActivity?.('completed');state.listeningActivity=null;updateVoiceUI();if(state.avatarState!=='error')settleAvatar();};
+  recognition.onerror=()=>{state.recording=false;state.listeningActivity?.('failed');state.listeningActivity=null;updateVoiceUI();setAvatarState('error');toast(t('voiceError'));};
   recognition.onresult=event=>{
     const transcript=Array.from(event.results).map(result=>result[0].transcript).join(' ');
     const input=$('#message-input');input.value=((input.value ? `${input.value} ` : '')+transcript).slice(0,input.maxLength);input.dispatchEvent(new Event('input'));input.focus();
@@ -1142,6 +1270,7 @@ function updateSpeechControls() {
 
 function cancelSpeech() {
   if (state.speech) window.speechSynthesis?.cancel();
+  state.speakingActivity?.('cancelled');state.speakingActivity=null;
   state.speech = null; state.speechStarted = false;
   updateSpeechControls();
 }
@@ -1153,9 +1282,9 @@ function readAloud(text) {
   if (state.recording) state.recognition?.stop();
   const utterance=new SpeechSynthesisUtterance(text.replace(/\[[A-Za-z][A-Za-z0-9_-]*\]/g,''));
   utterance.lang=/[\u3400-\u9fff]/.test(text)?'zh-CN':'en-US';utterance.rate=.95;
-  utterance.onstart=()=>{if(state.speech!==utterance)return;state.speechStarted=true;updateSpeechControls();setAvatarState('speaking');};
-  utterance.onend=()=>{if(state.speech!==utterance)return;state.speech=null;state.speechStarted=false;updateSpeechControls();settleAvatar();};
-  utterance.onerror=event=>{if(state.speech!==utterance)return;state.speech=null;state.speechStarted=false;updateSpeechControls();if(['canceled','interrupted'].includes(event.error)){settleAvatar();}else{setAvatarState('error');toast(t('speechError'));}};
+  utterance.onstart=()=>{if(state.speech!==utterance)return;state.speechStarted=true;state.speakingActivity=beginCompanionActivity('speech','speaking');updateSpeechControls();setAvatarState('speaking');};
+  utterance.onend=()=>{if(state.speech!==utterance)return;state.speakingActivity?.('completed');state.speakingActivity=null;state.speech=null;state.speechStarted=false;updateSpeechControls();settleAvatar();};
+  utterance.onerror=event=>{if(state.speech!==utterance)return;state.speakingActivity?.(['canceled','interrupted'].includes(event.error)?'cancelled':'failed');state.speakingActivity=null;state.speech=null;state.speechStarted=false;updateSpeechControls();if(['canceled','interrupted'].includes(event.error)){settleAvatar();}else{setAvatarState('error');toast(t('speechError'));}};
   state.speech=utterance;
   try {window.speechSynthesis.speak(utterance);}catch{state.speech=null;state.speechStarted=false;setAvatarState('error');toast(t('speechError'));}
 }
@@ -1165,6 +1294,9 @@ function bindEvents() {
   $('#avatar-collapse').addEventListener('click',()=>{state.panelExpanded=!state.panelExpanded;syncAssistantPanel();});
   $('#avatar-2d').addEventListener('click',()=>setAvatarMode('2d'));
   $('#avatar-3d').addEventListener('click',()=>setAvatarMode('3d'));
+  $('#avatar-character').addEventListener('change',event=>setAvatarCharacter(event.target.value));
+  $('#companion-connect').addEventListener('click',connectCurrentCompanion);
+  $('#companion-disconnect').addEventListener('click',()=>state.companionClient?.disconnect().catch(error=>showError(error.message)));
   $('#reduce-motion').addEventListener('change',event=>{state.reducedMotion=event.target.checked;localStorage.setItem('finpilot-reduced-motion',String(state.reducedMotion));applyMotionPreference();});
   $('#workspace-motion-toggle')?.addEventListener('click',()=>{state.reducedMotion=!state.reducedMotion;localStorage.setItem('finpilot-reduced-motion',String(state.reducedMotion));applyMotionPreference();});
   motionMedia.addEventListener('change', event=>{state.osReducedMotion=event.matches;applyMotionPreference();});
@@ -1172,16 +1304,24 @@ function bindEvents() {
   $('#avatar-read-last').addEventListener('click',()=>{const body=$$('.message.assistant .message-body').at(-1);if(body)readAloud(body.textContent);});
   $('#model-select').addEventListener('change',event=>changeModel(event.target.value));
   window.addEventListener('finpilot-avatar-ready',mountAvatar);
+  window.addEventListener('finpilot-companion-ready',mountAvatar);
   $('#avatar-stage').addEventListener('finpilot-avatar-status',event=>{state.avatarRenderStatus=event.detail;renderAvatarStatus();});
+  $('#avatar-stage').addEventListener('finpilot-companion-status',event=>{state.avatarRenderStatus=event.detail;renderAvatarStatus();});
   window.addEventListener('resize',()=>{const small=innerWidth<=1180;if(small!==state.smallLayout){state.smallLayout=small;state.panelExpanded=!small;syncAssistantPanel();}setSidebar(state.menuOpen,false);});
   $('#chat-form').addEventListener('submit',sendMessage);
   $('#message-input').addEventListener('keydown',event=>{if(event.key==='Enter'&&!event.shiftKey&&!event.isComposing){event.preventDefault();sendMessage();}});
   $('#message-input').addEventListener('input',event=>{const input=event.target;input.style.height='auto';input.style.height=`${Math.min(200,input.scrollHeight)}px`;});
-  $('#language-toggle').addEventListener('click',()=>{if(state.busy)return;state.language=state.language==='zh'?'en':'zh';localStorage.setItem('finpilot-language',state.language);applyLanguage();toast(t('changedLanguage'));});
+  $('#language-toggle').addEventListener('click',()=>{if(conversationLocked())return;state.language=state.language==='zh'?'en':'zh';localStorage.setItem('finpilot-language',state.language);applyLanguage();shareCompanionPreferences();toast(t('changedLanguage'));});
   $('#sidebar-new').addEventListener('click',newConversation);$('#top-new').addEventListener('click',newConversation);
   $('#nav-chat').addEventListener('click',()=>{closeSidebar();$('#message-input').focus();});
   $('#nav-calculator').addEventListener('click',()=>openCalculator());$('#quick-calculate').addEventListener('click',()=>openCalculator());
   $('#nav-knowledge').addEventListener('click',openKnowledge);
+  $$('[data-help-prompt]').forEach(button=>button.addEventListener('click',()=>{
+    if(conversationLocked())return;
+    const prompts={history:{zh:'FinPilot 怎么做历史复盘？请说明入口、步骤和限制。',en:'How do I use historical review in FinPilot? Explain the entry point, steps and limits.'},pet:{zh:'FinPilot 怎么连接桌宠和当前会话？',en:'How do I connect the FinPilot desktop pet to the current conversation?'},models:{zh:'FinPilot 怎么切换回答模型？离线模式有什么区别？',en:'How do I switch the answering model in FinPilot, and how is offline mode different?'}};
+    const input=$('#message-input');input.value=prompts[button.dataset.helpPrompt][state.language];input.dispatchEvent(new Event('input'));input.focus();
+    toast(state.language==='zh'?'教程示例已填入；点击发送才开始提问。':'Guide example filled. Choose Send when ready.');
+  }));
   $('#calculator-form').addEventListener('submit',calculate);
   $('#calculator-fields').addEventListener('input', invalidateCalculation);
   $$('.calc-tab').forEach(button=>button.addEventListener('click',()=>{state.calculatorKind=button.dataset.kind;renderCalculatorFields();}));
@@ -1221,6 +1361,9 @@ async function initialize() {
   await Promise.allSettled([loadHealth(),loadModels(),loadSessions().catch(error=>showError(t('errorPrefix')+error.message))]);
   const saved=localStorage.getItem('finpilot-session');
   if(saved&&state.sessions.some(session=>session.id===saved))await selectSession(saved);
+  const requestedSession=new URLSearchParams(location.search).get('session');
+  if(requestedSession&&/^[0-9a-f-]{36}$/i.test(requestedSession))await selectSession(requestedSession);
+  initializeCompanionConnection();
   const entry = new URLSearchParams(location.search);
   const engine = entry.get('engine');
   if (['deepseek','local'].includes(engine)) {
@@ -1236,6 +1379,7 @@ async function initialize() {
   }
   const tool=entry.get('tool');
   if (['compound','loan','budget'].includes(tool))openCalculator(tool);
+  else if (entry.get('view')==='calculator')openCalculator('compound');
   else if (entry.get('view')==='history') {
     openToolDialog($('#options-dialog'));
     const panel = $('#history-panel');
@@ -1243,7 +1387,7 @@ async function initialize() {
   }
   else if (entry.get('view')==='knowledge')await openKnowledge();
   // Only the age label changes; no data or model request is made by this timer.
-  setInterval(() => {
+  const ageTimer=setInterval(() => {
     if (document.hidden) return;
     $$('.analysis-snapshot-note[data-captured-at]').forEach(note => {
       if (note.dataset.stale === 'true') return;
@@ -1253,6 +1397,12 @@ async function initialize() {
       }
     });
   }, 15000);
+  window.addEventListener('pagehide',()=>{
+    clearInterval(ageTimer);clearTimeout(companionActivityErrorTimer);
+    for(const item of [...companionLocalActivities.values()])item.finish?.('cancelled');
+    state.companionClient?.destroy();state.avatar?.destroy();cancelSpeech();
+    for(const animation of [...activeAnimations])animation.cancel();
+  },{once:true});
 }
 
 initialize();

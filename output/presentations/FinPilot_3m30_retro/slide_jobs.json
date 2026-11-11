@@ -1,0 +1,242 @@
+{
+  "run_status": "slides_recorded",
+  "deck_name": "FinPilot_3m30_retro",
+  "selected_backend": "built-in image tool",
+  "sample_generation_method": {
+    "backend_used": "built-in image tool",
+    "tool_name": "image_gen",
+    "mode": "generate",
+    "prompt_source": "F:/桌面/COMP4431_Project/output/presentations/FinPilot_3m30_retro/sample_prompt.txt",
+    "model": "built-in default; exact model not exposed",
+    "size": "16:9 landscape requested; sample actual 1672x941",
+    "quality": "built-in default; not exposed",
+    "approved_sample_path": "F:/桌面/COMP4431_Project/output/presentations/FinPilot_3m30_retro/origin_image/slide_02.png",
+    "input_context_preparation": "Use view_image for every local input before image_gen; pass local paths as referenced_image_paths. The sample was generated from text only.",
+    "handoff_rule": "Use image_gen generate with referenced input images when available. Never substitute local rendering. User waived sample approval; parent has visually checked style reference."
+  },
+  "max_concurrent_slides": 3,
+  "slides": [
+    {
+      "slide_id": "slide_01",
+      "number": 1,
+      "title": "FinPilot",
+      "job": "prompts/slide_01.json",
+      "out": "origin_image/slide_01.png",
+      "input_images": [
+        {
+          "path": "F:/桌面/COMP4431_Project/output/presentations/FinPilot_3m30_retro/origin_image/slide_02.png",
+          "role": "internally reviewed sample style reference, accepted under explicit user confirmation waiver",
+          "fidelity": "Match palette, typography, outline weight, paper texture and density only. Do not copy the diagram or its content."
+        }
+      ],
+      "requires_context_images": true,
+      "status": "recorded",
+      "dispatch": {
+        "agent_id": "/root/slide01",
+        "agent_nickname": null,
+        "prompt": "prompts/slide_01.json",
+        "prompt_sha256": "43a8ef78c6de395b79118336661e8f6c657d56903c810b0a46786720f29b1d37",
+        "dispatched_at": "2026-11-11T12:52:19Z"
+      },
+      "result": {
+        "agent_id": "/root/slide01",
+        "backend_used": "built-in image tool",
+        "selected_source": "C:\\Users\\ROG\\.codex\\generated_images\\01a1caaa-7d7a-7001-8da5-1b94614eab29\\exec-19b1d2fc-993b-453d-b533-a258c1ac6e04.png",
+        "selected_source_sha256": "90ded608266f2d492424920261e4dd38db4991be725897fe8c308f3f9c36b9c6",
+        "final_image": "origin_image/slide_01.png",
+        "final_image_sha256": "90ded608266f2d492424920261e4dd38db4991be725897fe8c308f3f9c36b9c6",
+        "expected_backend": "built-in image tool",
+        "expected_backend_labels": [
+          "built-in image tool",
+          "image_gen"
+        ],
+        "sample_generation_method_matched": true,
+        "qa_note": "Complete readable cover; matches retro palette and typography.",
+        "recorded_at": "2026-11-11T12:54:01Z"
+      },
+      "blocker": null
+    },
+    {
+      "slide_id": "slide_02",
+      "number": 2,
+      "title": "RAG connects data with expert knowledge",
+      "job": "prompts/slide_02.json",
+      "out": "origin_image/slide_02.png",
+      "input_images": [],
+      "requires_context_images": false,
+      "status": "accepted",
+      "dispatch": null,
+      "result": {
+        "final_image": "origin_image/slide_02.png",
+        "accepted_sample": true
+      },
+      "blocker": null
+    },
+    {
+      "slide_id": "slide_03",
+      "number": 3,
+      "title": "Reliable grounding needs more than retrieval",
+      "job": "prompts/slide_03.json",
+      "out": "origin_image/slide_03.png",
+      "input_images": [
+        {
+          "path": "F:/桌面/COMP4431_Project/output/presentations/FinPilot_3m30_retro/origin_image/slide_02.png",
+          "role": "internally reviewed sample style reference, accepted under explicit user confirmation waiver",
+          "fidelity": "Match palette, typography, outline weight, paper texture and density only. Do not copy the diagram or its content."
+        }
+      ],
+      "requires_context_images": true,
+      "status": "recorded",
+      "dispatch": {
+        "agent_id": "/root/slide03",
+        "agent_nickname": null,
+        "prompt": "prompts/slide_03.json",
+        "prompt_sha256": "eac17084aae8d170ba7c27536e301a3e7e7858a3365d9bf0e09d0ddd10f53813",
+        "dispatched_at": "2026-11-11T12:52:33Z"
+      },
+      "result": {
+        "agent_id": "/root/slide03",
+        "backend_used": "built-in image tool",
+        "selected_source": "C:\\Users\\ROG\\.codex\\generated_images\\01a1caaa-b37d-7213-8c97-d070b4bb193f\\exec-ca031c48-c3e1-4d0e-96f0-3541bb0e3831.png",
+        "selected_source_sha256": "fab9b9829f0ecb4fea74577803b3bf39e7e18c9f5cc94cc63fc5d3832aeab7fb",
+        "final_image": "origin_image/slide_03.png",
+        "final_image_sha256": "fab9b9829f0ecb4fea74577803b3bf39e7e18c9f5cc94cc63fc5d3832aeab7fb",
+        "expected_backend": "built-in image tool",
+        "expected_backend_labels": [
+          "built-in image tool",
+          "image_gen"
+        ],
+        "sample_generation_method_matched": true,
+        "qa_note": "Both RAG challenges and explicit rule-check limit are readable.",
+        "recorded_at": "2026-11-11T12:54:15Z"
+      },
+      "blocker": null
+    },
+    {
+      "slide_id": "slide_04",
+      "number": 4,
+      "title": "Frontend design keeps complex tasks usable",
+      "job": "prompts/slide_04.json",
+      "out": "origin_image/slide_04.png",
+      "input_images": [
+        {
+          "path": "F:/桌面/COMP4431_Project/output/presentations/FinPilot_3m30_retro/origin_image/slide_02.png",
+          "role": "internally reviewed sample style reference, accepted under explicit user confirmation waiver",
+          "fidelity": "Match palette, typography, outline weight, paper texture and density only. Do not copy the diagram or its content."
+        }
+      ],
+      "requires_context_images": true,
+      "status": "recorded",
+      "dispatch": {
+        "agent_id": "/root/slide04",
+        "agent_nickname": null,
+        "prompt": "prompts/slide_04.json",
+        "prompt_sha256": "8f9c483da64e7998402c27081cc11b64b6b4efed933ca13a8552e92450609f6c",
+        "dispatched_at": "2026-11-11T12:52:51Z"
+      },
+      "result": {
+        "agent_id": "/root/slide04",
+        "backend_used": "built-in image tool",
+        "selected_source": "C:\\Users\\ROG\\.codex\\generated_images\\01a1caaa-ed70-7200-9350-b9aef6ef436b\\exec-937dae45-2052-4f84-ae4e-f922251d44a6.png",
+        "selected_source_sha256": "292622ce4ec2403035c6bcf57924bdb83258a7b71ef8c91e384b95b21327caf6",
+        "final_image": "origin_image/slide_04.png",
+        "final_image_sha256": "292622ce4ec2403035c6bcf57924bdb83258a7b71ef8c91e384b95b21327caf6",
+        "expected_backend": "built-in image tool",
+        "expected_backend_labels": [
+          "built-in image tool",
+          "image_gen"
+        ],
+        "sample_generation_method_matched": true,
+        "qa_note": "Frontend hierarchy motion and async decisions accurate; conceptual wireframe not screenshot.",
+        "recorded_at": "2026-11-11T12:54:15Z"
+      },
+      "blocker": null
+    },
+    {
+      "slide_id": "slide_05",
+      "number": 5,
+      "title": "One companion, on the web and desktop",
+      "job": "prompts/slide_05.json",
+      "out": "origin_image/slide_05.png",
+      "input_images": [
+        {
+          "path": "F:/桌面/COMP4431_Project/output/presentations/FinPilot_3m30_retro/origin_image/slide_02.png",
+          "role": "internally reviewed sample style reference, accepted under explicit user confirmation waiver",
+          "fidelity": "Match palette, typography, outline weight, paper texture and density only. Do not copy the diagram or its content."
+        },
+        {
+          "path": "F:/桌面/COMP4431_Project/web/companion/assets/portrait.webp",
+          "role": "strict input asset: actual current FinPilot companion portrait; integrate intact into this slide",
+          "fidelity": "Preserve the actual supplied character artwork, blue hair, face, maid outfit, proportions and full body. Keep original anime artwork rather than redraw in the slide illustration style. Do not replace it with a robot, new character or a similar redraw."
+        }
+      ],
+      "requires_context_images": true,
+      "status": "recorded",
+      "dispatch": {
+        "agent_id": "/root/slide05",
+        "agent_nickname": null,
+        "prompt": "prompts/slide_05.json",
+        "prompt_sha256": "317fcc64151311a66e35e3dd481144acbe2566d194b1f8b577fee08f7d38625e",
+        "dispatched_at": "2026-11-11T12:54:33Z"
+      },
+      "result": {
+        "agent_id": "/root/slide05",
+        "backend_used": "built-in image tool",
+        "selected_source": "C:\\Users\\ROG\\.codex\\generated_images\\01a1caac-8229-78b2-ade4-d239773e6c05\\exec-01c8baa6-eea1-4e06-8f84-0e8f84d7a585.png",
+        "selected_source_sha256": "10cd030178224e987ba39b11ceaae3ed08262d635e727c5824563f75a67d5a6b",
+        "final_image": "origin_image/slide_05.png",
+        "final_image_sha256": "10cd030178224e987ba39b11ceaae3ed08262d635e727c5824563f75a67d5a6b",
+        "expected_backend": "built-in image tool",
+        "expected_backend_labels": [
+          "built-in image tool",
+          "image_gen"
+        ],
+        "sample_generation_method_matched": true,
+        "qa_note": "Actual full-body 2D character and source credit retained; technical copy readable.",
+        "recorded_at": "2026-11-11T12:56:47Z"
+      },
+      "blocker": null
+    },
+    {
+      "slide_id": "slide_06",
+      "number": 6,
+      "title": "Shared conversation, explicit control",
+      "job": "prompts/slide_06.json",
+      "out": "origin_image/slide_06.png",
+      "input_images": [
+        {
+          "path": "F:/桌面/COMP4431_Project/output/presentations/FinPilot_3m30_retro/origin_image/slide_02.png",
+          "role": "internally reviewed sample style reference, accepted under explicit user confirmation waiver",
+          "fidelity": "Match palette, typography, outline weight, paper texture and density only. Do not copy the diagram or its content."
+        }
+      ],
+      "requires_context_images": true,
+      "status": "recorded",
+      "dispatch": {
+        "agent_id": "/root/slide06",
+        "agent_nickname": null,
+        "prompt": "prompts/slide_06.json",
+        "prompt_sha256": "927bb65fa669c9764f438906894d6db249fbab7948b4635783ea3f0e1f2d3903",
+        "dispatched_at": "2026-11-11T12:54:49Z"
+      },
+      "result": {
+        "agent_id": "/root/slide06",
+        "backend_used": "built-in image tool",
+        "selected_source": "C:\\Users\\ROG\\.codex\\generated_images\\01a1caac-c1c9-70c3-adfa-0148f954688f\\exec-11963435-56b2-4795-91d9-a1a2f77f398f.png",
+        "selected_source_sha256": "955a5de1ea0b8a41ab6c73a194a02fd440db3b4ff6fc89af69a05104437830bb",
+        "final_image": "origin_image/slide_06.png",
+        "final_image_sha256": "955a5de1ea0b8a41ab6c73a194a02fd440db3b4ff6fc89af69a05104437830bb",
+        "expected_backend": "built-in image tool",
+        "expected_backend_labels": [
+          "built-in image tool",
+          "image_gen"
+        ],
+        "sample_generation_method_matched": true,
+        "qa_note": "All labels readable; image-tool edit makes both web/database and desktop/database connections bidirectional.",
+        "recorded_at": "2026-11-11T12:58:17Z"
+      },
+      "blocker": null
+    }
+  ],
+  "updated_at": "2026-11-11T12:58:17Z"
+}

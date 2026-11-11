@@ -1,0 +1,28 @@
+{
+  "name": "finpilot-desktop-pet",
+  "version": "15.0.0",
+  "description": "Local FinPilot financial-learning desktop companion",
+  "author": "FinPilot course project",
+  "private": true,
+  "main": "main.cjs",
+  "scripts": {
+    "start": "electron .",
+    "test": "node --test tests/*.test.cjs",
+    "dist": "node build.cjs"
+  },
+  "devDependencies": {
+    "electron": "45.3.0",
+    "electron-builder": "26.18.0"
+  },
+  "build": {
+    "appId": "edu.finpilot.companion",
+    "productName": "FinPilotPet",
+    "copyright": "FinPilot course project; character credits in application",
+    "directories": {"output": "artifacts"},
+    "files": ["main.cjs", "preload.cjs", "geometry.cjs", "tray.png", "README.md", "package.json"],
+    "artifactName": "FinPilotPet-${version}-win-x64-portable.${ext}",
+    "win": {"target": "portable", "signAndEditExecutable": false},
+    "portable": {"requestExecutionLevel": "user"},
+    "asar": true
+  }
+}

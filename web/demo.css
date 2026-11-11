@@ -10,3 +10,4 @@
 @media(max-width:680px){.step-heading{display:grid;grid-template-columns:32px minmax(0,1fr);gap:8px 10px}.step-heading>div{grid-column:2}.step-status{grid-column:2;margin-left:0;justify-self:start}}
 
 .grounding-topic{margin:9px 0;padding:10px 12px;border:1px solid var(--line);border-radius:7px;background:var(--paper)}.grounding-topic>strong{font-size:11px}.grounding-topic p{margin:6px 0 0}.grounding-topic a{color:var(--gold-dark);text-underline-offset:3px}
+.demo-character-label{display:grid;gap:6px;font-size:11px;color:#64748b}.demo-character-label select{min-width:0;width:100%;padding:7px;border:1px solid #dce4ed;border-radius:8px;background:#fff;color:#0f172a;font:inherit}.demo-companion .fp-companion{height:100%}

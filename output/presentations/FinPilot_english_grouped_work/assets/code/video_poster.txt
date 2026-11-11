@@ -1,0 +1,4 @@
+    <img className="hero-poster" src={posterURL} alt="" fetchPriority="high" />
+    {requested && !reduced && <video ref={video} className="hero-video" data-testid="hero-video"
+      src={videoURL} autoPlay={!stopped} loop muted playsInline preload="auto"
+      onCanPlay={() => setMedia('ready')} onError={() => setMedia('fallback')} />}

@@ -1,0 +1,5 @@
+  useEffect(() => {
+    if (status !== 'loading') return;
+    const timer = window.setTimeout(() => setMedia('fallback'), 2500);
+    return () => window.clearTimeout(timer);
+  }, [status]);

@@ -1,0 +1,189 @@
+{
+  "checked_at": "2026-11-11T12:31:23.458715+00:00",
+  "status": "passed",
+  "phase": "complete",
+  "scope": "Actual Edge in independent browser profiles, real SSE/session APIs and persistence; controlled in-process provider, NOT real DeepSeek.",
+  "browser_financial_data_or_chat_response_mocking": false,
+  "browser_response_handling": "Chat/session/analysis/source responses come from the fixture backend. One real connection PUT reply is delayed, preserving its original response bytes, for a cursor race test.",
+  "fault_injection": [
+    "Fixture control closes actual SSE streams to require a new open/reset.",
+    "One connection PUT response is delayed without fabricating its contents.",
+    "Old generation and epoch reset messages are injected only into explicit browser test clients."
+  ],
+  "external_model_requests": 0,
+  "new_broker_requests": 0,
+  "normal_user_server_or_database_touched": false,
+  "fixture_port": 8018,
+  "checks": [
+    "unconnected_pet_reads_no_old_chat_and_starts_no_model",
+    "explicit_connection_real_sse_separate_profiles_zero_generation",
+    "workspace_to_pet_thinking_animation_same_saved_sources_times_and_message_ids",
+    "pet_to_workspace_same_sid_canonical_reload_without_duplicate_append",
+    "shared_post_omits_analysis_id_inherits_B_and_preserves_old_A_answers",
+    "actual_sse_stream_closure_reconnect_full_sync_zero_extra_generation",
+    "delayed_real_http_snapshot_cannot_resurrect_activity_after_newer_sse",
+    "old_operation_heartbeat_and_finish_cannot_adopt_a_new_connection_generation",
+    "client_only_epoch_fault_injection_rejects_a_retired_epoch_reset",
+    "disconnect_clears_view_switch_during_pending_does_not_leak_answer_or_late_state",
+    "client_injected_old_generation_reset_ignored_and_committed_delete_clears_link",
+    "safe_shared_html_url_rendering_and_demo_does_not_join_or_read_sessions"
+  ],
+  "screenshots": [
+    "reports/screenshots/companion-sync-v15/20261111T123123458715Z/workspace-first-turn.png",
+    "reports/screenshots/companion-sync-v15/20261111T123123458715Z/pet-first-turn.png",
+    "reports/screenshots/companion-sync-v15/20261111T123123458715Z/pet-final-safety.png"
+  ],
+  "limitations": [
+    "This verifies two browser profiles, not the native Windows window/tray; native acceptance is separate.",
+    "The fixture uses previously recorded real IBKR bars; neither report A nor B recollects data.",
+    "Provider output is deterministic test data; no real DeepSeek answer accuracy is measured."
+  ],
+  "sse_reconnect": {
+    "before_open_events": 1,
+    "after_open_events": 2,
+    "before_reset_events": 1,
+    "after_reset_events": 2,
+    "error_events": 1,
+    "actual_service_restart_tested": false
+  },
+  "browser": {
+    "channel": "msedge",
+    "version": "155.0.4283.45",
+    "separate_profiles": true,
+    "viewports": [
+      {
+        "width": 1440,
+        "height": 1000
+      },
+      {
+        "width": 1200,
+        "height": 900
+      }
+    ]
+  },
+  "controlled_provider_generations": 5,
+  "provider_calls": [
+    {
+      "marker": "WORKSPACE_A",
+      "json_output": true,
+      "analysis_id": "8554b7c7-288a-499e-b0a8-293abfd720cc"
+    },
+    {
+      "marker": "PET_A",
+      "json_output": true,
+      "analysis_id": "8554b7c7-288a-499e-b0a8-293abfd720cc"
+    },
+    {
+      "marker": "PET_B",
+      "json_output": true,
+      "analysis_id": "0d7be2eb-be4a-423c-927d-af5b8861e6a9"
+    },
+    {
+      "marker": "PET_OLD",
+      "json_output": true,
+      "analysis_id": "0d7be2eb-be4a-423c-927d-af5b8861e6a9"
+    },
+    {
+      "marker": "GENERAL_SAFE",
+      "json_output": false,
+      "analysis_id": null
+    }
+  ],
+  "shared_chat_http_requests": [
+    {
+      "surface": "workspace",
+      "method": "POST",
+      "path": "/api/chat",
+      "keys": [
+        "engine",
+        "language",
+        "message",
+        "session_id"
+      ],
+      "session_id": "5da5b1ce-e167-4945-9a76-a14e83a70c7a",
+      "analysis_id": null
+    },
+    {
+      "surface": "pet",
+      "method": "POST",
+      "path": "/api/chat",
+      "keys": [
+        "engine",
+        "language",
+        "message",
+        "session_id"
+      ],
+      "session_id": "5da5b1ce-e167-4945-9a76-a14e83a70c7a",
+      "analysis_id": null
+    },
+    {
+      "surface": "pet",
+      "method": "POST",
+      "path": "/api/chat",
+      "keys": [
+        "engine",
+        "language",
+        "message",
+        "session_id"
+      ],
+      "session_id": "5da5b1ce-e167-4945-9a76-a14e83a70c7a",
+      "analysis_id": null
+    },
+    {
+      "surface": "pet",
+      "method": "POST",
+      "path": "/api/chat",
+      "keys": [
+        "engine",
+        "language",
+        "message",
+        "session_id"
+      ],
+      "session_id": "5da5b1ce-e167-4945-9a76-a14e83a70c7a",
+      "analysis_id": null
+    },
+    {
+      "surface": "pet",
+      "method": "POST",
+      "path": "/api/chat",
+      "keys": [
+        "engine",
+        "language",
+        "message",
+        "session_id"
+      ],
+      "session_id": "5da5b1ce-e167-4945-9a76-a14e83a70c7a",
+      "analysis_id": null
+    }
+  ],
+  "old_analysis_unchanged": true,
+  "screenshots_review_needed": false,
+  "owned_fixture_stopped": true,
+  "page_errors": [],
+  "elapsed_seconds": 12.009,
+  "manual_review": {
+    "status": "accepted_controlled_workflow",
+    "scope": "Re-run after immediate abort of stale session GETs; screenshots and the controlled workflow only, not real model accuracy or native Windows properties.",
+    "visual_checks": [
+      "Both surfaces show the same provided-reference-style blue-haired whale maid, rendered by actual Canvas2D sprite assets.",
+      "Workspace screenshot visibly retains the historical period, provenance/coverage warning and expert sources.",
+      "Pet panel visibly offers explicit question entry, actual engine selector, report shortcut and historical source cards.",
+      "The source response is a controlled provider; DeepSeek badges are interface labels in this fixture, not evidence of an external model request."
+    ],
+    "limits": [
+      "The screenshot is a browser preview; it does not prove native transparency, click-through or tray behavior.",
+      "Evidence details may be collapsed; this run checks normal application validation and persisted contexts, not every numeric rendering permutation."
+    ],
+    "reviewed_at": "2026-11-11T12:31:23.458715+00:00"
+  },
+  "source_sha256": {
+    "web/companion/client.js": "d18bf1f7a16dc164d6f55301fffb3f3c7232a1a2bdb9cf5495b25b6379cf5135",
+    "web/app.js": "f28b8addef85474aa5dcb8ad5a7024fda232375f497e60abf3c9528b82cf2bb2",
+    "web/pet.js": "9f6dfcaf1064a90bc85f7d6f35da51965b92f76f7a5e53c9918ac3c3fe8d9d79",
+    "web/companion/messages.js": "625395a42fd4ce33c944a2e43720b667eeeeb9e99f68544d63f52bbde7a3c7f8",
+    "app/main.py": "ae1fe8ec5f7eaff07c431f28f5e21e61c28dab6c0fb421404db9510a4db9d8fb",
+    "app/companion.py": "7456bffbdb3803fa70c6c5e2de3bfbbcf0d2448fb31196fb53baadd8194b957b",
+    "app/storage.py": "9db4b37525d6d31600b995a0db51bcceb18adb004d137013127eec61f05e1b4f"
+  },
+  "additional_coverage_note": "This reruns the twelve existing controlled workflows after the session-GET invalidation change. It does not add a dedicated delayed session-GET differential test."
+}

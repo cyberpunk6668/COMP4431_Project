@@ -1,0 +1,10 @@
+{
+  "id": "h.change.oi_total",
+  "value": null,
+  "unit": "contracts",
+  "before": null,
+  "after": null,
+  "delta": null,
+  "status": "incomparable",
+  "reason": "missing_value_or_oi_asof"
+}

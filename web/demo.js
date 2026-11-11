@@ -9,7 +9,9 @@
     principle1:['固定历史，不冒充实时','Fixed history, never presented as live'], principle2:['本地数字与专家依据分开','Local numbers and expert sources stay distinct'], principle3:['模型调用由你发起','You initiate model calls'],
     sessionNote:['本页只建立独立演示会话，不读取你已有的聊天。','This page creates its own demo conversation and does not read your existing chats.'], companion:['与你一起核查依据','Check the evidence together'],
     avatarIdle:['准备就绪','Ready'], avatarThinking:['正在处理当前步骤','Working on this step'], avatarError:['请查看操作提示','Check the status message'],
-    avatarNote:['原生 Three.js / SVG 形象。动作表示操作状态，不代表判断置信度。','The original Three.js / SVG companion. Motion reflects activity, never confidence in a conclusion.'],
+    avatarNote:['鲸鱼娘2D序列动画。动作表示操作状态，不代表判断置信度。','Whale-maid 2D sprite animation. Motion reflects activity, never confidence in a conclusion.'],
+    characterLabel:['展示形象','Character'],whaleLabel:['鲸鱼娘 · 2D','Whale maid · 2D'],robotLabel:['原有机器人 · 2D/3D','Legacy robot · 2D/3D'],characterCredits:['角色来源与非商业许可 ↗','Character credits & noncommercial license ↗'],
+    legacyAvatarNote:['原有 Three.js / SVG 机器人。动作只表示操作状态。','The legacy Three.js / SVG robot. Motion represents activity only.'],
     avatarFallback:['此设备的 3D 不可用，当前显示真实 2D 形象。','3D is unavailable on this device; the original 2D companion is shown.'],
     nav1:['一份历史档案','A historical archive'], nav1Hint:['先确定数据是什么','Establish what the data is'], nav2:['一组专家依据','Expert evidence'], nav2Hint:['查看检索的来路','Inspect how sources were found'], nav3:['可核查的 AI 解释','An explanation you can check'], nav3Hint:['每条回答都有范围','Each answer keeps its scope'],
     railNote:['这是学习与复盘流程，不是交易指令或涨跌预测。','A learning and review workflow, not trade instructions or a price forecast.'],
@@ -65,7 +67,7 @@
     oi_reporting_cycle:['未平仓统计周期','Open-interest reporting cycle'], option_price_factors:['期权权利金影响因素','Factors affecting option premiums'],
     put_call_limits:['合约计数与人数','Contract counts and people'], volume_vs_oi:['成交量与未平仓量区别','Volume versus open interest'],
   };
-  const state = { language:'zh', record:null, hits:[], searched:false, searchQuery:'', sessionId:null, messages:[], models:[], model:null, modelsChecked:false, modelError:false, busy:null, avatar:null, avatarMode:'3d', avatarState:'idle', reduced:matchMedia('(prefers-reduced-motion: reduce)').matches };
+  const state = { language:'zh', record:null, hits:[], searched:false, searchQuery:'', sessionId:null, messages:[], models:[], model:null, modelsChecked:false, modelError:false, busy:null, avatar:null, avatarCharacter:'whale', avatarMode:'2d', avatarState:'idle', reduced:matchMedia('(prefers-reduced-motion: reduce)').matches };
   const t = key => text[key]?.[state.language === 'en' ? 1 : 0] || key;
   const motion = () => state.reduced || matchMedia('(prefers-reduced-motion: reduce)').matches;
   const url = raw => { try { const parsed = new URL(raw); return ['https:','http:'].includes(parsed.protocol) ? parsed.href : null; } catch { return null; } };
@@ -250,6 +252,8 @@
     for (const message of state.messages) {
       const item = node('article',undefined,`demo-message ${message.role}`);
       if (message.role === 'user') { item.textContent = message.content; container.append(item); continue; }
+      const projectHelp=window.FinPilotMessages?.extractProjectHelp(message);
+      if(projectHelp){const header=node('div',undefined,'demo-message-header');header.append(node('strong',t('assistant')),node('span',state.language==='en'?'Project guide · Local manual':'项目指南 · 本地手册','message-mode'));const text=node('div',message.content,'demo-answer-text project-help-canonical');text.hidden=true;item.append(header,text,window.FinPilotMessages.renderProjectHelp(projectHelp,{language:state.language}));container.append(item);continue;}
       const context = message.analysis_context || {}, records = Array.isArray(context.evidence) ? context.evidence : [];
       const evidence = renderEvidence(records), sources = new Map((message.sources || []).map((source,index) => [source.id,{...source,number:index+1}]));
       const mode = message.mode === 'deepseek' ? 'DeepSeek' : message.mode === 'local-lora' ? t('localName') : message.mode === 'offline' ? t('localExplanation') : message.mode || '—';
@@ -300,33 +304,41 @@
     try {
       const reply=await api('/api/chat',{method:'POST',timeout:90000,body:{message,session_id:state.sessionId,analysis_id:analysisId,engine,language}});
       if (!reply?.session_id || typeof reply.answer !== 'string' || reply.analysis_context && reply.analysis_context.analysis_id !== analysisId) throw new Error(t('incomplete'));
-      state.sessionId=reply.session_id;state.messages.push({role:'user',content:message},{role:'assistant',content:reply.answer,sources:Array.isArray(reply.sources)?reply.sources:[],mode:reply.mode,warning:reply.warning,analysis_context:reply.analysis_context});
+      state.sessionId=reply.session_id;state.messages.push({role:'user',content:message},{role:'assistant',content:reply.answer,sources:Array.isArray(reply.sources)?reply.sources:[],mode:reply.mode,warning:reply.warning,analysis_context:reply.analysis_context,project_help:reply.project_help||null});
       input.value='';renderMessages();status('ai',t('answerReady'));$('#demo-messages').lastElementChild?.scrollIntoView({block:'start',behavior:motion()?'instant':'smooth'});
     } catch (failure) { error('ai',failure.message);status('ai',''); }
     finally { setBusy(null); if (!$('#demo-ai-error').hidden) avatarState('error'); }
   }
   function applyLanguage() {
     document.documentElement.lang=state.language==='en'?'en':'zh-CN'; document.title=state.language==='en'?'FinPilot · History, evidence & explanation':'FinPilot · 历史、依据与解释';
-    document.querySelectorAll('[data-demo-text]').forEach(item=>{item.textContent=t(item.dataset.demoText);});
+    document.querySelectorAll('[data-demo-text]').forEach(item=>{item.textContent=item.dataset.demoText==='usageGuide'?(state.language==='en'?'Usage guide ↗':'使用指南 ↗'):t(item.dataset.demoText);});
     $('#demo-title').style.whiteSpace='pre-line';$('#demo-language').textContent=state.language==='en'?'中文':'EN';$('#demo-language').setAttribute('aria-label',state.language==='en'?'切换为中文':'Switch to English');
     state.avatar?.setLanguage(state.language);renderModels();renderArchive();renderExperts();renderMessages();avatarState(state.avatarState);sync();
     if(!state.busy){if(state.record&&$('#demo-load-error').hidden)status('load',t('archiveReady'));if(state.searched&&$('#demo-search-error').hidden)status('search',t('searchReady'));if(state.messages.length&&$('#demo-ai-error').hidden)status('ai',t('answerReady'));}
   }
   function applyMotion() { document.documentElement.dataset.motion=motion()?'reduced':'full';$('#demo-motion').checked=motion();state.avatar?.setReducedMotion(motion()); }
   function mountAvatar() {
-    if (state.avatar || !window.FinPilotAvatar) return;
+    const renderer=state.avatarCharacter==='whale'?window.FinPilotCompanion:window.FinPilotAvatar;
+    if (state.avatar || !renderer) return;
     const stage=$('#demo-avatar-stage');
-    stage.addEventListener('finpilot-avatar-status',event=>{const value=event.detail;$('#demo-avatar-renderer').textContent=value.renderer==='webgl2'?'3D / WEBGL':'2D / SVG';$('#demo-avatar-note').textContent=t(value.fallbackReason?'avatarFallback':'avatarNote');});
-    state.avatar=window.FinPilotAvatar.mount(stage,{mode:state.avatarMode,language:state.language});state.avatar.setReducedMotion(motion());state.avatar.setState(state.avatarState);
+    state.avatar=renderer.mount(stage,{mode:state.avatarMode,language:state.language,reducedMotion:motion()});state.avatar.setReducedMotion(motion());state.avatar.setState(state.avatarState);
+    window.finPilotDemoCompanion=state.avatar;
+    renderAvatarStatus(state.avatar.getStatus());
   }
+  function renderAvatarStatus(value) {
+    $('#demo-avatar-renderer').textContent=state.avatarCharacter==='whale'?(value.renderer==='canvas2d'?'2D / SPRITE':value.renderer==='static-image'?'2D / STATIC':'2D / UNAVAILABLE'):value.renderer==='webgl2'?'3D / WEBGL':'2D / SVG';
+    $('#demo-avatar-note').textContent=state.avatarCharacter==='whale'?t('avatarNote'):t(value.fallbackReason?'avatarFallback':'legacyAvatarNote');
+  }
+  for(const name of ['finpilot-avatar-status','finpilot-companion-status'])$('#demo-avatar-stage').addEventListener(name,event=>renderAvatarStatus(event.detail));
+  $('#demo-avatar-character').addEventListener('change',event=>{state.avatar?.destroy();state.avatar=null;$('#demo-avatar-stage').replaceChildren();state.avatarCharacter=event.target.value;state.avatarMode=state.avatarCharacter==='whale'?'2d':'3d';$('#demo-legacy-modes').hidden=state.avatarCharacter==='whale';for(const mode of ['2d','3d'])$(`#demo-avatar-${mode}`).setAttribute('aria-pressed',String(mode===state.avatarMode));mountAvatar();});
   $('#demo-load').addEventListener('click',loadArchive);$('#demo-search-form').addEventListener('submit',searchExperts);$('#demo-chat-form').addEventListener('submit',askAI);
   $('#demo-chat-input').addEventListener('keydown',event=>{if(event.key==='Enter'&&!event.shiftKey&&!event.isComposing){event.preventDefault();askAI();}});
   $('#demo-language').addEventListener('click',()=>{if(state.busy)return;state.language=state.language==='zh'?'en':'zh';applyLanguage();});
   $('#demo-model').addEventListener('change',event=>{state.model=event.target.value;renderModels();});
   $('#demo-motion').addEventListener('change',event=>{state.reduced=event.target.checked;applyMotion();});matchMedia('(prefers-reduced-motion: reduce)').addEventListener('change',applyMotion);
   document.querySelectorAll('[data-question]').forEach(button=>button.addEventListener('click',()=>{const value=questions[button.dataset.question][state.language==='en'?1:0];$('#demo-question').value=value;$('#demo-question').focus();}));
-  for (const mode of ['2d','3d']) $(`#demo-avatar-${mode}`).addEventListener('click',()=>{state.avatarMode=mode;state.avatar?.setMode(mode);for(const value of ['2d','3d'])$(`#demo-avatar-${value}`).setAttribute('aria-pressed',String(value===mode));});
-  window.addEventListener('finpilot-avatar-ready',mountAvatar);window.addEventListener('pagehide',()=>state.avatar?.destroy(),{once:true});
+  for (const mode of ['2d','3d']) $(`#demo-avatar-${mode}`).addEventListener('click',()=>{state.avatarMode=mode;state.avatar?.setMode?.(mode);for(const value of ['2d','3d'])$(`#demo-avatar-${value}`).setAttribute('aria-pressed',String(value===mode));});
+  window.addEventListener('finpilot-avatar-ready',mountAvatar);window.addEventListener('finpilot-companion-ready',mountAvatar);window.addEventListener('pagehide',()=>state.avatar?.destroy(),{once:true});
   $('#demo-question').value=questions.activity[0];$('#demo-chat-input').value=questions.activity[0];
   applyLanguage();applyMotion();mountAvatar();
   api('/api/models').then(data=>{state.models=Array.isArray(data?.models)?data.models:[];state.modelsChecked=true;state.model=state.models.find(model=>model.id===data.default&&model.available)?.id||state.models.find(model=>model.available)?.id||null;renderModels();}).catch(()=>{state.modelsChecked=true;state.modelError=true;renderModels();});

@@ -365,3 +365,113 @@ def test_safe_raw_plan_keeps_original_indices_and_six_part_bound(docs):
 def test_bad_reference_shape_is_explicitly_unresolved(docs):
     item = expert_citation_repair_plan([{"text": "看跌成交不是看空人数。", "evidence_ids": "expert.put_call"}], docs, set(docs))[0]
     assert item["malformed_references"] is True and item["status"] == "blocked"
+
+
+@pytest.mark.parametrize('text', [
+    '这里用的是历史成交条：这类历史条只返回开高低收和成交量，本身不提供按日持仓字段。这只限制这里的历史条接口，不代表其他来源没有历史未平仓量。',
+    '历史成交条本身不提供按日未平仓量字段。',
+])
+def test_explicit_historical_trade_bar_oi_type_boundary_needs_its_own_source(text, docs):
+    assert 'historical_oi_availability' in claim_facets(text)
+    assert validate_expert_grounding([part(text, 'expert.history_oi')], docs, context_kind='historical_ibkr')
+    with pytest.raises(ValueError, match='does not support'):
+        validate_expert_grounding([part(text, 'expert.oi_cycle')], docs, context_kind='historical_ibkr')
+
+
+@pytest.mark.parametrize('text', [
+    '本次所收历史成交条的未平仓量字段缺失。',
+    '历史成交条本身不提供新闻，持仓字段记录在另一张卡中。',
+    '历史收入条本身不提供按日工资字段。',
+])
+def test_missing_sample_field_or_other_domain_does_not_establish_oi_api_boundary(text):
+    assert 'historical_oi_availability' not in claim_facets(text)
+
+
+@pytest.mark.parametrize('text', [
+    '另取带独立统计日期的未平仓量来源。',
+    '建议先核对区间并确认未平仓量是否有独立报告日期。',
+])
+def test_normative_independent_oi_date_check_has_cycle_support(text, docs):
+    assert claim_facets(text) == {'oi_reporting_cycle'}
+    assert validate_expert_grounding([part(text, 'expert.oi_cycle')], docs)
+    with pytest.raises(ValueError, match='does not support'):
+        validate_expert_grounding([part(text, 'expert.history_oi')], docs)
+
+
+@pytest.mark.parametrize('text', [
+    '未平仓量的独立统计日期已记录在数据卡。',
+    '另取带独立统计日期的营业收入来源。',
+    '未平仓量独立统计日期能保证未来预测准确。',
+    '未平仓量独立统计日期证明资金流入。',
+])
+def test_oi_date_metadata_and_unrelated_inferences_do_not_unlock_cycle_source(text, docs):
+    assert 'oi_reporting_cycle' not in claim_facets(text)
+    with pytest.raises(ValueError, match='unrelated'):
+        validate_expert_grounding([part(text, 'expert.oi_cycle')], docs)
+
+
+@pytest.mark.parametrize('text', [
+    '成交条是区间汇总，不是同步报价，所以不能据此推断当前价差、隐含波动率或未来方向。',
+    '比较的是区间首日与末日各自收到的成交条末值，不是结算价，也不是同一时刻可成交的双边报价。',
+])
+def test_explicit_trade_bar_aggregate_and_executable_quote_distinction(text, docs):
+    assert 'historical_bar_semantics' in claim_facets(text)
+    assert validate_expert_grounding([part(text, 'expert.history_bars')], docs)
+    with pytest.raises(ValueError, match='does not support'):
+        validate_expert_grounding([part(text, 'expert.history_time')], docs)
+
+
+@pytest.mark.parametrize('text', [
+    '这段内容只是历史复盘，不是当前行情。',
+    '只把这段记录当作历史样本内的对照，不当作当前市场情绪的依据。',
+])
+def test_explicit_not_current_history_boundary_has_time_support(text, docs):
+    assert claim_facets(text) == {'historical_time_basis'}
+    assert validate_expert_grounding([part(text, 'expert.history_time')], docs)
+    with pytest.raises(ValueError, match='does not support'):
+        validate_expert_grounding([part(text, 'expert.history_oi')], docs)
+
+
+@pytest.mark.parametrize('text', [
+    '另取带独立统计日期的未平仓量来源；未来必涨。',
+    '另取带独立统计日期的未平仓量来源；持仓证明资金流入。',
+])
+def test_related_oi_source_does_not_unlock_forecast_or_fund_flow_claims(text, docs):
+    from app.history_chat import _validate
+    raw=json.dumps({'response':[{'kind':'explanation','text':text,'evidence_ids':['expert.oi_cycle']}]},ensure_ascii=False)
+    with pytest.raises(ValueError,match='Unsupported options claim'):
+        _validate(raw,{},docs,context_kind='historical_ibkr')
+
+
+def test_new_history_synonym_still_cannot_use_an_unknown_reference(docs):
+    from app.history_chat import _validate
+    raw=json.dumps({'response':[{'kind':'explanation','text':'历史复盘不是当前行情。','evidence_ids':['expert.unknown_history_reference']}]},ensure_ascii=False)
+    with pytest.raises(ValueError,match='Unknown'):
+        _validate(raw,{},docs,context_kind='historical_ibkr')
+
+
+@pytest.mark.parametrize('text', [
+    '这里用的是历史成交条接口，文档没有列出期权未平仓量的历史条类型。这个限制不代表其他数据商都没有历史未平仓量。',
+    '历史TRADES条接口文档没有列出按日期的未平仓量字段。',
+])
+def test_explicit_historical_trade_bar_interface_type_omission(text, docs):
+    assert claim_facets(text)=={'historical_oi_availability'}
+    assert validate_expert_grounding([part(text,'expert.history_oi')],docs,context_kind='historical_ibkr')
+    with pytest.raises(ValueError,match='does not support'):
+        validate_expert_grounding([part(text,'expert.oi_cycle')],docs,context_kind='historical_ibkr')
+
+
+@pytest.mark.parametrize('text', [
+    '历史成交条接口文档列出期权未平仓量字段。',
+    '本次历史成交条接口的未平仓量有统计日期。',
+    '此处历史成交条接口只描述价格，当前样本未平仓字段为空。',
+    '历史账单接口文档没有列出收入类型。',
+])
+def test_interface_name_alone_or_another_domain_does_not_claim_oi_unavailability(text):
+    assert 'historical_oi_availability' not in claim_facets(text)
+
+
+def test_historical_trade_interface_alias_does_not_override_import_provenance(docs):
+    text='历史成交条接口文档没有列出期权未平仓量的历史条类型。'
+    with pytest.raises(ValueError,match='Imported missing fields'):
+        validate_expert_grounding([part(text,'expert.history_oi')],docs,'这个CSV为什么没有持仓？','historical_import')

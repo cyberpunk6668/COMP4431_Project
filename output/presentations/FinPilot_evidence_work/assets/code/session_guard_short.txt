@@ -1,0 +1,4 @@
+      try {
+        const session = await request(`/api/sessions/${encodeURIComponent(sid)}`, {signal:controller.signal});
+        if (destroyed || serial !== syncSerial || connection?.epoch !== epoch || connection?.generation !== generation || connection?.session_id !== sid || !shouldSync(sid)) return null;
+        notify('onSession', session); return session;

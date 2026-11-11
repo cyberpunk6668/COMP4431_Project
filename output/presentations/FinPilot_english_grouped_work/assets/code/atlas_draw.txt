@@ -1,0 +1,10 @@
+      const image=this.atlases.get(sprite.atlas);
+      if(!image){if(!this.pending.has(sprite.atlas))this.ensureAtlas(sprite.atlas);return;}
+      const bounds=this.data.atlases[sprite.atlas].frames[String(sprite.source_index)];
+      if(!bounds){this.fallback('frame_missing');return;}
+      const key=`${sprite.atlas}:${sprite.source_index}:${clip.flip}`;
+      if(!force&&key===this.lastDraw)return;
+      const c=this.context,w=this.canvas.width,h=this.canvas.height,size=Math.min(w,h);
+      c.clearRect(0,0,w,h);c.save();c.imageSmoothingEnabled=true;c.imageSmoothingQuality='high';
+      c.translate(w/2,h/2);if(clip.flip)c.scale(-1,1);
+      c.drawImage(image,bounds.x,bounds.y,bounds.w,bounds.h,-size/2,-size/2,size,size);c.restore();

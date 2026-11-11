@@ -1,0 +1,78 @@
+{
+  "checked_at": "2026-11-11T13:43:23.650127+00:00",
+  "application_version": "16.0.0",
+  "native_host_version": "15.0.0",
+  "status": "passed_with_documented_scope",
+  "scope": "Project self-knowledge and usage tutorials: local reviewed bilingual manual, bounded model topic selection, safe UI cards, independent guide, preserved analysis binding and persisted messages. No new native hardware acceptance or forecasting accuracy claim.",
+  "topics": 16,
+  "manual_sha256": "01297956a8a77385fe4a70074c5321a74511d55c1f721ccfc9b408979c71503d",
+  "verification": {
+    "python_tests": 763,
+    "python_failures": 0,
+    "ui_checks_per_viewport": 18,
+    "viewport_widths": [
+      320,
+      390,
+      1440
+    ],
+    "designed_routing_cases_passed": 46,
+    "final_real_model_turns": 2,
+    "final_real_model_generations": 2,
+    "final_repairs": 0,
+    "total_opt_in_model_turns": 4,
+    "new_broker_requests": 0
+  },
+  "evidence": {
+    "python_regression_v16.json": {
+      "path": "reports/python_regression_v16.json",
+      "sha256": "4c042e47993b4c6f58f0fbb0e8eec4a107ea539dd68036667e87fa08ede3cdec",
+      "status": "passed"
+    },
+    "project_help_ui_v16.json": {
+      "path": "reports/project_help_ui_v16.json",
+      "sha256": "b773556455a9c20e0e8ac8a909d9d111db0188693a16d402b2314339f88576cf",
+      "status": "passed"
+    },
+    "project_help_live_v16.json": {
+      "path": "reports/project_help_live_v16.json",
+      "sha256": "03edd43ebc0debe3d7d1f1a33acd8f5a316b14ba62c79affe2147566731fe0d8",
+      "status": "passed"
+    },
+    "project_help_routing_v16.json": {
+      "path": "reports/project_help_routing_v16.json",
+      "sha256": "4e0366dd45b418fa9c27ad45b02de266cf92e74622e4354a9d61f668e1231172",
+      "status": "passed"
+    },
+    "project_help_runtime_v16.json": {
+      "path": "reports/project_help_runtime_v16.json",
+      "sha256": "9702ba369469153908f6aa1cb43d020547f6bbf0f9bf59953b4230b99584b4bd",
+      "status": "passed"
+    },
+    "project_help_validation_history_v16.json": {
+      "path": "reports/project_help_validation_history_v16.json",
+      "sha256": "3acd7f8d3b08cd90fb0af8e571d5f271a3ec346ca0f76fc46a37d4fbd222759c",
+      "status": "final_current_source_passed"
+    }
+  },
+  "guarantees_checked": [
+    "Model output is restricted to candidate topic IDs; steps and links match the public reviewed manual exactly.",
+    "Invalid/extra/unknown model output falls back to the local manual after one attempt; no repair loop.",
+    "Help with a bound historical report leaves its identity and content unchanged, adds no financial analysis_context, and persists four unique messages across two turns.",
+    "Ordinary finance/science, explicit calculations and actual report interpretations retain their original routes.",
+    "Help catalogue/search links make no model or broker request; keylike search text is rejected before entering a browser request URL.",
+    "Native help uses the existing page/bridge with a same-panel guide. No CSP, desktop bridge, voice permission or executable expansion."
+  ],
+  "limits": [
+    "Intent routing and reviewed manual are finite rules/content; not arbitrary source-code understanding or universal language accuracy.",
+    "The model selects manual topics; it does not freely author or verify operation steps, and this feature is not model fine-tuning.",
+    "Viewport and speech tests use a desktop browser and controlled fixtures; no new physical mobile/Windows hardware certification.",
+    "Source drift requires review; startup hashes and labels are provenance, not proof of each statement."
+  ],
+  "runtime": {
+    "url": "http://127.0.0.1:8000/help",
+    "backend_reloaded_final_source": true,
+    "user_records_preserved": true,
+    "desktop_connection_after_restart": "Explicitly reconnect the chosen conversation; no automatic old-session selection."
+  },
+  "package_integrity": "Generated separately by dist/package_check_v16.json; not inferred from this feature report."
+}

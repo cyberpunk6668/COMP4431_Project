@@ -1,0 +1,237 @@
+{
+  "checked_at": "2026-11-11T12:44:21.155Z",
+  "status": "passed_instrumented",
+  "phase": "complete",
+  "api": "Public Node Playwright _electron; Python API does not expose Electron",
+  "executable": "desktop/artifacts/win-unpacked/FinPilotPet.exe",
+  "fixture_port": 8018,
+  "external_model_requests": 0,
+  "new_broker_requests": 0,
+  "user_profile_or_other_windows_read": false,
+  "physical_mouse_tested": false,
+  "checks": [
+    "actual_packaged_window_show_sandbox_and_renderer_node_isolation",
+    "explicit_topmost_setter_probe_is_recorded_as_test_intervention",
+    "actual_tray_object_and_callbacks_show_then_harness_hide_without_focus",
+    "allowed_scale_ipc_updates_renderer_and_invalid_scale_is_rejected",
+    "simulated_cursor_drives_real_ignore_setter_while_os_window_hidden",
+    "real_panel_ipc_toggles_focusability_with_actual_focus_suppressed",
+    "renderer_pointer_event_drag_and_drop_with_capture_stub_not_physical_input",
+    "same_profile_second_process_exits_and_keeps_single_window",
+    "owned_profile_restart_restores_scale_and_clamped_position"
+  ],
+  "screenshots": [],
+  "limitations": [
+    "Main-process and renderer instrumentation, not physical mouse or OS click-through proof.",
+    "Focus/blur are suppressed in this test process; windows auto-hide immediately after show events to avoid interrupting the user.",
+    "Cursor and poll visibility are simulated while the actual window is hidden. Drag uses injected renderer events with pointer capture stubbed.",
+    "Screenshots capture only owned webContents with a transparent background, not the desktop or other apps."
+  ],
+  "native": {
+    "visible": false,
+    "alwaysOnTop": true,
+    "focusable": false,
+    "bounds": {
+      "x": 0,
+      "y": 0,
+      "width": 1708,
+      "height": 1020
+    },
+    "backgroundColor": "#000000",
+    "preferences": {
+      "sandbox": true,
+      "contextIsolation": true,
+      "nodeIntegration": false,
+      "webSecurity": true
+    },
+    "version": "15.0.0",
+    "displays": [
+      {
+        "id": 2690995187,
+        "workArea": {
+          "x": 0,
+          "y": 0,
+          "width": 1707,
+          "height": 1019
+        },
+        "scaleFactor": 1.5
+      }
+    ],
+    "renderer": {
+      "status": {
+        "open": false,
+        "busy": false,
+        "sessionId": null,
+        "position": {
+          "x": 1473,
+          "y": 803
+        },
+        "scale": 200,
+        "avatar": {
+          "renderer": "canvas2d",
+          "actualMode": "2d",
+          "requestedMode": "2d",
+          "state": "idle",
+          "language": "zh",
+          "activeClip": "idle",
+          "frames": 3,
+          "spriteChanges": 2,
+          "paused": false,
+          "reducedMotion": false,
+          "fallbackReason": null,
+          "assetRevision": "7661c8b304c5400701f91da01b1a643a207331de",
+          "loading": false,
+          "destroyed": false
+        },
+        "native": true
+      },
+      "nodeRequire": "undefined",
+      "nodeProcess": "undefined",
+      "bridgeKeys": [
+        "version",
+        "ready",
+        "setInteractiveRects",
+        "savePosition",
+        "setPanelOpen",
+        "beginDrag",
+        "endDrag",
+        "setScale",
+        "setRoaming",
+        "hide",
+        "reset",
+        "open",
+        "onLayout",
+        "onCommand"
+      ]
+    },
+    "after_first_show": {
+      "showEvents": 1,
+      "visibleDuringShow": true,
+      "topmostDuringShow": true,
+      "actuallyHiddenForHarness": true
+    }
+  },
+  "topmost_explicit_setter_probe": {
+    "test_intervention": true,
+    "before": true,
+    "shownBeforeSetter": true,
+    "immediately": true,
+    "after60ms": true,
+    "visibleAt60ms": true
+  },
+  "tray": {
+    "captured": true,
+    "destroyed": false,
+    "bounds": {
+      "x": 1386,
+      "y": 1019,
+      "width": 32,
+      "height": 49
+    },
+    "labels": [
+      "FinPilot · 鲸鱼娘金融助手",
+      "",
+      "显示桌宠 / Show pet",
+      "隐藏桌宠 / Hide pet",
+      "打开聊天 / Open chat",
+      "恢复位置 / Reset position",
+      "安静散步 / Gentle roaming",
+      "休息 / Wake or rest",
+      "角色大小 / Size",
+      "全部点击穿透 / Pass all clicks",
+      "",
+      "打开工作台 / Workspace",
+      "退出桌宠（保留后台） / Quit pet"
+    ]
+  },
+  "visibility": {
+    "showEvents": 1,
+    "visibleDuringShow": true,
+    "actuallyHiddenAfter": true
+  },
+  "cursor_simulation": {
+    "ignoreSetterCalls": [
+      false,
+      true,
+      false,
+      true
+    ],
+    "actualWindowHidden": true,
+    "focusCallsSuppressed": 1
+  },
+  "renderer_drag": {
+    "before": {
+      "x": 1423,
+      "y": 753
+    },
+    "during": {
+      "position": {
+        "x": 1303,
+        "y": 703
+      },
+      "dragging": "true",
+      "clip": "drag"
+    },
+    "after": {
+      "x": 1303,
+      "y": 757
+    }
+  },
+  "screenshot_unavailable": "Owned hidden webContents screenshot timed out; no desktop capture fallback was attempted.",
+  "topmost_after_normal_second_instance": true,
+  "duplicate": {
+    "exit_code": 0,
+    "only_same_test_profile": true
+  },
+  "restart": {
+    "open": false,
+    "busy": false,
+    "sessionId": null,
+    "position": {
+      "x": 1303,
+      "y": 757
+    },
+    "scale": 250,
+    "avatar": {
+      "renderer": "canvas2d",
+      "actualMode": "2d",
+      "requestedMode": "2d",
+      "state": "idle",
+      "language": "zh",
+      "activeClip": "idle",
+      "frames": 4,
+      "spriteChanges": 3,
+      "paused": false,
+      "reducedMotion": false,
+      "fallbackReason": null,
+      "assetRevision": "7661c8b304c5400701f91da01b1a643a207331de",
+      "loading": false,
+      "destroyed": false
+    },
+    "native": true
+  },
+  "fixture_counters": {
+    "controlled_provider_generations": 0,
+    "external_model_requests": 0,
+    "broker_requests": 0
+  },
+  "topmost_after_normal_second_instance_has_prior_test_intervention": true,
+  "owned_fixture_port_released": true,
+  "elapsed_seconds": 5.133,
+  "packaged_host_asar_sha256": "d8f277b7a63413d2ac76a7a73da9b20d3ecedbe6c4bc8b36ea9da59178a0a910",
+  "manual_review": {
+    "status": "accepted_instrumentation_only",
+    "reviewed_at": "2026-11-11T12:45:41.191116+00:00",
+    "facts": [
+      "Before the explicit setter probe, the final run observed native always-on-top true, a true visible show event and focusable false.",
+      "The explicit topmost setter probe was an intervention and was already true beforehand; it does not demonstrate correction of a false constructor state.",
+      "Runtime focus/blur suppression and auto-hide prevent this run from testing real focus acquisition or physical user input.",
+      "Cursor polling visibility and cursor position were simulated while the actual OS window was hidden. The real ignoreMouseEvents setter requests were observed, not physical click-through.",
+      "Renderer drag events used a capture stub; this is not physical dragging.",
+      "The owned hidden webContents screenshot timed out; no screen/other-window fallback was used.",
+      "Duplicate startup and restart used only this test profile; fixture model and broker counters remained zero."
+    ],
+    "earlier_runs": "Preflight fixture syntax error, early topmost samples and hidden screenshot timeout remain in separate failed reports. They were not overwritten as passes."
+  },
+  "scope": "Actual packaged Electron main-process and owned renderer instrumentation with an isolated controlled-provider backend. Cursor/drag are simulated; no physical mouse or desktop-screen capture."
+}

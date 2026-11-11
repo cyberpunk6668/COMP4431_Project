@@ -1,0 +1,49 @@
+{
+  "snippets": [
+    {
+      "id": "retrieval",
+      "source": "app/expert_knowledge.py",
+      "start_line": 135,
+      "end_line": 146,
+      "line_count": 12,
+      "sha256": "0c2d328de53f2e8b2132b60397e6b377663c0d5af57e0cf4f05ba28e9e1d07a4",
+      "caption": "Two lexical scores, one fused ranking",
+      "meaning": "BM25 term scoring and weighted Chinese character overlap are ranked separately, then combined by reciprocal rank fusion.",
+      "code": "            score = sum(self._idf[term] * counts[term] * 2.2 /\n                        (counts[term] + 1.2*(.25+.75*self._lengths[index]/self._average)) for term in matched_terms)\n            # Weighted character overlap is lexical, not an embedding similarity.\n            gram_score = sum(self._gram_idf[g] for g in matched_grams) / max(1, sum(self._gram_idf.get(g, 1) for g in grams))\n            if score > 0:\n                bm25[index] = score\n            if gram_score > 0:\n                char[index] = gram_score\n            details[index] = {\"matched_terms\": matched_terms[:12], \"matched_ngrams\": matched_grams[:12], \"matched_topics\": matched_topics}\n        rank = lambda scores: {index: position+1 for position, index in enumerate(sorted(scores, key=lambda i: (-scores[i], self.documents[i][\"id\"])))}\n        term_ranks, char_ranks = rank(bm25), rank(char)\n        fused = {i: sum(1/(60+ranks[i]) for ranks in (term_ranks, char_ranks) if i in ranks) for i in set(bm25) | set(char)}"
+    },
+    {
+      "id": "grounding",
+      "source": "app/expert_grounding.py",
+      "start_line": 205,
+      "end_line": 214,
+      "line_count": 10,
+      "sha256": "f3f2509ea5282b050c9b2deeaba2f7ca0260cbd3927862290c072f4f3823a008",
+      "caption": "Reject sources that do not support the recognized topic",
+      "meaning": "Each paragraph cites only supplied source IDs. Its recognized claim facets must be covered by the cited sources.",
+      "code": "        cited = [key for key in part.get(\"evidence_ids\", []) if str(key).startswith(\"expert.\")]\n        if any(key not in sources for key in cited):\n            raise ValueError(where + \"Expert citation was not in the retrieved context\")\n        if any(key not in sources and key not in local_ids for key in part.get(\"evidence_ids\", [])):\n            raise ValueError(where + \"Unknown local or expert reference\")\n        support = {facet for key in cited for facet in sources[key].get(\"supports\", []) if facet in SUPPORT_FACETS}\n        missing = facets - support\n        if missing:\n            raise ValueError(where + \"Expert citation does not support claim facets: \" + \",\".join(sorted(missing)))\n        unrelated = [key for key in cited if not set(sources[key].get(\"supports\", [])) & facets]"
+    },
+    {
+      "id": "repair_optional",
+      "source": "app/history_chat.py",
+      "start_line": 320,
+      "end_line": 325,
+      "line_count": 6,
+      "sha256": "4777a2d615176774c060a0a93ae41ba9c9764f197d08f19bc115b9ab86dc5af6",
+      "caption": "One initial answer, at most one repair",
+      "meaning": "range(2) bounds the initial generation plus one possible repair; the deadline bounds total answer time.",
+      "code": "                async with asyncio.timeout(ANSWER_DEADLINE_SECONDS):\n                    for attempt in range(2):\n                        attempts += 1\n                        repairs += bool(attempt)\n                        try:\n                            content = await self.local_provider.complete(messages) if engine == \"local\" else await self.cloud.complete(messages, json_output=True)"
+    }
+  ],
+  "metric": {
+    "source": "reports/expert_retrieval_holdout_v14.json",
+    "source_lines": "41-62",
+    "metric": "Recall@4",
+    "value": 0.87037,
+    "relevant_questions": 18,
+    "irrelevant_questions": 6,
+    "total_questions": 24,
+    "method": "bm25_char_ngram_rrf",
+    "current_retriever_matches_report_sha256": true,
+    "limitation": "Same-team manual gold labels and a small convenience sample. This is neither an external benchmark nor a measure of answer accuracy, citation entailment, market validity or predictive skill."
+  }
+}

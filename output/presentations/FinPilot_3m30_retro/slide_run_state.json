@@ -1,0 +1,30 @@
+{
+  "status": "completed",
+  "history": [
+    {
+      "from": "created",
+      "to": "jobs_prepared",
+      "at": "2026-11-11T12:52:04Z",
+      "note": "prepared slide prompt jobs"
+    },
+    {
+      "from": "jobs_prepared",
+      "to": "slides_dispatched",
+      "at": "2026-11-11T12:54:49Z",
+      "note": "all slide jobs dispatched"
+    },
+    {
+      "from": "slides_dispatched",
+      "to": "slides_recorded",
+      "at": "2026-11-11T12:58:17Z",
+      "note": "all slide images recorded"
+    },
+    {
+      "from": "slides_recorded",
+      "to": "completed",
+      "at": "2026-11-11T12:59:10Z",
+      "note": "Six slides visually reviewed, PPTX assembled, six notes verified, package and geometry checks passed."
+    }
+  ],
+  "updated_at": "2026-11-11T12:59:10Z"
+}

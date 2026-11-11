@@ -9,8 +9,8 @@ def _read_as_denial(prefix):
     decrease), not arbitrary intervening prose. 'Cannot be read as a forecast
     and volume increased' therefore remains a factual direction assertion.
     """
-    zh_tail = r"(?:(?:实际|真实|明确|可靠|已经发生|成交量|成交|持仓量|持仓|价格|占比|总量|变化量|数值|指标|的|增加|减少|上升|下降|变高|变低|增大|降低|提高|保持相同|保持不变|未变|持平|或|和|与|以及|、|\s))*$"
-    zh = re.search(r"(?:不能|无法|不可|不应|不该|不宜|不足以|不)(?:据此|直接|简单地|可靠地|轻易)?(?:被|(?:(?:把|将)(?:它|其|这|这些差异|这些变化|该变化|这一变化|这项变化|该差值|这些数值)))?(?:当作|当成|视为|解读为|解释为|描述为|称为|说成)" + zh_tail, prefix)
+    zh_tail = r"(?:(?:实际|真实|明确|可靠|已经发生|看涨|看跌|成交量|成交|持仓量|持仓|价格|占比|总量|变化量|数值|指标|的|增加|减少|上升|下降|放大|缩小|变高|变低|增大|降低|提高|保持相同|保持不变|未变|持平|或|和|与|以及|、|\s))*$"
+    zh = re.search(r"(?:不能|无法|不可|不应|不该|不宜|不足以|不)(?:据此|由此|直接|简单地|可靠地|轻易)?(?:被|(?:(?:把|将)(?:它|其|这|这些差异|这些变化|该变化|这一变化|这项变化|该差值|这些数值)))?(?:当作|当成|视为|解读为|解释为|描述为|称为|说成|说|断言)" + zh_tail, prefix)
     if zh and not re.search(r"(?:不能|无法|不可|并非|不是|并不是)\s*$", prefix[:zh.start()]):
         return True
     en_tail = r"(?:(?:an?|the|any|real|actual|genuine|clear|meaningful|reliable|observed|definite|evidence|of|showing|indicating|volume|price|interest|share|increas\w*|decreas\w*|higher|lower|rose|fell|unchanged|or|and|nor)\s+)*$"

@@ -1,0 +1,1385 @@
+{
+  "version": 1,
+  "character": "deepseek-whale-maid",
+  "asset_revision": "7661c8b304c5400701f91da01b1a643a207331de",
+  "source_repository": "https://github.com/YunYueSama/codex-deepseek-pet",
+  "fallback": "assets/portrait.webp",
+  "atlases": {
+    "actions": {
+      "url": "assets/actions.webp",
+      "frames": {
+        "0": {
+          "x": 0,
+          "y": 0,
+          "w": 256,
+          "h": 256
+        },
+        "9": {
+          "x": 256,
+          "y": 0,
+          "w": 256,
+          "h": 256
+        }
+      },
+      "width": 512,
+      "height": 256,
+      "source_cell": 512,
+      "source_columns": 4,
+      "upstream_path": "assets/whale/actions.png"
+    },
+    "dense-idle": {
+      "url": "assets/dense-idle.webp",
+      "frames": {
+        "1": {
+          "x": 0,
+          "y": 0,
+          "w": 256,
+          "h": 256
+        },
+        "3": {
+          "x": 256,
+          "y": 0,
+          "w": 256,
+          "h": 256
+        },
+        "5": {
+          "x": 512,
+          "y": 0,
+          "w": 256,
+          "h": 256
+        },
+        "7": {
+          "x": 768,
+          "y": 0,
+          "w": 256,
+          "h": 256
+        }
+      },
+      "width": 1024,
+      "height": 256,
+      "source_cell": 512,
+      "source_columns": 4,
+      "upstream_path": "assets/whale/dense-idle.png"
+    },
+    "dense-wave": {
+      "url": "assets/dense-wave.webp",
+      "frames": {
+        "1": {
+          "x": 0,
+          "y": 0,
+          "w": 256,
+          "h": 256
+        },
+        "3": {
+          "x": 256,
+          "y": 0,
+          "w": 256,
+          "h": 256
+        },
+        "5": {
+          "x": 512,
+          "y": 0,
+          "w": 256,
+          "h": 256
+        },
+        "7": {
+          "x": 768,
+          "y": 0,
+          "w": 256,
+          "h": 256
+        },
+        "9": {
+          "x": 0,
+          "y": 256,
+          "w": 256,
+          "h": 256
+        },
+        "11": {
+          "x": 256,
+          "y": 256,
+          "w": 256,
+          "h": 256
+        },
+        "13": {
+          "x": 512,
+          "y": 256,
+          "w": 256,
+          "h": 256
+        },
+        "15": {
+          "x": 768,
+          "y": 256,
+          "w": 256,
+          "h": 256
+        },
+        "17": {
+          "x": 0,
+          "y": 512,
+          "w": 256,
+          "h": 256
+        },
+        "19": {
+          "x": 256,
+          "y": 512,
+          "w": 256,
+          "h": 256
+        },
+        "21": {
+          "x": 512,
+          "y": 512,
+          "w": 256,
+          "h": 256
+        },
+        "23": {
+          "x": 768,
+          "y": 512,
+          "w": 256,
+          "h": 256
+        },
+        "25": {
+          "x": 0,
+          "y": 768,
+          "w": 256,
+          "h": 256
+        },
+        "27": {
+          "x": 256,
+          "y": 768,
+          "w": 256,
+          "h": 256
+        },
+        "29": {
+          "x": 512,
+          "y": 768,
+          "w": 256,
+          "h": 256
+        },
+        "31": {
+          "x": 768,
+          "y": 768,
+          "w": 256,
+          "h": 256
+        }
+      },
+      "width": 1024,
+      "height": 1024,
+      "source_cell": 512,
+      "source_columns": 4,
+      "upstream_path": "assets/whale/dense-wave.png"
+    },
+    "expressions": {
+      "url": "assets/expressions.webp",
+      "frames": {
+        "8": {
+          "x": 0,
+          "y": 0,
+          "w": 256,
+          "h": 256
+        }
+      },
+      "width": 256,
+      "height": 256,
+      "source_cell": 512,
+      "source_columns": 4,
+      "upstream_path": "assets/whale/expressions.png"
+    },
+    "idle-front": {
+      "url": "assets/idle-front.webp",
+      "frames": {
+        "0": {
+          "x": 0,
+          "y": 0,
+          "w": 512,
+          "h": 512
+        },
+        "1": {
+          "x": 512,
+          "y": 0,
+          "w": 512,
+          "h": 512
+        }
+      },
+      "width": 1024,
+      "height": 512,
+      "source_cell": 1024,
+      "source_columns": 2,
+      "upstream_path": "assets/whale/idle-front.png"
+    },
+    "inbetween-jump": {
+      "url": "assets/inbetween-jump.webp",
+      "frames": {
+        "13": {
+          "x": 0,
+          "y": 0,
+          "w": 256,
+          "h": 256
+        },
+        "19": {
+          "x": 256,
+          "y": 0,
+          "w": 256,
+          "h": 256
+        },
+        "21": {
+          "x": 512,
+          "y": 0,
+          "w": 256,
+          "h": 256
+        },
+        "23": {
+          "x": 768,
+          "y": 0,
+          "w": 256,
+          "h": 256
+        },
+        "25": {
+          "x": 0,
+          "y": 256,
+          "w": 256,
+          "h": 256
+        },
+        "27": {
+          "x": 256,
+          "y": 256,
+          "w": 256,
+          "h": 256
+        },
+        "29": {
+          "x": 512,
+          "y": 256,
+          "w": 256,
+          "h": 256
+        },
+        "31": {
+          "x": 768,
+          "y": 256,
+          "w": 256,
+          "h": 256
+        },
+        "45": {
+          "x": 0,
+          "y": 512,
+          "w": 256,
+          "h": 256
+        },
+        "46": {
+          "x": 256,
+          "y": 512,
+          "w": 256,
+          "h": 256
+        },
+        "47": {
+          "x": 512,
+          "y": 512,
+          "w": 256,
+          "h": 256
+        }
+      },
+      "width": 1024,
+      "height": 768,
+      "source_cell": 512,
+      "source_columns": 4,
+      "upstream_path": "assets/whale/inbetween-jump.png"
+    },
+    "inbetween-sleep": {
+      "url": "assets/inbetween-sleep.webp",
+      "frames": {
+        "1": {
+          "x": 0,
+          "y": 0,
+          "w": 256,
+          "h": 256
+        },
+        "3": {
+          "x": 256,
+          "y": 0,
+          "w": 256,
+          "h": 256
+        },
+        "5": {
+          "x": 512,
+          "y": 0,
+          "w": 256,
+          "h": 256
+        },
+        "7": {
+          "x": 768,
+          "y": 0,
+          "w": 256,
+          "h": 256
+        },
+        "9": {
+          "x": 0,
+          "y": 256,
+          "w": 256,
+          "h": 256
+        },
+        "11": {
+          "x": 256,
+          "y": 256,
+          "w": 256,
+          "h": 256
+        },
+        "13": {
+          "x": 512,
+          "y": 256,
+          "w": 256,
+          "h": 256
+        },
+        "17": {
+          "x": 768,
+          "y": 256,
+          "w": 256,
+          "h": 256
+        },
+        "19": {
+          "x": 0,
+          "y": 512,
+          "w": 256,
+          "h": 256
+        },
+        "21": {
+          "x": 256,
+          "y": 512,
+          "w": 256,
+          "h": 256
+        },
+        "23": {
+          "x": 512,
+          "y": 512,
+          "w": 256,
+          "h": 256
+        },
+        "25": {
+          "x": 768,
+          "y": 512,
+          "w": 256,
+          "h": 256
+        },
+        "27": {
+          "x": 0,
+          "y": 768,
+          "w": 256,
+          "h": 256
+        },
+        "29": {
+          "x": 256,
+          "y": 768,
+          "w": 256,
+          "h": 256
+        },
+        "31": {
+          "x": 512,
+          "y": 768,
+          "w": 256,
+          "h": 256
+        },
+        "35": {
+          "x": 768,
+          "y": 768,
+          "w": 256,
+          "h": 256
+        },
+        "37": {
+          "x": 0,
+          "y": 1024,
+          "w": 256,
+          "h": 256
+        },
+        "38": {
+          "x": 256,
+          "y": 1024,
+          "w": 256,
+          "h": 256
+        },
+        "39": {
+          "x": 512,
+          "y": 1024,
+          "w": 256,
+          "h": 256
+        }
+      },
+      "width": 1024,
+      "height": 1280,
+      "source_cell": 512,
+      "source_columns": 4,
+      "upstream_path": "assets/whale/inbetween-sleep.png"
+    },
+    "inbetween-walk": {
+      "url": "assets/inbetween-walk.webp",
+      "frames": {
+        "0": {
+          "x": 0,
+          "y": 0,
+          "w": 256,
+          "h": 256
+        },
+        "1": {
+          "x": 256,
+          "y": 0,
+          "w": 256,
+          "h": 256
+        },
+        "2": {
+          "x": 512,
+          "y": 0,
+          "w": 256,
+          "h": 256
+        },
+        "3": {
+          "x": 768,
+          "y": 0,
+          "w": 256,
+          "h": 256
+        },
+        "4": {
+          "x": 0,
+          "y": 256,
+          "w": 256,
+          "h": 256
+        },
+        "5": {
+          "x": 256,
+          "y": 256,
+          "w": 256,
+          "h": 256
+        },
+        "6": {
+          "x": 512,
+          "y": 256,
+          "w": 256,
+          "h": 256
+        },
+        "7": {
+          "x": 768,
+          "y": 256,
+          "w": 256,
+          "h": 256
+        },
+        "8": {
+          "x": 0,
+          "y": 512,
+          "w": 256,
+          "h": 256
+        },
+        "9": {
+          "x": 256,
+          "y": 512,
+          "w": 256,
+          "h": 256
+        },
+        "10": {
+          "x": 512,
+          "y": 512,
+          "w": 256,
+          "h": 256
+        },
+        "11": {
+          "x": 768,
+          "y": 512,
+          "w": 256,
+          "h": 256
+        },
+        "12": {
+          "x": 0,
+          "y": 768,
+          "w": 256,
+          "h": 256
+        },
+        "13": {
+          "x": 256,
+          "y": 768,
+          "w": 256,
+          "h": 256
+        },
+        "14": {
+          "x": 512,
+          "y": 768,
+          "w": 256,
+          "h": 256
+        },
+        "15": {
+          "x": 768,
+          "y": 768,
+          "w": 256,
+          "h": 256
+        }
+      },
+      "width": 1024,
+      "height": 1024,
+      "source_cell": 512,
+      "source_columns": 4,
+      "upstream_path": "assets/whale/inbetween-walk.png"
+    },
+    "story-token": {
+      "url": "assets/story-token.webp",
+      "frames": {
+        "0": {
+          "x": 0,
+          "y": 0,
+          "w": 256,
+          "h": 256
+        },
+        "1": {
+          "x": 256,
+          "y": 0,
+          "w": 256,
+          "h": 256
+        },
+        "2": {
+          "x": 512,
+          "y": 0,
+          "w": 256,
+          "h": 256
+        }
+      },
+      "width": 768,
+      "height": 256,
+      "source_cell": 384,
+      "source_columns": 4,
+      "upstream_path": "assets/whale/story-token.png"
+    }
+  },
+  "clips": {
+    "idle": {
+      "frames": [
+        {
+          "atlas": "idle-front",
+          "source_index": 0,
+          "duration_ms": 1000
+        }
+      ],
+      "loop": true,
+      "hold": false,
+      "flip": false,
+      "upstream_clip": "idle"
+    },
+    "shift": {
+      "frames": [
+        {
+          "atlas": "dense-idle",
+          "source_index": 1,
+          "duration_ms": 75
+        },
+        {
+          "atlas": "dense-idle",
+          "source_index": 3,
+          "duration_ms": 80
+        },
+        {
+          "atlas": "dense-idle",
+          "source_index": 5,
+          "duration_ms": 90
+        },
+        {
+          "atlas": "dense-idle",
+          "source_index": 7,
+          "duration_ms": 100
+        },
+        {
+          "atlas": "dense-idle",
+          "source_index": 5,
+          "duration_ms": 90
+        },
+        {
+          "atlas": "dense-idle",
+          "source_index": 3,
+          "duration_ms": 80
+        },
+        {
+          "atlas": "dense-idle",
+          "source_index": 1,
+          "duration_ms": 100
+        }
+      ],
+      "loop": false,
+      "hold": false,
+      "flip": false,
+      "upstream_clip": "shift"
+    },
+    "wave": {
+      "frames": [
+        {
+          "atlas": "dense-wave",
+          "source_index": 1,
+          "duration_ms": 80
+        },
+        {
+          "atlas": "dense-wave",
+          "source_index": 3,
+          "duration_ms": 70
+        },
+        {
+          "atlas": "dense-wave",
+          "source_index": 5,
+          "duration_ms": 65
+        },
+        {
+          "atlas": "dense-wave",
+          "source_index": 7,
+          "duration_ms": 65
+        },
+        {
+          "atlas": "dense-wave",
+          "source_index": 9,
+          "duration_ms": 70
+        },
+        {
+          "atlas": "dense-wave",
+          "source_index": 11,
+          "duration_ms": 65
+        },
+        {
+          "atlas": "dense-wave",
+          "source_index": 13,
+          "duration_ms": 65
+        },
+        {
+          "atlas": "dense-wave",
+          "source_index": 15,
+          "duration_ms": 65
+        },
+        {
+          "atlas": "dense-wave",
+          "source_index": 17,
+          "duration_ms": 65
+        },
+        {
+          "atlas": "dense-wave",
+          "source_index": 19,
+          "duration_ms": 70
+        },
+        {
+          "atlas": "dense-wave",
+          "source_index": 21,
+          "duration_ms": 65
+        },
+        {
+          "atlas": "dense-wave",
+          "source_index": 23,
+          "duration_ms": 65
+        },
+        {
+          "atlas": "dense-wave",
+          "source_index": 25,
+          "duration_ms": 70
+        },
+        {
+          "atlas": "dense-wave",
+          "source_index": 27,
+          "duration_ms": 75
+        },
+        {
+          "atlas": "dense-wave",
+          "source_index": 29,
+          "duration_ms": 80
+        },
+        {
+          "atlas": "dense-wave",
+          "source_index": 31,
+          "duration_ms": 100
+        }
+      ],
+      "loop": false,
+      "hold": false,
+      "flip": false,
+      "upstream_clip": "wave"
+    },
+    "pat": {
+      "frames": [
+        {
+          "atlas": "dense-wave",
+          "source_index": 1,
+          "duration_ms": 80
+        },
+        {
+          "atlas": "dense-wave",
+          "source_index": 3,
+          "duration_ms": 70
+        },
+        {
+          "atlas": "dense-wave",
+          "source_index": 5,
+          "duration_ms": 65
+        },
+        {
+          "atlas": "dense-wave",
+          "source_index": 7,
+          "duration_ms": 65
+        },
+        {
+          "atlas": "dense-wave",
+          "source_index": 9,
+          "duration_ms": 70
+        },
+        {
+          "atlas": "dense-wave",
+          "source_index": 11,
+          "duration_ms": 65
+        },
+        {
+          "atlas": "dense-wave",
+          "source_index": 13,
+          "duration_ms": 65
+        },
+        {
+          "atlas": "dense-wave",
+          "source_index": 15,
+          "duration_ms": 65
+        },
+        {
+          "atlas": "dense-wave",
+          "source_index": 17,
+          "duration_ms": 65
+        },
+        {
+          "atlas": "dense-wave",
+          "source_index": 19,
+          "duration_ms": 70
+        },
+        {
+          "atlas": "dense-wave",
+          "source_index": 21,
+          "duration_ms": 65
+        },
+        {
+          "atlas": "dense-wave",
+          "source_index": 23,
+          "duration_ms": 65
+        },
+        {
+          "atlas": "dense-wave",
+          "source_index": 25,
+          "duration_ms": 70
+        },
+        {
+          "atlas": "dense-wave",
+          "source_index": 27,
+          "duration_ms": 75
+        },
+        {
+          "atlas": "dense-wave",
+          "source_index": 29,
+          "duration_ms": 80
+        },
+        {
+          "atlas": "dense-wave",
+          "source_index": 31,
+          "duration_ms": 100
+        }
+      ],
+      "loop": false,
+      "hold": false,
+      "flip": false,
+      "upstream_clip": "happy"
+    },
+    "walk-right": {
+      "frames": [
+        {
+          "atlas": "inbetween-walk",
+          "source_index": 0,
+          "duration_ms": 60
+        },
+        {
+          "atlas": "inbetween-walk",
+          "source_index": 1,
+          "duration_ms": 60
+        },
+        {
+          "atlas": "inbetween-walk",
+          "source_index": 3,
+          "duration_ms": 60
+        },
+        {
+          "atlas": "inbetween-walk",
+          "source_index": 2,
+          "duration_ms": 60
+        },
+        {
+          "atlas": "inbetween-walk",
+          "source_index": 4,
+          "duration_ms": 60
+        },
+        {
+          "atlas": "inbetween-walk",
+          "source_index": 5,
+          "duration_ms": 60
+        },
+        {
+          "atlas": "inbetween-walk",
+          "source_index": 6,
+          "duration_ms": 60
+        },
+        {
+          "atlas": "inbetween-walk",
+          "source_index": 7,
+          "duration_ms": 60
+        },
+        {
+          "atlas": "inbetween-walk",
+          "source_index": 8,
+          "duration_ms": 60
+        },
+        {
+          "atlas": "inbetween-walk",
+          "source_index": 9,
+          "duration_ms": 60
+        },
+        {
+          "atlas": "inbetween-walk",
+          "source_index": 11,
+          "duration_ms": 60
+        },
+        {
+          "atlas": "inbetween-walk",
+          "source_index": 10,
+          "duration_ms": 60
+        },
+        {
+          "atlas": "inbetween-walk",
+          "source_index": 12,
+          "duration_ms": 60
+        },
+        {
+          "atlas": "inbetween-walk",
+          "source_index": 13,
+          "duration_ms": 60
+        },
+        {
+          "atlas": "inbetween-walk",
+          "source_index": 14,
+          "duration_ms": 60
+        },
+        {
+          "atlas": "inbetween-walk",
+          "source_index": 15,
+          "duration_ms": 60
+        }
+      ],
+      "loop": true,
+      "hold": false,
+      "flip": false,
+      "upstream_clip": "right"
+    },
+    "walk-left": {
+      "frames": [
+        {
+          "atlas": "inbetween-walk",
+          "source_index": 0,
+          "duration_ms": 60
+        },
+        {
+          "atlas": "inbetween-walk",
+          "source_index": 1,
+          "duration_ms": 60
+        },
+        {
+          "atlas": "inbetween-walk",
+          "source_index": 3,
+          "duration_ms": 60
+        },
+        {
+          "atlas": "inbetween-walk",
+          "source_index": 2,
+          "duration_ms": 60
+        },
+        {
+          "atlas": "inbetween-walk",
+          "source_index": 4,
+          "duration_ms": 60
+        },
+        {
+          "atlas": "inbetween-walk",
+          "source_index": 5,
+          "duration_ms": 60
+        },
+        {
+          "atlas": "inbetween-walk",
+          "source_index": 6,
+          "duration_ms": 60
+        },
+        {
+          "atlas": "inbetween-walk",
+          "source_index": 7,
+          "duration_ms": 60
+        },
+        {
+          "atlas": "inbetween-walk",
+          "source_index": 8,
+          "duration_ms": 60
+        },
+        {
+          "atlas": "inbetween-walk",
+          "source_index": 9,
+          "duration_ms": 60
+        },
+        {
+          "atlas": "inbetween-walk",
+          "source_index": 11,
+          "duration_ms": 60
+        },
+        {
+          "atlas": "inbetween-walk",
+          "source_index": 10,
+          "duration_ms": 60
+        },
+        {
+          "atlas": "inbetween-walk",
+          "source_index": 12,
+          "duration_ms": 60
+        },
+        {
+          "atlas": "inbetween-walk",
+          "source_index": 13,
+          "duration_ms": 60
+        },
+        {
+          "atlas": "inbetween-walk",
+          "source_index": 14,
+          "duration_ms": 60
+        },
+        {
+          "atlas": "inbetween-walk",
+          "source_index": 15,
+          "duration_ms": 60
+        }
+      ],
+      "loop": true,
+      "hold": false,
+      "flip": true,
+      "upstream_clip": "left"
+    },
+    "drag": {
+      "frames": [
+        {
+          "atlas": "inbetween-jump",
+          "source_index": 13,
+          "duration_ms": 100
+        }
+      ],
+      "loop": false,
+      "hold": true,
+      "flip": false,
+      "upstream_clip": "drag"
+    },
+    "fall": {
+      "frames": [
+        {
+          "atlas": "inbetween-jump",
+          "source_index": 19,
+          "duration_ms": 100
+        }
+      ],
+      "loop": false,
+      "hold": true,
+      "flip": false,
+      "upstream_clip": "fall"
+    },
+    "land": {
+      "frames": [
+        {
+          "atlas": "inbetween-jump",
+          "source_index": 21,
+          "duration_ms": 75
+        },
+        {
+          "atlas": "inbetween-jump",
+          "source_index": 23,
+          "duration_ms": 85
+        },
+        {
+          "atlas": "inbetween-jump",
+          "source_index": 25,
+          "duration_ms": 40
+        },
+        {
+          "atlas": "inbetween-jump",
+          "source_index": 45,
+          "duration_ms": 40
+        },
+        {
+          "atlas": "inbetween-jump",
+          "source_index": 27,
+          "duration_ms": 42.5
+        },
+        {
+          "atlas": "inbetween-jump",
+          "source_index": 46,
+          "duration_ms": 42.5
+        },
+        {
+          "atlas": "inbetween-jump",
+          "source_index": 29,
+          "duration_ms": 50
+        },
+        {
+          "atlas": "inbetween-jump",
+          "source_index": 47,
+          "duration_ms": 50
+        },
+        {
+          "atlas": "inbetween-jump",
+          "source_index": 31,
+          "duration_ms": 180
+        }
+      ],
+      "loop": false,
+      "hold": false,
+      "flip": false,
+      "upstream_clip": "land"
+    },
+    "sleep": {
+      "frames": [
+        {
+          "atlas": "inbetween-sleep",
+          "source_index": 1,
+          "duration_ms": 130
+        },
+        {
+          "atlas": "inbetween-sleep",
+          "source_index": 3,
+          "duration_ms": 170
+        },
+        {
+          "atlas": "inbetween-sleep",
+          "source_index": 5,
+          "duration_ms": 170
+        },
+        {
+          "atlas": "inbetween-sleep",
+          "source_index": 7,
+          "duration_ms": 65
+        },
+        {
+          "atlas": "inbetween-sleep",
+          "source_index": 35,
+          "duration_ms": 65
+        },
+        {
+          "atlas": "inbetween-sleep",
+          "source_index": 9,
+          "duration_ms": 120
+        },
+        {
+          "atlas": "inbetween-sleep",
+          "source_index": 11,
+          "duration_ms": 65
+        },
+        {
+          "atlas": "inbetween-sleep",
+          "source_index": 37,
+          "duration_ms": 65
+        },
+        {
+          "atlas": "inbetween-sleep",
+          "source_index": 13,
+          "duration_ms": 70
+        },
+        {
+          "atlas": "inbetween-sleep",
+          "source_index": 38,
+          "duration_ms": 70
+        },
+        {
+          "atlas": "inbetween-sleep",
+          "source_index": 17,
+          "duration_ms": 75
+        },
+        {
+          "atlas": "inbetween-sleep",
+          "source_index": 39,
+          "duration_ms": 75
+        },
+        {
+          "atlas": "inbetween-sleep",
+          "source_index": 19,
+          "duration_ms": 180
+        },
+        {
+          "atlas": "inbetween-sleep",
+          "source_index": 21,
+          "duration_ms": 150
+        },
+        {
+          "atlas": "inbetween-sleep",
+          "source_index": 23,
+          "duration_ms": 180
+        },
+        {
+          "atlas": "inbetween-sleep",
+          "source_index": 25,
+          "duration_ms": 180
+        },
+        {
+          "atlas": "inbetween-sleep",
+          "source_index": 27,
+          "duration_ms": 180
+        },
+        {
+          "atlas": "inbetween-sleep",
+          "source_index": 29,
+          "duration_ms": 180
+        },
+        {
+          "atlas": "inbetween-sleep",
+          "source_index": 31,
+          "duration_ms": 220
+        }
+      ],
+      "loop": false,
+      "hold": true,
+      "flip": false,
+      "upstream_clip": "sleep"
+    },
+    "wake": {
+      "frames": [
+        {
+          "atlas": "inbetween-sleep",
+          "source_index": 31,
+          "duration_ms": 100
+        },
+        {
+          "atlas": "inbetween-sleep",
+          "source_index": 29,
+          "duration_ms": 80
+        },
+        {
+          "atlas": "inbetween-sleep",
+          "source_index": 27,
+          "duration_ms": 80
+        },
+        {
+          "atlas": "inbetween-sleep",
+          "source_index": 25,
+          "duration_ms": 80
+        },
+        {
+          "atlas": "inbetween-sleep",
+          "source_index": 23,
+          "duration_ms": 90
+        },
+        {
+          "atlas": "inbetween-sleep",
+          "source_index": 21,
+          "duration_ms": 100
+        },
+        {
+          "atlas": "inbetween-sleep",
+          "source_index": 19,
+          "duration_ms": 75
+        },
+        {
+          "atlas": "inbetween-sleep",
+          "source_index": 39,
+          "duration_ms": 75
+        },
+        {
+          "atlas": "inbetween-sleep",
+          "source_index": 17,
+          "duration_ms": 65
+        },
+        {
+          "atlas": "inbetween-sleep",
+          "source_index": 38,
+          "duration_ms": 65
+        },
+        {
+          "atlas": "inbetween-sleep",
+          "source_index": 13,
+          "duration_ms": 65
+        },
+        {
+          "atlas": "inbetween-sleep",
+          "source_index": 37,
+          "duration_ms": 65
+        },
+        {
+          "atlas": "inbetween-sleep",
+          "source_index": 11,
+          "duration_ms": 100
+        },
+        {
+          "atlas": "inbetween-sleep",
+          "source_index": 9,
+          "duration_ms": 50
+        },
+        {
+          "atlas": "inbetween-sleep",
+          "source_index": 35,
+          "duration_ms": 50
+        },
+        {
+          "atlas": "inbetween-sleep",
+          "source_index": 7,
+          "duration_ms": 110
+        },
+        {
+          "atlas": "inbetween-sleep",
+          "source_index": 1,
+          "duration_ms": 150
+        }
+      ],
+      "loop": false,
+      "hold": false,
+      "flip": false,
+      "upstream_clip": "wake"
+    },
+    "thinking": {
+      "frames": [
+        {
+          "atlas": "story-token",
+          "source_index": 0,
+          "duration_ms": 110
+        },
+        {
+          "atlas": "story-token",
+          "source_index": 1,
+          "duration_ms": 130
+        },
+        {
+          "atlas": "story-token",
+          "source_index": 2,
+          "duration_ms": 180
+        }
+      ],
+      "loop": false,
+      "hold": true,
+      "flip": false,
+      "upstream_clip": "think"
+    },
+    "listening": {
+      "frames": [
+        {
+          "atlas": "expressions",
+          "source_index": 8,
+          "duration_ms": 1000
+        }
+      ],
+      "loop": false,
+      "hold": true,
+      "flip": false,
+      "upstream_clip": "review"
+    },
+    "speaking": {
+      "frames": [
+        {
+          "atlas": "dense-wave",
+          "source_index": 1,
+          "duration_ms": 80
+        },
+        {
+          "atlas": "dense-wave",
+          "source_index": 3,
+          "duration_ms": 70
+        },
+        {
+          "atlas": "dense-wave",
+          "source_index": 5,
+          "duration_ms": 65
+        },
+        {
+          "atlas": "dense-wave",
+          "source_index": 7,
+          "duration_ms": 65
+        },
+        {
+          "atlas": "dense-wave",
+          "source_index": 9,
+          "duration_ms": 70
+        },
+        {
+          "atlas": "dense-wave",
+          "source_index": 11,
+          "duration_ms": 65
+        },
+        {
+          "atlas": "dense-wave",
+          "source_index": 13,
+          "duration_ms": 65
+        },
+        {
+          "atlas": "dense-wave",
+          "source_index": 15,
+          "duration_ms": 65
+        },
+        {
+          "atlas": "dense-wave",
+          "source_index": 17,
+          "duration_ms": 65
+        },
+        {
+          "atlas": "dense-wave",
+          "source_index": 19,
+          "duration_ms": 70
+        },
+        {
+          "atlas": "dense-wave",
+          "source_index": 21,
+          "duration_ms": 65
+        },
+        {
+          "atlas": "dense-wave",
+          "source_index": 23,
+          "duration_ms": 65
+        },
+        {
+          "atlas": "dense-wave",
+          "source_index": 25,
+          "duration_ms": 70
+        },
+        {
+          "atlas": "dense-wave",
+          "source_index": 27,
+          "duration_ms": 75
+        },
+        {
+          "atlas": "dense-wave",
+          "source_index": 29,
+          "duration_ms": 80
+        },
+        {
+          "atlas": "dense-wave",
+          "source_index": 31,
+          "duration_ms": 100
+        }
+      ],
+      "loop": false,
+      "hold": false,
+      "flip": false,
+      "upstream_clip": "wave"
+    },
+    "error": {
+      "frames": [
+        {
+          "atlas": "actions",
+          "source_index": 0,
+          "duration_ms": 450
+        },
+        {
+          "atlas": "actions",
+          "source_index": 9,
+          "duration_ms": 450
+        },
+        {
+          "atlas": "actions",
+          "source_index": 9,
+          "duration_ms": 450
+        },
+        {
+          "atlas": "actions",
+          "source_index": 0,
+          "duration_ms": 450
+        }
+      ],
+      "loop": false,
+      "hold": false,
+      "flip": false,
+      "upstream_clip": "sad"
+    }
+  },
+  "runtime_image_bytes": 1140772,
+  "state_notes": {
+    "speaking": "Existing gesture; not phoneme lip sync.",
+    "error": "Operation state, never a market-risk assessment."
+  }
+}

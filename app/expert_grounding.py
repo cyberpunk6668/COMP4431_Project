@@ -67,6 +67,10 @@ def claim_facets(text: str) -> set[str]:
         facets.add("put_call_limits")
     if oi and _has(r"隔夜|清算|报告周期|统计周期|独立.{0,8}(?:周期|报告时点)|reporting cycle|reconcil|overnight|separate.{0,15}cycle", text):
         facets.add("oi_reporting_cycle")
+    # An explicit request to obtain/check independently dated OI is a reporting
+    # principle, unlike merely displaying a sample's date or a null field.
+    if oi and _has(r"(?:另取|取得|获取)[^。；;]{0,18}(?:带|有|包含)[^。；;]{0,6}独立(?:的)?(?:统计|报告|持仓)日期[^。；;]{0,8}(?:未平仓量|持仓)(?:来源|数据)?|(?:核对|确认|检查)[^。；;]{0,12}(?:未平仓量|持仓)[^。；;]{0,8}独立(?:的)?(?:统计|报告|持仓)日期", text):
+        facets.add("oi_reporting_cycle")
     if _has(r"隐含波动|波动率|\bIV\b|implied volatility", text) and _has(r"(?:波动|预期)(?:幅度|尺度)|涨跌方向|不.{0,15}(?:指明|预测|表示).{0,10}方向|either direction|magnitude|fluctuations?|not.{0,15}(?:predict|specify).{0,10}direction", text):
         facets.add("iv_direction_limits")
     if (_has(r"期权(?:价格|定价)|权利金|option (?:price|premium)|premiums?", text) and _has(r"剩余期限|时间价值|股息|利率|dividend|interest rate|remaining term|time value", text)) or _has(r"时间价值.{0,30}(?:衰减|侵蚀|到期)|time value.{0,30}(?:erod|decay|expir)", text):
@@ -79,12 +83,14 @@ def claim_facets(text: str) -> set[str]:
         facets.add("expired_eod_limits")
     if historic and _has(r"过滤|压缩|调整|filter|compress|adjust|(?:不同于|不同|差异).{0,20}实时累计|(?:differ|different).{0,25}(?:live|streaming|cumulative)", text):
         facets.add("historical_volume_filtering")
-    bar_like = _has(r"(?<![A-Za-z])(?:OHLC|bars?)(?![A-Za-z])|历史(?:成交条|价格条|报价条|报价|BID_ASK)|分钟(?:数据|记录|价格)|盘中成交(?:条|汇总)|(?:区间|所收|历史)成交记录.{0,8}末值|(?:interval|received|historical) trade records?.{0,15}end values?", text)
-    if bar_like and _has(r"同步.{0,10}(?:报价|双边)|双边报价|时间平均|区间(?:极值|聚合)|不是.{0,12}(?:结算价|官方收盘)|不能.{0,25}(?:价差|希腊值)|\b(?:BBO|NBBO)\b|synchroni[sz]|time.average|interval aggregates?|not.{0,20}(?:official settlement|settlement prices?|executable quote)", text):
+    bar_like = _has(r"(?<![A-Za-z])(?:OHLC|bars?)(?![A-Za-z])|历史(?:成交条|价格条|报价条|报价|BID_ASK)|分钟(?:数据|记录|价格)|盘中成交(?:条|汇总)|(?:区间|所收|历史)成交记录.{0,8}末值|成交条(?:的)?末值|成交条.{0,6}区间(?:汇总|聚合)|(?:interval|received|historical) trade records?.{0,15}end values?", text)
+    if bar_like and _has(r"同步.{0,10}(?:报价|双边)|双边报价|时间平均|区间(?:极值|聚合|汇总)|不是.{0,12}(?:结算价|官方收盘)|不能.{0,25}(?:价差|希腊值)|\b(?:BBO|NBBO)\b|synchroni[sz]|time.average|interval aggregates?|not.{0,20}(?:official settlement|settlement prices?|executable quote)", text):
         facets.add("historical_bar_semantics")
     if (_has(r"历史|导入|本地接收|接收时间|保存.{0,5}样本|historical|ingestion|receipt time|saved (?:sample|snapshot)", text) and
         _has(r"不代表.{0,15}(?:当前|现在|此刻)|不能(?:据此|由此)?(?:代表|说明|判断|断定|反映|推断).{0,12}(?:当前|现在|此刻)|不是.{0,12}(?:交易发生|交易时间)|不等于.{0,12}(?:交易|当前)|not.{0,25}(?:current|market event|exchange time)|present market.{0,20}cannot|cannot.{0,20}present", text)) or (
         historic and _has(r"历史请求.{0,20}(?:指定|设置).{0,20}(?:时区|交易时段)|(?:返回时间|时间格式).{0,20}(?:时区|登录)|(?:更新中|未结束).{0,20}(?:价格条|区间)|(?:未完成|未结束).{0,15}(?:不能|不可).{0,15}(?:完成|复盘)|historical requests?.{0,25}(?:specif|timezone)|returned.{0,20}(?:timestamp|time).{0,25}(?:timezone|login)|(?:updating|unfinished).{0,15}bars?", text)):
+        facets.add("historical_time_basis")
+    if historic and _has(r"(?:不是|并非)(?:当前|现在|此刻)(?:行情|市场状态|市场情绪)|不(?:当作|视为)(?:当前|现在|此刻)(?:行情|市场状态|市场情绪)", text):
         facets.add("historical_time_basis")
     if historic and _has(r"隐含波动|\bIV\b|implied.volatility|希腊值|greeks", text) and _has(r"(?:字段|类型).{0,30}(?:标的|股票|指数|基金)|不等于.{0,20}(?:合约|希腊)|回填|backfill|(?:type|field).{0,30}(?:stock|indice|ETF)|per.contract.{0,20}(?:unavailable|missing)", text):
         facets.add("historical_contract_iv_limits")
@@ -96,7 +102,9 @@ def claim_facets(text: str) -> set[str]:
         facets.add("contract_comparability")
     if _has(r"(?:确认|核对).{0,40}(?:合约范围|合约规格).{0,12}(?:是否一致|是否相同|一致|匹配).{0,40}(?:只有|仅).{0,15}可比.{0,20}(?:变化|方向|解读)", text):
         facets.add("contract_comparability")
-    if oi and _has(r"reqHistoricalData|whatToShow|历史(?:接口|数据类型|持仓)|OI历史条|historical (?:API|type|open interest)|historical bars?", text) and _has(r"不提供|不包含|没有.{0,20}(?:字段|类型)|未列|不支持|不可用|无法|缺少|不能恢复|does not|no.{0,15}(?:type|field)|not.{0,20}(?:available|provide|support)|unavailable", text):
+    if oi and _has(r"reqHistoricalData|whatToShow|历史(?:接口|数据类型|持仓)|历史(?:成交|TRADES)条接口|OI历史条|historical (?:API|type|open interest)|historical bars?", text) and _has(r"不提供|不包含|没有.{0,20}(?:字段|类型)|未列|不支持|不可用|无法|缺少|不能恢复|does not|no.{0,15}(?:type|field)|not.{0,20}(?:available|provide|support)|unavailable", text):
+        facets.add("historical_oi_availability")
+    if oi and _has(r"历史(?:成交|TRADES)条.{0,100}(?:本身不提供|不提供按日|不包含)[^，。；;：:]{0,12}(?:未平仓|持仓)(?:量)?(?:字段|数据|历史条)", text):
         facets.add("historical_oi_availability")
     return facets
 

@@ -1,0 +1,23 @@
+{
+  "checked_at": "2026-11-11T12:38:51.108Z",
+  "status": "failed",
+  "phase": "preflight",
+  "api": "Public Node Playwright _electron; Python API does not expose Electron",
+  "executable": "desktop/artifacts/win-unpacked/FinPilotPet.exe",
+  "fixture_port": 8018,
+  "external_model_requests": 0,
+  "new_broker_requests": 0,
+  "user_profile_or_other_windows_read": false,
+  "physical_mouse_tested": false,
+  "checks": [],
+  "screenshots": [],
+  "limitations": [
+    "Main-process and renderer instrumentation, not physical mouse or OS click-through proof.",
+    "Focus/blur are suppressed in this test process; windows auto-hide immediately after show events to avoid interrupting the user.",
+    "Cursor and poll visibility are simulated while the actual window is hidden. Drag uses injected renderer events with pointer capture stubbed.",
+    "Screenshots capture only owned webContents with a transparent background, not the desktop or other apps."
+  ],
+  "error": "Error: Owned fixture failed to start\n    at assert (F:\\桌面\\COMP4431_Project\\scripts\\check_native_instrumentation_v15.cjs:23:48)\n    at F:\\桌面\\COMP4431_Project\\scripts\\check_native_instrumentation_v15.cjs:50:3",
+  "owned_fixture_port_released": true,
+  "elapsed_seconds": 4.739
+}

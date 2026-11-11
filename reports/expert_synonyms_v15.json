@@ -1,0 +1,487 @@
+{
+  "checked_at": "2026-11-11T12:46:56.656026+00:00",
+  "status": "bounded_synonyms_verified_offline",
+  "scope": "No provider retry; audit of prior captured outputs with actual query/context retrieval over the unchanged corpus and public archived evidence.",
+  "external_calls": {
+    "llm": 0,
+    "ibkr": 0,
+    "http": 0
+  },
+  "project_credentials_or_user_database_read": false,
+  "dotenv_loading_disabled": true,
+  "tests": {
+    "passed": 323,
+    "failed": 0,
+    "files": [
+      "tests/test_expert_grounding.py",
+      "tests/test_history_chat.py",
+      "tests/test_options_chat.py",
+      "tests/test_options_expert_v14.py",
+      "tests/test_options_claims.py"
+    ]
+  },
+  "changes": [
+    "Explicit historical trade bars not providing daily OI fields maps to historical_oi_availability.",
+    "Obtaining/checking independently dated OI maps to oi_reporting_cycle, unlike bare field metadata.",
+    "Trade-bar interval summaries/end values versus synchronized quotes map to historical_bar_semantics.",
+    "History is not current quotes/not a present-sentiment basis maps to historical_time_basis."
+  ],
+  "prior_cloud_report": "reports/pet_cloud_v15-20261111T124026586357Z.json",
+  "second_turn_diagnostics": [
+    {
+      "source_ids": [
+        "expert.history_oi",
+        "expert.history_time",
+        "expert.put_call",
+        "expert.oi_cycle",
+        "expert.volume_oi",
+        "expert.history_bars"
+      ],
+      "required_query_facets": [
+        "historical_oi_availability",
+        "historical_time_basis",
+        "put_call_limits"
+      ],
+      "recognized_facets": [
+        [
+          "historical_time_basis",
+          "put_call_limits"
+        ],
+        [
+          "historical_oi_availability",
+          "oi_reporting_cycle"
+        ],
+        [
+          "volume_vs_oi"
+        ],
+        [
+          "historical_time_basis",
+          "oi_reporting_cycle"
+        ]
+      ],
+      "original_replay": {
+        "status": "rejected",
+        "error": "paragraph 1: Expert citation does not support claim facets: historical_time_basis"
+      },
+      "source_repair_plan": [
+        {
+          "paragraph": 1,
+          "claim_facets": [
+            "historical_time_basis",
+            "put_call_limits"
+          ],
+          "missing_facets": [
+            "historical_time_basis"
+          ],
+          "add_candidates": [
+            "expert.history_time"
+          ],
+          "candidates_by_facet": {
+            "historical_time_basis": [
+              "expert.history_time"
+            ]
+          },
+          "remove_unrelated": [],
+          "unresolved_facets": [],
+          "unprovided_expert_reference_count": 0,
+          "disallowed_reference_count": 0,
+          "malformed_references": false,
+          "status": "needs_citation_fix"
+        },
+        {
+          "paragraph": 2,
+          "claim_facets": [
+            "historical_oi_availability",
+            "oi_reporting_cycle"
+          ],
+          "missing_facets": [],
+          "add_candidates": [],
+          "candidates_by_facet": {},
+          "remove_unrelated": [],
+          "unresolved_facets": [],
+          "unprovided_expert_reference_count": 0,
+          "disallowed_reference_count": 0,
+          "malformed_references": false,
+          "status": "supported"
+        },
+        {
+          "paragraph": 3,
+          "claim_facets": [
+            "volume_vs_oi"
+          ],
+          "missing_facets": [],
+          "add_candidates": [],
+          "candidates_by_facet": {},
+          "remove_unrelated": [],
+          "unresolved_facets": [],
+          "unprovided_expert_reference_count": 0,
+          "disallowed_reference_count": 0,
+          "malformed_references": false,
+          "status": "supported"
+        },
+        {
+          "paragraph": 4,
+          "claim_facets": [
+            "historical_time_basis",
+            "oi_reporting_cycle"
+          ],
+          "missing_facets": [
+            "oi_reporting_cycle"
+          ],
+          "add_candidates": [
+            "expert.oi_cycle"
+          ],
+          "candidates_by_facet": {
+            "oi_reporting_cycle": [
+              "expert.oi_cycle"
+            ]
+          },
+          "remove_unrelated": [
+            "expert.history_oi"
+          ],
+          "unresolved_facets": [],
+          "unprovided_expert_reference_count": 0,
+          "disallowed_reference_count": 0,
+          "malformed_references": false,
+          "status": "needs_citation_fix"
+        }
+      ],
+      "citation_only_offline_draft": {
+        "status": "passed"
+      },
+      "not_live_acceptance": true,
+      "attempt": 1,
+      "diagnostic": "tmp/options-validation-v12-efc5ba2c051d45e7afcefea61cfc3300.json",
+      "diagnostic_sha256": "2b5c4d77643927c69a942f18bee1c8e8fa80f519cb94c990d771349616fd1344",
+      "prior_error": "paragraph 2: Expert citation is unrelated to recognized claims in its paragraph: expert.history_oi"
+    },
+    {
+      "source_ids": [
+        "expert.history_oi",
+        "expert.history_time",
+        "expert.put_call",
+        "expert.oi_cycle",
+        "expert.volume_oi",
+        "expert.history_bars"
+      ],
+      "required_query_facets": [
+        "historical_oi_availability",
+        "historical_time_basis",
+        "put_call_limits"
+      ],
+      "recognized_facets": [
+        [
+          "historical_time_basis",
+          "put_call_limits"
+        ],
+        [
+          "oi_reporting_cycle"
+        ],
+        [
+          "volume_vs_oi"
+        ],
+        [
+          "historical_time_basis",
+          "oi_reporting_cycle"
+        ]
+      ],
+      "original_replay": {
+        "status": "rejected",
+        "error": "paragraph 1: Expert citation does not support claim facets: historical_time_basis"
+      },
+      "source_repair_plan": [
+        {
+          "paragraph": 1,
+          "claim_facets": [
+            "historical_time_basis",
+            "put_call_limits"
+          ],
+          "missing_facets": [
+            "historical_time_basis"
+          ],
+          "add_candidates": [
+            "expert.history_time"
+          ],
+          "candidates_by_facet": {
+            "historical_time_basis": [
+              "expert.history_time"
+            ]
+          },
+          "remove_unrelated": [],
+          "unresolved_facets": [],
+          "unprovided_expert_reference_count": 0,
+          "disallowed_reference_count": 0,
+          "malformed_references": false,
+          "status": "needs_citation_fix"
+        },
+        {
+          "paragraph": 2,
+          "claim_facets": [
+            "oi_reporting_cycle"
+          ],
+          "missing_facets": [],
+          "add_candidates": [],
+          "candidates_by_facet": {},
+          "remove_unrelated": [],
+          "unresolved_facets": [],
+          "unprovided_expert_reference_count": 0,
+          "disallowed_reference_count": 0,
+          "malformed_references": false,
+          "status": "supported"
+        },
+        {
+          "paragraph": 3,
+          "claim_facets": [
+            "volume_vs_oi"
+          ],
+          "missing_facets": [],
+          "add_candidates": [],
+          "candidates_by_facet": {},
+          "remove_unrelated": [],
+          "unresolved_facets": [],
+          "unprovided_expert_reference_count": 0,
+          "disallowed_reference_count": 0,
+          "malformed_references": false,
+          "status": "supported"
+        },
+        {
+          "paragraph": 4,
+          "claim_facets": [
+            "historical_time_basis",
+            "oi_reporting_cycle"
+          ],
+          "missing_facets": [
+            "historical_time_basis"
+          ],
+          "add_candidates": [
+            "expert.history_time"
+          ],
+          "candidates_by_facet": {
+            "historical_time_basis": [
+              "expert.history_time"
+            ]
+          },
+          "remove_unrelated": [],
+          "unresolved_facets": [],
+          "unprovided_expert_reference_count": 0,
+          "disallowed_reference_count": 0,
+          "malformed_references": false,
+          "status": "needs_citation_fix"
+        }
+      ],
+      "citation_only_offline_draft": {
+        "status": "rejected",
+        "error": "Answer omitted requested expert facets: historical_oi_availability"
+      },
+      "not_live_acceptance": true,
+      "attempt": 2,
+      "diagnostic": "tmp/options-validation-v12-704a402fd40d4c76ad2847f02e3b2ce1.json",
+      "diagnostic_sha256": "cc5be51c8fb31a62d9b2dd4c7bfe66f7e130ba117602cb374d535160db0e7cf5",
+      "prior_error": "paragraph 4: Expert citation is unrelated to recognized claims in its paragraph: expert.oi_cycle"
+    }
+  ],
+  "previously_machine_accepted_first_turn": {
+    "source_ids": [
+      "expert.history_bars",
+      "expert.history_volume",
+      "expert.oi_cycle",
+      "expert.put_call",
+      "expert.contract_identity",
+      "expert.history_time"
+    ],
+    "required_query_facets": [],
+    "recognized_facets": [
+      [
+        "historical_bar_semantics",
+        "historical_time_basis"
+      ],
+      [],
+      [
+        "historical_bar_semantics",
+        "historical_time_basis"
+      ],
+      [
+        "oi_reporting_cycle"
+      ]
+    ],
+    "original_replay": {
+      "status": "rejected",
+      "error": "paragraph 1: Expert citation does not support claim facets: historical_bar_semantics"
+    },
+    "source_repair_plan": [
+      {
+        "paragraph": 1,
+        "claim_facets": [
+          "historical_bar_semantics",
+          "historical_time_basis"
+        ],
+        "missing_facets": [
+          "historical_bar_semantics"
+        ],
+        "add_candidates": [
+          "expert.history_bars"
+        ],
+        "candidates_by_facet": {
+          "historical_bar_semantics": [
+            "expert.history_bars"
+          ]
+        },
+        "remove_unrelated": [],
+        "unresolved_facets": [],
+        "unprovided_expert_reference_count": 0,
+        "disallowed_reference_count": 0,
+        "malformed_references": false,
+        "status": "needs_citation_fix"
+      },
+      {
+        "paragraph": 2,
+        "claim_facets": [],
+        "missing_facets": [],
+        "add_candidates": [],
+        "candidates_by_facet": {},
+        "remove_unrelated": [],
+        "unresolved_facets": [],
+        "unprovided_expert_reference_count": 0,
+        "disallowed_reference_count": 0,
+        "malformed_references": false,
+        "status": "supported"
+      },
+      {
+        "paragraph": 3,
+        "claim_facets": [
+          "historical_bar_semantics",
+          "historical_time_basis"
+        ],
+        "missing_facets": [
+          "historical_bar_semantics"
+        ],
+        "add_candidates": [
+          "expert.history_bars"
+        ],
+        "candidates_by_facet": {
+          "historical_bar_semantics": [
+            "expert.history_bars"
+          ]
+        },
+        "remove_unrelated": [],
+        "unresolved_facets": [],
+        "unprovided_expert_reference_count": 0,
+        "disallowed_reference_count": 0,
+        "malformed_references": false,
+        "status": "needs_citation_fix"
+      },
+      {
+        "paragraph": 4,
+        "claim_facets": [
+          "oi_reporting_cycle"
+        ],
+        "missing_facets": [
+          "oi_reporting_cycle"
+        ],
+        "add_candidates": [
+          "expert.oi_cycle"
+        ],
+        "candidates_by_facet": {
+          "oi_reporting_cycle": [
+            "expert.oi_cycle"
+          ]
+        },
+        "remove_unrelated": [],
+        "unresolved_facets": [],
+        "unprovided_expert_reference_count": 0,
+        "disallowed_reference_count": 0,
+        "malformed_references": false,
+        "status": "needs_citation_fix"
+      }
+    ],
+    "citation_only_offline_draft": {
+      "status": "passed"
+    },
+    "not_live_acceptance": true,
+    "reconstruction": "Citation-bearing paragraph text from the saved accepted excerpt; kinds reconstructed as explanation for source-check audit, not asserted to recover the original JSON kinds."
+  },
+  "remaining_limits": [
+    "No general entailment proof. Mere source labels cannot support another concept.",
+    "Attempt 2 removed the historical-API availability explanation and attributes missing OI to reporting cycles; the omitted required API facet remains rejected after citation-only repair.",
+    "Previously accepted first answer is now rejected for missing bar-semantics support; its original report must be retained rather than rewritten as passed under these updated checks."
+  ],
+  "canonical_cloud_report_or_diagnostics_edited": false,
+  "source_hashes": {
+    "app/expert_grounding.py": "78dca1e838d01cb47c59f308452ed43b2643c29b16bcdf212b720cd329f7dc49",
+    "tests/test_expert_grounding.py": "4e6e303ffb9004dff845df34a8a203d255c6ecab73bac43e32dcf5675e6a2c3a"
+  },
+  "interface_gate_followup": {
+    "checked_at": "2026-11-11T12:54:13.166904+00:00",
+    "change": "Only add 历史(?:成交|TRADES)条接口 to the existing historical-OI context gate. Its existing negative field/type condition is unchanged.",
+    "prior_audit_backup": "reports/expert_synonyms_v15-before-history-interface-gate.json",
+    "tests_passed": 330,
+    "tests_failed": 0,
+    "question": "这份历史报告中的未平仓量为什么是缺失？只说明这类历史接口提供哪些字段，以及缺失是否等于零，不讨论走势或下一步操作。",
+    "source_report": "reports/pet_cloud_v15-20261111T125053788251Z.json",
+    "actual_retrieved_source_ids": [
+      "expert.history_oi",
+      "expert.oi_cycle",
+      "expert.volume_oi",
+      "expert.history_bars",
+      "expert.history_permissions",
+      "expert.history_iv"
+    ],
+    "diagnostics": [
+      {
+        "attempt": 1,
+        "diagnostic": "tmp/options-validation-v12-0786ee43ae104b89894cae166ccf833a.json",
+        "recorded_at": "2026-11-11T12:50:59.831351+00:00",
+        "diagnostic_sha256": "32507dfdc2a400368dd658e45133b13d84c05acbedddf0419a2a1e5184a5a295",
+        "prior_error": "paragraph 1: Expert citation is unrelated to recognized claims in its paragraph: expert.history_oi",
+        "recognized_facets": [
+          [
+            "historical_oi_availability"
+          ],
+          [
+            "oi_reporting_cycle"
+          ],
+          [
+            "volume_vs_oi"
+          ]
+        ],
+        "complete_unmodified_output_replay": {
+          "status": "passed"
+        },
+        "raw_edited": false
+      },
+      {
+        "attempt": 2,
+        "diagnostic": "tmp/options-validation-v12-64b2155ecf714cb2b0307d53b3703a08.json",
+        "recorded_at": "2026-11-11T12:51:03.628534+00:00",
+        "diagnostic_sha256": "8e9d6d49d38aa7ae39dab1f965fe6891f8cfdaeb1524a42b6153b56e820c78a9",
+        "prior_error": "Answer omitted requested expert facets: historical_oi_availability",
+        "recognized_facets": [
+          [
+            "historical_oi_availability"
+          ],
+          [
+            "oi_reporting_cycle"
+          ],
+          [
+            "volume_vs_oi"
+          ]
+        ],
+        "complete_unmodified_output_replay": {
+          "status": "rejected",
+          "error": "paragraph 1: Expert citation does not support claim facets: historical_oi_availability"
+        },
+        "raw_edited": false
+      }
+    ],
+    "scope": "Offline complete _validate replay over immutable public archived market data, not a new model acceptance.",
+    "new_model_calls": 0,
+    "new_ibkr_requests": 0,
+    "new_http_requests": 0,
+    "credentials_or_user_db_read": false,
+    "canonical_cloud_report_edited": false,
+    "source_hashes": {
+      "app/expert_grounding.py": "f3f2509ea5282b050c9b2deeaba2f7ca0260cbd3927862290c072f4f3823a008",
+      "tests/test_expert_grounding.py": "c7b3abd7fd85040e5637cd76129f53dbd8416ccc779f97c3fe18a8f67c5e4193"
+    }
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "checked_at": "2026-11-11T12:56:13.964548+00:00",
+  "status": "final_two_surface_run_passed_prior_failures_retained",
+  "scope": "All script-owned v15 live verification runs, including failed local validations; excludes unrelated manual conversation activity.",
+  "final_report": "reports/pet_cloud_v15.json",
+  "final_current_policy_successful_turns": 2,
+  "runs": [
+    {
+      "report": "reports/pet_cloud_v15-initial-zero-call-script-failure.json",
+      "chat_http_requests": 0,
+      "generations": 0,
+      "repairs": 0,
+      "result": "UI assertion expected a different connection label; no model called"
+    },
+    {
+      "report": "reports/pet_cloud_v15-20261111T123337421758Z.json",
+      "chat_http_requests": 1,
+      "generations": 2,
+      "repairs": 1,
+      "count_source": "Generation attempts 1 and 2 present in the two opt-in output-only validation diagnostics; reply counters were not yet captured by this initial verifier.",
+      "result": "Unknown sources then direction-negation/source validation failed; offline response retained"
+    },
+    {
+      "report": "reports/pet_cloud_v15-20261111T124026586357Z.json",
+      "chat_http_requests": 2,
+      "generations": 4,
+      "repairs": 2,
+      "count_source": "received_replies server counters",
+      "result": "One earlier-policy cloud reply, one local fallback. The earlier-policy reply is not current-policy evidence; new lexical rules correctly require its missing bar/time sources."
+    },
+    {
+      "report": "reports/pet_cloud_v15-20261111T125053788251Z.json",
+      "chat_http_requests": 1,
+      "generations": 2,
+      "repairs": 1,
+      "count_source": "received_replies server counters",
+      "result": "Historical trade-bar API synonym was unrecognized. First unmodified output passes offline after the bounded gate fix; runtime failure remains failed."
+    },
+    {
+      "report": "reports/pet_cloud_v15-20261111T125430678673Z.json",
+      "chat_http_requests": 2,
+      "generations": 3,
+      "repairs": 1,
+      "count_source": "received_replies server counters",
+      "result": "Final policy: two actual DeepSeek replies with current sources and exact local evidence; both surfaces synchronized."
+    }
+  ],
+  "totals": {
+    "chat_http_requests": 6,
+    "generations": 11,
+    "schema_repairs": 5,
+    "new_broker_requests": 0
+  },
+  "automatic_retries": "No script/network retries. Each failed live run stopped; another run followed explicit diagnosis and a source/test change.",
+  "failure_records_preserved": true,
+  "raw_provider_outputs_edited": false,
+  "old_answers_or_archives_overwritten": false,
+  "offline_fix_reports": [
+    "reports/direction_denial_v15.json",
+    "reports/expert_synonyms_v15.json"
+  ],
+  "count_visibility": "Generation counts are provider-wrapper/server diagnostics, not independent billing or HTTP transport-attempt telemetry."
+}

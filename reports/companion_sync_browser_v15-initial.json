@@ -1,0 +1,147 @@
+{
+  "checked_at": "2026-11-11T12:16:53.243984+00:00",
+  "status": "passed",
+  "phase": "complete",
+  "scope": "Actual Edge in independent browser profiles, real SSE/session APIs and persistence; controlled in-process provider, NOT real DeepSeek.",
+  "no_browser_api_response_mocking": true,
+  "external_model_requests": 0,
+  "new_broker_requests": 0,
+  "normal_user_server_or_database_touched": false,
+  "fixture_port": 8015,
+  "checks": [
+    "unconnected_pet_reads_no_old_chat_and_starts_no_model",
+    "explicit_connection_real_sse_separate_profiles_zero_generation",
+    "workspace_to_pet_thinking_animation_same_saved_sources_times_and_message_ids",
+    "pet_to_workspace_same_sid_canonical_reload_without_duplicate_append",
+    "shared_post_omits_analysis_id_inherits_B_and_preserves_old_A_answers",
+    "actual_sse_stream_closure_reconnect_full_sync_zero_extra_generation",
+    "disconnect_clears_view_switch_during_pending_does_not_leak_answer_or_late_state",
+    "client_injected_old_generation_reset_ignored_and_committed_delete_clears_link",
+    "safe_shared_html_url_rendering_and_demo_does_not_join_or_read_sessions"
+  ],
+  "screenshots": [
+    "reports/screenshots/companion-sync-v15/20261111T121653243984Z/workspace-first-turn.png",
+    "reports/screenshots/companion-sync-v15/20261111T121653243984Z/pet-first-turn.png",
+    "reports/screenshots/companion-sync-v15/20261111T121653243984Z/pet-final-safety.png"
+  ],
+  "limitations": [
+    "This verifies two browser profiles, not the native Windows window/tray; native acceptance is separate.",
+    "The fixture uses previously recorded real IBKR bars; neither report A nor B recollects data.",
+    "Provider output is deterministic test data; no real DeepSeek answer accuracy is measured."
+  ],
+  "browser": {
+    "channel": "msedge",
+    "version": "155.0.4283.45",
+    "separate_profiles": true,
+    "viewports": [
+      {
+        "width": 1440,
+        "height": 1000
+      },
+      {
+        "width": 1200,
+        "height": 900
+      }
+    ]
+  },
+  "controlled_provider_generations": 5,
+  "provider_calls": [
+    {
+      "marker": "WORKSPACE_A",
+      "json_output": true,
+      "analysis_id": "40eaf5c2-8561-4bfd-a257-2bdcffbfd715"
+    },
+    {
+      "marker": "PET_A",
+      "json_output": true,
+      "analysis_id": "40eaf5c2-8561-4bfd-a257-2bdcffbfd715"
+    },
+    {
+      "marker": "PET_B",
+      "json_output": true,
+      "analysis_id": "b9cc48ae-d995-4fe1-b701-16629fc74965"
+    },
+    {
+      "marker": "PET_OLD",
+      "json_output": true,
+      "analysis_id": "b9cc48ae-d995-4fe1-b701-16629fc74965"
+    },
+    {
+      "marker": "GENERAL_SAFE",
+      "json_output": false,
+      "analysis_id": null
+    }
+  ],
+  "shared_chat_http_requests": [
+    {
+      "surface": "workspace",
+      "method": "POST",
+      "path": "/api/chat",
+      "keys": [
+        "engine",
+        "language",
+        "message",
+        "session_id"
+      ],
+      "session_id": "96e06713-d4d0-4515-9d5f-28c1949e0f7e",
+      "analysis_id": null
+    },
+    {
+      "surface": "pet",
+      "method": "POST",
+      "path": "/api/chat",
+      "keys": [
+        "engine",
+        "language",
+        "message",
+        "session_id"
+      ],
+      "session_id": "96e06713-d4d0-4515-9d5f-28c1949e0f7e",
+      "analysis_id": null
+    },
+    {
+      "surface": "pet",
+      "method": "POST",
+      "path": "/api/chat",
+      "keys": [
+        "engine",
+        "language",
+        "message",
+        "session_id"
+      ],
+      "session_id": "96e06713-d4d0-4515-9d5f-28c1949e0f7e",
+      "analysis_id": null
+    },
+    {
+      "surface": "pet",
+      "method": "POST",
+      "path": "/api/chat",
+      "keys": [
+        "engine",
+        "language",
+        "message",
+        "session_id"
+      ],
+      "session_id": "96e06713-d4d0-4515-9d5f-28c1949e0f7e",
+      "analysis_id": null
+    },
+    {
+      "surface": "pet",
+      "method": "POST",
+      "path": "/api/chat",
+      "keys": [
+        "engine",
+        "language",
+        "message",
+        "session_id"
+      ],
+      "session_id": "96e06713-d4d0-4515-9d5f-28c1949e0f7e",
+      "analysis_id": null
+    }
+  ],
+  "old_analysis_unchanged": true,
+  "screenshots_review_needed": true,
+  "owned_fixture_stopped": true,
+  "page_errors": [],
+  "elapsed_seconds": 11.206
+}

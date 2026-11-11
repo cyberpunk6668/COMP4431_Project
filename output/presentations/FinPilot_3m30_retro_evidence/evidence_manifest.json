@@ -1,0 +1,189 @@
+{
+  "created_at_utc": "2026-11-11T13:23:02.466540+00:00",
+  "capture_method": "Current localhost pages captured through browser tool. Saved actual-cloud run screenshots copied from their reported paths.",
+  "new_model_calls": 0,
+  "new_broker_requests": 0,
+  "source_snapshot_policy": "Complete whitelisted source files frozen during this update; slide line numbers refer to that capture-time version, not later concurrent edits.",
+  "main_slide_count": 6,
+  "appendix_slide_count": 6,
+  "main_talk_seconds": 210,
+  "screenshots": [
+    {
+      "asset": "assets\\homepage_desktop_live.jpg",
+      "sha256": "d7a1920a621a71ba7775999d1329372491baf8447252bc45b3feed377e4b9d7b",
+      "kind": "fresh browser capture",
+      "pixels": [
+        1425,
+        891
+      ],
+      "url": "http://127.0.0.1:8000/"
+    },
+    {
+      "asset": "assets\\homepage_live.jpg",
+      "sha256": "4ad579849bcef159e655727502e8e6dc6cfc5ac92b7196354d50eeac250ade49",
+      "kind": "fresh browser capture",
+      "pixels": [
+        584,
+        849
+      ],
+      "url": "http://127.0.0.1:8000/"
+    },
+    {
+      "asset": "assets\\workspace_desktop_live.jpg",
+      "sha256": "486fe736ea646c89ca5c922791f384e6c9a8851aebdf4a364f060cc9e53a379a",
+      "kind": "fresh browser capture",
+      "pixels": [
+        1425,
+        891
+      ],
+      "url": "http://127.0.0.1:8000/workspace"
+    },
+    {
+      "asset": "assets\\workspace_mobile_drawer_live.jpg",
+      "sha256": "9193e444e1f539f17911225151edc91a9a09c0b1bc30c3ddea5e54f0ad28ce31",
+      "kind": "fresh browser capture",
+      "pixels": [
+        390,
+        844
+      ],
+      "url": "http://127.0.0.1:8000/workspace"
+    },
+    {
+      "asset": "assets\\workspace_mobile_live.jpg",
+      "sha256": "9d7972dedf2d322b28c403bd1ecf81dd5176ea48856eba1ef3daa899bccbe0f4",
+      "kind": "fresh browser capture",
+      "pixels": [
+        375,
+        812
+      ],
+      "url": "http://127.0.0.1:8000/workspace"
+    },
+    {
+      "asset": "assets/cloud_workspace_actual.png",
+      "sha256": "1b3a7457f2e8d8d9df372a41c698a91c30bfd6dfbc38b6add268d9d13ee80ea3",
+      "kind": "saved actual DeepSeek acceptance run",
+      "original": "reports\\screenshots\\pet-cloud-v15\\20261111T125430678673Z\\1-workspace.png",
+      "pixels": [
+        1440,
+        1000
+      ],
+      "scope": "Archived IBKR data; actual packaged Electron renderer or Edge, not a new call made for this deck."
+    },
+    {
+      "asset": "assets/cloud_native_actual.png",
+      "sha256": "87830f8bc028cf42a51e7243303ef8e2433592f0d0583c0d4b98bbebf61f6391",
+      "kind": "saved actual DeepSeek acceptance run",
+      "original": "reports\\screenshots\\pet-cloud-v15\\20261111T125430678673Z\\2-native_pet.png",
+      "pixels": [
+        2562,
+        1530
+      ],
+      "scope": "Archived IBKR data; actual packaged Electron renderer or Edge, not a new call made for this deck."
+    },
+    {
+      "asset": "assets/rag_missing_oi_crop.png",
+      "sha256": "27f75b649213869e04f504a703326dfcd934316e6c7c02a8caacc1e023502be9",
+      "kind": "unaltered rectangular crop",
+      "original_asset": "assets/cloud_workspace_actual.png",
+      "original_sha256": "1b3a7457f2e8d8d9df372a41c698a91c30bfd6dfbc38b6add268d9d13ee80ea3",
+      "crop_xyxy": [
+        292,
+        280,
+        1085,
+        369
+      ],
+      "pixel_editing": "Crop only; no painted labels, changed text or AI reconstruction."
+    },
+    {
+      "asset": "assets/rag_source_controls_crop.png",
+      "sha256": "3277e2a11d70216337f1254a362fa2a824ebfee88363f692943ccc00dca4f6c8",
+      "kind": "unaltered rectangular crop",
+      "original_asset": "assets/cloud_workspace_actual.png",
+      "original_sha256": "1b3a7457f2e8d8d9df372a41c698a91c30bfd6dfbc38b6add268d9d13ee80ea3",
+      "crop_xyxy": [
+        295,
+        690,
+        1075,
+        819
+      ],
+      "pixel_editing": "Crop only; no painted labels, changed text or AI reconstruction."
+    },
+    {
+      "asset": "assets/native_host_crop.png",
+      "sha256": "b21ee92fd8ec0b1a81a53a357e486e5d742e7586b2427110cc1c1ad4c88994e2",
+      "kind": "unaltered rectangular crop",
+      "original_asset": "assets/cloud_native_actual.png",
+      "original_sha256": "87830f8bc028cf42a51e7243303ef8e2433592f0d0583c0d4b98bbebf61f6391",
+      "crop_xyxy": [
+        1410,
+        273,
+        2538,
+        1530
+      ],
+      "pixel_editing": "Crop only; no painted labels, changed text or AI reconstruction."
+    }
+  ],
+  "code_extraction_policy": "Original continuous source lines. Visual wrapping only. Line numbers, original text and SHA256 in code manifest.",
+  "saved_reports": [
+    {
+      "path": "evidence_sources\\companion_acceptance_v15.json",
+      "sha256": "a59efc81627689514089333fd37e91cd9b73b4e4fb2305fc7180b0a2366c3ca6"
+    },
+    {
+      "path": "evidence_sources\\expert_retrieval_holdout_v14.json",
+      "sha256": "d3bd1c5359de1f0f201c92610ce0dca59451bebeb8755693ca6fc6594fa78067"
+    },
+    {
+      "path": "evidence_sources\\native_companion_v15.json",
+      "sha256": "26a068062b0f92f950d7f8f3d5189462e5c552ac6c828080294d2849e3bbd09b"
+    },
+    {
+      "path": "evidence_sources\\pet_cloud_v15.json",
+      "sha256": "c2a360cd55d066b4515edc3598e1539adb3977d148590a6fd8deaafd3dffdbda"
+    }
+  ],
+  "appendices": [
+    {
+      "letter": "A",
+      "slide": 7,
+      "title": "FinPilot, running locally",
+      "supports_main_slide": 1,
+      "hidden_by_default": true
+    },
+    {
+      "letter": "B",
+      "slide": 8,
+      "title": "RAG: two routes, one ranking",
+      "supports_main_slide": 2,
+      "hidden_by_default": true
+    },
+    {
+      "letter": "C",
+      "slide": 9,
+      "title": "RAG: evidence behind a claim",
+      "supports_main_slide": 3,
+      "hidden_by_default": true
+    },
+    {
+      "letter": "D",
+      "slide": 10,
+      "title": "Frontend: responsive by design",
+      "supports_main_slide": 4,
+      "hidden_by_default": true
+    },
+    {
+      "letter": "E",
+      "slide": 11,
+      "title": "Companion: real renderer and host",
+      "supports_main_slide": 5,
+      "hidden_by_default": true
+    },
+    {
+      "letter": "F",
+      "slide": 12,
+      "title": "Sync: code and a verified run",
+      "supports_main_slide": 6,
+      "hidden_by_default": true
+    }
+  ]
+}

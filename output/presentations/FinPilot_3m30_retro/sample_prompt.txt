@@ -1,0 +1,18 @@
+Create exactly one finished 16:9 widescreen PowerPoint slide image, landscape. This is a technical university presentation about FinPilot, a bilingual financial education assistant. Use the codex-ppt "retro flat illustration" visual system: cream/off-white paper #F5F3E8 with very subtle fine grain, dark slate #34495E text, uniform charcoal monoline outlines, flat coral #FF6B6B, mint #95E1D3, mustard #F9CA24, burnt orange #E17055 and muted slate blue #6C7A89. Chunky retro serif title and clear geometric sans-serif body. Polished editorial illustration, flat fills, spacious and legible from a classroom projector. No glossy 3D, no gradients, no watermark, no page number, no unrelated logo. All typography must be accurate English. Use the entire 16:9 canvas with safe margins.
+
+Title at top left, large and prominent on two lines: "RAG connects data" / "with expert knowledge".
+
+Below, make an accurate two-lane architecture diagram, visually illustrated with paper reports, small books, a simple search mechanism and a speech sheet, with broad whitespace. The local numerical evidence travels on the upper lane directly to the rightmost grounded answer. The expert corpus travels on a lower lane through dual retrieval and RRF, then joins the same grounded answer. Do not imply the numerical analysis is searched with BM25.
+
+Visible exact English copy, organized as concise readable blocks:
+Upper left heading "Saved analysis"
+Upper left description "Values, timestamps, data limits"
+Lower left heading "Expert library"
+Lower left description "14 reviewed knowledge blocks"
+Middle lower heading "Dual-route retrieval"
+Inside middle block on two lines "BM25 + Chinese n-grams" / "RRF rank fusion"
+Right heading "Grounded answer"
+Right description on two lines "DeepSeek + evidence" / "Local references + expert citations"
+Bottom modest statement "Local numbers. Traceable explanations."
+
+Use a few simple directional connecting lines clearly from saved analysis to grounded answer, and from expert library to retrieval to grounded answer. Keep connections outside labels. Illustrations should explain the actual information flow rather than decorate the page. Vary sizes so the two evidence inputs, retrieval and answer are clear. Maintain excellent legibility, never tiny text. Do not add any other wording.

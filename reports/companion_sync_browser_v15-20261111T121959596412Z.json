@@ -1,0 +1,25 @@
+{
+  "checked_at": "2026-11-11T12:19:59.597425+00:00",
+  "status": "failed",
+  "phase": "explicit_workspace_connection",
+  "scope": "Actual Edge in independent browser profiles, real SSE/session APIs and persistence; controlled in-process provider, NOT real DeepSeek.",
+  "no_browser_api_response_mocking": true,
+  "external_model_requests": 0,
+  "new_broker_requests": 0,
+  "normal_user_server_or_database_touched": false,
+  "fixture_port": 8015,
+  "checks": [
+    "unconnected_pet_reads_no_old_chat_and_starts_no_model"
+  ],
+  "screenshots": [],
+  "limitations": [
+    "This verifies two browser profiles, not the native Windows window/tray; native acceptance is separate.",
+    "The fixture uses previously recorded real IBKR bars; neither report A nor B recollects data.",
+    "Provider output is deterministic test data; no real DeepSeek answer accuracy is measured."
+  ],
+  "error_type": "Error",
+  "error": "Page.wait_for_function: EvalError: Evaluating a string as JavaScript violates the following Content Security Policy directive because 'unsafe-eval' is not an allowed source of script: script-src 'self'\".\n\n    at eval (<anonymous>)\n    at predicate (eval at evaluate (:290:30), <anonymous>:4:56)\n    at next (eval at evaluate (:290:30), <anonymous>:29:29)",
+  "owned_fixture_stopped": true,
+  "page_errors": [],
+  "elapsed_seconds": 4.961
+}

@@ -10,6 +10,9 @@ from app.options_claims import direction_statements
     "不能解释为成交量增加或减少。",
     "不能描述为价格上升或下降。",
     "The difference cannot be described as an increase or decrease.",
+    "不能据此说成交放大或看跌占比上升。",
+    "不可由此断言看涨成交量增加或看跌占比下降。",
+    "因此不能据此说成交放大或看跌占比上升。",
     "不能当成增加或减少来解读。",
     "这些差异不应视为成交量增加或减少。",
     "无法解读为价格上升或下降。",
@@ -38,6 +41,10 @@ def test_local_read_as_denial_is_not_an_observed_direction(text):
     ("These values cannot be compared, but volume increased.", [("increased", False)]),
     ("It cannot be read as a forecast and volume increased.", [("increased", False)]),
     ("不能将其解读为预测并且成交量增加。", [("increased", False)]),
+    ("不能据此说预测准确并且成交量增加。", [("increased", False)]),
+    ("不能据此说没有风险并且看跌占比上升。", [("increased", False)]),
+    ("不能据此说看跌占比上升，但成交量增加。", [("increased", False)]),
+    ("不能断言未来预测可靠；看跌占比上升。", [("increased", False)]),
 ])
 def test_unrelated_disclaimer_does_not_hide_a_direction(text, expected):
     assert direction_statements(text) == expected
@@ -68,6 +75,24 @@ def test_existing_explicit_inference_denials_are_retained(text):
     "不是不能视为增加。",
     "It cannot not be interpreted as an increase.",
     "Not only can it be read as an increase.",
+    "并非不能据此说看跌占比上升。",
+    "不是不能断言成交量增加。",
 ])
 def test_affirmative_double_negation_does_not_exempt_the_claim(text):
     assert direction_statements(text), "An affirmative construction must remain a claim"
+
+
+def test_historical_incomparable_evidence_accepts_only_the_scoped_claim_denial():
+    import json
+    from app.history_chat import _validate
+    evidence = {'h.change.volume_total': {'id':'h.change.volume_total', 'status':'incomparable',
+                'delta':None, 'direction':'unavailable', 'value':100}}
+    def response(text, reference='h.change.volume_total'):
+        return json.dumps({'response':[{'kind':'limitation','text':text,'evidence_ids':[reference]}]}, ensure_ascii=False)
+    assert _validate(response('不可比，因此不能据此说成交放大或看跌占比上升。'), evidence, {})
+    for text in ('不能预测未来，但成交量增加。', '不能据此说预测准确并且成交量增加。',
+                 '并非不能据此说成交量增加。', '成交量没有增加。'):
+        with pytest.raises(ValueError, match='Incomparable'):
+            _validate(response(text), evidence, {})
+    with pytest.raises(ValueError, match='Unknown'):
+        _validate(response('不能据此说成交量增加。', 'h.change.not_provided'), evidence, {})

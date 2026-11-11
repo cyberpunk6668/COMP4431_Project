@@ -1,0 +1,4 @@
+      const c=this.context,w=this.canvas.width,h=this.canvas.height,size=Math.min(w,h);
+      c.clearRect(0,0,w,h);c.save();c.imageSmoothingEnabled=true;c.imageSmoothingQuality='high';
+      c.translate(w/2,h/2);if(clip.flip)c.scale(-1,1);
+      c.drawImage(image,bounds.x,bounds.y,bounds.w,bounds.h,-size/2,-size/2,size,size);c.restore();

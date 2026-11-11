@@ -1,0 +1,10 @@
+    async function sync() {
+      clearTimeout(syncTimer);syncTimer = null;
+      const sid = connection?.session_id;
+      if (destroyed || !shouldSync(sid)) return null;
+      const serial = ++syncSerial, generation = connection.generation, epoch = connection.epoch;
+      const controller = new AbortController(); controllers.add(controller);
+      try {
+        const session = await request(`/api/sessions/${encodeURIComponent(sid)}`, {signal:controller.signal});
+        if (destroyed || serial !== syncSerial || connection?.epoch !== epoch || connection?.generation !== generation || connection?.session_id !== sid || !shouldSync(sid)) return null;
+        notify('onSession', session); return session;

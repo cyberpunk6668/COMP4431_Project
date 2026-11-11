@@ -1,0 +1,178 @@
+{
+  "checked_at": "2026-11-11T12:20:31.014471+00:00",
+  "status": "passed",
+  "phase": "complete",
+  "scope": "Actual Edge in independent browser profiles, real SSE/session APIs and persistence; controlled in-process provider, NOT real DeepSeek.",
+  "external_model_requests": 0,
+  "new_broker_requests": 0,
+  "normal_user_server_or_database_touched": false,
+  "fixture_port": 8015,
+  "checks": [
+    "unconnected_pet_reads_no_old_chat_and_starts_no_model",
+    "explicit_connection_real_sse_separate_profiles_zero_generation",
+    "workspace_to_pet_thinking_animation_same_saved_sources_times_and_message_ids",
+    "pet_to_workspace_same_sid_canonical_reload_without_duplicate_append",
+    "shared_post_omits_analysis_id_inherits_B_and_preserves_old_A_answers",
+    "actual_sse_stream_closure_reconnect_full_sync_zero_extra_generation",
+    "delayed_real_http_snapshot_cannot_resurrect_activity_after_newer_sse",
+    "old_operation_heartbeat_and_finish_cannot_adopt_a_new_connection_generation",
+    "client_only_epoch_fault_injection_rejects_a_retired_epoch_reset",
+    "disconnect_clears_view_switch_during_pending_does_not_leak_answer_or_late_state",
+    "client_injected_old_generation_reset_ignored_and_committed_delete_clears_link",
+    "safe_shared_html_url_rendering_and_demo_does_not_join_or_read_sessions"
+  ],
+  "screenshots": [
+    "reports/screenshots/companion-sync-v15/20261111T122031013479Z/workspace-first-turn.png",
+    "reports/screenshots/companion-sync-v15/20261111T122031013479Z/pet-first-turn.png",
+    "reports/screenshots/companion-sync-v15/20261111T122031013479Z/pet-final-safety.png"
+  ],
+  "limitations": [
+    "This verifies two browser profiles, not the native Windows window/tray; native acceptance is separate.",
+    "The fixture uses previously recorded real IBKR bars; neither report A nor B recollects data.",
+    "Provider output is deterministic test data; no real DeepSeek answer accuracy is measured."
+  ],
+  "sse_reconnect": {
+    "before_open_events": 1,
+    "after_open_events": 2,
+    "before_reset_events": 1,
+    "after_reset_events": 2,
+    "error_events": 1,
+    "actual_service_restart_tested": false
+  },
+  "browser": {
+    "channel": "msedge",
+    "version": "155.0.4283.45",
+    "separate_profiles": true,
+    "viewports": [
+      {
+        "width": 1440,
+        "height": 1000
+      },
+      {
+        "width": 1200,
+        "height": 900
+      }
+    ]
+  },
+  "controlled_provider_generations": 5,
+  "provider_calls": [
+    {
+      "marker": "WORKSPACE_A",
+      "json_output": true,
+      "analysis_id": "86e0b765-6d65-483e-a6a4-68c5df2483a8"
+    },
+    {
+      "marker": "PET_A",
+      "json_output": true,
+      "analysis_id": "86e0b765-6d65-483e-a6a4-68c5df2483a8"
+    },
+    {
+      "marker": "PET_B",
+      "json_output": true,
+      "analysis_id": "6c1484b4-e3d6-475e-9c69-841a3f34678b"
+    },
+    {
+      "marker": "PET_OLD",
+      "json_output": true,
+      "analysis_id": "6c1484b4-e3d6-475e-9c69-841a3f34678b"
+    },
+    {
+      "marker": "GENERAL_SAFE",
+      "json_output": false,
+      "analysis_id": null
+    }
+  ],
+  "shared_chat_http_requests": [
+    {
+      "surface": "workspace",
+      "method": "POST",
+      "path": "/api/chat",
+      "keys": [
+        "engine",
+        "language",
+        "message",
+        "session_id"
+      ],
+      "session_id": "4576d852-c76e-4332-88ae-2f8f6de0b446",
+      "analysis_id": null
+    },
+    {
+      "surface": "pet",
+      "method": "POST",
+      "path": "/api/chat",
+      "keys": [
+        "engine",
+        "language",
+        "message",
+        "session_id"
+      ],
+      "session_id": "4576d852-c76e-4332-88ae-2f8f6de0b446",
+      "analysis_id": null
+    },
+    {
+      "surface": "pet",
+      "method": "POST",
+      "path": "/api/chat",
+      "keys": [
+        "engine",
+        "language",
+        "message",
+        "session_id"
+      ],
+      "session_id": "4576d852-c76e-4332-88ae-2f8f6de0b446",
+      "analysis_id": null
+    },
+    {
+      "surface": "pet",
+      "method": "POST",
+      "path": "/api/chat",
+      "keys": [
+        "engine",
+        "language",
+        "message",
+        "session_id"
+      ],
+      "session_id": "4576d852-c76e-4332-88ae-2f8f6de0b446",
+      "analysis_id": null
+    },
+    {
+      "surface": "pet",
+      "method": "POST",
+      "path": "/api/chat",
+      "keys": [
+        "engine",
+        "language",
+        "message",
+        "session_id"
+      ],
+      "session_id": "4576d852-c76e-4332-88ae-2f8f6de0b446",
+      "analysis_id": null
+    }
+  ],
+  "old_analysis_unchanged": true,
+  "screenshots_review_needed": false,
+  "owned_fixture_stopped": true,
+  "page_errors": [],
+  "elapsed_seconds": 11.56,
+  "browser_financial_data_or_chat_response_mocking": false,
+  "browser_response_handling": "Chat/session/analysis/source responses come from the fixture backend. One real connection PUT reply is delayed, preserving its original response bytes, for a cursor race test.",
+  "fault_injection": [
+    "Fixture control closes actual SSE streams to require a new open/reset.",
+    "One connection PUT response is delayed without fabricating its contents.",
+    "Old generation and epoch reset messages are injected only into explicit browser test clients."
+  ],
+  "manual_review": {
+    "status": "accepted_controlled_workflow",
+    "scope": "Screenshots and the controlled workflow, not real model answer accuracy or native Windows properties.",
+    "visual_checks": [
+      "Both surfaces show the same provided-reference-style blue-haired whale maid, rendered by actual Canvas2D sprite assets.",
+      "Workspace screenshot visibly retains the historical period, provenance/coverage warning and expert sources.",
+      "Pet panel visibly offers explicit question entry, actual engine selector, report shortcut and historical source cards.",
+      "The source response is a controlled provider; DeepSeek badges are interface labels in this fixture, not evidence of an external model request."
+    ],
+    "limits": [
+      "The screenshot is a browser preview; it does not prove native transparency, click-through or tray behavior.",
+      "Evidence details may be collapsed; this run checks normal application validation and persisted contexts, not every numeric rendering permutation."
+    ]
+  }
+}

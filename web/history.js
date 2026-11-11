@@ -199,6 +199,7 @@
     const current = new AbortController(); controller = current;
     const timeout = setTimeout(() => current.abort('timeout'), 20000);
     let completed = false;
+    const finishActivity = window.FinPilotActivities?.begin('history');
     showError(''); setBusy(true);
     try {
       const response = await fetch(`${path}?language=${language() ? 'en' : 'zh'}`, { method:'POST', signal:current.signal, cache:'no-store', ...(body ? { headers:{'Content-Type':'application/json'}, body:JSON.stringify(body) } : {}) });
@@ -218,6 +219,7 @@
       const message = current.signal.aborted ? t('timeout') : failure instanceof TypeError ? t('network') : failure.message;
       showError(message + (currentRecord ? ` ${t('previous')}` : ''));
     } finally {
+      finishActivity?.(completed ? 'completed' : current.signal.aborted ? 'cancelled' : 'failed');
       clearTimeout(timeout); if (controller === current) { controller = null; setBusy(false); if (completed) { status.textContent = t('complete'); status.hidden = false; } }
     }
   }

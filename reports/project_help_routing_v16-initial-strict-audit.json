@@ -1,0 +1,316 @@
+{
+  "checked_at": "2026-11-11T13:37:16.409152+00:00",
+  "status": "failed",
+  "scope": "Manually designed routing/entrypoint regression cases; not a blind benchmark, language understanding accuracy or semantic proof of each fact. No model, broker, user database or network.",
+  "cases": [
+    {
+      "id": "HELP-01",
+      "passed": true,
+      "actual_topics": [
+        "help.overview"
+      ]
+    },
+    {
+      "id": "HELP-02",
+      "passed": true,
+      "actual_topics": [
+        "help.overview"
+      ]
+    },
+    {
+      "id": "HELP-03",
+      "passed": true,
+      "actual_topics": [
+        "help.calculator"
+      ]
+    },
+    {
+      "id": "HELP-04",
+      "passed": true,
+      "actual_topics": [
+        "help.calculator"
+      ]
+    },
+    {
+      "id": "HELP-05",
+      "passed": true,
+      "actual_topics": [
+        "help.calculator"
+      ]
+    },
+    {
+      "id": "HELP-06",
+      "passed": true,
+      "actual_topics": [
+        "help.calculator"
+      ]
+    },
+    {
+      "id": "HELP-07",
+      "passed": true,
+      "actual_topics": [
+        "help.options"
+      ]
+    },
+    {
+      "id": "HELP-08",
+      "passed": true,
+      "actual_topics": [
+        "help.options"
+      ]
+    },
+    {
+      "id": "HELP-09",
+      "passed": true,
+      "actual_topics": [
+        "help.options"
+      ]
+    },
+    {
+      "id": "HELP-10",
+      "passed": true,
+      "actual_topics": [
+        "help.history",
+        "help.ibkr"
+      ]
+    },
+    {
+      "id": "HELP-11",
+      "passed": true,
+      "actual_topics": [
+        "help.history"
+      ]
+    },
+    {
+      "id": "HELP-12",
+      "passed": true,
+      "actual_topics": [
+        "help.history"
+      ]
+    },
+    {
+      "id": "HELP-13",
+      "passed": true,
+      "actual_topics": [
+        "help.history"
+      ]
+    },
+    {
+      "id": "HELP-14",
+      "passed": true,
+      "actual_topics": [
+        "help.ibkr"
+      ]
+    },
+    {
+      "id": "HELP-15",
+      "passed": false,
+      "actual_topics": []
+    },
+    {
+      "id": "HELP-16",
+      "passed": true,
+      "actual_topics": [
+        "help.reports"
+      ]
+    },
+    {
+      "id": "HELP-17",
+      "passed": false,
+      "actual_topics": []
+    },
+    {
+      "id": "HELP-18",
+      "passed": true,
+      "actual_topics": [
+        "help.models"
+      ]
+    },
+    {
+      "id": "HELP-19",
+      "passed": true,
+      "actual_topics": [
+        "help.rag",
+        "help.models"
+      ]
+    },
+    {
+      "id": "HELP-20",
+      "passed": false,
+      "actual_topics": []
+    },
+    {
+      "id": "HELP-21",
+      "passed": true,
+      "actual_topics": [
+        "help.export"
+      ]
+    },
+    {
+      "id": "HELP-22",
+      "passed": true,
+      "actual_topics": [
+        "help.export"
+      ]
+    },
+    {
+      "id": "HELP-23",
+      "passed": true,
+      "actual_topics": [
+        "help.rag"
+      ]
+    },
+    {
+      "id": "HELP-24",
+      "passed": true,
+      "actual_topics": [
+        "help.rag"
+      ]
+    },
+    {
+      "id": "HELP-25",
+      "passed": true,
+      "actual_topics": [
+        "help.chat",
+        "help.appearance"
+      ]
+    },
+    {
+      "id": "HELP-26",
+      "passed": true,
+      "actual_topics": [
+        "help.pet",
+        "help.avatar"
+      ]
+    },
+    {
+      "id": "HELP-27",
+      "passed": true,
+      "actual_topics": [
+        "help.voice"
+      ]
+    },
+    {
+      "id": "HELP-28",
+      "passed": true,
+      "actual_topics": [
+        "help.pet",
+        "help.voice"
+      ]
+    },
+    {
+      "id": "HELP-29",
+      "passed": true,
+      "actual_topics": [
+        "help.pet"
+      ]
+    },
+    {
+      "id": "HELP-30",
+      "passed": true,
+      "actual_topics": [
+        "help.pet"
+      ]
+    },
+    {
+      "id": "HELP-31",
+      "passed": true,
+      "actual_topics": [
+        "help.pet"
+      ]
+    },
+    {
+      "id": "HELP-32",
+      "passed": true,
+      "actual_topics": [
+        "help.overview"
+      ]
+    },
+    {
+      "id": "HELP-33",
+      "passed": true,
+      "actual_topics": [
+        "help.ibkr"
+      ]
+    },
+    {
+      "id": "HELP-34",
+      "passed": false,
+      "actual_topics": [
+        "help.trading"
+      ]
+    },
+    {
+      "id": "HELP-35",
+      "passed": true,
+      "actual_topics": [
+        "help.boundaries"
+      ]
+    },
+    {
+      "id": "HELP-36",
+      "passed": true,
+      "actual_topics": [
+        "help.export"
+      ]
+    },
+    {
+      "id": "HELP-37",
+      "passed": false,
+      "actual_topics": [
+        "help.trading"
+      ]
+    },
+    {
+      "id": "HELP-38",
+      "passed": false,
+      "actual_topics": [
+        "help.boundaries"
+      ]
+    },
+    {
+      "id": "NORMAL-01",
+      "passed": true,
+      "actual_topics": []
+    },
+    {
+      "id": "NORMAL-02",
+      "passed": true,
+      "actual_topics": []
+    },
+    {
+      "id": "NORMAL-03",
+      "passed": true,
+      "actual_topics": []
+    },
+    {
+      "id": "NORMAL-04",
+      "passed": true,
+      "actual_topics": []
+    },
+    {
+      "id": "NORMAL-05",
+      "passed": true,
+      "actual_topics": []
+    },
+    {
+      "id": "NORMAL-06",
+      "passed": true,
+      "actual_topics": []
+    },
+    {
+      "id": "NORMAL-07",
+      "passed": true,
+      "actual_topics": []
+    },
+    {
+      "id": "NORMAL-08",
+      "passed": true,
+      "actual_topics": []
+    }
+  ],
+  "total": 46,
+  "passed": 40,
+  "model_calls": 0,
+  "broker_calls": 0
+}

@@ -1,0 +1,64 @@
+{
+  "checked_at": "2026-11-11T12:09:40.794486+00:00",
+  "status": "passed",
+  "scope": "Independent actual Edge Canvas2D renderer; only local asset HTTP responses.",
+  "model_calls": 0,
+  "broker_calls": 0,
+  "checks": [
+    "actual_canvas2d_pixels",
+    "pinned_asset_revision",
+    "lazy_action_loading",
+    "five_operation_states",
+    "authored_multiframe_wave",
+    "authored_multiframe_walk",
+    "drag_drop_and_rest_poses",
+    "reduced_motion_stops_animation_but_state_updates",
+    "real_intersection_pause",
+    "accessible_language_label",
+    "three_viewports_no_overflow",
+    "idempotent_destroy",
+    "canvas_unavailable_static_portrait",
+    "action_failure_honest_static_fallback",
+    "destroy_during_async_load",
+    "no_page_errors",
+    "local_assets_only_no_api_requests"
+  ],
+  "viewports": [
+    {
+      "width": 320,
+      "renderer": "canvas2d"
+    },
+    {
+      "width": 390,
+      "renderer": "canvas2d"
+    },
+    {
+      "width": 1440,
+      "renderer": "canvas2d"
+    }
+  ],
+  "screenshots": [
+    "reports/screenshots/companion-v15/renderer-320.png",
+    "reports/screenshots/companion-v15/renderer-390.png",
+    "reports/screenshots/companion-v15/renderer-1440.png"
+  ],
+  "renderer": {
+    "renderer": "canvas2d",
+    "actualMode": "2d",
+    "requestedMode": "2d",
+    "state": "idle",
+    "language": "en",
+    "activeClip": "idle",
+    "frames": 52,
+    "spriteChanges": 51,
+    "paused": false,
+    "reducedMotion": false,
+    "fallbackReason": null,
+    "assetRevision": "7661c8b304c5400701f91da01b1a643a207331de",
+    "loading": false,
+    "destroyed": false
+  },
+  "page_errors": [],
+  "requests": 29,
+  "total_checks": 17
+}

@@ -1,0 +1,195 @@
+{
+  "checked_at": "2026-11-11T13:32:48.253215+00:00",
+  "status": "passed",
+  "phase": "complete",
+  "scope": "Actual Edge headless workspace; real DeepSeek selects reviewed topic IDs. Local manual supplies all steps.",
+  "base": "http://127.0.0.1:8016",
+  "questions": [
+    "期权分析怎么用？",
+    "下一步"
+  ],
+  "financial_and_chat_responses_mocked": false,
+  "privacy_fixture": "Only browser GET /api/sessions is fulfilled with an empty list; no existing session details are read.",
+  "model_budget": {
+    "ui_turns": 2,
+    "maximum_generations": 2,
+    "maximum_schema_repairs": 0
+  },
+  "automatic_retries": 0,
+  "new_broker_requests": 0,
+  "zero_broker_basis": "Only saved-archive replay and project-help requests; browser guard rejects collection actions. No independent socket/billing instrumentation in this script.",
+  "call_count_scope": "Server-reported generation attempts on two script-owned real UI turns; no independent provider billing trace.",
+  "counters": {
+    "ui_chat_http_requests": 2,
+    "confirmed_deepseek_selectors": 2,
+    "generations": 2,
+    "schema_repairs": 0
+  },
+  "turns": [
+    {
+      "topic_ids": [
+        "help.options"
+      ],
+      "mode": "project-help",
+      "selector": {
+        "requested_engine": "deepseek",
+        "engine": "deepseek",
+        "status": "validated",
+        "generation_attempts": 1,
+        "reason": null
+      },
+      "manual_version": "16.0",
+      "manual_sha256": "6d8b9c6efeaaa5fd175de03500574f971d4173ed4d04f77aae0743645aee824b",
+      "answer_sha256": "08a4a51128e7126766944ebc2ed5f5b1f97164bf4a601c4f5dd1a21a26737dd6",
+      "steps_exactly_equal_http_manual": true,
+      "full_answer_exactly_equal_http_manual": true,
+      "followup_used": false,
+      "financial_analysis_context_absent": true,
+      "source_urls": [
+        "/help#help.options"
+      ],
+      "source_drift": [],
+      "persisted_message_ids": [
+        1,
+        2
+      ],
+      "saved_at_utc": "2026-11-11T13:32:51.542796+00:00",
+      "time_scope": "Message saved time and manual version, not a market data timestamp."
+    },
+    {
+      "topic_ids": [
+        "help.options"
+      ],
+      "mode": "project-help",
+      "selector": {
+        "requested_engine": "deepseek",
+        "engine": "deepseek",
+        "status": "validated",
+        "generation_attempts": 1,
+        "reason": null
+      },
+      "manual_version": "16.0",
+      "manual_sha256": "6d8b9c6efeaaa5fd175de03500574f971d4173ed4d04f77aae0743645aee824b",
+      "answer_sha256": "08a4a51128e7126766944ebc2ed5f5b1f97164bf4a601c4f5dd1a21a26737dd6",
+      "steps_exactly_equal_http_manual": true,
+      "full_answer_exactly_equal_http_manual": true,
+      "followup_used": true,
+      "financial_analysis_context_absent": true,
+      "source_urls": [
+        "/help#help.options"
+      ],
+      "source_drift": [],
+      "persisted_message_ids": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "saved_at_utc": "2026-11-11T13:32:54.502365+00:00",
+      "time_scope": "Message saved time and manual version, not a market data timestamp."
+    }
+  ],
+  "received_reply_metadata": [
+    {
+      "mode": "project-help",
+      "warning": null,
+      "generation_attempts": 1,
+      "schema_repair_attempts": 0,
+      "selector": {
+        "requested_engine": "deepseek",
+        "engine": "deepseek",
+        "status": "validated",
+        "generation_attempts": 1,
+        "reason": null
+      }
+    },
+    {
+      "mode": "project-help",
+      "warning": null,
+      "generation_attempts": 1,
+      "schema_repair_attempts": 0,
+      "selector": {
+        "requested_engine": "deepseek",
+        "engine": "deepseek",
+        "status": "validated",
+        "generation_attempts": 1,
+        "reason": null
+      }
+    }
+  ],
+  "checks": [
+    "startup_manual_reads_archive_replay_do_not_generate",
+    "turn_1_exact_manual_safe_sources_binding_persistence_real_card_link",
+    "turn_2_exact_manual_safe_sources_binding_persistence_real_card_link",
+    "immutable_archive_unchanged",
+    "two_turns_four_unique_messages",
+    "no_companion_connection_mutation",
+    "no_financial_context_in_tutorials"
+  ],
+  "screenshots": [
+    "reports/screenshots/project-help-live-v16/20261111T133248253215Z/turn-1-real-selector-local-manual.png",
+    "reports/screenshots/project-help-live-v16/20261111T133248253215Z/turn-2-real-selector-local-manual.png"
+  ],
+  "cleanup_policy": "Close only owned browser. Retain owned session and immutable archive in isolated DB. Never modify companion connection or stop backend.",
+  "source_sha256": {
+    "app/main.py": "96c79643830eb772b2844c742e67cb0571c16d1a484485e0127a8670ffa86998",
+    "app/project_help.py": "ef31ad2ac3065406dd958e5960c21396047e22c7c558c1196374a752819e11ca",
+    "app/project_help_chat.py": "053f23e53c97bdd8b4f212cc0463bfd10d05bb3f631ee260c59f361acf464163",
+    "app/service.py": "0b776a66481774249429fe0e2bede6775b6b7a43d88fb992a15c3cdd339457d6",
+    "app/storage.py": "a4aedbe00b528e9394fd341095a3e60177c13463ccd6062c9d754ac6e0051282",
+    "data/project_help.json": "6d8b9c6efeaaa5fd175de03500574f971d4173ed4d04f77aae0743645aee824b",
+    "web/app.js": "734774e4b05816b476903d9bf67cfe7d510e18b24cb0b1a30b4bef9598fb9003",
+    "web/companion/messages.js": "d9fdadbe593cf6f3a1087f39a96673e6714a8f6e298f2b2add955eb61670d2de",
+    "web/help.html": "902257e1e6c8c5fab1b77052baefacbf5c53c358622b09bc749442f6613703ee",
+    "web/help.js": "d38a2a07c2be18cda9fe97d748299b61332598e40e8d1a5b7f10428b22acc5ac",
+    "scripts/check_project_help_live_v16.py": "98d57f2a65acad52a9915a3e91c88ac3601f1e4bea89dbe373fdebb2a66fd6f9"
+  },
+  "unknown_entry_read": {
+    "topic_id": "help.boundaries",
+    "known": false,
+    "model_requests": 0,
+    "scope": "Read-only HTTP entry check only; not a negative unknown-question chat-routing test."
+  },
+  "archive": {
+    "analysis_id": "e0443f4a-d382-4905-a4f5-421120fbb7a7",
+    "symbol": "AAPL",
+    "expiry": "2026-11-13",
+    "period": {
+      "start": "2026-11-06",
+      "end": "2026-11-10"
+    },
+    "archive_sha256": "08cbf4cbd74bcd35b5905e2b96e95bd83c36b52b9d9326591ef5148719cd9ab1",
+    "this_run_new_broker_requests": 0,
+    "scope": "Replay of the existing saved IBKR archive, not a new capture."
+  },
+  "owned_session_id": "5fdf9944-de21-4723-9c04-f51ab02e85e6",
+  "browser_api_request_counts": {
+    "GET /api/companion/connection": 6,
+    "GET /api/companion/events": 3,
+    "GET /api/health": 3,
+    "GET /api/models": 3,
+    "GET /api/project-help": 2,
+    "GET /api/sessions": 5,
+    "GET /api/sessions/5fdf9944-de21-4723-9c04-f51ab02e85e6": 3,
+    "POST /api/chat": 2
+  },
+  "page_errors": [],
+  "guard_failures": [],
+  "owned_records_retained": true,
+  "backend_lifecycle_managed_by_script": false,
+  "companion_connection_modified_by_script": false,
+  "source_sha256_at_end": {
+    "app/main.py": "96c79643830eb772b2844c742e67cb0571c16d1a484485e0127a8670ffa86998",
+    "app/project_help.py": "ef31ad2ac3065406dd958e5960c21396047e22c7c558c1196374a752819e11ca",
+    "app/project_help_chat.py": "053f23e53c97bdd8b4f212cc0463bfd10d05bb3f631ee260c59f361acf464163",
+    "app/service.py": "0b776a66481774249429fe0e2bede6775b6b7a43d88fb992a15c3cdd339457d6",
+    "app/storage.py": "a4aedbe00b528e9394fd341095a3e60177c13463ccd6062c9d754ac6e0051282",
+    "data/project_help.json": "6d8b9c6efeaaa5fd175de03500574f971d4173ed4d04f77aae0743645aee824b",
+    "web/app.js": "734774e4b05816b476903d9bf67cfe7d510e18b24cb0b1a30b4bef9598fb9003",
+    "web/companion/messages.js": "d9fdadbe593cf6f3a1087f39a96673e6714a8f6e298f2b2add955eb61670d2de",
+    "web/help.html": "902257e1e6c8c5fab1b77052baefacbf5c53c358622b09bc749442f6613703ee",
+    "web/help.js": "d38a2a07c2be18cda9fe97d748299b61332598e40e8d1a5b7f10428b22acc5ac",
+    "scripts/check_project_help_live_v16.py": "98d57f2a65acad52a9915a3e91c88ac3601f1e4bea89dbe373fdebb2a66fd6f9"
+  },
+  "source_unchanged_during_run": true
+}

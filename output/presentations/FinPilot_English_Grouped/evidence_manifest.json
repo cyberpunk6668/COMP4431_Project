@@ -1,0 +1,166 @@
+{
+  "created_at_utc": "2026-11-11T13:41:00.214066+00:00",
+  "visible_language": "English",
+  "new_model_calls": 0,
+  "new_broker_requests": 0,
+  "native_calculator_request": true,
+  "page_order": "Overview, RAG, Frontend, Companion. Concept and corresponding evidence are adjacent.",
+  "no_hidden_slides": true,
+  "ui_capture_policy": "Actual native English UI regions cropped from real browser captures. Chinese history titles, locale-switch controls and bilingual result summaries are outside the displayed crop. No labels or values repainted.",
+  "source_policy": "Frozen whitelisted source files; syntax highlighting changes appearance only. Original TXT and hashes retained.",
+  "screenshot_crops": [
+    {
+      "asset": "assets\\ui\\workspace_english_content.png",
+      "sha256": "077dc25cd399c6adea27369682eac6fdee692c46086a87d574f1574f64abf47b",
+      "raw_capture": "raw_captures\\workspace_desktop_en_full.jpg",
+      "raw_sha256": "f900872c598df6927dfc51dbd8492106a621a0439e6b89548216099f6946ebd4",
+      "crop_xyxy": [
+        238,
+        104,
+        1403,
+        690
+      ],
+      "edit": "Unaltered rectangular crop only"
+    },
+    {
+      "asset": "assets\\ui\\calculator_desktop_english_form.png",
+      "sha256": "59e9d9b29e2d45461626d2867eef2c7c035622d8dc86785f8b403b5d72b83895",
+      "raw_capture": "raw_captures\\calculator_desktop_en.jpg",
+      "raw_sha256": "f7233d6526ad6458ed4815086dddc2a4ef38d3eacd43fd2aa82dda90a24538bc",
+      "crop_xyxy": [
+        0,
+        0,
+        670,
+        537
+      ],
+      "edit": "Unaltered rectangular crop only"
+    },
+    {
+      "asset": "assets\\ui\\calculator_mobile_english_form.png",
+      "sha256": "838c2efd5a5ed2bd4ddb0c338ed6cdb568aad7473843141fb1e1454a2ef7ec89",
+      "raw_capture": "raw_captures\\calculator_mobile_en.jpg",
+      "raw_sha256": "08c4c9dde7fa57a0ade07541bd99ed71f1329c926a508c95f2bcc1d30b389077",
+      "crop_xyxy": [
+        0,
+        0,
+        341,
+        605
+      ],
+      "edit": "Unaltered rectangular crop only"
+    },
+    {
+      "asset": "assets\\ui\\companion_english_browser.png",
+      "sha256": "515d9a4c20ecb0063c657d0e8794d22b15c8e2718e162091ce16243847f908cd",
+      "raw_capture": "raw_captures\\workspace_desktop_en_full.jpg",
+      "raw_sha256": "f900872c598df6927dfc51dbd8492106a621a0439e6b89548216099f6946ebd4",
+      "crop_xyxy": [
+        1088,
+        115,
+        1385,
+        684
+      ],
+      "edit": "Unaltered rectangular crop only"
+    }
+  ],
+  "avatar_credit_edit": {
+    "backend": "built-in image_gen",
+    "source_image": "original slide 5",
+    "change": "Character credit romanized as Shangshan Wuxing; rest of slide preserved.",
+    "output_sha256": "e767b0a4a4677cb777b9579c39a9fe2642a54f2db29505aae64b10b897350f18"
+  },
+  "slides": [
+    {
+      "number": 1,
+      "title": "FinPilot",
+      "speaker": 1,
+      "seconds": 20,
+      "words": 34
+    },
+    {
+      "number": 2,
+      "title": "The actual English workspace",
+      "speaker": 1,
+      "seconds": 20,
+      "words": 37
+    },
+    {
+      "number": 3,
+      "title": "RAG connects data with expert knowledge",
+      "speaker": 2,
+      "seconds": 20,
+      "words": 34
+    },
+    {
+      "number": 4,
+      "title": "Two routes, one ranking",
+      "speaker": 2,
+      "seconds": 16,
+      "words": 29
+    },
+    {
+      "number": 5,
+      "title": "Reliable grounding needs more than retrieval",
+      "speaker": 2,
+      "seconds": 12,
+      "words": 24
+    },
+    {
+      "number": 6,
+      "title": "Missing values remain unavailable",
+      "speaker": 2,
+      "seconds": 12,
+      "words": 24
+    },
+    {
+      "number": 7,
+      "title": "Frontend design keeps complex tasks usable",
+      "speaker": 3,
+      "seconds": 16,
+      "words": 26
+    },
+    {
+      "number": 8,
+      "title": "Real English views, responsive controls",
+      "speaker": 3,
+      "seconds": 19,
+      "words": 27
+    },
+    {
+      "number": 9,
+      "title": "Motion with a safe fallback",
+      "speaker": 3,
+      "seconds": 20,
+      "words": 37
+    },
+    {
+      "number": 10,
+      "title": "One companion, on the web and desktop",
+      "speaker": 4,
+      "seconds": 14,
+      "words": 22
+    },
+    {
+      "number": 11,
+      "title": "One shared 2D renderer",
+      "speaker": 4,
+      "seconds": 15,
+      "words": 22
+    },
+    {
+      "number": 12,
+      "title": "Shared conversation, explicit control",
+      "speaker": 4,
+      "seconds": 12,
+      "words": 18
+    },
+    {
+      "number": 13,
+      "title": "Guard stale responses, preserve the evidence",
+      "speaker": 4,
+      "seconds": 14,
+      "words": 22
+    }
+  ],
+  "total_words": 356,
+  "planned_seconds": 210
+}

@@ -4,6 +4,8 @@ import re
 from app.finance import calculate, parse_calculation
 from app.llm import ProviderError
 from app.local_prompt import LOCAL_SYSTEM
+from app.project_help import ProjectHelp
+from app.project_help_chat import ProjectHelpChat
 
 SYSTEM = """You are FinPilot, a bilingual assistant with a focus on financial education.
 Respond to the user's actual question in the requested language. Explain uncertainty plainly.
@@ -81,17 +83,22 @@ def _trade_request(message: str, financial: bool) -> bool:
 
 
 class ChatService:
-    def __init__(self, retriever, provider, settings, local_provider=None):
+    def __init__(self, retriever, provider, settings, local_provider=None, project_help=None):
         self.retriever, self.provider, self.settings = retriever, provider, settings
         self.local_provider = local_provider
         self.documents = {d["id"]: d for d in retriever.documents}
+        self.project_help = project_help if project_help is not None else ProjectHelp()
+        self.help_chat = ProjectHelpChat(self.project_help,provider,settings,local_provider)
 
-    async def answer(self, message: str, history: list, language: str, engine: str = "deepseek") -> dict:
+    async def answer(self, message: str, history: list, language: str, engine: str = "deepseek", *, project_context=None) -> dict:
         zh = language == "zh"
         base = dict(sources=[], mode="offline")
         # API credentials are unnecessary to the task. Do not persist/forward an accidentally pasted secret.
         if re.search(r"\bsk-[a-zA-Z0-9_-]{16,}", message):
             return {**base, "answer": "请勿在对话中提供密钥或密码。请删除敏感信息后重试。" if zh else "Do not send API keys or passwords. Remove sensitive information and try again.", "warning": "sensitive_input"}
+        help_context = project_context if project_context is not None else self.project_help.resolve(message,history,language)
+        if help_context is not None:
+            return await self.help_chat.answer(help_context,message,history,language,engine)
         try:
             req = parse_calculation(message)
             if req:

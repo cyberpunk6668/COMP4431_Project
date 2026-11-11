@@ -1,0 +1,211 @@
+{
+  "deck_name": "FinPilot_3m30_retro",
+  "language": "English",
+  "goal": "A six-slide COMP4431 project presentation, four speakers, 210 seconds. Explain the actual FinPilot project and technical challenges in RAG, frontend design and the virtual companion.",
+  "approval": {
+    "outline": "approved by user",
+    "style": "user selected GitHub codex-ppt retro flat illustration",
+    "remaining_gates": "user explicitly waived all subsequent confirmations and authorized complete generation",
+    "sample": "internally reviewed as style reference under user confirmation waiver"
+  },
+  "selected_image_backend": "built-in image tool",
+  "max_concurrent_slides": 3,
+  "sample_generation_method": {
+    "backend_used": "built-in image tool",
+    "tool_name": "image_gen",
+    "mode": "generate",
+    "prompt_source": "F:/桌面/COMP4431_Project/output/presentations/FinPilot_3m30_retro/sample_prompt.txt",
+    "model": "built-in default; exact model not exposed",
+    "size": "16:9 landscape requested; sample actual 1672x941",
+    "quality": "built-in default; not exposed",
+    "approved_sample_path": "F:/桌面/COMP4431_Project/output/presentations/FinPilot_3m30_retro/origin_image/slide_02.png",
+    "input_context_preparation": "Use view_image for every local input before image_gen; pass local paths as referenced_image_paths. The sample was generated from text only.",
+    "handoff_rule": "Use image_gen generate with referenced input images when available. Never substitute local rendering. User waived sample approval; parent has visually checked style reference."
+  },
+  "style": {
+    "name": "复古扁平插画风",
+    "visual_direction": "Retro flat editorial illustration. Cream subtly grained paper, consistent charcoal monoline outlines, chunky dark-slate retro serif headlines, geometric sans-serif body. Flat fills. Match sample typography and palette.",
+    "color_palette": {
+      "background": "#F5F3E8",
+      "text": "#34495E",
+      "coral": "#FF6B6B",
+      "mint": "#95E1D3",
+      "mustard": "#F9CA24",
+      "orange": "#E17055",
+      "slateBlue": "#6C7A89"
+    },
+    "constraints": "Spacious 16:9 landscape. Whole slide image including accurate readable text. No 3D, glossy treatment, watermark, page number or unrelated logo. No extra prose outside supplied text. Important text within 4% safe margins. Keep body large enough for classroom projection."
+  },
+  "approved_style_reference": {
+    "path": "F:/桌面/COMP4431_Project/output/presentations/FinPilot_3m30_retro/origin_image/slide_02.png",
+    "role": "internally reviewed sample style reference, accepted under explicit user confirmation waiver",
+    "fidelity": "Match palette, typography, outline weight, paper texture and density only. Do not copy the diagram or its content."
+  },
+  "deck_context": {
+    "source_summary": "FinPilot is an English/Chinese finance education chatbot using FastAPI, local calculators, lexical RAG and DeepSeek. Homepage React/TypeScript with GSAP/Motion; workspace native JS/CSS. Current companion uses reused 2D WebP atlases and Canvas2D on web and Electron desktop, explicit shared session over SQLite/SSE.",
+    "core_claim": "Make financial explanations traceable and usable, with an interactive companion that preserves the same evidence.",
+    "factual_limits": "Do not claim trained RAG, embeddings, vector database, market prediction, all-React architecture, new 3D avatar, phoneme lip sync or full v15 end-to-end acceptance. Illustrations of interfaces are conceptual diagrams, not screenshots."
+  },
+  "slides": [
+    {
+      "number": 1,
+      "title": "FinPilot",
+      "role": "cover and overview",
+      "intent": "Open the presentation with product purpose and the three requested technical contributions.",
+      "key_points": [
+        "Financial answers with evidence",
+        "Bilingual financial education",
+        "Traceable RAG",
+        "Usable frontend",
+        "Interactive companion",
+        "COMP4431 · Group Project"
+      ],
+      "layout": {
+        "composition": "Cover poster with an enormous FinPilot title occupying the upper-left, a clear subtitle directly below. A panoramic retro flat illustration in the middle depicts a student at a laptop, educational documents and a calculator with simple conceptual assistant speech bubble. At bottom, three short distinct contribution labels, not three repetitive cards. Deliberately different from sample architecture. Generous whitespace.",
+        "text_order": "FinPilot, Financial answers with evidence, Bilingual financial education; three contribution labels; small course label."
+      },
+      "visual_elements": {
+        "main_visual": "Warm educational scene with a person, books and desktop calculator. Calm, flat ink-outlined shapes and same cream paper. No rising-price imagery or invented financial performance."
+      },
+      "constraints": [
+        "Visible text limited to the listed copy. Do not add a generic robot or another avatar character. No invented university logo, member names or IDs. No page number."
+      ]
+    },
+    {
+      "number": 2,
+      "title": "RAG connects data with expert knowledge",
+      "role": "architecture",
+      "sample_approved": true,
+      "use_approved_style_reference": false,
+      "key_points": [
+        "Saved analysis",
+        "Values, timestamps, data limits",
+        "Expert library",
+        "14 reviewed knowledge blocks",
+        "Dual-route retrieval",
+        "BM25 + Chinese n-grams",
+        "RRF rank fusion",
+        "Grounded answer",
+        "DeepSeek + evidence",
+        "Local references + expert citations",
+        "Local numbers. Traceable explanations."
+      ],
+      "layout": {
+        "composition": "Keep existing final sample; local evidence direct to answer on upper lane, expert corpus through retrieval then answer on lower lane."
+      }
+    },
+    {
+      "number": 3,
+      "title": "Reliable grounding needs more than retrieval",
+      "role": "technical challenges",
+      "intent": "Explain two RAG challenges and concrete responses while admitting the rule-check limit.",
+      "key_points": [
+        "Challenge 1: Bilingual wording",
+        "Domain aliases + two retrieval routes",
+        "Challenge 2: Unsupported claims",
+        "Topic-aware citation checks + one repair",
+        "Missing values stay missing",
+        "Rule checks cannot guarantee correctness"
+      ],
+      "layout": {
+        "composition": "Two broad side-by-side illustrated challenges below a two-line headline. Left: English and Chinese term slips feeding a search/index mechanism. Right: a claim sheet checked against a source book with a magnifying glass. Each side has its challenge heading and exactly one solution line. Bottom a slim mustard strip contains Missing values stay missing; underneath a modest but clearly readable limitation. No architecture repeated from sample; avoid tiny footnotes."
+      },
+      "visual_elements": {
+        "main_visual": "Retro flat filing drawer and small bilingual word slips on left; evidence inspection on right. Do not add illegible fake paragraphs."
+      },
+      "local_context": {
+        "background": "Both retrieval routes are lexical. Chinese n-grams and BM25 rankings use RRF. Citation support checking is limited rule-based topic checking with at most one repair. Missing local data must not become zero."
+      },
+      "constraints": [
+        "Use exact English key points only. Do not add Chinese vocabulary examples. Do not display the retrieval metric on this slide; it belongs in notes and Q&A."
+      ]
+    },
+    {
+      "number": 4,
+      "title": "Frontend design keeps complex tasks usable",
+      "role": "design decisions and challenges",
+      "intent": "Explain responsive hierarchy, resilient motion and asynchronous state through paired concise copy.",
+      "key_points": [
+        "Responsive hierarchy",
+        "Columns become drawers on mobile",
+        "Resilient motion",
+        "Poster fallback + reduced motion",
+        "Async control",
+        "Request IDs reject stale results",
+        "React homepage. JavaScript workspace."
+      ],
+      "layout": {
+        "composition": "Large headline on two lines at top, left side a flat outlined desktop screen with a phone partially beside it, as conceptual wireframes with clean shapes and no fake text. Right side three vertically separated rows with medium large headings and one short solution line each. Use colored simple icons to distinguish hierarchy, motion and request order. Single small but readable tech-stack line at bottom. Do not reproduce cards or source diagram."
+      },
+      "visual_elements": {
+        "main_visual": "Desktop and phone conceptual interface showing the same chat/input and collapsed assistant, with visually clear spacing. A small poster icon and a pair of orderly numbered messages in supporting row icons."
+      },
+      "local_context": {
+        "background": "Actual homepage uses React/TypeScript/Vite and GSAP/Motion. Workspace is vanilla JavaScript/CSS. Hero video falls back to a poster; reduced motion is respected. Request IDs/cancellation prevent old calculations overwriting new input, chat failure retains draft."
+      },
+      "constraints": [
+        "Visible wording exactly as key points. Do not label the whole application React. Do not claim speed or user-retention improvements."
+      ]
+    },
+    {
+      "number": 5,
+      "title": "One companion, on the web and desktop",
+      "role": "character implementation and technical challenges",
+      "intent": "Use the real FinPilot portrait and explain actual 2D rendering and desktop interaction work.",
+      "key_points": [
+        "Canvas2D + WebP atlases",
+        "Shared renderer. Operation-linked states.",
+        "Animation cost",
+        "Lazy load, pause, static fallback",
+        "Transparent windows",
+        "Alpha hit regions, drag, panel placement",
+        "Character: YunYueSama / 上善无形 / ZipZipPipe",
+        "CC BY-NC-SA 4.0"
+      ],
+      "required_images": [
+        {
+          "path": "F:/桌面/COMP4431_Project/web/companion/assets/portrait.webp",
+          "role": "strict input asset: actual current FinPilot companion portrait; integrate intact into this slide",
+          "fidelity": "Preserve the actual supplied character artwork, blue hair, face, maid outfit, proportions and full body. Keep original anime artwork rather than redraw in the slide illustration style. Do not replace it with a robot, new character or a similar redraw."
+        }
+      ],
+      "layout": {
+        "composition": "A character showcase spread: two-line large headline at top. Left-center contains the actual supplied portrait, large and completely visible against a mint or mustard flat backdrop shape, without black background or any cropping of feet/hair. Surrounding graphics use deck's flat monoline style. Right-center lists rendering line and operation-linked states, then two short challenge/solution pairs with small illustration icons. Footer credits occupy two clearly legible lines at the bottom, may use modest smaller text. Keep at least 4% safe margins."
+      },
+      "visual_elements": {
+        "main_visual": "Supplied portrait unchanged; small flat illustration icons for animation frame atlas and transparent desktop window. No robot or other character."
+      },
+      "source_image_rules": "Image 1 is style reference only, Image 2 is actual portrait. Preserve Image 2 visibly and exactly. The portrait is an existing reused 2D character, not a newly modeled or 3D avatar.",
+      "constraints": [
+        "Render exact headings/solution lines. Render attribution exactly. Do not claim Live2D, original avatar design, 3D or lip sync. No full desktop screenshots."
+      ]
+    },
+    {
+      "number": 6,
+      "title": "Shared conversation, explicit control",
+      "role": "synchronization and closing",
+      "intent": "Show explicit session selection, persisted state and stale-result filtering, then close the talk.",
+      "key_points": [
+        "Web workspace",
+        "Choose one session",
+        "SQLite + SSE",
+        "Save, notify, reload",
+        "Desktop companion",
+        "Reject stale responses",
+        "One saved conversation with the same evidence."
+      ],
+      "layout": {
+        "composition": "A closing architectural postcard different from sample. At center a large shared conversation ledger with SQLite + SSE and Save, notify, reload underneath. To its left a web browser window with heading Web workspace and caption Choose one session. To right a desktop chat panel with heading Desktop companion and caption Reject stale responses. Simple orderly links connect windows to ledger. No robot or whale portrait repeated. Bottom generous bold closing sentence as standalone text, not a badge. Medium-large two-line title on top."
+      },
+      "visual_elements": {
+        "main_visual": "Flat web window, saved conversation ledger, desktop chat panel; small fresh-message envelopes and one discarded faded stale-message envelope to illustrate consistency."
+      },
+      "local_context": {
+        "background": "Users explicitly connect one SID. SSE notifies after persistence and clients re-read SQLite-backed authoritative state. Generation and sequence checks ignore late results. Mechanism is implemented but current v15 native/cloud acceptance has limitations; do not show verified badges or claim all tests pass."
+      },
+      "constraints": [
+        "Visible wording limited to exact key points. No cloud-acceptance pass marks. Keep a quiet, confident ending with readable diagram."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+        support = {facet for key in cited for facet in sources[key].get("supports", []) if facet in SUPPORT_FACETS}
+        missing = facets - support
+        if missing:
+            raise ValueError(where + "Expert citation does not support claim facets: " + ",".join(sorted(missing)))
+        unrelated = [key for key in cited if not set(sources[key].get("supports", [])) & facets]

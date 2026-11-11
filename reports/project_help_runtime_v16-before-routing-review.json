@@ -1,0 +1,20 @@
+{
+  "checked_at": "2026-11-11T13:36:53.551017+00:00",
+  "status": "passed",
+  "scope": "Read-only public routes on the reloaded task-owned normal :8000 server; no user session list, chat details, model or broker request.",
+  "application_version": "16.0.0",
+  "manual_topics": 16,
+  "all_reviewed_source_hashes_match": true,
+  "csp_preserved": true,
+  "model_requests": 0,
+  "broker_requests": 0,
+  "user_session_reads": 0,
+  "checks": [
+    "health_identity_and_version",
+    "help_html",
+    "catalogue",
+    "search",
+    "known_topic",
+    "unknown_topic_404"
+  ]
+}

@@ -1,0 +1,112 @@
+{
+  "status": "passed",
+  "total_slides": 12,
+  "main_slides": 6,
+  "hidden_appendices": 6,
+  "main_image_bytes_unchanged": true,
+  "main_english_words": 383,
+  "planned_talk_seconds": 210,
+  "notes_on_all_slides": true,
+  "evidence_embedded_without_reconstruction": true,
+  "source_code_and_png_hashes_verified": true,
+  "code_snippets_verified": 10,
+  "powerpoint_document_api_rendered": 12,
+  "powerpoint_hidden_slide_flags_confirmed": true,
+  "back_links_target_correct_main_slides": true,
+  "embedded_evidence": [
+    {
+      "slide": 7,
+      "asset": "assets\\homepage_desktop_live.jpg",
+      "embedded_bytes_match": true,
+      "sha256": "d7a1920a621a71ba7775999d1329372491baf8447252bc45b3feed377e4b9d7b"
+    },
+    {
+      "slide": 7,
+      "asset": "assets\\homepage_live.jpg",
+      "embedded_bytes_match": true,
+      "sha256": "4ad579849bcef159e655727502e8e6dc6cfc5ac92b7196354d50eeac250ade49"
+    },
+    {
+      "slide": 8,
+      "asset": "assets\\code\\rag_rrf.png",
+      "embedded_bytes_match": true,
+      "sha256": "129ffc07742578a71d21b6040183fb7a8754c1785672a70552b79a7bd4694c17"
+    },
+    {
+      "slide": 9,
+      "asset": "assets\\rag_missing_oi_crop.png",
+      "embedded_bytes_match": true,
+      "sha256": "27f75b649213869e04f504a703326dfcd934316e6c7c02a8caacc1e023502be9"
+    },
+    {
+      "slide": 9,
+      "asset": "assets\\rag_source_controls_crop.png",
+      "embedded_bytes_match": true,
+      "sha256": "3277e2a11d70216337f1254a362fa2a824ebfee88363f692943ccc00dca4f6c8"
+    },
+    {
+      "slide": 9,
+      "asset": "assets\\code\\rag_support.png",
+      "embedded_bytes_match": true,
+      "sha256": "c4962694fddae4759e720fd18f6434c06fcad5d362bbeb5ee3a0a1f01846ce3b"
+    },
+    {
+      "slide": 10,
+      "asset": "assets\\workspace_desktop_live.jpg",
+      "embedded_bytes_match": true,
+      "sha256": "486fe736ea646c89ca5c922791f384e6c9a8851aebdf4a364f060cc9e53a379a"
+    },
+    {
+      "slide": 10,
+      "asset": "assets\\workspace_mobile_drawer_live.jpg",
+      "embedded_bytes_match": true,
+      "sha256": "9193e444e1f539f17911225151edc91a9a09c0b1bc30c3ddea5e54f0ad28ce31"
+    },
+    {
+      "slide": 10,
+      "asset": "assets\\code\\request_guard_wide.png",
+      "embedded_bytes_match": true,
+      "sha256": "d5108e261b830248d0cd803feb73a7c0c54c3c6aaf1aa8e7c6fd74b77607ec38"
+    },
+    {
+      "slide": 11,
+      "asset": "assets\\native_host_crop.png",
+      "embedded_bytes_match": true,
+      "sha256": "b21ee92fd8ec0b1a81a53a357e486e5d742e7586b2427110cc1c1ad4c88994e2"
+    },
+    {
+      "slide": 11,
+      "asset": "assets\\code\\atlas_draw_short.png",
+      "embedded_bytes_match": true,
+      "sha256": "657b8ae8a08cf12def115917769b929396e6e76b8989d99a7a09ae9f62f7304a"
+    },
+    {
+      "slide": 12,
+      "asset": "assets\\code\\session_guard_short.png",
+      "embedded_bytes_match": true,
+      "sha256": "9838d6df448d29177caaf1dcda8d57a7fd427e2653df42a0c98499b7c0796ab3"
+    }
+  ],
+  "checks_do_not_prove": "All financial answers correct; all physical hardware/OS input behavior; measured audio timing.",
+  "package_integrity": {
+    "chart_count": 0,
+    "claim_boundary": "Structural package checks only; no slide text, notes, formulas, chart values, or native PowerPoint execution were inspected.",
+    "finding_count": 0,
+    "findings": [],
+    "notes_parts_skipped": 12,
+    "relationship_part_count": 39,
+    "slide_count": 12,
+    "status": "pass"
+  },
+  "layout_geometry": {
+    "finding_count": 0,
+    "findings": [],
+    "slide_count": 12,
+    "slide_size_in": [
+      10.0,
+      5.625
+    ],
+    "warning_count": 0,
+    "warnings": []
+  }
+}

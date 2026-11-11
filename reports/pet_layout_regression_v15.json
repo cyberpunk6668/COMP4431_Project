@@ -1,0 +1,84 @@
+{
+  "checked_at": "2026-11-11T12:27:14.259559+00:00",
+  "status": "fixed_controlled_and_native_geometry_verified",
+  "native_before_refresh": {
+    "native": true,
+    "panelOpen": true,
+    "renderer": "canvas2d",
+    "petRect": {
+      "x": 255.98959350585938,
+      "y": 807,
+      "width": 200,
+      "height": 200
+    },
+    "panelRect": {
+      "x": 12,
+      "y": 247,
+      "width": 440,
+      "height": 760
+    },
+    "placement": "old-script",
+    "overlap": true,
+    "alphaPixels": 26128,
+    "bluePixels": 18427,
+    "opaqueSampleReceiver": "pet-panel"
+  },
+  "native_observation_method": "Read-only CDP inspection of the already running owned native app at loopback 8017; no input, reload, new app or server changes. No private session data collected.",
+  "fix": "Choose a fully available right/left side before clamping. Prefer above/below when neither horizontal side fits; use a bounded sheet below 480px with a visible close control.",
+  "controlled_after_patch": {
+    "status": "passed",
+    "checks_per_viewport": 15,
+    "placements": [
+      {
+        "width": 320,
+        "panel_placement_check": "narrow_sheet_with_visible_close"
+      },
+      {
+        "width": 390,
+        "panel_placement_check": "narrow_sheet_with_visible_close"
+      },
+      {
+        "width": 1440,
+        "panel_placement_check": "left_pet_right_panel_no_overlap"
+      }
+    ],
+    "report": "reports/pet_browser_v15.json"
+  },
+  "native_after_refresh": {
+    "checked_at": "2026-11-11T12:38:35.859362+00:00",
+    "native": true,
+    "panelOpen": true,
+    "renderer": "canvas2d",
+    "petRect": {
+      "x": 255.98959350585938,
+      "y": 807,
+      "width": 200,
+      "height": 200,
+      "top": 807,
+      "right": 455.9895935058594,
+      "bottom": 1007,
+      "left": 255.98959350585938
+    },
+    "panelRect": {
+      "x": 471.9895935058594,
+      "y": 247,
+      "width": 440,
+      "height": 760,
+      "top": 247,
+      "right": 911.9895935058594,
+      "bottom": 1007,
+      "left": 471.9895935058594
+    },
+    "placement": "right",
+    "overlap": false,
+    "viewport": {
+      "width": 1708,
+      "height": 1020,
+      "dpr": 1.5
+    },
+    "method": "Read-only CDP geometry of parent-owned packaged Electron after loading fixed web source. No screen background or message content read."
+  },
+  "new_model_calls": 0,
+  "new_broker_requests": 0,
+  "executable_rebuild_required": false
+}

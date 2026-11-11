@@ -1,0 +1,3 @@
+        rank = lambda scores: {index: position+1 for position, index in enumerate(sorted(scores, key=lambda i: (-scores[i], self.documents[i]["id"])))}
+        term_ranks, char_ranks = rank(bm25), rank(char)
+        fused = {i: sum(1/(60+ranks[i]) for ranks in (term_ranks, char_ranks) if i in ranks) for i in set(bm25) | set(char)}

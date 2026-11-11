@@ -1,0 +1,43 @@
+{
+  "slide": 6,
+  "title": "Shared conversation, explicit control",
+  "prompt": "# Codex PPT Slide Image Prompt\n\n## Canvas\n{\n  \"type\": \"16:9 full-slide PowerPoint image\",\n  \"language\": \"English\",\n  \"slide_number\": 6,\n  \"render_slide_number\": false\n}\n\n## Deck Goal\nA six-slide COMP4431 project presentation, four speakers, 210 seconds. Explain the actual FinPilot project and technical challenges in RAG, frontend design and the virtual companion.\n\n## Required Background\n{\n  \"deck_context\": {\n    \"source_summary\": \"FinPilot is an English/Chinese finance education chatbot using FastAPI, local calculators, lexical RAG and DeepSeek. Homepage React/TypeScript with GSAP/Motion; workspace native JS/CSS. Current companion uses reused 2D WebP atlases and Canvas2D on web and Electron desktop, explicit shared session over SQLite/SSE.\",\n    \"core_claim\": \"Make financial explanations traceable and usable, with an interactive companion that preserves the same evidence.\",\n    \"factual_limits\": \"Do not claim trained RAG, embeddings, vector database, market prediction, all-React architecture, new 3D avatar, phoneme lip sync or full v15 end-to-end acceptance. Illustrations of interfaces are conceptual diagrams, not screenshots.\"\n  },\n  \"slide_local_context\": {\n    \"background\": \"Users explicitly connect one SID. SSE notifies after persistence and clients re-read SQLite-backed authoritative state. Generation and sequence checks ignore late results. Mechanism is implemented but current v15 native/cloud acceptance has limitations; do not show verified badges or claim all tests pass.\"\n  }\n}\n\n## Global Style\n{\n  \"name\": \"复古扁平插画风\",\n  \"visual_direction\": \"Retro flat editorial illustration. Cream subtly grained paper, consistent charcoal monoline outlines, chunky dark-slate retro serif headlines, geometric sans-serif body. Flat fills. Match sample typography and palette.\",\n  \"color_palette\": {\n    \"background\": \"#F5F3E8\",\n    \"text\": \"#34495E\",\n    \"coral\": \"#FF6B6B\",\n    \"mint\": \"#95E1D3\",\n    \"mustard\": \"#F9CA24\",\n    \"orange\": \"#E17055\",\n    \"slateBlue\": \"#6C7A89\"\n  },\n  \"constraints\": \"Spacious 16:9 landscape. Whole slide image including accurate readable text. No 3D, glossy treatment, watermark, page number or unrelated logo. No extra prose outside supplied text. Important text within 4% safe margins. Keep body large enough for classroom projection.\"\n}\n\n## Input Images\n\n- Image 1: F:/桌面/COMP4431_Project/output/presentations/FinPilot_3m30_retro/origin_image/slide_02.png — internally reviewed sample style reference, accepted under explicit user confirmation waiver; Match palette, typography, outline weight, paper texture and density only. Do not copy the diagram or its content.\n\n\n## Slide\n{\n  \"number\": 6,\n  \"title\": \"Shared conversation, explicit control\",\n  \"role\": \"synchronization and closing\",\n  \"intent\": \"Show explicit session selection, persisted state and stale-result filtering, then close the talk.\"\n}\n\n## Text\n{\n  \"title\": \"Shared conversation, explicit control\",\n  \"key_points\": [\n    \"Web workspace\",\n    \"Choose one session\",\n    \"SQLite + SSE\",\n    \"Save, notify, reload\",\n    \"Desktop companion\",\n    \"Reject stale responses\",\n    \"One saved conversation with the same evidence.\"\n  ],\n  \"speaker_focus\": null\n}\n\n## Layout\n{\n  \"composition\": \"A closing architectural postcard different from sample. At center a large shared conversation ledger with SQLite + SSE and Save, notify, reload underneath. To its left a web browser window with heading Web workspace and caption Choose one session. To right a desktop chat panel with heading Desktop companion and caption Reject stale responses. Simple orderly links connect windows to ledger. No robot or whale portrait repeated. Bottom generous bold closing sentence as standalone text, not a badge. Medium-large two-line title on top.\"\n}\n\n## Visual Elements\n{\n  \"main_visual\": \"Flat web window, saved conversation ledger, desktop chat panel; small fresh-message envelopes and one discarded faded stale-message envelope to illustrate consistency.\"\n}\n\n## Constraints\n[\n  \"Visible wording limited to exact key points. No cloud-acceptance pass marks. Keep a quiet, confident ending with readable diagram.\"\n]\n\n## Style Reference Rule\nUse Image 1 as the approved sample-slide style reference. Match its palette, typography mood, density, texture, and overall visual identity. Do not copy its exact layout unless this slide's layout explicitly asks for it.\n\n## Input Image Handling Rules\nFor any input image marked as a strict input asset, include it visibly and preserve its content. Do not redraw, replace, relabel, or invent a similar figure. Scale and crop only as needed for composition while keeping the important labels, arrows, data, and relationships recognizable.\n\n## Universal Constraints\n- The final image itself must contain the title and key points.\n- Render Chinese text exactly and legibly; avoid garbled characters.\n- Keep the confirmed deck style consistent while varying layout by slide role.\n- No watermark, unrelated logo, or extra slide number.\n",
+  "out": "slide_06.png",
+  "input_images": [
+    {
+      "path": "F:/桌面/COMP4431_Project/output/presentations/FinPilot_3m30_retro/origin_image/slide_02.png",
+      "role": "internally reviewed sample style reference, accepted under explicit user confirmation waiver",
+      "fidelity": "Match palette, typography, outline weight, paper texture and density only. Do not copy the diagram or its content."
+    }
+  ],
+  "requires_context_images": true,
+  "expected_backend": "built-in image tool",
+  "sample_generation_method": {
+    "backend_used": "built-in image tool",
+    "tool_name": "image_gen",
+    "mode": "generate",
+    "prompt_source": "F:/桌面/COMP4431_Project/output/presentations/FinPilot_3m30_retro/sample_prompt.txt",
+    "model": "built-in default; exact model not exposed",
+    "size": "16:9 landscape requested; sample actual 1672x941",
+    "quality": "built-in default; not exposed",
+    "approved_sample_path": "F:/桌面/COMP4431_Project/output/presentations/FinPilot_3m30_retro/origin_image/slide_02.png",
+    "input_context_preparation": "Use view_image for every local input before image_gen; pass local paths as referenced_image_paths. The sample was generated from text only.",
+    "handoff_rule": "Use image_gen generate with referenced input images when available. Never substitute local rendering. User waived sample approval; parent has visually checked style reference."
+  },
+  "generation_contract": {
+    "must_use_selected_image_backend": true,
+    "must_match_sample_generation_method": true,
+    "forbidden_final_image_methods": [
+      "local drawing/rendering scripts",
+      "Pillow-generated slides",
+      "SVG/HTML/CSS/canvas screenshots",
+      "python-pptx/PptxGenJS/native PPT layout screenshots",
+      "manually composited text/image overlays"
+    ],
+    "must_return": [
+      "backend_used",
+      "selected_source",
+      "qa_note"
+    ]
+  }
+}

@@ -1,0 +1,132 @@
+[
+  {
+    "title": "FinPilot",
+    "speaker": 1,
+    "seconds": 20,
+    "text": "Hello everyone. Our project is FinPilot, a bilingual chatbot for financial education. We focused on three connected features: RAG for traceable explanations, a clear frontend, and an interactive companion on the web and desktop.",
+    "zh": "介绍项目定位和三个技术重点。",
+    "start": 0,
+    "end": 20,
+    "words": 34
+  },
+  {
+    "title": "The actual English workspace",
+    "speaker": 1,
+    "seconds": 20,
+    "text": "This is the actual English workspace. Users can learn financial concepts, run planning calculations, and use browser-supported voice. Local functions handle the numbers, while the language model explains the results. Let us start with the RAG pipeline.",
+    "zh": "指向真实英文工作台，概括学习、计算和语音；交给第二位。",
+    "start": 20,
+    "end": 40,
+    "words": 37
+  },
+  {
+    "title": "RAG connects data with expert knowledge",
+    "speaker": 2,
+    "seconds": 20,
+    "text": "Our RAG pipeline combines local evidence with reviewed expert knowledge. Saved analyses provide values, timestamps, and data limitations. Fourteen expert knowledge blocks explain financial concepts. The answer keeps local references separate from expert citations.",
+    "zh": "按本地数据、专家知识、带来源回答的顺序讲。",
+    "start": 40,
+    "end": 60,
+    "words": 34
+  },
+  {
+    "title": "Two routes, one ranking",
+    "speaker": 2,
+    "seconds": 16,
+    "text": "We use BM25 and Chinese character n-grams, then combine their rankings with RRF. The colored code shows this step. The small held-out evaluation measures retrieval, rather than answer accuracy.",
+    "zh": "指出蓝紫色排名融合代码与指标边界，不读完整公式。",
+    "start": 60,
+    "end": 76,
+    "words": 29
+  },
+  {
+    "title": "Reliable grounding needs more than retrieval",
+    "speaker": 2,
+    "seconds": 12,
+    "text": "Two challenges are bilingual wording and unsupported claims. Domain aliases improve matching. Topic-aware citation checks reject sources that fail to support a recognized claim.",
+    "zh": "概括两个挑战及对应处理，接着切具体证据。",
+    "start": 76,
+    "end": 88,
+    "words": 24
+  },
+  {
+    "title": "Missing values remain unavailable",
+    "speaker": 2,
+    "seconds": 12,
+    "text": "Here, missing open interest remains null. It never becomes zero. We allow one repair, but these checks cannot guarantee correctness. Next is the frontend.",
+    "zh": "指真实报告中的 null 和右侧校验，保留正确性边界；交给第三位。",
+    "start": 88,
+    "end": 100,
+    "words": 24
+  },
+  {
+    "title": "Frontend design keeps complex tasks usable",
+    "speaker": 3,
+    "seconds": 16,
+    "text": "Our React homepage introduces the product, while the JavaScript workspace handles real tasks. We designed the interface around readable information, resilient motion, and safe asynchronous updates.",
+    "zh": "准确区分 React 首页和原生 JavaScript 工作台。",
+    "start": 100,
+    "end": 116,
+    "words": 26
+  },
+  {
+    "title": "Real English views, responsive controls",
+    "speaker": 3,
+    "seconds": 19,
+    "text": "These are actual English calculator forms. On narrow screens, headings and controls adapt to the available space. Request IDs prevent old calculation responses from replacing newer input.",
+    "zh": "对照两个表单，再指代码中请求序号的比较。",
+    "start": 116,
+    "end": 135,
+    "words": 27
+  },
+  {
+    "title": "Motion with a safe fallback",
+    "speaker": 3,
+    "seconds": 20,
+    "text": "Animations also need a reliable fallback. This code keeps a poster behind the video and falls back after two point five seconds. Users can reduce motion. These choices keep the interface usable. Next, we explain our companion.",
+    "zh": "分别指超时和常驻海报两段代码，说明减少动态；交给第四位。",
+    "start": 135,
+    "end": 155,
+    "words": 37
+  },
+  {
+    "title": "One companion, on the web and desktop",
+    "speaker": 4,
+    "seconds": 14,
+    "text": "Our companion uses Canvas2D and WebP atlases. Its states follow user actions. Transparent windows need alpha-based hit regions, dragging, and panel placement.",
+    "zh": "概括图集、操作状态和透明窗口交互挑战。",
+    "start": 155,
+    "end": 169,
+    "words": 22
+  },
+  {
+    "title": "One shared 2D renderer",
+    "speaker": 4,
+    "seconds": 15,
+    "text": "The English browser companion and Electron app share this renderer. Frame bounds, lazy loading, visibility pause, and static fallback manage animation cost.",
+    "zh": "明确截图来自浏览器，Electron 共用渲染器；指 drawImage 与帧坐标。",
+    "start": 169,
+    "end": 184,
+    "words": 22
+  },
+  {
+    "title": "Shared conversation, explicit control",
+    "speaker": 4,
+    "seconds": 12,
+    "text": "Users explicitly select a conversation. The server saves messages, sends an SSE notification, and clients reload the record.",
+    "zh": "按明确选择会话、保存、通知、重读的顺序讲同步。",
+    "start": 184,
+    "end": 196,
+    "words": 18
+  },
+  {
+    "title": "Guard stale responses, preserve the evidence",
+    "speaker": 4,
+    "seconds": 14,
+    "text": "This guard rejects stale responses. The saved cloud run passed two turns, with physical input limits. The conversation keeps the same evidence.",
+    "zh": "指过期响应判断及验收记录，保留物理输入限制并收尾。",
+    "start": 196,
+    "end": 210,
+    "words": 22
+  }
+]

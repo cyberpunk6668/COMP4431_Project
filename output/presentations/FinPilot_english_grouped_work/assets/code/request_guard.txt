@@ -1,0 +1,1 @@
+  try { const result=await api('/api/calculate',{ method:'POST',body:JSON.stringify(body) });if(sequence===state.calculationSequence)showCalculation(result); }

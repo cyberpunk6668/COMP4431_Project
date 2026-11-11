@@ -11,7 +11,7 @@ from typing import Literal
 import hashlib
 
 from fastapi import FastAPI, HTTPException, Request
-from fastapi.responses import JSONResponse, FileResponse
+from fastapi.responses import JSONResponse, FileResponse, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, ConfigDict, Field, ValidationError, field_validator
 
@@ -31,6 +31,7 @@ from app.history_chat import HistoryChat, describe_history
 from app.expert_knowledge import ExpertKnowledge
 from app.service import ChatService, _FINANCE_CONTEXT, _GENERAL_TASK, _follow_up
 from app.storage import Store
+from app.companion import CompanionBus, ConnectionInput, ActivityInput, StaleConnection, ActivityLimit, encode_event
 
 
 class ChatRequest(BaseModel):
@@ -175,16 +176,20 @@ def create_app(settings: Settings | None = None, *, options_provider=None, histo
     locks = [asyncio.Lock() for _ in range(64)]
     recent = defaultdict(deque)
     refreshing_sessions = set()
+    companion = CompanionBus()
 
     @asynccontextmanager
     async def lifespan(app):
         yield
+        companion.close()
         await local_provider.close()
 
     app = FastAPI(title="FinPilot API", version=__version__, description="Local financial education and read-only IBKR options analysis.", docs_url=None, redoc_url=None, lifespan=lifespan)
     app.state.store, app.state.service, app.state.options = store, service, options
     app.state.options_chat = option_chat
     app.state.history_chat = history_chat
+    app.state.companion = companion
+    app.state.project_help = service.project_help
 
     @app.middleware("http")
     async def local_security(request: Request, call_next):
@@ -224,7 +229,7 @@ def create_app(settings: Settings | None = None, *, options_provider=None, histo
 
     @app.get("/api/health")
     def health():
-        return dict(status="ok", mode="deepseek" if config.online else "offline", model=config.model,
+        return dict(application="FinPilot", status="ok", mode="deepseek" if config.online else "offline", model=config.model,
                     knowledge_documents=len(retriever.documents), version=__version__,
                     provider_verified=False, local_model=local_provider.status(), avatar_modes=["3d", "2d"],
                     note="Mode indicates configuration, not a live provider connectivity test.")
@@ -314,6 +319,61 @@ def create_app(settings: Settings | None = None, *, options_provider=None, histo
             raise HTTPException(404, {"code": "analysis_not_found", "message": "The saved option analysis is unavailable. Select or collect another report."})
         return result
 
+    @app.get("/api/companion/connection")
+    async def companion_connection():
+        companion.expire_activities()
+        return companion.connection()
+
+    @app.put("/api/companion/connection")
+    async def connect_companion(body: ConnectionInput):
+        sid = str(body.session_id) if body.session_id is not None else None
+        # Sharing is an explicit selection, not a scan of recent chats. These
+        # synchronous reads and the memory update have no await between them;
+        # do not wait behind a potentially long model/refresh conversation lock.
+        if sid is not None:
+            require_session(sid)
+        try:
+            return companion.connect(sid, language=body.language, engine=body.engine,
+                                     expected_generation=body.expected_generation)
+        except StaleConnection as error:
+            raise HTTPException(409, {"code": str(error), "message": "The shared conversation changed. Reload its connection before updating."}) from None
+
+    @app.post("/api/companion/activity")
+    async def companion_activity(body: ActivityInput):
+        try:
+            companion.frontend_activity(body)
+        except StaleConnection as error:
+            raise HTTPException(409, {"code": str(error), "message": "This activity belongs to an earlier shared conversation."}) from None
+        except ActivityLimit as error:
+            raise HTTPException(429, {"code": str(error), "message": "Too many companion activities are pending."}) from None
+        return {"accepted": True, **companion.connection()}
+
+    @app.get("/api/companion/events")
+    async def companion_events(request: Request, surface: Literal["desktop", "workspace"] = "workspace"):
+        try:
+            subscriber = companion.subscribe(surface)
+        except ActivityLimit as error:
+            raise HTTPException(429, {"code": str(error), "message": "Too many companion event streams are open."}) from None
+
+        async def events():
+            try:
+                yield encode_event(companion.reset())
+                while not companion.closed and not await request.is_disconnected():
+                    companion.expire_activities()
+                    try:
+                        event = await asyncio.wait_for(subscriber.queue.get(), timeout=15)
+                    except TimeoutError:
+                        yield ": heartbeat\n\n"
+                        continue
+                    if event is None:
+                        break
+                    yield encode_event(event)
+            finally:
+                companion.unsubscribe(subscriber)
+
+        return StreamingResponse(events(), media_type="text/event-stream",
+                                 headers={"Cache-Control": "no-store", "X-Accel-Buffering": "no"})
+
     @app.get("/api/sessions/{sid}")
     def get_session(sid: str):
         return require_session(sid)
@@ -325,6 +385,7 @@ def create_app(settings: Settings | None = None, *, options_provider=None, histo
             record = require_analysis(body.analysis_id) if body.analysis_id is not None else None
             analysis_id = str(body.analysis_id) if body.analysis_id is not None else None
             store.set_active_analysis(sid, analysis_id)
+            companion.notify("analysis.changed", sid, analysis_id=analysis_id)
             return {"active_analysis_id": analysis_id,
                     "active_analysis": describe_saved_analysis(record) if record is not None else None}
 
@@ -333,6 +394,8 @@ def create_app(settings: Settings | None = None, *, options_provider=None, histo
         if sid in refreshing_sessions:
             raise HTTPException(409, {"code": "analysis_refresh_busy", "message": "This conversation is already refreshing. Wait for its result."})
         refreshing_sessions.add(sid)
+        operation = None
+        operation_status = "failed"
         try:
             async with locks[hash(sid) % len(locks)]:
                 session = require_session(sid)
@@ -342,6 +405,7 @@ def create_app(settings: Settings | None = None, *, options_provider=None, histo
                 previous = require_analysis(expected_id)
                 if previous.get("analysis_kind") == "historical_options":
                     raise HTTPException(422, {"code": "historical_refresh_requires_new_dataset", "message": "This is a fixed historical review. Import or fetch another historical dataset; it cannot be refreshed as live quotes."})
+                operation = companion.start_operation(sid, "refresh")
                 try:
                     collected = await capture_refresh(options, previous, body.language)
                 except IBKROptionsError as error:
@@ -354,6 +418,7 @@ def create_app(settings: Settings | None = None, *, options_provider=None, histo
                     raise HTTPException(404, "Session not found") from None
                 except ValueError:
                     raise HTTPException(409, {"code": "analysis_refresh_conflict", "message": "The attached analysis changed during collection. Its existing records were preserved."}) from None
+                companion.notify("analysis.changed", sid, analysis_id=new_id)
                 current = require_analysis(new_id)
                 user_message = ("刷新这批期权分析，并用白话解释前后变化、数据时间和判断依据。" if body.language == "zh"
                                 else "Refresh this options analysis and explain what changed in plain language, with data times and evidence.")
@@ -366,10 +431,13 @@ def create_app(settings: Settings | None = None, *, options_provider=None, histo
                     result = await fallback.answer(user_message, [], body.language, "deepseek", current)
                     result["warning"] = "options_answer_unavailable"
                 store.append_turn(sid, user_message, result)
+                companion.notify("session.changed", sid)
+                operation_status = "completed"
                 return {"session_id": sid, "user_message": user_message, "refreshed": True, **result,
                         "active_analysis": describe_analysis(current, body.language),
                         "analysis_history": session_analysis_history(sid, new_id, body.language)}
         finally:
+            companion.finish_operation(operation, operation_status)
             refreshing_sessions.discard(sid)
 
     @app.delete("/api/sessions/{sid}")
@@ -377,6 +445,7 @@ def create_app(settings: Settings | None = None, *, options_provider=None, histo
         async with locks[hash(sid) % len(locks)]:
             if not store.delete(sid):
                 raise HTTPException(404, "Session not found")
+            companion.notify("session.deleted", sid)
         return {"deleted": True}
 
     @app.get("/api/sessions/{sid}/export")
@@ -508,12 +577,25 @@ def create_app(settings: Settings | None = None, *, options_provider=None, histo
                 record = require_analysis(session["active_analysis_id"])
             if explicit_analysis:
                 store.set_active_analysis(sid, str(body.analysis_id) if body.analysis_id is not None else None)
-            if record is not None and uses_analysis_context(body.message):
-                selected_chat = history_chat if record.get("analysis_kind") == "historical_options" else option_chat
-                result = await selected_chat.answer(body.message, session["messages"], body.language, body.engine, record)
-            else:
-                result = await service.answer(body.message, session["messages"], body.language, body.engine)
-            store.append_turn(sid, body.message, result)
+                companion.notify("analysis.changed", sid, analysis_id=str(body.analysis_id) if body.analysis_id is not None else None)
+            operation = companion.start_operation(sid, "chat")
+            operation_status = "failed"
+            try:
+                # Product usage questions take precedence over a bound market
+                # report. They never clear/rebind the report or call a broker.
+                help_context = service.project_help.resolve(body.message,session["messages"],body.language)
+                if help_context is not None:
+                    result = await service.answer(body.message,session["messages"],body.language,body.engine,project_context=help_context)
+                elif record is not None and uses_analysis_context(body.message):
+                    selected_chat = history_chat if record.get("analysis_kind") == "historical_options" else option_chat
+                    result = await selected_chat.answer(body.message, session["messages"], body.language, body.engine, record)
+                else:
+                    result = await service.answer(body.message, session["messages"], body.language, body.engine)
+                store.append_turn(sid, body.message, result)
+                companion.notify("session.changed", sid)
+                operation_status = "completed"
+            finally:
+                companion.finish_operation(operation, operation_status)
             return {"session_id": sid, **result,
                     "active_analysis": describe_saved_analysis(record, body.language) if record is not None else None,
                     "analysis_history": session_analysis_history(sid, record["analysis_id"] if record is not None else None, body.language)}
@@ -531,6 +613,37 @@ def create_app(settings: Settings | None = None, *, options_provider=None, histo
     @app.get("/demo", include_in_schema=False)
     def innovation_demo():
         return FileResponse(ROOT / "web" / "demo.html")
+
+    @app.get("/pet", include_in_schema=False)
+    def desktop_pet():
+        return FileResponse(ROOT / "web" / "pet.html")
+
+    @app.get("/help", include_in_schema=False)
+    def project_manual_page():
+        return FileResponse(ROOT / "web" / "help.html")
+
+    @app.get("/api/project-help")
+    def project_manual(language: Literal["zh","en"] = "zh"):
+        manual = service.project_help
+        topics = manual.catalogue(language=language)
+        sample = topics[0] if topics else {}
+        return {"manual_version":sample.get("manual_version","16.0"),"current_version":16,"topics":topics}
+
+    @app.get("/api/project-help/search")
+    def search_project_manual(q: str = "", language: Literal["zh","en"] = "zh", limit: int = 4):
+        if not 1 <= len(q.strip()) <= 500 or not 1 <= limit <= 6:
+            raise HTTPException(422,"Use a query of 1–500 characters and a limit of 1–6")
+        if re.search(r"\bsk-[a-zA-Z0-9_-]{16,}",q):
+            raise HTTPException(422,"Remove credentials before searching the public manual")
+        topics = service.project_help.search(q,language=language,limit=limit)
+        return {"manual_version":topics[0].get("manual_version","16.0") if topics else "16.0","topics":topics}
+
+    @app.get("/api/project-help/topics/{topic_id}")
+    def project_manual_topic(topic_id: str, language: Literal["zh","en"] = "zh"):
+        topic = next((entry for entry in service.project_help.catalogue(language=language) if entry["id"]==topic_id),None)
+        if topic is None:
+            raise HTTPException(404,"Unknown project manual topic")
+        return topic
 
     @app.get("/docs", include_in_schema=False)
     def api_documentation():

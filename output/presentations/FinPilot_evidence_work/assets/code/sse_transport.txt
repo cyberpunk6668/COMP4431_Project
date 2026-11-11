@@ -1,0 +1,10 @@
+    function openEvents() {
+      if (destroyed) return;
+      source = new EventSource(`/api/companion/events?surface=${surface}`);
+      for (const name of ['reset','connection.changed','activity','session.changed','analysis.changed','session.deleted']) source.addEventListener(name,eventReceived);
+      source.onopen = () => {
+        online = true; notify('onStatus',{connected:true,error:null});
+        // Reconnection always reconciles the explicit binding, never scans chats.
+        readConnection().then(queueSync).catch(error => notify('onStatus',{connected:true,error:error.message}));
+      };
+      source.onerror = () => { online = false; notify('onStatus',{connected:false,error:'connection_lost'}); };

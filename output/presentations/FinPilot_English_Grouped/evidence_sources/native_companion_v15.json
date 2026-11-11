@@ -1,0 +1,49 @@
+{
+  "checked_at": "2026-11-11T12:49:59.523188+00:00",
+  "status": "passed_with_manual_hardware_limits",
+  "scope": "Windows packaged Electron native contracts plus separate actual-input observation. This report does not convert simulated cursor/drag into physical-mouse proof.",
+  "environment": {
+    "os": "Windows x64",
+    "monitors_observed": 1,
+    "scale_factors": [
+      1.5
+    ]
+  },
+  "native_instrumentation": {
+    "report": "reports/native_instrumentation_v15.json",
+    "status": "passed_instrumented",
+    "checks": 9,
+    "initial_topmost_before_explicit_probe": true,
+    "shown_visible": true,
+    "topmost_setter_probe_is_intervention": true,
+    "focus_suppressed": true,
+    "cursor_and_drag_simulated": true
+  },
+  "layout_fix": {
+    "report": "reports/pet_layout_regression_v15.json",
+    "native_after_reload_no_overlap": true
+  },
+  "actual_input_observation": {
+    "tool": "@oai/sky SendInput to owned plain underlay only",
+    "underlay_button_before": 0,
+    "underlay_button_after": 1,
+    "model_or_broker_calls": 0,
+    "evidence": "Interaction observed inline during the active task; no desktop screenshot copied into submission.",
+    "limit": "Pet OS visibility/topmost was not sampled simultaneously, so this counter change alone is NOT certified as physical click-through of a visible pet."
+  },
+  "launcher": {
+    "script": "start-desktop.ps1",
+    "desktop_gui_window_style": "Normal",
+    "python_helper_window_style": "Hidden",
+    "reason": "Visible pet was explicitly requested; avoid SW_HIDE overriding the first showInactive. No long-running service is terminated by the launcher."
+  },
+  "new_model_calls": 0,
+  "new_broker_requests": 0,
+  "not_certified": [
+    "Physical pointer drag/drop and alpha-boundary hit accuracy while the visible overlay covers a controlled window.",
+    "Physical opening and recovery through the Windows tray menu; actual Tray callbacks are instrumented.",
+    "A second physical monitor, other hardware DPI values, other Windows versions, and a physical mobile device."
+  ],
+  "no_screen_capture_capability_added_to_product": true,
+  "interpretation": "Implemented native controls are covered by actual-process instrumentation and bounded browser input. The outstanding physical/hardware checks are explicit manual acceptance limits, not passes."
+}

@@ -1,0 +1,56 @@
+{
+  "checked_at": "2026-11-11T12:50:51.970Z",
+  "status": "failed",
+  "phase": "one_python_model_verification",
+  "scope": "Owned isolated backend :8020 and packaged Electron :9438; one Python two-surface real-model verifier run. Focus methods are suppressed by this harness only; native mouse/tray acceptance is separate.",
+  "no_financial_response_mocking": true,
+  "automatic_model_retries": 0,
+  "new_broker_requests": 0,
+  "model_budget": {
+    "python_check_runs": 1,
+    "answer_turns": 2,
+    "maximum_generations": 4
+  },
+  "model_test_started": true,
+  "normal_user_backend_or_database_touched": false,
+  "native_focus_suppression": {
+    "enabled": true,
+    "packaged": true,
+    "version": "15.0.0",
+    "existing_window_count": 0,
+    "scope": "Only focus/blur overridden in this owned process. showInactive, real renderers, APIs and model responses unchanged."
+  },
+  "cleanup": {
+    "electron_closed": true,
+    "backend_stdin_closed": true,
+    "backend_exit": {
+      "exited": true,
+      "code": 0,
+      "signal": null
+    },
+    "owned_ports_closed": true
+  },
+  "audit_directory": "tmp/pet-cloud-v15/run-CiSyN7",
+  "backend_serving_pid": 65776,
+  "backend_launcher_pid": 68988,
+  "packaged_asar_sha256": "d8f277b7a63413d2ac76a7a73da9b20d3ecedbe6c4bc8b36ea9da59178a0a910",
+  "python_check_exit": {
+    "exited": true,
+    "code": 1,
+    "signal": null
+  },
+  "python_summary": {
+    "status": "failed",
+    "phase": "turn_1_workspace",
+    "report": "F:\\桌面\\COMP4431_Project\\reports\\pet_cloud_v15-20261111T125053788251Z.json",
+    "counters": {
+      "chat_http_requests": 1,
+      "confirmed_deepseek_replies": 0
+    },
+    "error": "A real validated DeepSeek reply is required"
+  },
+  "error": "The single Python verification failed; see its retained report. No automatic retry performed.",
+  "elapsed_seconds": 13,
+  "logs_retained_in_tmp": true,
+  "normal_user_processes_killed": false
+}

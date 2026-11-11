@@ -1,0 +1,174 @@
+{
+  "checked_at": "2026-11-11T12:50:53.788251+00:00",
+  "status": "failed",
+  "phase": "turn_1_workspace",
+  "scope": "Actual Edge workspace + actual packaged Electron renderer over loopback to real DeepSeek, using archived IBKR bars.",
+  "ui_input": "Playwright renderer input; native mouse/tray checks are a separate report.",
+  "no_financial_response_mocking": true,
+  "new_broker_requests": 0,
+  "automatic_script_retries": 0,
+  "model_budget": {
+    "answer_turns": 2,
+    "maximum_generations": 4,
+    "maximum_schema_repairs_per_answer": 1
+  },
+  "count_visibility": "Generation/repair counts are server-reported. Only script-owned turns counted; unrelated manual interaction is excluded.",
+  "counters": {
+    "chat_http_requests": 1,
+    "confirmed_deepseek_replies": 0
+  },
+  "turns": [],
+  "checks": [
+    "startup_animation_connection_and_sync_do_not_generate"
+  ],
+  "screenshots": [],
+  "questions": [
+    "这份历史报告中的未平仓量为什么是缺失？只说明这类历史接口提供哪些字段，以及缺失是否等于零，不讨论走势或下一步操作。",
+    "接着解释这批历史样本的看跌成交占比。它能说明现在市场看空吗？只说明这批历史样本的局限，不补充操作建议。"
+  ],
+  "source_sha256": {
+    "app/history_chat.py": "4777a2d615176774c060a0a93ae41ba9c9764f197d08f19bc115b9ab86dc5af6",
+    "app/options_claims.py": "92635137fde703a998086e7dc75ad3cc09e710042f2fb470cb686f763cd04048",
+    "app/expert_grounding.py": "78dca1e838d01cb47c59f308452ed43b2643c29b16bcdf212b720cd329f7dc49",
+    "web/companion/client.js": "d18bf1f7a16dc164d6f55301fffb3f3c7232a1a2bdb9cf5495b25b6379cf5135",
+    "web/companion/messages.js": "625395a42fd4ce33c944a2e43720b667eeeeb9e99f68544d63f52bbde7a3c7f8",
+    "web/pet.js": "9f6dfcaf1064a90bc85f7d6f35da51965b92f76f7a5e53c9918ac3c3fe8d9d79",
+    "web/app.js": "f28b8addef85474aa5dcb8ad5a7024fda232375f497e60abf3c9528b82cf2bb2"
+  },
+  "native_focus_suppressed_by_test_harness": true,
+  "archive": {
+    "source": "ibkr_historical",
+    "source_verified_scope": "Returned by configured Gateway only; no independent exchange calibration or complete-session verification",
+    "captured_at": "2026-11-11T07:47:29.966925+00:00",
+    "ingested_at": "2026-11-11T12:50:54.596285+00:00",
+    "bar_basis": "derived_from_intraday_trades",
+    "period": {
+      "start": "2026-11-06",
+      "end": "2026-11-10"
+    },
+    "dates": [
+      "2026-11-06",
+      "2026-11-09",
+      "2026-11-10"
+    ],
+    "request": {
+      "symbol": "AAPL",
+      "expiry": "2026-11-13",
+      "strike": 350.0,
+      "calendar_days": 5,
+      "bar_size": "1 hour",
+      "what_to_show": "TRADES",
+      "use_rth": true,
+      "keep_up_to_date": false,
+      "start_inclusive_utc": "2026-11-06T05:00:00+00:00",
+      "end_exclusive_utc": "2026-11-11T05:00:00+00:00"
+    },
+    "aggregation": {
+      "kind": "derived_daily",
+      "native_eod": false,
+      "partial_bars": true,
+      "full_session_verified": false,
+      "timezone": "America/New_York"
+    },
+    "daily": [
+      {
+        "date": "2026-11-06",
+        "received_contracts": 2,
+        "common_contracts": 2,
+        "volume_total": 7386.0,
+        "put_volume_share": 0.11873815326292987,
+        "oi_total": null,
+        "put_oi_share": null,
+        "oi_asof_date": null
+      },
+      {
+        "date": "2026-11-09",
+        "received_contracts": 2,
+        "common_contracts": 2,
+        "volume_total": 12029.0,
+        "put_volume_share": 0.3310333361044143,
+        "oi_total": null,
+        "put_oi_share": null,
+        "oi_asof_date": null
+      },
+      {
+        "date": "2026-11-10",
+        "received_contracts": 2,
+        "common_contracts": 2,
+        "volume_total": 12835.0,
+        "put_volume_share": 0.26443319049474096,
+        "oi_total": null,
+        "put_oi_share": null,
+        "oi_asof_date": null
+      }
+    ],
+    "comparable_price_evidence_ids": [
+      "h.contract.0.trade_close",
+      "h.contract.1.trade_close",
+      "h.underlying.trade_close"
+    ],
+    "local_changes": [
+      {
+        "id": "h.change.volume_total",
+        "before": 7386.0,
+        "after": 12835.0,
+        "delta": null,
+        "delta_unit": "contracts",
+        "unit": "contracts",
+        "status": "incomparable",
+        "reason": "historical_bar_coverage_unverified",
+        "direction": "unavailable"
+      },
+      {
+        "id": "h.change.put_volume_share",
+        "before": 0.11873815326292987,
+        "after": 0.26443319049474096,
+        "delta": null,
+        "delta_unit": "percentage_points",
+        "unit": "fraction",
+        "status": "incomparable",
+        "reason": "historical_bar_coverage_unverified",
+        "direction": "unavailable"
+      },
+      {
+        "id": "h.change.oi_total",
+        "before": null,
+        "after": null,
+        "delta": null,
+        "delta_unit": "contracts",
+        "unit": "contracts",
+        "status": "incomparable",
+        "reason": "missing_value_or_oi_asof",
+        "direction": "unavailable"
+      },
+      {
+        "id": "h.change.put_oi_share",
+        "before": null,
+        "after": null,
+        "delta": null,
+        "delta_unit": "percentage_points",
+        "unit": "fraction",
+        "status": "incomparable",
+        "reason": "missing_value_or_oi_asof",
+        "direction": "unavailable"
+      }
+    ],
+    "historical_oi_available": false,
+    "instantaneous_bbo_available": false,
+    "archived_original_capture_history_requests": 3,
+    "this_run_new_broker_requests": 0
+  },
+  "archive_sha256": "08cbf4cbd74bcd35b5905e2b96e95bd83c36b52b9d9326591ef5148719cd9ab1",
+  "received_replies": [
+    {
+      "surface": "workspace",
+      "mode": "offline",
+      "warning": "options_answer_validation_failed",
+      "generation_attempts": 2,
+      "schema_repair_attempts": 1
+    }
+  ],
+  "error": "A real validated DeepSeek reply is required",
+  "prior_explicit_connection_restored": true,
+  "owned_records_retained_in_isolated_test_database": true
+}

@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light"><title>FinPilot · 鲸鱼娘桌宠</title>
+  <link rel="icon" href="/static/favicon.svg"><link rel="stylesheet" href="/static/companion/renderer.css">
+  <link rel="stylesheet" href="/static/companion/messages.css"><link rel="stylesheet" href="/static/pet.css">
+  <script defer src="/static/companion/renderer.js"></script><script defer src="/static/companion/client.js"></script>
+  <script defer src="/static/companion/messages.js"></script><script defer src="/static/pet.js"></script>
+</head>
+<body>
+  <main id="pet-world" aria-label="FinPilot 2D financial companion">
+    <section id="pet-panel" class="pet-panel" aria-labelledby="pet-title" hidden>
+      <header class="pet-panel-header"><div><span class="pet-overline">FINPILOT / COMPANION</span><h1 id="pet-title">小鲸 · 金融知识助手</h1></div><button id="pet-close-panel" type="button" class="pet-icon-button" aria-label="收起聊天">×</button></header>
+      <p id="pet-connection" class="pet-connection" role="status">正在连接本地服务…</p>
+      <div class="pet-preferences"><label>引擎<select id="pet-engine" aria-label="回答引擎"><option value="deepseek">DeepSeek + RAG</option></select></label><button id="pet-language" type="button">EN</button><label class="pet-motion"><input id="pet-reduce" type="checkbox">减少动态</label></div>
+      <div class="pet-tools"><button type="button" id="pet-explain">解释本报告</button><button type="button" data-open="calculator">计算器 ↗</button><button type="button" data-open="history">历史复盘 ↗</button><button type="button" data-open="workspace">完整工作台 ↗</button></div>
+      <div id="pet-analysis"></div>
+      <div id="pet-messages" class="pet-messages" aria-live="polite"><p class="pet-welcome">先问一个问题，或在工作台点击「连接当前会话到桌宠」。只读取你明确连接的会话。</p></div>
+      <p id="pet-request-status" class="pet-request-status" role="status" hidden></p><p id="pet-error" class="pet-error" role="alert" hidden></p>
+      <form id="pet-chat-form"><label class="pet-input-label" for="pet-input">你的问题</label><textarea id="pet-input" rows="2" maxlength="3000" placeholder="问一个问题，或继续解释当前报告…"></textarea><div class="pet-send-row"><small>Enter 发送 · Shift + Enter 换行</small><button id="pet-send" type="submit">发送 ↗</button></div></form>
+      <footer><button id="pet-new" type="button">新建会话</button><button id="pet-disconnect" type="button">断开共享</button><span>仅在发送时调用所选模型</span></footer>
+      <details class="pet-credits"><summary>角色来源与使用范围</summary><p>YunYueSama / codex-deepseek-pet；原设：上善无形，女仆版：ZipZipPipe。非商业课程与个人演示，非 DeepSeek 官方产品。完整许可和改动见项目素材清单。</p></details>
+    </section>
+    <div id="pet-character" tabindex="0" role="button" aria-label="鲸鱼娘：单击互动，双击或回车打开聊天，方向键移动"><div id="pet-stage"></div><span id="pet-state" class="pet-state" role="status">准备就绪</span></div>
+    <div id="pet-toast" class="pet-toast" role="status" hidden></div>
+    <button id="pet-menu-toggle" type="button" class="pet-menu-toggle" aria-label="桌宠菜单" aria-expanded="false">···</button>
+    <nav id="pet-menu" class="pet-menu" aria-label="桌宠控制" hidden><button type="button" id="pet-menu-chat">打开聊天</button><button type="button" id="pet-reset">恢复位置</button><label>大小<select id="pet-size"><option value="150">150px</option><option value="200" selected>200px</option><option value="250">250px</option><option value="300">300px</option></select></label><label>安静散步<input id="pet-roam" type="checkbox"></label><button type="button" id="pet-sleep">休息 / 唤醒</button><button type="button" id="pet-hide">隐藏桌宠（托盘恢复）</button></nav>
+  </main>
+</body></html>

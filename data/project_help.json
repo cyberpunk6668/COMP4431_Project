@@ -1,0 +1,1058 @@
+{
+  "current_version": 16,
+  "manual_version": "16.0",
+  "reviewed_at": "2026-11-11",
+  "scope": "Hand-reviewed public product manual; fixed UI/document provenance hashes only, not arbitrary repository retrieval.",
+  "documents": [
+    {
+      "id": "help.overview",
+      "keywords": [
+        "FinPilot",
+        "项目功能",
+        "使用指南",
+        "getting started",
+        "project guide",
+        "features"
+      ],
+      "source_files": [
+        {
+          "path": "web/index.html",
+          "sha256": "227beb709f099939a52c062d23179ae551b98669a726ad1f993c737b6566bd44"
+        },
+        {
+          "path": "web/demo.html",
+          "sha256": "a74d7e6a8876fa851bab9ac83b9e462117f91d30082a11d6c810746b777fced2"
+        },
+        {
+          "path": "docs/desktop_pet_v15.md",
+          "sha256": "fc995f92b9f44f78368388a8145c6b924ebc6414c606f7983ffc183c649ad9e5"
+        }
+      ],
+      "links": [
+        {
+          "url": "/workspace",
+          "zh": "打开工作台",
+          "en": "Open workspace"
+        },
+        {
+          "url": "/demo",
+          "zh": "三步演示",
+          "en": "Three-step demo"
+        }
+      ],
+      "zh": {
+        "title": "FinPilot 使用起点",
+        "summary": "FinPilot 是面向学习的中英双语金融助手，组合聊天、固定公式计算、期权样本分析、专家依据与 2D 桌宠。",
+        "steps": [
+          "打开工作台，在聊天框输入问题；选择语言与回答引擎，点击发送。",
+          "初次体验可打开三步演示：加载已保存的真实历史样本，查看专家依据，再明确点击 AI 解释。",
+          "需要计算或期权资料时使用侧栏对应入口；每条回答核对实际模式、时间、数值与来源。"
+        ],
+        "restrictions": [
+          "项目不会自动交易、后台轮询行情或保证判断正确。",
+          "普通科学、编程与生活问题也可正常提问；项目使用教程与市场事实是不同来源。",
+          "加载本地档案、播放动画或连接桌宠本身不触发模型调用。"
+        ]
+      },
+      "en": {
+        "title": "Start using FinPilot",
+        "summary": "FinPilot is a bilingual educational finance assistant combining chat, fixed-formula calculators, option-sample analysis, expert evidence and a 2D desktop companion.",
+        "steps": [
+          "Open the workspace, enter a question, choose the language and answer engine, then select Send.",
+          "For a first tour, open the three-step demo: load a saved real historical sample, inspect expert evidence, then explicitly request an AI explanation.",
+          "Use the sidebar for calculators or options. Check the actual mode, timestamps, numbers and sources on each answer."
+        ],
+        "restrictions": [
+          "The project does not place trades, poll quotes in the background or guarantee correct conclusions.",
+          "Ordinary science, programming and daily-life questions remain available; product tutorials are separate from market evidence.",
+          "Loading an archive, playing an animation or connecting the pet does not itself call a model."
+        ]
+      }
+    },
+    {
+      "id": "help.options",
+      "keywords": [
+        "期权分析",
+        "易懂解读",
+        "专业详情",
+        "联合分析",
+        "批量分析",
+        "options analysis",
+        "option analysis",
+        "batch analysis"
+      ],
+      "source_files": [
+        {
+          "path": "web/index.html",
+          "sha256": "227beb709f099939a52c062d23179ae551b98669a726ad1f993c737b6566bd44"
+        },
+        {
+          "path": "web/options.js",
+          "sha256": "0efe5d6630cf62b597fa2421558940dc56cc418f597dc989bc20f785b7aa7e4e"
+        },
+        {
+          "path": "docs/options_analysis_v6.md",
+          "sha256": "48af31252193e5adfa80b51520d5dceb905918b42355d249da9e86da6134730e"
+        }
+      ],
+      "links": [
+        {
+          "url": "/workspace?view=options",
+          "zh": "打开期权分析",
+          "en": "Open options analysis"
+        },
+        {
+          "url": "/workspace?view=history",
+          "zh": "使用历史复盘",
+          "en": "Use historical review"
+        }
+      ],
+      "zh": {
+        "title": "使用期权分析",
+        "summary": "从所选合约样本出发，先核对数据时间与覆盖，再看分布、可比性和冲突线索。",
+        "steps": [
+          "打开侧栏「期权分析」，填写公司或基金代码；到期日从该标的实际期权链读取。",
+          "可选「把几个标的或日期放在一起比较」，每行一组，最多 4 组；在高级设置调整范围和请求行情类型。",
+          "点击「帮我读懂这批期权」后先看「易懂解读」，需要时展开「专业详情」和诊断；要继续聊天，点击「针对这批数据追问」并发送问题。"
+        ],
+        "restrictions": [
+          "网关采集需要可用 IB Gateway/API 连接与相应行情权限；请求实时不代表实际收到实时。",
+          "勾选「让 AI 补充解释」才会把汇总指标发给模型；需遵守行情许可。",
+          "样本成交或持仓比例不是多空人数，不能单独证明全市场情绪或预测涨跌；缺失报价不会补造。"
+        ]
+      },
+      "en": {
+        "title": "Use options analysis",
+        "summary": "Start with the selected contract sample: check timing and coverage before distributions, comparability and conflicting clues.",
+        "steps": [
+          "Open Options analysis in the sidebar and enter a stock or fund symbol. Expirations come from that symbol’s actual option chain.",
+          "Choose comparison mode for several symbols or dates: one group per line, up to four. Advanced settings control the strike range and requested feed type.",
+          "Select the analysis button, read Plain-language view first, then inspect Technical details and diagnostics. To continue in chat, choose the report follow-up button and send a question."
+        ],
+        "restrictions": [
+          "Gateway collection requires an available IB Gateway/API connection and appropriate market-data permissions. Requesting live data does not establish that live data arrived.",
+          "Selecting AI interpretation sends aggregate metrics to a model; market-data licence conditions still apply.",
+          "Sample volume or open-interest shares are not counts of bullish or bearish people and do not alone establish market-wide sentiment or predict prices. Missing quotes remain missing."
+        ]
+      }
+    },
+    {
+      "id": "help.history",
+      "keywords": [
+        "导入历史",
+        "历史复盘",
+        "历史样本",
+        "CSV",
+        "JSON",
+        "教学样例",
+        "historical review",
+        "import history",
+        "import data",
+        "saved archive",
+        "teaching example"
+      ],
+      "source_files": [
+        {
+          "path": "web/index.html",
+          "sha256": "227beb709f099939a52c062d23179ae551b98669a726ad1f993c737b6566bd44"
+        },
+        {
+          "path": "web/history.js",
+          "sha256": "f26d89481a550693ff7bc8b58a27bfcdfa0b95ebb3eeea1d47c04ea108e08af6"
+        },
+        {
+          "path": "docs/history_rag_v13.md",
+          "sha256": "7b1e9e2c8d1ede04d4f8ac782036874f085982f77afd75f1a988e1f795301c76"
+        }
+      ],
+      "links": [
+        {
+          "url": "/workspace?view=history",
+          "zh": "打开历史复盘",
+          "en": "Open historical review"
+        },
+        {
+          "url": "/demo",
+          "zh": "演示已保存档案",
+          "en": "Try a saved archive"
+        }
+      ],
+      "zh": {
+        "title": "导入与回放历史资料",
+        "summary": "历史复盘在本地核对指定合约的历史记录；它不是即时行情或完整期权链。",
+        "steps": [
+          "进入「期权分析 → 历史复盘与专家依据」；可以回放真实 IBKR 历史样本，或加载明确标为合成的教学样例。",
+          "导入自己的文件时先下载 CSV/JSON 模板，填写名称、代码、到期日并选择 UTF-8 文件；核对预览与来源说明。",
+          "CSV 至少提供 trading_date、strike、right，C 为看涨、P 为看跌。点击「生成本地历史复盘」，再选择「带着这段历史追问」，核对草稿后发送。"
+        ],
+        "restrictions": [
+          "接受 2–300 行，文件或转换后的请求最多 32000 字节；仅支持 USD、标准乘数 100，空值不填成零。",
+          "本地文件来源未独立核验；真实样本回放不访问网关，教学样例不是市场证据。",
+          "所收盘中成交 bar 末值不是官方收盘或结算价；时段覆盖未核验、历史 OI 或独立统计日期缺失时不得强行比较。",
+          "界面没有历史网关抓取表单；历史读取 API 的存在不代表已有相应网页按钮。"
+        ]
+      },
+      "en": {
+        "title": "Import or replay historical records",
+        "summary": "Historical review checks selected contracts locally; it is neither live market data nor a complete option chain.",
+        "steps": [
+          "Open Options analysis → Historical review & expert evidence. Replay a saved real IBKR sample, or load the clearly labelled synthetic teaching example.",
+          "For your own data, download a CSV/JSON template, enter a review name, symbol and expiration, choose a UTF-8 file, then inspect the preview and provenance notes.",
+          "CSV requires trading_date, strike and right; use C for call and P for put. Build the local review, choose its follow-up action, review the draft and select Send."
+        ],
+        "restrictions": [
+          "Use 2–300 rows and no more than 32000 bytes for the file or converted request. Only USD with standard multiplier 100 is supported; missing values are not zero-filled.",
+          "Local-file provenance is not independently verified. Saved-sample replay makes no gateway request; teaching data is not market evidence.",
+          "Received intraday trade-bar end values are not official closes or settlement prices. Unverified session coverage, missing historical OI or reporting dates can prevent comparisons.",
+          "There is no historical gateway-fetch form in this UI; a historical-read API is not evidence of a corresponding page button."
+        ]
+      }
+    },
+    {
+      "id": "help.reports",
+      "keywords": [
+        "刷新并解释变化",
+        "针对这批数据追问",
+        "解释本报告",
+        "分析记录",
+        "一键刷新",
+        "report follow-up",
+        "refresh analysis",
+        "analysis history"
+      ],
+      "source_files": [
+        {
+          "path": "web/app.js",
+          "sha256": "734774e4b05816b476903d9bf67cfe7d510e18b24cb0b1a30b4bef9598fb9003"
+        },
+        {
+          "path": "web/pet.js",
+          "sha256": "381ba4fa7ce973402fb143fb874d104cc1a869f31ae466497fd2650bb6e7d70b"
+        },
+        {
+          "path": "docs/options_refresh_v11.md",
+          "sha256": "84949205558ab2913adc7b888327e6a704be19560aecf18a7f1abd4a248623d3"
+        },
+        {
+          "path": "docs/options_chat_v10.md",
+          "sha256": "e858c4352babf7b2e9e8a3b8c26dc5cca2a173aee1a077bf2269209e74ecbb26"
+        }
+      ],
+      "links": [
+        {
+          "url": "/workspace",
+          "zh": "返回聊天工作台",
+          "en": "Open chat workspace"
+        },
+        {
+          "url": "/workspace?view=history",
+          "zh": "导入新历史版本",
+          "en": "Import a new historical version"
+        }
+      ],
+      "zh": {
+        "title": "针对报告追问与刷新",
+        "summary": "聊天会读取服务器当前绑定的报告；旧回复保留各自的数据时间、来源与证据。",
+        "steps": [
+          "在分析结果选择追问，将该报告绑定到会话，再发送容易理解的问题，例如「哪些能确定，哪些仍不确定？」。",
+          "快照报告卡可点击「刷新并解释变化」：按原来保存的范围和请求模式重新采集，再解释可比的前后变化。",
+          "展开分析记录查看旧版本；在工作台或桌宠继续提问时使用当前绑定，明确切换报告才改变绑定。"
+        ],
+        "restrictions": [
+          "追问本身不自动刷新行情。历史复盘固定，不能用实时刷新按钮更新；导入另一批记录可创建新版本。",
+          "新报告提交后即保留；模型解释失败不代表报告未保存。缺失字段、样本范围变化或统计时点不一致会标为不可比。",
+          "本地接收时间变化不等于交易所行情变化；旧报告、旧回答不会被改成新数据。"
+        ]
+      },
+      "en": {
+        "title": "Ask about a report and refresh it",
+        "summary": "Chat reads the report currently bound on the server; earlier answers retain their own timestamps, sources and evidence.",
+        "steps": [
+          "Choose the report follow-up action to bind it to a chat, then send a plain-language question such as “What is established and what is still uncertain?”.",
+          "On a snapshot card, choose Refresh and explain changes to collect the saved scope and requested feed mode again, then explain comparable changes.",
+          "Expand analysis history to revisit earlier versions. Workspace and pet follow-ups use the current binding; change reports explicitly when needed."
+        ],
+        "restrictions": [
+          "A follow-up does not automatically refresh quotes. Historical reviews stay fixed and cannot use live refresh; import another dataset for a new version.",
+          "A committed new report is retained even if model explanation fails. Missing fields, changed samples or inconsistent reporting times can make comparisons invalid.",
+          "A newer local receipt time does not prove the market changed. Earlier reports and answers retain their original evidence."
+        ]
+      }
+    },
+    {
+      "id": "help.models",
+      "keywords": [
+        "切换模型",
+        "回答引擎",
+        "DeepSeek",
+        "本地模型",
+        "模型不可用",
+        "model switch",
+        "answer engine",
+        "local model",
+        "model unavailable"
+      ],
+      "source_files": [
+        {
+          "path": "web/app.js",
+          "sha256": "734774e4b05816b476903d9bf67cfe7d510e18b24cb0b1a30b4bef9598fb9003"
+        },
+        {
+          "path": "web/index.html",
+          "sha256": "227beb709f099939a52c062d23179ae551b98669a726ad1f993c737b6566bd44"
+        },
+        {
+          "path": "finetuning/README.md",
+          "sha256": "5d01a46a31853b6a6753e6d92102603a4c1805090a1a9baaf994d3ed7ae6212d"
+        }
+      ],
+      "links": [
+        {
+          "url": "/workspace",
+          "zh": "选择回答引擎",
+          "en": "Choose an answer engine"
+        }
+      ],
+      "zh": {
+        "title": "切换回答引擎",
+        "summary": "选择 DeepSeek 或可用的本地 LoRA 作为后续问题的引擎；“已配置”只是服务器设置状态，不等于接口连通或账户额度已验证，应核对每条回答的实际模式和错误。",
+        "steps": [
+          "在工作台聊天输入框上方打开「回答引擎」下拉框，选择可用引擎；切换作用于下一条问题。",
+          "桌宠聊天气泡也有引擎选择；共享连接的语言和引擎会同步到已明确连接的会话。",
+          "若本地引擎未就绪，核对可选 LoRA 环境、缓存基座和适配器，再重启后端；以可用状态与实际回答标记为准。"
+        ],
+        "restrictions": [
+          "DeepSeek 需要服务器可用配置；密钥只在后端，不应贴到聊天框。",
+          "本地引擎依赖独立 Python/ML 环境、已缓存基座、训练清单和权重；不会在普通聊天中自动下载模型。",
+          "缺少模型或生成失败会显示实际降级提示；有本地金融资料时可展示摘录，项目使用教程仍可阅读。没有一般问题的本地资料时不会编造答案。"
+        ]
+      },
+      "en": {
+        "title": "Switch answer engines",
+        "summary": "Choose DeepSeek or an available local LoRA engine for later questions. “Configured” describes server settings, not verified connectivity or account credit; check each reply’s actual mode and errors.",
+        "steps": [
+          "Open the Answer engine selector above the workspace input and choose an available engine. The choice applies to the next question.",
+          "The pet chat bubble also has an engine selector. Language and engine preferences synchronize for the explicitly connected chat.",
+          "If the local engine is not ready, check the optional LoRA environment, cached base model and adapter, then restart the backend. Trust availability and actual answer badges."
+        ],
+        "restrictions": [
+          "DeepSeek requires working server configuration. Credentials stay on the backend and should not be pasted into chat.",
+          "The local engine needs a separate Python/ML environment, cached base model, training manifest and weights. Ordinary chat does not download models automatically.",
+          "Missing models or generation failures show the actual fallback. Available local finance references and project-manual steps remain readable; an ordinary question without local references is not given an invented local answer."
+        ]
+      }
+    },
+    {
+      "id": "help.pet",
+      "keywords": [
+        "桌宠",
+        "鲸鱼娘",
+        "小鲸",
+        "连接桌宠",
+        "desktop pet",
+        "desktop companion",
+        "whale maid",
+        "tray"
+      ],
+      "source_files": [
+        {
+          "path": "web/index.html",
+          "sha256": "227beb709f099939a52c062d23179ae551b98669a726ad1f993c737b6566bd44"
+        },
+        {
+          "path": "web/pet.html",
+          "sha256": "e72d276ccb963c044fa4bdc41cf5b990eecb539b61836681fdb0d2c8ba063a3e"
+        },
+        {
+          "path": "web/pet.js",
+          "sha256": "381ba4fa7ce973402fb143fb874d104cc1a869f31ae466497fd2650bb6e7d70b"
+        },
+        {
+          "path": "docs/desktop_pet_v15.md",
+          "sha256": "fc995f92b9f44f78368388a8145c6b924ebc6414c606f7983ffc183c649ad9e5"
+        }
+      ],
+      "links": [
+        {
+          "url": "/workspace",
+          "zh": "连接工作台会话",
+          "en": "Connect a workspace chat"
+        },
+        {
+          "url": "/pet",
+          "zh": "桌宠网页预览",
+          "en": "Preview pet in browser"
+        }
+      ],
+      "zh": {
+        "title": "连接和使用 2D 桌宠",
+        "summary": "小鲸与工作台共用已明确选定的聊天和金融后端；网页预览与 Windows 原生宿主的能力不同。",
+        "steps": [
+          "在工作台新建或打开目标会话，在助手区域点击「连接当前会话」；桌宠只同步明确连接的会话。",
+          "Windows 桌宠使用项目启动脚本 start-desktop.ps1；双击角色或按回车打开聊天，单击只播放本地互动。",
+          "聊天气泡可追问报告或打开计算器、历史复盘和完整工作台；菜单可调整大小、恢复位置或隐藏，Windows 托盘可恢复与退出。",
+          "不再共享时点击「断开」；删除被连接会话或重启服务也会清除连接。"
+        ],
+        "restrictions": [
+          "切换另一网页会话不会让桌宠自动跟随；关闭浏览器后，本地后端仍运行时桌宠可继续该会话。",
+          "便携 EXE 仍需要项目 Python 环境和后端；浏览器 /pet 预览不具备系统置顶、托盘或原生点击穿透。",
+          "鲸鱼娘是非官方 2D 角色，仅用于课程及个人非商业演示；动画状态不表示市场涨跌或判断可靠性。",
+          "原生宿主不提供麦克风语音输入；漫游默认关闭，动画、连接与 SSE 重连不自动请求模型或行情。",
+          "默认退出桌宠只关闭宿主，不停止共享后端，也不结束用户原先启动的服务。"
+        ]
+      },
+      "en": {
+        "title": "Connect and use the 2D pet",
+        "summary": "The pet shares an explicitly selected chat and the existing finance backend. Browser preview and Windows native host have different capabilities.",
+        "steps": [
+          "Open or create the intended workspace chat and select Connect current chat in the companion panel. Only that explicitly connected chat is synchronized.",
+          "Start the Windows pet with the project start-desktop.ps1 script. Double-click the character or press Enter to open chat; a single click plays only a local interaction.",
+          "Use its bubble for report questions or shortcuts to calculators, history and the full workspace. Its menu controls size, position and hiding; the Windows tray restores or exits it.",
+          "Select Disconnect when finished. Deleting the linked chat or restarting the service also clears the connection."
+        ],
+        "restrictions": [
+          "Switching to another web chat does not silently move the pet. It can continue after the browser closes while the local backend remains running.",
+          "The portable EXE still requires the project Python environment and backend. Browser /pet preview has no native always-on-top, tray or system click-through capability.",
+          "The unofficial whale maid is 2D and limited to course/personal noncommercial demonstrations. Animation states do not indicate market direction or confidence.",
+          "The native host does not offer microphone input. Roaming defaults off; animation, connection and SSE reconnection do not automatically request models or market data.",
+          "Exiting the pet closes the host by default without stopping the shared backend or a service started earlier by the user."
+        ]
+      }
+    },
+    {
+      "id": "help.export",
+      "keywords": [
+        "导出对话",
+        "导出会话",
+        "导出聊天",
+        "export chat",
+        "export conversation",
+        "export session",
+        "PDF",
+        "Excel"
+      ],
+      "source_files": [
+        {
+          "path": "web/index.html",
+          "sha256": "227beb709f099939a52c062d23179ae551b98669a726ad1f993c737b6566bd44"
+        },
+        {
+          "path": "web/app.js",
+          "sha256": "734774e4b05816b476903d9bf67cfe7d510e18b24cb0b1a30b4bef9598fb9003"
+        }
+      ],
+      "links": [
+        {
+          "url": "/workspace",
+          "zh": "打开需要导出的会话",
+          "en": "Open the chat to export"
+        }
+      ],
+      "zh": {
+        "title": "导出聊天记录",
+        "summary": "工作台提供当前会话的 JSON 下载，包含已保存的回答及其分析依据。",
+        "steps": [
+          "在侧栏打开要保留的会话，等待当前请求结束。",
+          "点击输入框下方「导出会话」，浏览器会下载该会话的 JSON 文件。",
+          "保留文件时自行检查内容；需要其他格式可在项目外转换。"
+        ],
+        "restrictions": [
+          "当前没有 PDF、Word、Excel 或图片导出按钮，也没有导入聊天 JSON 的界面。",
+          "导出的是当前会话，不是自动打包所有会话；不要将包含私人信息的文件公开。"
+        ]
+      },
+      "en": {
+        "title": "Export a chat",
+        "summary": "The workspace downloads the current chat as JSON, including saved answers and their analysis evidence.",
+        "steps": [
+          "Open the desired chat in the sidebar and wait for any current request to finish.",
+          "Select Export chat below the composer; the browser downloads that chat’s JSON file.",
+          "Review the file before sharing. Convert to other formats outside the project if needed."
+        ],
+        "restrictions": [
+          "There is no PDF, Word, Excel or image export button, nor a chat-JSON import UI.",
+          "Export covers the current chat, not an automatic bundle of every chat. Avoid publishing files containing private information."
+        ]
+      }
+    },
+    {
+      "id": "help.voice",
+      "keywords": [
+        "语音",
+        "朗读",
+        "麦克风",
+        "speech",
+        "voice",
+        "microphone",
+        "read aloud"
+      ],
+      "source_files": [
+        {
+          "path": "web/app.js",
+          "sha256": "734774e4b05816b476903d9bf67cfe7d510e18b24cb0b1a30b4bef9598fb9003"
+        },
+        {
+          "path": "web/index.html",
+          "sha256": "227beb709f099939a52c062d23179ae551b98669a726ad1f993c737b6566bd44"
+        },
+        {
+          "path": "web/pet.html",
+          "sha256": "e72d276ccb963c044fa4bdc41cf5b990eecb539b61836681fdb0d2c8ba063a3e"
+        },
+        {
+          "path": "docs/desktop_pet_v15.md",
+          "sha256": "fc995f92b9f44f78368388a8145c6b924ebc6414c606f7983ffc183c649ad9e5"
+        }
+      ],
+      "links": [
+        {
+          "url": "/workspace",
+          "zh": "工作台语音入口",
+          "en": "Open workspace voice controls"
+        }
+      ],
+      "zh": {
+        "title": "语音输入与朗读",
+        "summary": "工作台利用浏览器提供的语音识别与朗读能力，不下载额外语音模型。",
+        "steps": [
+          "在工作台点击输入框旁「语音输入」，允许浏览器麦克风权限；识别文字只填入草稿，核对后再发送。",
+          "已有回答可用朗读操作，助手面板有「朗读最新回答」；再次停止或取消时以界面状态为准。",
+          "若按钮不可用或识别失败，检查浏览器能力、权限与设备，或直接键盘输入。"
+        ],
+        "restrictions": [
+          "语音识别支持取决于浏览器，可能使用浏览器厂商在线服务；硬件与语言支持不保证。",
+          "朗读使用浏览器 speechSynthesis，声线取决于设备；角色嘴部动画不是精准音素同步。",
+          "Windows 桌宠宿主不开放麦克风，桌宠气泡没有工作台语音按钮；不可据此宣传原生语音对话。"
+        ]
+      },
+      "en": {
+        "title": "Voice input and read-aloud",
+        "summary": "The workspace uses browser speech recognition and synthesis without downloading an additional voice model.",
+        "steps": [
+          "Select Voice input beside the workspace composer and allow microphone access. Recognition fills a draft only; review it before selecting Send.",
+          "Use a saved answer’s read-aloud action or Read latest answer in the companion panel. Follow the displayed state to stop or cancel speech.",
+          "If unavailable or failing, check browser capability, permissions and devices, or type the question."
+        ],
+        "restrictions": [
+          "Recognition depends on browser support and may use a browser-vendor online service. Hardware and language support are not guaranteed.",
+          "Read-aloud uses browser speechSynthesis and device voices. Character mouth motion is not precise phoneme synchronization.",
+          "The Windows native pet does not grant microphone access and its bubble lacks the workspace voice buttons; it is not native voice conversation."
+        ]
+      }
+    },
+    {
+      "id": "help.avatar",
+      "keywords": [
+        "Avatar",
+        "2D",
+        "3D",
+        "形象",
+        "机器人",
+        "展示形象",
+        "reduced motion"
+      ],
+      "source_files": [
+        {
+          "path": "web/index.html",
+          "sha256": "227beb709f099939a52c062d23179ae551b98669a726ad1f993c737b6566bd44"
+        },
+        {
+          "path": "web/app.js",
+          "sha256": "734774e4b05816b476903d9bf67cfe7d510e18b24cb0b1a30b4bef9598fb9003"
+        },
+        {
+          "path": "web/demo.html",
+          "sha256": "a74d7e6a8876fa851bab9ac83b9e462117f91d30082a11d6c810746b777fced2"
+        },
+        {
+          "path": "docs/desktop_pet_v15.md",
+          "sha256": "fc995f92b9f44f78368388a8145c6b924ebc6414c606f7983ffc183c649ad9e5"
+        }
+      ],
+      "links": [
+        {
+          "url": "/workspace",
+          "zh": "选择助手形象",
+          "en": "Choose companion appearance"
+        },
+        {
+          "url": "/demo",
+          "zh": "查看演示形象",
+          "en": "View demo companion"
+        }
+      ],
+      "zh": {
+        "title": "切换 2D/3D 展示形象",
+        "summary": "默认鲸鱼娘采用真实多帧 2D 图集；旧机器人仍提供 2D SVG 与 3D WebGL 展示。",
+        "steps": [
+          "在工作台助手区域的「展示形象」中选择「鲸鱼娘 · 2D」或「原有机器人 · 2D/3D」。",
+          "需要 3D 时先选择旧机器人，再使用 3D/2D 按钮；鲸鱼娘没有 3D 模型。",
+          "使用「减少动态」或系统减少动画设置降低运动；资源不可用时保留静态或 2D 降级与聊天功能。"
+        ],
+        "restrictions": [
+          "3D 依赖 WebGL2/浏览器能力；不是所有设备都能启用。",
+          "待机、聆听、思考、朗读、错误只表示实际操作状态，不表示投资回报或市场情绪。",
+          "/demo 共用角色组件，但保持独立会话，不自动读取桌宠或工作台聊天。"
+        ]
+      },
+      "en": {
+        "title": "Switch 2D/3D appearances",
+        "summary": "The default whale maid uses a real multi-frame 2D atlas. The legacy robot retains 2D SVG and 3D WebGL displays.",
+        "steps": [
+          "In the workspace companion panel choose Whale maid · 2D or Legacy robot · 2D/3D from Appearance.",
+          "For 3D, first select the legacy robot, then use its 3D/2D controls. The whale maid has no 3D model.",
+          "Use Reduce motion or the system preference to limit movement. Static/2D fallbacks preserve chat when rendering assets fail."
+        ],
+        "restrictions": [
+          "3D requires WebGL2/browser support and is unavailable on some devices.",
+          "Idle, listening, thinking, speaking and error indicate operations, not returns or market sentiment.",
+          "The demo shares the character component but keeps its own chat and does not automatically read pet or workspace conversations."
+        ]
+      }
+    },
+    {
+      "id": "help.trading",
+      "keywords": [
+        "自动交易",
+        "自动下单",
+        "买卖执行",
+        "auto trading",
+        "automated trading",
+        "place orders"
+      ],
+      "source_files": [
+        {
+          "path": "docs/options_analysis_v6.md",
+          "sha256": "48af31252193e5adfa80b51520d5dceb905918b42355d249da9e86da6134730e"
+        },
+        {
+          "path": "docs/desktop_pet_v15.md",
+          "sha256": "fc995f92b9f44f78368388a8145c6b924ebc6414c606f7983ffc183c649ad9e5"
+        }
+      ],
+      "links": [
+        {
+          "url": "/workspace?view=options",
+          "zh": "只读分析入口",
+          "en": "Open read-only analysis"
+        }
+      ],
+      "zh": {
+        "title": "交易能力边界",
+        "summary": "FinPilot 没有自动交易、下单或代客执行功能；IBKR 集成用于只读行情与历史数据分析。",
+        "steps": [
+          "把项目用于核对数据、学习期权概念和解释样本证据。",
+          "需要投资决策时自行核查时效、缺失项和风险，不把模型或角色动画当作买卖指令。"
+        ],
+        "restrictions": [
+          "不会读取订单、持仓或账户资产来执行交易，也没有一键买卖、回测交易执行或收益保证。",
+          "界面可连接网关不等于具有交易权限；不能通过聊天开启未实现的交易能力。"
+        ]
+      },
+      "en": {
+        "title": "Trading capability boundary",
+        "summary": "FinPilot has no automatic trading, order placement or execution-on-your-behalf feature. Its IBKR integration reads market and historical data for analysis.",
+        "steps": [
+          "Use the project to inspect data, learn option concepts and explain sample evidence.",
+          "Independently check timing, missing fields and risks for decisions; model replies and character animations are not trade instructions."
+        ],
+        "restrictions": [
+          "It does not read orders, positions or account assets to execute trades. There is no one-click trade execution, execution backtest or return guarantee.",
+          "Connecting a gateway does not establish trading capability. Chat cannot enable an unimplemented order feature."
+        ]
+      }
+    },
+    {
+      "id": "help.ibkr",
+      "keywords": [
+        "IBKR",
+        "IB Gateway",
+        "网关",
+        "354",
+        "10090",
+        "10167",
+        "行情订阅",
+        "行情权限",
+        "subscription",
+        "market data permissions"
+      ],
+      "source_files": [
+        {
+          "path": "web/options.js",
+          "sha256": "0efe5d6630cf62b597fa2421558940dc56cc418f597dc989bc20f785b7aa7e4e"
+        },
+        {
+          "path": "docs/ibkr_gateway_v12.md",
+          "sha256": "a362ad440c458e7c9bb5ebf373130d0ec62abc76a623312e6c72b735e63d6fdb"
+        },
+        {
+          "path": "docs/options_analysis_v6.md",
+          "sha256": "48af31252193e5adfa80b51520d5dceb905918b42355d249da9e86da6134730e"
+        }
+      ],
+      "links": [
+        {
+          "url": "/workspace?view=options",
+          "zh": "查看分析与安全诊断",
+          "en": "Open analysis and diagnostics"
+        },
+        {
+          "url": "/workspace?view=history",
+          "zh": "使用已存历史档案",
+          "en": "Use saved historical records"
+        }
+      ],
+      "zh": {
+        "title": "区分网关、订阅与延迟数据问题",
+        "summary": "以报告中的请求模式、实际返回类型、字段覆盖和安全诊断区分问题；程序不能授予缺少的订阅。",
+        "steps": [
+          "确认 IB Gateway 已登录、启用 socket API 并与后端所配置的本地端口一致，保留只读设置；不要把密码、账号或验证码发到聊天。",
+          "在期权分析的高级设置明确选择实时、冻结、延迟或延迟冻结，再查看实际行情类型和字段覆盖；需要时缩小范围重试。",
+          "若存在订阅提示，在 IBKR 客户门户核对当前登录环境的行情权限、API acknowledgement 和模拟账户共享；没有实时权限时可使用可用历史档案学习。"
+        ],
+        "restrictions": [
+          "354 是本次请求的订阅限制；10090 可表示部分字段限制；10167 需结合实际延迟类型与字段，不能说全部接口失效。",
+          "具体缺少哪一款订阅必须核对账户当前权限；本项目未读取你的订阅清单，不能保证购买某产品即可修复全部字段。",
+          "close 参考价不等于双边 bid/ask，延迟或冻结不等于实时；超时本身也不能唯一证明权限或程序故障。",
+          "这里给配置检查步骤，不会自动连接、订阅、购买套餐或请求新行情。"
+        ]
+      },
+      "en": {
+        "title": "Separate gateway, subscription and delayed-data issues",
+        "summary": "Use the requested mode, actual returned type, field coverage and safe diagnostics. The program cannot grant a missing subscription.",
+        "steps": [
+          "Check that IB Gateway is logged in, socket API is enabled and its local port matches the backend configuration; keep read-only settings. Do not send passwords, account details or codes to chat.",
+          "In options advanced settings explicitly select live, frozen, delayed or delayed-frozen, then inspect actual type and field coverage. Reduce the sampling range if needed.",
+          "For entitlement notices, check market-data permissions, API acknowledgement and paper-account sharing in the IBKR portal for the current login environment. Saved history remains usable for learning."
+        ],
+        "restrictions": [
+          "354 identifies a subscription restriction for that request. 10090 can indicate partial field restrictions. Interpret 10167 with actual delayed type and received fields, not as proof of total interface failure.",
+          "The exact missing product requires checking current account permissions. The project has not read your subscriptions and cannot promise a particular purchase will fix every field.",
+          "A close reference is not two-sided bid/ask; delayed or frozen is not live. A timeout alone cannot uniquely identify permissions or a software fault.",
+          "These are configuration checks, not automatic connections, subscription purchases or new market-data requests."
+        ]
+      }
+    },
+    {
+      "id": "help.calculator",
+      "keywords": [
+        "计算器",
+        "复利储蓄",
+        "贷款月供",
+        "收支预算",
+        "calculator",
+        "compound savings",
+        "loan payment",
+        "monthly budget"
+      ],
+      "source_files": [
+        {
+          "path": "web/index.html",
+          "sha256": "227beb709f099939a52c062d23179ae551b98669a726ad1f993c737b6566bd44"
+        },
+        {
+          "path": "web/app.js",
+          "sha256": "734774e4b05816b476903d9bf67cfe7d510e18b24cb0b1a30b4bef9598fb9003"
+        }
+      ],
+      "links": [
+        {
+          "url": "/workspace?view=calculator",
+          "zh": "打开计算器",
+          "en": "Open calculator"
+        },
+        {
+          "url": "/workspace?tool=loan",
+          "zh": "贷款月供",
+          "en": "Loan payment"
+        },
+        {
+          "url": "/workspace?tool=budget",
+          "zh": "收支预算",
+          "en": "Monthly budget"
+        }
+      ],
+      "zh": {
+        "title": "使用固定公式计算器",
+        "summary": "计算器提供复利储蓄、固定利率等额本息贷款和月度收支预算，数值由本地固定公式计算。",
+        "steps": [
+          "打开侧栏「财务计算器」或输入框旁「计算」，选择复利储蓄、贷款月供或收支预算。",
+          "填入界面要求的本金、利率、期限、月末追加或收支等参数，再点击「计算结果」。",
+          "利率输入框以百分数为单位：年利率 5% 填 5，不填 0.05；预算的收入与支出应按同一月份和币种填写。",
+          "查看结果、公式和假设，修改参数比较不同计划。"
+        ],
+        "restrictions": [
+          "复利采用月度复利与月末追加假设；贷款采用固定利率等额本息，不代表银行实际报价。",
+          "没有期权定价、税务、保险、保证收益或实盘回测计算器；聊天中的精确计算应核对工具结果。",
+          "执行本地计算不需要模型或 IBKR 请求。"
+        ]
+      },
+      "en": {
+        "title": "Use fixed-formula calculators",
+        "summary": "The calculator covers compound savings, fixed-rate amortizing loan payments and monthly budgets using deterministic local formulas.",
+        "steps": [
+          "Open Financial calculators in the sidebar or Calculate beside the composer. Choose savings, loan payment or budget.",
+          "Enter the displayed principal, rate, term, month-end contributions or income/expense parameters and select Calculate.",
+          "Rate inputs use percentage points: enter 5 for a 5% annual rate, not 0.05. Budget income and expenses should use the same month and currency.",
+          "Inspect results, formulas and assumptions; change inputs to compare plans."
+        ],
+        "restrictions": [
+          "Savings assume monthly compounding and month-end contributions. Loans assume a fixed-rate amortizing schedule, not a bank quote.",
+          "There is no option-pricing, tax, insurance, guaranteed-return or live-trading backtest calculator. Check precise chat calculations against tool results.",
+          "Local calculations do not require a model or IBKR request."
+        ]
+      }
+    },
+    {
+      "id": "help.rag",
+      "keywords": [
+        "RAG",
+        "微调",
+        "检索增强",
+        "LoRA",
+        "fine tuning",
+        "fine-tuning",
+        "retrieval augmented generation"
+      ],
+      "source_files": [
+        {
+          "path": "docs/innovation_rag_v14.md",
+          "sha256": "e11766e1b7fd3ecb54490ec5663f032133fd2bed34a25b3e89075d0dc0446fd3"
+        },
+        {
+          "path": "finetuning/README.md",
+          "sha256": "5d01a46a31853b6a6753e6d92102603a4c1805090a1a9baaf994d3ed7ae6212d"
+        },
+        {
+          "path": "docs/innovation_upgrade.md",
+          "sha256": "f20527c184dd9166eecc9115cff7cf5d67bc76e33759151d2588a70419c3455a"
+        }
+      ],
+      "links": [
+        {
+          "url": "/workspace?view=knowledge",
+          "zh": "查看知识来源",
+          "en": "Inspect knowledge sources"
+        },
+        {
+          "url": "/demo",
+          "zh": "查看检索演示",
+          "en": "Open retrieval demo"
+        }
+      ],
+      "zh": {
+        "title": "微调、RAG 与本地 LoRA 的区别",
+        "summary": "本项目的专家 RAG 是检索已审阅知识来支持解释；本地 Qwen3-0.6B LoRA 是单独的微调实验，二者不是同一件事。",
+        "steps": [
+          "在演示页加载历史样本并查看专家依据，观察本地数据来源与专家知识来源分开显示。",
+          "RAG 用词项 BM25、中文字符匹配与 RRF 排序，不使用 embeddings 或向量数据库；相关性分数不是判断正确率。",
+          "若已准备本地 LoRA 环境与权重，可在引擎选择器选择本地实验，并核对回答实际模式。"
+        ],
+        "restrictions": [
+          "没有对托管 DeepSeek 做微调；提示词、检索知识或风格包装不能称作 DeepSeek 微调。",
+          "LoRA 依赖可选环境、缓存基座和适配器；小样本训练/检索指标不等于金融事实准确率或超过 DeepSeek。",
+          "来源主张检查是有限规则，不是通用语义证明；检索和引用都不能保证预测成功。"
+        ]
+      },
+      "en": {
+        "title": "Fine-tuning, RAG and the local LoRA experiment",
+        "summary": "Expert RAG retrieves reviewed knowledge to support explanations. Local Qwen3-0.6B LoRA is a separate fine-tuning experiment.",
+        "steps": [
+          "Load a historical sample in the demo and inspect expert evidence; local data and expert knowledge sources are displayed separately.",
+          "RAG ranks BM25 terms and Chinese character matches with RRF; it uses no embeddings or vector database. Relevance scores are not accuracy estimates.",
+          "With the optional local LoRA environment and weights prepared, choose the local experiment in the engine selector and inspect its actual answer mode."
+        ],
+        "restrictions": [
+          "The hosted DeepSeek model was not fine-tuned. Prompts, retrieval and styling must not be called DeepSeek fine-tuning.",
+          "LoRA requires optional dependencies, a cached base model and adapter. Small-sample training/retrieval metrics do not establish financial accuracy or superiority to DeepSeek.",
+          "Claim-source checks are limited rules, not general semantic proof. Retrieval and citations do not guarantee successful predictions."
+        ]
+      }
+    },
+    {
+      "id": "help.chat",
+      "keywords": [
+        "新建会话",
+        "删除会话",
+        "最近会话",
+        "切换语言",
+        "中英切换",
+        "new chat",
+        "new session",
+        "chat history",
+        "delete chat",
+        "switch language"
+      ],
+      "source_files": [
+        {
+          "path": "web/index.html",
+          "sha256": "227beb709f099939a52c062d23179ae551b98669a726ad1f993c737b6566bd44"
+        },
+        {
+          "path": "web/app.js",
+          "sha256": "734774e4b05816b476903d9bf67cfe7d510e18b24cb0b1a30b4bef9598fb9003"
+        }
+      ],
+      "links": [
+        {
+          "url": "/workspace",
+          "zh": "管理聊天会话",
+          "en": "Manage chats"
+        }
+      ],
+      "zh": {
+        "title": "会话、语言和普通问答",
+        "summary": "工作台保存会话与回答依据；金融之外的普通问题也可使用所选模型回答。",
+        "steps": [
+          "点击顶部「新建会话」或侧栏加号开始新聊天，从「最近会话」恢复已有会话。",
+          "使用顶部语言按钮切换中文与英文；模型选择位于输入框上方，当前请求期间部分控件会锁定。",
+          "不再需要某条会话时使用该会话的删除操作；删除连接中的会话会断开桌宠共享。"
+        ],
+        "restrictions": [
+          "发送请求才调用所选模型；离线摘录与模型调用有不同模式标记。",
+          "不会自动把所有会话共享给桌宠；/demo 使用独立会话规则。",
+          "删除会话不会把以前的模型回答改写为新的分析依据；如需保留记录请先导出。"
+        ]
+      },
+      "en": {
+        "title": "Chats, languages and ordinary questions",
+        "summary": "The workspace saves chats and answer evidence. Ordinary questions beyond finance can also use the selected model.",
+        "steps": [
+          "Select New chat at the top or the sidebar plus button; restore existing chats from Recent chats.",
+          "Use the top language button for Chinese/English. The engine selector is above the input; some controls lock during a request.",
+          "Delete an unwanted chat using its session action. Deleting the connected chat also disconnects the pet."
+        ],
+        "restrictions": [
+          "Only sending a request invokes the selected model. Offline excerpts and model calls have distinct mode badges.",
+          "The app does not automatically share all chats with the pet. The demo keeps separate session rules.",
+          "Deletion does not rewrite old answers with new analysis evidence. Export first if you need a copy."
+        ]
+      }
+    },
+    {
+      "id": "help.appearance",
+      "keywords": [
+        "主题",
+        "浅色",
+        "深色",
+        "减少动态",
+        "theme",
+        "dark mode",
+        "light mode",
+        "reduce motion"
+      ],
+      "source_files": [
+        {
+          "path": "web/index.html",
+          "sha256": "227beb709f099939a52c062d23179ae551b98669a726ad1f993c737b6566bd44"
+        },
+        {
+          "path": "web/app.js",
+          "sha256": "734774e4b05816b476903d9bf67cfe7d510e18b24cb0b1a30b4bef9598fb9003"
+        },
+        {
+          "path": "web/demo.html",
+          "sha256": "a74d7e6a8876fa851bab9ac83b9e462117f91d30082a11d6c810746b777fced2"
+        }
+      ],
+      "links": [
+        {
+          "url": "/workspace",
+          "zh": "调整工作台显示",
+          "en": "Adjust workspace display"
+        },
+        {
+          "url": "/demo",
+          "zh": "打开演示页",
+          "en": "Open demo"
+        }
+      ],
+      "zh": {
+        "title": "主题与减少动态",
+        "summary": "工作台默认浅白、藏青与低调金色，保留主题切换和减少动态控制。",
+        "steps": [
+          "点击工作台顶部主题按钮切换明暗显示。",
+          "点击「减少动态」或助手区域相应选项；系统减少动画偏好也会参与显示设置。",
+          "移动端使用导航按钮与可折叠助手面板，必要时先关闭工具弹窗再回到聊天。"
+        ],
+        "restrictions": [
+          "减少动态只影响展示，不更改市场数据或模型判断。",
+          "透明、WebGL、语音与帧率取决于浏览器和设备；截图或模拟视口不等于所有真实硬件认证。"
+        ]
+      },
+      "en": {
+        "title": "Themes and reduced motion",
+        "summary": "The workspace defaults to white, navy and restrained gold, with theme and reduced-motion controls.",
+        "steps": [
+          "Use the top theme button to switch light/dark display.",
+          "Select Reduce motion or the matching companion option; system motion preferences also affect rendering.",
+          "On small screens use the navigation button and collapsible companion panel, closing tool dialogs when returning to chat."
+        ],
+        "restrictions": [
+          "Reduced motion changes presentation, not market data or model conclusions.",
+          "Transparency, WebGL, speech and frame rate depend on the device/browser. Screenshots or simulated viewports do not certify all physical hardware."
+        ]
+      }
+    },
+    {
+      "id": "help.boundaries",
+      "keywords": [
+        "未实现",
+        "未知功能",
+        "支持范围",
+        "unknown feature",
+        "unsupported feature"
+      ],
+      "source_files": [
+        {
+          "path": "web/index.html",
+          "sha256": "227beb709f099939a52c062d23179ae551b98669a726ad1f993c737b6566bd44"
+        },
+        {
+          "path": "web/pet.html",
+          "sha256": "e72d276ccb963c044fa4bdc41cf5b990eecb539b61836681fdb0d2c8ba063a3e"
+        },
+        {
+          "path": "docs/desktop_pet_v15.md",
+          "sha256": "fc995f92b9f44f78368388a8145c6b924ebc6414c606f7983ffc183c649ad9e5"
+        }
+      ],
+      "links": [
+        {
+          "url": "/workspace",
+          "zh": "查看已有功能",
+          "en": "Inspect existing features"
+        },
+        {
+          "url": "/docs",
+          "zh": "查看固定 API 契约",
+          "en": "Inspect API contract"
+        }
+      ],
+      "zh": {
+        "title": "未确认的项目功能",
+        "summary": "这份已审阅手册未确认所问功能，不能据此声称已经实现或可在当前环境使用。",
+        "steps": [
+          "查看工作台已有的聊天、计算器、期权分析与历史复盘入口；也可打开 API 文档核对现有契约。",
+          "请说明想完成的操作和当前页面，便于区分已有入口、环境依赖与尚需开发的能力。"
+        ],
+        "restrictions": [
+          "未知不等于支持；没有已核实的入口时不会编造按钮、菜单、路径或操作成功。",
+          "手册不读取账户订阅、私有文件、密钥或任意代码，也不执行安装、购买、交易或电脑操作。"
+        ]
+      },
+      "en": {
+        "title": "Unconfirmed project capability",
+        "summary": "The reviewed manual does not establish the requested feature. It cannot be represented as implemented or available in this environment.",
+        "steps": [
+          "Inspect the existing workspace chat, calculators, options and history entries, or use API documentation to check the current contract.",
+          "Describe the action you want and the current page so existing controls, environment dependencies and future work can be distinguished."
+        ],
+        "restrictions": [
+          "Unknown does not mean supported. No unverified button, menu, path or successful operation is invented.",
+          "The manual does not read account subscriptions, private files, credentials or arbitrary code, or execute installations, purchases, trades or computer actions."
+        ]
+      }
+    }
+  ]
+}

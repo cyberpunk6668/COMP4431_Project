@@ -1,0 +1,47 @@
+{
+  "status": "passed",
+  "slide_count": 13,
+  "all_slides_visible": true,
+  "groups": {
+    "overview": [
+      1,
+      2
+    ],
+    "rag": [
+      3,
+      6
+    ],
+    "frontend": [
+      7,
+      9
+    ],
+    "companion": [
+      10,
+      13
+    ]
+  },
+  "english_slide_text_and_notes": true,
+  "visible_raster_content_manually_reviewed_in_english": true,
+  "colored_code_snippets": 12,
+  "colored_report_extracts": 1,
+  "source_text_and_wrap_reconstruction_verified": true,
+  "syntax_palette_colors": [
+    "#1B63B2",
+    "#20794A",
+    "#253D4A",
+    "#55766F",
+    "#7A3EB1",
+    "#AE3E56",
+    "#B95D00"
+  ],
+  "english_words": 356,
+  "planned_seconds": 210,
+  "native_powerpoint_rendered_visible_slides": 13,
+  "five_original_concept_images_unchanged": true,
+  "avatar_credit_edited_to_english": true,
+  "not_claimed": [
+    "Measured audio timing",
+    "Entire application fully localized",
+    "New cloud model or broker acceptance runs"
+  ]
+}

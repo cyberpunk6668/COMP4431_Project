@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#FAFAFA"><meta name="description" content="FinPilot 项目使用指南：查找聊天、历史复盘、计算器、桌宠与模型的操作步骤和限制。">
+  <title>FinPilot · 使用指南</title><link rel="icon" href="/static/favicon.svg">
+  <link rel="stylesheet" href="/static/companion/messages.css"><link rel="stylesheet" href="/static/help.css">
+  <script defer src="/static/companion/messages.js"></script><script defer src="/static/help.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#help-search" data-help-text="skip">跳到手册搜索</a>
+  <header class="help-header shell"><a class="help-brand" href="/" aria-label="FinPilot 首页"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 2 9 5v10l-9 5-9-5V7Z"/></svg><span>FinPilot<span class="brand-dot">.</span><small>THE FIELD GUIDE</small></span></a><nav class="help-header-actions" aria-label="Project navigation"><a href="/demo" data-help-text="demo">三步演示</a><button id="help-language" type="button" aria-label="Switch to English">EN</button><a class="workspace-link" href="/workspace" data-help-text="workspace">进入工作台 ↗</a></nav></header>
+  <main class="shell">
+    <section class="help-hero" aria-labelledby="help-title"><div><p class="eyebrow">A LITTLE GUIDANCE. A CLEARER START.</p><h1 id="help-title" data-help-text="title">先熟悉工具，<br>再开始探索。</h1><p class="hero-description" data-help-text="intro">查找真实入口、操作步骤与功能边界。把复杂的金融问题留给讨论，把“怎么用”交给这份手册。</p><div class="help-principles"><span data-help-text="local">本地手册检索</span><span data-help-text="noCalls">搜索不会调用模型或 IBKR</span><span id="help-version">—</span></div></div><aside class="help-start"><span class="mini-overline">START SMALL</span><h2 data-help-text="startTitle">第一次使用？</h2><p data-help-text="startDescription">打开工作台，输入问题，核对回复的实际模式。需要计算时，用固定公式的计算器。</p><a href="/workspace" data-help-text="startLink">从工作台开始 ↗</a><small data-help-text="startBoundary">桌宠需本地启动脚本与 Python 环境；网页预览不等于 Windows 桌宠。</small></aside></section>
+    <section class="help-search-region" aria-label="Search manual"><form id="help-search-form" role="search"><label for="help-search" data-help-text="searchLabel">想了解哪项功能？</label><div class="help-search-field"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><input id="help-search" type="search" maxlength="300" placeholder="搜索：历史复盘、桌宠、模型、导出…" autocomplete="off"><button id="help-search-submit" type="submit" data-help-text="search">搜索</button></div></form><div class="help-quick-search"><span data-help-text="try">试试</span><button type="button" data-help-query="history" data-help-text="quickHistory">历史复盘</button><button type="button" data-help-query="pet" data-help-text="quickPet">连接桌宠</button><button type="button" data-help-query="models" data-help-text="quickModels">选择模型</button><button id="help-reset" type="button" data-help-text="all">全部主题</button></div><p id="help-status" class="help-status" role="status" aria-live="polite"></p><div id="help-error" class="help-error" role="alert" hidden><span id="help-error-text"></span><button id="help-retry" type="button" data-help-text="retry">重试</button></div></section>
+    <div class="help-layout"><aside class="help-index"><h2 data-help-text="index">手册目录</h2><nav id="help-index" aria-label="Manual topics"></nav><p data-help-text="indexNote">操作来自已审阅的项目手册，不是金融市场资料或模型自由生成的建议。</p></aside><section id="help-results" class="help-results" aria-label="Manual topics" aria-busy="true"><p class="help-loading" data-help-text="loading">正在读取本地手册…</p></section></div>
+    <section id="help-empty" class="help-empty" hidden><span>⌕</span><h2 data-help-text="emptyTitle">暂时没有匹配的主题</h2><p data-help-text="emptyDescription">换一个功能名称，或查看完整目录。此页面不会生成未经审阅的操作步骤。</p><button id="help-empty-reset" type="button" data-help-text="all">全部主题</button></section>
+    <footer class="help-footer"><span>FINPILOT / KNOW YOUR TOOLS</span><p data-help-text="footer">历史资料不代表当前行情；检索排名不代表正确率。手册说明功能范围，不能替代金融判断。</p><a href="/workspace" data-help-text="workspace">进入工作台 ↗</a></footer>
+  </main>
+</body>
+</html>

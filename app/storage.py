@@ -78,6 +78,9 @@ class Store:
 
     def get(self, sid: str) -> dict | None:
         with self.connect() as db:
+            # Keep the session header/current binding and its message list in
+            # one SQLite snapshot when another window commits a shared turn.
+            db.execute("BEGIN")
             row = db.execute("SELECT * FROM sessions WHERE id=?", (sid,)).fetchone()
             if row is None:
                 return None
@@ -89,6 +92,14 @@ class Store:
                 item["sources"] = json.loads(item["sources"])
                 item["calculation"] = json.loads(item["calculation"]) if item["calculation"] else None
                 item["analysis_context"] = json.loads(item["analysis_context"]) if item["analysis_context"] else None
+                if item.get("mode") == "project-help":
+                    # v16 help metadata lives in the existing trusted source
+                    # JSON. Keep it separate from financial analysis_context.
+                    for source in item["sources"]:
+                        context = source.get("project_help") if isinstance(source,dict) else None
+                        if isinstance(context,dict) and context.get("intent")=="project_help":
+                            item["project_help"] = context
+                            break
                 result["messages"].append(item)
             return result
 

@@ -1,0 +1,28 @@
+{
+  "checked_at": "2026-11-11T13:40:45.461Z",
+  "status": "passed",
+  "scope": "One opt-in two-turn real-model verifier over a newly owned isolated :8016 backend; no native UI, user database, broker collection or response mocking.",
+  "maximum_model_generations": 2,
+  "automatic_retries": 0,
+  "cleanup": {
+    "stdin_eof": true,
+    "backend_exit": {
+      "code": 0
+    },
+    "owned_port_closed": true
+  },
+  "isolated_audit_directory": "tmp/project-help-live-v16-YWMfEO",
+  "verifier_exit_code": 0,
+  "verifier_summary": {
+    "status": "passed",
+    "phase": "complete",
+    "report": "F:\\桌面\\COMP4431_Project\\reports\\project_help_live_v16-20261111T134046448251Z.json",
+    "counters": {
+      "ui_chat_http_requests": 2,
+      "confirmed_deepseek_selectors": 2,
+      "generations": 2,
+      "schema_repairs": 0
+    },
+    "error": null
+  }
+}

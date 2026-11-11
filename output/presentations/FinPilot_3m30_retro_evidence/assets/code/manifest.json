@@ -1,0 +1,900 @@
+{
+  "purpose": "Verbatim repository source extraction rendered as evidence assets, not final presentation slides.",
+  "font": "Consolas",
+  "font_path": "C:\\Windows\\Fonts\\consola.ttf",
+  "font_size_px": 38,
+  "canvas_width_px": 1200,
+  "background": "#F5F3E8",
+  "text_color": "#253D4A",
+  "wrap_policy": "Pixel-width visual wraps. Only the first visual row of a logical source line shows its original line number. No code characters are inserted, removed, or joined across original lines.",
+  "snippets": [
+    {
+      "id": "rag_rrf",
+      "path": "app/expert_knowledge.py",
+      "source_absolute_path": "F:\\桌面\\COMP4431_Project\\app\\expert_knowledge.py",
+      "start_line": 144,
+      "end_line": 146,
+      "source_sha256": "0c2d328de53f2e8b2132b60397e6b377663c0d5af57e0cf4f05ba28e9e1d07a4",
+      "code": "        rank = lambda scores: {index: position+1 for position, index in enumerate(sorted(scores, key=lambda i: (-scores[i], self.documents[i][\"id\"])))}\n        term_ranks, char_ranks = rank(bm25), rank(char)\n        fused = {i: sum(1/(60+ranks[i]) for ranks in (term_ranks, char_ranks) if i in ranks) for i in set(bm25) | set(char)}",
+      "txt_path": "F:\\桌面\\COMP4431_Project\\output\\presentations\\FinPilot_evidence_work\\assets\\code\\rag_rrf.txt",
+      "txt_sha256": "8302b2295493acb721d9c23ce6752211441a4cc24c6bb127b0f093cb344770d5",
+      "png_path": "F:\\桌面\\COMP4431_Project\\output\\presentations\\FinPilot_evidence_work\\assets\\code\\rag_rrf.png",
+      "png_sha256": "129ffc07742578a71d21b6040183fb7a8754c1785672a70552b79a7bd4694c17",
+      "pixels": [
+        1200,
+        636
+      ],
+      "logical_lines": 3,
+      "visual_rows": 9,
+      "visual_row_map": [
+        {
+          "source_line": 144,
+          "continuation": false,
+          "text": "        rank = lambda scores: {index: position+1 "
+        },
+        {
+          "source_line": 144,
+          "continuation": true,
+          "text": "for position, index in enumerate(sorted(scores, "
+        },
+        {
+          "source_line": 144,
+          "continuation": true,
+          "text": "key=lambda i: (-scores[i], self.documents[i]["
+        },
+        {
+          "source_line": 144,
+          "continuation": true,
+          "text": "\"id\"])))}"
+        },
+        {
+          "source_line": 145,
+          "continuation": false,
+          "text": "        term_ranks, char_ranks = rank(bm25), "
+        },
+        {
+          "source_line": 145,
+          "continuation": true,
+          "text": "rank(char)"
+        },
+        {
+          "source_line": 146,
+          "continuation": false,
+          "text": "        fused = {i: sum(1/(60+ranks[i]) for "
+        },
+        {
+          "source_line": 146,
+          "continuation": true,
+          "text": "ranks in (term_ranks, char_ranks) if i in ranks) "
+        },
+        {
+          "source_line": 146,
+          "continuation": true,
+          "text": "for i in set(bm25) | set(char)}"
+        }
+      ],
+      "source_snapshot_path": "source_snapshot/app/expert_knowledge.py",
+      "packaged_source_snapshot": "source_snapshot/app/expert_knowledge.py"
+    },
+    {
+      "id": "rag_support",
+      "path": "app/expert_grounding.py",
+      "source_absolute_path": "F:\\桌面\\COMP4431_Project\\app\\expert_grounding.py",
+      "start_line": 210,
+      "end_line": 214,
+      "source_sha256": "f3f2509ea5282b050c9b2deeaba2f7ca0260cbd3927862290c072f4f3823a008",
+      "code": "        support = {facet for key in cited for facet in sources[key].get(\"supports\", []) if facet in SUPPORT_FACETS}\n        missing = facets - support\n        if missing:\n            raise ValueError(where + \"Expert citation does not support claim facets: \" + \",\".join(sorted(missing)))\n        unrelated = [key for key in cited if not set(sources[key].get(\"supports\", [])) & facets]",
+      "txt_path": "F:\\桌面\\COMP4431_Project\\output\\presentations\\FinPilot_evidence_work\\assets\\code\\rag_support.txt",
+      "txt_sha256": "2af52b1945a25711f73014935391bfb78a96ebafb2083fac68dc59ad776feecb",
+      "png_path": "F:\\桌面\\COMP4431_Project\\output\\presentations\\FinPilot_evidence_work\\assets\\code\\rag_support.png",
+      "png_sha256": "c4962694fddae4759e720fd18f6434c06fcad5d362bbeb5ee3a0a1f01846ce3b",
+      "pixels": [
+        1200,
+        690
+      ],
+      "logical_lines": 5,
+      "visual_rows": 10,
+      "visual_row_map": [
+        {
+          "source_line": 210,
+          "continuation": false,
+          "text": "        support = {facet for key in cited for "
+        },
+        {
+          "source_line": 210,
+          "continuation": true,
+          "text": "facet in sources[key].get(\"supports\", []) if "
+        },
+        {
+          "source_line": 210,
+          "continuation": true,
+          "text": "facet in SUPPORT_FACETS}"
+        },
+        {
+          "source_line": 211,
+          "continuation": false,
+          "text": "        missing = facets - support"
+        },
+        {
+          "source_line": 212,
+          "continuation": false,
+          "text": "        if missing:"
+        },
+        {
+          "source_line": 213,
+          "continuation": false,
+          "text": "            raise ValueError(where + \"Expert "
+        },
+        {
+          "source_line": 213,
+          "continuation": true,
+          "text": "citation does not support claim facets: \" + \","
+        },
+        {
+          "source_line": 213,
+          "continuation": true,
+          "text": "\".join(sorted(missing)))"
+        },
+        {
+          "source_line": 214,
+          "continuation": false,
+          "text": "        unrelated = [key for key in cited if not "
+        },
+        {
+          "source_line": 214,
+          "continuation": true,
+          "text": "set(sources[key].get(\"supports\", [])) & facets]"
+        }
+      ],
+      "source_snapshot_path": "source_snapshot/app/expert_grounding.py",
+      "packaged_source_snapshot": "source_snapshot/app/expert_grounding.py"
+    },
+    {
+      "id": "video_fallback",
+      "path": "frontend/src/components/Hero.tsx",
+      "source_absolute_path": "F:\\桌面\\COMP4431_Project\\frontend\\src\\components\\Hero.tsx",
+      "start_line": 137,
+      "end_line": 148,
+      "source_sha256": "50200af71d126065340183716627bd4670c52478363728cd5834f0abfa5ab6d3",
+      "code": "  useEffect(() => {\n    if (status !== 'loading') return;\n    const timer = window.setTimeout(() => setMedia('fallback'), 2500);\n    return () => window.clearTimeout(timer);\n  }, [status]);\n\n  const visibleMedia = stopped && !reduced && requested && media === 'ready' ? 'ready' : status;\n  return <div className=\"hero-background\" ref={layer} aria-hidden=\"true\" data-media={visibleMedia}>\n    <img className=\"hero-poster\" src={posterURL} alt=\"\" fetchPriority=\"high\" />\n    {requested && !reduced && <video ref={video} className=\"hero-video\" data-testid=\"hero-video\"\n      src={videoURL} autoPlay={!stopped} loop muted playsInline preload=\"auto\"\n      onCanPlay={() => setMedia('ready')} onError={() => setMedia('fallback')} />}",
+      "txt_path": "F:\\桌面\\COMP4431_Project\\output\\presentations\\FinPilot_evidence_work\\assets\\code\\video_fallback.txt",
+      "txt_sha256": "df39e5f8de69b4557703dd80a2120cf0ce6eeb8171615e8c6c48ead15411a616",
+      "png_path": "F:\\桌面\\COMP4431_Project\\output\\presentations\\FinPilot_evidence_work\\assets\\code\\video_fallback.png",
+      "png_sha256": "ca0084862787bf1c1413b04b058e364a67aeeaf0ce2a07a96bbe03a5344e9766",
+      "pixels": [
+        1200,
+        1284
+      ],
+      "logical_lines": 12,
+      "visual_rows": 21,
+      "visual_row_map": [
+        {
+          "source_line": 137,
+          "continuation": false,
+          "text": "  useEffect(() => {"
+        },
+        {
+          "source_line": 138,
+          "continuation": false,
+          "text": "    if (status !== 'loading') return;"
+        },
+        {
+          "source_line": 139,
+          "continuation": false,
+          "text": "    const timer = window.setTimeout(() => "
+        },
+        {
+          "source_line": 139,
+          "continuation": true,
+          "text": "setMedia('fallback'), 2500);"
+        },
+        {
+          "source_line": 140,
+          "continuation": false,
+          "text": "    return () => window.clearTimeout(timer);"
+        },
+        {
+          "source_line": 141,
+          "continuation": false,
+          "text": "  }, [status]);"
+        },
+        {
+          "source_line": 142,
+          "continuation": false,
+          "text": ""
+        },
+        {
+          "source_line": 143,
+          "continuation": false,
+          "text": "  const visibleMedia = stopped && !reduced && "
+        },
+        {
+          "source_line": 143,
+          "continuation": true,
+          "text": "requested && media === 'ready' ? 'ready' : "
+        },
+        {
+          "source_line": 143,
+          "continuation": true,
+          "text": "status;"
+        },
+        {
+          "source_line": 144,
+          "continuation": false,
+          "text": "  return <div className=\"hero-background\" ref={"
+        },
+        {
+          "source_line": 144,
+          "continuation": true,
+          "text": "layer} aria-hidden=\"true\" data-media={"
+        },
+        {
+          "source_line": 144,
+          "continuation": true,
+          "text": "visibleMedia}>"
+        },
+        {
+          "source_line": 145,
+          "continuation": false,
+          "text": "    <img className=\"hero-poster\" src={posterURL} "
+        },
+        {
+          "source_line": 145,
+          "continuation": true,
+          "text": "alt=\"\" fetchPriority=\"high\" />"
+        },
+        {
+          "source_line": 146,
+          "continuation": false,
+          "text": "    {requested && !reduced && <video ref={video} "
+        },
+        {
+          "source_line": 146,
+          "continuation": true,
+          "text": "className=\"hero-video\" data-testid=\"hero-video\""
+        },
+        {
+          "source_line": 147,
+          "continuation": false,
+          "text": "      src={videoURL} autoPlay={!stopped} loop "
+        },
+        {
+          "source_line": 147,
+          "continuation": true,
+          "text": "muted playsInline preload=\"auto\""
+        },
+        {
+          "source_line": 148,
+          "continuation": false,
+          "text": "      onCanPlay={() => setMedia('ready')} "
+        },
+        {
+          "source_line": 148,
+          "continuation": true,
+          "text": "onError={() => setMedia('fallback')} />}"
+        }
+      ],
+      "source_snapshot_path": "source_snapshot/frontend/src/components/Hero.tsx",
+      "packaged_source_snapshot": "source_snapshot/frontend/src/components/Hero.tsx"
+    },
+    {
+      "id": "atlas_draw",
+      "path": "web/companion/renderer.js",
+      "source_absolute_path": "F:\\桌面\\COMP4431_Project\\web\\companion\\renderer.js",
+      "start_line": 136,
+      "end_line": 145,
+      "source_sha256": "8167031081412fa43a9e1b3683cb402252ee97a9e1479b5f883c213d0d98ba46",
+      "code": "      const image=this.atlases.get(sprite.atlas);\n      if(!image){if(!this.pending.has(sprite.atlas))this.ensureAtlas(sprite.atlas);return;}\n      const bounds=this.data.atlases[sprite.atlas].frames[String(sprite.source_index)];\n      if(!bounds){this.fallback('frame_missing');return;}\n      const key=`${sprite.atlas}:${sprite.source_index}:${clip.flip}`;\n      if(!force&&key===this.lastDraw)return;\n      const c=this.context,w=this.canvas.width,h=this.canvas.height,size=Math.min(w,h);\n      c.clearRect(0,0,w,h);c.save();c.imageSmoothingEnabled=true;c.imageSmoothingQuality='high';\n      c.translate(w/2,h/2);if(clip.flip)c.scale(-1,1);\n      c.drawImage(image,bounds.x,bounds.y,bounds.w,bounds.h,-size/2,-size/2,size,size);c.restore();",
+      "txt_path": "F:\\桌面\\COMP4431_Project\\output\\presentations\\FinPilot_evidence_work\\assets\\code\\atlas_draw.txt",
+      "txt_sha256": "4bd62b324d49a9bf71ac551c19b580ae846edf93baefc12210d3230e313b3df2",
+      "png_path": "F:\\桌面\\COMP4431_Project\\output\\presentations\\FinPilot_evidence_work\\assets\\code\\atlas_draw.png",
+      "png_sha256": "a5e8f44024d5f2e552a95ff43d8fdcf2f718d5afb1dbb37b4221d1f63e3bd844",
+      "pixels": [
+        1200,
+        1338
+      ],
+      "logical_lines": 10,
+      "visual_rows": 22,
+      "visual_row_map": [
+        {
+          "source_line": 136,
+          "continuation": false,
+          "text": "      const image=this.atlases.get(sprite.atlas);"
+        },
+        {
+          "source_line": 137,
+          "continuation": false,
+          "text": "      if(!image){if(!this.pending.has("
+        },
+        {
+          "source_line": 137,
+          "continuation": true,
+          "text": "sprite.atlas))this.ensureAtlas(sprite.atlas);"
+        },
+        {
+          "source_line": 137,
+          "continuation": true,
+          "text": "return;}"
+        },
+        {
+          "source_line": 138,
+          "continuation": false,
+          "text": "      const bounds=this.data.atlases["
+        },
+        {
+          "source_line": 138,
+          "continuation": true,
+          "text": "sprite.atlas].frames[String(sprite.source_index)]"
+        },
+        {
+          "source_line": 138,
+          "continuation": true,
+          "text": ";"
+        },
+        {
+          "source_line": 139,
+          "continuation": false,
+          "text": "      if(!bounds){this.fallback('frame_missing');"
+        },
+        {
+          "source_line": 139,
+          "continuation": true,
+          "text": "return;}"
+        },
+        {
+          "source_line": 140,
+          "continuation": false,
+          "text": "      const key=`${sprite.atlas}:${"
+        },
+        {
+          "source_line": 140,
+          "continuation": true,
+          "text": "sprite.source_index}:${clip.flip}`;"
+        },
+        {
+          "source_line": 141,
+          "continuation": false,
+          "text": "      if(!force&&key===this.lastDraw)return;"
+        },
+        {
+          "source_line": 142,
+          "continuation": false,
+          "text": "      const c=this.context,w=this.canvas.width,h="
+        },
+        {
+          "source_line": 142,
+          "continuation": true,
+          "text": "this.canvas.height,size=Math.min(w,h);"
+        },
+        {
+          "source_line": 143,
+          "continuation": false,
+          "text": "      c.clearRect(0,0,w,h);c.save();"
+        },
+        {
+          "source_line": 143,
+          "continuation": true,
+          "text": "c.imageSmoothingEnabled=true;"
+        },
+        {
+          "source_line": 143,
+          "continuation": true,
+          "text": "c.imageSmoothingQuality='high';"
+        },
+        {
+          "source_line": 144,
+          "continuation": false,
+          "text": "      c.translate(w/2,h/2);if(clip.flip)c.scale(-"
+        },
+        {
+          "source_line": 144,
+          "continuation": true,
+          "text": "1,1);"
+        },
+        {
+          "source_line": 145,
+          "continuation": false,
+          "text": "      c.drawImage(image,bounds.x,bounds.y,"
+        },
+        {
+          "source_line": 145,
+          "continuation": true,
+          "text": "bounds.w,bounds.h,-size/2,-size/2,size,size);"
+        },
+        {
+          "source_line": 145,
+          "continuation": true,
+          "text": "c.restore();"
+        }
+      ],
+      "source_snapshot_path": "source_snapshot/web/companion/renderer.js",
+      "packaged_source_snapshot": "source_snapshot/web/companion/renderer.js"
+    },
+    {
+      "id": "session_guard",
+      "path": "web/companion/client.js",
+      "source_absolute_path": "F:\\桌面\\COMP4431_Project\\web\\companion\\client.js",
+      "start_line": 35,
+      "end_line": 44,
+      "source_sha256": "d18bf1f7a16dc164d6f55301fffb3f3c7232a1a2bdb9cf5495b25b6379cf5135",
+      "code": "    async function sync() {\n      clearTimeout(syncTimer);syncTimer = null;\n      const sid = connection?.session_id;\n      if (destroyed || !shouldSync(sid)) return null;\n      const serial = ++syncSerial, generation = connection.generation, epoch = connection.epoch;\n      const controller = new AbortController(); controllers.add(controller);\n      try {\n        const session = await request(`/api/sessions/${encodeURIComponent(sid)}`, {signal:controller.signal});\n        if (destroyed || serial !== syncSerial || connection?.epoch !== epoch || connection?.generation !== generation || connection?.session_id !== sid || !shouldSync(sid)) return null;\n        notify('onSession', session); return session;",
+      "txt_path": "F:\\桌面\\COMP4431_Project\\output\\presentations\\FinPilot_evidence_work\\assets\\code\\session_guard.txt",
+      "txt_sha256": "8e2219cb3faedf3bb50c5ca539dabbd72baddcdd03cda856251ba9eab304ec58",
+      "png_path": "F:\\桌面\\COMP4431_Project\\output\\presentations\\FinPilot_evidence_work\\assets\\code\\session_guard.png",
+      "png_sha256": "1cf92c3742f04ce8e931f8beaeb0d0f452d2309160c6d053a5c9a55ac4e6a7b0",
+      "pixels": [
+        1200,
+        1230
+      ],
+      "logical_lines": 10,
+      "visual_rows": 20,
+      "visual_row_map": [
+        {
+          "source_line": 35,
+          "continuation": false,
+          "text": "    async function sync() {"
+        },
+        {
+          "source_line": 36,
+          "continuation": false,
+          "text": "      clearTimeout(syncTimer);syncTimer = null;"
+        },
+        {
+          "source_line": 37,
+          "continuation": false,
+          "text": "      const sid = connection?.session_id;"
+        },
+        {
+          "source_line": 38,
+          "continuation": false,
+          "text": "      if (destroyed || !shouldSync(sid)) return "
+        },
+        {
+          "source_line": 38,
+          "continuation": true,
+          "text": "null;"
+        },
+        {
+          "source_line": 39,
+          "continuation": false,
+          "text": "      const serial = ++syncSerial, generation = "
+        },
+        {
+          "source_line": 39,
+          "continuation": true,
+          "text": "connection.generation, epoch = connection.epoch;"
+        },
+        {
+          "source_line": 40,
+          "continuation": false,
+          "text": "      const controller = new AbortController(); "
+        },
+        {
+          "source_line": 40,
+          "continuation": true,
+          "text": "controllers.add(controller);"
+        },
+        {
+          "source_line": 41,
+          "continuation": false,
+          "text": "      try {"
+        },
+        {
+          "source_line": 42,
+          "continuation": false,
+          "text": "        const session = await request("
+        },
+        {
+          "source_line": 42,
+          "continuation": true,
+          "text": "`/api/sessions/${encodeURIComponent(sid)}`, {"
+        },
+        {
+          "source_line": 42,
+          "continuation": true,
+          "text": "signal:controller.signal});"
+        },
+        {
+          "source_line": 43,
+          "continuation": false,
+          "text": "        if (destroyed || serial !== syncSerial "
+        },
+        {
+          "source_line": 43,
+          "continuation": true,
+          "text": "|| connection?.epoch !== epoch || "
+        },
+        {
+          "source_line": 43,
+          "continuation": true,
+          "text": "connection?.generation !== generation || "
+        },
+        {
+          "source_line": 43,
+          "continuation": true,
+          "text": "connection?.session_id !== sid || !shouldSync("
+        },
+        {
+          "source_line": 43,
+          "continuation": true,
+          "text": "sid)) return null;"
+        },
+        {
+          "source_line": 44,
+          "continuation": false,
+          "text": "        notify('onSession', session); return "
+        },
+        {
+          "source_line": 44,
+          "continuation": true,
+          "text": "session;"
+        }
+      ],
+      "source_snapshot_path": "source_snapshot/web/companion/client.js",
+      "packaged_source_snapshot": "source_snapshot/web/companion/client.js"
+    },
+    {
+      "id": "sse_transport",
+      "path": "web/companion/client.js",
+      "source_absolute_path": "F:\\桌面\\COMP4431_Project\\web\\companion\\client.js",
+      "start_line": 85,
+      "end_line": 94,
+      "source_sha256": "d18bf1f7a16dc164d6f55301fffb3f3c7232a1a2bdb9cf5495b25b6379cf5135",
+      "code": "    function openEvents() {\n      if (destroyed) return;\n      source = new EventSource(`/api/companion/events?surface=${surface}`);\n      for (const name of ['reset','connection.changed','activity','session.changed','analysis.changed','session.deleted']) source.addEventListener(name,eventReceived);\n      source.onopen = () => {\n        online = true; notify('onStatus',{connected:true,error:null});\n        // Reconnection always reconciles the explicit binding, never scans chats.\n        readConnection().then(queueSync).catch(error => notify('onStatus',{connected:true,error:error.message}));\n      };\n      source.onerror = () => { online = false; notify('onStatus',{connected:false,error:'connection_lost'}); };",
+      "txt_path": "F:\\桌面\\COMP4431_Project\\output\\presentations\\FinPilot_evidence_work\\assets\\code\\sse_transport.txt",
+      "txt_sha256": "a9c7a18a0191f515faba9ef5b2d5fa694ef07449a353b83ee21bf04fe05a7dc0",
+      "png_path": "F:\\桌面\\COMP4431_Project\\output\\presentations\\FinPilot_evidence_work\\assets\\code\\sse_transport.png",
+      "png_sha256": "30581cfe6213d7d9b956d42ab34b3c327a3cd255e1f9b9173a2b044e7a561ef0",
+      "pixels": [
+        1200,
+        1284
+      ],
+      "logical_lines": 10,
+      "visual_rows": 21,
+      "visual_row_map": [
+        {
+          "source_line": 85,
+          "continuation": false,
+          "text": "    function openEvents() {"
+        },
+        {
+          "source_line": 86,
+          "continuation": false,
+          "text": "      if (destroyed) return;"
+        },
+        {
+          "source_line": 87,
+          "continuation": false,
+          "text": "      source = new EventSource("
+        },
+        {
+          "source_line": 87,
+          "continuation": true,
+          "text": "`/api/companion/events?surface=${surface}`);"
+        },
+        {
+          "source_line": 88,
+          "continuation": false,
+          "text": "      for (const name of ['reset',"
+        },
+        {
+          "source_line": 88,
+          "continuation": true,
+          "text": "'connection.changed','activity',"
+        },
+        {
+          "source_line": 88,
+          "continuation": true,
+          "text": "'session.changed','analysis.changed',"
+        },
+        {
+          "source_line": 88,
+          "continuation": true,
+          "text": "'session.deleted']) source.addEventListener(name,"
+        },
+        {
+          "source_line": 88,
+          "continuation": true,
+          "text": "eventReceived);"
+        },
+        {
+          "source_line": 89,
+          "continuation": false,
+          "text": "      source.onopen = () => {"
+        },
+        {
+          "source_line": 90,
+          "continuation": false,
+          "text": "        online = true; notify('onStatus',{"
+        },
+        {
+          "source_line": 90,
+          "continuation": true,
+          "text": "connected:true,error:null});"
+        },
+        {
+          "source_line": 91,
+          "continuation": false,
+          "text": "        // Reconnection always reconciles the "
+        },
+        {
+          "source_line": 91,
+          "continuation": true,
+          "text": "explicit binding, never scans chats."
+        },
+        {
+          "source_line": 92,
+          "continuation": false,
+          "text": "        readConnection().then(queueSync).catch("
+        },
+        {
+          "source_line": 92,
+          "continuation": true,
+          "text": "error => notify('onStatus',{connected:true,"
+        },
+        {
+          "source_line": 92,
+          "continuation": true,
+          "text": "error:error.message}));"
+        },
+        {
+          "source_line": 93,
+          "continuation": false,
+          "text": "      };"
+        },
+        {
+          "source_line": 94,
+          "continuation": false,
+          "text": "      source.onerror = () => { online = false; "
+        },
+        {
+          "source_line": 94,
+          "continuation": true,
+          "text": "notify('onStatus',{connected:false,"
+        },
+        {
+          "source_line": 94,
+          "continuation": true,
+          "text": "error:'connection_lost'}); };"
+        }
+      ],
+      "source_snapshot_path": "source_snapshot/web/companion/client.js",
+      "packaged_source_snapshot": "source_snapshot/web/companion/client.js"
+    },
+    {
+      "id": "atlas_draw_short",
+      "path": "web/companion/renderer.js",
+      "source_absolute_path": "F:\\桌面\\COMP4431_Project\\web\\companion\\renderer.js",
+      "start_line": 142,
+      "end_line": 145,
+      "source_sha256": "8167031081412fa43a9e1b3683cb402252ee97a9e1479b5f883c213d0d98ba46",
+      "code": "      const c=this.context,w=this.canvas.width,h=this.canvas.height,size=Math.min(w,h);\n      c.clearRect(0,0,w,h);c.save();c.imageSmoothingEnabled=true;c.imageSmoothingQuality='high';\n      c.translate(w/2,h/2);if(clip.flip)c.scale(-1,1);\n      c.drawImage(image,bounds.x,bounds.y,bounds.w,bounds.h,-size/2,-size/2,size,size);c.restore();",
+      "txt_path": "F:\\桌面\\COMP4431_Project\\output\\presentations\\FinPilot_evidence_work\\assets\\code\\atlas_draw_short.txt",
+      "txt_sha256": "3675b7d25a52f073afd00407fec8c845af68e5fff9cd6bcd42964ceb5c9e50f7",
+      "png_path": "F:\\桌面\\COMP4431_Project\\output\\presentations\\FinPilot_evidence_work\\assets\\code\\atlas_draw_short.png",
+      "png_sha256": "657b8ae8a08cf12def115917769b929396e6e76b8989d99a7a09ae9f62f7304a",
+      "pixels": [
+        1200,
+        690
+      ],
+      "logical_lines": 4,
+      "font_size_px": 38,
+      "canvas_width_px": 1200,
+      "visual_rows": 10,
+      "visual_row_map": [
+        {
+          "source_line": 142,
+          "continuation": false,
+          "text": "      const c=this.context,w=this.canvas.width,h="
+        },
+        {
+          "source_line": 142,
+          "continuation": true,
+          "text": "this.canvas.height,size=Math.min(w,h);"
+        },
+        {
+          "source_line": 143,
+          "continuation": false,
+          "text": "      c.clearRect(0,0,w,h);c.save();"
+        },
+        {
+          "source_line": 143,
+          "continuation": true,
+          "text": "c.imageSmoothingEnabled=true;"
+        },
+        {
+          "source_line": 143,
+          "continuation": true,
+          "text": "c.imageSmoothingQuality='high';"
+        },
+        {
+          "source_line": 144,
+          "continuation": false,
+          "text": "      c.translate(w/2,h/2);if(clip.flip)c.scale(-"
+        },
+        {
+          "source_line": 144,
+          "continuation": true,
+          "text": "1,1);"
+        },
+        {
+          "source_line": 145,
+          "continuation": false,
+          "text": "      c.drawImage(image,bounds.x,bounds.y,"
+        },
+        {
+          "source_line": 145,
+          "continuation": true,
+          "text": "bounds.w,bounds.h,-size/2,-size/2,size,size);"
+        },
+        {
+          "source_line": 145,
+          "continuation": true,
+          "text": "c.restore();"
+        }
+      ],
+      "source_snapshot_path": "source_snapshot/web/companion/renderer.js",
+      "packaged_source_snapshot": "source_snapshot/web/companion/renderer.js"
+    },
+    {
+      "id": "session_guard_short",
+      "path": "web/companion/client.js",
+      "source_absolute_path": "F:\\桌面\\COMP4431_Project\\web\\companion\\client.js",
+      "start_line": 41,
+      "end_line": 44,
+      "source_sha256": "d18bf1f7a16dc164d6f55301fffb3f3c7232a1a2bdb9cf5495b25b6379cf5135",
+      "code": "      try {\n        const session = await request(`/api/sessions/${encodeURIComponent(sid)}`, {signal:controller.signal});\n        if (destroyed || serial !== syncSerial || connection?.epoch !== epoch || connection?.generation !== generation || connection?.session_id !== sid || !shouldSync(sid)) return null;\n        notify('onSession', session); return session;",
+      "txt_path": "F:\\桌面\\COMP4431_Project\\output\\presentations\\FinPilot_evidence_work\\assets\\code\\session_guard_short.txt",
+      "txt_sha256": "9abf3e8eafd3915248fe3eed6b8347d48dd90059cff82d1fe5a066a2d281018a",
+      "png_path": "F:\\桌面\\COMP4431_Project\\output\\presentations\\FinPilot_evidence_work\\assets\\code\\session_guard_short.png",
+      "png_sha256": "9838d6df448d29177caaf1dcda8d57a7fd427e2653df42a0c98499b7c0796ab3",
+      "pixels": [
+        1200,
+        744
+      ],
+      "logical_lines": 4,
+      "font_size_px": 38,
+      "canvas_width_px": 1200,
+      "visual_rows": 11,
+      "visual_row_map": [
+        {
+          "source_line": 41,
+          "continuation": false,
+          "text": "      try {"
+        },
+        {
+          "source_line": 42,
+          "continuation": false,
+          "text": "        const session = await request("
+        },
+        {
+          "source_line": 42,
+          "continuation": true,
+          "text": "`/api/sessions/${encodeURIComponent(sid)}`, {"
+        },
+        {
+          "source_line": 42,
+          "continuation": true,
+          "text": "signal:controller.signal});"
+        },
+        {
+          "source_line": 43,
+          "continuation": false,
+          "text": "        if (destroyed || serial !== syncSerial "
+        },
+        {
+          "source_line": 43,
+          "continuation": true,
+          "text": "|| connection?.epoch !== epoch || "
+        },
+        {
+          "source_line": 43,
+          "continuation": true,
+          "text": "connection?.generation !== generation || "
+        },
+        {
+          "source_line": 43,
+          "continuation": true,
+          "text": "connection?.session_id !== sid || !shouldSync("
+        },
+        {
+          "source_line": 43,
+          "continuation": true,
+          "text": "sid)) return null;"
+        },
+        {
+          "source_line": 44,
+          "continuation": false,
+          "text": "        notify('onSession', session); return "
+        },
+        {
+          "source_line": 44,
+          "continuation": true,
+          "text": "session;"
+        }
+      ],
+      "source_snapshot_path": "source_snapshot/web/companion/client.js",
+      "packaged_source_snapshot": "source_snapshot/web/companion/client.js"
+    },
+    {
+      "id": "request_guard",
+      "path": "web/app.js",
+      "source_absolute_path": "F:\\桌面\\COMP4431_Project\\output\\presentations\\FinPilot_evidence_work\\source_snapshot\\web\\app.js",
+      "start_line": 1217,
+      "end_line": 1217,
+      "source_sha256": "a8f93a7b1d1b404320968819b64536939cbcbc770e272bfe5a399d1d3ede0960",
+      "code": "  try { const result=await api('/api/calculate',{ method:'POST',body:JSON.stringify(body) });if(sequence===state.calculationSequence)showCalculation(result); }",
+      "txt_path": "F:\\桌面\\COMP4431_Project\\output\\presentations\\FinPilot_evidence_work\\assets\\code\\request_guard.txt",
+      "txt_sha256": "67eab5a62c9d62f32cbc3ab0626bbd52beceb534dcbc65dd1615baaac8d73c10",
+      "png_path": "F:\\桌面\\COMP4431_Project\\output\\presentations\\FinPilot_evidence_work\\assets\\code\\request_guard.png",
+      "png_sha256": "dfc869533733a90255a204539e8c85c6ac5d25a594dfa823564d6538fafab172",
+      "pixels": [
+        1200,
+        366
+      ],
+      "logical_lines": 1,
+      "font_size_px": 38,
+      "canvas_width_px": 1200,
+      "visual_rows": 4,
+      "visual_row_map": [
+        {
+          "source_line": 1217,
+          "continuation": false,
+          "text": "  try { const result=await api('/api/calculate',{"
+        },
+        {
+          "source_line": 1217,
+          "continuation": true,
+          "text": " method:'POST',body:JSON.stringify(body) });if("
+        },
+        {
+          "source_line": 1217,
+          "continuation": true,
+          "text": "sequence===state.calculationSequence)"
+        },
+        {
+          "source_line": 1217,
+          "continuation": true,
+          "text": "showCalculation(result); }"
+        }
+      ],
+      "packaged_source_snapshot": "source_snapshot/web/app.js"
+    },
+    {
+      "id": "request_guard_wide",
+      "path": "web/app.js",
+      "source_absolute_path": "F:\\桌面\\COMP4431_Project\\output\\presentations\\FinPilot_evidence_work\\source_snapshot\\web\\app.js",
+      "start_line": 1217,
+      "end_line": 1217,
+      "source_sha256": "a8f93a7b1d1b404320968819b64536939cbcbc770e272bfe5a399d1d3ede0960",
+      "code": "  try { const result=await api('/api/calculate',{ method:'POST',body:JSON.stringify(body) });if(sequence===state.calculationSequence)showCalculation(result); }",
+      "txt_path": "F:\\桌面\\COMP4431_Project\\output\\presentations\\FinPilot_evidence_work\\assets\\code\\request_guard_wide.txt",
+      "txt_sha256": "67eab5a62c9d62f32cbc3ab0626bbd52beceb534dcbc65dd1615baaac8d73c10",
+      "png_path": "F:\\桌面\\COMP4431_Project\\output\\presentations\\FinPilot_evidence_work\\assets\\code\\request_guard_wide.png",
+      "png_sha256": "d5108e261b830248d0cd803feb73a7c0c54c3c6aaf1aa8e7c6fd74b77607ec38",
+      "pixels": [
+        2400,
+        274
+      ],
+      "logical_lines": 1,
+      "font_size_px": 44,
+      "canvas_width_px": 2400,
+      "visual_rows": 2,
+      "visual_row_map": [
+        {
+          "source_line": 1217,
+          "continuation": false,
+          "text": "  try { const result=await api('/api/calculate',{ method:'POST',body:JSON.stringify(body) }"
+        },
+        {
+          "source_line": 1217,
+          "continuation": true,
+          "text": ");if(sequence===state.calculationSequence)showCalculation(result); }"
+        }
+      ],
+      "packaged_source_snapshot": "source_snapshot/web/app.js"
+    }
+  ],
+  "source_snapshot_captured_at_utc": "2026-11-11T13:23:01.614935+00:00",
+  "source_snapshot_policy": "Complete whitelisted source files frozen during this update. Slides cite these capture-time line numbers. Later concurrent repository edits do not alter these evidence files."
+}

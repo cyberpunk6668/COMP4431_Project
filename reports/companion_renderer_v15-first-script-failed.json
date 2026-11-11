@@ -1,0 +1,17 @@
+{
+  "checked_at": "2026-11-11T12:09:02.386380+00:00",
+  "status": "failed",
+  "scope": "Independent actual Edge Canvas2D renderer; only local asset HTTP responses.",
+  "model_calls": 0,
+  "broker_calls": 0,
+  "checks": [
+    "actual_canvas2d_pixels",
+    "pinned_asset_revision",
+    "lazy_action_loading"
+  ],
+  "viewports": [],
+  "screenshots": [],
+  "error_type": "TypeError",
+  "error": "Page.wait_for_function() takes 2 positional arguments but 3 were given",
+  "page_errors": []
+}

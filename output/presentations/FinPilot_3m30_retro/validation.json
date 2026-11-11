@@ -1,0 +1,104 @@
+{
+  "status": "passed",
+  "slide_count": 6,
+  "aspect_ratio": "16:9",
+  "slide_size_emu": [
+    9144000,
+    5143500
+  ],
+  "speaker_notes_match_speech_md": true,
+  "english_word_count": 383,
+  "planned_seconds": 210,
+  "planned_seconds_by_speaker": [
+    40,
+    60,
+    55,
+    55
+  ],
+  "words_by_speaker": [
+    72,
+    111,
+    101,
+    99
+  ],
+  "timing_limitation": "Planned from word counts, not an audio rehearsal measurement.",
+  "backend": "built-in image tool",
+  "primary_skill": "ningzimu/codex-ppt-skill",
+  "primary_skill_commit": "941dcafe2f23ea4ae61de99e9b22fb0ef3d9e06c",
+  "visual_review": "All six original images inspected; embedded images 2 and 5 inspected after assembly compression; final montage inspected.",
+  "repair": "Slide 6 edited with same built-in image tool to show bidirectional connections.",
+  "pptx_sha256": "0f824da0965afb4792ea6b40e3285722c43bdb99c62241f1d44c2740f49fb9cb",
+  "not_claimed": [
+    "PowerPoint native application opened",
+    "live model/broker retested",
+    "audio timing measured"
+  ],
+  "slides": [
+    {
+      "slide": 1,
+      "image_pixels": [
+        1672,
+        941
+      ],
+      "embedded_image_format": "png",
+      "note_words": 72,
+      "notes_match": true,
+      "full_slide_picture": true
+    },
+    {
+      "slide": 2,
+      "image_pixels": [
+        1672,
+        941
+      ],
+      "embedded_image_format": "jpg",
+      "note_words": 58,
+      "notes_match": true,
+      "full_slide_picture": true
+    },
+    {
+      "slide": 3,
+      "image_pixels": [
+        1671,
+        941
+      ],
+      "embedded_image_format": "png",
+      "note_words": 53,
+      "notes_match": true,
+      "full_slide_picture": true
+    },
+    {
+      "slide": 4,
+      "image_pixels": [
+        1671,
+        941
+      ],
+      "embedded_image_format": "png",
+      "note_words": 101,
+      "notes_match": true,
+      "full_slide_picture": true
+    },
+    {
+      "slide": 5,
+      "image_pixels": [
+        1672,
+        941
+      ],
+      "embedded_image_format": "jpg",
+      "note_words": 66,
+      "notes_match": true,
+      "full_slide_picture": true
+    },
+    {
+      "slide": 6,
+      "image_pixels": [
+        1672,
+        941
+      ],
+      "embedded_image_format": "png",
+      "note_words": 33,
+      "notes_match": true,
+      "full_slide_picture": true
+    }
+  ]
+}

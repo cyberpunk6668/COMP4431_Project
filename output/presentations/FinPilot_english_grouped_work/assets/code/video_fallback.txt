@@ -1,0 +1,12 @@
+  useEffect(() => {
+    if (status !== 'loading') return;
+    const timer = window.setTimeout(() => setMedia('fallback'), 2500);
+    return () => window.clearTimeout(timer);
+  }, [status]);
+
+  const visibleMedia = stopped && !reduced && requested && media === 'ready' ? 'ready' : status;
+  return <div className="hero-background" ref={layer} aria-hidden="true" data-media={visibleMedia}>
+    <img className="hero-poster" src={posterURL} alt="" fetchPriority="high" />
+    {requested && !reduced && <video ref={video} className="hero-video" data-testid="hero-video"
+      src={videoURL} autoPlay={!stopped} loop muted playsInline preload="auto"
+      onCanPlay={() => setMedia('ready')} onError={() => setMedia('fallback')} />}

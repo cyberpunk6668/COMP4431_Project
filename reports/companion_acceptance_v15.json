@@ -1,0 +1,158 @@
+{
+  "checked_at": "2026-11-11T12:58:23.569584+00:00",
+  "version": "15.0.0",
+  "status": "implemented_and_verified_with_explicit_native_manual_limits",
+  "scope": "FinPilot v15 implementation, attributed 2D assets, three-viewport UI, cross-profile sync, packaged native contracts, and actual historical-data/DeepSeek two-surface workflow. Physical native input and hardware coverage are not fully certified.",
+  "character": {
+    "kind": "existing attributed whale-maid 2D sequences",
+    "upstream_commit": "7661c8b304c5400701f91da01b1a643a207331de",
+    "runtime_image_bytes": 1140772,
+    "new_3d_character": false,
+    "license_scope": "Noncommercial demo; attribution/custom contribution terms plus CC BY-NC-SA 4.0 character derivatives kept separately from app code"
+  },
+  "verification": {
+    "python": {
+      "status": "passed",
+      "tests": 717,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "external_calls": 0
+    },
+    "renderer": {
+      "status": "passed",
+      "checks": 17
+    },
+    "workspace_and_demo": {
+      "status": "passed",
+      "checks_per_viewport": 24,
+      "widths": [
+        320,
+        390,
+        1440
+      ]
+    },
+    "pet_browser": {
+      "status": "passed",
+      "checks_per_viewport": 15,
+      "widths": [
+        320,
+        390,
+        1440
+      ]
+    },
+    "sse_shared_sessions": {
+      "status": "passed",
+      "checks": 12,
+      "provider": "controlled in-process; actual SSE/HTTP/persistence"
+    },
+    "native": {
+      "status": "passed_with_manual_hardware_limits",
+      "instrumented_checks": 9,
+      "physical_input_certified": false,
+      "physical_monitors": 1,
+      "hardware_dpi_scale": 1.5
+    },
+    "build": {
+      "status": "passed",
+      "host_contract_tests": 4
+    },
+    "final_actual_models": {
+      "status": "passed",
+      "answer_turns": 2,
+      "generations": 3,
+      "schema_repairs": 1,
+      "new_ib_requests": 0,
+      "data": "Existing archived IBKR history, not fresh market capture",
+      "manual_review": "bounded_review_passed"
+    },
+    "all_script_owned_model_runs": {
+      "chat_http_requests": 6,
+      "generations": 11,
+      "schema_repairs": 5,
+      "new_broker_requests": 0
+    }
+  },
+  "evidence": {
+    "companion_renderer_v15": {
+      "path": "reports/companion_renderer_v15.json",
+      "sha256": "4adcd9e96888697f452d450147c4f2c31df4b1700d11d86717ee57d2922d7d0f",
+      "status": "passed"
+    },
+    "workspace_companion_v15": {
+      "path": "reports/workspace_companion_v15.json",
+      "sha256": "92dbc722f7439338dac933eb9ae5617724f77d49a17a801c490a346973915f3a",
+      "status": "passed"
+    },
+    "pet_browser_v15": {
+      "path": "reports/pet_browser_v15.json",
+      "sha256": "68165b50abe5eb2fccc2324e221cc9b5333e632b0b9990b7010be3d237108bdb",
+      "status": "passed"
+    },
+    "companion_sync_browser_v15": {
+      "path": "reports/companion_sync_browser_v15.json",
+      "sha256": "0f3c962b1be8f499a334ebefc5801842815a28c8b552ff4628f04af6cf0059ac",
+      "status": "passed"
+    },
+    "desktop_build_v15": {
+      "path": "reports/desktop_build_v15.json",
+      "sha256": "a6ca2b985d02cc85e41317c2fa52c2bbef406eeed56bec3b86941801ceb7f2ed",
+      "status": "passed"
+    },
+    "python_regression_v15": {
+      "path": "reports/python_regression_v15.json",
+      "sha256": "ea833256b9cf8ebafd66bd20b78f8d2c52a3818c693f1dceb6630bfc6ebb225d",
+      "status": "passed"
+    },
+    "native_companion_v15": {
+      "path": "reports/native_companion_v15.json",
+      "sha256": "26a068062b0f92f950d7f8f3d5189462e5c552ac6c828080294d2849e3bbd09b",
+      "status": "passed_with_manual_hardware_limits"
+    },
+    "pet_cloud_v15": {
+      "path": "reports/pet_cloud_v15.json",
+      "sha256": "c2a360cd55d066b4515edc3598e1539adb3977d148590a6fd8deaafd3dffdbda",
+      "status": "passed"
+    },
+    "cloud_validation_history_v15": {
+      "path": "reports/cloud_validation_history_v15.json",
+      "sha256": "cbafaa94dae8ffefeb0e4e7e0f9340a4b38a53c30876a25dbaea81487bd401f5",
+      "status": "final_two_surface_run_passed_prior_failures_retained"
+    }
+  },
+  "source_sha256": {
+    "app/history_chat.py": "4777a2d615176774c060a0a93ae41ba9c9764f197d08f19bc115b9ab86dc5af6",
+    "app/options_claims.py": "92635137fde703a998086e7dc75ad3cc09e710042f2fb470cb686f763cd04048",
+    "app/expert_grounding.py": "f3f2509ea5282b050c9b2deeaba2f7ca0260cbd3927862290c072f4f3823a008",
+    "web/companion/client.js": "d18bf1f7a16dc164d6f55301fffb3f3c7232a1a2bdb9cf5495b25b6379cf5135",
+    "web/companion/messages.js": "625395a42fd4ce33c944a2e43720b667eeeeb9e99f68544d63f52bbde7a3c7f8",
+    "web/pet.js": "9f6dfcaf1064a90bc85f7d6f35da51965b92f76f7a5e53c9918ac3c3fe8d9d79",
+    "web/app.js": "f28b8addef85474aa5dcb8ad5a7024fda232375f497e60abf3c9528b82cf2bb2"
+  },
+  "portable": {
+    "path": "desktop/artifacts/FinPilotPet-15.0.0-win-x64-portable.exe",
+    "bytes": 109966509,
+    "sha256": "64b4f47bc9d7522c9c62c6f3a63903a5fcca952865d84f92dcd5892cb92b80f0"
+  },
+  "package_integrity": "Generated separately as dist/submission_manifest_v15.json and dist/package_check_v15.json after this report; package status is not inferred here.",
+  "service": {
+    "final_main_backend_reloaded": true,
+    "application": "FinPilot",
+    "version": "15.0.0",
+    "host": "127.0.0.1",
+    "port": 8000,
+    "desktop_started_through_final_launcher": true,
+    "explicit_session_connection_after_service_restart": "Not automatically restored; select and connect intentionally."
+  },
+  "boundaries": [
+    "No new 3D character; legacy robot remains a labeled option.",
+    "Portable requires installed project Python and backend; it does not bundle Python or the local base model.",
+    "No automatic LLM, IB collection, account agent, speech-model download or background financial loops.",
+    "Physical drag/tray/alpha hit tests and additional hardware DPI/monitors/mobile devices are not certified.",
+    "The user pressed physical Escape to stop Computer Use during the final post-launch UI observation; no further GUI actions were taken.",
+    "Financial source rules are bounded lexical checks, not general entailment, forecasting accuracy or a guarantee every future answer passes.",
+    "Archived OI and BBO remain missing; unverified bar coverage changes remain incomparable."
+  ],
+  "prior_failures_retained": true,
+  "user_credentials_or_chat_database_packaged": false
+}

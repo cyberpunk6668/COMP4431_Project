@@ -1,0 +1,151 @@
+{
+  "checked_at": "2026-11-11T05:43:35.041951+00:00",
+  "symbol": "AAPL",
+  "requested_market_data_type": 4,
+  "observation_seconds": 8,
+  "scope": "Actual local IB Gateway, one stock-only stream, no account/order/model requests.",
+  "wire": [
+    {
+      "at": "2026-11-11T05:43:35.868596+00:00",
+      "fields": [
+        "58",
+        "1",
+        "2",
+        "3"
+      ]
+    },
+    {
+      "at": "2026-11-11T05:43:39.096337+00:00",
+      "fields": [
+        "2",
+        "6",
+        "2",
+        "74",
+        "0"
+      ]
+    },
+    {
+      "at": "2026-11-11T05:43:39.097656+00:00",
+      "fields": [
+        "1",
+        "6",
+        "2",
+        "75",
+        "348.51",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "at": "2026-11-11T05:43:39.097656+00:00",
+      "fields": [
+        "1",
+        "6",
+        "2",
+        "66",
+        "-1.00",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "at": "2026-11-11T05:43:39.097656+00:00",
+      "fields": [
+        "1",
+        "6",
+        "2",
+        "67",
+        "-1.00",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "at": "2026-11-11T05:43:39.097656+00:00",
+      "fields": [
+        "1",
+        "6",
+        "2",
+        "76",
+        "0",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "at": "2026-11-11T05:43:39.097656+00:00",
+      "fields": [
+        "1",
+        "6",
+        "2",
+        "68",
+        "-1.00",
+        "0",
+        "0"
+      ]
+    }
+  ],
+  "callbacks": [
+    {
+      "kind": "feed",
+      "value": 3,
+      "before_fields": [],
+      "after_fields": []
+    },
+    {
+      "kind": "price",
+      "tick_type": 75,
+      "price": 348.51,
+      "mode": 3,
+      "retained_fields": []
+    },
+    {
+      "kind": "price",
+      "tick_type": 66,
+      "price": -1.0,
+      "mode": 3,
+      "retained_fields": []
+    },
+    {
+      "kind": "price",
+      "tick_type": 67,
+      "price": -1.0,
+      "mode": 3,
+      "retained_fields": []
+    },
+    {
+      "kind": "price",
+      "tick_type": 76,
+      "price": 0.0,
+      "mode": 3,
+      "retained_fields": []
+    },
+    {
+      "kind": "price",
+      "tick_type": 68,
+      "price": -1.0,
+      "mode": 3,
+      "retained_fields": []
+    }
+  ],
+  "status": "completed",
+  "underlying": {
+    "price": null,
+    "price_basis": null,
+    "bid": null,
+    "ask": null,
+    "last": null,
+    "received_at": null,
+    "quote_received_at": null,
+    "last_trade_at": null,
+    "market_data_type": 3,
+    "delayed_ticks_observed": true
+  },
+  "retained_values": {},
+  "broker_codes": [
+    2104,
+    2107,
+    2158,
+    10167
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "checked_at": "2026-11-10T08:15:38.056350+00:00",
+  "question": "For a positive APY, does dividing APY by 12 overstate or understate the equivalent monthly rate? Explain the formula, without numerical estimates.",
+  "passed": true,
+  "check_scope": "Targeted wording regression for the APY comparison error discovered in initial live sample; not broad semantic accuracy.",
+  "answer": "For a **positive APY**, dividing the APY by 12 **overstates** the equivalent monthly rate — it does not understate it.\n\n**The formula.** APY includes compounding. Given an APY y (as a decimal), the equivalent monthly rate is:\n\nmonthly rate = (1 + y)^(1/12) − 1\n\nThis is the twelfth root of (1 + y), minus 1 — the constant monthly growth factor that compounds to the stated annual yield.\n\n**Why dividing by 12 overstates it.** Dividing y by 12 is a simple linear split. But compounding means the annual growth is multiplicative, not additive: the monthly factor is the geometric mean of the annual factor, not its arithmetic share. For any positive y, the geometric-mean-based monthly rate (1 + y)^(1/12) − 1 is smaller than y/12. So y/12 is too high.\n\n**Boundary case.** At zero APY, both approaches give zero — the inequality only bites when the APY is positive. [effective-yield]\n\n**Caveats.** This assumes the APY is the true effective annual yield and that compounding is monthly; real account day counts and rules can differ. [effective-yield]\n\nThis is educational information, not financial advice.",
+  "sources": [
+    {
+      "id": "effective-yield",
+      "title": "名义利率与有效年收益率 / Nominal rate and APY",
+      "url": "https://www.consumerfinance.gov/rules-policy/regulations/1030/a/",
+      "snippet": "APY includes compounding. In a simplified monthly model, nominal annual rate r implies APY (1+r/12)^12-1; given APY y, monthly rate is (1+y)^(1/12)-1. Use decimal fractions for r and y in these formulas. Dividing a POSITIVE APY by 12 OVERSTATES the equivalent monthly rate: APY 5% means about 0.4074% monthly, not 0.4167%. Zero APY means zero monthly rate. Project form inputs nominal annual percentages: enter 5 for 5%. Actual disclosures may use different day counts and rules."
+    }
+  ],
+  "mode": "deepseek"
+}

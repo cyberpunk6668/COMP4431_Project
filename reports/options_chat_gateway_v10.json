@@ -1,0 +1,167 @@
+{
+  "checked_at": "2026-11-11T05:04:12.459946+00:00",
+  "status": "passed",
+  "scope": "Real local IB Gateway AAPL snapshot requested as delayed, real DeepSeek, temporary isolated database. Not a guarantee of real-time quotes or investment correctness.",
+  "privacy": "No API key, account fields, session identifier, model prompts, raw provider JSON or raw contract quotes are saved in this report. Controlled server-answer excerpts and aggregate evidence are retained for review.",
+  "transport": "In-process FastAPI TestClient; actual external DeepSeek HTTPS request(s).",
+  "automatic_retries": 0,
+  "turns": [
+    {
+      "mode": "deepseek",
+      "warning": null,
+      "answer_excerpt": "仅解释已保存的 IBKR 样本；未重新获取行情。本地接收时间不能保证交易所行情的实时性。\n其中含延迟或冻结资料，近期收到也不等于当前市场报价。\n\n先说这批数据能站住脚的部分：它只覆盖一个标的、一个到期日的一小批合约，而且行情标记为延迟。持仓这一侧配对覆盖是完整的，所以“样本里看跌合约占未平仓量的比例”和“持仓集中在少数行权价”这类描述，可以当作这个样本内部的结构来看。 [g0.oi_coverage] [g0.oi_put_share] [g0.oi_top_share] [g0.oi_top_two_share]\n\n局限也很明确：双边报价覆盖为零，有效报价合约和近期实时报价合约都是零，所以买卖价差、平值隐含波动率、偏斜、跨式权利金这些价格类指标全部缺失。缺失只说明这批样本里没有可用证据，不能当成零，也不能据此推断市场定价。 [g0.quality_quote_coverage] [g0.quality_valid_quote_contracts] [g0.quality_fresh_live_quote_contracts] [g0.median_spread] [g0.atm_iv] [g0.skew_25_delta]\n\n至于“看跌合约更活跃是否等于多数人看空”，答案是不能。每笔成交都同时有一个买方和一个卖方，成交计数只说明合约换手了多少，不告诉你谁是主动方、是开新仓还是平旧仓。看跌合约的买方可能是在对冲下跌风险，卖方也可能只是在收取权利金，方向意图并不唯一。\n\n而且这批样本里，成交配对覆盖为零，成交总数和看跌成交占比都不可用，成交与持仓的共同覆盖也是零。所以连“看跌成交更活跃”这个前提，在这批数据里都没有得到证实；成交和持仓还按不同统计周期更新，不能简单相减来推断情绪变化。 [g0.volume_coverage] [g0.volume_total] [g0.volume_put_share] [g0.positioning_coverage] [g0.positioning_gap]\n\n更稳妥的做法是：等同一标的、同一到期日出现足够的双边报价和成对成交后，再在同一范围内比较看涨与看跌的成交和持仓结构，并留意价差是否窄到价格有意义。在那之前，只能把这批数据当作一个持仓结构的静态切片，不能当作市场情绪的结论。 [g0.quality_fresh_live_pair_coverage] [g0.quality_requested_contracts] [g0.quality_received_contracts]",
+      "analysis_binding_matches": true,
+      "answer_characters": 1077,
+      "cited_evidence": [
+        {
+          "id": "g0.oi_coverage",
+          "value": 1.0,
+          "unit": "fraction",
+          "matches_original": true
+        },
+        {
+          "id": "g0.oi_put_share",
+          "value": 0.36912296564195296,
+          "unit": "fraction",
+          "matches_original": true
+        },
+        {
+          "id": "g0.oi_top_share",
+          "value": 0.5128842676311031,
+          "unit": "fraction",
+          "matches_original": true
+        },
+        {
+          "id": "g0.oi_top_two_share",
+          "value": 0.8415461121157324,
+          "unit": "fraction",
+          "matches_original": true
+        },
+        {
+          "id": "g0.quality_quote_coverage",
+          "value": 0.0,
+          "unit": "fraction",
+          "matches_original": true
+        },
+        {
+          "id": "g0.quality_valid_quote_contracts",
+          "value": 0,
+          "unit": "contracts",
+          "matches_original": true
+        },
+        {
+          "id": "g0.quality_fresh_live_quote_contracts",
+          "value": 0,
+          "unit": "contracts",
+          "matches_original": true
+        },
+        {
+          "id": "g0.median_spread",
+          "value": null,
+          "unit": "percent",
+          "matches_original": true
+        },
+        {
+          "id": "g0.atm_iv",
+          "value": null,
+          "unit": "fraction",
+          "matches_original": true
+        },
+        {
+          "id": "g0.skew_25_delta",
+          "value": null,
+          "unit": "percentage_points",
+          "matches_original": true
+        },
+        {
+          "id": "g0.volume_coverage",
+          "value": 0.0,
+          "unit": "fraction",
+          "matches_original": true
+        },
+        {
+          "id": "g0.volume_total",
+          "value": null,
+          "unit": "contracts",
+          "matches_original": true
+        },
+        {
+          "id": "g0.volume_put_share",
+          "value": null,
+          "unit": "fraction",
+          "matches_original": true
+        },
+        {
+          "id": "g0.positioning_coverage",
+          "value": 0.0,
+          "unit": "fraction",
+          "matches_original": true
+        },
+        {
+          "id": "g0.positioning_gap",
+          "value": null,
+          "unit": "percentage_points",
+          "matches_original": true
+        },
+        {
+          "id": "g0.quality_fresh_live_pair_coverage",
+          "value": 0.0,
+          "unit": "fraction",
+          "matches_original": true
+        },
+        {
+          "id": "g0.quality_requested_contracts",
+          "value": 6,
+          "unit": "contracts",
+          "matches_original": true
+        },
+        {
+          "id": "g0.quality_received_contracts",
+          "value": 6,
+          "unit": "contracts",
+          "matches_original": true
+        }
+      ],
+      "scopes_and_original_times_match": true,
+      "realtime_guaranteed": false,
+      "snapshot_stale": false,
+      "has_snapshot_notice": true,
+      "contains_direction_or_purpose_limit_terms": true,
+      "model_request": {
+        "json_output": true,
+        "sent_evidence_count": 27,
+        "prior_chat_messages": 0
+      }
+    }
+  ],
+  "checks": [
+    "server_generated_persistent_uuid",
+    "one_aapl_snapshot_saved",
+    "unknown_analysis_rejected_before_cloud",
+    "local_evidence_values_match_original",
+    "unknown_evidence_rejected_locally",
+    "all_citations_resolve",
+    "scope_time_feed_retained",
+    "same_session_binding_persists",
+    "session_and_export_preserve_context",
+    "original_saved_analysis_unchanged",
+    "outgoing_model_evidence_matches_saved_aggregates",
+    "one_model_request_per_turn_no_retry"
+  ],
+  "model": "deepseek-flash",
+  "unknown_evidence_rejected_locally": true,
+  "analysis_id": "d20043a3-6f12-4d5c-8494-b69268323119",
+  "analysis_fingerprint": "e278be30bc8d3cbab806c9614a2996e2231f98f2836cb1a9e483d816b273f34f",
+  "market_scopes": [
+    {
+      "symbol": "AAPL",
+      "expiration": "2026-11-11",
+      "source": "ibkr",
+      "received_at": "2026-11-11T05:04:17.519965+00:00",
+      "market_data_status": "delayed",
+      "local_evidence_count": 21
+    }
+  ],
+  "real_model_requests": 1,
+  "interpretation_limits": "Automated acceptance verifies source grounding, model mode, evidence references and persistence. It does not establish universal correctness of financial reasoning or present market conditions."
+}

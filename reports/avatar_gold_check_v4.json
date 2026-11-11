@@ -1,0 +1,36 @@
+{
+  "checked_at": "2026-11-10T11:37:37.028074+00:00",
+  "checks": [
+    "actual_webgl2_r187_and_animation",
+    "native_svg_fallback_palette",
+    "state_colour_idle",
+    "state_colour_listening",
+    "state_colour_thinking",
+    "state_colour_speaking",
+    "state_colour_error",
+    "reduced_motion_stops_webgl_and_svg_animations",
+    "mode_switch_keeps_character_and_resources",
+    "destroy_releases_ui",
+    "forced_webgl_failure_remains_useful_svg",
+    "no_javascript_page_errors"
+  ],
+  "limitations": "Independent render/lifecycle and synthetic state tests, not actual microphone or audible speech verification. Mouth motion is procedural, not phoneme lip sync.",
+  "webgl": {
+    "requestedMode": "3d",
+    "actualMode": "3d",
+    "renderer": "webgl2",
+    "state": "idle",
+    "reducedMotion": true,
+    "fallbackReason": null,
+    "frames": 23,
+    "destroyed": false,
+    "threeRevision": "187"
+  },
+  "page_errors": [],
+  "status": "passed",
+  "total": 12,
+  "sha256": {
+    "web\\avatar.js": "9c3005553c777ded6fd8edc845c9626c132fe8acb43b82790a908a6fb6693c5c",
+    "web\\avatar.css": "6b63ec024d347a5a471ad3d983c120520ed12507e3685d89b9777c21dd854701"
+  }
+}

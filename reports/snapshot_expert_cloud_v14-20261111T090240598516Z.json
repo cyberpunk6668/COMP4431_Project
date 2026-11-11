@@ -1,0 +1,389 @@
+{
+  "checked_at": "2026-11-11T09:02:40.598516+00:00",
+  "status": "failed",
+  "scope": "Existing actual IBKR snapshot, one real model question; zero new market-data requests and zero session mutations.",
+  "snapshot_source_report": "reports/ibkr_browser_live_v12.json",
+  "analysis_id": "d945bc88-ffa7-4735-94d3-7350eba1528e",
+  "snapshot_fingerprint": "6516a5108a2c2fa6a2b2b51b8385e4e0e4be3535635ff78a63c9447034336be0",
+  "broker_requests": 0,
+  "session_mutations": 0,
+  "mode": "offline",
+  "warning": "options_answer_validation_failed",
+  "generation_attempts": 2,
+  "schema_repair_attempts": 1,
+  "answer_excerpt": "这份样本来自显式重新采集，并与上次快照对照；解释本身不再额外采集行情。本地接收时间不能保证交易所行情的实时性。\n标的仅使用收盘参考价选择合约范围，不代表当前可成交报价；本地接收时间也不是收盘发生时间。\n这份样本已过时或接收时间无法确认，只能回看采集时的结构。\n其中含延迟或冻结资料，近期收到也不等于当前市场报价。\n\n这份快照没有新闻或社交媒体来源，不能据此判断整体市场情绪。看跌合约可能用于保护、组合交易或卖出；看跌成交占比较多也不能直接等同于市场看空。",
+  "grounding": null,
+  "sources": [],
+  "analysis_context": {
+    "analysis_id": "d945bc88-ffa7-4735-94d3-7350eba1528e",
+    "source": "ibkr",
+    "captured_at": "2026-11-11T06:21:44.738974+00:00",
+    "completed_at": "2026-11-11T06:21:44.738974+00:00",
+    "scopes": [
+      {
+        "id": "g0",
+        "symbol": "AAPL",
+        "expiry": "2026-11-11",
+        "received_at": "2026-11-11T06:21:44.738974+00:00",
+        "market_data_status": "delayed",
+        "snapshot_age_seconds": 9655.859,
+        "stale": true,
+        "time_status": "known",
+        "assessment_status": "descriptive",
+        "quote_coverage": 0.0,
+        "reason_codes": [
+          "market_data_not_consistently_live",
+          "underlying_live_midpoint_unavailable",
+          "insufficient_fresh_live_pairs",
+          "insufficient_recent_metric_evidence"
+        ],
+        "reference_basis": "close",
+        "reference_received_at": "2026-11-11T06:21:36.231375+00:00",
+        "reference_last_trade_at": null,
+        "reference_close_received_at": "2026-11-11T06:21:36.231375+00:00",
+        "reference_only": true
+      }
+    ],
+    "snapshot_age_seconds": 9655.859,
+    "stale": true,
+    "freshness_threshold_seconds": 30,
+    "realtime_guaranteed": false,
+    "partial_failures": [],
+    "notice": "这份样本来自显式重新采集，并与上次快照对照；解释本身不再额外采集行情。本地接收时间不能保证交易所行情的实时性。",
+    "previous_analysis_id": "78a590cb-dfe6-4619-b4e0-11e4b95f13b4",
+    "refresh_comparison": {
+      "previous_analysis_id": "78a590cb-dfe6-4619-b4e0-11e4b95f13b4",
+      "previous_captured_at": "2026-11-11T06:21:31.689408+00:00",
+      "current_captured_at": "2026-11-11T06:21:44.738974+00:00",
+      "status": "partial",
+      "summary": "只有部分指标可前后比较；其余变化量未生成。",
+      "scopes": [
+        {
+          "id": "s0",
+          "symbol": "AAPL",
+          "expiry": "2026-11-11",
+          "previous_received_at": "2026-11-11T06:21:31.689408+00:00",
+          "received_at": "2026-11-11T06:21:44.738974+00:00",
+          "before_feed": "delayed",
+          "after_feed": "delayed",
+          "before_scope": {
+            "trading_class": "AAPL",
+            "currency": "USD",
+            "multiplier": 100,
+            "requested_strikes": [
+              345.0,
+              347.5,
+              350.0
+            ]
+          },
+          "after_scope": {
+            "trading_class": "AAPL",
+            "currency": "USD",
+            "multiplier": 100,
+            "requested_strikes": [
+              345.0,
+              347.5,
+              350.0
+            ]
+          },
+          "status": "partial",
+          "reasons": [
+            "missing_both",
+            "oi_pair_sample_changed",
+            "quote_contract_set_unverified",
+            "atm_definition_missing"
+          ],
+          "reason_messages": [
+            "前后样本的这个指标都缺失。",
+            "未平仓计数实际配对的行权价集合改变。",
+            "无法核验价差指标实际使用的合约集合。",
+            "缺少近平值行权价或波动率计算口径。"
+          ],
+          "metrics": [
+            {
+              "id": "quote_coverage",
+              "label": "有效报价覆盖",
+              "before": 0.0,
+              "after": 0.0,
+              "unit": "fraction",
+              "delta": 0.0,
+              "delta_unit": "percentage_points",
+              "direction": "unchanged",
+              "status": "comparable",
+              "reason": null,
+              "reason_text": null
+            },
+            {
+              "id": "volume_put_share",
+              "label": "看跌成交占比",
+              "before": null,
+              "after": null,
+              "unit": "fraction",
+              "delta": null,
+              "delta_unit": "percentage_points",
+              "direction": "unavailable",
+              "status": "incomparable",
+              "reason": "missing_both",
+              "reason_text": "前后样本的这个指标都缺失。"
+            },
+            {
+              "id": "oi_put_share",
+              "label": "看跌未平仓占比",
+              "before": 0.42794612794612796,
+              "after": 0.48184474123539234,
+              "unit": "fraction",
+              "delta": null,
+              "delta_unit": "percentage_points",
+              "direction": "unavailable",
+              "status": "incomparable",
+              "reason": "oi_pair_sample_changed",
+              "reason_text": "未平仓计数实际配对的行权价集合改变。"
+            },
+            {
+              "id": "volume_total",
+              "label": "配对样本成交总数",
+              "before": 0,
+              "after": 0,
+              "unit": "contracts",
+              "delta": 0,
+              "delta_unit": "contracts",
+              "direction": "unchanged",
+              "status": "comparable",
+              "reason": null,
+              "reason_text": null
+            },
+            {
+              "id": "oi_total",
+              "label": "配对样本未平仓总数",
+              "before": 2970,
+              "after": 4792,
+              "unit": "contracts",
+              "delta": null,
+              "delta_unit": "contracts",
+              "direction": "unavailable",
+              "status": "incomparable",
+              "reason": "oi_pair_sample_changed",
+              "reason_text": "未平仓计数实际配对的行权价集合改变。"
+            },
+            {
+              "id": "median_spread",
+              "label": "相对买卖价差中位数",
+              "before": null,
+              "after": null,
+              "unit": "percent",
+              "delta": null,
+              "delta_unit": "percentage_points",
+              "direction": "unavailable",
+              "status": "incomparable",
+              "reason": "quote_contract_set_unverified",
+              "reason_text": "无法核验价差指标实际使用的合约集合。"
+            },
+            {
+              "id": "atm_iv",
+              "label": "近平值隐含波动率",
+              "before": null,
+              "after": null,
+              "unit": "fraction",
+              "delta": null,
+              "delta_unit": "volatility_points",
+              "direction": "unavailable",
+              "status": "incomparable",
+              "reason": "atm_definition_missing",
+              "reason_text": "缺少近平值行权价或波动率计算口径。"
+            }
+          ]
+        }
+      ],
+      "failures": [],
+      "notice": "这是显式重新采集后的前后快照对照。覆盖、行情类型或取样改变不能当成市场涨跌。成交总数差值只是两次收到的累计计数差，不是精确时间间隔内的新增成交，更不代表资金流入。日成交按纽约接收日期核对；本地接收日期不能证明交易所统计周期。未平仓量有独立报告周期，差值不代表资金流入或方向性新持仓。"
+    },
+    "evidence_ids": [],
+    "expert_source_ids": [],
+    "evidence": [],
+    "grounding": null,
+    "retrieval": {
+      "method": "bm25_char_ngram_rrf",
+      "embedding": false,
+      "knowledge_version": "1.1",
+      "corpus_sha256": "442290b75b51768259f9f0a8c6468eeaf5c4c800ea652f6725c725152da81ac5",
+      "hits": [
+        {
+          "id": "expert.put_call",
+          "title": "看跌成交占比不是看空人数",
+          "method": "bm25_char_ngram_rrf",
+          "embedding": false,
+          "knowledge_version": "1.1",
+          "corpus_sha256": "442290b75b51768259f9f0a8c6468eeaf5c4c800ea652f6725c725152da81ac5",
+          "query_normalization": "english_plural_and_reviewed_domain_aliases",
+          "query_expansions": [],
+          "rrf_score": 0.03252247,
+          "bm25_rank": 1,
+          "char_rank": 2,
+          "bm25_score": 2.093259,
+          "char_score": 0.15008,
+          "matched_terms": [
+            "看空"
+          ],
+          "matched_ngrams": [
+            "不是",
+            "不能",
+            "人数",
+            "合约",
+            "合约计",
+            "看空",
+            "约计",
+            "约计数",
+            "计数"
+          ],
+          "matched_topics": [
+            "看空"
+          ],
+          "selection_reason": "query_facet",
+          "selected_facet": "put_call_limits",
+          "question_rank": 1
+        },
+        {
+          "id": "expert.history_time",
+          "title": "交易日期、区间时间与导入时间不同",
+          "method": "bm25_char_ngram_rrf",
+          "embedding": false,
+          "knowledge_version": "1.1",
+          "corpus_sha256": "442290b75b51768259f9f0a8c6468eeaf5c4c800ea652f6725c725152da81ac5",
+          "query_normalization": "english_plural_and_reviewed_domain_aliases",
+          "query_expansions": [],
+          "rrf_score": 0.03226646,
+          "bm25_rank": 3,
+          "char_rank": 1,
+          "bm25_score": 1.742263,
+          "char_score": 0.16256,
+          "matched_terms": [
+            "样本"
+          ],
+          "matched_ngrams": [
+            "不是",
+            "不能",
+            "不能据",
+            "市场",
+            "据此",
+            "更新",
+            "样本",
+            "能据",
+            "能据此",
+            "覆盖"
+          ],
+          "matched_topics": [],
+          "selection_reason": "context_facet",
+          "selected_facet": "historical_time_basis",
+          "question_rank": 2
+        },
+        {
+          "id": "expert.contract_identity",
+          "title": "期权系列需要完整合约身份",
+          "method": "bm25_char_ngram_rrf",
+          "embedding": false,
+          "knowledge_version": "1.1",
+          "corpus_sha256": "442290b75b51768259f9f0a8c6468eeaf5c4c800ea652f6725c725152da81ac5",
+          "query_normalization": "english_plural_and_reviewed_domain_aliases",
+          "query_expansions": [],
+          "rrf_score": 0.03200205,
+          "bm25_rank": 2,
+          "char_rank": 3,
+          "bm25_score": 1.812354,
+          "char_score": 0.073942,
+          "matched_terms": [
+            "样本"
+          ],
+          "matched_ngrams": [
+            "不能",
+            "合约",
+            "市场",
+            "期权",
+            "样本",
+            "解释"
+          ],
+          "matched_topics": [
+            "样本"
+          ],
+          "selection_reason": "lexical_rank",
+          "question_rank": 3
+        },
+        {
+          "id": "expert.history_bars",
+          "title": "历史价格条不是同一时刻双边报价",
+          "method": "bm25_char_ngram_rrf",
+          "embedding": false,
+          "knowledge_version": "1.1",
+          "corpus_sha256": "442290b75b51768259f9f0a8c6468eeaf5c4c800ea652f6725c725152da81ac5",
+          "query_normalization": "english_plural_and_reviewed_domain_aliases",
+          "query_expansions": [],
+          "rrf_score": 0.03100962,
+          "bm25_rank": 5,
+          "char_rank": 4,
+          "bm25_score": 1.372618,
+          "char_score": 0.031178,
+          "matched_terms": [
+            "报价"
+          ],
+          "matched_ngrams": [
+            "不是",
+            "不能",
+            "报价"
+          ],
+          "matched_topics": [],
+          "selection_reason": "lexical_rank",
+          "question_rank": 4
+        },
+        {
+          "id": "expert.spread",
+          "title": "报价价差与成交价格要分开",
+          "method": "bm25_char_ngram_rrf",
+          "embedding": false,
+          "knowledge_version": "1.1",
+          "corpus_sha256": "442290b75b51768259f9f0a8c6468eeaf5c4c800ea652f6725c725152da81ac5",
+          "query_normalization": "english_plural_and_reviewed_domain_aliases",
+          "query_expansions": [],
+          "rrf_score": 0.03033088,
+          "bm25_rank": 4,
+          "char_rank": 8,
+          "bm25_score": 1.614947,
+          "char_score": 0.012876,
+          "matched_terms": [
+            "报价"
+          ],
+          "matched_ngrams": [
+            "报价"
+          ],
+          "matched_topics": [
+            "报价"
+          ],
+          "selection_reason": "lexical_rank",
+          "question_rank": 5
+        },
+        {
+          "id": "expert.history_limits",
+          "title": "到期期权及原生日终数据存在限制",
+          "method": "bm25_char_ngram_rrf",
+          "embedding": false,
+          "knowledge_version": "1.1",
+          "corpus_sha256": "442290b75b51768259f9f0a8c6468eeaf5c4c800ea652f6725c725152da81ac5",
+          "query_normalization": "english_plural_and_reviewed_domain_aliases",
+          "query_expansions": [],
+          "rrf_score": 0.01538462,
+          "bm25_rank": null,
+          "char_rank": 5,
+          "bm25_score": 0,
+          "char_score": 0.029799,
+          "matched_terms": [],
+          "matched_ngrams": [
+            "不能",
+            "期权",
+            "覆盖"
+          ],
+          "matched_topics": [],
+          "selection_reason": "lexical_rank",
+          "question_rank": 6
+        }
+      ]
+    }
+  }
+}

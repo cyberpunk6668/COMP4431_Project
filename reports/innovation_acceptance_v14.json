@@ -1,0 +1,210 @@
+{
+  "checked_at": "2026-11-11T09:45:00.877676+00:00",
+  "version": "14.0.0",
+  "status": "passed_limited",
+  "objective": "Expert RAG integrated with historical/current options chat and an independent interactive demo.",
+  "server_tests": {
+    "tests": 649,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "browser": {
+    "report": "reports/guided_demo_browser_v14.json",
+    "status": "passed",
+    "checks_per_viewport": 27,
+    "viewport_widths": [
+      320,
+      390,
+      1440
+    ],
+    "api_mode": "Controlled fixtures; actual local Avatar renderers",
+    "actual_phone_hardware_tested": false
+  },
+  "real_model_validation": {
+    "snapshot_report": "reports/snapshot_expert_cloud_v14.json",
+    "demo_report": "reports/expert_demo_cloud_v14.json",
+    "final_validated_answers": 3,
+    "final_generation_attempts": 6,
+    "final_schema_repairs": 3,
+    "first_pass_all_correct": false,
+    "all_recorded_generation_attempts_including_failed_runs": 20,
+    "count_basis": "Recorded server-reported generation attempts, not billed tokens/cost or whole-project lifetime.",
+    "new_ibkr_market_data_requests": 0,
+    "runs": [
+      {
+        "report": "reports/snapshot_expert_cloud_v14-20261111T090240598516Z.json",
+        "kind": "snapshot",
+        "checked_at": "2026-11-11T09:02:40.598516+00:00",
+        "status": "failed",
+        "phase": null,
+        "reported_generation_attempts": 2,
+        "reported_schema_repairs": 1,
+        "new_broker_requests": 0
+      },
+      {
+        "report": "reports/snapshot_expert_cloud_v14-20261111T090934720189Z.json",
+        "kind": "snapshot",
+        "checked_at": "2026-11-11T09:09:34.719188+00:00",
+        "status": "failed",
+        "phase": null,
+        "reported_generation_attempts": 2,
+        "reported_schema_repairs": 1,
+        "new_broker_requests": 0
+      },
+      {
+        "report": "reports/snapshot_expert_cloud_v14-20261111T091658484967Z.json",
+        "kind": "snapshot",
+        "checked_at": "2026-11-11T09:16:58.484967+00:00",
+        "status": "failed",
+        "phase": null,
+        "reported_generation_attempts": 2,
+        "reported_schema_repairs": 1,
+        "new_broker_requests": 0
+      },
+      {
+        "report": "reports/snapshot_expert_cloud_v14-20261111T092058345416Z.json",
+        "kind": "snapshot",
+        "checked_at": "2026-11-11T09:20:58.344397+00:00",
+        "status": "failed",
+        "phase": null,
+        "reported_generation_attempts": 2,
+        "reported_schema_repairs": 1,
+        "new_broker_requests": 0
+      },
+      {
+        "report": "reports/snapshot_expert_cloud_v14-20261111T093004893355Z.json",
+        "kind": "snapshot",
+        "checked_at": "2026-11-11T09:30:04.893355+00:00",
+        "status": "failed",
+        "phase": null,
+        "reported_generation_attempts": 2,
+        "reported_schema_repairs": 1,
+        "new_broker_requests": 0
+      },
+      {
+        "report": "reports/snapshot_expert_cloud_v14-initial-failed.json",
+        "kind": "snapshot",
+        "checked_at": "2026-11-11T08:56:44.630832+00:00",
+        "status": "failed",
+        "phase": null,
+        "reported_generation_attempts": 2,
+        "reported_schema_repairs": 1,
+        "new_broker_requests": 0
+      },
+      {
+        "report": "reports/snapshot_expert_cloud_v14.json",
+        "kind": "snapshot",
+        "checked_at": "2026-11-11T09:38:02.470185+00:00",
+        "status": "passed_limited",
+        "phase": null,
+        "reported_generation_attempts": 2,
+        "reported_schema_repairs": 1,
+        "new_broker_requests": 0
+      },
+      {
+        "report": "reports/expert_demo_cloud_v14-grounding-failed.json",
+        "kind": "guided_demo",
+        "checked_at": "2026-11-11T09:27:39.739463+00:00",
+        "status": "failed",
+        "phase": "turn_1_local_values_and_claim_source_support",
+        "reported_generation_attempts": 2,
+        "reported_schema_repairs": 1,
+        "new_broker_requests": 0
+      },
+      {
+        "report": "reports/expert_demo_cloud_v14-preflight-failed.json",
+        "kind": "guided_demo",
+        "checked_at": "2026-11-11T09:22:31.535058+00:00",
+        "status": "failed",
+        "phase": "demo_initial_ui_and_real_avatar",
+        "reported_generation_attempts": 0,
+        "reported_schema_repairs": 0,
+        "new_broker_requests": 0
+      },
+      {
+        "report": "reports/expert_demo_cloud_v14-search-preflight-failed.json",
+        "kind": "guided_demo",
+        "checked_at": "2026-11-11T09:24:42.381466+00:00",
+        "status": "failed",
+        "phase": "expert_search_click",
+        "reported_generation_attempts": 0,
+        "reported_schema_repairs": 0,
+        "new_broker_requests": 0
+      },
+      {
+        "report": "reports/expert_demo_cloud_v14.json",
+        "kind": "guided_demo",
+        "checked_at": "2026-11-11T09:39:48.085254+00:00",
+        "status": "passed_limited",
+        "phase": "complete",
+        "reported_generation_attempts": 4,
+        "reported_schema_repairs": 2,
+        "new_broker_requests": 0
+      }
+    ]
+  },
+  "retrieval": {
+    "blind_report": "reports/expert_retrieval_holdout_v14.json",
+    "recall_at_4": 0.87037,
+    "mrr_at_4": 0.796296,
+    "all_gold_hit": [
+      15,
+      18
+    ],
+    "irrelevant_abstention": [
+      4,
+      6
+    ],
+    "retriever_hash_still_matches_freeze": true,
+    "not_answer_accuracy": true
+  },
+  "data_scope": {
+    "source": "Previously recorded actual IBKR historical archive",
+    "symbol": "AAPL",
+    "strike": 350,
+    "expiry": "2026-11-13",
+    "contract_sides": [
+      "C",
+      "P"
+    ],
+    "dates": [
+      "2026-11-06",
+      "2026-11-09",
+      "2026-11-10"
+    ],
+    "full_session_coverage_verified": false,
+    "historical_oi_available": false,
+    "synchronized_bbo_available": false,
+    "volume_changes_comparable": false,
+    "archive_file_sha256": "d3f28e2a0d016261e54291663f5cf8c8c6e0a08afc4524669731be7b002337fe",
+    "present_market_sentiment_verified": false
+  },
+  "limitations": [
+    "Finite reviewed-facet checks are not general semantic entailment or financial accuracy guarantees.",
+    "All final model answers required one bounded repair; failed runs remain archived.",
+    "Actual cloud testing covers one saved snapshot and one historical dataset.",
+    "Mobile checks use desktop Edge responsive/touch emulation.",
+    "Minor underlying/contract wording ambiguity is recorded in demo manual_review."
+  ],
+  "documents": [
+    "docs/innovation_rag_v14.md",
+    "docs/demo_v14.md"
+  ],
+  "sha256": {
+    "app/expert_grounding.py": "4f1a4966629152003696f182cc2775b8c268e57bdb4feea1e1aab1d050a4d1e6",
+    "app/expert_knowledge.py": "0c2d328de53f2e8b2132b60397e6b377663c0d5af57e0cf4f05ba28e9e1d07a4",
+    "app/options_claims.py": "e8b7cd4e308baf91fdd199bf0bc76e90cdddc277e3d4fde4745c514cad414c7f",
+    "app/options_chat.py": "32796db7a31a0c7565d5ac1f3633be773c2ea575bde3c8dd4d7e95140e47d478",
+    "app/history_chat.py": "4777a2d615176774c060a0a93ae41ba9c9764f197d08f19bc115b9ab86dc5af6",
+    "app/main.py": "a074a94737e4080d98501147a52cd84b8ff169c14d5681cbec53d9ff79ba14de",
+    "web/demo.html": "d40439584934827fb1494071cda5ac890dc2a04f27c341a89f1ba9ef32d1183d",
+    "web/demo.js": "c4ab440f6b36438fae732942a91e0654c32c49c16f2d022b60c3d2466a4ca7db",
+    "web/demo.css": "cae0a9cd51713ef17e266219e9d1b36ce6304a0039a88df48ebd1d43fc2f51b3",
+    "data/expert_knowledge.json": "2569650d12f8124fe3ba21832bd949629b42afa864ee60e5c204baa78b69dea9",
+    "reports/tests_v14.xml": "e2c52b913bc8058a30d6973f7989f7c9279e3ef40cc9a56504cc16d36ef9ba96",
+    "reports/guided_demo_browser_v14.json": "d0b781386e21c8f948bd882ec9be4d360fb74ad416a724a7d72fbb7890d165fe",
+    "reports/expert_demo_cloud_v14.json": "68fd5f8e4586c7837f73c5f1df83321064517641d9bccd8adca2fd2441735605",
+    "reports/snapshot_expert_cloud_v14.json": "45734288f8aca2aaf208c95ab1765eade006a8b788e12d0353e9ff43f5880734"
+  }
+}

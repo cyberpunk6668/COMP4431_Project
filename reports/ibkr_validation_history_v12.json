@@ -1,0 +1,51 @@
+{
+  "scope": "Sanitized audit summary. Failed originals remain unchanged in excluded tmp/. Final evidence is separate; an earlier failed workflow is not reclassified as passed.",
+  "actual_workflow_attempts": [
+    {
+      "checked_at": "2026-11-11T05:53:57.805416+00:00",
+      "transport": "Opt-in API acceptance with actual IBKR and model",
+      "status": "failed",
+      "phase": "first_model_validation",
+      "successful_market_captures": 2,
+      "reply_modes": ["offline"],
+      "reason": "The model exceeded the six-part schema and qualitative prose constraints. No second chat turn was sent.",
+      "original_archive": "tmp/ibkr-refresh-live-v12-failed-20261111T055357805416Z.json"
+    },
+    {
+      "checked_at": "2026-11-11T06:05:55.953495+00:00",
+      "transport": "Actual Edge UI against local HTTP service",
+      "status": "failed",
+      "phase": "followup_reply_validation",
+      "successful_market_captures": 2,
+      "reply_modes": ["deepseek", "offline"],
+      "server_reported_generation_attempts": [1, 2],
+      "reason": "Refresh succeeded, but the follow-up failed validation even after one bounded repair. A negation false positive was subsequently reproduced and fixed offline.",
+      "original_archive": "tmp/ibkr-browser-live-v12-failed-20261111T062108743369Z.json"
+    },
+    {
+      "checked_at": "2026-11-11T06:21:17.503879+00:00",
+      "transport": "Actual Edge UI against local HTTP service",
+      "status": "passed_limited",
+      "workflow_status": "passed",
+      "successful_market_captures": 2,
+      "reply_modes": ["deepseek", "deepseek"],
+      "server_reported_generation_attempts": [1, 1],
+      "actual_market_data_types": [3, 3],
+      "bbo_contracts": [0, 0],
+      "contracts_per_capture": 6,
+      "full_quote_validation": false,
+      "evidence": "reports/ibkr_browser_live_v12.json"
+    }
+  ],
+  "diagnostic_replay": {
+    "scope": "One saved actual snapshot replay with reconstructed previous-answer history, no IBKR request or session mutation. This is diagnostic evidence, not a live workflow acceptance.",
+    "mode": "deepseek",
+    "generation_attempts": 1,
+    "schema_repair_attempts": 0
+  },
+  "limits": [
+    "Model generation counts are reported by the server, not independently observed provider traffic.",
+    "Successful collection of delayed close/OI/model Greeks does not demonstrate a current executable quote or realtime entitlement.",
+    "Human semantic review and accepted wording limits are retained in the final report."
+  ]
+}

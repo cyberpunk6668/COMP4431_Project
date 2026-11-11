@@ -1,0 +1,2 @@
+# Optional async client for the IBKR TWS API protocol used by IB Gateway.
+ib-async==2.1.0

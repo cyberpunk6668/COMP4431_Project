@@ -1,0 +1,50 @@
+[
+  {
+    "package": "react",
+    "version": "19.3.1",
+    "license": "MIT",
+    "homepage": "https://react.dev/",
+    "license_file": "react-LICENSE.txt"
+  },
+  {
+    "package": "react-dom",
+    "version": "19.3.1",
+    "license": "MIT",
+    "homepage": "https://react.dev/",
+    "license_file": "react-dom-LICENSE.txt"
+  },
+  {
+    "package": "three",
+    "version": "0.187.0",
+    "license": "MIT",
+    "homepage": "https://threejs.org/",
+    "license_file": "three-LICENSE.txt"
+  },
+  {
+    "package": "gsap",
+    "version": "3.15.1",
+    "license": "Standard 'no charge' license: https://gsap.com/standard-license.",
+    "homepage": "https://gsap.com"
+  },
+  {
+    "package": "motion",
+    "version": "14.12.0",
+    "license": "MIT",
+    "homepage": null,
+    "license_file": "motion-LICENSE.txt"
+  },
+  {
+    "package": "lucide-react",
+    "version": "1.71.0",
+    "license": "ISC",
+    "homepage": "https://lucide.dev",
+    "license_file": "lucide-react-LICENSE.txt"
+  },
+  {
+    "package": "tailwindcss",
+    "version": "4.3.5",
+    "license": "MIT",
+    "homepage": "https://tailwindcss.com",
+    "license_file": "tailwindcss-LICENSE.txt"
+  }
+]

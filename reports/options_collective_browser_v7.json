@@ -1,0 +1,57 @@
+{
+  "checked_at": "2026-11-11T02:56:23.951837+00:00",
+  "status": "passed",
+  "scope": "Synthetic option API responses only. No broker or cloud model requests.",
+  "checks": [
+    "no_auto_analysis",
+    "collective_report_before_raw_data",
+    "liquidity_and_distributions",
+    "positioning_and_volatility",
+    "structured_model_summary_conflicts_and_scenarios",
+    "model_text_is_safe",
+    "single_prefixed_evidence_reference_resolves",
+    "batch_g0_g1_and_comparison_references_resolve_to_correct_cohort",
+    "raw_contract_details_expand",
+    "batch_input_validation",
+    "batch_request_contract",
+    "partial_failure_visible",
+    "term_structure_and_comparison_rows",
+    "nested_chain_reports",
+    "mobile_dialog_containment",
+    "english_reopen"
+  ],
+  "viewports": [
+    {
+      "width": 320,
+      "height": 740,
+      "single_requests": 1,
+      "batch_requests": 1,
+      "page_errors": []
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "single_requests": 1,
+      "batch_requests": 1,
+      "page_errors": []
+    },
+    {
+      "width": 1440,
+      "height": 1000,
+      "single_requests": 1,
+      "batch_requests": 1,
+      "page_errors": []
+    }
+  ],
+  "source_sha256": {
+    "web/index.html": "8b7d5c880e62de404e293649a5e994ddf006b1d9c8e31bf9621c89adbe8192b5",
+    "web/options.js": "2286e091f95b0fd16f1b1b6b79886dcc7c0068ac7458d85bb9348217ce247e7a",
+    "web/options.css": "f4d677d88ea2d112d8a254605926d1f97ecea77c5c0de7469a271e3e1be48b82",
+    "app/options_collective.py": "f9dd10379c8ddd4e403d721241f32bab1f092364392ba60ad05009871a2dfd57"
+  },
+  "screenshots": [
+    "reports/screenshots/options-v7/collective-1440.png",
+    "reports/screenshots/options-v7/collective-320.png",
+    "reports/screenshots/options-v7/collective-390.png"
+  ]
+}

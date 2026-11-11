@@ -1,0 +1,317 @@
+{
+  "checked_at": "2026-11-11T05:30:43.990932+00:00",
+  "status": "passed",
+  "turns": [
+    {
+      "mode": "deepseek",
+      "warning": null,
+      "answer_excerpt": "这份样本来自显式重新采集，并与上次快照对照；解释本身不再额外采集行情。本地接收时间不能保证交易所行情的实时性。\n其中含延迟或冻结资料，近期收到也不等于当前市场报价。\n\n这次是显式重新采集后的前后对照，两次样本的标的、到期日、行权价范围和行情类型都一致，所以本地判定为可比，可以逐项看已算好的变化。但两次都是延迟行情，近期实时报价合约数为零，因此这些变化描述的是两次收到的历史样本，不代表此刻盘口。 [change.s0.quote_coverage] [g0.quality_fresh_live_quote_contracts]\n\n有效双边报价覆盖前后持平，说明样本完整度没变；同时相对买卖价差中位数下降，按本地计算方向为变小。价差变窄通常意味着屏幕报价更接近可成交价，但它不包含可成交数量或订单簿深度，不能据此判断流动性一定变好。 [change.s0.quote_coverage] [change.s0.median_spread] [g0.median_spread]\n\n配对样本成交总数上升，看跌成交占比也上升；未平仓总数上升，但看跌未平仓占比持平。成交总数差只是两次收到的累计计数之差，不是精确间隔内的新增成交，更不是资金流入；未平仓量有独立报告周期，其变化也不等于新方向性持仓。 [change.s0.volume_total] [change.s0.volume_put_share] [change.s0.oi_total] [change.s0.oi_put_share]\n\n近平值隐含波动率上升，按本地计算方向为变大。隐含波动率是从期权价格折算出的波动定价指标，上升说明报价里包含的波动程度更高，但它本身不指明涨跌方向；保护需求、供需和报价条件都可能影响它，这里无法区分是哪一种。 [change.s0.atm_iv] [g0.atm_iv]\n\n当前样本里看跌成交占比高于看跌持仓占比，形成结构差异；成交集中度和持仓集中度都显示份额分散在多个行权价上。这只是合约构成上的描述，每笔交易都有买卖双方，不能当作看空人数、支撑阻力或做市商持仓的证据。 [g0.positioning_gap] [g0.volume_hhi] [g0.oi_hhi]\n\n判断依据仅限这份保存的对照：两次都是延迟行情、没有近期实时配对，也没有新闻或情绪来源。因此不能推断价格方向、资金流或未来走势；若要更可靠，可等行情转为实时且配对覆盖充足后再做一次对照，并注意接收时间只是本地时间。 [g0.quality_fresh_live_pair_coverage]",
+      "analysis_binding_matches": true,
+      "comparison_retained": true,
+      "realtime_guaranteed": false,
+      "citations": [
+        {
+          "id": "change.s0.quote_coverage",
+          "before": 1.0,
+          "after": 1.0,
+          "delta": 0.0,
+          "status": "comparable",
+          "matches_original": true
+        },
+        {
+          "id": "g0.quality_fresh_live_quote_contracts",
+          "value": 0,
+          "matches_original": true
+        },
+        {
+          "id": "change.s0.median_spread",
+          "before": 8.000000000000007,
+          "after": 6.000000000000014,
+          "delta": -1.999999999999993,
+          "status": "comparable",
+          "matches_original": true
+        },
+        {
+          "id": "g0.median_spread",
+          "value": 6.000000000000014,
+          "matches_original": true
+        },
+        {
+          "id": "change.s0.volume_total",
+          "before": 300,
+          "after": 450,
+          "delta": 150,
+          "status": "comparable",
+          "matches_original": true
+        },
+        {
+          "id": "change.s0.volume_put_share",
+          "before": 0.6,
+          "after": 0.7,
+          "delta": 10.0,
+          "status": "comparable",
+          "matches_original": true
+        },
+        {
+          "id": "change.s0.oi_total",
+          "before": 600,
+          "after": 675,
+          "delta": 75,
+          "status": "comparable",
+          "matches_original": true
+        },
+        {
+          "id": "change.s0.oi_put_share",
+          "before": 0.6,
+          "after": 0.6,
+          "delta": 0.0,
+          "status": "comparable",
+          "matches_original": true
+        },
+        {
+          "id": "change.s0.atm_iv",
+          "before": 0.24,
+          "after": 0.26,
+          "delta": 2.0,
+          "status": "comparable",
+          "matches_original": true
+        },
+        {
+          "id": "g0.atm_iv",
+          "value": 0.26,
+          "matches_original": true
+        },
+        {
+          "id": "g0.positioning_gap",
+          "value": 9.999999999999998,
+          "matches_original": true
+        },
+        {
+          "id": "g0.volume_hhi",
+          "value": 0.3333333333333333,
+          "matches_original": true
+        },
+        {
+          "id": "g0.oi_hhi",
+          "value": 0.3333333333333333,
+          "matches_original": true
+        },
+        {
+          "id": "g0.quality_fresh_live_pair_coverage",
+          "value": 0.0,
+          "matches_original": true
+        }
+      ]
+    },
+    {
+      "mode": "deepseek",
+      "warning": null,
+      "answer_excerpt": "这份样本来自显式重新采集，并与上次快照对照；解释本身不再额外采集行情。本地接收时间不能保证交易所行情的实时性。\n其中含延迟或冻结资料，近期收到也不等于当前市场报价。\n\n不能。看跌成交占比上升，只说明在这批配对样本里，看跌合约的成交计数占比更高；它统计的是合约数量，不是人数，也不区分买方和卖方。每笔成交都同时有一个买方和一个卖方，所以无法从计数推出“多数人”在押注下跌。 [change.s0.volume_put_share] [g0.volume_put_share]\n\n另一个容易被误读的点是：看跌未平仓占比没有变化，而看跌成交占比上升，两者形成结构差异。未平仓量有独立的报告周期，成交是期间累计，二者口径不同；这个差异只能描述合约构成，不能当作新开空头仓位或资金流入的证据。 [change.s0.oi_put_share] [g0.positioning_gap] [g0.common_oi_put_share]\n\n近平值隐含波动率上升，也只说明报价里折算出的波动定价变高，不指明方向。偏斜指标显示看跌一侧的波动定价高于看涨一侧，这可以作为一种“下行保护报价更贵”的观察，但同样可能来自供需、报价条件或对冲需求，无法归因于某一群人的看法。 [change.s0.atm_iv] [g0.skew_25_delta]\n\n判断依据仅限这份保存的对照：两次都是延迟行情，近期实时配对覆盖为零，也没有新闻或情绪来源。成交总数差只是两次收到的累计计数之差，不是精确间隔内的新增成交，更不是资金流。因此这份样本支持“合约构成上偏看跌一侧更活跃”，不支持“多数人看空”这种关于人群意图的结论。 [g0.quality_fresh_live_pair_coverage] [change.s0.volume_total]\n\n若想更接近可用的判断，可等行情转为实时、配对覆盖充足后再做一次对照，并同时观察看跌成交占比与看跌持仓占比是否同向变化；即便如此，也只能描述合约结构，仍需其他来源才能谈参与者意图。",
+      "analysis_binding_matches": true,
+      "comparison_retained": true,
+      "realtime_guaranteed": false,
+      "citations": [
+        {
+          "id": "change.s0.volume_put_share",
+          "before": 0.6,
+          "after": 0.7,
+          "delta": 10.0,
+          "status": "comparable",
+          "matches_original": true
+        },
+        {
+          "id": "g0.volume_put_share",
+          "value": 0.7,
+          "matches_original": true
+        },
+        {
+          "id": "change.s0.oi_put_share",
+          "before": 0.6,
+          "after": 0.6,
+          "delta": 0.0,
+          "status": "comparable",
+          "matches_original": true
+        },
+        {
+          "id": "g0.positioning_gap",
+          "value": 9.999999999999998,
+          "matches_original": true
+        },
+        {
+          "id": "g0.common_oi_put_share",
+          "value": 0.6,
+          "matches_original": true
+        },
+        {
+          "id": "change.s0.atm_iv",
+          "before": 0.24,
+          "after": 0.26,
+          "delta": 2.0,
+          "status": "comparable",
+          "matches_original": true
+        },
+        {
+          "id": "g0.skew_25_delta",
+          "value": 4.0000000000000036,
+          "matches_original": true
+        },
+        {
+          "id": "g0.quality_fresh_live_pair_coverage",
+          "value": 0.0,
+          "matches_original": true
+        },
+        {
+          "id": "change.s0.volume_total",
+          "before": 300,
+          "after": 450,
+          "delta": 150,
+          "status": "comparable",
+          "matches_original": true
+        }
+      ]
+    }
+  ],
+  "checks": [
+    "explicit_refresh_only",
+    "exact_saved_parameters_and_expiry",
+    "new_server_uuid_and_previous_link",
+    "local_before_after_delta_verified",
+    "all_citations_resolve_to_local_evidence",
+    "refresh_explanation_cites_change_evidence",
+    "old_snapshot_hash_unchanged",
+    "history_retains_both_versions",
+    "session_export_preserves_context",
+    "comparison_survives_followup",
+    "no_automatic_retry"
+  ],
+  "scope": "Synthetic before/after market data, real local analytics and in-process API routes, real DeepSeek refresh explanation and follow-up. No IBKR connection; not live-market validation.",
+  "privacy": "Temporary isolated database. Reports contain safe aggregate comparisons and controlled answer excerpts only; no keys, account fields, session IDs, raw quotes or prompts. Safe provider response diagnostics remain in tmp/ and must not be submitted.",
+  "transport": "FastAPI TestClient plus actual external DeepSeek HTTPS",
+  "automatic_retries": 0,
+  "model": "deepseek-flash",
+  "old_analysis_id": "7c84a02f-4fc5-40c7-8049-78777a38511b",
+  "new_analysis_id": "8f72dc4c-40b0-4f69-b0a8-0e396ca4446d",
+  "old_fingerprint": "a83e56c9b424428df36af6f265032040bde38ad5c4b37163c7385a99ce9837a8",
+  "old_captured_at": "2026-11-11T05:30:37.990932+00:00",
+  "new_captured_at": "2026-11-11T05:30:42.990932+00:00",
+  "before_feed": "delayed",
+  "after_feed": "delayed",
+  "comparison_status": "comparable",
+  "local_changes": [
+    {
+      "id": "change.s0.quote_coverage",
+      "before": 1.0,
+      "after": 1.0,
+      "delta": 0.0,
+      "unit": "fraction",
+      "delta_unit": "percentage_points",
+      "status": "comparable",
+      "reason": null
+    },
+    {
+      "id": "change.s0.volume_put_share",
+      "before": 0.6,
+      "after": 0.7,
+      "delta": 10.0,
+      "unit": "fraction",
+      "delta_unit": "percentage_points",
+      "status": "comparable",
+      "reason": null
+    },
+    {
+      "id": "change.s0.oi_put_share",
+      "before": 0.6,
+      "after": 0.6,
+      "delta": 0.0,
+      "unit": "fraction",
+      "delta_unit": "percentage_points",
+      "status": "comparable",
+      "reason": null
+    },
+    {
+      "id": "change.s0.volume_total",
+      "before": 300,
+      "after": 450,
+      "delta": 150,
+      "unit": "contracts",
+      "delta_unit": "contracts",
+      "status": "comparable",
+      "reason": null
+    },
+    {
+      "id": "change.s0.oi_total",
+      "before": 600,
+      "after": 675,
+      "delta": 75,
+      "unit": "contracts",
+      "delta_unit": "contracts",
+      "status": "comparable",
+      "reason": null
+    },
+    {
+      "id": "change.s0.median_spread",
+      "before": 8.000000000000007,
+      "after": 6.000000000000014,
+      "delta": -1.999999999999993,
+      "unit": "percent",
+      "delta_unit": "percentage_points",
+      "status": "comparable",
+      "reason": null
+    },
+    {
+      "id": "change.s0.atm_iv",
+      "before": 0.24,
+      "after": 0.26,
+      "delta": 2.0,
+      "unit": "fraction",
+      "delta_unit": "volatility_points",
+      "status": "comparable",
+      "reason": null
+    }
+  ],
+  "history_count": 2,
+  "model_requests": [
+    {
+      "prior_messages": 0,
+      "sent_evidence_count": 34,
+      "sent_change_count": 7
+    },
+    {
+      "prior_messages": 2,
+      "sent_evidence_count": 34,
+      "sent_change_count": 7
+    }
+  ],
+  "old_snapshot_unchanged": true,
+  "new_snapshot_unchanged_during_followup": true,
+  "ibkr_captures": 0,
+  "synthetic_captures": 2,
+  "real_model_requests": 2,
+  "collection_attempts": [
+    {
+      "symbol": "DEMO",
+      "expiry": null,
+      "strike_count": 3,
+      "requested_market_data_type": 3
+    },
+    {
+      "symbol": "DEMO",
+      "expiry": "2030-01-18",
+      "strike_count": 3,
+      "requested_market_data_type": 3
+    }
+  ],
+  "provider_validation": [
+    {
+      "turn": 1,
+      "accepted_by_local_parser": true
+    },
+    {
+      "turn": 2,
+      "accepted_by_local_parser": true
+    }
+  ],
+  "collection_attempt_count": 2,
+  "successful_collection_count": 2,
+  "ibkr_collection_attempts": 0
+}

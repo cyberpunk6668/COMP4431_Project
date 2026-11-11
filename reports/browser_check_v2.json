@@ -1,0 +1,39 @@
+{
+  "checked_at": "2026-11-10T09:36:52.440868+00:00",
+  "status": "passed",
+  "checks": [
+    "desktop_initial_load_and_configuration_label",
+    "actual_webgl2_avatar_under_application_csp",
+    "dark_theme_toggle_and_persistence",
+    "avatar_mode_and_reduced_motion_controls",
+    "avatar_thinking_state_tracks_real_cloud_request",
+    "real_deepseek_chat_and_source_links",
+    "json_export_matches_conversation",
+    "session_restored_after_reload",
+    "new_chat_and_session_switch",
+    "compound_loan_budget_forms_and_verified_results",
+    "knowledge_catalogue_and_english_interface",
+    "failed_request_keeps_draft_and_shows_error",
+    "untrusted_chat_text_not_executed_as_html",
+    "session_delete_updates_ui",
+    "mobile_layout_menu_and_calculator",
+    "responsive_no_horizontal_overflow_320_768_1024",
+    "local_api_reference_and_request_tester"
+  ],
+  "total": 17,
+  "browser": "Microsoft Edge (headless Chromium)",
+  "duration_seconds": 12.43,
+  "page_errors": [],
+  "console_errors": [
+    "Failed to load resource: the server responded with a status of 503 (Service Unavailable)"
+  ],
+  "screenshots": [
+    "reports/screenshots/v2/calculator-compound.png",
+    "reports/screenshots/v2/chat-sources.png",
+    "reports/screenshots/v2/home-dark.png",
+    "reports/screenshots/v2/home-desktop.png",
+    "reports/screenshots/v2/home-light.png",
+    "reports/screenshots/v2/home-mobile.png"
+  ],
+  "voice_validation": "Capability detection/UI only. Actual microphone and audible synthesis require manual testing on the presentation machine."
+}

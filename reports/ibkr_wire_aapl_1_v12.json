@@ -1,0 +1,32 @@
+{
+  "checked_at": "2026-11-11T05:50:03.719626+00:00",
+  "symbol": "AAPL",
+  "requested_market_data_type": 1,
+  "observation_seconds": 7,
+  "scope": "Actual local IB Gateway, one stock-only stream, no account/order/model requests.",
+  "wire": [],
+  "callbacks": [],
+  "status": "completed",
+  "underlying": {
+    "price": null,
+    "price_basis": null,
+    "bid": null,
+    "ask": null,
+    "last": null,
+    "close": null,
+    "close_received_at": null,
+    "received_at": null,
+    "quote_received_at": null,
+    "last_trade_at": null,
+    "market_data_type": null,
+    "delayed_ticks_observed": false
+  },
+  "retained_values": {},
+  "broker_codes": [
+    354,
+    2104,
+    2107,
+    2119,
+    2158
+  ]
+}

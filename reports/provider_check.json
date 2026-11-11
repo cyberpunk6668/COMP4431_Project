@@ -1,0 +1,9 @@
+{
+  "checked_at": "2026-11-10T08:11:55.063707+00:00",
+  "model": "deepseek-flash",
+  "endpoint": "https://api.deepseek.com/chat/completions",
+  "test": "live_provider_connectivity",
+  "status": "passed",
+  "response": "FinPilot connection verified",
+  "latency_ms": 2025.45
+}

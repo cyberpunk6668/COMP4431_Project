@@ -1,0 +1,292 @@
+{
+  "checked_at": "2026-11-11T05:06:28.037100+00:00",
+  "status": "passed",
+  "scope": "Synthetic market data, real local analytics and TestClient API routes, real DeepSeek. No IBKR connection. Not live-market validation.",
+  "privacy": "No API key, account fields, session identifier, model prompts, raw provider JSON or raw contract quotes are saved in this report. Controlled server-answer excerpts and aggregate evidence are retained for review. Separate safe provider-response diagnostics are confined to tmp/ and excluded from submission.",
+  "transport": "In-process FastAPI TestClient; actual external DeepSeek HTTPS request(s).",
+  "automatic_retries": 0,
+  "turns": [
+    {
+      "mode": "deepseek",
+      "warning": null,
+      "answer_excerpt": "仅解释已保存的 IBKR 样本；未重新获取行情。本地接收时间不能保证交易所行情的实时性。\n其中含延迟或冻结资料，近期收到也不等于当前市场报价。\n\n这两组数据分别来自两个不同的标的，到期日相同，但它们是各自独立的样本，不能把两边的合约数量加在一起，也不能当成同一只股票的两种看法。\n\n最明显的差异在成交结构：第一组的成交里看跌合约只占少数，第二组的成交里看跌合约占多数。也就是说，两组样本中更活跃的合约类型正好相反。 [g0.volume_put_share] [g1.volume_put_share]\n\n但看未平仓量（尚未结清的合约总数），两组的看跌占比几乎一样，都偏向看跌一侧。所以第一组出现了“成交偏看涨、持仓偏看跌”的分歧，第二组则是成交和持仓方向大体一致。 [g0.oi_put_share] [g1.oi_put_share] [g0.positioning_gap] [g1.positioning_gap]\n\n成交的集中程度也不同：第一组的成交明显挤在少数几个行权价上，第二组则分散得多。持仓的集中程度两边看起来相近。 [g0.volume_hhi] [g1.volume_hhi] [g0.oi_hhi] [g1.oi_hhi]\n\n报价条件方面，两组的双边报价覆盖都完整，但第二组的买卖价差中位数更大，说明它的屏幕报价离“确定能成交的价格”更远一些。两组的平值隐含波动率和偏斜指标在样本里看起来相同。 [g0.median_spread] [g1.median_spread] [g0.atm_iv] [g1.atm_iv] [g0.skew_25_delta] [g1.skew_25_delta]\n\n这些数据不能说明谁在买、谁在卖，也不能说明是主动买入还是平仓；看跌合约多不等于有人看空，每笔成交都有买卖双方。成交量是期间累计，未平仓量按另一套周期更新，两者可以同时存在分歧。集中度不能当作支撑位、阻力位或做市商持仓的线索。两组都是延迟或冻结的历史样本，没有实时保证，也没有新闻或情绪来源，因此不能据此推断后续价格方向或给出买卖建议。 [g0.quality_fresh_live_quote_contracts] [g1.quality_fresh_live_quote_contracts]",
+      "analysis_binding_matches": true,
+      "answer_characters": 958,
+      "cited_evidence": [
+        {
+          "id": "g0.volume_put_share",
+          "value": 0.2,
+          "unit": "fraction",
+          "matches_original": true
+        },
+        {
+          "id": "g1.volume_put_share",
+          "value": 0.7142857142857143,
+          "unit": "fraction",
+          "matches_original": true
+        },
+        {
+          "id": "g0.oi_put_share",
+          "value": 0.6666666666666666,
+          "unit": "fraction",
+          "matches_original": true
+        },
+        {
+          "id": "g1.oi_put_share",
+          "value": 0.6666666666666666,
+          "unit": "fraction",
+          "matches_original": true
+        },
+        {
+          "id": "g0.positioning_gap",
+          "value": -46.666666666666664,
+          "unit": "percentage_points",
+          "matches_original": true
+        },
+        {
+          "id": "g1.positioning_gap",
+          "value": 4.761904761904767,
+          "unit": "percentage_points",
+          "matches_original": true
+        },
+        {
+          "id": "g0.volume_hhi",
+          "value": 0.46278400000000003,
+          "unit": "index",
+          "matches_original": true
+        },
+        {
+          "id": "g1.volume_hhi",
+          "value": 0.20000000000000004,
+          "unit": "index",
+          "matches_original": true
+        },
+        {
+          "id": "g0.oi_hhi",
+          "value": 0.20000000000000004,
+          "unit": "index",
+          "matches_original": true
+        },
+        {
+          "id": "g1.oi_hhi",
+          "value": 0.20000000000000004,
+          "unit": "index",
+          "matches_original": true
+        },
+        {
+          "id": "g0.median_spread",
+          "value": 8.000000000000007,
+          "unit": "percent",
+          "matches_original": true
+        },
+        {
+          "id": "g1.median_spread",
+          "value": 11.999999999999993,
+          "unit": "percent",
+          "matches_original": true
+        },
+        {
+          "id": "g0.atm_iv",
+          "value": 0.26,
+          "unit": "fraction",
+          "matches_original": true
+        },
+        {
+          "id": "g1.atm_iv",
+          "value": 0.26,
+          "unit": "fraction",
+          "matches_original": true
+        },
+        {
+          "id": "g0.skew_25_delta",
+          "value": 7.999999999999999,
+          "unit": "percentage_points",
+          "matches_original": true
+        },
+        {
+          "id": "g1.skew_25_delta",
+          "value": 7.999999999999999,
+          "unit": "percentage_points",
+          "matches_original": true
+        },
+        {
+          "id": "g0.quality_fresh_live_quote_contracts",
+          "value": 0,
+          "unit": "contracts",
+          "matches_original": true
+        },
+        {
+          "id": "g1.quality_fresh_live_quote_contracts",
+          "value": 0,
+          "unit": "contracts",
+          "matches_original": true
+        }
+      ],
+      "scopes_and_original_times_match": true,
+      "realtime_guaranteed": false,
+      "snapshot_stale": false,
+      "has_snapshot_notice": true,
+      "contains_direction_or_purpose_limit_terms": true,
+      "model_request": {
+        "json_output": true,
+        "sent_evidence_count": 62,
+        "prior_chat_messages": 0
+      }
+    },
+    {
+      "mode": "deepseek",
+      "warning": null,
+      "answer_excerpt": "仅解释已保存的 IBKR 样本；未重新获取行情。本地接收时间不能保证交易所行情的实时性。\n其中含延迟或冻结资料，近期收到也不等于当前市场报价。\n\n看跌合约成交更活跃，只说明这段时间里看跌合约被换手的次数更多，不说明多数人看空。每笔成交都有一个买方和一个卖方，成交计数只记录合约被交易，不记录谁主动、谁是新开仓、谁是平仓。所以“看跌合约多”和“看空的人多”是两件事。\n\n这批数据里，BBB 的看跌成交占比明显偏高，而 AAA 的看跌成交占比偏低；但两组的看跌持仓占比几乎一样，都偏向看跌一侧。也就是说，BBB 的成交和持仓方向大体一致，AAA 则出现成交偏看涨、持仓偏看跌的分歧。 [g1.volume_put_share] [g0.volume_put_share] [g1.oi_put_share] [g0.oi_put_share] [g0.positioning_gap] [g1.positioning_gap]\n\n这种分歧本身就说明成交占比不能当方向指标。成交量是一段时间累计的换手，未平仓量按另一套周期更新，两者统计口径不同，可以同时存在。AAA 的成交集中在少数行权价上，BBB 的成交分散得多，所以同样的“看跌占比”背后，合约分布结构也不一样。 [g0.volume_hhi] [g1.volume_hhi] [g0.volume_top_share] [g1.volume_top_share]\n\n这些数据不能说明谁在买、谁在卖，也不能区分主动买入、平仓或对冲。看跌合约可能被用来保护已有持仓，也可能被卖方收取权利金，这些用途在成交计数里看不出来。集中度不能当作支撑位、阻力位或做市商持仓的线索。两组都是延迟或冻结的历史样本，没有实时保证，也没有新闻或情绪来源，因此不能据此推断后续价格方向。 [g0.quality_fresh_live_quote_contracts] [g1.quality_fresh_live_quote_contracts]\n\n如果想更稳妥地理解这类差异，可以看同一标的、同一到期日的成交与持仓是否同向，以及报价价差是否足够窄到能代表可成交价格；BBB 的价差中位数比 AAA 更大，屏幕价格的可参考程度更低一些。这些只是核对方向，不构成买卖建议。 [g0.median_spread] [g1.median_spread]",
+      "analysis_binding_matches": true,
+      "answer_characters": 986,
+      "cited_evidence": [
+        {
+          "id": "g1.volume_put_share",
+          "value": 0.7142857142857143,
+          "unit": "fraction",
+          "matches_original": true
+        },
+        {
+          "id": "g0.volume_put_share",
+          "value": 0.2,
+          "unit": "fraction",
+          "matches_original": true
+        },
+        {
+          "id": "g1.oi_put_share",
+          "value": 0.6666666666666666,
+          "unit": "fraction",
+          "matches_original": true
+        },
+        {
+          "id": "g0.oi_put_share",
+          "value": 0.6666666666666666,
+          "unit": "fraction",
+          "matches_original": true
+        },
+        {
+          "id": "g0.positioning_gap",
+          "value": -46.666666666666664,
+          "unit": "percentage_points",
+          "matches_original": true
+        },
+        {
+          "id": "g1.positioning_gap",
+          "value": 4.761904761904767,
+          "unit": "percentage_points",
+          "matches_original": true
+        },
+        {
+          "id": "g0.volume_hhi",
+          "value": 0.46278400000000003,
+          "unit": "index",
+          "matches_original": true
+        },
+        {
+          "id": "g1.volume_hhi",
+          "value": 0.20000000000000004,
+          "unit": "index",
+          "matches_original": true
+        },
+        {
+          "id": "g0.volume_top_share",
+          "value": 0.656,
+          "unit": "fraction",
+          "matches_original": true
+        },
+        {
+          "id": "g1.volume_top_share",
+          "value": 0.2,
+          "unit": "fraction",
+          "matches_original": true
+        },
+        {
+          "id": "g0.quality_fresh_live_quote_contracts",
+          "value": 0,
+          "unit": "contracts",
+          "matches_original": true
+        },
+        {
+          "id": "g1.quality_fresh_live_quote_contracts",
+          "value": 0,
+          "unit": "contracts",
+          "matches_original": true
+        },
+        {
+          "id": "g0.median_spread",
+          "value": 8.000000000000007,
+          "unit": "percent",
+          "matches_original": true
+        },
+        {
+          "id": "g1.median_spread",
+          "value": 11.999999999999993,
+          "unit": "percent",
+          "matches_original": true
+        }
+      ],
+      "scopes_and_original_times_match": true,
+      "realtime_guaranteed": false,
+      "snapshot_stale": false,
+      "has_snapshot_notice": true,
+      "contains_direction_or_purpose_limit_terms": true,
+      "model_request": {
+        "json_output": true,
+        "sent_evidence_count": 62,
+        "prior_chat_messages": 2
+      }
+    }
+  ],
+  "checks": [
+    "server_generated_persistent_uuid",
+    "single_and_batch_saved",
+    "unknown_analysis_rejected_before_cloud",
+    "local_evidence_values_match_original",
+    "unknown_evidence_rejected_locally",
+    "all_citations_resolve",
+    "scope_time_feed_retained",
+    "same_session_binding_persists",
+    "session_and_export_preserve_context",
+    "original_saved_analysis_unchanged",
+    "outgoing_model_evidence_matches_saved_aggregates",
+    "one_model_request_per_turn_no_retry"
+  ],
+  "prior_failed_fixture_requests": 1,
+  "model": "deepseek-flash",
+  "unknown_evidence_rejected_locally": true,
+  "analysis_id": "8eda3411-6e64-4cf4-87c9-7415dd7630a1",
+  "analysis_fingerprint": "5e3eff3bf21b06b022c91e18fa0e27ec14933974f9365c072b8939206977f14c",
+  "market_scopes": [
+    {
+      "symbol": "AAA",
+      "expiration": "2026-12-02",
+      "source": "fixture",
+      "received_at": "2026-11-11T05:06:28.113259+00:00",
+      "market_data_status": "delayed",
+      "local_evidence_count": 21
+    },
+    {
+      "symbol": "BBB",
+      "expiration": "2026-12-02",
+      "source": "fixture",
+      "received_at": "2026-11-11T05:06:28.114268+00:00",
+      "market_data_status": "delayed_frozen",
+      "local_evidence_count": 21
+    }
+  ],
+  "synthetic_snapshot_requests": 3,
+  "ibkr_requests": 0,
+  "real_model_requests": 2,
+  "interpretation_limits": "Automated acceptance verifies source grounding, model mode, evidence references and persistence. It does not establish universal correctness of financial reasoning or present market conditions.",
+  "provider_validation": [
+    {
+      "turn": 1,
+      "accepted_by_local_parser": true
+    },
+    {
+      "turn": 2,
+      "accepted_by_local_parser": true
+    }
+  ],
+  "cumulative_fixture_model_requests": 3
+}

@@ -1,0 +1,41 @@
+{
+  "checked_at": "2026-11-11T02:15:54.246232+00:00",
+  "status": "passed",
+  "browser": "Microsoft Edge",
+  "scope": "All options calls intercepted with fixtures. No IB Gateway or LLM calls from this browser test.",
+  "checks": [
+    "navigation_and_deep_link",
+    "no_automatic_analysis",
+    "gateway_tcp_status",
+    "default_feed_mode_omitted",
+    "explicit_delayed_and_live_requests",
+    "model_opt_in_and_unavailable_result",
+    "live_delayed_labels_and_coverage",
+    "missing_values_distinct_from_zero",
+    "call_put_filter",
+    "scroll_containment",
+    "model_response_uses_text_only",
+    "provider_error_clears_previous_result",
+    "escape_and_english_reopen"
+  ],
+  "viewports": [
+    {
+      "width": 320,
+      "height": 740,
+      "deep_link": false,
+      "fixture_analysis_requests": 4
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "deep_link": true,
+      "fixture_analysis_requests": 4
+    },
+    {
+      "width": 1440,
+      "height": 1000,
+      "deep_link": false,
+      "fixture_analysis_requests": 4
+    }
+  ]
+}

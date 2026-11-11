@@ -1,0 +1,166 @@
+{
+  "checked_at": "2026-11-11T03:11:07.633130+00:00",
+  "status": "passed",
+  "scope": "Synthetic inputs, no external requests",
+  "successful_reports": 2,
+  "failures": [],
+  "plain_brief": {
+    "title": "把几组期权放在一起看",
+    "headline": "本次收到 2 组资料，2 组可作带时点的样本解读。",
+    "scope": {
+      "groups": 2
+    },
+    "status": "descriptive",
+    "freshness": {
+      "mode": "delayed",
+      "label": "逐组查看数据时点",
+      "meaning": "各组按顺序采集，不能把它们当作同一瞬间的全市场画面。",
+      "tone": "attention",
+      "historical": false
+    },
+    "cards": [
+      {
+        "id": "batch_coverage",
+        "question": "这次比较的信息够完整吗？",
+        "answer": "收到的 2 组中，2 组至少一半合约有近期有效买卖报价。",
+        "meaning": "报价齐全程度只说明数据覆盖，不能当成预测正确率。成交和持仓资料可以有不同的覆盖范围。",
+        "evidence_ids": [
+          "comparison.report_1_quote_coverage",
+          "comparison.report_2_quote_coverage"
+        ],
+        "tone": "available",
+        "details": ""
+      },
+      {
+        "id": "batch_activity",
+        "question": "各组的交易构成有何不同？",
+        "answer": "在各自样本内，AAA / 2026-12-02 的看跌合约占成交 20%，BBB / 2026-12-02 为 71.4%。",
+        "meaning": "这是比例对照。每组约定价格范围和标的不同，不能据此把原始数量合并或判断哪个标的更看空。",
+        "evidence_ids": [
+          "g0.volume_put_share",
+          "g1.volume_put_share"
+        ],
+        "tone": "available",
+        "details": ""
+      },
+      {
+        "id": "batch_pricing",
+        "question": "不同到期日的波动定价一样吗？",
+        "answer": "这次没有满足比较条件的同标的到期日配对。",
+        "meaning": "不同公司、报价缺失或口径不一致时，不能把数字直接放在一起解释为期限变化。",
+        "evidence_ids": [],
+        "tone": "attention",
+        "details": ""
+      }
+    ],
+    "items": [
+      {
+        "symbol": "AAA",
+        "expiration": "2026-12-02",
+        "status": "descriptive",
+        "headline": "这次成交更偏向看涨合约，已有合约存量却更偏向看跌合约。",
+        "activity": "按比例折算，本次每 100 份样本成交合约中，约 20 份是看跌期权，80 份是看涨期权。",
+        "pricing": "在可比的两侧合约中，看跌期权的波动定价更高。",
+        "freshness": {
+          "mode": "delayed",
+          "label": "延迟资料",
+          "meaning": "本机刚收到资料，也可能是较早的市场报价。请按这份带时间标记的样本阅读。",
+          "tone": "attention",
+          "received_at": "2026-11-11T03:11:07.631138+00:00",
+          "age_seconds": 0.001992,
+          "historical": false
+        },
+        "evidence_ids": [
+          "g0.volume_coverage",
+          "g0.volume_total",
+          "g0.volume_put_share",
+          "g0.volume_top_share",
+          "g0.skew_25_delta",
+          "g0.positioning_coverage",
+          "g0.common_volume_put_share",
+          "g0.common_oi_put_share",
+          "g0.positioning_gap"
+        ]
+      },
+      {
+        "symbol": "BBB",
+        "expiration": "2026-12-02",
+        "status": "descriptive",
+        "headline": "这次成交与已有合约存量，在构成上都更偏向看跌合约。",
+        "activity": "按比例折算，本次每 100 份样本成交合约中，约 71.4 份是看跌期权，28.6 份是看涨期权。",
+        "pricing": "在可比的两侧合约中，看跌期权的波动定价更高。",
+        "freshness": {
+          "mode": "delayed",
+          "label": "延迟资料",
+          "meaning": "本机刚收到资料，也可能是较早的市场报价。请按这份带时间标记的样本阅读。",
+          "tone": "attention",
+          "received_at": "2026-11-11T03:11:07.633130+00:00",
+          "age_seconds": 0.0,
+          "historical": false
+        },
+        "evidence_ids": [
+          "g1.volume_coverage",
+          "g1.volume_total",
+          "g1.volume_put_share",
+          "g1.volume_top_share",
+          "g1.skew_25_delta",
+          "g1.positioning_coverage",
+          "g1.common_volume_put_share",
+          "g1.common_oi_put_share",
+          "g1.positioning_gap"
+        ]
+      }
+    ],
+    "next_steps": [
+      "逐组确认到期日、行情类型和采集时间，再比较比例。",
+      "点开结论旁的依据，核对它属于哪个标的和到期日。"
+    ],
+    "glossary": [
+      {
+        "term": "看涨期权 / 看跌期权",
+        "meaning": "分别赋予按约定价格买入或卖出标的的权利；一份成交合约同时有买方和卖方。"
+      },
+      {
+        "term": "行权价",
+        "meaning": "合约事先约定的买入或卖出价格。它与股票当前价格不同。"
+      },
+      {
+        "term": "未平仓量",
+        "meaning": "尚未结清的合约总数，按独立的统计周期更新。"
+      },
+      {
+        "term": "隐含波动率（IV）",
+        "meaning": "从期权价格折算出的波动定价指标，通常按年表示；它本身不指明上涨或下跌方向。"
+      },
+      {
+        "term": "买卖价差",
+        "meaning": "当前卖方要价与买方出价的距离。差距越大，屏幕上的价格越难代表一个确定可成交的价格。"
+      }
+    ],
+    "evidence_ids": [
+      "g0.volume_coverage",
+      "g0.volume_total",
+      "g0.volume_put_share",
+      "g0.volume_top_share",
+      "g0.skew_25_delta",
+      "g0.positioning_coverage",
+      "g0.common_volume_put_share",
+      "g0.common_oi_put_share",
+      "g0.positioning_gap",
+      "g1.volume_coverage",
+      "g1.volume_total",
+      "g1.volume_put_share",
+      "g1.volume_top_share",
+      "g1.skew_25_delta",
+      "g1.positioning_coverage",
+      "g1.common_volume_put_share",
+      "g1.common_oi_put_share",
+      "g1.positioning_gap",
+      "comparison.report_1_quote_coverage",
+      "comparison.report_2_quote_coverage"
+    ]
+  },
+  "interpretation": {
+    "status": "skipped"
+  }
+}

@@ -1,0 +1,210 @@
+{
+  "checked_at": "2026-11-11T01:41:10.584497+00:00",
+  "status": "passed",
+  "version": "v5-workspace",
+  "theme": "light",
+  "scope": {
+    "actual_backend": "calculator and isolated synthetic-session CRUD",
+    "cloud_generation": "skipped",
+    "fixture_context": "mocked chat, calculator delay, model availability and browser speech events",
+    "local_llm": "not loaded",
+    "speech_hardware": "not tested"
+  },
+  "environment": {
+    "browser_channel": "msedge",
+    "browser_version": "155.0.4283.45",
+    "headless": true,
+    "platform": "Windows",
+    "base": "http://127.0.0.1:8000"
+  },
+  "checks": [
+    "unavailable_local_model_is_disabled_and_explained",
+    "empty_input_is_ignored_and_sample_only_fills_an_editable_draft",
+    "pending_chat_locks_engine_and_preserves_navigation_context",
+    "chat_completion_returns_avatar_and_controls_to_idle",
+    "safe_rich_text_and_expandable_matching_sources",
+    "primary_body_and_model_descriptions_have_readable_sizes",
+    "mock_speech_events_drive_listening_speaking_and_idle",
+    "pending_answer_blocks_previous_answer_speech_including_programmatic_attempt",
+    "failed_chat_displays_error_and_keeps_draft",
+    "model_switch_confirmation_request_contract_and_actual_mode_badge",
+    "calculator_delayed_response_cannot_replace_another_tool",
+    "editing_parameters_discards_inflight_and_previously_displayed_calculations",
+    "calculator_rejects_invalid_principal_before_network_request",
+    "mobile_chat_and_expandable_companion_remain_accessible",
+    "both_models_switch_bidirectionally_and_unavailable_cloud_is_disabled",
+    "prior_gold_v4_theme_migrates_to_coinwise_v5_light_palette",
+    "actual_webgl2_avatar_and_local_brand_font",
+    "workspace_fonts_and_graphics_load_locally_without_cdn_assets",
+    "post_migration_explicit_theme_choice_survives_reload",
+    "two_and_three_dimensional_avatar_modes",
+    "workspace_pause_stops_and_resumes_nonessential_motion",
+    "six_responsive_widths_in_both_languages_keep_chat_and_calculator_in_view",
+    "mobile_navigation_escape_focus_cycle_backdrop_and_knowledge",
+    "calculator_tabs_support_arrow_keyboard_navigation",
+    "actual_compound_zero_rate_loan_and_negative_budget_results",
+    "actual_sessions_are_created_and_selected_without_touching_user_data",
+    "actual_empty_test_session_exports_as_json_without_model_inference",
+    "new_conversation_and_actual_delete_update_workspace",
+    "no_unmocked_model_requests",
+    "touch_emulation_supports_navigation_backdrop_calculator_and_companion",
+    "system_reduced_motion_preserves_reading_and_static_avatar"
+  ],
+  "total": 31,
+  "layouts": [
+    {
+      "language": "zh",
+      "width": 320,
+      "workspace": "passed",
+      "calculator_dialog": "passed"
+    },
+    {
+      "language": "zh",
+      "width": 390,
+      "workspace": "passed",
+      "calculator_dialog": "passed"
+    },
+    {
+      "language": "zh",
+      "width": 768,
+      "workspace": "passed",
+      "calculator_dialog": "passed"
+    },
+    {
+      "language": "zh",
+      "width": 1024,
+      "workspace": "passed",
+      "calculator_dialog": "passed"
+    },
+    {
+      "language": "zh",
+      "width": 1440,
+      "workspace": "passed",
+      "calculator_dialog": "passed"
+    },
+    {
+      "language": "zh",
+      "width": 1920,
+      "workspace": "passed",
+      "calculator_dialog": "passed"
+    },
+    {
+      "language": "en",
+      "width": 320,
+      "workspace": "passed",
+      "calculator_dialog": "passed"
+    },
+    {
+      "language": "en",
+      "width": 390,
+      "workspace": "passed",
+      "calculator_dialog": "passed"
+    },
+    {
+      "language": "en",
+      "width": 768,
+      "workspace": "passed",
+      "calculator_dialog": "passed"
+    },
+    {
+      "language": "en",
+      "width": 1024,
+      "workspace": "passed",
+      "calculator_dialog": "passed"
+    },
+    {
+      "language": "en",
+      "width": 1440,
+      "workspace": "passed",
+      "calculator_dialog": "passed"
+    },
+    {
+      "language": "en",
+      "width": 1920,
+      "workspace": "passed",
+      "calculator_dialog": "passed"
+    }
+  ],
+  "layout_count": 12,
+  "details": {
+    "reading_sizes_px": {
+      ".message.assistant .message-body": 14,
+      "#model-description": 12,
+      ".copilot-intro": 12
+    },
+    "calculator_pending_strategy": "request_generation_guard",
+    "initial_avatar": {
+      "requestedMode": "3d",
+      "actualMode": "3d",
+      "renderer": "webgl2",
+      "state": "idle",
+      "reducedMotion": false,
+      "fallbackReason": null,
+      "frames": 17,
+      "destroyed": false,
+      "threeRevision": "187"
+    },
+    "palette": {
+      "background": "rgb(250, 250, 250)",
+      "accent": "#d4af37",
+      "font": "Inter, \"Microsoft YaHei\", \"PingFang SC\", system-ui, sans-serif"
+    },
+    "workspace_external_assets": [],
+    "live_chat": "Skipped; the chat endpoint is blocked in the real-backend browser context.",
+    "unmocked_chat_attempts": 0
+  },
+  "page_errors": [],
+  "normal_console_errors": [],
+  "duration_seconds": 40.61,
+  "source_sha256": {
+    "web/index.html": "4387e439568f02ea60d9f6ea9b841a1b29aceeda397e44c2628c2d511920633c",
+    "web/styles.css": "8f25102ac90e291a94245cb794bbdc405d04e1f0953dbe02ae13d0d9981632e5",
+    "web/app.js": "322a88338a7f8ccedecac48fe8a217dc792658641cccb6b9e1d627fffb9fe489",
+    "web/avatar.js": "9c3005553c777ded6fd8edc845c9626c132fe8acb43b82790a908a6fb6693c5c",
+    "web/avatar.css": "6b63ec024d347a5a471ad3d983c120520ed12507e3685d89b9777c21dd854701"
+  },
+  "screenshots": [
+    "reports/screenshots/workspace-v5/avatar-mobile.png",
+    "reports/screenshots/workspace-v5/calculator-desktop.png",
+    "reports/screenshots/workspace-v5/calculator-mobile.png",
+    "reports/screenshots/workspace-v5/chat-desktop.png",
+    "reports/screenshots/workspace-v5/chat-mobile.png",
+    "reports/screenshots/workspace-v5/touch-mobile.png",
+    "reports/screenshots/workspace-v5/workspace-desktop.png",
+    "reports/screenshots/workspace-v5/workspace-mobile.png"
+  ],
+  "screenshot_provenance": {
+    "chat-desktop.png": "mock chat response",
+    "chat-mobile.png": "mock local response",
+    "avatar-mobile.png": "real 3D with mock chat response",
+    "workspace-desktop.png": "actual local APIs",
+    "workspace-mobile.png": "actual local APIs",
+    "calculator-desktop.png": "actual formula endpoint",
+    "calculator-mobile.png": "actual formula endpoint",
+    "touch-mobile.png": "actual local APIs and emulated touch"
+  },
+  "historical_evidence": [
+    "reports/workspace_check_v4.json",
+    "reports/avatar_gold_check_v4.json",
+    "reports/browser_local_check_v4.json"
+  ],
+  "verification_script_sha256": "1dd1d3bb680b996c240f987f00bd3fc3b1abbe82649fe380736ad5c0ba1d6459",
+  "limits": [
+    "One Windows/Edge environment; no general device-performance guarantee or full accessibility certification.",
+    "Mock speech events verify state wiring, not microphone recognition or audible speech.",
+    "Model response modes and source presence do not prove general financial factual accuracy."
+  ],
+  "manual_visual_review": {
+    "reviewed_at": "2026-11-11T01:43:07.089792+00:00",
+    "screenshots": [
+      "workspace-desktop.png",
+      "workspace-mobile.png",
+      "chat-desktop.png",
+      "avatar-mobile.png",
+      "calculator-desktop.png",
+      "calculator-mobile.png"
+    ],
+    "result": "passed",
+    "observations": "Consistent porcelain, slate and gold palette across desktop and mobile. Chat sources, Avatar controls and calculator result cards remain readable without horizontal clipping in these screenshots."
+  }
+}

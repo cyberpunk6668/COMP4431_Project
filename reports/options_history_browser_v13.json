@@ -1,0 +1,60 @@
+{
+  "checked_at": "2026-11-11T08:18:14.364319+00:00",
+  "result_version": "v13_human_citation_label_revision",
+  "status": "passed",
+  "viewports": [
+    {
+      "width": 320,
+      "height": 740,
+      "page_errors": [],
+      "local_fixture_posts": 7,
+      "explicit_fixture_chat_posts": 1,
+      "real_broker_calls": 0,
+      "external_model_calls": 0
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "page_errors": [],
+      "local_fixture_posts": 7,
+      "explicit_fixture_chat_posts": 1,
+      "real_broker_calls": 0,
+      "external_model_calls": 0
+    },
+    {
+      "width": 1440,
+      "height": 1000,
+      "page_errors": [],
+      "local_fixture_posts": 7,
+      "explicit_fixture_chat_posts": 1,
+      "real_broker_calls": 0,
+      "external_model_calls": 0
+    }
+  ],
+  "scope": "All API requests intercepted; synthetic rows are analyzed by the real deterministic history builder. No real IBKR or external model calls. UI checks do not validate imported provenance or trading-session coverage.",
+  "checks": [
+    "history_deeplink_and_no_automatic_data_or_model_request",
+    "empty_templates_contain_no_fabricated_market_rows",
+    "server_owned_demo_label_remains_synthetic",
+    "local_json_preview_and_explicit_import",
+    "client_drops_untrusted_verified_source_and_demo_flags",
+    "blank_is_missing_and_zero_is_preserved",
+    "four_plain_questions",
+    "missing_chart_points_break_lines",
+    "missing_oi_asof_has_no_fake_aggregate",
+    "change_units_and_incomparability",
+    "csv_import",
+    "oversized_or_malformed_files_block_post",
+    "foreign_currency_multiplier_or_unknown_price_basis_is_not_relabelled",
+    "failed_request_preserves_previous_review",
+    "saved_broker_archive_is_distinct_from_demo",
+    "partial_intraday_bars_are_not_official_closes_or_full_day_volume",
+    "historical_attach_prefills_without_sending",
+    "historical_context_has_no_live_refresh",
+    "explicit_send_separates_local_evidence_and_expert_sources",
+    "retrieval_rank_is_not_accuracy",
+    "saved_history_dispatches_without_new_capture",
+    "chinese_and_english",
+    "mobile_containment"
+  ]
+}

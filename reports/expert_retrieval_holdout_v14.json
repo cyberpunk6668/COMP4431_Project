@@ -1,0 +1,3396 @@
+{
+  "version": "14.0.0-holdout-1",
+  "generated_at": "2026-11-11T08:43:38.028227+00:00",
+  "status": "evaluated_with_limitations",
+  "method": "bm25_char_ngram_rrf",
+  "scope": "Unmodified raw ExpertKnowledge.search only; excludes chat query expansion, claim-source validation and model generation.",
+  "external_calls": {
+    "http": 0,
+    "ibkr": 0,
+    "llm": 0
+  },
+  "corpus_documents": 14,
+  "support_facets": 14,
+  "inputs": {
+    "cases": "expert_holdout_v14.json",
+    "corpus": "expert_knowledge.json",
+    "cases_sha256": "de796bd5bec10d280a44d7dec505b2445158988c2602eef6e743e26d832377bd",
+    "corpus_sha256": "2569650d12f8124fe3ba21832bd949629b42afa864ee60e5c204baa78b69dea9",
+    "retriever_sha256": "0c2d328de53f2e8b2132b60397e6b377663c0d5af57e0cf4f05ba28e9e1d07a4"
+  },
+  "construction": {
+    "author": "A separate evaluation agent in the same project team",
+    "held_out_from_ranker_tuning": true,
+    "split_role": "blind_holdout",
+    "blind_to_ranker_author_until_algorithm_freeze": true,
+    "blind_external_benchmark": false,
+    "independent_third_party_adjudication": false,
+    "created_after": "The original 40-query set was exposed and reclassified as discovery/dev.",
+    "freeze_policy": "Share only the case count and SHA256 before the ranker author freezes the algorithm. Run once after that freeze; retain every miss and false positive. Do not edit queries, gold labels, topics or the ranker in response to this set.",
+    "coverage": "24 new questions: 18 relevant, including 4 multi-topic questions; 6 irrelevant or outside the corpus; 12 Chinese and 12 English. New phrasing rather than copied chunk titles.",
+    "limitation": "Same-team manual gold labels and a small convenience sample. This is neither an external benchmark nor a measure of answer accuracy, citation entailment, market validity or predictive skill."
+  },
+  "metric_definitions": {
+    "recall_at_k": "Mean over relevant queries of |top-k IDs intersect gold IDs| / |gold IDs|.",
+    "mrr_at_k": "Mean reciprocal rank of the first gold ID among the first k results; zero when absent. Relevant queries only.",
+    "all_gold_hit_rate_at_k": "Fraction of relevant queries for which every labelled ID is in top-k; separates complete multi-topic retrieval from merely finding one source.",
+    "facet_recall_at_k": "Mean fraction of required claim facets covered by the retrieved documents' supports.",
+    "no_hit_abstention_rate": "Fraction of no-hit queries returning an empty list; its complement is the false-positive rate.",
+    "scores_are_not": "Answer accuracy, confidence, citation entailment, market validation or prediction success."
+  },
+  "summary": {
+    "queries": 24,
+    "relevant_queries": 18,
+    "no_hit_queries": 6,
+    "relevant_query_metrics": {
+      "1": {
+        "recall_at_k": 0.601852,
+        "mrr_at_k": 0.722222,
+        "all_gold_hit_rate_at_k": 0.5,
+        "facet_recall_at_k": 0.601852
+      },
+      "3": {
+        "recall_at_k": 0.87037,
+        "mrr_at_k": 0.796296,
+        "all_gold_hit_rate_at_k": 0.833333,
+        "facet_recall_at_k": 0.87037
+      },
+      "4": {
+        "recall_at_k": 0.87037,
+        "mrr_at_k": 0.796296,
+        "all_gold_hit_rate_at_k": 0.833333,
+        "facet_recall_at_k": 0.87037
+      },
+      "6": {
+        "recall_at_k": 0.87037,
+        "mrr_at_k": 0.796296,
+        "all_gold_hit_rate_at_k": 0.833333,
+        "facet_recall_at_k": 0.87037
+      }
+    },
+    "no_hit_abstention_rate": 0.666667,
+    "no_hit_false_positive_rate": 0.333333
+  },
+  "by_language": {
+    "en": {
+      "queries": 12,
+      "relevant_queries": 9,
+      "no_hit_queries": 3,
+      "relevant_query_metrics": {
+        "1": {
+          "recall_at_k": 0.666667,
+          "mrr_at_k": 0.777778,
+          "all_gold_hit_rate_at_k": 0.555556,
+          "facet_recall_at_k": 0.666667
+        },
+        "3": {
+          "recall_at_k": 0.888889,
+          "mrr_at_k": 0.814815,
+          "all_gold_hit_rate_at_k": 0.888889,
+          "facet_recall_at_k": 0.888889
+        },
+        "4": {
+          "recall_at_k": 0.888889,
+          "mrr_at_k": 0.814815,
+          "all_gold_hit_rate_at_k": 0.888889,
+          "facet_recall_at_k": 0.888889
+        },
+        "6": {
+          "recall_at_k": 0.888889,
+          "mrr_at_k": 0.814815,
+          "all_gold_hit_rate_at_k": 0.888889,
+          "facet_recall_at_k": 0.888889
+        }
+      },
+      "no_hit_abstention_rate": 0.666667,
+      "no_hit_false_positive_rate": 0.333333
+    },
+    "zh": {
+      "queries": 12,
+      "relevant_queries": 9,
+      "no_hit_queries": 3,
+      "relevant_query_metrics": {
+        "1": {
+          "recall_at_k": 0.537037,
+          "mrr_at_k": 0.666667,
+          "all_gold_hit_rate_at_k": 0.444444,
+          "facet_recall_at_k": 0.537037
+        },
+        "3": {
+          "recall_at_k": 0.851852,
+          "mrr_at_k": 0.777778,
+          "all_gold_hit_rate_at_k": 0.777778,
+          "facet_recall_at_k": 0.851852
+        },
+        "4": {
+          "recall_at_k": 0.851852,
+          "mrr_at_k": 0.777778,
+          "all_gold_hit_rate_at_k": 0.777778,
+          "facet_recall_at_k": 0.851852
+        },
+        "6": {
+          "recall_at_k": 0.851852,
+          "mrr_at_k": 0.777778,
+          "all_gold_hit_rate_at_k": 0.777778,
+          "facet_recall_at_k": 0.851852
+        }
+      },
+      "no_hit_abstention_rate": 0.666667,
+      "no_hit_false_positive_rate": 0.333333
+    }
+  },
+  "by_kind": {
+    "cross_topic": {
+      "queries": 4,
+      "relevant_queries": 4,
+      "no_hit_queries": 0,
+      "relevant_query_metrics": {
+        "1": {
+          "recall_at_k": 0.458333,
+          "mrr_at_k": 1.0,
+          "all_gold_hit_rate_at_k": 0.0,
+          "facet_recall_at_k": 0.458333
+        },
+        "3": {
+          "recall_at_k": 0.916667,
+          "mrr_at_k": 1.0,
+          "all_gold_hit_rate_at_k": 0.75,
+          "facet_recall_at_k": 0.916667
+        },
+        "4": {
+          "recall_at_k": 0.916667,
+          "mrr_at_k": 1.0,
+          "all_gold_hit_rate_at_k": 0.75,
+          "facet_recall_at_k": 0.916667
+        },
+        "6": {
+          "recall_at_k": 0.916667,
+          "mrr_at_k": 1.0,
+          "all_gold_hit_rate_at_k": 0.75,
+          "facet_recall_at_k": 0.916667
+        }
+      },
+      "no_hit_abstention_rate": null,
+      "no_hit_false_positive_rate": null
+    },
+    "no_hit_lexical_trap": {
+      "queries": 5,
+      "relevant_queries": 0,
+      "no_hit_queries": 5,
+      "relevant_query_metrics": {
+        "1": {
+          "recall_at_k": null,
+          "mrr_at_k": null,
+          "all_gold_hit_rate_at_k": null,
+          "facet_recall_at_k": null
+        },
+        "3": {
+          "recall_at_k": null,
+          "mrr_at_k": null,
+          "all_gold_hit_rate_at_k": null,
+          "facet_recall_at_k": null
+        },
+        "4": {
+          "recall_at_k": null,
+          "mrr_at_k": null,
+          "all_gold_hit_rate_at_k": null,
+          "facet_recall_at_k": null
+        },
+        "6": {
+          "recall_at_k": null,
+          "mrr_at_k": null,
+          "all_gold_hit_rate_at_k": null,
+          "facet_recall_at_k": null
+        }
+      },
+      "no_hit_abstention_rate": 0.6,
+      "no_hit_false_positive_rate": 0.4
+    },
+    "no_hit_out_of_corpus": {
+      "queries": 1,
+      "relevant_queries": 0,
+      "no_hit_queries": 1,
+      "relevant_query_metrics": {
+        "1": {
+          "recall_at_k": null,
+          "mrr_at_k": null,
+          "all_gold_hit_rate_at_k": null,
+          "facet_recall_at_k": null
+        },
+        "3": {
+          "recall_at_k": null,
+          "mrr_at_k": null,
+          "all_gold_hit_rate_at_k": null,
+          "facet_recall_at_k": null
+        },
+        "4": {
+          "recall_at_k": null,
+          "mrr_at_k": null,
+          "all_gold_hit_rate_at_k": null,
+          "facet_recall_at_k": null
+        },
+        "6": {
+          "recall_at_k": null,
+          "mrr_at_k": null,
+          "all_gold_hit_rate_at_k": null,
+          "facet_recall_at_k": null
+        }
+      },
+      "no_hit_abstention_rate": 1.0,
+      "no_hit_false_positive_rate": 0.0
+    },
+    "paraphrase": {
+      "queries": 8,
+      "relevant_queries": 8,
+      "no_hit_queries": 0,
+      "relevant_query_metrics": {
+        "1": {
+          "recall_at_k": 0.75,
+          "mrr_at_k": 0.75,
+          "all_gold_hit_rate_at_k": 0.75,
+          "facet_recall_at_k": 0.75
+        },
+        "3": {
+          "recall_at_k": 1.0,
+          "mrr_at_k": 0.875,
+          "all_gold_hit_rate_at_k": 1.0,
+          "facet_recall_at_k": 1.0
+        },
+        "4": {
+          "recall_at_k": 1.0,
+          "mrr_at_k": 0.875,
+          "all_gold_hit_rate_at_k": 1.0,
+          "facet_recall_at_k": 1.0
+        },
+        "6": {
+          "recall_at_k": 1.0,
+          "mrr_at_k": 0.875,
+          "all_gold_hit_rate_at_k": 1.0,
+          "facet_recall_at_k": 1.0
+        }
+      },
+      "no_hit_abstention_rate": null,
+      "no_hit_false_positive_rate": null
+    },
+    "synonym_paraphrase": {
+      "queries": 6,
+      "relevant_queries": 6,
+      "no_hit_queries": 0,
+      "relevant_query_metrics": {
+        "1": {
+          "recall_at_k": 0.5,
+          "mrr_at_k": 0.5,
+          "all_gold_hit_rate_at_k": 0.5,
+          "facet_recall_at_k": 0.5
+        },
+        "3": {
+          "recall_at_k": 0.666667,
+          "mrr_at_k": 0.555556,
+          "all_gold_hit_rate_at_k": 0.666667,
+          "facet_recall_at_k": 0.666667
+        },
+        "4": {
+          "recall_at_k": 0.666667,
+          "mrr_at_k": 0.555556,
+          "all_gold_hit_rate_at_k": 0.666667,
+          "facet_recall_at_k": 0.666667
+        },
+        "6": {
+          "recall_at_k": 0.666667,
+          "mrr_at_k": 0.555556,
+          "all_gold_hit_rate_at_k": 0.666667,
+          "facet_recall_at_k": 0.666667
+        }
+      },
+      "no_hit_abstention_rate": null,
+      "no_hit_false_positive_rate": null
+    }
+  },
+  "limitations": [
+    "Gold relevance is manually authored by a project maintainer, not independently adjudicated.",
+    "Split role and prior exposure are recorded in construction; this is not a blind external benchmark.",
+    "No answer accuracy, source entailment, numeric correctness or prediction performance is measured.",
+    "Facet coverage is a reviewed metadata mapping, not an automatic proof that an answer is entailed.",
+    "Known misses and incidental lexical matches are retained; no ranker changes were made from this evaluation."
+  ],
+  "cases": [
+    {
+      "id": "holdout_01",
+      "language": "zh",
+      "kind": "synonym_paraphrase",
+      "query": "期权被反复转手，为何累计换手手数涨了，存续合约总数却没涨？",
+      "relevant_ids": [
+        "expert.volume_oi"
+      ],
+      "required_facets": [
+        "volume_vs_oi"
+      ],
+      "retrieved_ids": [
+        "expert.history_volume"
+      ],
+      "metrics": {
+        "1": {
+          "recall": 0.0,
+          "reciprocal_rank": 0.0,
+          "all_gold_hit": false,
+          "facet_recall": 0.0
+        },
+        "3": {
+          "recall": 0.0,
+          "reciprocal_rank": 0.0,
+          "all_gold_hit": false,
+          "facet_recall": 0.0
+        },
+        "4": {
+          "recall": 0.0,
+          "reciprocal_rank": 0.0,
+          "all_gold_hit": false,
+          "facet_recall": 0.0
+        },
+        "6": {
+          "recall": 0.0,
+          "reciprocal_rank": 0.0,
+          "all_gold_hit": false,
+          "facet_recall": 0.0
+        }
+      },
+      "missed_ids_at_4": [
+        "expert.volume_oi"
+      ],
+      "retrieval_ms": 0.693,
+      "ranking": [
+        {
+          "id": "expert.history_volume",
+          "supports": [
+            "historical_volume_filtering"
+          ],
+          "retrieval": {
+            "method": "bm25_char_ngram_rrf",
+            "embedding": false,
+            "knowledge_version": "1.1",
+            "corpus_sha256": "442290b75b51768259f9f0a8c6468eeaf5c4c800ea652f6725c725152da81ac5",
+            "query_normalization": "english_plural_and_reviewed_domain_aliases",
+            "query_expansions": [],
+            "rrf_score": 0.03278689,
+            "bm25_rank": 1,
+            "char_rank": 1,
+            "bm25_score": 2.310462,
+            "char_score": 0.059628,
+            "matched_terms": [
+              "累计"
+            ],
+            "matched_ngrams": [
+              "累计"
+            ],
+            "matched_topics": [
+              "累计"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "holdout_02",
+      "language": "en",
+      "kind": "synonym_paraphrase",
+      "query": "When protective puts dominate the options tape, is that a survey showing most investors are pessimists?",
+      "relevant_ids": [
+        "expert.put_call"
+      ],
+      "required_facets": [
+        "put_call_limits"
+      ],
+      "retrieved_ids": [
+        "expert.pricing"
+      ],
+      "metrics": {
+        "1": {
+          "recall": 0.0,
+          "reciprocal_rank": 0.0,
+          "all_gold_hit": false,
+          "facet_recall": 0.0
+        },
+        "3": {
+          "recall": 0.0,
+          "reciprocal_rank": 0.0,
+          "all_gold_hit": false,
+          "facet_recall": 0.0
+        },
+        "4": {
+          "recall": 0.0,
+          "reciprocal_rank": 0.0,
+          "all_gold_hit": false,
+          "facet_recall": 0.0
+        },
+        "6": {
+          "recall": 0.0,
+          "reciprocal_rank": 0.0,
+          "all_gold_hit": false,
+          "facet_recall": 0.0
+        }
+      },
+      "missed_ids_at_4": [
+        "expert.put_call"
+      ],
+      "retrieval_ms": 0.33,
+      "ranking": [
+        {
+          "id": "expert.pricing",
+          "supports": [
+            "option_price_factors"
+          ],
+          "retrieval": {
+            "method": "bm25_char_ngram_rrf",
+            "embedding": false,
+            "knowledge_version": "1.1",
+            "corpus_sha256": "442290b75b51768259f9f0a8c6468eeaf5c4c800ea652f6725c725152da81ac5",
+            "query_normalization": "english_plural_and_reviewed_domain_aliases",
+            "query_expansions": [],
+            "rrf_score": 0.01639344,
+            "bm25_rank": 1,
+            "char_rank": null,
+            "bm25_score": 3.12463,
+            "char_score": 0,
+            "matched_terms": [
+              "investor",
+              "option"
+            ],
+            "matched_ngrams": [],
+            "matched_topics": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "holdout_03",
+      "language": "zh",
+      "kind": "paraphrase",
+      "query": "期权OI在盘后清算、翌日发布，那我上午下载到的数应该对应哪一天，而不是下载瞬间吧？",
+      "relevant_ids": [
+        "expert.oi_cycle"
+      ],
+      "required_facets": [
+        "oi_reporting_cycle"
+      ],
+      "retrieved_ids": [
+        "expert.oi_cycle",
+        "expert.volume_oi"
+      ],
+      "metrics": {
+        "1": {
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "all_gold_hit": true,
+          "facet_recall": 1.0
+        },
+        "3": {
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "all_gold_hit": true,
+          "facet_recall": 1.0
+        },
+        "4": {
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "all_gold_hit": true,
+          "facet_recall": 1.0
+        },
+        "6": {
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "all_gold_hit": true,
+          "facet_recall": 1.0
+        }
+      },
+      "missed_ids_at_4": [],
+      "retrieval_ms": 0.313,
+      "ranking": [
+        {
+          "id": "expert.oi_cycle",
+          "supports": [
+            "oi_reporting_cycle"
+          ],
+          "retrieval": {
+            "method": "bm25_char_ngram_rrf",
+            "embedding": false,
+            "knowledge_version": "1.1",
+            "corpus_sha256": "442290b75b51768259f9f0a8c6468eeaf5c4c800ea652f6725c725152da81ac5",
+            "query_normalization": "english_plural_and_reviewed_domain_aliases",
+            "query_expansions": [],
+            "rrf_score": 0.03252247,
+            "bm25_rank": 2,
+            "char_rank": 1,
+            "bm25_score": 2.039256,
+            "char_score": 0.126115,
+            "matched_terms": [
+              "oi"
+            ],
+            "matched_ngrams": [
+              "发布",
+              "对应",
+              "清算"
+            ],
+            "matched_topics": [
+              "oi"
+            ]
+          }
+        },
+        {
+          "id": "expert.volume_oi",
+          "supports": [
+            "volume_vs_oi"
+          ],
+          "retrieval": {
+            "method": "bm25_char_ngram_rrf",
+            "embedding": false,
+            "knowledge_version": "1.1",
+            "corpus_sha256": "442290b75b51768259f9f0a8c6468eeaf5c4c800ea652f6725c725152da81ac5",
+            "query_normalization": "english_plural_and_reviewed_domain_aliases",
+            "query_expansions": [],
+            "rrf_score": 0.01639344,
+            "bm25_rank": 1,
+            "char_rank": null,
+            "bm25_score": 2.109807,
+            "char_score": 0,
+            "matched_terms": [
+              "oi"
+            ],
+            "matched_ngrams": [],
+            "matched_topics": [
+              "oi"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "holdout_04",
+      "language": "en",
+      "kind": "paraphrase",
+      "query": "For an equity option, does a fatter implied-volatility estimate imply a selloff, or merely a larger possible move?",
+      "relevant_ids": [
+        "expert.volatility"
+      ],
+      "required_facets": [
+        "iv_direction_limits"
+      ],
+      "retrieved_ids": [
+        "expert.volatility",
+        "expert.history_iv",
+        "expert.pricing",
+        "expert.history_bars"
+      ],
+      "metrics": {
+        "1": {
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "all_gold_hit": true,
+          "facet_recall": 1.0
+        },
+        "3": {
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "all_gold_hit": true,
+          "facet_recall": 1.0
+        },
+        "4": {
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "all_gold_hit": true,
+          "facet_recall": 1.0
+        },
+        "6": {
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "all_gold_hit": true,
+          "facet_recall": 1.0
+        }
+      },
+      "missed_ids_at_4": [],
+      "retrieval_ms": 0.407,
+      "ranking": [
+        {
+          "id": "expert.volatility",
+          "supports": [
+            "iv_direction_limits"
+          ],
+          "retrieval": {
+            "method": "bm25_char_ngram_rrf",
+            "embedding": false,
+            "knowledge_version": "1.1",
+            "corpus_sha256": "442290b75b51768259f9f0a8c6468eeaf5c4c800ea652f6725c725152da81ac5",
+            "query_normalization": "english_plural_and_reviewed_domain_aliases",
+            "query_expansions": [],
+            "rrf_score": 0.01639344,
+            "bm25_rank": 1,
+            "char_rank": null,
+            "bm25_score": 7.549418,
+            "char_score": 0,
+            "matched_terms": [
+              "estimate",
+              "implied",
+              "option",
+              "volatility"
+            ],
+            "matched_ngrams": [],
+            "matched_topics": [
+              "volatility"
+            ]
+          }
+        },
+        {
+          "id": "expert.history_iv",
+          "supports": [
+            "historical_contract_iv_limits"
+          ],
+          "retrieval": {
+            "method": "bm25_char_ngram_rrf",
+            "embedding": false,
+            "knowledge_version": "1.1",
+            "corpus_sha256": "442290b75b51768259f9f0a8c6468eeaf5c4c800ea652f6725c725152da81ac5",
+            "query_normalization": "english_plural_and_reviewed_domain_aliases",
+            "query_expansions": [],
+            "rrf_score": 0.01612903,
+            "bm25_rank": 2,
+            "char_rank": null,
+            "bm25_score": 4.608066,
+            "char_score": 0,
+            "matched_terms": [
+              "implied",
+              "option",
+              "volatility"
+            ],
+            "matched_ngrams": [],
+            "matched_topics": []
+          }
+        },
+        {
+          "id": "expert.pricing",
+          "supports": [
+            "option_price_factors"
+          ],
+          "retrieval": {
+            "method": "bm25_char_ngram_rrf",
+            "embedding": false,
+            "knowledge_version": "1.1",
+            "corpus_sha256": "442290b75b51768259f9f0a8c6468eeaf5c4c800ea652f6725c725152da81ac5",
+            "query_normalization": "english_plural_and_reviewed_domain_aliases",
+            "query_expansions": [],
+            "rrf_score": 0.01587302,
+            "bm25_rank": 3,
+            "char_rank": null,
+            "bm25_score": 3.681294,
+            "char_score": 0,
+            "matched_terms": [
+              "implied",
+              "option",
+              "volatility"
+            ],
+            "matched_ngrams": [],
+            "matched_topics": []
+          }
+        },
+        {
+          "id": "expert.history_bars",
+          "supports": [
+            "historical_bar_semantics"
+          ],
+          "retrieval": {
+            "method": "bm25_char_ngram_rrf",
+            "embedding": false,
+            "knowledge_version": "1.1",
+            "corpus_sha256": "442290b75b51768259f9f0a8c6468eeaf5c4c800ea652f6725c725152da81ac5",
+            "query_normalization": "english_plural_and_reviewed_domain_aliases",
+            "query_expansions": [],
+            "rrf_score": 0.015625,
+            "bm25_rank": 4,
+            "char_rank": null,
+            "bm25_score": 2.725221,
+            "char_score": 0,
+            "matched_terms": [
+              "implied",
+              "volatility"
+            ],
+            "matched_ngrams": [],
+            "matched_topics": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "holdout_05",
+      "language": "zh",
+      "kind": "paraphrase",
+      "query": "现货横盘的几天里，期权还会因为期限缩短或股息利率变化而变价吗？",
+      "relevant_ids": [
+        "expert.pricing"
+      ],
+      "required_facets": [
+        "option_price_factors"
+      ],
+      "retrieved_ids": [
+        "expert.history_volume",
+        "expert.pricing"
+      ],
+      "metrics": {
+        "1": {
+          "recall": 0.0,
+          "reciprocal_rank": 0.0,
+          "all_gold_hit": false,
+          "facet_recall": 0.0
+        },
+        "3": {
+          "recall": 1.0,
+          "reciprocal_rank": 0.5,
+          "all_gold_hit": true,
+          "facet_recall": 1.0
+        },
+        "4": {
+          "recall": 1.0,
+          "reciprocal_rank": 0.5,
+          "all_gold_hit": true,
+          "facet_recall": 1.0
+        },
+        "6": {
+          "recall": 1.0,
+          "reciprocal_rank": 0.5,
+          "all_gold_hit": true,
+          "facet_recall": 1.0
+        }
+      },
+      "missed_ids_at_4": [],
+      "retrieval_ms": 0.283,
+      "ranking": [
+        {
+          "id": "expert.history_volume",
+          "supports": [
+            "historical_volume_filtering"
+          ],
+          "retrieval": {
+            "method": "bm25_char_ngram_rrf",
+            "embedding": false,
+            "knowledge_version": "1.1",
+            "corpus_sha256": "442290b75b51768259f9f0a8c6468eeaf5c4c800ea652f6725c725152da81ac5",
+            "query_normalization": "english_plural_and_reviewed_domain_aliases",
+            "query_expansions": [],
+            "rrf_score": 0.03252247,
+            "bm25_rank": 1,
+            "char_rank": 2,
+            "bm25_score": 1.460265,
+            "char_score": 0.029875,
+            "matched_terms": [
+              "变化"
+            ],
+            "matched_ngrams": [
+              "变化"
+            ],
+            "matched_topics": [
+              "变化"
+            ]
+          }
+        },
+        {
+          "id": "expert.pricing",
+          "supports": [
+            "option_price_factors"
+          ],
+          "retrieval": {
+            "method": "bm25_char_ngram_rrf",
+            "embedding": false,
+            "knowledge_version": "1.1",
+            "corpus_sha256": "442290b75b51768259f9f0a8c6468eeaf5c4c800ea652f6725c725152da81ac5",
+            "query_normalization": "english_plural_and_reviewed_domain_aliases",
+            "query_expansions": [],
+            "rrf_score": 0.03252247,
+            "bm25_rank": 2,
+            "char_rank": 1,
+            "bm25_score": 1.448702,
+            "char_score": 0.190531,
+            "matched_terms": [
+              "变化"
+            ],
+            "matched_ngrams": [
+              "利率",
+              "变化",
+              "期权",
+              "期限",
+              "股息"
+            ],
+            "matched_topics": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "holdout_06",
+      "language": "en",
+      "kind": "synonym_paraphrase",
+      "query": "If I place an option order halfway between the best buying and selling quotes, am I assured a fill?",
+      "relevant_ids": [
+        "expert.spread"
+      ],
+      "required_facets": [
+        "bid_ask_execution"
+      ],
+      "retrieved_ids": [
+        "expert.spread",
+        "expert.history_volume"
+      ],
+      "metrics": {
+        "1": {
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "all_gold_hit": true,
+          "facet_recall": 1.0
+        },
+        "3": {
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "all_gold_hit": true,
+          "facet_recall": 1.0
+        },
+        "4": {
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "all_gold_hit": true,
+          "facet_recall": 1.0
+        },
+        "6": {
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "all_gold_hit": true,
+          "facet_recall": 1.0
+        }
+      },
+      "missed_ids_at_4": [],
+      "retrieval_ms": 0.324,
+      "ranking": [
+        {
+          "id": "expert.spread",
+          "supports": [
+            "bid_ask_execution"
+          ],
+          "retrieval": {
+            "method": "bm25_char_ngram_rrf",
+            "embedding": false,
+            "knowledge_version": "1.1",
+            "corpus_sha256": "442290b75b51768259f9f0a8c6468eeaf5c4c800ea652f6725c725152da81ac5",
+            "query_normalization": "english_plural_and_reviewed_domain_aliases",
+            "query_expansions": [],
+            "rrf_score": 0.01639344,
+            "bm25_rank": 1,
+            "char_rank": null,
+            "bm25_score": 4.543535,
+            "char_score": 0,
+            "matched_terms": [
+              "fill",
+              "order"
+            ],
+            "matched_ngrams": [],
+            "matched_topics": []
+          }
+        },
+        {
+          "id": "expert.history_volume",
+          "supports": [
+            "historical_volume_filtering"
+          ],
+          "retrieval": {
+            "method": "bm25_char_ngram_rrf",
+            "embedding": false,
+            "knowledge_version": "1.1",
+            "corpus_sha256": "442290b75b51768259f9f0a8c6468eeaf5c4c800ea652f6725c725152da81ac5",
+            "query_normalization": "english_plural_and_reviewed_domain_aliases",
+            "query_expansions": [],
+            "rrf_score": 0.01612903,
+            "bm25_rank": 2,
+            "char_rank": null,
+            "bm25_score": 4.10835,
+            "char_score": 0,
+            "matched_terms": [
+              "best",
+              "quote"
+            ],
+            "matched_ngrams": [],
+            "matched_topics": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "holdout_07",
+      "language": "zh",
+      "kind": "paraphrase",
+      "query": "IBKR查昨天的期权数据也可能需要行情订阅吗？不能因为不是今天就默认所有账户都能取吧？",
+      "relevant_ids": [
+        "expert.history_permissions"
+      ],
+      "required_facets": [
+        "historical_permissions"
+      ],
+      "retrieved_ids": [
+        "expert.history_permissions",
+        "expert.history_iv",
+        "expert.history_limits",
+        "expert.volatility",
+        "expert.history_time",
+        "expert.contract_identity"
+      ],
+      "metrics": {
+        "1": {
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "all_gold_hit": true,
+          "facet_recall": 1.0
+        },
+        "3": {
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "all_gold_hit": true,
+          "facet_recall": 1.0
+        },
+        "4": {
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "all_gold_hit": true,
+          "facet_recall": 1.0
+        },
+        "6": {
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "all_gold_hit": true,
+          "facet_recall": 1.0
+        }
+      },
+      "missed_ids_at_4": [],
+      "retrieval_ms": 0.378,
+      "ranking": [
+        {
+          "id": "expert.history_permissions",
+          "supports": [
+            "historical_permissions"
+          ],
+          "retrieval": {
+            "method": "bm25_char_ngram_rrf",
+            "embedding": false,
+            "knowledge_version": "1.1",
+            "corpus_sha256": "442290b75b51768259f9f0a8c6468eeaf5c4c800ea652f6725c725152da81ac5",
+            "query_normalization": "english_plural_and_reviewed_domain_aliases",
+            "query_expansions": [],
+            "rrf_score": 0.03278689,
+            "bm25_rank": 1,
+            "char_rank": 1,
+            "bm25_score": 3.893963,
+            "char_score": 0.255395,
+            "matched_terms": [
+              "ibkr",
+              "订阅"
+            ],
+            "matched_ngrams": [
+              "不能",
+              "情订",
+              "情订阅",
+              "行情",
+              "行情订",
+              "订阅",
+              "账户",
+              "都能",
+              "需要"
+            ],
+            "matched_topics": [
+              "ibkr",
+              "订阅"
+            ]
+          }
+        },
+        {
+          "id": "expert.history_iv",
+          "supports": [
+            "historical_contract_iv_limits"
+          ],
+          "retrieval": {
+            "method": "bm25_char_ngram_rrf",
+            "embedding": false,
+            "knowledge_version": "1.1",
+            "corpus_sha256": "442290b75b51768259f9f0a8c6468eeaf5c4c800ea652f6725c725152da81ac5",
+            "query_normalization": "english_plural_and_reviewed_domain_aliases",
+            "query_expansions": [],
+            "rrf_score": 0.03151365,
+            "bm25_rank": 2,
+            "char_rank": 5,
+            "bm25_score": 1.599467,
+            "char_score": 0.047101,
+            "matched_terms": [
+              "ibkr"
+            ],
+            "matched_ngrams": [
+              "不能",
+              "数据",
+              "期权"
+            ],
+            "matched_topics": []
+          }
+        },
+        {
+          "id": "expert.history_limits",
+          "supports": [
+            "expired_eod_limits"
+          ],
+          "retrieval": {
+            "method": "bm25_char_ngram_rrf",
+            "embedding": false,
+            "knowledge_version": "1.1",
+            "corpus_sha256": "442290b75b51768259f9f0a8c6468eeaf5c4c800ea652f6725c725152da81ac5",
+            "query_normalization": "english_plural_and_reviewed_domain_aliases",
+            "query_expansions": [],
+            "rrf_score": 0.03102453,
+            "bm25_rank": 3,
+            "char_rank": 6,
+            "bm25_score": 1.579438,
+            "char_score": 0.047101,
+            "matched_terms": [
+              "ibkr"
+            ],
+            "matched_ngrams": [
+              "不能",
+              "数据",
+              "期权"
+            ],
+            "matched_topics": []
+          }
+        },
+        {
+          "id": "expert.volatility",
+          "supports": [
+            "iv_direction_limits"
+          ],
+          "retrieval": {
+            "method": "bm25_char_ngram_rrf",
+            "embedding": false,
+            "knowledge_version": "1.1",
+            "corpus_sha256": "442290b75b51768259f9f0a8c6468eeaf5c4c800ea652f6725c725152da81ac5",
+            "query_normalization": "english_plural_and_reviewed_domain_aliases",
+            "query_expansions": [],
+            "rrf_score": 0.01612903,
+            "bm25_rank": null,
+            "char_rank": 2,
+            "bm25_score": 0,
+            "char_score": 0.054477,
+            "matched_terms": [],
+            "matched_ngrams": [
+              "不能",
+              "也可",
+              "期权"
+            ],
+            "matched_topics": []
+          }
+        },
+        {
+          "id": "expert.history_time",
+          "supports": [
+            "historical_time_basis"
+          ],
+          "retrieval": {
+            "method": "bm25_char_ngram_rrf",
+            "embedding": false,
+            "knowledge_version": "1.1",
+            "corpus_sha256": "442290b75b51768259f9f0a8c6468eeaf5c4c800ea652f6725c725152da81ac5",
+            "query_normalization": "english_plural_and_reviewed_domain_aliases",
+            "query_expansions": [],
+            "rrf_score": 0.01587302,
+            "bm25_rank": null,
+            "char_rank": 3,
+            "bm25_score": 0,
+            "char_score": 0.049281,
+            "matched_terms": [],
+            "matched_ngrams": [
+              "不是",
+              "不能",
+              "可能"
+            ],
+            "matched_topics": []
+          }
+        },
+        {
+          "id": "expert.contract_identity",
+          "supports": [
+            "contract_comparability"
+          ],
+          "retrieval": {
+            "method": "bm25_char_ngram_rrf",
+            "embedding": false,
+            "knowledge_version": "1.1",
+            "corpus_sha256": "442290b75b51768259f9f0a8c6468eeaf5c4c800ea652f6725c725152da81ac5",
+            "query_normalization": "english_plural_and_reviewed_domain_aliases",
+            "query_expansions": [],
+            "rrf_score": 0.015625,
+            "bm25_rank": null,
+            "char_rank": 4,
+            "bm25_score": 0,
+            "char_score": 0.047101,
+            "matched_terms": [],
+            "matched_ngrams": [
+              "不能",
+              "期权",
+              "需要"
+            ],
+            "matched_topics": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "holdout_08",
+      "language": "en",
+      "kind": "synonym_paraphrase",
+      "query": "Does choosing last month let IBKR retrieve a lapsed equity-option series' native daily record?",
+      "relevant_ids": [
+        "expert.history_limits"
+      ],
+      "required_facets": [
+        "expired_eod_limits"
+      ],
+      "retrieved_ids": [
+        "expert.history_oi",
+        "expert.contract_identity",
+        "expert.history_limits",
+        "expert.history_iv",
+        "expert.history_permissions"
+      ],
+      "metrics": {
+        "1": {
+          "recall": 0.0,
+          "reciprocal_rank": 0.0,
+          "all_gold_hit": false,
+          "facet_recall": 0.0
+        },
+        "3": {
+          "recall": 1.0,
+          "reciprocal_rank": 0.3333333333333333,
+          "all_gold_hit": true,
+          "facet_recall": 1.0
+        },
+        "4": {
+          "recall": 1.0,
+          "reciprocal_rank": 0.3333333333333333,
+          "all_gold_hit": true,
+          "facet_recall": 1.0
+        },
+        "6": {
+          "recall": 1.0,
+          "reciprocal_rank": 0.3333333333333333,
+          "all_gold_hit": true,
+          "facet_recall": 1.0
+        }
+      },
+      "missed_ids_at_4": [],
+      "retrieval_ms": 0.376,
+      "ranking": [
+        {
+          "id": "expert.history_oi",
+          "supports": [
+            "historical_oi_availability"
+          ],
+          "retrieval": {
+            "method": "bm25_char_ngram_rrf",
+            "embedding": false,
+            "knowledge_version": "1.1",
+            "corpus_sha256": "442290b75b51768259f9f0a8c6468eeaf5c4c800ea652f6725c725152da81ac5",
+            "query_normalization": "english_plural_and_reviewed_domain_aliases",
+            "query_expansions": [],
+            "rrf_score": 0.01639344,
+            "bm25_rank": 1,
+            "char_rank": null,
+            "bm25_score": 4.033092,
+            "char_score": 0,
+            "matched_terms": [
+              "daily",
+              "ibkr",
+              "option"
+            ],
+            "matched_ngrams": [],
+            "matched_topics": []
+          }
+        },
+        {
+          "id": "expert.contract_identity",
+          "supports": [
+            "contract_comparability"
+          ],
+          "retrieval": {
+            "method": "bm25_char_ngram_rrf",
+            "embedding": false,
+            "knowledge_version": "1.1",
+            "corpus_sha256": "442290b75b51768259f9f0a8c6468eeaf5c4c800ea652f6725c725152da81ac5",
+            "query_normalization": "english_plural_and_reviewed_domain_aliases",
+            "query_expansions": [],
+            "rrf_score": 0.01612903,
+            "bm25_rank": 2,
+            "char_rank": null,
+            "bm25_score": 3.174912,
+            "char_score": 0,
+            "matched_terms": [
+              "option",
+              "sery"
+            ],
+            "matched_ngrams": [],
+            "matched_topics": []
+          }
+        },
+        {
+          "id": "expert.history_limits",
+          "supports": [
+            "expired_eod_limits"
+          ],
+          "retrieval": {
+            "method": "bm25_char_ngram_rrf",
+            "embedding": false,
+            "knowledge_version": "1.1",
+            "corpus_sha256": "442290b75b51768259f9f0a8c6468eeaf5c4c800ea652f6725c725152da81ac5",
+            "query_normalization": "english_plural_and_reviewed_domain_aliases",
+            "query_expansions": [],
+            "rrf_score": 0.01587302,
+            "bm25_rank": 3,
+            "char_rank": null,
+            "bm25_score": 2.895893,
+            "char_score": 0,
+            "matched_terms": [
+              "ibkr",
+              "option"
+            ],
+            "matched_ngrams": [],
+            "matched_topics": []
+          }
+        },
+        {
+          "id": "expert.history_iv",
+          "supports": [
+            "historical_contract_iv_limits"
+          ],
+          "retrieval": {
+            "method": "bm25_char_ngram_rrf",
+            "embedding": false,
+            "knowledge_version": "1.1",
+            "corpus_sha256": "442290b75b51768259f9f0a8c6468eeaf5c4c800ea652f6725c725152da81ac5",
+            "query_normalization": "english_plural_and_reviewed_domain_aliases",
+            "query_expansions": [],
+            "rrf_score": 0.015625,
+            "bm25_rank": 4,
+            "char_rank": null,
+            "bm25_score": 2.459161,
+            "char_score": 0,
+            "matched_terms": [
+              "ibkr",
+              "option"
+            ],
+            "matched_ngrams": [],
+            "matched_topics": []
+          }
+        },
+        {
+          "id": "expert.history_permissions",
+          "supports": [
+            "historical_permissions"
+          ],
+          "retrieval": {
+            "method": "bm25_char_ngram_rrf",
+            "embedding": false,
+            "knowledge_version": "1.1",
+            "corpus_sha256": "442290b75b51768259f9f0a8c6468eeaf5c4c800ea652f6725c725152da81ac5",
+            "query_normalization": "english_plural_and_reviewed_domain_aliases",
+            "query_expansions": [],
+            "rrf_score": 0.01538462,
+            "bm25_rank": 5,
+            "char_rank": null,
+            "bm25_score": 1.67217,
+            "char_score": 0,
+            "matched_terms": [
+              "ibkr"
+            ],
+            "matched_ngrams": [],
+            "matched_topics": [
+              "ibkr"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "holdout_09",
+      "language": "zh",
+      "kind": "paraphrase",
+      "query": "券商重取同一天的期权历史成交合计，为什么可能少于当时的盘中累计，是否有交易过滤差异？",
+      "relevant_ids": [
+        "expert.history_volume"
+      ],
+      "required_facets": [
+        "historical_volume_filtering"
+      ],
+      "retrieved_ids": [
+        "expert.history_volume",
+        "expert.history_bars",
+        "expert.history_time",
+        "expert.history_oi"
+      ],
+      "metrics": {
+        "1": {
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "all_gold_hit": true,
+          "facet_recall": 1.0
+        },
+        "3": {
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "all_gold_hit": true,
+          "facet_recall": 1.0
+        },
+        "4": {
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "all_gold_hit": true,
+          "facet_recall": 1.0
+        },
+        "6": {
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "all_gold_hit": true,
+          "facet_recall": 1.0
+        }
+      },
+      "missed_ids_at_4": [],
+      "retrieval_ms": 0.368,
+      "ranking": [
+        {
+          "id": "expert.history_volume",
+          "supports": [
+            "historical_volume_filtering"
+          ],
+          "retrieval": {
+            "method": "bm25_char_ngram_rrf",
+            "embedding": false,
+            "knowledge_version": "1.1",
+            "corpus_sha256": "442290b75b51768259f9f0a8c6468eeaf5c4c800ea652f6725c725152da81ac5",
+            "query_normalization": "english_plural_and_reviewed_domain_aliases",
+            "query_expansions": [],
+            "rrf_score": 0.03278689,
+            "bm25_rank": 1,
+            "char_rank": 1,
+            "bm25_score": 5.316442,
+            "char_score": 0.205929,
+            "matched_terms": [
+              "历史",
+              "累计",
+              "过滤"
+            ],
+            "matched_ngrams": [
+              "交易",
+              "历史",
+              "历史成",
+              "可能",
+              "史成",
+              "史成交",
+              "成交",
+              "累计",
+              "过滤"
+            ],
+            "matched_topics": [
+              "累计",
+              "过滤"
+            ]
+          }
+        },
+        {
+          "id": "expert.history_bars",
+          "supports": [
+            "historical_bar_semantics"
+          ],
+          "retrieval": {
+            "method": "bm25_char_ngram_rrf",
+            "embedding": false,
+            "knowledge_version": "1.1",
+            "corpus_sha256": "442290b75b51768259f9f0a8c6468eeaf5c4c800ea652f6725c725152da81ac5",
+            "query_normalization": "english_plural_and_reviewed_domain_aliases",
+            "query_expansions": [],
+            "rrf_score": 0.03200205,
+            "bm25_rank": 3,
+            "char_rank": 2,
+            "bm25_score": 0.653772,
+            "char_score": 0.129657,
+            "matched_terms": [
+              "历史"
+            ],
+            "matched_ngrams": [
+              "历史",
+              "历史成",
+              "史成",
+              "史成交",
+              "同一",
+              "成交"
+            ],
+            "matched_topics": []
+          }
+        },
+        {
+          "id": "expert.history_time",
+          "supports": [
+            "historical_time_basis"
+          ],
+          "retrieval": {
+            "method": "bm25_char_ngram_rrf",
+            "embedding": false,
+            "knowledge_version": "1.1",
+            "corpus_sha256": "442290b75b51768259f9f0a8c6468eeaf5c4c800ea652f6725c725152da81ac5",
+            "query_normalization": "english_plural_and_reviewed_domain_aliases",
+            "query_expansions": [],
+            "rrf_score": 0.03175403,
+            "bm25_rank": 2,
+            "char_rank": 4,
+            "bm25_score": 0.673999,
+            "char_score": 0.055629,
+            "matched_terms": [
+              "历史"
+            ],
+            "matched_ngrams": [
+              "交易",
+              "历史",
+              "可能"
+            ],
+            "matched_topics": [
+              "历史"
+            ]
+          }
+        },
+        {
+          "id": "expert.history_oi",
+          "supports": [
+            "historical_oi_availability"
+          ],
+          "retrieval": {
+            "method": "bm25_char_ngram_rrf",
+            "embedding": false,
+            "knowledge_version": "1.1",
+            "corpus_sha256": "442290b75b51768259f9f0a8c6468eeaf5c4c800ea652f6725c725152da81ac5",
+            "query_normalization": "english_plural_and_reviewed_domain_aliases",
+            "query_expansions": [],
+            "rrf_score": 0.03149802,
+            "bm25_rank": 4,
+            "char_rank": 3,
+            "bm25_score": 0.575986,
+            "char_score": 0.110366,
+            "matched_terms": [
+              "历史"
+            ],
+            "matched_ngrams": [
+              "历史",
+              "历史成",
+              "史成",
+              "史成交",
+              "成交",
+              "期权"
+            ],
+            "matched_topics": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "holdout_10",
+      "language": "en",
+      "kind": "synonym_paraphrase",
+      "query": "An hourly bid-and-offer candle stores averages and extrema. Are its endpoints a simultaneously available option quote?",
+      "relevant_ids": [
+        "expert.history_bars"
+      ],
+      "required_facets": [
+        "historical_bar_semantics"
+      ],
+      "retrieved_ids": [
+        "expert.history_bars",
+        "expert.spread"
+      ],
+      "metrics": {
+        "1": {
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "all_gold_hit": true,
+          "facet_recall": 1.0
+        },
+        "3": {
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "all_gold_hit": true,
+          "facet_recall": 1.0
+        },
+        "4": {
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "all_gold_hit": true,
+          "facet_recall": 1.0
+        },
+        "6": {
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "all_gold_hit": true,
+          "facet_recall": 1.0
+        }
+      },
+      "missed_ids_at_4": [],
+      "retrieval_ms": 0.361,
+      "ranking": [
+        {
+          "id": "expert.history_bars",
+          "supports": [
+            "historical_bar_semantics"
+          ],
+          "retrieval": {
+            "method": "bm25_char_ngram_rrf",
+            "embedding": false,
+            "knowledge_version": "1.1",
+            "corpus_sha256": "442290b75b51768259f9f0a8c6468eeaf5c4c800ea652f6725c725152da81ac5",
+            "query_normalization": "english_plural_and_reviewed_domain_aliases",
+            "query_expansions": [],
+            "rrf_score": 0.01639344,
+            "bm25_rank": 1,
+            "char_rank": null,
+            "bm25_score": 6.903212,
+            "char_score": 0,
+            "matched_terms": [
+              "average",
+              "bid",
+              "quote"
+            ],
+            "matched_ngrams": [],
+            "matched_topics": []
+          }
+        },
+        {
+          "id": "expert.spread",
+          "supports": [
+            "bid_ask_execution"
+          ],
+          "retrieval": {
+            "method": "bm25_char_ngram_rrf",
+            "embedding": false,
+            "knowledge_version": "1.1",
+            "corpus_sha256": "442290b75b51768259f9f0a8c6468eeaf5c4c800ea652f6725c725152da81ac5",
+            "query_normalization": "english_plural_and_reviewed_domain_aliases",
+            "query_expansions": [],
+            "rrf_score": 0.01612903,
+            "bm25_rank": 2,
+            "char_rank": null,
+            "bm25_score": 5.524596,
+            "char_score": 0,
+            "matched_terms": [
+              "available",
+              "bid"
+            ],
+            "matched_ngrams": [],
+            "matched_topics": [
+              "bid"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "holdout_11",
+      "language": "zh",
+      "kind": "paraphrase",
+      "query": "这份期权文件记录的是过去交易区间，刚刚上传成功能证明当前市场还维持当时状态吗？",
+      "relevant_ids": [
+        "expert.history_time"
+      ],
+      "required_facets": [
+        "historical_time_basis"
+      ],
+      "retrieved_ids": [
+        "expert.history_iv",
+        "expert.history_time"
+      ],
+      "metrics": {
+        "1": {
+          "recall": 0.0,
+          "reciprocal_rank": 0.0,
+          "all_gold_hit": false,
+          "facet_recall": 0.0
+        },
+        "3": {
+          "recall": 1.0,
+          "reciprocal_rank": 0.5,
+          "all_gold_hit": true,
+          "facet_recall": 1.0
+        },
+        "4": {
+          "recall": 1.0,
+          "reciprocal_rank": 0.5,
+          "all_gold_hit": true,
+          "facet_recall": 1.0
+        },
+        "6": {
+          "recall": 1.0,
+          "reciprocal_rank": 0.5,
+          "all_gold_hit": true,
+          "facet_recall": 1.0
+        }
+      },
+      "missed_ids_at_4": [],
+      "retrieval_ms": 0.278,
+      "ranking": [
+        {
+          "id": "expert.history_iv",
+          "supports": [
+            "historical_contract_iv_limits"
+          ],
+          "retrieval": {
+            "method": "bm25_char_ngram_rrf",
+            "embedding": false,
+            "knowledge_version": "1.1",
+            "corpus_sha256": "442290b75b51768259f9f0a8c6468eeaf5c4c800ea652f6725c725152da81ac5",
+            "query_normalization": "english_plural_and_reviewed_domain_aliases",
+            "query_expansions": [],
+            "rrf_score": 0.01639344,
+            "bm25_rank": null,
+            "char_rank": 1,
+            "bm25_score": 0,
+            "char_score": 0.136733,
+            "matched_terms": [],
+            "matched_ngrams": [
+              "份期",
+              "份期权",
+              "当前",
+              "期权",
+              "过去"
+            ],
+            "matched_topics": []
+          }
+        },
+        {
+          "id": "expert.history_time",
+          "supports": [
+            "historical_time_basis"
+          ],
+          "retrieval": {
+            "method": "bm25_char_ngram_rrf",
+            "embedding": false,
+            "knowledge_version": "1.1",
+            "corpus_sha256": "442290b75b51768259f9f0a8c6468eeaf5c4c800ea652f6725c725152da81ac5",
+            "query_normalization": "english_plural_and_reviewed_domain_aliases",
+            "query_expansions": [],
+            "rrf_score": 0.01612903,
+            "bm25_rank": null,
+            "char_rank": 2,
+            "bm25_score": 0,
+            "char_score": 0.115946,
+            "matched_terms": [],
+            "matched_ngrams": [
+              "交易",
+              "区间",
+              "市场",
+              "状态",
+              "过去"
+            ],
+            "matched_topics": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "holdout_12",
+      "language": "en",
+      "kind": "synonym_paraphrase",
+      "query": "A volatility history requested for an equity ticker is not a dated Greek surface for every option strike, is it?",
+      "relevant_ids": [
+        "expert.history_iv"
+      ],
+      "required_facets": [
+        "historical_contract_iv_limits"
+      ],
+      "retrieved_ids": [
+        "expert.history_iv",
+        "expert.pricing",
+        "expert.history_oi",
+        "expert.volatility",
+        "expert.contract_identity",
+        "expert.history_limits"
+      ],
+      "metrics": {
+        "1": {
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "all_gold_hit": true,
+          "facet_recall": 1.0
+        },
+        "3": {
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "all_gold_hit": true,
+          "facet_recall": 1.0
+        },
+        "4": {
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "all_gold_hit": true,
+          "facet_recall": 1.0
+        },
+        "6": {
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "all_gold_hit": true,
+          "facet_recall": 1.0
+        }
+      },
+      "missed_ids_at_4": [],
+      "retrieval_ms": 0.488,
+      "ranking": [
+        {
+          "id": "expert.history_iv",
+          "supports": [
+            "historical_contract_iv_limits"
+          ],
+          "retrieval": {
+            "method": "bm25_char_ngram_rrf",
+            "embedding": false,
+            "knowledge_version": "1.1",
+            "corpus_sha256": "442290b75b51768259f9f0a8c6468eeaf5c4c800ea652f6725c725152da81ac5",
+            "query_normalization": "english_plural_and_reviewed_domain_aliases",
+            "query_expansions": [],
+            "rrf_score": 0.01639344,
+            "bm25_rank": 1,
+            "char_rank": null,
+            "bm25_score": 8.015936,
+            "char_score": 0,
+            "matched_terms": [
+              "greek",
+              "history",
+              "not",
+              "option",
+              "volatility"
+            ],
+            "matched_ngrams": [],
+            "matched_topics": []
+          }
+        },
+        {
+          "id": "expert.pricing",
+          "supports": [
+            "option_price_factors"
+          ],
+          "retrieval": {
+            "method": "bm25_char_ngram_rrf",
+            "embedding": false,
+            "knowledge_version": "1.1",
+            "corpus_sha256": "442290b75b51768259f9f0a8c6468eeaf5c4c800ea652f6725c725152da81ac5",
+            "query_normalization": "english_plural_and_reviewed_domain_aliases",
+            "query_expansions": [],
+            "rrf_score": 0.01612903,
+            "bm25_rank": 2,
+            "char_rank": null,
+            "bm25_score": 5.291704,
+            "char_score": 0,
+            "matched_terms": [
+              "option",
+              "strike",
+              "volatility"
+            ],
+            "matched_ngrams": [],
+            "matched_topics": [
+              "strike"
+            ]
+          }
+        },
+        {
+          "id": "expert.history_oi",
+          "supports": [
+            "historical_oi_availability"
+          ],
+          "retrieval": {
+            "method": "bm25_char_ngram_rrf",
+            "embedding": false,
+            "knowledge_version": "1.1",
+            "corpus_sha256": "442290b75b51768259f9f0a8c6468eeaf5c4c800ea652f6725c725152da81ac5",
+            "query_normalization": "english_plural_and_reviewed_domain_aliases",
+            "query_expansions": [],
+            "rrf_score": 0.01587302,
+            "bm25_rank": 3,
+            "char_rank": null,
+            "bm25_score": 4.194918,
+            "char_score": 0,
+            "matched_terms": [
+              "dated",
+              "history",
+              "not",
+              "option"
+            ],
+            "matched_ngrams": [],
+            "matched_topics": []
+          }
+        },
+        {
+          "id": "expert.volatility",
+          "supports": [
+            "iv_direction_limits"
+          ],
+          "retrieval": {
+            "method": "bm25_char_ngram_rrf",
+            "embedding": false,
+            "knowledge_version": "1.1",
+            "corpus_sha256": "442290b75b51768259f9f0a8c6468eeaf5c4c800ea652f6725c725152da81ac5",
+            "query_normalization": "english_plural_and_reviewed_domain_aliases",
+            "query_expansions": [],
+            "rrf_score": 0.015625,
+            "bm25_rank": 4,
+            "char_rank": null,
+            "bm25_score": 3.566245,
+            "char_score": 0,
+            "matched_terms": [
+              "not",
+              "option",
+              "volatility"
+            ],
+            "matched_ngrams": [],
+            "matched_topics": [
+              "volatility"
+            ]
+          }
+        },
+        {
+          "id": "expert.contract_identity",
+          "supports": [
+            "contract_comparability"
+          ],
+          "retrieval": {
+            "method": "bm25_char_ngram_rrf",
+            "embedding": false,
+            "knowledge_version": "1.1",
+            "corpus_sha256": "442290b75b51768259f9f0a8c6468eeaf5c4c800ea652f6725c725152da81ac5",
+            "query_normalization": "english_plural_and_reviewed_domain_aliases",
+            "query_expansions": [],
+            "rrf_score": 0.01538462,
+            "bm25_rank": 5,
+            "char_rank": null,
+            "bm25_score": 3.328928,
+            "char_score": 0,
+            "matched_terms": [
+              "option",
+              "strike"
+            ],
+            "matched_ngrams": [],
+            "matched_topics": []
+          }
+        },
+        {
+          "id": "expert.history_limits",
+          "supports": [
+            "expired_eod_limits"
+          ],
+          "retrieval": {
+            "method": "bm25_char_ngram_rrf",
+            "embedding": false,
+            "knowledge_version": "1.1",
+            "corpus_sha256": "442290b75b51768259f9f0a8c6468eeaf5c4c800ea652f6725c725152da81ac5",
+            "query_normalization": "english_plural_and_reviewed_domain_aliases",
+            "query_expansions": [],
+            "rrf_score": 0.01515152,
+            "bm25_rank": 6,
+            "char_rank": null,
+            "bm25_score": 3.043332,
+            "char_score": 0,
+            "matched_terms": [
+              "history",
+              "not",
+              "option"
+            ],
+            "matched_ngrams": [],
+            "matched_topics": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "holdout_13",
+      "language": "zh",
+      "kind": "paraphrase",
+      "query": "前日只统计某个行权价的看涨看跌，后日又加了另一档；两天总手数变化还算固定期权样本的变化吗？",
+      "relevant_ids": [
+        "expert.contract_identity"
+      ],
+      "required_facets": [
+        "contract_comparability"
+      ],
+      "retrieved_ids": [
+        "expert.contract_identity",
+        "expert.put_call",
+        "expert.pricing",
+        "expert.history_oi",
+        "expert.history_volume"
+      ],
+      "metrics": {
+        "1": {
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "all_gold_hit": true,
+          "facet_recall": 1.0
+        },
+        "3": {
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "all_gold_hit": true,
+          "facet_recall": 1.0
+        },
+        "4": {
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "all_gold_hit": true,
+          "facet_recall": 1.0
+        },
+        "6": {
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "all_gold_hit": true,
+          "facet_recall": 1.0
+        }
+      },
+      "missed_ids_at_4": [],
+      "retrieval_ms": 0.427,
+      "ranking": [
+        {
+          "id": "expert.contract_identity",
+          "supports": [
+            "contract_comparability"
+          ],
+          "retrieval": {
+            "method": "bm25_char_ngram_rrf",
+            "embedding": false,
+            "knowledge_version": "1.1",
+            "corpus_sha256": "442290b75b51768259f9f0a8c6468eeaf5c4c800ea652f6725c725152da81ac5",
+            "query_normalization": "english_plural_and_reviewed_domain_aliases",
+            "query_expansions": [],
+            "rrf_score": 0.03278689,
+            "bm25_rank": 1,
+            "char_rank": 1,
+            "bm25_score": 8.040753,
+            "char_score": 0.248123,
+            "matched_terms": [
+              "变化",
+              "样本",
+              "看涨",
+              "看跌",
+              "行权价"
+            ],
+            "matched_ngrams": [
+              "变化",
+              "期权",
+              "权价",
+              "样本",
+              "涨看",
+              "涨看跌",
+              "看涨",
+              "看涨看",
+              "看跌",
+              "行权",
+              "行权价"
+            ],
+            "matched_topics": [
+              "样本"
+            ]
+          }
+        },
+        {
+          "id": "expert.put_call",
+          "supports": [
+            "put_call_limits"
+          ],
+          "retrieval": {
+            "method": "bm25_char_ngram_rrf",
+            "embedding": false,
+            "knowledge_version": "1.1",
+            "corpus_sha256": "442290b75b51768259f9f0a8c6468eeaf5c4c800ea652f6725c725152da81ac5",
+            "query_normalization": "english_plural_and_reviewed_domain_aliases",
+            "query_expansions": [],
+            "rrf_score": 0.03200205,
+            "bm25_rank": 3,
+            "char_rank": 2,
+            "bm25_score": 2.645977,
+            "char_score": 0.10801,
+            "matched_terms": [
+              "看涨",
+              "看跌"
+            ],
+            "matched_ngrams": [
+              "的看",
+              "看涨",
+              "看跌",
+              "统计",
+              "行权"
+            ],
+            "matched_topics": [
+              "看涨",
+              "看跌"
+            ]
+          }
+        },
+        {
+          "id": "expert.pricing",
+          "supports": [
+            "option_price_factors"
+          ],
+          "retrieval": {
+            "method": "bm25_char_ngram_rrf",
+            "embedding": false,
+            "knowledge_version": "1.1",
+            "corpus_sha256": "442290b75b51768259f9f0a8c6468eeaf5c4c800ea652f6725c725152da81ac5",
+            "query_normalization": "english_plural_and_reviewed_domain_aliases",
+            "query_expansions": [],
+            "rrf_score": 0.03200205,
+            "bm25_rank": 2,
+            "char_rank": 3,
+            "bm25_score": 3.232354,
+            "char_score": 0.09503,
+            "matched_terms": [
+              "变化",
+              "行权价"
+            ],
+            "matched_ngrams": [
+              "变化",
+              "期权",
+              "权价",
+              "行权",
+              "行权价"
+            ],
+            "matched_topics": [
+              "行权价"
+            ]
+          }
+        },
+        {
+          "id": "expert.history_oi",
+          "supports": [
+            "historical_oi_availability"
+          ],
+          "retrieval": {
+            "method": "bm25_char_ngram_rrf",
+            "embedding": false,
+            "knowledge_version": "1.1",
+            "corpus_sha256": "442290b75b51768259f9f0a8c6468eeaf5c4c800ea652f6725c725152da81ac5",
+            "query_normalization": "english_plural_and_reviewed_domain_aliases",
+            "query_expansions": [],
+            "rrf_score": 0.03125,
+            "bm25_rank": 4,
+            "char_rank": 4,
+            "bm25_score": 2.418608,
+            "char_score": 0.071747,
+            "matched_terms": [
+              "看涨",
+              "看跌"
+            ],
+            "matched_ngrams": [
+              "期权",
+              "看涨",
+              "看跌",
+              "统计"
+            ],
+            "matched_topics": []
+          }
+        },
+        {
+          "id": "expert.history_volume",
+          "supports": [
+            "historical_volume_filtering"
+          ],
+          "retrieval": {
+            "method": "bm25_char_ngram_rrf",
+            "embedding": false,
+            "knowledge_version": "1.1",
+            "corpus_sha256": "442290b75b51768259f9f0a8c6468eeaf5c4c800ea652f6725c725152da81ac5",
+            "query_normalization": "english_plural_and_reviewed_domain_aliases",
+            "query_expansions": [],
+            "rrf_score": 0.03076923,
+            "bm25_rank": 5,
+            "char_rank": 5,
+            "bm25_score": 1.460265,
+            "char_score": 0.049744,
+            "matched_terms": [
+              "变化"
+            ],
+            "matched_ngrams": [
+              "价的",
+              "变化"
+            ],
+            "matched_topics": [
+              "变化"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "holdout_14",
+      "language": "en",
+      "kind": "paraphrase",
+      "query": "Do the IBKR historical TRADES candles themselves supply dated option open-interest observations, or must I obtain another series?",
+      "relevant_ids": [
+        "expert.history_oi"
+      ],
+      "required_facets": [
+        "historical_oi_availability"
+      ],
+      "retrieved_ids": [
+        "expert.history_oi",
+        "expert.oi_cycle",
+        "expert.history_limits",
+        "expert.history_iv",
+        "expert.history_volume",
+        "expert.volume_oi"
+      ],
+      "metrics": {
+        "1": {
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "all_gold_hit": true,
+          "facet_recall": 1.0
+        },
+        "3": {
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "all_gold_hit": true,
+          "facet_recall": 1.0
+        },
+        "4": {
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "all_gold_hit": true,
+          "facet_recall": 1.0
+        },
+        "6": {
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "all_gold_hit": true,
+          "facet_recall": 1.0
+        }
+      },
+      "missed_ids_at_4": [],
+      "retrieval_ms": 0.43,
+      "ranking": [
+        {
+          "id": "expert.history_oi",
+          "supports": [
+            "historical_oi_availability"
+          ],
+          "retrieval": {
+            "method": "bm25_char_ngram_rrf",
+            "embedding": false,
+            "knowledge_version": "1.1",
+            "corpus_sha256": "442290b75b51768259f9f0a8c6468eeaf5c4c800ea652f6725c725152da81ac5",
+            "query_normalization": "english_plural_and_reviewed_domain_aliases",
+            "query_expansions": [],
+            "rrf_score": 0.01639344,
+            "bm25_rank": 1,
+            "char_rank": null,
+            "bm25_score": 10.344289,
+            "char_score": 0,
+            "matched_terms": [
+              "dated",
+              "historical",
+              "ibkr",
+              "interest",
+              "open",
+              "option",
+              "supply",
+              "trade"
+            ],
+            "matched_ngrams": [],
+            "matched_topics": []
+          }
+        },
+        {
+          "id": "expert.oi_cycle",
+          "supports": [
+            "oi_reporting_cycle"
+          ],
+          "retrieval": {
+            "method": "bm25_char_ngram_rrf",
+            "embedding": false,
+            "knowledge_version": "1.1",
+            "corpus_sha256": "442290b75b51768259f9f0a8c6468eeaf5c4c800ea652f6725c725152da81ac5",
+            "query_normalization": "english_plural_and_reviewed_domain_aliases",
+            "query_expansions": [],
+            "rrf_score": 0.01612903,
+            "bm25_rank": 2,
+            "char_rank": null,
+            "bm25_score": 6.973219,
+            "char_score": 0,
+            "matched_terms": [
+              "interest",
+              "must",
+              "open",
+              "trade"
+            ],
+            "matched_ngrams": [],
+            "matched_topics": []
+          }
+        },
+        {
+          "id": "expert.history_limits",
+          "supports": [
+            "expired_eod_limits"
+          ],
+          "retrieval": {
+            "method": "bm25_char_ngram_rrf",
+            "embedding": false,
+            "knowledge_version": "1.1",
+            "corpus_sha256": "442290b75b51768259f9f0a8c6468eeaf5c4c800ea652f6725c725152da81ac5",
+            "query_normalization": "english_plural_and_reviewed_domain_aliases",
+            "query_expansions": [],
+            "rrf_score": 0.01587302,
+            "bm25_rank": 3,
+            "char_rank": null,
+            "bm25_score": 5.508701,
+            "char_score": 0,
+            "matched_terms": [
+              "historical",
+              "ibkr",
+              "must",
+              "option"
+            ],
+            "matched_ngrams": [],
+            "matched_topics": []
+          }
+        },
+        {
+          "id": "expert.history_iv",
+          "supports": [
+            "historical_contract_iv_limits"
+          ],
+          "retrieval": {
+            "method": "bm25_char_ngram_rrf",
+            "embedding": false,
+            "knowledge_version": "1.1",
+            "corpus_sha256": "442290b75b51768259f9f0a8c6468eeaf5c4c800ea652f6725c725152da81ac5",
+            "query_normalization": "english_plural_and_reviewed_domain_aliases",
+            "query_expansions": [],
+            "rrf_score": 0.015625,
+            "bm25_rank": 4,
+            "char_rank": null,
+            "bm25_score": 5.2884,
+            "char_score": 0,
+            "matched_terms": [
+              "historical",
+              "ibkr",
+              "must",
+              "option"
+            ],
+            "matched_ngrams": [],
+            "matched_topics": []
+          }
+        },
+        {
+          "id": "expert.history_volume",
+          "supports": [
+            "historical_volume_filtering"
+          ],
+          "retrieval": {
+            "method": "bm25_char_ngram_rrf",
+            "embedding": false,
+            "knowledge_version": "1.1",
+            "corpus_sha256": "442290b75b51768259f9f0a8c6468eeaf5c4c800ea652f6725c725152da81ac5",
+            "query_normalization": "english_plural_and_reviewed_domain_aliases",
+            "query_expansions": [],
+            "rrf_score": 0.01538462,
+            "bm25_rank": 5,
+            "char_rank": null,
+            "bm25_score": 4.627322,
+            "char_score": 0,
+            "matched_terms": [
+              "historical",
+              "ibkr",
+              "trade"
+            ],
+            "matched_ngrams": [],
+            "matched_topics": []
+          }
+        },
+        {
+          "id": "expert.volume_oi",
+          "supports": [
+            "volume_vs_oi"
+          ],
+          "retrieval": {
+            "method": "bm25_char_ngram_rrf",
+            "embedding": false,
+            "knowledge_version": "1.1",
+            "corpus_sha256": "442290b75b51768259f9f0a8c6468eeaf5c4c800ea652f6725c725152da81ac5",
+            "query_normalization": "english_plural_and_reviewed_domain_aliases",
+            "query_expansions": [],
+            "rrf_score": 0.01515152,
+            "bm25_rank": 6,
+            "char_rank": null,
+            "bm25_score": 4.349719,
+            "char_score": 0,
+            "matched_terms": [
+              "interest",
+              "open"
+            ],
+            "matched_ngrams": [],
+            "matched_topics": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "holdout_15",
+      "language": "zh",
+      "kind": "cross_topic",
+      "query": "期权换手合约数和未平仓数是同一个数吗？如果看跌那边换手更多，也不能直接换算成看空人数吧？",
+      "relevant_ids": [
+        "expert.volume_oi",
+        "expert.put_call"
+      ],
+      "required_facets": [
+        "volume_vs_oi",
+        "put_call_limits"
+      ],
+      "retrieved_ids": [
+        "expert.put_call",
+        "expert.volume_oi",
+        "expert.oi_cycle",
+        "expert.contract_identity",
+        "expert.history_oi",
+        "expert.history_bars"
+      ],
+      "metrics": {
+        "1": {
+          "recall": 0.5,
+          "reciprocal_rank": 1.0,
+          "all_gold_hit": false,
+          "facet_recall": 0.5
+        },
+        "3": {
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "all_gold_hit": true,
+          "facet_recall": 1.0
+        },
+        "4": {
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "all_gold_hit": true,
+          "facet_recall": 1.0
+        },
+        "6": {
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "all_gold_hit": true,
+          "facet_recall": 1.0
+        }
+      },
+      "missed_ids_at_4": [],
+      "retrieval_ms": 0.416,
+      "ranking": [
+        {
+          "id": "expert.put_call",
+          "supports": [
+            "put_call_limits"
+          ],
+          "retrieval": {
+            "method": "bm25_char_ngram_rrf",
+            "embedding": false,
+            "knowledge_version": "1.1",
+            "corpus_sha256": "442290b75b51768259f9f0a8c6468eeaf5c4c800ea652f6725c725152da81ac5",
+            "query_normalization": "english_plural_and_reviewed_domain_aliases",
+            "query_expansions": [],
+            "rrf_score": 0.03252247,
+            "bm25_rank": 1,
+            "char_rank": 2,
+            "bm25_score": 3.416248,
+            "char_score": 0.178743,
+            "matched_terms": [
+              "看空",
+              "看跌"
+            ],
+            "matched_ngrams": [
+              "不能",
+              "人数",
+              "合约",
+              "更多",
+              "看空",
+              "看空人",
+              "看跌",
+              "空人",
+              "空人数"
+            ],
+            "matched_topics": [
+              "看空",
+              "看跌"
+            ]
+          }
+        },
+        {
+          "id": "expert.volume_oi",
+          "supports": [
+            "volume_vs_oi"
+          ],
+          "retrieval": {
+            "method": "bm25_char_ngram_rrf",
+            "embedding": false,
+            "knowledge_version": "1.1",
+            "corpus_sha256": "442290b75b51768259f9f0a8c6468eeaf5c4c800ea652f6725c725152da81ac5",
+            "query_normalization": "english_plural_and_reviewed_domain_aliases",
+            "query_expansions": [],
+            "rrf_score": 0.03252247,
+            "bm25_rank": 2,
+            "char_rank": 1,
+            "bm25_score": 1.937037,
+            "char_score": 0.32425,
+            "matched_terms": [
+              "未平仓"
+            ],
+            "matched_ngrams": [
+              "不能",
+              "不能直",
+              "合约",
+              "和未",
+              "和未平",
+              "平仓",
+              "换算",
+              "换算成",
+              "接换",
+              "接换算",
+              "未平",
+              "未平仓"
+            ],
+            "matched_topics": []
+          }
+        },
+        {
+          "id": "expert.oi_cycle",
+          "supports": [
+            "oi_reporting_cycle"
+          ],
+          "retrieval": {
+            "method": "bm25_char_ngram_rrf",
+            "embedding": false,
+            "knowledge_version": "1.1",
+            "corpus_sha256": "442290b75b51768259f9f0a8c6468eeaf5c4c800ea652f6725c725152da81ac5",
+            "query_normalization": "english_plural_and_reviewed_domain_aliases",
+            "query_expansions": [],
+            "rrf_score": 0.03149802,
+            "bm25_rank": 3,
+            "char_rank": 4,
+            "bm25_score": 1.841996,
+            "char_score": 0.109496,
+            "matched_terms": [
+              "未平仓"
+            ],
+            "matched_ngrams": [
+              "不能",
+              "也不",
+              "也不能",
+              "平仓",
+              "未平",
+              "未平仓"
+            ],
+            "matched_topics": [
+              "未平仓"
+            ]
+          }
+        },
+        {
+          "id": "expert.contract_identity",
+          "supports": [
+            "contract_comparability"
+          ],
+          "retrieval": {
+            "method": "bm25_char_ngram_rrf",
+            "embedding": false,
+            "knowledge_version": "1.1",
+            "corpus_sha256": "442290b75b51768259f9f0a8c6468eeaf5c4c800ea652f6725c725152da81ac5",
+            "query_normalization": "english_plural_and_reviewed_domain_aliases",
+            "query_expansions": [],
+            "rrf_score": 0.03100962,
+            "bm25_rank": 4,
+            "char_rank": 5,
+            "bm25_score": 1.472015,
+            "char_score": 0.103547,
+            "matched_terms": [
+              "看跌"
+            ],
+            "matched_ngrams": [
+              "不能",
+              "不能直",
+              "合约",
+              "期权",
+              "直接",
+              "看跌",
+              "能直",
+              "能直接"
+            ],
+            "matched_topics": []
+          }
+        },
+        {
+          "id": "expert.history_oi",
+          "supports": [
+            "historical_oi_availability"
+          ],
+          "retrieval": {
+            "method": "bm25_char_ngram_rrf",
+            "embedding": false,
+            "knowledge_version": "1.1",
+            "corpus_sha256": "442290b75b51768259f9f0a8c6468eeaf5c4c800ea652f6725c725152da81ac5",
+            "query_normalization": "english_plural_and_reviewed_domain_aliases",
+            "query_expansions": [],
+            "rrf_score": 0.03030999,
+            "bm25_rank": 5,
+            "char_rank": 7,
+            "bm25_score": 1.209304,
+            "char_score": 0.032441,
+            "matched_terms": [
+              "看跌"
+            ],
+            "matched_ngrams": [
+              "不能",
+              "期权",
+              "看跌"
+            ],
+            "matched_topics": []
+          }
+        },
+        {
+          "id": "expert.history_bars",
+          "supports": [
+            "historical_bar_semantics"
+          ],
+          "retrieval": {
+            "method": "bm25_char_ngram_rrf",
+            "embedding": false,
+            "knowledge_version": "1.1",
+            "corpus_sha256": "442290b75b51768259f9f0a8c6468eeaf5c4c800ea652f6725c725152da81ac5",
+            "query_normalization": "english_plural_and_reviewed_domain_aliases",
+            "query_expansions": [],
+            "rrf_score": 0.01587302,
+            "bm25_rank": null,
+            "char_rank": 3,
+            "bm25_score": 0,
+            "char_score": 0.136094,
+            "matched_terms": [],
+            "matched_ngrams": [
+              "不能",
+              "不能直",
+              "同一",
+              "是同",
+              "是同一",
+              "直接",
+              "能直",
+              "能直接"
+            ],
+            "matched_topics": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "holdout_16",
+      "language": "en",
+      "kind": "cross_topic",
+      "query": "An option premium rose while its implied volatility rose too; does this establish a bearish direction, and can we ignore the remaining lifetime and underlying price?",
+      "relevant_ids": [
+        "expert.volatility",
+        "expert.pricing"
+      ],
+      "required_facets": [
+        "iv_direction_limits",
+        "option_price_factors"
+      ],
+      "retrieved_ids": [
+        "expert.pricing",
+        "expert.volatility",
+        "expert.history_iv",
+        "expert.history_bars",
+        "expert.put_call",
+        "expert.contract_identity"
+      ],
+      "metrics": {
+        "1": {
+          "recall": 0.5,
+          "reciprocal_rank": 1.0,
+          "all_gold_hit": false,
+          "facet_recall": 0.5
+        },
+        "3": {
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "all_gold_hit": true,
+          "facet_recall": 1.0
+        },
+        "4": {
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "all_gold_hit": true,
+          "facet_recall": 1.0
+        },
+        "6": {
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "all_gold_hit": true,
+          "facet_recall": 1.0
+        }
+      },
+      "missed_ids_at_4": [],
+      "retrieval_ms": 0.481,
+      "ranking": [
+        {
+          "id": "expert.pricing",
+          "supports": [
+            "option_price_factors"
+          ],
+          "retrieval": {
+            "method": "bm25_char_ngram_rrf",
+            "embedding": false,
+            "knowledge_version": "1.1",
+            "corpus_sha256": "442290b75b51768259f9f0a8c6468eeaf5c4c800ea652f6725c725152da81ac5",
+            "query_normalization": "english_plural_and_reviewed_domain_aliases",
+            "query_expansions": [],
+            "rrf_score": 0.01639344,
+            "bm25_rank": 1,
+            "char_rank": null,
+            "bm25_score": 13.017171,
+            "char_score": 0,
+            "matched_terms": [
+              "implied",
+              "option",
+              "premium",
+              "price",
+              "remaining",
+              "underlying",
+              "volatility"
+            ],
+            "matched_ngrams": [],
+            "matched_topics": [
+              "premium"
+            ]
+          }
+        },
+        {
+          "id": "expert.volatility",
+          "supports": [
+            "iv_direction_limits"
+          ],
+          "retrieval": {
+            "method": "bm25_char_ngram_rrf",
+            "embedding": false,
+            "knowledge_version": "1.1",
+            "corpus_sha256": "442290b75b51768259f9f0a8c6468eeaf5c4c800ea652f6725c725152da81ac5",
+            "query_normalization": "english_plural_and_reviewed_domain_aliases",
+            "query_expansions": [],
+            "rrf_score": 0.01612903,
+            "bm25_rank": 2,
+            "char_rank": null,
+            "bm25_score": 9.646047,
+            "char_score": 0,
+            "matched_terms": [
+              "direction",
+              "implied",
+              "option",
+              "price",
+              "volatility"
+            ],
+            "matched_ngrams": [],
+            "matched_topics": [
+              "volatility"
+            ]
+          }
+        },
+        {
+          "id": "expert.history_iv",
+          "supports": [
+            "historical_contract_iv_limits"
+          ],
+          "retrieval": {
+            "method": "bm25_char_ngram_rrf",
+            "embedding": false,
+            "knowledge_version": "1.1",
+            "corpus_sha256": "442290b75b51768259f9f0a8c6468eeaf5c4c800ea652f6725c725152da81ac5",
+            "query_normalization": "english_plural_and_reviewed_domain_aliases",
+            "query_expansions": [],
+            "rrf_score": 0.01587302,
+            "bm25_rank": 3,
+            "char_rank": null,
+            "bm25_score": 4.608066,
+            "char_score": 0,
+            "matched_terms": [
+              "implied",
+              "option",
+              "volatility"
+            ],
+            "matched_ngrams": [],
+            "matched_topics": []
+          }
+        },
+        {
+          "id": "expert.history_bars",
+          "supports": [
+            "historical_bar_semantics"
+          ],
+          "retrieval": {
+            "method": "bm25_char_ngram_rrf",
+            "embedding": false,
+            "knowledge_version": "1.1",
+            "corpus_sha256": "442290b75b51768259f9f0a8c6468eeaf5c4c800ea652f6725c725152da81ac5",
+            "query_normalization": "english_plural_and_reviewed_domain_aliases",
+            "query_expansions": [],
+            "rrf_score": 0.015625,
+            "bm25_rank": 4,
+            "char_rank": null,
+            "bm25_score": 3.860801,
+            "char_score": 0,
+            "matched_terms": [
+              "implied",
+              "price",
+              "volatility"
+            ],
+            "matched_ngrams": [],
+            "matched_topics": []
+          }
+        },
+        {
+          "id": "expert.put_call",
+          "supports": [
+            "put_call_limits"
+          ],
+          "retrieval": {
+            "method": "bm25_char_ngram_rrf",
+            "embedding": false,
+            "knowledge_version": "1.1",
+            "corpus_sha256": "442290b75b51768259f9f0a8c6468eeaf5c4c800ea652f6725c725152da81ac5",
+            "query_normalization": "english_plural_and_reviewed_domain_aliases",
+            "query_expansions": [],
+            "rrf_score": 0.01538462,
+            "bm25_rank": 5,
+            "char_rank": null,
+            "bm25_score": 3.438249,
+            "char_score": 0,
+            "matched_terms": [
+              "bearish"
+            ],
+            "matched_ngrams": [],
+            "matched_topics": [
+              "bearish"
+            ]
+          }
+        },
+        {
+          "id": "expert.contract_identity",
+          "supports": [
+            "contract_comparability"
+          ],
+          "retrieval": {
+            "method": "bm25_char_ngram_rrf",
+            "embedding": false,
+            "knowledge_version": "1.1",
+            "corpus_sha256": "442290b75b51768259f9f0a8c6468eeaf5c4c800ea652f6725c725152da81ac5",
+            "query_normalization": "english_plural_and_reviewed_domain_aliases",
+            "query_expansions": [],
+            "rrf_score": 0.01515152,
+            "bm25_rank": 6,
+            "char_rank": null,
+            "bm25_score": 2.658214,
+            "char_score": 0,
+            "matched_terms": [
+              "option",
+              "underlying"
+            ],
+            "matched_ngrams": [],
+            "matched_topics": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "holdout_17",
+      "language": "zh",
+      "kind": "cross_topic",
+      "query": "拿券商过去一小时的期权买卖价条，能当成当前同步报价并保证在中间位置成交吗？",
+      "relevant_ids": [
+        "expert.history_bars",
+        "expert.spread",
+        "expert.history_time"
+      ],
+      "required_facets": [
+        "historical_bar_semantics",
+        "bid_ask_execution",
+        "historical_time_basis"
+      ],
+      "retrieved_ids": [
+        "expert.history_bars",
+        "expert.spread",
+        "expert.history_iv",
+        "expert.oi_cycle"
+      ],
+      "metrics": {
+        "1": {
+          "recall": 0.3333333333333333,
+          "reciprocal_rank": 1.0,
+          "all_gold_hit": false,
+          "facet_recall": 0.3333333333333333
+        },
+        "3": {
+          "recall": 0.6666666666666666,
+          "reciprocal_rank": 1.0,
+          "all_gold_hit": false,
+          "facet_recall": 0.6666666666666666
+        },
+        "4": {
+          "recall": 0.6666666666666666,
+          "reciprocal_rank": 1.0,
+          "all_gold_hit": false,
+          "facet_recall": 0.6666666666666666
+        },
+        "6": {
+          "recall": 0.6666666666666666,
+          "reciprocal_rank": 1.0,
+          "all_gold_hit": false,
+          "facet_recall": 0.6666666666666666
+        }
+      },
+      "missed_ids_at_4": [
+        "expert.history_time"
+      ],
+      "retrieval_ms": 0.339,
+      "ranking": [
+        {
+          "id": "expert.history_bars",
+          "supports": [
+            "historical_bar_semantics"
+          ],
+          "retrieval": {
+            "method": "bm25_char_ngram_rrf",
+            "embedding": false,
+            "knowledge_version": "1.1",
+            "corpus_sha256": "442290b75b51768259f9f0a8c6468eeaf5c4c800ea652f6725c725152da81ac5",
+            "query_normalization": "english_plural_and_reviewed_domain_aliases",
+            "query_expansions": [],
+            "rrf_score": 0.03252247,
+            "bm25_rank": 1,
+            "char_rank": 2,
+            "bm25_score": 3.544403,
+            "char_score": 0.148551,
+            "matched_terms": [
+              "同步",
+              "报价"
+            ],
+            "matched_ngrams": [
+              "买卖",
+              "买卖价",
+              "卖价",
+              "同步",
+              "成交",
+              "报价"
+            ],
+            "matched_topics": [
+              "同步"
+            ]
+          }
+        },
+        {
+          "id": "expert.spread",
+          "supports": [
+            "bid_ask_execution"
+          ],
+          "retrieval": {
+            "method": "bm25_char_ngram_rrf",
+            "embedding": false,
+            "knowledge_version": "1.1",
+            "corpus_sha256": "442290b75b51768259f9f0a8c6468eeaf5c4c800ea652f6725c725152da81ac5",
+            "query_normalization": "english_plural_and_reviewed_domain_aliases",
+            "query_expansions": [],
+            "rrf_score": 0.03252247,
+            "bm25_rank": 2,
+            "char_rank": 1,
+            "bm25_score": 1.614947,
+            "char_score": 0.183732,
+            "matched_terms": [
+              "报价"
+            ],
+            "matched_ngrams": [
+              "中间",
+              "买卖",
+              "买卖价",
+              "保证",
+              "卖价",
+              "成交",
+              "报价"
+            ],
+            "matched_topics": [
+              "报价"
+            ]
+          }
+        },
+        {
+          "id": "expert.history_iv",
+          "supports": [
+            "historical_contract_iv_limits"
+          ],
+          "retrieval": {
+            "method": "bm25_char_ngram_rrf",
+            "embedding": false,
+            "knowledge_version": "1.1",
+            "corpus_sha256": "442290b75b51768259f9f0a8c6468eeaf5c4c800ea652f6725c725152da81ac5",
+            "query_normalization": "english_plural_and_reviewed_domain_aliases",
+            "query_expansions": [],
+            "rrf_score": 0.01587302,
+            "bm25_rank": null,
+            "char_rank": 3,
+            "bm25_score": 0,
+            "char_score": 0.070362,
+            "matched_terms": [],
+            "matched_ngrams": [
+              "当前",
+              "期权",
+              "过去"
+            ],
+            "matched_topics": []
+          }
+        },
+        {
+          "id": "expert.oi_cycle",
+          "supports": [
+            "oi_reporting_cycle"
+          ],
+          "retrieval": {
+            "method": "bm25_char_ngram_rrf",
+            "embedding": false,
+            "knowledge_version": "1.1",
+            "corpus_sha256": "442290b75b51768259f9f0a8c6468eeaf5c4c800ea652f6725c725152da81ac5",
+            "query_normalization": "english_plural_and_reviewed_domain_aliases",
+            "query_expansions": [],
+            "rrf_score": 0.015625,
+            "bm25_rank": null,
+            "char_rank": 4,
+            "bm25_score": 0,
+            "char_score": 0.068993,
+            "matched_terms": [],
+            "matched_ngrams": [
+              "当成",
+              "成交",
+              "过去"
+            ],
+            "matched_topics": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "holdout_18",
+      "language": "en",
+      "kind": "cross_topic",
+      "query": "Before interpreting a change in option activity, should we keep the same strike-and-expiration membership and check whether historical filtering differs from the live tape?",
+      "relevant_ids": [
+        "expert.contract_identity",
+        "expert.history_volume"
+      ],
+      "required_facets": [
+        "contract_comparability",
+        "historical_volume_filtering"
+      ],
+      "retrieved_ids": [
+        "expert.contract_identity",
+        "expert.history_volume",
+        "expert.pricing"
+      ],
+      "metrics": {
+        "1": {
+          "recall": 0.5,
+          "reciprocal_rank": 1.0,
+          "all_gold_hit": false,
+          "facet_recall": 0.5
+        },
+        "3": {
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "all_gold_hit": true,
+          "facet_recall": 1.0
+        },
+        "4": {
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "all_gold_hit": true,
+          "facet_recall": 1.0
+        },
+        "6": {
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "all_gold_hit": true,
+          "facet_recall": 1.0
+        }
+      },
+      "missed_ids_at_4": [],
+      "retrieval_ms": 0.443,
+      "ranking": [
+        {
+          "id": "expert.contract_identity",
+          "supports": [
+            "contract_comparability"
+          ],
+          "retrieval": {
+            "method": "bm25_char_ngram_rrf",
+            "embedding": false,
+            "knowledge_version": "1.1",
+            "corpus_sha256": "442290b75b51768259f9f0a8c6468eeaf5c4c800ea652f6725c725152da81ac5",
+            "query_normalization": "english_plural_and_reviewed_domain_aliases",
+            "query_expansions": [],
+            "rrf_score": 0.01639344,
+            "bm25_rank": 1,
+            "char_rank": null,
+            "bm25_score": 15.236449,
+            "char_score": 0,
+            "matched_terms": [
+              "activity",
+              "change",
+              "differ",
+              "expiration",
+              "interpreting",
+              "membership",
+              "option",
+              "strike"
+            ],
+            "matched_ngrams": [],
+            "matched_topics": []
+          }
+        },
+        {
+          "id": "expert.history_volume",
+          "supports": [
+            "historical_volume_filtering"
+          ],
+          "retrieval": {
+            "method": "bm25_char_ngram_rrf",
+            "embedding": false,
+            "knowledge_version": "1.1",
+            "corpus_sha256": "442290b75b51768259f9f0a8c6468eeaf5c4c800ea652f6725c725152da81ac5",
+            "query_normalization": "english_plural_and_reviewed_domain_aliases",
+            "query_expansions": [],
+            "rrf_score": 0.01612903,
+            "bm25_rank": 2,
+            "char_rank": null,
+            "bm25_score": 9.528238,
+            "char_score": 0,
+            "matched_terms": [
+              "differ",
+              "from",
+              "historical",
+              "interpreting",
+              "live"
+            ],
+            "matched_ngrams": [],
+            "matched_topics": []
+          }
+        },
+        {
+          "id": "expert.pricing",
+          "supports": [
+            "option_price_factors"
+          ],
+          "retrieval": {
+            "method": "bm25_char_ngram_rrf",
+            "embedding": false,
+            "knowledge_version": "1.1",
+            "corpus_sha256": "442290b75b51768259f9f0a8c6468eeaf5c4c800ea652f6725c725152da81ac5",
+            "query_normalization": "english_plural_and_reviewed_domain_aliases",
+            "query_expansions": [],
+            "rrf_score": 0.01587302,
+            "bm25_rank": 3,
+            "char_rank": null,
+            "bm25_score": 5.42505,
+            "char_score": 0,
+            "matched_terms": [
+              "change",
+              "option",
+              "strike"
+            ],
+            "matched_ngrams": [],
+            "matched_topics": [
+              "strike"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "holdout_19",
+      "language": "zh",
+      "kind": "no_hit_lexical_trap",
+      "query": "日历应用中如何显示海外会议的本地时间和日期？",
+      "relevant_ids": [],
+      "required_facets": [],
+      "retrieved_ids": [],
+      "metrics": {},
+      "missed_ids_at_4": [],
+      "retrieval_ms": 0.008,
+      "ranking": []
+    },
+    {
+      "id": "holdout_20",
+      "language": "en",
+      "kind": "no_hit_lexical_trap",
+      "query": "Which permission lets a browser microphone stream audio through an API?",
+      "relevant_ids": [],
+      "required_facets": [],
+      "retrieved_ids": [],
+      "metrics": {},
+      "missed_ids_at_4": [],
+      "retrieval_ms": 0.278,
+      "ranking": []
+    },
+    {
+      "id": "holdout_21",
+      "language": "zh",
+      "kind": "no_hit_lexical_trap",
+      "query": "两段Python程序输出不一样，怎么逐行比较和定位冲突？",
+      "relevant_ids": [],
+      "required_facets": [],
+      "retrieved_ids": [
+        "expert.volume_oi",
+        "expert.contract_identity",
+        "expert.history_volume"
+      ],
+      "metrics": {},
+      "missed_ids_at_4": [],
+      "retrieval_ms": 0.295,
+      "ranking": [
+        {
+          "id": "expert.volume_oi",
+          "supports": [
+            "volume_vs_oi"
+          ],
+          "retrieval": {
+            "method": "bm25_char_ngram_rrf",
+            "embedding": false,
+            "knowledge_version": "1.1",
+            "corpus_sha256": "442290b75b51768259f9f0a8c6468eeaf5c4c800ea652f6725c725152da81ac5",
+            "query_normalization": "english_plural_and_reviewed_domain_aliases",
+            "query_expansions": [],
+            "rrf_score": 0.03278689,
+            "bm25_rank": 1,
+            "char_rank": 1,
+            "bm25_score": 2.489281,
+            "char_score": 0.080976,
+            "matched_terms": [
+              "冲突"
+            ],
+            "matched_ngrams": [
+              "冲突"
+            ],
+            "matched_topics": [
+              "冲突"
+            ]
+          }
+        },
+        {
+          "id": "expert.contract_identity",
+          "supports": [
+            "contract_comparability"
+          ],
+          "retrieval": {
+            "method": "bm25_char_ngram_rrf",
+            "embedding": false,
+            "knowledge_version": "1.1",
+            "corpus_sha256": "442290b75b51768259f9f0a8c6468eeaf5c4c800ea652f6725c725152da81ac5",
+            "query_normalization": "english_plural_and_reviewed_domain_aliases",
+            "query_expansions": [],
+            "rrf_score": 0.03225806,
+            "bm25_rank": 2,
+            "char_rank": 2,
+            "bm25_score": 1.472015,
+            "char_score": 0.051868,
+            "matched_terms": [
+              "比较"
+            ],
+            "matched_ngrams": [
+              "比较"
+            ],
+            "matched_topics": [
+              "比较"
+            ]
+          }
+        },
+        {
+          "id": "expert.history_volume",
+          "supports": [
+            "historical_volume_filtering"
+          ],
+          "retrieval": {
+            "method": "bm25_char_ngram_rrf",
+            "embedding": false,
+            "knowledge_version": "1.1",
+            "corpus_sha256": "442290b75b51768259f9f0a8c6468eeaf5c4c800ea652f6725c725152da81ac5",
+            "query_normalization": "english_plural_and_reviewed_domain_aliases",
+            "query_expansions": [],
+            "rrf_score": 0.03174603,
+            "bm25_rank": 3,
+            "char_rank": 3,
+            "bm25_score": 1.460265,
+            "char_score": 0.051868,
+            "matched_terms": [
+              "比较"
+            ],
+            "matched_ngrams": [
+              "比较"
+            ],
+            "matched_topics": [
+              "比较"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "holdout_22",
+      "language": "en",
+      "kind": "no_hit_out_of_corpus",
+      "query": "How do coupon reinvestment and duration affect the realized return of a corporate bond?",
+      "relevant_ids": [],
+      "required_facets": [],
+      "retrieved_ids": [],
+      "metrics": {},
+      "missed_ids_at_4": [],
+      "retrieval_ms": 0.017,
+      "ranking": []
+    },
+    {
+      "id": "holdout_23",
+      "language": "zh",
+      "kind": "no_hit_lexical_trap",
+      "query": "游戏角色的攻击波动范围变大，代表平均伤害更高吗？",
+      "relevant_ids": [],
+      "required_facets": [],
+      "retrieved_ids": [],
+      "metrics": {},
+      "missed_ids_at_4": [],
+      "retrieval_ms": 0.21,
+      "ranking": []
+    },
+    {
+      "id": "holdout_24",
+      "language": "en",
+      "kind": "no_hit_lexical_trap",
+      "query": "In a terminal, which call opens a file and which option closes the window?",
+      "relevant_ids": [],
+      "required_facets": [],
+      "retrieved_ids": [
+        "expert.contract_identity",
+        "expert.history_oi",
+        "expert.history_bars",
+        "expert.put_call"
+      ],
+      "metrics": {},
+      "missed_ids_at_4": [],
+      "retrieval_ms": 0.326,
+      "ranking": [
+        {
+          "id": "expert.contract_identity",
+          "supports": [
+            "contract_comparability"
+          ],
+          "retrieval": {
+            "method": "bm25_char_ngram_rrf",
+            "embedding": false,
+            "knowledge_version": "1.1",
+            "corpus_sha256": "442290b75b51768259f9f0a8c6468eeaf5c4c800ea652f6725c725152da81ac5",
+            "query_normalization": "english_plural_and_reviewed_domain_aliases",
+            "query_expansions": [],
+            "rrf_score": 0.01639344,
+            "bm25_rank": 1,
+            "char_rank": null,
+            "bm25_score": 5.191688,
+            "char_score": 0,
+            "matched_terms": [
+              "call",
+              "option",
+              "window"
+            ],
+            "matched_ngrams": [],
+            "matched_topics": []
+          }
+        },
+        {
+          "id": "expert.history_oi",
+          "supports": [
+            "historical_oi_availability"
+          ],
+          "retrieval": {
+            "method": "bm25_char_ngram_rrf",
+            "embedding": false,
+            "knowledge_version": "1.1",
+            "corpus_sha256": "442290b75b51768259f9f0a8c6468eeaf5c4c800ea652f6725c725152da81ac5",
+            "query_normalization": "english_plural_and_reviewed_domain_aliases",
+            "query_expansions": [],
+            "rrf_score": 0.01612903,
+            "bm25_rank": 2,
+            "char_rank": null,
+            "bm25_score": 3.450889,
+            "char_score": 0,
+            "matched_terms": [
+              "call",
+              "open",
+              "option"
+            ],
+            "matched_ngrams": [],
+            "matched_topics": []
+          }
+        },
+        {
+          "id": "expert.history_bars",
+          "supports": [
+            "historical_bar_semantics"
+          ],
+          "retrieval": {
+            "method": "bm25_char_ngram_rrf",
+            "embedding": false,
+            "knowledge_version": "1.1",
+            "corpus_sha256": "442290b75b51768259f9f0a8c6468eeaf5c4c800ea652f6725c725152da81ac5",
+            "query_normalization": "english_plural_and_reviewed_domain_aliases",
+            "query_expansions": [],
+            "rrf_score": 0.01587302,
+            "bm25_rank": 3,
+            "char_rank": null,
+            "bm25_score": 3.307364,
+            "char_score": 0,
+            "matched_terms": [
+              "close",
+              "open"
+            ],
+            "matched_ngrams": [],
+            "matched_topics": []
+          }
+        },
+        {
+          "id": "expert.put_call",
+          "supports": [
+            "put_call_limits"
+          ],
+          "retrieval": {
+            "method": "bm25_char_ngram_rrf",
+            "embedding": false,
+            "knowledge_version": "1.1",
+            "corpus_sha256": "442290b75b51768259f9f0a8c6468eeaf5c4c800ea652f6725c725152da81ac5",
+            "query_normalization": "english_plural_and_reviewed_domain_aliases",
+            "query_expansions": [],
+            "rrf_score": 0.015625,
+            "bm25_rank": 4,
+            "char_rank": null,
+            "bm25_score": 2.588921,
+            "char_score": 0,
+            "matched_terms": [
+              "call"
+            ],
+            "matched_ngrams": [],
+            "matched_topics": [
+              "call"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

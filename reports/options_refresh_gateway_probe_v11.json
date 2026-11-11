@@ -1,0 +1,14 @@
+{
+  "checked_at": "2026-11-11T05:33:36.641352+00:00",
+  "scope": "One read-only delayed-frozen AAPL diagnostic capture after delayed entitlement failure; no model, no account request, no automatic fallback in the app.",
+  "requested_market_data_type": 4,
+  "status": "unavailable",
+  "error_code": "ibkr_entitlement_missing",
+  "broker_codes": [
+    2104,
+    2107,
+    2158,
+    10167
+  ],
+  "classification_review": "Captured before the delayed-advisory classification fix. Code 10167 alone did not establish denial of the delayed feed. No usable reference quote arrived within the collection window. No automatic app feed switch or model request was made."
+}

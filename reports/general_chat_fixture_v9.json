@@ -1,0 +1,120 @@
+{
+  "checked_at": "2026-11-11T04:42:05.856001+00:00",
+  "status": "passed",
+  "mode": "fixture",
+  "app_version": "9.0.0",
+  "base": "http://127.0.0.1:8000",
+  "browser": "Microsoft Edge (headless Chromium)",
+  "scope": "Controlled general-answer fixtures; no model connectivity or factual accuracy claim.",
+  "privacy": "Independent empty-storage contexts; only owned disposable sessions deleted; existing session titles masked.",
+  "cases": [
+    {
+      "name": "desktop-zh",
+      "width": 1440,
+      "height": 1000,
+      "language": "zh",
+      "prompt": "太阳系最大的行星是哪一颗？请用一句话回答。",
+      "status": "passed",
+      "answer": "太阳系最大的行星是木星。",
+      "visible_answer": "太阳系最大的行星是木星。",
+      "mode": "deepseek",
+      "sources": [],
+      "warning": null,
+      "badge": "DeepSeek",
+      "layout_before_reload": {
+        "viewport": 1440,
+        "document": 1440,
+        "body": 1440,
+        "answer": {
+          "left": 297,
+          "right": 1083
+        }
+      },
+      "layout_after_reload": {
+        "viewport": 1440,
+        "document": 1440,
+        "body": 1440,
+        "answer": {
+          "left": 297,
+          "right": 1083
+        }
+      },
+      "screenshots": [
+        "reports/screenshots/chat-v9/fixture/desktop-zh-answer.png",
+        "reports/screenshots/chat-v9/fixture/desktop-zh-restored.png"
+      ],
+      "checks": [
+        "isolated_storage_and_owned_session",
+        "general_question_answered",
+        "deepseek_mode_without_sources_or_warning",
+        "visible_answer_and_honest_badge",
+        "composer_and_model_selector_restored",
+        "editable_composer_after_reply",
+        "persisted_answer_and_metadata_after_reload",
+        "no_duplicate_model_request",
+        "no_horizontal_overflow",
+        "no_page_errors"
+      ],
+      "owned_session_removed": true,
+      "page_errors": [],
+      "chat_requests": 1,
+      "live_model_requests": 0,
+      "elapsed_seconds": 2.76
+    },
+    {
+      "name": "mobile-en",
+      "width": 390,
+      "height": 844,
+      "language": "en",
+      "prompt": "Write a short sick-leave email to my manager for today. Use placeholders instead of personal details.",
+      "status": "passed",
+      "answer": "Subject: Sick Leave Today\n\nHi [Manager],\n\nI am feeling unwell and need to take sick leave today. I will keep you updated.\n\nThank you for your understanding.\n[Your Name]",
+      "visible_answer": "Subject: Sick Leave Today\n\nHi [Manager],\n\nI am feeling unwell and need to take sick leave today. I will keep you updated.\n\nThank you for your understanding. [Your Name]",
+      "mode": "deepseek",
+      "sources": [],
+      "warning": null,
+      "badge": "DeepSeek",
+      "layout_before_reload": {
+        "viewport": 390,
+        "document": 390,
+        "body": 390,
+        "answer": {
+          "left": 17,
+          "right": 373
+        }
+      },
+      "layout_after_reload": {
+        "viewport": 390,
+        "document": 390,
+        "body": 390,
+        "answer": {
+          "left": 17,
+          "right": 373
+        }
+      },
+      "screenshots": [
+        "reports/screenshots/chat-v9/fixture/mobile-en-answer.png",
+        "reports/screenshots/chat-v9/fixture/mobile-en-restored.png"
+      ],
+      "checks": [
+        "isolated_storage_and_owned_session",
+        "general_question_answered",
+        "deepseek_mode_without_sources_or_warning",
+        "visible_answer_and_honest_badge",
+        "composer_and_model_selector_restored",
+        "editable_composer_after_reply",
+        "persisted_answer_and_metadata_after_reload",
+        "no_duplicate_model_request",
+        "no_horizontal_overflow",
+        "no_page_errors"
+      ],
+      "owned_session_removed": true,
+      "page_errors": [],
+      "chat_requests": 1,
+      "live_model_requests": 0,
+      "elapsed_seconds": 2.46
+    }
+  ],
+  "live_model_requests": 0,
+  "elapsed_seconds": 6.09
+}

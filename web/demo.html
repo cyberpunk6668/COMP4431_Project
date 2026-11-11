@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#FAFAFA">
+  <meta name="description" content="FinPilot guided demo: replay a historical options archive, retrieve expert evidence, then explicitly ask AI to explain the saved data.">
+  <title>FinPilot · 历史、依据与解释</title>
+  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/static/demo.css">
+  <link rel="stylesheet" href="/static/avatar.css">
+  <script src="/static/demo.js" defer></script>
+  <script src="/static/avatar.js" type="module"></script>
+</head>
+<body>
+  <a href="#demo-archive" class="skip-link" data-demo-text="skip">跳到演示步骤</a>
+  <header class="demo-header shell">
+    <a class="demo-brand" href="/" aria-label="FinPilot home"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 2 9 5v10l-9 5-9-5V7Z"/></svg><span>FinPilot<span class="brand-dot">.</span><small>GUIDED RESEARCH</small></span></a>
+    <div class="demo-header-actions"><label class="motion-control"><input id="demo-motion" type="checkbox"><span data-demo-text="reduceMotion">减少动态</span></label><button id="demo-language" type="button" class="text-button" aria-label="Switch to English">EN</button><a href="/workspace?view=history" class="workspace-link" data-demo-text="workspace">进入完整工作台 ↗</a></div>
+  </header>
+  <main class="shell">
+    <section class="demo-hero" aria-labelledby="demo-title">
+      <div class="demo-hero-copy"><p class="eyebrow">HISTORY → EVIDENCE → EXPLANATION</p><h1 id="demo-title" data-demo-text="hero">把历史数字，<br>讲成有据可查的解释。</h1><p class="hero-description" data-demo-text="description">先看一份真实历史档案，再找到专家资料。最后，由你决定何时让 AI 解释这批数据。</p><div class="hero-principles"><span data-demo-text="principle1">固定历史，不冒充实时</span><span data-demo-text="principle2">本地数字与专家依据分开</span><span data-demo-text="principle3">模型调用由你发起</span></div><p class="demo-session-note" data-demo-text="sessionNote">本页只建立独立演示会话，不读取你已有的聊天。</p></div>
+      <aside class="demo-companion" aria-labelledby="demo-companion-title"><div class="companion-heading"><span id="demo-companion-title" data-demo-text="companion">与你一起核查依据</span><span id="demo-avatar-renderer" class="renderer-label">—</span></div><div id="demo-avatar-stage" class="demo-avatar-stage"></div><div class="avatar-toolbar"><div role="group" aria-label="Avatar mode"><button id="demo-avatar-3d" type="button" aria-pressed="true">3D</button><button id="demo-avatar-2d" type="button" aria-pressed="false">2D</button></div><span id="demo-avatar-status" role="status" data-demo-text="avatarIdle">准备就绪</span></div><p id="demo-avatar-note" class="small-note" data-demo-text="avatarNote">原生 Three.js / SVG 形象。动作表示操作状态，不代表判断置信度。</p></aside>
+    </section>
+    <div class="demo-layout">
+      <nav class="demo-step-nav" aria-label="Demo steps"><ol><li><a href="#demo-archive" data-step-link="1" aria-current="step"><span class="step-counter">01</span><span><strong data-demo-text="nav1">一份历史档案</strong><small data-demo-text="nav1Hint">先确定数据是什么</small></span><i aria-hidden="true">↗</i></a></li><li><a href="#demo-experts" data-step-link="2"><span class="step-counter">02</span><span><strong data-demo-text="nav2">一组专家依据</strong><small data-demo-text="nav2Hint">查看检索的来路</small></span><i aria-hidden="true">↗</i></a></li><li><a href="#demo-ai" data-step-link="3"><span class="step-counter">03</span><span><strong data-demo-text="nav3">可核查的 AI 解释</strong><small data-demo-text="nav3Hint">每条回答都有范围</small></span><i aria-hidden="true">↗</i></a></li></ol><p data-demo-text="railNote">这是学习与复盘流程，不是交易指令或涨跌预测。</p></nav>
+      <div class="demo-steps">
+        <section id="demo-archive" class="demo-step" aria-labelledby="archive-title" data-state="empty">
+          <div class="step-heading"><span class="section-number">01</span><div><p class="eyebrow" data-demo-text="archiveOverline">从可追溯的历史开始</p><h2 id="archive-title" data-demo-text="archiveTitle">先看数据，再问结论。</h2></div><span class="step-status" data-demo-text="localOnly">本地档案回放</span></div>
+          <p class="step-description" data-demo-text="archiveDescription">读取服务器已经保存的 IBKR 历史档案。这个按钮不会连接网关，也不会调用模型；合约到期后，档案仍可回看。</p>
+          <button id="demo-load" type="button" class="primary-button"><span data-demo-text="load">载入真实历史档案</span><span aria-hidden="true">↗</span></button>
+          <p class="action-boundary" data-demo-text="loadBoundary">本次操作：0 次新行情采集 · 0 次模型调用</p>
+          <p id="demo-load-status" class="request-status" role="status" hidden></p><div id="demo-load-error" class="request-error" role="alert" hidden></div>
+          <div id="demo-archive-result" hidden></div>
+        </section>
+        <section id="demo-experts" class="demo-step" aria-labelledby="experts-title" data-state="locked">
+          <div class="step-heading"><span class="section-number">02</span><div><p class="eyebrow" data-demo-text="expertsOverline">把数字与专业原则放在一起</p><h2 id="experts-title" data-demo-text="expertsTitle">找到解释背后的资料。</h2></div><span class="step-status" data-demo-text="retrievalOnly">本地知识检索</span></div>
+          <p class="step-description" data-demo-text="expertsDescription">提出一个关于这段历史的问题，查看实际检索的专家或官方片段。排名表示匹配程度，不是答案正确率，也不是向量模型的置信度。</p>
+          <form id="demo-search-form"><fieldset id="demo-search-fields" disabled><label for="demo-question" data-demo-text="questionLabel">你想弄清楚什么？</label><textarea id="demo-question" rows="3" maxlength="500"></textarea><div class="question-suggestions"><button type="button" data-question="activity" data-demo-text="suggestActivity">成交计数能说明情绪吗？</button><button type="button" data-question="oi" data-demo-text="suggestOI">为什么缺少持仓不能补零？</button><button type="button" data-question="price" data-demo-text="suggestPrice">历史末值和当前报价有何不同？</button></div><button id="demo-search" class="secondary-button" type="submit" data-demo-text="search">检索专家依据 ↗</button></fieldset></form>
+          <p id="demo-search-status" class="request-status" role="status" hidden></p><div id="demo-search-error" class="request-error" role="alert" hidden></div><div id="demo-expert-results" hidden></div>
+        </section>
+        <section id="demo-ai" class="demo-step" aria-labelledby="ai-title" data-state="locked">
+          <div class="step-heading"><span class="section-number">03</span><div><p class="eyebrow" data-demo-text="aiOverline">由你发起模型解释</p><h2 id="ai-title" data-demo-text="aiTitle">让 AI 解释，也让依据可见。</h2></div><span class="step-status" data-demo-text="explicitModel">明确点击才请求模型</span></div>
+          <p class="step-description" data-demo-text="aiDescription">模型读取这批已保存的历史摘要与检索资料。每条回答分别保留当时的数据依据和实际引用，新的问题不会改写旧回答。</p>
+          <div class="demo-model-row"><label for="demo-model" data-demo-text="modelLabel">本次回答引擎</label><select id="demo-model" disabled><option data-demo-text="checkingModels">正在检查模型状态…</option></select><span id="demo-model-status" role="status"></span></div>
+          <p id="demo-model-disclosure" class="model-disclosure" data-demo-text="modelDisclosure">点击下方按钮后，才会向所选模型发送这批历史摘要和问题；不会重新采集行情。</p>
+          <div id="demo-messages" class="demo-messages" aria-live="polite"></div>
+          <form id="demo-chat-form"><fieldset id="demo-chat-fields" disabled><label for="demo-chat-input" data-demo-text="chatLabel">给模型的问题（可编辑）</label><textarea id="demo-chat-input" rows="3" maxlength="3000"></textarea><div class="chat-actions"><small data-demo-text="chatHint">Enter 发送 · Shift + Enter 换行</small><button id="demo-explain" class="primary-button" type="submit" data-demo-text="explain">用 AI 解释这批数据</button></div></fieldset></form>
+          <p id="demo-ai-status" class="request-status" role="status" hidden></p><div id="demo-ai-error" class="request-error" role="alert" hidden></div>
+        </section>
+      </div>
+    </div>
+    <footer class="demo-footer"><span>FINPILOT / CLARITY BEFORE CONCLUSIONS</span><p data-demo-text="footer">来源可追溯，不等于数据完整或判断必然正确。请结合历史区间、样本范围和每条依据阅读。</p><a href="/workspace?view=history" data-demo-text="workspace">进入完整工作台 ↗</a></footer>
+  </main>
+</body>
+</html>

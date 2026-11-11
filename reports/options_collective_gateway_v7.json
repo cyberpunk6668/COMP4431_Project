@@ -1,0 +1,36 @@
+{
+  "checked_at": "2026-11-11T02:46:04.631966+00:00",
+  "scope": "Actual read-only IB Gateway, no cloud call",
+  "successful_reports": 2,
+  "failures": [],
+  "comparison_status": "descriptive",
+  "cohorts": [
+    {
+      "market_data_status": "delayed",
+      "collective_status": "descriptive",
+      "findings": 4,
+      "conflicts": 0,
+      "capture_age_seconds": 5.162
+    },
+    {
+      "market_data_status": "delayed",
+      "collective_status": "descriptive",
+      "findings": 3,
+      "conflicts": 0,
+      "capture_age_seconds": 0.001
+    }
+  ],
+  "interpretation": {
+    "status": "skipped",
+    "reason": "not_requested"
+  },
+  "status": "passed",
+  "http_verification": {
+    "checked_at": "2026-11-11T02:57:49.644735+00:00",
+    "reports": 2,
+    "failures": 0,
+    "comparison_status": "insufficient",
+    "model_status": "skipped",
+    "note": "Later actual HTTP batch returned fewer usable fields and correctly downgraded comparative analysis."
+  }
+}

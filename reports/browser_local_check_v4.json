@@ -1,0 +1,19 @@
+{
+  "checked_at": "2026-11-10T11:43:09.302576+00:00",
+  "status": "passed",
+  "scope": "One real local LoRA generation in Edge. No mocked generation or DeepSeek request; not a financial accuracy benchmark.",
+  "answer": "要点：复利表示已产生的利息也继续计息。估算需要初始本金、追加投入、期限、利率及复利频率。本项目计算器采用名义年利率按月复利、每月月末追加投入：月利率 = 年利率 / 12；利率为零时直接累加本金和投入。结果是固定利率的假设场景，不代表市场预测，未计税、费用或通胀。实际有效年收益率不能直接除以 12 当作月利率。\n\n注意：适用范围、地区和产品条款可能不同，请打开官方来源核实；这不是收益承诺。\n\n来源：[compound-interest]\n仅供金融教育，不构成个人投资建议。",
+  "screenshot": "reports/screenshots/workspace-v4/local-lora-chat.png",
+  "checks": [
+    "actual_local_option_and_switch_confirmation",
+    "one_real_local_generation",
+    "thinking_idle_and_busy_engine_lock",
+    "actual_local_mode_and_source_rendering",
+    "switch_back_preserves_previous_response_mode",
+    "no_cloud_chat_or_page_errors"
+  ],
+  "total": 6,
+  "test_session_removed": true,
+  "page_errors": [],
+  "elapsed_seconds": 11.81
+}

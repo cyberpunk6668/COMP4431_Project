@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#FAFAFA">
+  <meta name="description" content="FinPilot 金融知识助手：可追溯知识问答、财务计算与个人规划。">
+  <title>FinPilot · 金融知识工作台</title>
+  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/static/styles.css">
+  <link rel="stylesheet" href="/static/avatar.css">
+  <link rel="stylesheet" href="/static/options.css">
+  <link rel="stylesheet" href="/static/history.css">
+  <script src="/static/app.js" defer></script>
+  <script src="/static/options.js" defer></script>
+  <script src="/static/history.js" defer></script>
+  <script src="/static/avatar.js" type="module"></script>
+</head>
+<body class="workspace-theme">
+  <button class="mobile-menu icon-button" id="mobile-menu" aria-label="打开导航" aria-expanded="false"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+  <div class="sidebar-shade" id="sidebar-shade"></div>
+  <aside class="sidebar" id="sidebar" aria-label="主导航">
+    <a class="brand" href="/" aria-label="FinPilot 首页">
+      <svg class="brand-symbol" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4a2 2 0 0 0 1-1.73Z"/>
+      </svg>
+      <span>FinPilot<span class="brand-dot">.</span><small data-i18n="brandSub">金融知识 · 理性决策</small></span>
+    </a>
+    <div class="workspace-label"><span class="tiny-dot"></span><span data-i18n="workspace">个人学习工作台</span><span class="workspace-version">LAB</span></div>
+    <nav class="nav-list">
+      <button class="nav-button active" id="nav-chat"><svg viewBox="0 0 24 24"><path d="M5 4h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H9l-6 3V6a2 2 0 0 1 2-2Z"/><path d="M7 9h10M7 13h6"/></svg><span data-i18n="navChat">知识助手</span><span class="nav-arrow">↗</span></button>
+      <button class="nav-button" id="nav-calculator"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 11h1M15 11h1M8 15h1M15 15h1M8 18h1M15 18h1"/></svg><span data-i18n="navCalculator">财务计算器</span></button>
+      <button class="nav-button" id="nav-options" type="button" aria-haspopup="dialog" aria-controls="options-dialog"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4v16h16M7 15l4-4 3 2 5-6M15 7h4v4"/></svg><span data-options-text="nav">期权分析</span></button>
+      <button class="nav-button" id="nav-knowledge"><svg viewBox="0 0 24 24"><path d="M3 4h7l2 2 2-2h7v15h-7l-2 2-2-2H3V4ZM12 6v15M6 8h3M15 8h3M6 12h3M15 12h3"/></svg><span data-i18n="navKnowledge">知识来源</span></button>
+    </nav>
+    <div class="history-heading"><span data-i18n="recentSessions">最近会话</span><button id="sidebar-new" class="icon-button" title="新建会话" aria-label="新建会话">+</button></div>
+    <div class="session-list" id="session-list"><p class="session-empty" data-i18n="noSessions">从一个问题开始你的探索。</p></div>
+    <div class="sidebar-bottom"><div class="sidebar-note"><span class="note-icon">i</span><p data-i18n="sidebarNote">让数据解释假设，<br>让来源支持判断。</p></div><div class="project-label"><span class="project-avatar">F</span><div><strong>COMP4431</strong><small data-i18n="projectSub">金融领域 AI 项目</small></div><span class="project-status" title="本地应用"></span></div></div>
+  </aside>
+
+  <main class="workspace-main">
+    <header class="topbar"><div class="breadcrumb"><span data-i18n="research">研究与规划</span><span class="breadcrumb-divider">/</span><strong data-i18n="workbench">金融知识工作台</strong></div><div class="top-actions"><button id="workspace-motion-toggle" class="motion-toggle" type="button" aria-pressed="false" aria-label="减少动态效果"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14M16 5v14"/></svg><span data-i18n="motionToggle">减少动态</span></button><button id="theme-toggle" class="theme-toggle" type="button" aria-label="切换深色主题">☾</button><span class="engine-badge" id="engine-badge"><span></span><span id="engine-label">连接中</span></span><button class="language-button" id="language-toggle" aria-label="Switch to English">EN <span>⌄</span></button><button class="new-button" id="top-new"><span>+</span><span data-i18n="newSession">新建会话</span></button></div></header>
+    <div class="workspace-layout">
+    <div class="page-content" id="page-content">
+      <section class="welcome" id="welcome">
+        <div class="hero-copy"><span class="release-pill"><span></span>FINANCE COPILOT · AVATAR LAB</span><div class="eyebrow"><span class="eyebrow-line"></span>CLARITY BEFORE DECISIONS</div><h1 data-i18n="heroTitle">让每个财务问题，<br>都有据可循<span class="title-dot">。</span></h1><p class="hero-description" data-i18n="heroDescription">从理解一个概念，到计算一份计划。<br>和你的 AI 金融知识助手，一起把复杂问题想清楚。</p><div class="hero-tags"><span><span>✓</span><span data-i18n="tagSource">来源可追溯</span></span><span><span>✓</span><span data-i18n="tagMath">确定性计算</span></span><span><span>✓</span><span data-i18n="tagLanguage">中英双语</span></span></div></div>
+        <div class="hero-art" aria-hidden="true"><div class="art-grid"></div><div class="art-orbit"></div><div class="art-orbit second"></div><div class="art-point point-a"></div><div class="art-point point-b"></div><svg class="art-chart" viewBox="0 0 300 200"><defs><linearGradient id="chartShade" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-opacity=".23"/><stop offset="100%" stop-opacity="0"/></linearGradient></defs><path d="M15 165 64 145 104 151 147 105 184 115 227 61 276 37V190H15Z" fill="url(#chartShade)"/><path d="m15 165 49-20 40 6 43-46 37 10 43-54 49-24" fill="none" stroke-width="3"/><circle cx="276" cy="37" r="6" stroke-width="4"/></svg><div class="art-card"><span class="art-card-icon">↗</span><div><small>KNOWLEDGE COMPOUNDS</small><strong data-i18n="artText">理解，是长期的资产</strong></div></div><span class="art-caption" data-i18n="artCaption">示意图 · 非市场数据</span></div>
+      </section>
+      <section class="suggestion-section" id="suggestions"><div class="section-heading"><h2 data-i18n="startHere">从这里开始</h2><span data-i18n="startHint">选一个问题，开启探索</span></div><div class="prompt-grid"><button class="prompt-card" data-prompt="risk"><span class="prompt-icon">◈</span><span class="prompt-category" data-i18n="prompt1Category">投资入门</span><strong data-i18n="prompt1">分散投资，真的能降低风险吗？</strong><span class="prompt-card-bottom"><span data-i18n="prompt1Hint">理解风险与收益的关系</span><span>↗</span></span></button><button class="prompt-card" data-prompt="compound"><span class="prompt-icon">↗</span><span class="prompt-category" data-i18n="prompt2Category">长期规划</span><strong data-i18n="prompt2">每月存一笔钱，10 年后会怎样？</strong><span class="prompt-card-bottom"><span data-i18n="prompt2Hint">用复利计算看见假设的影响</span><span>↗</span></span></button><button class="prompt-card" data-prompt="budget"><span class="prompt-icon">◎</span><span class="prompt-category" data-i18n="prompt3Category">日常财务</span><strong data-i18n="prompt3">应急储备金，需要准备多少？</strong><span class="prompt-card-bottom"><span data-i18n="prompt3Hint">建立一份有缓冲的财务计划</span><span>↗</span></span></button></div></section>
+      <section id="chat-messages" class="chat-messages" aria-live="polite" aria-label="对话内容"></section>
+      <div id="chat-status" class="chat-status" role="status" hidden><span class="loading-dots"><i></i><i></i><i></i></span><span data-i18n="thinking">正在检索知识并整理回答…</span></div>
+      <div class="composer-zone"><div id="error-banner" class="error-banner" role="alert" hidden></div><p id="analysis-context-status" class="analysis-context-status" role="status" aria-live="polite"></p><section id="analysis-context-card" class="analysis-context-card" aria-label="Options analysis attached to the next message" hidden></section><form class="composer" id="chat-form"><div class="composer-context"><label class="engine-selector" for="model-select"><span class="model-spark">✦</span><select id="model-select" aria-label="回答引擎"><option value="deepseek">DeepSeek</option></select></label><span class="context-caption" data-i18n="groundedContext">知识驱动 · 来源可查</span></div><p id="model-switch-status" class="model-switch-status" role="status" aria-live="polite"></p><label for="message-input" class="sr-only" data-i18n="inputLabel">你的金融问题</label><textarea id="message-input" rows="2" maxlength="3000" placeholder="问一个金融问题，或描述你的财务计算需求…" aria-describedby="composer-hint"></textarea><div class="composer-toolbar"><div class="composer-tools"><button type="button" class="composer-tool" id="mic-button"><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3M8 21h8"/></svg><span data-i18n="voiceInput">语音输入</span></button><span class="tool-divider"></span><button type="button" class="composer-tool" id="quick-calculate"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 12h3M13 12h3M8 16h3M13 16h3"/></svg><span data-i18n="calculate">计算</span></button></div><div class="send-tools"><span class="keyboard-hint" id="composer-hint" data-i18n="enterHint">Enter 发送 · Shift + Enter 换行</span><button type="submit" id="send-button" class="send-button" aria-label="发送"><svg viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button></div></div></form><div class="composer-footnote"><span><span class="footnote-lock">◈</span><span data-i18n="disclaimer">聊天仅供金融知识学习。期权行情请打开「期权分析」。</span></span><button id="export-button" class="export-button" disabled data-i18n="export">导出会话 ↗</button></div></div>
+    </div>
+    <aside class="copilot-panel" id="copilot-panel" aria-labelledby="copilot-title">
+      <div class="copilot-heading"><div class="copilot-heading-copy"><span class="copilot-dot"></span><h2 id="copilot-title">PILOT <span data-i18n="companion">交互助手</span></h2></div><button class="copilot-collapse" id="avatar-collapse" type="button" aria-expanded="true" aria-controls="copilot-content" aria-label="折叠助手面板">−</button></div>
+      <div id="copilot-content" class="copilot-content">
+        <div class="avatar-display"><div class="avatar-grid" aria-hidden="true"></div><div class="avatar-display-label"><span>FINPILOT / COMPANION</span><span id="avatar-renderer">2D / SVG</span></div><div id="avatar-stage" class="avatar-stage" aria-label="金融知识交互助手"></div><div class="avatar-status-pill"><span></span><span id="avatar-status" role="status">准备就绪</span></div></div>
+        <div class="avatar-mode-control" role="group" aria-label="Avatar display"><button id="avatar-3d" type="button" aria-pressed="true">3D <span data-i18n="spatialMode">立体</span></button><button id="avatar-2d" type="button" aria-pressed="false">2D <span data-i18n="simpleMode">简约</span></button></div>
+        <p class="copilot-intro" data-i18n="companionIntro">一起理解概念、核查来源，
+把每一步计划想清楚。</p>
+        <button id="avatar-read-last" class="companion-read" type="button" disabled><span class="read-wave" aria-hidden="true">▁▃▆▃▁</span><span data-i18n="readLatest">朗读最新回答</span><span>↗</span></button>
+        <label class="motion-control" for="reduce-motion"><input id="reduce-motion" type="checkbox"><span data-i18n="reduceMotion">减少动态效果</span></label>
+        <p class="avatar-explanation" id="avatar-explanation" data-i18n="avatarExplanation">动作随对话与语音状态变化；说话动作为近似演绎。</p>
+        <div class="model-detail"><span data-i18n="modelLabel">回答引擎</span><strong id="model-name">DeepSeek</strong><p id="model-description" data-i18n="modelDefaultDescription">结合本地知识来源，整理金融教育回答。</p></div>
+      </div>
+    </aside>
+    </div>
+    <footer class="page-footer"><span>FINPILOT / KNOWLEDGE FIRST</span><span data-i18n="footer">基于知识检索与 DeepSeek 构建</span></footer>
+  </main>
+
+  <dialog id="calculator-dialog" class="tool-dialog"><div class="dialog-heading"><div><div class="eyebrow">PLAN WITH NUMBERS</div><h2 data-i18n="calculatorTitle">把计划，算清楚。</h2></div><button class="icon-button close-dialog" aria-label="关闭">×</button></div><p class="dialog-description" data-i18n="calculatorDescription">结果由固定公式计算；改变假设，比较不同计划。</p><div class="calc-tabs" role="tablist" aria-label="计算类型"><button class="calc-tab active" id="tab-compound" role="tab" aria-selected="true" data-kind="compound" data-i18n="compoundTab">复利储蓄</button><button class="calc-tab" id="tab-loan" role="tab" aria-selected="false" data-kind="loan" data-i18n="loanTab">贷款月供</button><button class="calc-tab" id="tab-budget" role="tab" aria-selected="false" data-kind="budget" data-i18n="budgetTab">收支预算</button></div><form id="calculator-form"><div id="calculator-fields" class="calculator-fields"></div><button class="primary-button" type="submit" id="calculate-button" data-i18n="runCalculation">计算结果 ↗</button></form><div class="calculation-error" id="calculation-error" role="alert" hidden></div><div class="calculation-output" id="calculation-output" aria-live="polite" hidden></div></dialog>
+  <dialog id="knowledge-dialog" class="tool-dialog knowledge-dialog"><div class="dialog-heading"><div><div class="eyebrow">TRACEABLE BY DESIGN</div><h2 data-i18n="knowledgeTitle">每个判断，都有来处。</h2></div><button class="icon-button close-dialog" aria-label="关闭">×</button></div><p class="dialog-description" data-i18n="knowledgeDescription">本地精选知识库支持回答检索。来源链接可供进一步查阅；知识库不代表实时行情或完整的监管建议。</p><div class="knowledge-list" id="knowledge-list"></div></dialog>
+  <dialog id="options-dialog" class="tool-dialog options-dialog" aria-labelledby="options-title">
+    <div class="dialog-heading">
+      <h2 id="options-title" data-options-text="title">看懂期权里的市场线索</h2>
+      <button class="icon-button close-dialog" type="button" aria-label="关闭">×</button>
+    </div>
+    <p class="options-description" data-options-text="description">先看这批数据有多新、交易分布怎样，再了解它能说明什么。</p>
+    <details id="history-panel" class="history-panel" open>
+      <summary><span data-history-text="title">历史复盘与专家依据</span><span class="history-mode-tag" data-history-text="mode">日线复盘 · 不是即时行情</span></summary>
+      <div class="history-panel-content">
+        <p class="history-intro" data-history-text="intro">导入几天的期权日线资料，先核对来源与共同合约，再看成交和持仓变化。收盘价是历史记录，不是当前买卖报价。</p>
+        <ol class="history-pipeline" aria-label="Historical review workflow"><li><strong data-history-text="step1">历史样本</strong><span data-history-text="step1Hint">核对来源与范围</span></li><li><strong data-history-text="step2">本地计算</strong><span data-history-text="step2Hint">固定规则与可比性检查</span></li><li><strong data-history-text="step3">专家依据与解释</strong><span data-history-text="step3Hint">聊天发送后再检索与回答</span></li></ol>
+        <div class="history-start-actions"><button id="history-sample" type="button" class="primary-button history-sample" data-history-text="sample">回放真实 IBKR 历史样本</button><button id="history-demo" type="button" class="history-secondary" data-history-text="demo">加载教学样例</button><button id="history-template-csv" type="button" class="history-text-button" data-history-text="csvTemplate">下载 CSV 模板</button><button id="history-template-json" type="button" class="history-text-button" data-history-text="jsonTemplate">下载 JSON 模板</button></div>
+        <p class="history-template-hint" data-history-text="sampleHint">真实样本来自服务器保存的只读网关历史档案；点击只回放，不重新访问网关。教学样例是独立的合成数据。</p>
+        <p class="history-template-hint" data-history-text="templateHint">模板只有字段与空清单，不含行情。教学样例会始终标为合成数据。</p>
+        <form id="history-form" class="history-form">
+          <fieldset id="history-fields">
+            <label class="history-file-field" for="history-file"><span data-history-text="file">选择 CSV / JSON 文件</span><input id="history-file" type="file" accept=".csv,.json,text/csv,application/json" aria-describedby="history-file-help history-file-status"><small id="history-file-help" data-history-text="fileHelp">最多 300 行、32 KB。CSV 必须有 trading_date、strike、right；C 为看涨，P 为看跌，空值不会填成零。</small></label>
+            <p id="history-file-status" class="history-file-status" role="status"></p>
+            <div class="history-fields-grid">
+              <label for="history-label"><span data-history-text="label">给这段复盘起个名字</span><input id="history-label" name="label" type="text" maxlength="80" required placeholder="例如：AAPL 最近几天"></label>
+              <label for="history-symbol"><span data-history-text="symbol">公司或基金代码</span><input id="history-symbol" name="symbol" type="text" maxlength="12" required placeholder="AAPL" autocapitalize="characters" autocomplete="off" spellcheck="false"></label>
+              <label for="history-expiry"><span data-history-text="expiry">这批合约的到期日</span><input id="history-expiry" name="expiry" type="text" inputmode="numeric" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" required placeholder="YYYY-MM-DD"></label>
+            </div>
+            <details class="history-provenance"><summary data-history-text="provenance">补充来源说明（可选）</summary><div class="history-fields-grid"><label for="history-source-label"><span data-history-text="sourceLabel">原始资料的来源说明</span><input id="history-source-label" name="source_label" type="text" maxlength="160" placeholder="例如：券商导出的日线记录"></label><label for="history-exported-at"><span data-history-text="exportedAt">原文件导出时间（含时区，可留空）</span><input id="history-exported-at" name="exported_at" type="text" maxlength="40" placeholder="2026-11-10T20:00:00Z"></label></div></details>
+            <div id="history-preview" class="history-preview" hidden></div>
+            <div class="history-submit-row"><button id="history-submit" type="submit" class="primary-button" data-history-text="submit" disabled>生成本地历史复盘</button><small data-history-text="localOnly">此步骤只在本地分析，不调用云端模型。追问时需另行点击发送。</small></div>
+          </fieldset>
+        </form>
+        <p id="history-status" class="history-status" role="status" hidden></p>
+        <div id="history-error" class="history-error" role="alert" hidden></div>
+        <section id="history-result" class="history-result" aria-live="polite" hidden></section>
+      </div>
+    </details>
+    <p id="options-gateway" class="options-gateway" role="status" hidden></p>
+    <div class="options-reading-controls" role="group" aria-label="阅读方式">
+      <button id="options-view-simple" type="button" aria-pressed="true" data-options-text="easyView">易懂解读</button>
+      <button id="options-view-professional" type="button" aria-pressed="false" data-options-text="professionalView">专业详情</button>
+    </div>
+    <form id="options-form">
+      <fieldset id="options-fields" class="options-fields">
+        <label for="options-analysis-mode" class="options-analysis-mode">
+          <span data-options-text="analysisMode">你想了解什么</span>
+          <select id="options-analysis-mode" name="analysis_mode"><option value="single" data-options-text="singleMode">了解一个公司或基金</option><option value="batch" data-options-text="batchMode">把几个标的或日期放在一起比较</option></select>
+        </label>
+        <label for="options-symbol" data-options-single>
+          <span data-options-text="symbol">公司或基金代码</span>
+          <input list="options-symbol-examples" id="options-symbol" name="symbol" type="text" placeholder="AAPL" maxlength="12" autocapitalize="characters" autocomplete="off" spellcheck="false" required aria-describedby="options-symbol-hint">
+          <datalist id="options-symbol-examples"><option value="AAPL" label="Apple · 苹果"></option><option value="MSFT" label="Microsoft · 微软"></option><option value="SPY" label="S&P 500 ETF"></option></datalist>
+          <small id="options-symbol-hint" data-options-text="symbolHint">例如 AAPL（苹果）或 SPY（标普 500 ETF）。</small>
+        </label>
+        <label for="options-batch-items" class="options-batch-input" data-options-batch hidden>
+          <span data-options-text="batchItems">想放在一起比较的项目</span>
+          <textarea id="options-batch-items" name="batch_items" rows="3" maxlength="160" placeholder="AAPL&#10;MSFT" aria-describedby="options-batch-hint" disabled></textarea>
+          <small id="options-batch-hint" data-options-text="batchHint">每行一个代码，后面可填写实际到期日（YYYY-MM-DD）；最多 4 行，提交前会核验日期。</small>
+        </label>
+        <details id="options-advanced" class="options-advanced">
+          <summary data-options-text="advancedSettings">调整日期、范围与报价时间</summary>
+          <div class="options-advanced-grid">
+            <div class="options-expiry-field" data-options-single>
+              <label for="options-expiry" data-options-text="expiry">合约到期日</label>
+              <select id="options-expiry" name="expiry" aria-describedby="options-expiry-hint options-expiry-status" disabled><option value="" data-options-text="expiryNearest">最近可用到期日（自动选择）</option></select>
+              <small id="options-expiry-hint" data-options-text="expiryHint">日期来自所选标的的实际期权链。留空使用最近可用到期日。</small>
+              <small id="options-expiry-status" class="options-expiry-status" role="status"></small>
+              <button id="options-refresh-expirations" class="options-metadata-button" type="button" data-options-text="expiryRefresh">读取可选到期日</button>
+            </div>
+            <label for="options-radius">
+              <span data-options-text="radius">查看的约定价格范围</span>
+              <select id="options-radius" name="radius" aria-describedby="options-radius-hint">
+                <option value="1">3 档价格</option><option value="2">5 档价格</option><option value="3" selected>7 档价格</option><option value="4">9 档价格</option><option value="5">11 档价格</option><option value="6">13 档价格</option>
+              </select>
+              <small id="options-radius-hint" data-options-text="radiusHint">围绕最接近股票或基金现价的约定价格取样。</small>
+            </label>
+            <label for="options-feed-mode">
+              <span data-options-text="requestedMode">希望获取哪一类报价</span>
+              <select id="options-feed-mode" name="market_data_type" aria-describedby="options-feed-hint">
+                <option value="" data-options-text="serverMode">采用本机设置</option>
+                <option value="1" data-options-text="requestLive">实时数据</option>
+                <option value="2" data-options-text="requestFrozen">冻结报价（保留的旧数据）</option>
+                <option value="3" data-options-text="requestDelayed">接受延迟数据</option>
+                <option value="4" data-options-text="requestDelayedFrozen">延迟且冻结的数据</option>
+              </select>
+              <small id="options-feed-hint" data-options-text="feedHint">报告会明确显示实际收到的数据时间类型。</small>
+            </label>
+          </div>
+        </details>
+        <label class="options-consent" for="options-interpret">
+          <input id="options-interpret" name="interpret" type="checkbox" aria-describedby="options-interpret-hint">
+          <span><strong data-options-text="interpret">让 AI 补充解释</strong><small id="options-interpret-hint" data-options-text="interpretHint">会把汇总指标发给模型服务。请在你的行情许可允许时勾选。</small></span>
+        </label>
+        <button id="options-submit" class="primary-button" type="submit" data-options-text="submit">帮我读懂这批期权</button>
+      </fieldset>
+    </form>
+    <p id="options-request-status" class="options-request-status" role="status" hidden></p>
+    <div id="options-error" class="options-error" role="alert" hidden></div>
+    <div id="options-error-actions" class="options-error-actions" hidden></div>
+    <div id="options-results" class="options-results" hidden></div>
+  </dialog>
+  <div class="toast" id="toast" role="status" hidden></div>
+</body>
+</html>

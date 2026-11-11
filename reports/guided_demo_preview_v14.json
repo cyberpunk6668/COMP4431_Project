@@ -1,0 +1,70 @@
+{
+  "checked_at": "2026-11-11T08:55:32.066312+00:00",
+  "entry": "/static/demo.html",
+  "status": "passed",
+  "viewports": [
+    {
+      "width": 320,
+      "height": 740,
+      "avatar_actual_mode": "3d",
+      "page_errors": [],
+      "fixture_archive_posts": 3,
+      "fixture_search_gets": 3,
+      "explicit_fixture_chat_posts": 5,
+      "real_broker_calls": 0,
+      "external_model_calls": 0
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "avatar_actual_mode": "3d",
+      "page_errors": [],
+      "fixture_archive_posts": 3,
+      "fixture_search_gets": 3,
+      "explicit_fixture_chat_posts": 5,
+      "real_broker_calls": 0,
+      "external_model_calls": 0
+    },
+    {
+      "width": 1440,
+      "height": 1000,
+      "avatar_actual_mode": "3d",
+      "page_errors": [],
+      "fixture_archive_posts": 4,
+      "fixture_search_gets": 4,
+      "explicit_fixture_chat_posts": 5,
+      "real_broker_calls": 0,
+      "external_model_calls": 0
+    }
+  ],
+  "scope": "All APIs intercepted; deterministic local analyzer/retriever and actual local Three.js/SVG Avatar. Synthetic records test interface contracts only, without real broker or external model requests.",
+  "checks": [
+    "models_status_only_on_initial_load",
+    "no_existing_user_session_read_or_mutation",
+    "real_avatar_2d_3d_or_truthful_fallback",
+    "keyboard_avatar_switch",
+    "system_reduced_motion",
+    "archive_failure_does_not_unlock_later_steps",
+    "explicit_archive_replay_and_duplicate_lock",
+    "historical_period_contract_identity_and_partial_coverage",
+    "zero_is_not_missing_and_missing_oi_is_not_zero",
+    "suggestions_do_not_search_or_call_model",
+    "explicit_local_expert_search_and_error_state",
+    "publisher_reviewed_date_and_source_url",
+    "actual_dual_ranks_are_not_accuracy",
+    "curated_facets_are_not_natural_ranked_hits",
+    "candidate_sources_distinct_from_answer_citations",
+    "selected_ready_engine_and_null_first_demo_session",
+    "explicit_model_call_and_duplicate_lock",
+    "per_reply_data_cards_and_human_expert_citations",
+    "html_is_literal_text",
+    "failed_model_request_retains_draft_and_archive",
+    "local_fallback_mode_is_visible",
+    "general_questions_do_not_inherit_fake_historical_evidence",
+    "bounded_reviewed_topics_link_to_returned_sources_without_general_entailment_claim",
+    "chinese_english_labels",
+    "new_archive_resets_only_demo_context",
+    "unready_models_leave_archive_and_search_usable",
+    "mobile_containment"
+  ]
+}

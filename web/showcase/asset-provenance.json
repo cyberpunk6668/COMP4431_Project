@@ -1,0 +1,39 @@
+[
+  {
+    "file": "media/reference-motion.mp4",
+    "source": "https://strvid.nyc3.digitaloceanspaces.com/motionitems/source/1782066233149-motion_105.mp4",
+    "origin": "User-provided reference asset; no independent ownership claim",
+    "bytes": 2603767,
+    "sha256": "8439ecb6330b5c7b59ccacd92eef966c3d5719d72204c3f45d7a4a18aa2575ec"
+  },
+  {
+    "file": "media/reference-poster.webp",
+    "source": "media/reference-motion.mp4",
+    "origin": "Frame extracted at 1.92 seconds for static and failed playback",
+    "bytes": 27068,
+    "sha256": "1c1bacc4f2656216c85c23fbb589a09b119bbdfa4926757b6693b640a70aa9ce"
+  },
+  {
+    "file": "media/finance-coins.mp4",
+    "source": "https://strvid.nyc3.cdn.digitaloceanspaces.com/motionsite/finance_coin_animation.mp4",
+    "origin": "User-provided reference asset; no independent ownership claim",
+    "bytes": 647030,
+    "sha256": "e982288923993ef3a63cdbfd294393dbc3cfddccae0292e9abe106e396211f64"
+  },
+  {
+    "file": "fonts/inter-latin.woff2",
+    "source": "https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2",
+    "family": "Inter",
+    "license": "SIL Open Font License 1.1",
+    "bytes": 48256,
+    "sha256": "3100e775e8616cd2611beecfa23a4263d7037586789b43f035236a2e6fbd4c62"
+  },
+  {
+    "file": "fonts/outfit-latin.woff2",
+    "source": "https://fonts.gstatic.com/s/outfit/v15/QGYvz_MVcBeNP4NJtEtq.woff2",
+    "family": "Outfit",
+    "license": "SIL Open Font License 1.1",
+    "bytes": 32292,
+    "sha256": "6c18d579fd87c3776be068b762cbc83fde3acb543d49eabd3ade842eb987e887"
+  }
+]

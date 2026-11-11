@@ -1,0 +1,36 @@
+/* Original FinPilot mentor. All artwork is generated locally, without remote assets. */
+.fp-avatar{position:relative;width:100%;height:100%;min-height:170px;isolation:isolate;overflow:hidden;contain:layout paint;--fp-eye:#e8c88a;--fp-line:rgba(219,168,90,.18)}
+.fp-avatar__canvas,.fp-avatar__flat{position:absolute;inset:0;width:100%;height:100%;display:block}
+.fp-avatar__canvas{opacity:0;transition:opacity .3s ease}
+.fp-avatar[data-actual-mode="3d"] .fp-avatar__canvas{opacity:1}
+.fp-avatar[data-actual-mode="3d"] .fp-avatar__flat{visibility:hidden}
+.fp-avatar__flat{overflow:visible;filter:drop-shadow(0 14px 12px rgba(0,0,0,.18))}
+.fp-avatar__float{transform-origin:160px 160px;animation:fp-avatar-float 6s ease-in-out infinite}
+.fp-avatar__halo{transform-origin:160px 154px;animation:fp-avatar-orbit 36s linear infinite;transition:opacity .25s}
+.fp-avatar__eye{transform-box:fill-box;transform-origin:center;animation:fp-avatar-blink 5.8s linear infinite;transition:fill .22s ease}
+.fp-avatar__mouth-open{opacity:0;transform-box:fill-box;transform-origin:center}
+.fp-avatar__mouth-smile{opacity:1;stroke:var(--fp-eye);transition:stroke .22s ease}
+.fp-avatar__mouth-open,.fp-avatar__ear-light,.fp-avatar__cheek{fill:var(--fp-eye);transition:fill .22s ease}
+.fp-avatar__status-ring{opacity:0;transform-box:fill-box;transform-origin:center}
+.fp-avatar[data-state="listening"] .fp-avatar__status-ring{opacity:.75;animation:fp-avatar-listen 2.2s ease-in-out infinite}
+.fp-avatar[data-state="listening"]{--fp-eye:#f5dcaa}
+.fp-avatar[data-state="thinking"]{--fp-eye:#dba85a}
+.fp-avatar[data-state="thinking"] .fp-avatar__halo{animation-duration:10s;opacity:.9}
+.fp-avatar[data-state="thinking"] .fp-avatar__head{transform:rotate(-4deg);transform-origin:160px 130px}
+.fp-avatar[data-state="speaking"] .fp-avatar__mouth-smile{opacity:0}
+.fp-avatar[data-state="speaking"] .fp-avatar__mouth-open{opacity:1;animation:fp-avatar-speak .34s ease-in-out infinite alternate}
+.fp-avatar[data-state="speaking"]{--fp-eye:#ffe7b4}
+.fp-avatar[data-state="error"]{--fp-eye:#dfa28e}
+.fp-avatar[data-state="error"] .fp-avatar__halo{opacity:.25}
+.fp-avatar__flat [data-eye]{fill:var(--fp-eye)}
+.fp-avatar__status-ring{stroke:var(--fp-eye)}
+.fp-avatar__hidden-text{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.fp-avatar[data-reduced-motion="true"] .fp-avatar__float,.fp-avatar[data-reduced-motion="true"] .fp-avatar__halo,.fp-avatar[data-reduced-motion="true"] .fp-avatar__eye,.fp-avatar[data-reduced-motion="true"] .fp-avatar__mouth-open,.fp-avatar[data-reduced-motion="true"] .fp-avatar__status-ring{animation:none!important}
+.fp-avatar[data-reduced-motion="true"] *{transition:none!important}
+.fp-avatar[data-paused="true"] *{animation-play-state:paused!important}
+@keyframes fp-avatar-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+@keyframes fp-avatar-orbit{to{transform:rotate(360deg)}}
+@keyframes fp-avatar-blink{0%,45%,47%,100%{transform:scaleY(1)}46%{transform:scaleY(.12)}}
+@keyframes fp-avatar-listen{0%,100%{opacity:.28;transform:scale(.96)}50%{opacity:.72;transform:scale(1.04)}}
+@keyframes fp-avatar-speak{0%{transform:scaleY(.35)}100%{transform:scaleY(1.2)}}
+@media(prefers-reduced-motion:reduce){.fp-avatar *{animation:none!important;transition:none!important}}

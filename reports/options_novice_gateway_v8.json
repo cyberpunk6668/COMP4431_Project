@@ -1,0 +1,23 @@
+{
+  "checked_at": "2026-11-11T03:17:30.106244+00:00",
+  "status": "passed",
+  "scope": "Actual IB Gateway, no cloud",
+  "successful_reports": 2,
+  "failures": [],
+  "plain_brief": {
+    "status": "limited",
+    "freshness_mode": "delayed",
+    "card_ids": [
+      "batch_coverage",
+      "batch_activity",
+      "batch_pricing"
+    ],
+    "item_statuses": [
+      "limited",
+      "descriptive"
+    ]
+  },
+  "interpretation": {
+    "status": "skipped"
+  }
+}

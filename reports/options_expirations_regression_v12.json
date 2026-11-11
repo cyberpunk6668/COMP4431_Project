@@ -1,0 +1,227 @@
+{
+  "checked_at": "2026-11-11T05:53:12.259327+00:00",
+  "status": "passed",
+  "scope": "Synthetic API interception only; real deterministic report builders. No IBKR or LLM calls. Not a live-market validation.",
+  "viewports": [
+    {
+      "width": 320,
+      "height": 740,
+      "page_errors": [],
+      "metadata_requests": 7,
+      "fixture_analysis_posts": 5,
+      "events": [
+        {
+          "kind": "metadata",
+          "symbol": "AAPL"
+        },
+        {
+          "kind": "analysis",
+          "path": "/api/options/analyze"
+        },
+        {
+          "kind": "metadata",
+          "symbol": "MSFT"
+        },
+        {
+          "kind": "metadata",
+          "symbol": "FAIL"
+        },
+        {
+          "kind": "analysis",
+          "path": "/api/options/analyze"
+        },
+        {
+          "kind": "metadata",
+          "symbol": "FAIL"
+        },
+        {
+          "kind": "metadata",
+          "symbol": "EMPTY"
+        },
+        {
+          "kind": "metadata",
+          "symbol": "LONG"
+        },
+        {
+          "kind": "analysis",
+          "path": "/api/options/analyze"
+        },
+        {
+          "kind": "metadata",
+          "symbol": "FAIL"
+        },
+        {
+          "kind": "analysis",
+          "path": "/api/options/batch"
+        },
+        {
+          "kind": "analysis",
+          "path": "/api/options/batch"
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "page_errors": [],
+      "metadata_requests": 7,
+      "fixture_analysis_posts": 5,
+      "events": [
+        {
+          "kind": "metadata",
+          "symbol": "AAPL"
+        },
+        {
+          "kind": "analysis",
+          "path": "/api/options/analyze"
+        },
+        {
+          "kind": "metadata",
+          "symbol": "MSFT"
+        },
+        {
+          "kind": "metadata",
+          "symbol": "FAIL"
+        },
+        {
+          "kind": "analysis",
+          "path": "/api/options/analyze"
+        },
+        {
+          "kind": "metadata",
+          "symbol": "FAIL"
+        },
+        {
+          "kind": "metadata",
+          "symbol": "EMPTY"
+        },
+        {
+          "kind": "metadata",
+          "symbol": "LONG"
+        },
+        {
+          "kind": "analysis",
+          "path": "/api/options/analyze"
+        },
+        {
+          "kind": "metadata",
+          "symbol": "FAIL"
+        },
+        {
+          "kind": "analysis",
+          "path": "/api/options/batch"
+        },
+        {
+          "kind": "analysis",
+          "path": "/api/options/batch"
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "height": 1000,
+      "page_errors": [],
+      "metadata_requests": 12,
+      "fixture_analysis_posts": 7,
+      "events": [
+        {
+          "kind": "metadata",
+          "symbol": "AAPL"
+        },
+        {
+          "kind": "analysis",
+          "path": "/api/options/analyze"
+        },
+        {
+          "kind": "metadata",
+          "symbol": "MSFT"
+        },
+        {
+          "kind": "metadata",
+          "symbol": "FAIL"
+        },
+        {
+          "kind": "analysis",
+          "path": "/api/options/analyze"
+        },
+        {
+          "kind": "metadata",
+          "symbol": "FAIL"
+        },
+        {
+          "kind": "metadata",
+          "symbol": "EMPTY"
+        },
+        {
+          "kind": "metadata",
+          "symbol": "LONG"
+        },
+        {
+          "kind": "analysis",
+          "path": "/api/options/analyze"
+        },
+        {
+          "kind": "metadata",
+          "symbol": "FAIL"
+        },
+        {
+          "kind": "analysis",
+          "path": "/api/options/batch"
+        },
+        {
+          "kind": "analysis",
+          "path": "/api/options/batch"
+        },
+        {
+          "kind": "metadata",
+          "symbol": "RACEA"
+        },
+        {
+          "kind": "metadata",
+          "symbol": "RACEB"
+        },
+        {
+          "kind": "metadata",
+          "symbol": "SPY"
+        },
+        {
+          "kind": "analysis",
+          "path": "/api/options/batch"
+        },
+        {
+          "kind": "metadata",
+          "symbol": "AAPL"
+        },
+        {
+          "kind": "metadata",
+          "symbol": "MSFT"
+        },
+        {
+          "kind": "analysis",
+          "path": "/api/options/batch"
+        }
+      ]
+    }
+  ],
+  "checks": [
+    "no_arbitrary_date_calendar",
+    "no_automatic_quote_or_llm_request",
+    "actual_chain_membership_including_non_friday_fixture",
+    "literal_dates_without_timezone_shift",
+    "verified_selection_survives_reopen_and_language_change",
+    "symbol_change_clears_old_dates",
+    "success_cache_and_uncached_failure_retry",
+    "truthful_metadata_failure_nearest_default",
+    "empty_chain_has_no_manual_dates",
+    "invalid_batch_date_blocks_post_and_lists_actual_dates",
+    "unavailable_batch_metadata_blocks_post",
+    "success_cache_expires_after_60_seconds",
+    "valid_batch_dates_preserved_and_metadata_deduplicated",
+    "undated_batch_uses_backend_nearest",
+    "stale_response_guard_and_sequential_metadata",
+    "metadata_precedes_analysis_post",
+    "full_metadata_list_beyond_30_dates",
+    "novice_and_professional_report_toggle",
+    "novice_report_and_mobile_containment"
+  ]
+}

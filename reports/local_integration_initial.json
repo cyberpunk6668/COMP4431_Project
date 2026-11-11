@@ -1,0 +1,78 @@
+{
+  "checked_at": "2026-11-10T09:51:11.349396+00:00",
+  "total": 3,
+  "passed": 3,
+  "results": [
+    {
+      "case": "zh_local_generation",
+      "passed": true,
+      "expected_mode": "local-lora",
+      "latency_ms": 16518.1,
+      "session_id": "bb4a0adc-5240-4915-a64c-74015e490125",
+      "answer": "要点：复利表示已产生的利息也继续计息。估算需要初始本金、追加投入、期限、利率及复利频率。本项目计算器采用名义年利率按月复利、每月月末追加投入：月利率 = 年利率 / 12；利率为零时直接累加本金和投入。结果是固定利率的假设场景，不代表市场预测，未计税、费用或通胀。实际有效年收益率不能直接除以 12 当作月利率。\n\n注意：适用范围、地区和产品条款可能不同，请打开官方来源核实；这不是收益承诺。\n\n适用范围：金融教育；投资决策；不构成具体买卖建议。\n\n来源：[compound-interest]\n仅供金融教育，不构成专业建议。",
+      "sources": [
+        {
+          "id": "compound-interest",
+          "title": "复利与定期投入 / Compound interest",
+          "url": "https://www.investor.gov/financial-tools-calculators/calculators/compound-interest-calculator",
+          "snippet": "复利表示已产生的利息也继续计息。估算需要初始本金、追加投入、期限、利率及复利频率。本项目计算器采用名义年利率按月复利、每月月末追加投入：月利率 = 年利率 / 12；利率为零时直接累加本金和投入。结果是固定利率的假设场景，不代表市场预测，未计税、费用或通胀。实际有效年收益率不能直接除以 12 当作月利率。"
+        }
+      ],
+      "mode": "local-lora"
+    },
+    {
+      "case": "en_local_generation",
+      "passed": true,
+      "expected_mode": "local-lora",
+      "latency_ms": 11598.93,
+      "session_id": "a3b9441e-13d8-4ce6-a0b9-fe8f36bbda47",
+      "answer": "Key points: The U.S. FDIC standard limit is $250,000 per depositor, per FDIC-insured bank, per ownership category. Accounts in the same category at one bank are aggregated; simply opening more accounts does not multiply coverage. Eligible deposits may be insured, while investments such as stocks, bonds and mutual funds are not FDIC-insured deposits. These U.S. rules do not apply to mainland China, Hong Kong or other jurisdictions. Verify bank and account eligibility. Reviewed snapshot: 2026-11-10.\n\nSource: [deposit-us]\nCaveat: Scope, jurisdiction and product terms can differ. Check the official source; this is educational, not a live or licensed purchase offer.\n\nFor calculations, jurisdiction-specific calculators and open-source tools are recommended. Not guaranteed returns, leverage, or market manipulation.",
+      "sources": [
+        {
+          "id": "deposit-us",
+          "title": "美国存款保险 / U.S. FDIC deposit insurance",
+          "url": "https://www.fdic.gov/resources/deposit-insurance/understanding-deposit-insurance",
+          "snippet": "The U.S. FDIC standard limit is $250,000 per depositor, per FDIC-insured bank, per ownership category. Accounts in the same category at one bank are aggregated; simply opening more accounts does not multiply coverage. Eligible deposits may be insured, while investments such as stocks, bonds and mutual funds are not FDIC-insured deposits. These U.S. rules do not apply to mainland China, Hong Kong or other jurisdictions. Verify bank and account eligibility. Reviewed snapshot: 2026-11-10."
+        }
+      ],
+      "mode": "local-lora"
+    },
+    {
+      "case": "local_calculator_route",
+      "passed": true,
+      "expected_mode": "calculator",
+      "latency_ms": 36.4,
+      "session_id": "5a9aa8a8-2823-483f-9160-0df41851fdeb",
+      "answer": "每月还款 / Monthly payment: 100.00; 总利息 / Total interest: 0.00\n\nA=P×r/(1-(1+r)^(-n)); r=annual_rate/1200; n=12×years; r=0: A=P/n\n\nFixed-rate monthly annuity, payments at month-end; no fees, early repayment, or rate changes.\nUses nominal annual rate, not an all-in APR; bank schedules may differ due to monthly rounding.\nFull precision internally; total payment uses unrounded monthly payment.",
+      "sources": [],
+      "mode": "calculator",
+      "calculation": {
+        "kind": "loan",
+        "summary": "每月还款 / Monthly payment: 100.00; 总利息 / Total interest: 0.00",
+        "values": {
+          "monthly_payment": "100.00",
+          "total_payment": "1200.00",
+          "total_interest": "0.00",
+          "months": 12
+        },
+        "series": [
+          {
+            "period": 0,
+            "balance": "1200.00"
+          },
+          {
+            "period": 1,
+            "balance": "0.00"
+          }
+        ],
+        "formula": "A=P×r/(1-(1+r)^(-n)); r=annual_rate/1200; n=12×years; r=0: A=P/n",
+        "assumptions": [
+          "Fixed-rate monthly annuity, payments at month-end; no fees, early repayment, or rate changes.",
+          "Uses nominal annual rate, not an all-in APR; bank schedules may differ due to monthly rounding.",
+          "Full precision internally; total payment uses unrounded monthly payment."
+        ]
+      }
+    }
+  ],
+  "limits": "Actual cached local-model HTTP integration. Checks response mode, completion and supplied citation IDs; raw answers require source-faithfulness review. No DeepSeek comparison or general accuracy claim."
+}

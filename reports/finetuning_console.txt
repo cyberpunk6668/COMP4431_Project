@@ -1,0 +1,79 @@
+{
+  "provenance": "Project-authored prompts and reference-based target answers; no user conversations or external teacher API outputs.",
+  "corpus_sha256": "cab12acbd6851951f9f46d446d68b424e24bbdd760857fe9a694fcb5e0c6b0ec",
+  "split_strategy": "18 disjoint knowledge topic groups: 12 train, 3 validation, 3 test. Both languages of one topic stay in one split.",
+  "limitations": "Small author-curated experiment. Held-out topics still come from the same public knowledge corpus; not an independent finance benchmark.",
+  "splits": {
+    "train": {
+      "examples": 144,
+      "groups": [
+        "diversification",
+        "risk-tolerance",
+        "compound-interest",
+        "loan-amortization",
+        "budgeting",
+        "emergency-fund",
+        "inflation",
+        "investment-fees",
+        "bond-rate-risk",
+        "phishing",
+        "credit-score",
+        "stock-basics"
+      ],
+      "sha256": "ee918df84db9e430da3c1b22fca4de95c49dc2bcba42ee39b70c144a0359c1d1"
+    },
+    "validation": {
+      "examples": 12,
+      "groups": [
+        "effective-yield",
+        "etf-basics",
+        "financial-ratios"
+      ],
+      "sha256": "fe2498fe475e0bffa3168d6e8be861a064ef182cc651cf244053be203bd57526"
+    },
+    "test": {
+      "examples": 12,
+      "groups": [
+        "deposit-us",
+        "deposit-hk",
+        "financial-statements"
+      ],
+      "sha256": "2056ff27867ea68a9490f7da256066dcf6889562e7f873ab2e2c0464cb6a7cfb"
+    }
+  }
+}
+{
+  "status": "training",
+  "examples": 144,
+  "trainable_parameters": 2293760,
+  "total_parameters": 598343680,
+  "max_tokens": 387,
+  "gpu": "NVIDIA GeForce RTX 4070 Laptop GPU"
+}
+{"epoch": 1, "optimizer_step": 6, "mean_loss_so_far": 1.25337, "elapsed_seconds": 9.7}
+{"epoch": 1, "optimizer_step": 12, "mean_loss_so_far": 0.96125, "elapsed_seconds": 18.2}
+{"epoch": 1, "optimizer_step": 18, "mean_loss_so_far": 0.72547, "elapsed_seconds": 28.8}
+{"epoch": 1, "optimizer_step": 24, "mean_loss_so_far": 0.55328, "elapsed_seconds": 39.7}
+{"epoch": 1, "optimizer_step": 30, "mean_loss_so_far": 0.44416, "elapsed_seconds": 49.3}
+{"epoch": 1, "optimizer_step": 36, "mean_loss_so_far": 0.37052, "elapsed_seconds": 59.3}
+{"epoch": 1, "train_mean_example_loss": 0.3705204861843312, "validation_mean_example_loss": 0.002575908375244277, "optimizer_steps": 36}
+{"epoch": 2, "optimizer_step": 42, "mean_loss_so_far": 0.00081, "elapsed_seconds": 72.3}
+{"epoch": 2, "optimizer_step": 48, "mean_loss_so_far": 0.00065, "elapsed_seconds": 81.7}
+{"epoch": 2, "optimizer_step": 54, "mean_loss_so_far": 0.00055, "elapsed_seconds": 91.5}
+{"epoch": 2, "optimizer_step": 60, "mean_loss_so_far": 0.00049, "elapsed_seconds": 99.8}
+{"epoch": 2, "optimizer_step": 66, "mean_loss_so_far": 0.00044, "elapsed_seconds": 108.7}
+{"epoch": 2, "optimizer_step": 72, "mean_loss_so_far": 0.00039, "elapsed_seconds": 117.6}
+{"epoch": 2, "train_mean_example_loss": 0.0003937616578089849, "validation_mean_example_loss": 0.0015462933855208878, "optimizer_steps": 72}
+{"epoch": 3, "optimizer_step": 78, "mean_loss_so_far": 0.00018, "elapsed_seconds": 127.6}
+{"epoch": 3, "optimizer_step": 84, "mean_loss_so_far": 0.00017, "elapsed_seconds": 134.9}
+{"epoch": 3, "optimizer_step": 90, "mean_loss_so_far": 0.00016, "elapsed_seconds": 146.7}
+{"epoch": 3, "optimizer_step": 96, "mean_loss_so_far": 0.00015, "elapsed_seconds": 158.0}
+{"epoch": 3, "optimizer_step": 102, "mean_loss_so_far": 0.00015, "elapsed_seconds": 168.5}
+{"epoch": 3, "optimizer_step": 108, "mean_loss_so_far": 0.00015, "elapsed_seconds": 179.5}
+{"epoch": 3, "train_mean_example_loss": 0.00014534569325203646, "validation_mean_example_loss": 0.0014132991076015362, "optimizer_steps": 108}
+{
+  "status": "completed",
+  "steps": 108,
+  "duration_seconds": 181.51,
+  "adapter_sha256": "5b8b9c5ea3e75d0c86fdc05189b617fcd2f9fb84d7637beffa1a661d68fb9d0a"
+}

@@ -1,0 +1,616 @@
+{
+  "checked_at": "2026-11-11T09:39:48.085254+00:00",
+  "status": "passed_limited",
+  "phase": "complete",
+  "transport": "Actual Edge 1440x1000 → /demo → loopback HTTP → saved historical archive and DeepSeek",
+  "provenance": "This run replays the server's existing IBKR archive. It does NOT reconnect to IBKR or collect fresh market data.",
+  "privacy": "Fresh browser context. Existing session list/details are never read. Only this page's newly created session is audited and removed. No request headers, credentials, account data or session IDs are stored.",
+  "no_response_mocking": true,
+  "new_broker_requests": 0,
+  "automatic_script_retries": 0,
+  "automatic_network_retries": 0,
+  "diagnostics_trace_enabled_by_test": false,
+  "model_budget": {
+    "answer_turns": 2,
+    "maximum_generations": 4,
+    "maximum_schema_repairs_per_answer": 1
+  },
+  "count_visibility": "HTTP/UI actions are observed. Provider-internal generation counts are reported by the server, not directly observed by this browser test.",
+  "counters": {
+    "archive_replay_http_requests": 1,
+    "expert_search_http_requests": 1,
+    "chat_http_requests": 2,
+    "confirmed_deepseek_replies": 2
+  },
+  "turns": [
+    {
+      "mode": "deepseek",
+      "warning": null,
+      "answer_excerpt": "历史复盘区间：2026-11-06 — 2026-11-10。由本地网关返回，来源可追溯；未经独立交易所校准，时段完整性未核验。导入时间是本地记录时间；以下内容不代表当前行情、当前市场情绪或预测。\n\n这段复盘只覆盖本地记录的历史区间，标的为所选到期合约，来源是本地网关返回的历史成交条汇总，未经交易所独立校准，时段完整性也未核验。因此它只能描述过去样本里发生了什么，不代表当前行情、当前情绪或未来方向。 [h.day.0.volume_total] [h.day.1.volume_total] [h.day.2.volume_total] [expert.history_time]\n\n能确认的是同一合约的所收成交记录末值：看涨合约末值上升，看跌合约末值下降，标的所收成交条末值也上升。这些只是各日期收到的成交记录首尾对比，不是结算价，也不是同步可成交报价，不能据此推断当前价差或隐含波动率。 [h.contract.0.trade_close] [h.contract.1.trade_close] [h.underlying.trade_close] [expert.history_bars]\n\n不能比较的部分：样本成交计数和看跌成交占比的首尾变化被标为不可比，原因是历史成交条覆盖时段未核验；未平仓量及其看跌占比在各日期都缺失，缺失不等于零，所以不生成持仓变化结论。看跌成交占比只统计合约活动，不是看空人数或主动买卖意图，提前行权等交易也可能造成占比波动。 [h.change.volume_total] [h.change.put_volume_share] [h.change.oi_total] [h.change.put_oi_share] [expert.put_call]\n\n下一步可核对：各日期成交条是否覆盖完整常规交易时段、合约范围是否一致，以及未平仓量是否有独立的持仓日期和发布日期。只有这些口径对齐后，才谈得上对样本活动做方向性比较；在此之前，价格末值变化与成交量、持仓变化应分开看。",
+      "server_reported_generation_attempts": 2,
+      "server_reported_schema_repair_attempts": 1,
+      "local_evidence_ids": [
+        "h.day.0.volume_total",
+        "h.day.1.volume_total",
+        "h.day.2.volume_total",
+        "h.contract.0.trade_close",
+        "h.contract.1.trade_close",
+        "h.underlying.trade_close",
+        "h.change.volume_total",
+        "h.change.put_volume_share",
+        "h.change.oi_total",
+        "h.change.put_oi_share"
+      ],
+      "expert_source_ids": [
+        "expert.history_time",
+        "expert.history_bars",
+        "expert.put_call"
+      ],
+      "cited_comparable_price": true,
+      "cited_incomparable_measure": true,
+      "cited_missing_oi": true,
+      "evidence_values": [
+        {
+          "id": "h.day.0.volume_total",
+          "value": 7386.0,
+          "unit": "contracts"
+        },
+        {
+          "id": "h.day.1.volume_total",
+          "value": 12029.0,
+          "unit": "contracts"
+        },
+        {
+          "id": "h.day.2.volume_total",
+          "value": 12835.0,
+          "unit": "contracts"
+        },
+        {
+          "id": "h.contract.0.trade_close",
+          "value": 2.74,
+          "unit": "USD",
+          "before": 2.24,
+          "after": 2.74,
+          "delta": 0.5,
+          "status": "comparable",
+          "reason": null
+        },
+        {
+          "id": "h.contract.1.trade_close",
+          "value": 4.1,
+          "unit": "USD",
+          "before": 10.0,
+          "after": 4.1,
+          "delta": -5.9,
+          "status": "comparable",
+          "reason": null
+        },
+        {
+          "id": "h.underlying.trade_close",
+          "value": 348.63,
+          "unit": "USD",
+          "before": 342.45,
+          "after": 348.63,
+          "delta": 6.180000000000007,
+          "status": "comparable",
+          "reason": null
+        },
+        {
+          "id": "h.change.volume_total",
+          "value": 12835.0,
+          "unit": "contracts",
+          "before": 7386.0,
+          "after": 12835.0,
+          "delta": null,
+          "status": "incomparable",
+          "reason": "historical_bar_coverage_unverified"
+        },
+        {
+          "id": "h.change.put_volume_share",
+          "value": 0.26443319049474096,
+          "unit": "fraction",
+          "before": 0.11873815326292987,
+          "after": 0.26443319049474096,
+          "delta": null,
+          "status": "incomparable",
+          "reason": "historical_bar_coverage_unverified"
+        },
+        {
+          "id": "h.change.oi_total",
+          "value": null,
+          "unit": "contracts",
+          "before": null,
+          "after": null,
+          "delta": null,
+          "status": "incomparable",
+          "reason": "missing_value_or_oi_asof"
+        },
+        {
+          "id": "h.change.put_oi_share",
+          "value": null,
+          "unit": "fraction",
+          "before": null,
+          "after": null,
+          "delta": null,
+          "status": "incomparable",
+          "reason": "missing_value_or_oi_asof"
+        }
+      ],
+      "paragraph_grounding_audit": {
+        "method": "reviewed_support_facets",
+        "scope": "bounded_rule_checks_not_general_entailment",
+        "required_query_facets": [],
+        "covered_facets": [
+          "historical_bar_semantics",
+          "historical_time_basis",
+          "put_call_limits"
+        ],
+        "paragraphs": [
+          {
+            "part": 0,
+            "claim_facets": [
+              "historical_time_basis"
+            ],
+            "expert_source_ids": [
+              "expert.history_time"
+            ],
+            "supporting_sources": {
+              "historical_time_basis": [
+                "expert.history_time"
+              ]
+            }
+          },
+          {
+            "part": 1,
+            "claim_facets": [
+              "historical_bar_semantics"
+            ],
+            "expert_source_ids": [
+              "expert.history_bars"
+            ],
+            "supporting_sources": {
+              "historical_bar_semantics": [
+                "expert.history_bars"
+              ]
+            }
+          },
+          {
+            "part": 2,
+            "claim_facets": [
+              "put_call_limits"
+            ],
+            "expert_source_ids": [
+              "expert.put_call"
+            ],
+            "supporting_sources": {
+              "put_call_limits": [
+                "expert.put_call"
+              ]
+            }
+          },
+          {
+            "part": 3,
+            "claim_facets": [],
+            "expert_source_ids": [],
+            "supporting_sources": {}
+          }
+        ]
+      }
+    },
+    {
+      "mode": "deepseek",
+      "warning": null,
+      "answer_excerpt": "历史复盘区间：2026-11-06 — 2026-11-10。由本地网关返回，来源可追溯；未经独立交易所校准，时段完整性未核验。导入时间是本地记录时间；以下内容不代表当前行情、当前市场情绪或预测。\n\n不能。这段记录只覆盖所选到期合约在过去几天的历史成交条汇总，来源是本地网关返回，未经交易所独立校准，时段完整性也未核验。它描述的是过去样本里发生了什么，不是此刻的市场状态，也不能说明现在市场看空。看跌成交占比只统计合约活动，每笔成交都有买方和卖方，不能识别看空人数或主动买卖意图；提前行权等交易也可能让占比出现不含方向信息的波动。 [h.day.2.put_volume_share] [expert.put_call] [expert.history_time]\n\n未平仓量没有给出，是因为这里用的是历史成交条接口，该接口返回价格和成交量，文档未列期权持仓历史条类型，所以这些历史条本身无法恢复按日持仓。未平仓量还有独立的清算核对和发布周期，与即时成交报告不同，不能把收到字段的时刻当成持仓发生时刻，也不能用后来的持仓回填过去日期。成交量和未平仓量回答的是不同问题：前者统计期间交易的合约，后者统计尚未结清的合约。这只限制这里的历史条接口，不代表其他来源没有历史持仓数据。 [h.day.2.oi_total] [h.change.oi_total] [expert.history_oi] [expert.oi_cycle] [expert.volume_oi]\n\n因此，样本成交计数和看跌成交占比的首尾变化被标为不可比，原因是历史成交条覆盖时段未核验；未平仓量及其看跌占比在各日期都缺失，缺失不等于零，所以不生成持仓变化结论。期间成交不能直接换算成新增持仓或资金流入。 [h.change.volume_total] [h.change.put_volume_share] [h.change.put_oi_share] [expert.volume_oi]\n\n下一步可核对各日期成交条是否覆盖完整常规交易时段、合约范围是否一致，以及未平仓量是否有独立的持仓日期和发布日期。只有这些口径对齐后，才谈得上对样本活动做方向性比较；在此之前，价格末值变化与成交量、持仓变化应分开看。",
+      "server_reported_generation_attempts": 2,
+      "server_reported_schema_repair_attempts": 1,
+      "local_evidence_ids": [
+        "h.day.2.put_volume_share",
+        "h.day.2.oi_total",
+        "h.change.oi_total",
+        "h.change.volume_total",
+        "h.change.put_volume_share",
+        "h.change.put_oi_share"
+      ],
+      "expert_source_ids": [
+        "expert.put_call",
+        "expert.history_time",
+        "expert.history_oi",
+        "expert.oi_cycle",
+        "expert.volume_oi"
+      ],
+      "cited_comparable_price": false,
+      "cited_incomparable_measure": true,
+      "cited_missing_oi": true,
+      "evidence_values": [
+        {
+          "id": "h.day.2.put_volume_share",
+          "value": 0.26443319049474096,
+          "unit": "fraction"
+        },
+        {
+          "id": "h.day.2.oi_total",
+          "value": null,
+          "unit": "contracts"
+        },
+        {
+          "id": "h.change.oi_total",
+          "value": null,
+          "unit": "contracts",
+          "before": null,
+          "after": null,
+          "delta": null,
+          "status": "incomparable",
+          "reason": "missing_value_or_oi_asof"
+        },
+        {
+          "id": "h.change.volume_total",
+          "value": 12835.0,
+          "unit": "contracts",
+          "before": 7386.0,
+          "after": 12835.0,
+          "delta": null,
+          "status": "incomparable",
+          "reason": "historical_bar_coverage_unverified"
+        },
+        {
+          "id": "h.change.put_volume_share",
+          "value": 0.26443319049474096,
+          "unit": "fraction",
+          "before": 0.11873815326292987,
+          "after": 0.26443319049474096,
+          "delta": null,
+          "status": "incomparable",
+          "reason": "historical_bar_coverage_unverified"
+        },
+        {
+          "id": "h.change.put_oi_share",
+          "value": null,
+          "unit": "fraction",
+          "before": null,
+          "after": null,
+          "delta": null,
+          "status": "incomparable",
+          "reason": "missing_value_or_oi_asof"
+        }
+      ],
+      "paragraph_grounding_audit": {
+        "method": "reviewed_support_facets",
+        "scope": "bounded_rule_checks_not_general_entailment",
+        "required_query_facets": [
+          "historical_oi_availability",
+          "historical_time_basis",
+          "put_call_limits"
+        ],
+        "covered_facets": [
+          "historical_oi_availability",
+          "historical_time_basis",
+          "oi_reporting_cycle",
+          "put_call_limits",
+          "volume_vs_oi"
+        ],
+        "paragraphs": [
+          {
+            "part": 0,
+            "claim_facets": [
+              "historical_time_basis",
+              "put_call_limits"
+            ],
+            "expert_source_ids": [
+              "expert.put_call",
+              "expert.history_time"
+            ],
+            "supporting_sources": {
+              "historical_time_basis": [
+                "expert.history_time"
+              ],
+              "put_call_limits": [
+                "expert.put_call"
+              ]
+            }
+          },
+          {
+            "part": 1,
+            "claim_facets": [
+              "historical_oi_availability",
+              "oi_reporting_cycle",
+              "volume_vs_oi"
+            ],
+            "expert_source_ids": [
+              "expert.history_oi",
+              "expert.oi_cycle",
+              "expert.volume_oi"
+            ],
+            "supporting_sources": {
+              "historical_oi_availability": [
+                "expert.history_oi"
+              ],
+              "oi_reporting_cycle": [
+                "expert.oi_cycle"
+              ],
+              "volume_vs_oi": [
+                "expert.volume_oi"
+              ]
+            }
+          },
+          {
+            "part": 2,
+            "claim_facets": [
+              "volume_vs_oi"
+            ],
+            "expert_source_ids": [
+              "expert.volume_oi"
+            ],
+            "supporting_sources": {
+              "volume_vs_oi": [
+                "expert.volume_oi"
+              ]
+            }
+          },
+          {
+            "part": 3,
+            "claim_facets": [],
+            "expert_source_ids": [],
+            "supporting_sources": {}
+          }
+        ]
+      }
+    }
+  ],
+  "screenshots": [
+    "reports/screenshots/expert-demo-v14-live/20261111T093948085254Z/demo-2d.png",
+    "reports/screenshots/expert-demo-v14-live/20261111T093948085254Z/demo-3d.png",
+    "reports/screenshots/expert-demo-v14-live/20261111T093948085254Z/demo-expert-search.png",
+    "reports/screenshots/expert-demo-v14-live/20261111T093948085254Z/demo-answer-1.png",
+    "reports/screenshots/expert-demo-v14-live/20261111T093948085254Z/demo-answer-2.png"
+  ],
+  "checks": [
+    "actual_demo_step_clicks",
+    "no_existing_session_reads",
+    "no_broker_routes_or_response_mocking",
+    "real_webgl2_and_svg_renderers",
+    "model_selection_without_generation",
+    "separate_candidate_search_and_actual_answer_sources",
+    "catalogue_version_hash_match",
+    "per_paragraph_recognized_claim_support",
+    "local_values_and_time_source_unchanged",
+    "two_validated_deepseek_turns",
+    "same_owned_session_persistence_and_export",
+    "no_pageerror_or_horizontal_overflow"
+  ],
+  "browser": {
+    "channel": "msedge",
+    "version": "155.0.4283.45",
+    "headless": true,
+    "viewport": {
+      "width": 1440,
+      "height": 1000
+    }
+  },
+  "app_version": "14.0.0",
+  "catalogue": {
+    "version": "1.1",
+    "corpus_sha256": "442290b75b51768259f9f0a8c6468eeaf5c4c800ea652f6725c725152da81ac5",
+    "document_count": 14,
+    "embedding": false
+  },
+  "avatar": {
+    "actual_webgl2_draw_observed": true,
+    "native_svg_2d_observed": true,
+    "rendered_frames_at_mode_change": 16,
+    "three_revision": "187",
+    "thinking_and_idle_states_observed": true
+  },
+  "model_switch": {
+    "status": "verified_without_generation",
+    "alternative_engine": "local"
+  },
+  "analysis_id": "f561dc2b-fe82-49f9-ab94-9cf915a4c33f",
+  "archive": {
+    "source": "ibkr_historical",
+    "source_verified_scope": "Returned by configured Gateway only; no independent exchange calibration or complete-session verification",
+    "captured_at": "2026-11-11T07:47:29.966925+00:00",
+    "ingested_at": "2026-11-11T09:39:50.172996+00:00",
+    "bar_basis": "derived_from_intraday_trades",
+    "period": {
+      "start": "2026-11-06",
+      "end": "2026-11-10"
+    },
+    "dates": [
+      "2026-11-06",
+      "2026-11-09",
+      "2026-11-10"
+    ],
+    "request": {
+      "symbol": "AAPL",
+      "expiry": "2026-11-13",
+      "strike": 350.0,
+      "calendar_days": 5,
+      "bar_size": "1 hour",
+      "what_to_show": "TRADES",
+      "use_rth": true,
+      "keep_up_to_date": false,
+      "start_inclusive_utc": "2026-11-06T05:00:00+00:00",
+      "end_exclusive_utc": "2026-11-11T05:00:00+00:00"
+    },
+    "aggregation": {
+      "kind": "derived_daily",
+      "native_eod": false,
+      "partial_bars": true,
+      "full_session_verified": false,
+      "timezone": "America/New_York"
+    },
+    "daily": [
+      {
+        "date": "2026-11-06",
+        "received_contracts": 2,
+        "common_contracts": 2,
+        "volume_total": 7386.0,
+        "put_volume_share": 0.11873815326292987,
+        "oi_total": null,
+        "put_oi_share": null,
+        "oi_asof_date": null
+      },
+      {
+        "date": "2026-11-09",
+        "received_contracts": 2,
+        "common_contracts": 2,
+        "volume_total": 12029.0,
+        "put_volume_share": 0.3310333361044143,
+        "oi_total": null,
+        "put_oi_share": null,
+        "oi_asof_date": null
+      },
+      {
+        "date": "2026-11-10",
+        "received_contracts": 2,
+        "common_contracts": 2,
+        "volume_total": 12835.0,
+        "put_volume_share": 0.26443319049474096,
+        "oi_total": null,
+        "put_oi_share": null,
+        "oi_asof_date": null
+      }
+    ],
+    "comparable_price_evidence_ids": [
+      "h.contract.0.trade_close",
+      "h.contract.1.trade_close",
+      "h.underlying.trade_close"
+    ],
+    "local_changes": [
+      {
+        "id": "h.change.volume_total",
+        "before": 7386.0,
+        "after": 12835.0,
+        "delta": null,
+        "delta_unit": "contracts",
+        "unit": "contracts",
+        "status": "incomparable",
+        "reason": "historical_bar_coverage_unverified",
+        "direction": "unavailable"
+      },
+      {
+        "id": "h.change.put_volume_share",
+        "before": 0.11873815326292987,
+        "after": 0.26443319049474096,
+        "delta": null,
+        "delta_unit": "percentage_points",
+        "unit": "fraction",
+        "status": "incomparable",
+        "reason": "historical_bar_coverage_unverified",
+        "direction": "unavailable"
+      },
+      {
+        "id": "h.change.oi_total",
+        "before": null,
+        "after": null,
+        "delta": null,
+        "delta_unit": "contracts",
+        "unit": "contracts",
+        "status": "incomparable",
+        "reason": "missing_value_or_oi_asof",
+        "direction": "unavailable"
+      },
+      {
+        "id": "h.change.put_oi_share",
+        "before": null,
+        "after": null,
+        "delta": null,
+        "delta_unit": "percentage_points",
+        "unit": "fraction",
+        "status": "incomparable",
+        "reason": "missing_value_or_oi_asof",
+        "direction": "unavailable"
+      }
+    ],
+    "historical_oi_available": false,
+    "instantaneous_bbo_available": false,
+    "archived_original_capture_history_requests": 3,
+    "this_run_new_broker_requests": 0
+  },
+  "archive_sha256": "08cbf4cbd74bcd35b5905e2b96e95bd83c36b52b9d9326591ef5148719cd9ab1",
+  "analysis_fingerprint": "81214a2e3bb34212045711c8972f22820f08e00c1393893b22b18f9d57aa4ac5",
+  "candidate_source_ids": [
+    "expert.history_volume",
+    "expert.history_limits",
+    "expert.contract_identity",
+    "expert.history_iv"
+  ],
+  "workflow_status": "passed",
+  "original_analysis_unchanged": true,
+  "owned_session_persisted_and_exported": true,
+  "current_market_prediction": false,
+  "limits": [
+    "Archive replay only; no new IBKR collection or present-market verification.",
+    "Observed intraday bars do not prove complete-session coverage; volume changes remain incomparable and OI remains absent.",
+    "Grounding checks recognized claim facets and retrieved support bindings; they are not general semantic entailment or an accuracy score."
+  ],
+  "owned_session_removed": true,
+  "immutable_archived_analyses_retained": 1,
+  "page_errors": [],
+  "blocked_api_requests": [],
+  "blocked_external_requests": [],
+  "api_requests_checked_for_absent_credentials": 5,
+  "elapsed_seconds": 22.479,
+  "server_reported_total_generation_attempts": 4,
+  "server_reported_repair_attempts": 2,
+  "manual_review": {
+    "reviewed_at": "2026-11-11T09:42:46.964183+00:00",
+    "conclusion": "accepted_limited",
+    "scope": "Human review of the final actual accepted answer excerpts and screenshots. No answer text, original report fields or invocation counts were edited.",
+    "turns": [
+      {
+        "turn": 1,
+        "paragraphs": [
+          {
+            "paragraph": 1,
+            "assessment": "Historical period/provenance and present-market boundary are correctly limited; history_time is relevant. Minor terminology issue recorded below."
+          },
+          {
+            "paragraph": 2,
+            "assessment": "Call end value rises, put falls and underlying rises, matching the immutable cards. The text confines these to received trade-record endpoints rather than settlement, synchronized BBO or current pricing; history_bars supports the distinction."
+          },
+          {
+            "paragraph": 3,
+            "assessment": "Volume/put-share changes remain incomparable because session coverage is unverified. OI and its dates remain missing, never zero. Contract activity is separated from people/intent, with early exercise described only as a possibility; put_call is relevant."
+          },
+          {
+            "paragraph": 4,
+            "assessment": "Procedural next checks only. It does not supply new market observations, assert a fresh collection, guarantee sentiment accuracy or issue a trade instruction."
+          }
+        ]
+      },
+      {
+        "turn": 2,
+        "paragraphs": [
+          {
+            "paragraph": 1,
+            "assessment": "Directly declines a present bearish-market conclusion from this historical selected sample; put_call and history_time support the stated boundaries."
+          },
+          {
+            "paragraph": 2,
+            "assessment": "Historical OI absence is scoped to this historical-TRADES/bar path and its documented data types, not all APIs/vendors. Separate OI reconciliation/reporting cycles and volume-versus-OI definitions have their respective sources."
+          },
+          {
+            "paragraph": 3,
+            "assessment": "Repeats the local incomparability/missingness limits faithfully; does not infer new positions or fund inflows from reported volume. OI null values are preserved."
+          },
+          {
+            "paragraph": 4,
+            "assessment": "Procedural checks stay within historical sample comparison and preserve separation of price endpoints from activity/OI; no present-market prediction or new numeric claim."
+          }
+        ]
+      }
+    ],
+    "wording_limitations": [
+      {
+        "turn": 1,
+        "paragraph": 1,
+        "exact_phrase": "标的为所选到期合约",
+        "assessment": "This wording conflates the underlying with the selected option contracts. The precise scope remains correctly identified in the cards as AAPL, expiration 2026-11-13, strike 350 C/P. This minor wording issue does not change the local numbers or source/time boundary."
+      }
+    ],
+    "screenshots": "Both actual answer screenshots visually reviewed: historical scope, data/expert citation controls, before/after values, incomparable labels and missing OI are legible. No session identifier, account data or credential is visible. Real WebGL2/SVG mode checks and the local/DeepSeek selection were recorded by the same browser run.",
+    "invocation_interpretation": "Two actual UI answer turns; the server reports four generations including two bounded schema repairs. This run replays an existing archive and requests zero new broker collections.",
+    "remaining_limits": "Acceptance is limited to this recorded workflow and the stated bounded claim-facet/data checks; it is not general semantic entailment, calibrated accuracy, complete-session market data or a current sentiment forecast."
+  }
+}

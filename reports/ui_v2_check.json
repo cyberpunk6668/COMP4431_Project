@@ -1,0 +1,278 @@
+{
+  "checked_at": "2026-11-10T09:35:07.408465+00:00",
+  "browser": "msedge",
+  "mocked_backend": true,
+  "mocked_speech_events": true,
+  "scope": "Real browser UI integration; no DeepSeek billing or local-model inference. Speech hardware and answer accuracy are not tested.",
+  "source_sha256": {
+    "web\\index.html": "3d43855edb722be38925d6286e817e461b6d7d1f8007e51bb3b196a8455723bf",
+    "web\\styles.css": "b9056d6e395f684e59a2f04ed13e9ba9f92244569acd17d53cb7d15392ed30ab",
+    "web\\app.js": "5f0a2c6107c5e80a8773073d2be3aab98163727f761f1694dc4f9700ba532a2b"
+  },
+  "status": "passed",
+  "checks": [
+    "localized_model_choices_and_unavailable_state",
+    "32_responsive_theme_language_cases_and_32_calculator_layouts",
+    "actual_request_thinking_idle_transitions",
+    "safe_markdown_and_verified_source_links",
+    "readable_primary_text_sizes",
+    "keyboard_calculator_tabs",
+    "genuine_webgl_svg_switch_and_reduced_motion",
+    "mock_speech_recognition_and_synthesis_event_integration",
+    "outage_error_state_preserves_draft",
+    "available_local_engine_selection_and_request_contract",
+    "mobile_companion_defaults_collapsed_and_expands"
+  ],
+  "check_count": 11,
+  "layout_cases": [
+    {
+      "theme": "light",
+      "language": "zh",
+      "width": 320,
+      "home": "passed",
+      "calculator": "passed"
+    },
+    {
+      "theme": "light",
+      "language": "zh",
+      "width": 390,
+      "home": "passed",
+      "calculator": "passed"
+    },
+    {
+      "theme": "light",
+      "language": "zh",
+      "width": 721,
+      "home": "passed",
+      "calculator": "passed"
+    },
+    {
+      "theme": "light",
+      "language": "zh",
+      "width": 768,
+      "home": "passed",
+      "calculator": "passed"
+    },
+    {
+      "theme": "light",
+      "language": "zh",
+      "width": 940,
+      "home": "passed",
+      "calculator": "passed"
+    },
+    {
+      "theme": "light",
+      "language": "zh",
+      "width": 1024,
+      "home": "passed",
+      "calculator": "passed"
+    },
+    {
+      "theme": "light",
+      "language": "zh",
+      "width": 1280,
+      "home": "passed",
+      "calculator": "passed"
+    },
+    {
+      "theme": "light",
+      "language": "zh",
+      "width": 1440,
+      "home": "passed",
+      "calculator": "passed"
+    },
+    {
+      "theme": "light",
+      "language": "en",
+      "width": 320,
+      "home": "passed",
+      "calculator": "passed"
+    },
+    {
+      "theme": "light",
+      "language": "en",
+      "width": 390,
+      "home": "passed",
+      "calculator": "passed"
+    },
+    {
+      "theme": "light",
+      "language": "en",
+      "width": 721,
+      "home": "passed",
+      "calculator": "passed"
+    },
+    {
+      "theme": "light",
+      "language": "en",
+      "width": 768,
+      "home": "passed",
+      "calculator": "passed"
+    },
+    {
+      "theme": "light",
+      "language": "en",
+      "width": 940,
+      "home": "passed",
+      "calculator": "passed"
+    },
+    {
+      "theme": "light",
+      "language": "en",
+      "width": 1024,
+      "home": "passed",
+      "calculator": "passed"
+    },
+    {
+      "theme": "light",
+      "language": "en",
+      "width": 1280,
+      "home": "passed",
+      "calculator": "passed"
+    },
+    {
+      "theme": "light",
+      "language": "en",
+      "width": 1440,
+      "home": "passed",
+      "calculator": "passed"
+    },
+    {
+      "theme": "dark",
+      "language": "zh",
+      "width": 320,
+      "home": "passed",
+      "calculator": "passed"
+    },
+    {
+      "theme": "dark",
+      "language": "zh",
+      "width": 390,
+      "home": "passed",
+      "calculator": "passed"
+    },
+    {
+      "theme": "dark",
+      "language": "zh",
+      "width": 721,
+      "home": "passed",
+      "calculator": "passed"
+    },
+    {
+      "theme": "dark",
+      "language": "zh",
+      "width": 768,
+      "home": "passed",
+      "calculator": "passed"
+    },
+    {
+      "theme": "dark",
+      "language": "zh",
+      "width": 940,
+      "home": "passed",
+      "calculator": "passed"
+    },
+    {
+      "theme": "dark",
+      "language": "zh",
+      "width": 1024,
+      "home": "passed",
+      "calculator": "passed"
+    },
+    {
+      "theme": "dark",
+      "language": "zh",
+      "width": 1280,
+      "home": "passed",
+      "calculator": "passed"
+    },
+    {
+      "theme": "dark",
+      "language": "zh",
+      "width": 1440,
+      "home": "passed",
+      "calculator": "passed"
+    },
+    {
+      "theme": "dark",
+      "language": "en",
+      "width": 320,
+      "home": "passed",
+      "calculator": "passed"
+    },
+    {
+      "theme": "dark",
+      "language": "en",
+      "width": 390,
+      "home": "passed",
+      "calculator": "passed"
+    },
+    {
+      "theme": "dark",
+      "language": "en",
+      "width": 721,
+      "home": "passed",
+      "calculator": "passed"
+    },
+    {
+      "theme": "dark",
+      "language": "en",
+      "width": 768,
+      "home": "passed",
+      "calculator": "passed"
+    },
+    {
+      "theme": "dark",
+      "language": "en",
+      "width": 940,
+      "home": "passed",
+      "calculator": "passed"
+    },
+    {
+      "theme": "dark",
+      "language": "en",
+      "width": 1024,
+      "home": "passed",
+      "calculator": "passed"
+    },
+    {
+      "theme": "dark",
+      "language": "en",
+      "width": 1280,
+      "home": "passed",
+      "calculator": "passed"
+    },
+    {
+      "theme": "dark",
+      "language": "en",
+      "width": 1440,
+      "home": "passed",
+      "calculator": "passed"
+    }
+  ],
+  "layout_case_count": 32,
+  "calculator_layout_count": 32,
+  "reading_sizes_px": {
+    ".message.assistant .message-body": 15,
+    "#model-description": 12,
+    ".copilot-intro": 13
+  },
+  "page_errors": [],
+  "renderer": {
+    "requestedMode": "3d",
+    "actualMode": "3d",
+    "renderer": "webgl2",
+    "state": "idle",
+    "reducedMotion": true,
+    "fallbackReason": null,
+    "frames": 8,
+    "destroyed": false,
+    "threeRevision": "187"
+  },
+  "screenshots": [
+    "reports/screenshots/ui-v2-mocked/home-dark.png",
+    "reports/screenshots/ui-v2-mocked/home-light.png",
+    "reports/screenshots/ui-v2-mocked/mobile-expanded.png"
+  ],
+  "duration_seconds": 8.7
+}

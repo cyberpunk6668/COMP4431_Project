@@ -1,0 +1,57 @@
+{
+  "checked_at": "2026-11-11T09:22:31.535058+00:00",
+  "status": "failed",
+  "phase": "demo_initial_ui_and_real_avatar",
+  "transport": "Actual Edge 1440x1000 → /demo → loopback HTTP → saved historical archive and DeepSeek",
+  "provenance": "This run replays the server's existing IBKR archive. It does NOT reconnect to IBKR or collect fresh market data.",
+  "privacy": "Fresh browser context. Existing session list/details are never read. Only this page's newly created session is audited and removed. No request headers, credentials, account data or session IDs are stored.",
+  "no_response_mocking": true,
+  "new_broker_requests": 0,
+  "automatic_script_retries": 0,
+  "automatic_network_retries": 0,
+  "diagnostics_trace_enabled_by_test": false,
+  "model_budget": {
+    "answer_turns": 2,
+    "maximum_generations": 4,
+    "maximum_schema_repairs_per_answer": 1
+  },
+  "count_visibility": "HTTP/UI actions are observed. Provider-internal generation counts are reported by the server, not directly observed by this browser test.",
+  "counters": {
+    "archive_replay_http_requests": 0,
+    "expert_search_http_requests": 0,
+    "chat_http_requests": 0,
+    "confirmed_deepseek_replies": 0
+  },
+  "turns": [],
+  "screenshots": [
+    "reports/screenshots/expert-demo-v14-live/20261111T092231535058Z/demo-failed.png"
+  ],
+  "checks": [],
+  "browser": {
+    "channel": "msedge",
+    "version": "155.0.4283.45",
+    "headless": true,
+    "viewport": {
+      "width": 1440,
+      "height": 1000
+    }
+  },
+  "app_version": "14.0.0",
+  "catalogue": {
+    "version": "1.1",
+    "corpus_sha256": "442290b75b51768259f9f0a8c6468eeaf5c4c800ea652f6725c725152da81ac5",
+    "document_count": 14,
+    "embedding": false
+  },
+  "workflow_status": "failed",
+  "error_type": "AssertionError",
+  "error_code": "Locator expected to be disabled\nActual value: enabled \nCall log:\n  - Expect \"to_be_disabled\" with timeout 5000ms\n  - waiting for locator(\"#demo-search-fields\")\n    8 × locator resolved to <fieldset disabled id=\"demo-search-fields\">…</fieldset>\n      - unexpected value \"enabled\"\n",
+  "immutable_archived_analyses_retained": 0,
+  "page_errors": [],
+  "blocked_api_requests": [],
+  "blocked_external_requests": [],
+  "api_requests_checked_for_absent_credentials": 1,
+  "elapsed_seconds": 6.546,
+  "server_reported_total_generation_attempts": null,
+  "server_reported_repair_attempts": null
+}

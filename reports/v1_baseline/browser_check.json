@@ -1,0 +1,33 @@
+{
+  "checked_at": "2026-11-10T08:24:20.838498+00:00",
+  "status": "passed",
+  "checks": [
+    "desktop_initial_load_and_configuration_label",
+    "real_deepseek_chat_and_source_links",
+    "json_export_matches_conversation",
+    "session_restored_after_reload",
+    "new_chat_and_session_switch",
+    "compound_loan_budget_forms_and_verified_results",
+    "knowledge_catalogue_and_english_interface",
+    "failed_request_keeps_draft_and_shows_error",
+    "untrusted_chat_text_not_executed_as_html",
+    "session_delete_updates_ui",
+    "mobile_layout_menu_and_calculator",
+    "responsive_no_horizontal_overflow_320_768_1024",
+    "local_api_reference_and_request_tester"
+  ],
+  "total": 13,
+  "browser": "Microsoft Edge (headless Chromium)",
+  "duration_seconds": 10.17,
+  "page_errors": [],
+  "console_errors": [
+    "Failed to load resource: the server responded with a status of 503 (Service Unavailable)"
+  ],
+  "screenshots": [
+    "reports/screenshots/calculator-compound.png",
+    "reports/screenshots/chat-sources.png",
+    "reports/screenshots/home-desktop.png",
+    "reports/screenshots/home-mobile.png"
+  ],
+  "voice_validation": "Capability detection/UI only. Actual microphone and audible synthesis require manual testing on the presentation machine."
+}

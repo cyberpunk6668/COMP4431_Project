@@ -1,0 +1,49 @@
+{
+  "checked_at": "2026-11-10T09:28:38.666796+00:00",
+  "status": "passed",
+  "browser": "Microsoft Edge (headless Chromium)",
+  "webgl": {
+    "requestedMode": "3d",
+    "actualMode": "3d",
+    "renderer": "webgl2",
+    "state": "idle",
+    "reducedMotion": false,
+    "fallbackReason": null,
+    "frames": 24,
+    "destroyed": false,
+    "threeRevision": "187"
+  },
+  "states": [
+    "listening",
+    "thinking",
+    "speaking",
+    "error",
+    "idle"
+  ],
+  "reducedMotionFrameStable": true,
+  "modeSwitchAndDestroy": true,
+  "forcedWebGLFallback": {
+    "requestedMode": "3d",
+    "actualMode": "2d",
+    "renderer": "svg",
+    "state": "idle",
+    "reducedMotion": false,
+    "fallbackReason": "webgl2_unavailable",
+    "frames": 0,
+    "destroyed": false,
+    "threeRevision": null
+  },
+  "checks": [
+    "genuine_webgl2_renderer",
+    "native_svg_mode",
+    "five_state_transitions",
+    "reduced_motion_stops_render_loop",
+    "2d_3d_switch",
+    "destroy_removes_ui",
+    "forced_webgl2_failure_falls_back",
+    "no_javascript_page_errors"
+  ],
+  "total": 8,
+  "page_errors": [],
+  "limitations": "Synthetic state drivers verify rendering and lifecycle. Actual speech/microphone integration is tested separately; mouth motion is approximate, not phoneme lip synchronization."
+}

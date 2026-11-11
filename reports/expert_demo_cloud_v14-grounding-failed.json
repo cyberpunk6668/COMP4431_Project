@@ -1,0 +1,226 @@
+{
+  "checked_at": "2026-11-11T09:27:39.739463+00:00",
+  "status": "failed",
+  "phase": "turn_1_local_values_and_claim_source_support",
+  "transport": "Actual Edge 1440x1000 → /demo → loopback HTTP → saved historical archive and DeepSeek",
+  "provenance": "This run replays the server's existing IBKR archive. It does NOT reconnect to IBKR or collect fresh market data.",
+  "privacy": "Fresh browser context. Existing session list/details are never read. Only this page's newly created session is audited and removed. No request headers, credentials, account data or session IDs are stored.",
+  "no_response_mocking": true,
+  "new_broker_requests": 0,
+  "automatic_script_retries": 0,
+  "automatic_network_retries": 0,
+  "diagnostics_trace_enabled_by_test": false,
+  "model_budget": {
+    "answer_turns": 2,
+    "maximum_generations": 4,
+    "maximum_schema_repairs_per_answer": 1
+  },
+  "count_visibility": "HTTP/UI actions are observed. Provider-internal generation counts are reported by the server, not directly observed by this browser test.",
+  "counters": {
+    "archive_replay_http_requests": 1,
+    "expert_search_http_requests": 1,
+    "chat_http_requests": 1,
+    "confirmed_deepseek_replies": 0
+  },
+  "turns": [
+    {
+      "mode": "offline",
+      "warning": "options_answer_validation_failed",
+      "answer_excerpt": "历史复盘区间：2026-11-06 — 2026-11-10。由本地网关返回，来源可追溯；未经独立交易所校准，时段完整性未核验。导入时间是本地记录时间；以下内容不代表当前行情、当前市场情绪或预测。\n\n这项统计保留了前后记录，但样本或字段口径不足以支持可靠的变化判断。请查看证据卡中的不可比原因。 [h.change.put_volume_share]\n\n历史成交条记录区间成交高低开收和成交量。历史BID_ASK条的开收为时间平均买卖价，高低为区间报价极值；这些字段不是同刻可成交双边报价，不能直接计算即时买卖价差或即时隐含波动率。 [expert.history_bars]\n\n本地说明保留了缺失字段，未补造数值。请结合证据卡中的样本范围和来源继续核对。",
+      "server_reported_generation_attempts": 2,
+      "server_reported_schema_repair_attempts": 1
+    }
+  ],
+  "screenshots": [
+    "reports/screenshots/expert-demo-v14-live/20261111T092739739463Z/demo-2d.png",
+    "reports/screenshots/expert-demo-v14-live/20261111T092739739463Z/demo-3d.png",
+    "reports/screenshots/expert-demo-v14-live/20261111T092739739463Z/demo-expert-search.png",
+    "reports/screenshots/expert-demo-v14-live/20261111T092739739463Z/demo-failed.png"
+  ],
+  "checks": [],
+  "browser": {
+    "channel": "msedge",
+    "version": "155.0.4283.45",
+    "headless": true,
+    "viewport": {
+      "width": 1440,
+      "height": 1000
+    }
+  },
+  "app_version": "14.0.0",
+  "catalogue": {
+    "version": "1.1",
+    "corpus_sha256": "442290b75b51768259f9f0a8c6468eeaf5c4c800ea652f6725c725152da81ac5",
+    "document_count": 14,
+    "embedding": false
+  },
+  "avatar": {
+    "actual_webgl2_draw_observed": true,
+    "native_svg_2d_observed": true,
+    "rendered_frames_at_mode_change": 17,
+    "three_revision": "187"
+  },
+  "model_switch": {
+    "status": "verified_without_generation",
+    "alternative_engine": "local"
+  },
+  "analysis_id": "71c6d36f-5661-4d1f-8bca-4e22c08a59cd",
+  "archive": {
+    "source": "ibkr_historical",
+    "source_verified_scope": "Returned by configured Gateway only; no independent exchange calibration or complete-session verification",
+    "captured_at": "2026-11-11T07:47:29.966925+00:00",
+    "ingested_at": "2026-11-11T09:27:41.598833+00:00",
+    "bar_basis": "derived_from_intraday_trades",
+    "period": {
+      "start": "2026-11-06",
+      "end": "2026-11-10"
+    },
+    "dates": [
+      "2026-11-06",
+      "2026-11-09",
+      "2026-11-10"
+    ],
+    "request": {
+      "symbol": "AAPL",
+      "expiry": "2026-11-13",
+      "strike": 350.0,
+      "calendar_days": 5,
+      "bar_size": "1 hour",
+      "what_to_show": "TRADES",
+      "use_rth": true,
+      "keep_up_to_date": false,
+      "start_inclusive_utc": "2026-11-06T05:00:00+00:00",
+      "end_exclusive_utc": "2026-11-11T05:00:00+00:00"
+    },
+    "aggregation": {
+      "kind": "derived_daily",
+      "native_eod": false,
+      "partial_bars": true,
+      "full_session_verified": false,
+      "timezone": "America/New_York"
+    },
+    "daily": [
+      {
+        "date": "2026-11-06",
+        "received_contracts": 2,
+        "common_contracts": 2,
+        "volume_total": 7386.0,
+        "put_volume_share": 0.11873815326292987,
+        "oi_total": null,
+        "put_oi_share": null,
+        "oi_asof_date": null
+      },
+      {
+        "date": "2026-11-09",
+        "received_contracts": 2,
+        "common_contracts": 2,
+        "volume_total": 12029.0,
+        "put_volume_share": 0.3310333361044143,
+        "oi_total": null,
+        "put_oi_share": null,
+        "oi_asof_date": null
+      },
+      {
+        "date": "2026-11-10",
+        "received_contracts": 2,
+        "common_contracts": 2,
+        "volume_total": 12835.0,
+        "put_volume_share": 0.26443319049474096,
+        "oi_total": null,
+        "put_oi_share": null,
+        "oi_asof_date": null
+      }
+    ],
+    "comparable_price_evidence_ids": [
+      "h.contract.0.trade_close",
+      "h.contract.1.trade_close",
+      "h.underlying.trade_close"
+    ],
+    "local_changes": [
+      {
+        "id": "h.change.volume_total",
+        "before": 7386.0,
+        "after": 12835.0,
+        "delta": null,
+        "delta_unit": "contracts",
+        "unit": "contracts",
+        "status": "incomparable",
+        "reason": "historical_bar_coverage_unverified",
+        "direction": "unavailable"
+      },
+      {
+        "id": "h.change.put_volume_share",
+        "before": 0.11873815326292987,
+        "after": 0.26443319049474096,
+        "delta": null,
+        "delta_unit": "percentage_points",
+        "unit": "fraction",
+        "status": "incomparable",
+        "reason": "historical_bar_coverage_unverified",
+        "direction": "unavailable"
+      },
+      {
+        "id": "h.change.oi_total",
+        "before": null,
+        "after": null,
+        "delta": null,
+        "delta_unit": "contracts",
+        "unit": "contracts",
+        "status": "incomparable",
+        "reason": "missing_value_or_oi_asof",
+        "direction": "unavailable"
+      },
+      {
+        "id": "h.change.put_oi_share",
+        "before": null,
+        "after": null,
+        "delta": null,
+        "delta_unit": "percentage_points",
+        "unit": "fraction",
+        "status": "incomparable",
+        "reason": "missing_value_or_oi_asof",
+        "direction": "unavailable"
+      }
+    ],
+    "historical_oi_available": false,
+    "instantaneous_bbo_available": false,
+    "archived_original_capture_history_requests": 3,
+    "this_run_new_broker_requests": 0
+  },
+  "archive_sha256": "08cbf4cbd74bcd35b5905e2b96e95bd83c36b52b9d9326591ef5148719cd9ab1",
+  "analysis_fingerprint": "54ca72d217933c7b64a745e2a9747939adb4013e31003fd069dfcbc5e3d96d2e",
+  "candidate_source_ids": [
+    "expert.history_volume",
+    "expert.history_limits",
+    "expert.contract_identity",
+    "expert.history_iv"
+  ],
+  "workflow_status": "failed",
+  "error_type": "AssertionError",
+  "error_code": "A real validated DeepSeek reply is required",
+  "owned_session_removed": true,
+  "immutable_archived_analyses_retained": 1,
+  "page_errors": [],
+  "blocked_api_requests": [],
+  "blocked_external_requests": [],
+  "api_requests_checked_for_absent_credentials": 4,
+  "elapsed_seconds": 11.966,
+  "server_reported_total_generation_attempts": 2,
+  "server_reported_repair_attempts": 1,
+  "failure_diagnostics": {
+    "scope": "Read-only inspection after the failed live answer; no additional model calls",
+    "attempts": [
+      {
+        "attempt": 1,
+        "path": "tmp/options-validation-v12-cbd6b2c77f4248d7854277476f03a01d.json",
+        "validation_error": "paragraph 1: Expert citation does not support claim facets: historical_time_basis"
+      },
+      {
+        "attempt": 2,
+        "path": "tmp/options-validation-v12-f1d419b47894467bb605b2d9bd6a3744.json",
+        "validation_error": "paragraph 1: Expert citation does not support claim facets: historical_time_basis"
+      }
+    ],
+    "observation": "Both failed model outputs are identical. The first paragraph states a historical/current boundary but cites only local data IDs. Further offline paragraph checks also reveal an unrecognized interval-trade-record/BBO synonym and surplus citations in other paragraphs. No fix or additional live request was performed by this run."
+  }
+}

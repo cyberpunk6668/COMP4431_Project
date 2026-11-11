@@ -1,0 +1,45 @@
+{
+  "reviewed_at": "2026-11-10T09:51:32.669881+00:00",
+  "reviewer": "Implementation agent, not an independent human financial expert",
+  "scope": "Read all 24 saved outputs against their supplied reference summaries. This is a narrow source-faithfulness review, not a representative financial accuracy score.",
+  "raw_output_file": "reports/finetuning_evaluation.json",
+  "finetuned_observation": "All 12 adapted answers exactly match the project reference target answer (including its caveat and source ID). This is strong evidence for learning conditioned copying/format, not open-ended reasoning or factual knowledge acquisition.",
+  "baseline_examples": [
+    {
+      "ids": [
+        "test-deposit-us-zh-0",
+        "test-deposit-us-zh-1"
+      ],
+      "finding": "Adds that FDIC insurance is managed by FED; this is not supported by the supplied reference and confuses the institutions."
+    },
+    {
+      "ids": [
+        "test-deposit-us-en-1"
+      ],
+      "finding": "Describes each account as insured up to the limit while also stating aggregation, creating an inconsistent impression relative to the explicit per-depositor/per-bank/per-category reference."
+    },
+    {
+      "ids": [
+        "test-deposit-hk-zh-0"
+      ],
+      "finding": "Invents an increase from 2026-11-01, whereas the supplied snapshot explicitly says raised from 2024-10-01. Also changes the reviewed snapshot date."
+    },
+    {
+      "ids": [
+        "test-deposit-hk-en-0"
+      ],
+      "finding": "Says the scheme was introduced 2024-10-01 (the reference says protection limit was raised then), and claims savings accounts are not covered without source support. The official DPS FAQ states the scheme commenced 2006-09-25."
+    }
+  ],
+  "external_crosscheck": [
+    {
+      "url": "https://www.dps.org.hk/en/for-depositors/faqs/",
+      "observation": "Official FAQ says scheme commenced 25 September 2006; current maximum HK$800,000; protected products depend on deposit and Scheme membership. This checks an illustrative baseline error, not all 24 outputs."
+    }
+  ],
+  "limits": [
+    "Source copying can preserve a stale or incorrect reference.",
+    "Questions vary wording but ask the same broad explanation; more specific or adversarial requests were not evaluated here.",
+    "Do not convert these observations into 100% general financial accuracy or a claim of superiority over DeepSeek."
+  ]
+}

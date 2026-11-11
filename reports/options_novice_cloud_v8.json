@@ -1,0 +1,299 @@
+{
+  "checked_at": "2026-11-11T03:14:20.814658+00:00",
+  "status": "passed",
+  "scope": "Synthetic inputs with actual DeepSeek",
+  "successful_reports": 2,
+  "failures": [],
+  "plain_brief": {
+    "title": "把几组期权放在一起看",
+    "headline": "本次收到 2 组资料，2 组可作带时点的样本解读。",
+    "scope": {
+      "groups": 2
+    },
+    "status": "descriptive",
+    "freshness": {
+      "mode": "delayed",
+      "label": "延迟资料",
+      "meaning": "各组按顺序采集，不能把它们当作同一瞬间的全市场画面。",
+      "tone": "attention",
+      "historical": false
+    },
+    "cards": [
+      {
+        "id": "batch_coverage",
+        "question": "这次比较的信息够完整吗？",
+        "answer": "收到的 2 组中，2 组至少一半合约有近期有效买卖报价。",
+        "meaning": "报价齐全程度只说明数据覆盖，不能当成预测正确率。成交和持仓资料可以有不同的覆盖范围。",
+        "evidence_ids": [
+          "comparison.report_1_quote_coverage",
+          "comparison.report_2_quote_coverage"
+        ],
+        "tone": "available",
+        "details": ""
+      },
+      {
+        "id": "batch_activity",
+        "question": "各组的交易构成有何不同？",
+        "answer": "在各自样本内，AAA / 2026-12-02 的看跌合约占成交 20%，BBB / 2026-12-02 为 71.4%。",
+        "meaning": "这是各自时点的比例对照。每组约定价格范围、标的和行情类型可能不同，不能据此把原始数量合并或判断哪个标的更看空。",
+        "evidence_ids": [
+          "g0.volume_put_share",
+          "g1.volume_put_share"
+        ],
+        "tone": "available",
+        "details": ""
+      },
+      {
+        "id": "batch_pricing",
+        "question": "不同到期日的价格该怎样比较？",
+        "answer": "这次没有满足比较条件的同标的到期日配对。",
+        "meaning": "不同公司、报价缺失或口径不一致时，不能把数字直接放在一起解释为期限变化。",
+        "evidence_ids": [],
+        "tone": "attention",
+        "details": ""
+      }
+    ],
+    "items": [
+      {
+        "symbol": "AAA",
+        "expiration": "2026-12-02",
+        "status": "descriptive",
+        "headline": "这次成交更偏向看涨合约，已有合约存量却更偏向看跌合约。",
+        "activity": "按比例折算，本次每 100 份样本成交合约中，约 20 份是看跌期权，80 份是看涨期权。",
+        "pricing": "按同一口径比较，这对合约中看跌一侧的相对定价更高。",
+        "freshness": {
+          "mode": "delayed",
+          "label": "延迟资料",
+          "meaning": "本机刚收到资料，也可能是较早的市场报价。请按这份带时间标记的样本阅读。",
+          "tone": "attention",
+          "received_at": "2026-11-11T03:14:11.974781+00:00",
+          "age_seconds": 8.839877,
+          "historical": false
+        },
+        "evidence_ids": [
+          "g0.volume_coverage",
+          "g0.volume_total",
+          "g0.volume_put_share",
+          "g0.volume_top_share",
+          "g0.skew_25_delta",
+          "g0.positioning_coverage",
+          "g0.common_volume_put_share",
+          "g0.common_oi_put_share",
+          "g0.positioning_gap"
+        ]
+      },
+      {
+        "symbol": "BBB",
+        "expiration": "2026-12-02",
+        "status": "descriptive",
+        "headline": "这次成交与已有合约存量，在构成上都更偏向看跌合约。",
+        "activity": "按比例折算，本次每 100 份样本成交合约中，约 71.4 份是看跌期权，28.6 份是看涨期权。",
+        "pricing": "按同一口径比较，这对合约中看跌一侧的相对定价更高。",
+        "freshness": {
+          "mode": "delayed",
+          "label": "延迟资料",
+          "meaning": "本机刚收到资料，也可能是较早的市场报价。请按这份带时间标记的样本阅读。",
+          "tone": "attention",
+          "received_at": "2026-11-11T03:14:11.976779+00:00",
+          "age_seconds": 8.837879,
+          "historical": false
+        },
+        "evidence_ids": [
+          "g1.volume_coverage",
+          "g1.volume_total",
+          "g1.volume_put_share",
+          "g1.volume_top_share",
+          "g1.skew_25_delta",
+          "g1.positioning_coverage",
+          "g1.common_volume_put_share",
+          "g1.common_oi_put_share",
+          "g1.positioning_gap"
+        ]
+      }
+    ],
+    "next_steps": [
+      "逐组确认到期日、行情类型和采集时间，再比较比例。",
+      "点开结论旁的依据，核对它属于哪个标的和到期日。"
+    ],
+    "glossary": [
+      {
+        "term": "看涨期权 / 看跌期权",
+        "meaning": "分别赋予按约定价格买入或卖出标的的权利；一份成交合约同时有买方和卖方。"
+      },
+      {
+        "term": "成交量",
+        "meaning": "一段时间内交易的合约数量；每笔成交都有买方和卖方，计数不会直接告诉你谁主动买入。"
+      },
+      {
+        "term": "到期日",
+        "meaning": "合约权利终止的日期。每组报告只分析选定到期日的期权。"
+      },
+      {
+        "term": "行权价",
+        "meaning": "合约事先约定的买入或卖出价格。它与股票当前价格不同。"
+      },
+      {
+        "term": "未平仓量",
+        "meaning": "尚未结清的合约总数，按独立的统计周期更新。"
+      },
+      {
+        "term": "隐含波动率（IV）",
+        "meaning": "从期权价格折算出的波动定价指标，通常按年表示；它本身不指明上涨或下跌方向。"
+      },
+      {
+        "term": "买卖价差",
+        "meaning": "当前卖方要价与买方出价的距离。差距越大，屏幕上的价格越难代表一个确定可成交的价格。"
+      }
+    ],
+    "evidence_ids": [
+      "g0.volume_coverage",
+      "g0.volume_total",
+      "g0.volume_put_share",
+      "g0.volume_top_share",
+      "g0.skew_25_delta",
+      "g0.positioning_coverage",
+      "g0.common_volume_put_share",
+      "g0.common_oi_put_share",
+      "g0.positioning_gap",
+      "g1.volume_coverage",
+      "g1.volume_total",
+      "g1.volume_put_share",
+      "g1.volume_top_share",
+      "g1.skew_25_delta",
+      "g1.positioning_coverage",
+      "g1.common_volume_put_share",
+      "g1.common_oi_put_share",
+      "g1.positioning_gap",
+      "comparison.report_1_quote_coverage",
+      "comparison.report_2_quote_coverage"
+    ]
+  },
+  "interpretation": {
+    "status": "ok",
+    "model": "deepseek-flash",
+    "report": {
+      "summary": {
+        "text": "本批样本包含两个匿名组 AAA（2026-12-02） 与 BBB（2026-12-02），均为延迟数据，只能做描述性快照。最突出的对比是：AAA（2026-12-02） 的成交以看涨合约为主，而尚未结清的合约以看跌合约为主；BBB（2026-12-02） 的成交与尚未结清的合约都偏向看跌合约。两组报价覆盖都完整，买卖价差中位数相同，平值两侧平均隐含波动率也相同，但成交的行权价集中形状差别很大。这些只是结构差异，不能说明谁更看涨或看跌，也不能推断未来价格。",
+        "evidence_ids": [
+          "g0.volume_put_share",
+          "g0.oi_put_share",
+          "g1.volume_put_share",
+          "g1.oi_put_share",
+          "g0.volume_hhi",
+          "g1.volume_hhi",
+          "g0.atm_iv",
+          "g1.atm_iv"
+        ]
+      },
+      "observations": [
+        {
+          "text": "观察：AAA（2026-12-02） 的成交中看跌合约占比很小，但尚未结清的合约中看跌占比明显更高，两者方向相反。解释上，成交量是期间累计，尚未结清的合约有独立报告周期，二者不能直接相减来推断新开仓或平仓，因此这个差距只说明两个统计口径下的结构不同。",
+          "evidence_ids": [
+            "g0.volume_put_share",
+            "g0.oi_put_share",
+            "g0.positioning_gap",
+            "g0.common_volume_put_share",
+            "g0.common_oi_put_share"
+          ]
+        },
+        {
+          "text": "观察：AAA（2026-12-02） 的成交高度集中在少数行权价，最大一档和前两档合计占比都很高，成交集中度指标也高；而它的尚未结清合约分布更分散，集中度指标低得多。解释上，这表示成交活跃的行权价与尚未结清合约较多的行权价在集中形状上不同，但集中形状不揭示具体峰值行权价，也不能断言两者位置不同或相同。",
+          "evidence_ids": [
+            "g0.volume_top_share",
+            "g0.volume_top_two_share",
+            "g0.volume_hhi",
+            "g0.oi_top_share",
+            "g0.oi_top_two_share",
+            "g0.oi_hhi"
+          ]
+        },
+        {
+          "text": "观察：BBB（2026-12-02） 的成交与尚未结清的合约都偏向看跌合约，两者占比接近，方向一致；其成交集中度与尚未结清合约集中度都处于较分散的形状。解释上，这描述的是该组内部成交与尚未结清合约的结构较为一致，不代表看跌合约数量多就代表悲观人数多，看跌只是合约类型。",
+          "evidence_ids": [
+            "g1.volume_put_share",
+            "g1.oi_put_share",
+            "g1.positioning_gap",
+            "g1.volume_hhi",
+            "g1.oi_hhi"
+          ]
+        },
+        {
+          "text": "观察：两组双边报价覆盖都完整，买卖价差中位数相同，平值两侧平均隐含波动率相同，平值跨式权利金占比也相同；但两组的看跌成交占比差别很大。解释上，这属于不同标的或到期结构下的并存现象，不能据此说定价应当分化或应当一致，也不能把差异主要归因于成交活跃度、报价条件或时间采样。",
+          "evidence_ids": [
+            "g0.liquidity_coverage",
+            "g1.liquidity_coverage",
+            "g0.median_spread",
+            "g1.median_spread",
+            "g0.atm_iv",
+            "g1.atm_iv",
+            "g0.atm_straddle_pct",
+            "g1.atm_straddle_pct",
+            "g0.volume_put_share",
+            "g1.volume_put_share"
+          ]
+        }
+      ],
+      "conflicts": [],
+      "scenarios": [
+        {
+          "condition": "如果后续取得同一标的、同一到期顺序下更完整的行权价窗口，并确认成交与尚未结清合约是否落在相同行权价上",
+          "implication": "届时可重新评估 AAA（2026-12-02） 中成交偏看涨合约、尚未结清合约偏看跌合约这一结构差异是口径造成的，还是确实存在于不同行权价上；在此之前只能保留为未验证的可能性。",
+          "evidence_ids": [
+            "g0.volume_put_share",
+            "g0.oi_put_share",
+            "g0.volume_hhi",
+            "g0.oi_hhi"
+          ]
+        },
+        {
+          "condition": "如果后续获得带时间戳的同步报价，以及区分主动方与开平仓方向的成交明细",
+          "implication": "届时可重新评估 BBB（2026-12-02） 成交与尚未结清合约方向一致这一观察是否稳定，并检验当前顺序采集是否影响对比；当前数据不能支持这类推断。",
+          "evidence_ids": [
+            "g1.volume_put_share",
+            "g1.oi_put_share",
+            "g1.positioning_gap"
+          ]
+        }
+      ],
+      "limitations": [
+        "两组均为延迟数据，只能做描述性快照分析，不能用于实时判断。",
+        "报价按顺序采集而非同时采集，组间对比可能受采集时点影响。",
+        "只提供集中形状，不揭示具体峰值行权价，也无法判断成交与尚未结清合约的行权价是否重合或分离。",
+        "成交量是期间累计，尚未结清的合约有独立报告周期，二者不能揭示新开仓或平仓，也不能标注主动买卖方。",
+        "每笔成交都有买方和卖方，成交占比不代表乐观或悲观人数。",
+        "集中度不能用来推断支撑阻力、做市商持仓、伽马暴露或最大痛点。",
+        "缺少明确基线，不能称任何价差、隐含波动率或活跃度为历史高、低或异常。",
+        "不同组可能对应不同标的或到期，不能合并总数，也不能据此推断新闻情绪、未来价格或概率，本分析不构成交易建议。"
+      ]
+    },
+    "text": "本批样本包含两个匿名组 AAA（2026-12-02） 与 BBB（2026-12-02），均为延迟数据，只能做描述性快照。最突出的对比是：AAA（2026-12-02） 的成交以看涨合约为主，而尚未结清的合约以看跌合约为主；BBB（2026-12-02） 的成交与尚未结清的合约都偏向看跌合约。两组报价覆盖都完整，买卖价差中位数相同，平值两侧平均隐含波动率也相同，但成交的行权价集中形状差别很大。这些只是结构差异，不能说明谁更看涨或看跌，也不能推断未来价格。\n\n观察：AAA（2026-12-02） 的成交中看跌合约占比很小，但尚未结清的合约中看跌占比明显更高，两者方向相反。解释上，成交量是期间累计，尚未结清的合约有独立报告周期，二者不能直接相减来推断新开仓或平仓，因此这个差距只说明两个统计口径下的结构不同。\n\n观察：AAA（2026-12-02） 的成交高度集中在少数行权价，最大一档和前两档合计占比都很高，成交集中度指标也高；而它的尚未结清合约分布更分散，集中度指标低得多。解释上，这表示成交活跃的行权价与尚未结清合约较多的行权价在集中形状上不同，但集中形状不揭示具体峰值行权价，也不能断言两者位置不同或相同。\n\n观察：BBB（2026-12-02） 的成交与尚未结清的合约都偏向看跌合约，两者占比接近，方向一致；其成交集中度与尚未结清合约集中度都处于较分散的形状。解释上，这描述的是该组内部成交与尚未结清合约的结构较为一致，不代表看跌合约数量多就代表悲观人数多，看跌只是合约类型。\n\n观察：两组双边报价覆盖都完整，买卖价差中位数相同，平值两侧平均隐含波动率相同，平值跨式权利金占比也相同；但两组的看跌成交占比差别很大。解释上，这属于不同标的或到期结构下的并存现象，不能据此说定价应当分化或应当一致，也不能把差异主要归因于成交活跃度、报价条件或时间采样。\n\n如果后续取得同一标的、同一到期顺序下更完整的行权价窗口，并确认成交与尚未结清合约是否落在相同行权价上 届时可重新评估 AAA（2026-12-02） 中成交偏看涨合约、尚未结清合约偏看跌合约这一结构差异是口径造成的，还是确实存在于不同行权价上；在此之前只能保留为未验证的可能性。\n\n如果后续获得带时间戳的同步报价，以及区分主动方与开平仓方向的成交明细 届时可重新评估 BBB（2026-12-02） 成交与尚未结清合约方向一致这一观察是否稳定，并检验当前顺序采集是否影响对比；当前数据不能支持这类推断。\n\n两组均为延迟数据，只能做描述性快照分析，不能用于实时判断。\n\n报价按顺序采集而非同时采集，组间对比可能受采集时点影响。\n\n只提供集中形状，不揭示具体峰值行权价，也无法判断成交与尚未结清合约的行权价是否重合或分离。\n\n成交量是期间累计，尚未结清的合约有独立报告周期，二者不能揭示新开仓或平仓，也不能标注主动买卖方。\n\n每笔成交都有买方和卖方，成交占比不代表乐观或悲观人数。\n\n集中度不能用来推断支撑阻力、做市商持仓、伽马暴露或最大痛点。\n\n缺少明确基线，不能称任何价差、隐含波动率或活跃度为历史高、低或异常。\n\n不同组可能对应不同标的或到期，不能合并总数，也不能据此推断新闻情绪、未来价格或概率，本分析不构成交易建议。",
+    "evidence": [
+      "g0.atm_iv",
+      "g0.atm_straddle_pct",
+      "g0.common_oi_put_share",
+      "g0.common_volume_put_share",
+      "g0.liquidity_coverage",
+      "g0.median_spread",
+      "g0.oi_hhi",
+      "g0.oi_put_share",
+      "g0.oi_top_share",
+      "g0.oi_top_two_share",
+      "g0.positioning_gap",
+      "g0.volume_hhi",
+      "g0.volume_put_share",
+      "g0.volume_top_share",
+      "g0.volume_top_two_share",
+      "g1.atm_iv",
+      "g1.atm_straddle_pct",
+      "g1.liquidity_coverage",
+      "g1.median_spread",
+      "g1.oi_hhi",
+      "g1.oi_put_share",
+      "g1.positioning_gap",
+      "g1.volume_hhi",
+      "g1.volume_put_share"
+    ],
+    "basis": "descriptive_snapshot",
+    "generated_at": "2026-11-11T03:14:20.814658+00:00"
+  }
+}

@@ -1,0 +1,103 @@
+{
+  "trained": true,
+  "base_model_id": "Qwen/Qwen3-0.6B",
+  "base_revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+  "started_at": "2026-11-10T09:42:04.151385+00:00",
+  "completed_at": "2026-11-10T09:45:05.645101+00:00",
+  "steps": 108,
+  "microsteps": 432,
+  "adapter_sha256": "5b8b9c5ea3e75d0c86fdc05189b617fcd2f9fb84d7637beffa1a661d68fb9d0a",
+  "adapter_bytes": 9204512,
+  "method": "LoRA supervised fine-tuning with assistant-only loss",
+  "lora_rank": 8,
+  "lora_alpha": 16,
+  "target_modules": [
+    "q_proj",
+    "k_proj",
+    "v_proj",
+    "o_proj"
+  ],
+  "epochs": 3,
+  "learning_rate": 0.0002,
+  "gradient_accumulation_steps": 4,
+  "batch_size": 1,
+  "max_sequence_length": 512,
+  "enable_thinking": false,
+  "trainable_parameters": 2293760,
+  "total_parameters_with_adapter": 598343680,
+  "trainable_percent": 0.383352,
+  "dataset": {
+    "provenance": "Project-authored prompts and reference-based target answers; no user conversations or external teacher API outputs.",
+    "corpus_sha256": "cab12acbd6851951f9f46d446d68b424e24bbdd760857fe9a694fcb5e0c6b0ec",
+    "split_strategy": "18 disjoint knowledge topic groups: 12 train, 3 validation, 3 test. Both languages of one topic stay in one split.",
+    "limitations": "Small author-curated experiment. Held-out topics still come from the same public knowledge corpus; not an independent finance benchmark.",
+    "splits": {
+      "train": {
+        "examples": 144,
+        "groups": [
+          "diversification",
+          "risk-tolerance",
+          "compound-interest",
+          "loan-amortization",
+          "budgeting",
+          "emergency-fund",
+          "inflation",
+          "investment-fees",
+          "bond-rate-risk",
+          "phishing",
+          "credit-score",
+          "stock-basics"
+        ],
+        "sha256": "ee918df84db9e430da3c1b22fca4de95c49dc2bcba42ee39b70c144a0359c1d1"
+      },
+      "validation": {
+        "examples": 12,
+        "groups": [
+          "effective-yield",
+          "etf-basics",
+          "financial-ratios"
+        ],
+        "sha256": "fe2498fe475e0bffa3168d6e8be861a064ef182cc651cf244053be203bd57526"
+      },
+      "test": {
+        "examples": 12,
+        "groups": [
+          "deposit-us",
+          "deposit-hk",
+          "financial-statements"
+        ],
+        "sha256": "2056ff27867ea68a9490f7da256066dcf6889562e7f873ab2e2c0464cb6a7cfb"
+      }
+    }
+  },
+  "duration_seconds": 181.51,
+  "peak_gpu_allocated_mib": 1912.63,
+  "hardware": {
+    "gpu": "NVIDIA GeForce RTX 4070 Laptop GPU",
+    "gpu_total_mib": 8188,
+    "python": "3.11.7",
+    "torch": "2.7.1+cu128"
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "train_mean_example_loss": 0.3705204861843312,
+      "validation_mean_example_loss": 0.002575908375244277,
+      "optimizer_steps": 36
+    },
+    {
+      "epoch": 2,
+      "train_mean_example_loss": 0.0003937616578089849,
+      "validation_mean_example_loss": 0.0015462933855208878,
+      "optimizer_steps": 72
+    },
+    {
+      "epoch": 3,
+      "train_mean_example_loss": 0.00014534569325203646,
+      "validation_mean_example_loss": 0.0014132991076015362,
+      "optimizer_steps": 108
+    }
+  ],
+  "limits": "Small author-curated behaviour adaptation experiment, not a guarantee of financial factual accuracy and not a DeepSeek fine-tune.",
+  "license": "Apache-2.0 (base model and derived adapter; official base LICENSE included)"
+}

@@ -1,0 +1,49 @@
+{
+  "scope": "Sanitized audit of historical capability and model validation; all counts are bounded application-reported attempts, not an independent provider billing audit.",
+  "events": [
+    {
+      "checked_at": "2026-11-11T07:47:29.966925+00:00",
+      "kind": "actual_historical_probe",
+      "status": "passed",
+      "history_requests": 3,
+      "model_requests": 0,
+      "evidence": "reports/ibkr_history_probe_v13.json"
+    },
+    {
+      "kind": "first_actual_production_and_edge_workflow",
+      "status": "failed",
+      "phase": "turn_1_reply_validation",
+      "historical_capture": "succeeded",
+      "server_reported_history_requests": 3,
+      "server_reported_generation_attempts": 2,
+      "server_reported_schema_repair_attempts": 1,
+      "second_chat_turn_sent": false,
+      "original_archive": "tmp/history-cloud-v13-failed-20261111-161248.json"
+    },
+    {
+      "kind": "saved_actual_snapshot_diagnostic_replay",
+      "status": "failed",
+      "history_requests": 0,
+      "session_mutations": 0,
+      "generation_attempts": 2,
+      "schema_repair_attempts": 1,
+      "confirmed_issue": "Strict qualitative formatting rejected quantity wording. An exact relational identity phrase was subsequently normalized narrowly; quantities and unknown citations remain checked. Offline edited-output checks were not counted as live success."
+    },
+    {
+      "checked_at": "2026-11-11T08:13:32.105752+00:00",
+      "kind": "final_actual_production_and_edge_workflow",
+      "status": "passed_limited",
+      "workflow_status": "passed",
+      "server_reported_history_requests": 3,
+      "confirmed_deepseek_replies": 2,
+      "server_reported_generation_attempts": 2,
+      "server_reported_schema_repair_attempts": 0,
+      "evidence": "reports/history_cloud_v13.json"
+    }
+  ],
+  "remaining_limits": [
+    "Returned intraday bars are not independent exchange calibration or verified complete-session coverage.",
+    "Historical OI and per-contract IV/Greeks are missing; historical review does not establish current sentiment.",
+    "Valid cited IDs do not prove sentence-level citation entailment; the final report records a concrete partial-alignment example."
+  ]
+}

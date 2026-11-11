@@ -1,0 +1,50 @@
+{
+  "checked_at": "2026-11-11T06:04:58.371278+00:00",
+  "status": "passed",
+  "viewports": [
+    {
+      "width": 320,
+      "height": 740,
+      "page_errors": [],
+      "intercepted_api_calls": 17,
+      "real_broker_calls": 0,
+      "model_requests": 0
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "page_errors": [],
+      "intercepted_api_calls": 17,
+      "real_broker_calls": 0,
+      "model_requests": 0
+    },
+    {
+      "width": 1440,
+      "height": 1000,
+      "page_errors": [],
+      "intercepted_api_calls": 17,
+      "real_broker_calls": 0,
+      "model_requests": 0
+    }
+  ],
+  "scope": "All API traffic intercepted with synthetic responses. This checks presentation of provider facts, not actual entitlement or exchange-data availability.",
+  "checks": [
+    "close_reference_is_not_current_executable_quote",
+    "closing_date_and_unknown_trade_time_are_not_inferred",
+    "last_trade_time_is_separate_from_local_receipt",
+    "close_is_not_copied_into_bid_ask_or_last",
+    "successful_snapshot_has_optional_diagnostic_records",
+    "delayed_type_without_quotes_is_explicit",
+    "explicit_denial_does_not_claim_all_data_denied",
+    "no_callbacks_does_not_invent_entitlement_or_adapter_fault",
+    "broker_codes_tick_types_counts_and_time_basis_are_visible",
+    "partial_subscription_10090_preserves_received_fields_and_does_not_claim_total_denial",
+    "failed_analysis_retains_previous_snapshot_with_explicit_old_label",
+    "batch_failure_diagnostics_identify_symbol",
+    "legacy_reports_work_without_diagnostics",
+    "refresh_failure_retains_active_snapshot_messages_and_draft",
+    "chinese_english_diagnostics",
+    "no_automatic_model_request",
+    "mobile_containment"
+  ]
+}

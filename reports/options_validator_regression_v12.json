@@ -1,0 +1,11 @@
+{
+  "checked_at": "2026-11-11T06:29:19.736440+00:00",
+  "status": "passed",
+  "source": "reports/ibkr_browser_live_v12.json",
+  "source_checked_at": "2026-11-11T06:21:17.503879+00:00",
+  "scope": "Offline final claim-guard compatibility check over the exact final live answer excerpts. It does not rerun the full model-output schema parser or make market/model requests.",
+  "paragraphs_checked": 13,
+  "false_positive_blocks": 0,
+  "external_calls": 0,
+  "post_live_hardening": "Limited negation handling was further corrected for negated return guarantees and English cannot-ignore market assertions; 13 additional positive/negative unit tests cover these boundaries. Numeric-format rules were unchanged."
+}

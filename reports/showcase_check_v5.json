@@ -1,0 +1,153 @@
+{
+  "status": "passed",
+  "checked_at": "2026-11-11T01:49:21.636643+00:00",
+  "browser": "Microsoft Edge, headless",
+  "base": "http://127.0.0.1:8000",
+  "checks": [
+    "same_origin_reference_video_is_decoded_and_autoplays_muted_inline",
+    "five_ordered_intro_transitions_observed_in_browser",
+    "mobile_menu_keyboard_focus_and_exit_animated",
+    "global_motion_control_pauses_and_resumes_video",
+    "hero_links_to_story_and_workbench",
+    "four_story_steps_remain_interactive",
+    "citations_match_local_curated_sources",
+    "calculator_updates_from_real_api_after_keyboard_input",
+    "mentor_can_switch_to_2d",
+    "actual_workspace_deep_links_open_tools_and_prompt_without_chat",
+    "reduced_motion_uses_static_hero_and_dark_os_keeps_light_appearance",
+    "responsive_layout_at_seven_widths_and_1024px_navigation_breakpoint",
+    "mobile_menu_keyboard_focus_and_exit_reduced_motion",
+    "failed_video_reveals_functional_static_hero",
+    "video_timeout_reveals_functional_static_hero",
+    "late_media_recovers_without_restarting_intro",
+    "javascript_disabled_keeps_readable_static_entry",
+    "no_unhandled_errors_remote_resources_or_chat_calls"
+  ],
+  "layouts": [
+    {
+      "width": 320,
+      "height": 568,
+      "hero_height": 568,
+      "hero": "passed",
+      "planning": "passed"
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "hero_height": 844,
+      "hero": "passed",
+      "planning": "passed"
+    },
+    {
+      "width": 768,
+      "height": 1024,
+      "hero_height": 1024,
+      "hero": "passed",
+      "planning": "passed"
+    },
+    {
+      "width": 1023,
+      "height": 900,
+      "hero_height": 900,
+      "hero": "passed",
+      "planning": "passed"
+    },
+    {
+      "width": 1024,
+      "height": 900,
+      "hero_height": 900,
+      "hero": "passed",
+      "planning": "passed"
+    },
+    {
+      "width": 1440,
+      "height": 1000,
+      "hero_height": 1000,
+      "hero": "passed",
+      "planning": "passed"
+    },
+    {
+      "width": 1920,
+      "height": 1080,
+      "hero_height": 1080,
+      "hero": "passed",
+      "planning": "passed"
+    }
+  ],
+  "page_errors": [],
+  "normal_console_errors": [],
+  "controlled_fault_console_errors": {
+    "failed_video": [
+      "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    ],
+    "video_timeout": []
+  },
+  "external_runtime_requests": [],
+  "chat_requests": [],
+  "intro_observation_ms": {
+    "groups": {
+      "header": {
+        "initial": {
+          "opacity": 0,
+          "y": -40
+        },
+        "firstVisible": 144.20000004768372,
+        "settled": 1055.9000000953674
+      },
+      "eyebrow": {
+        "initial": {
+          "opacity": 0,
+          "y": 48
+        },
+        "firstVisible": 243.30000019073486,
+        "settled": 1155.8000001907349
+      },
+      "heading": {
+        "initial": {
+          "opacity": 0,
+          "y": 48
+        },
+        "firstVisible": 353.10000014305115,
+        "settled": 1255.9000000953674
+      },
+      "description": {
+        "initial": {
+          "opacity": 0,
+          "y": 48
+        },
+        "firstVisible": 443.30000019073486,
+        "settled": 1355.8000001907349
+      },
+      "actions": {
+        "initial": {
+          "opacity": 0,
+          "y": 48
+        },
+        "firstVisible": 543.3000001907349,
+        "settled": 1455.8000001907349
+      }
+    },
+    "videoReady": 398.7999999523163,
+    "start": 398.7999999523163,
+    "ready": 1539.2000000476837
+  },
+  "failed_video_seconds_to_visible": 1.87,
+  "video_timeout_seconds_to_visible": 4.35,
+  "total": 18,
+  "duration_seconds": 18.19,
+  "sha256": {
+    "frontend/src/App.tsx": "cb5e27886e08a90fa9d9dc7c905e680e36ecedcd9bba427dc8126eac42b9ade1",
+    "frontend/src/styles.css": "99b3e327ba4f730221703a8a3eed9ef622de00b9d75d5d843d8db63eee57e135",
+    "frontend/src/components/Hero.tsx": "7e23b418d03b65f4776fe28c2f9f7cdf6145d6fc683839910e6f98cbdf09269f",
+    "frontend/src/components/hero.css": "d243aa424f217ba576f6781742e0082ee80495119c5932292ed2e3f90ab13146",
+    "web/showcase/index.html": "97f2b1c19579d07f5ea0b7c6e209c96514daa44fbc90c310b1261cffe044ceb6",
+    "web/showcase/media/reference-motion.mp4": "8439ecb6330b5c7b59ccacd92eef966c3d5719d72204c3f45d7a4a18aa2575ec"
+  },
+  "screenshots": [
+    "reports/screenshots/showcase-v5/hero-desktop.png",
+    "reports/screenshots/showcase-v5/hero-mobile.png",
+    "reports/screenshots/showcase-v5/mobile-menu.png",
+    "reports/screenshots/showcase-v5/static-dark-os.png",
+    "reports/screenshots/showcase-v5/video-fallback.png"
+  ]
+}

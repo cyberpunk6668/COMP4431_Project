@@ -1,0 +1,31 @@
+{
+  "checked_at": "2026-11-11T05:31:20.252616+00:00",
+  "status": "failed",
+  "turns": [],
+  "checks": [],
+  "scope": "Actual local IB Gateway acceptance, requested as delayed: attempt an initial AAPL collection, then one explicit refresh and one real DeepSeek explanation only if collection succeeds. Actual attempt/success/model counters below determine what completed.",
+  "privacy": "Temporary isolated database. Reports contain safe aggregate comparisons and controlled answer excerpts only; no keys, account fields, session IDs, raw quotes or prompts. Safe provider response diagnostics remain in tmp/ and must not be submitted.",
+  "transport": "FastAPI TestClient plus actual external DeepSeek HTTPS",
+  "automatic_retries": 0,
+  "model": "deepseek-flash",
+  "error_type": "AssertionError",
+  "error_code": "Unexpected HTTP status 424 for /api/options/analyze; code=ibkr_entitlement_missing",
+  "real_model_requests": 0,
+  "collection_attempts": [
+    {
+      "symbol": "AAPL",
+      "expiry": null,
+      "strike_count": 3,
+      "requested_market_data_type": 3
+    }
+  ],
+  "provider_validation": [],
+  "collection_attempt_count": 1,
+  "successful_collection_count": 0,
+  "ibkr_collection_attempts": 1,
+  "classification_review": {
+    "original_response_preserved": true,
+    "review": "The original response classified missing ticks as entitlement_missing. A later delayed-frozen read-only diagnostic recorded only delayed advisory 10167 plus informational farm codes, not a confirmed hard refusal of delayed access. The adapter now distinguishes these cases in explicit delayed modes; six unit tests cover that correction. This historical run has not been relabeled as a new-code live success."
+  },
+  "actual_gateway_refresh_verified": false
+}

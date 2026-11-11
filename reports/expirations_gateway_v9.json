@@ -1,0 +1,45 @@
+{
+  "checked_at": "2026-11-11T04:34:05.001485+00:00",
+  "scope": "Actual local IBKR contract metadata, no model request",
+  "metadata": {
+    "source": "ibkr",
+    "symbol": "AAPL",
+    "expirations": [
+      "2026-11-11",
+      "2026-11-13",
+      "2026-11-16",
+      "2026-11-18",
+      "2026-11-20",
+      "2026-11-23",
+      "2026-11-25",
+      "2026-11-27",
+      "2026-12-04",
+      "2026-12-11",
+      "2026-12-18",
+      "2026-12-24",
+      "2027-01-15",
+      "2027-02-19",
+      "2027-03-19",
+      "2027-04-16",
+      "2027-06-17",
+      "2027-09-17",
+      "2027-12-17",
+      "2028-01-21",
+      "2028-03-17",
+      "2028-06-16",
+      "2028-12-15",
+      "2029-01-19"
+    ],
+    "trading_class": "AAPL",
+    "currency": "USD",
+    "date_kind": "expiration",
+    "timezone": "America/New_York",
+    "as_of": "2026-11-11T04:34:05.464519+00:00"
+  },
+  "invalid_date": {
+    "requested": "2026-11-12",
+    "code": "ibkr_expiration_unavailable",
+    "choices_match_metadata": true
+  },
+  "status": "passed"
+}

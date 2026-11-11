@@ -1,0 +1,49 @@
+{
+  "checked_at": "2026-11-10T09:57:31.293294+00:00",
+  "file": "output/presentations/FinPilot_Demo_EN_v2.pptx",
+  "sha256": "dd643b7aa25604f1ad2eb7e5e9d91fafa4391aaf2b4f8a7ba79e02ce893e706e",
+  "status": "passed",
+  "slide_count": 10,
+  "all_final_slides_rendered_and_visually_reviewed": true,
+  "previews": [
+    "tmp/presentations-v2/final-1.png",
+    "tmp/presentations-v2/final-2.png",
+    "tmp/presentations-v2/final-3.png",
+    "tmp/presentations-v2/final-4.png",
+    "tmp/presentations-v2/final-5.png",
+    "tmp/presentations-v2/final-6.png",
+    "tmp/presentations-v2/final-7.png",
+    "tmp/presentations-v2/final-8.png",
+    "tmp/presentations-v2/final-9.png",
+    "tmp/presentations-v2/final-10.png"
+  ],
+  "template_font": "Arial",
+  "template_size_emu": [
+    12192000,
+    6858000
+  ],
+  "original_file_preserved_sha256": "1b033a1113422fcc2fd9d498f3754afa642523cc31c7d769c59c3ebf75d13965",
+  "source_chart_parts_preserved_byte_for_byte": {
+    "ppt/slides/charts/chart1.xml": true,
+    "ppt/slides/charts/_rels/chart1.xml.rels": true,
+    "ppt/embeddings/chart-data-snapshot-001.xlsx": true
+  },
+  "embedded_png_images": 5,
+  "embedded_workbook_count": 2,
+  "chart_owner_slides": [
+    5,
+    9
+  ],
+  "facts_checked_against": [
+    "reports/finetuning_training.json",
+    "reports/finetuning_evaluation.json",
+    "reports/local_integration.json",
+    "reports/tests_v2.xml",
+    "reports/browser_check_v2.json",
+    "reports/ui_v2_check.json",
+    "reports/avatar_check.json"
+  ],
+  "metrics_scope": "Citation/section/disclaimer regex rates under supplied evidence; not financial accuracy or DeepSeek comparison. Rates in native chart rounded to one decimal percentage point.",
+  "native_powerpoint_opening_verified": false,
+  "visual_findings": []
+}

@@ -1,0 +1,27 @@
+{"status": "evaluating_base", "test_examples": 12}
+F:\桌面\COMP4431_Project\.venv-ml\Lib\site-packages\transformers\generation\configuration_utils.py:631: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.6` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`.
+  warnings.warn(
+F:\桌面\COMP4431_Project\.venv-ml\Lib\site-packages\transformers\generation\configuration_utils.py:636: UserWarning: `do_sample` is set to `False`. However, `top_p` is set to `0.95` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `top_p`.
+  warnings.warn(
+F:\桌面\COMP4431_Project\.venv-ml\Lib\site-packages\transformers\generation\configuration_utils.py:653: UserWarning: `do_sample` is set to `False`. However, `top_k` is set to `20` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `top_k`.
+  warnings.warn(
+{"status": "evaluating_adapter", "base_loss": 1.44112432996432}
+{
+  "status": "completed",
+  "baseline_loss": 1.44112432996432,
+  "finetuned_loss": 0.004210581867179523,
+  "baseline_metrics": {
+    "expected_citation_present_rate": 0.6666666666666666,
+    "no_unknown_citation_ids_rate": 1.0,
+    "three_section_format_rate": 0.0,
+    "educational_disclaimer_present_rate": 0.0,
+    "terminated_with_eos_rate": 1.0
+  },
+  "finetuned_metrics": {
+    "expected_citation_present_rate": 1.0,
+    "no_unknown_citation_ids_rate": 1.0,
+    "three_section_format_rate": 1.0,
+    "educational_disclaimer_present_rate": 1.0,
+    "terminated_with_eos_rate": 1.0
+  }
+}

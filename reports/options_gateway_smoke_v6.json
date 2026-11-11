@@ -1,0 +1,113 @@
+{
+  "checked_at": "2026-11-11T02:10:45.419063+00:00",
+  "scope": "Actual configured local IB Gateway. No LLM request or recorded raw market data.",
+  "gateway": {
+    "provider": "ibkr",
+    "enabled": true,
+    "dependency_installed": true,
+    "endpoint": "127.0.0.1:4002",
+    "tcp_reachable": true,
+    "requested_market_data_type": 1,
+    "status": "tcp_ready"
+  },
+  "attempts": [
+    {
+      "symbol": "AAPL",
+      "requested_market_data_type": 1,
+      "outcome": "broker_request_failed",
+      "code": "ibkr_entitlement_missing",
+      "detail": "IBKR did not provide the requested data entitlement. Check stock and US option subscriptions or request delayed data explicitly."
+    },
+    {
+      "symbol": "AAPL",
+      "requested_market_data_type": 2,
+      "outcome": "broker_request_failed",
+      "code": "ibkr_entitlement_missing",
+      "detail": "IBKR did not provide the requested data entitlement. Check stock and US option subscriptions or request delayed data explicitly."
+    },
+    {
+      "symbol": "AAPL",
+      "requested_market_data_type": 3,
+      "outcome": "sample_received",
+      "expiration": "2026-11-11",
+      "quality": {
+        "market_data_status": "delayed",
+        "llm_eligible": false,
+        "requested_contracts": 6,
+        "received_contracts": 6,
+        "valid_quote_contracts": 0,
+        "fresh_live_quote_contracts": 0,
+        "quote_coverage": 0.0,
+        "fresh_live_paired_strikes": 0,
+        "fresh_live_pair_coverage": 0.0,
+        "freshness_seconds": 30.0,
+        "underlying_fresh_live": false,
+        "observed_quote_modes": {
+          "delayed": 6
+        },
+        "excluded_out_of_scope_rows": 0,
+        "excluded_ambiguous_contracts": 0,
+        "reason_codes": [
+          "market_data_not_consistently_live",
+          "underlying_live_midpoint_unavailable",
+          "insufficient_fresh_live_pairs"
+        ]
+      },
+      "broker_codes": [
+        10090,
+        10167
+      ],
+      "available_metrics": [
+        "put_call_volume",
+        "put_call_open_interest"
+      ]
+    },
+    {
+      "symbol": "AAPL",
+      "requested_market_data_type": 4,
+      "outcome": "sample_received",
+      "expiration": "2026-11-11",
+      "quality": {
+        "market_data_status": "delayed",
+        "llm_eligible": false,
+        "requested_contracts": 6,
+        "received_contracts": 6,
+        "valid_quote_contracts": 0,
+        "fresh_live_quote_contracts": 0,
+        "quote_coverage": 0.0,
+        "fresh_live_paired_strikes": 0,
+        "fresh_live_pair_coverage": 0.0,
+        "freshness_seconds": 30.0,
+        "underlying_fresh_live": false,
+        "observed_quote_modes": {
+          "delayed": 6
+        },
+        "excluded_out_of_scope_rows": 0,
+        "excluded_ambiguous_contracts": 0,
+        "reason_codes": [
+          "market_data_not_consistently_live",
+          "underlying_live_midpoint_unavailable",
+          "insufficient_fresh_live_pairs"
+        ]
+      },
+      "broker_codes": [
+        10090,
+        10167
+      ],
+      "available_metrics": [
+        "put_call_volume",
+        "put_call_open_interest"
+      ]
+    }
+  ],
+  "http_browser_verification": {
+    "checked_at": "2026-11-11T02:16:02.450002+00:00",
+    "homepage_link_opens_options": true,
+    "actual_http_status": 200,
+    "market_data_status": "delayed",
+    "received_contracts": 6,
+    "valid_quote_contracts": 0,
+    "llm_status": "skipped",
+    "page_errors": 0
+  }
+}

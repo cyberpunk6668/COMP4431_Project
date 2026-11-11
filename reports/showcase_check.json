@@ -1,0 +1,186 @@
+{
+  "status": "passed",
+  "checked_at": "2026-11-10T10:45:15.754517+00:00",
+  "scope": "Actual Edge browser and local APIs. No chat requests, cloud billing, local LLM inference or simulated financial market data.",
+  "base": "http://127.0.0.1:8000",
+  "browser": "Microsoft Edge / Chromium (headless)",
+  "total": 24,
+  "checks": [
+    "built_homepage_and_readable_hero_under_real_csp",
+    "genuine_webgl2_hero_renderer",
+    "hero_animation_draws_frames",
+    "global_pause_stops_nonessential_motion",
+    "motion_resume_works",
+    "native_scroll_drives_four_stage_feature_story",
+    "evidence_links_match_curated_knowledge_metadata",
+    "offscreen_hero_rendering_stops",
+    "showcase_calculator_uses_verified_backend_result",
+    "calculator_keyboard_input_reaches_live_api",
+    "zero_balance_scenario_has_consistent_chart_endpoint",
+    "all_feature_chapters_remain_reachable",
+    "decorative_video_is_muted_inline_and_obeys_global_pause",
+    "all_workspace_ctas_resolve_to_the_actual_app",
+    "workspace_prompt_and_calculator_deep_links",
+    "workspace_knowledge_and_model_deep_links_without_generation",
+    "reduced_motion_renders_static_scene_and_readable_content",
+    "all_four_story_chapters_are_selectable_with_reduced_motion",
+    "six_responsive_sizes_without_horizontal_overflow",
+    "mobile_navigation_escape_focus_and_link_close",
+    "forced_webgl_failure_preserves_svg_hero_and_content",
+    "rendering_engine_chunk_failure_does_not_break_react_content",
+    "javascript_disabled_still_has_heading_and_workspace_link",
+    "no_page_errors_csp_errors_remote_runtime_requests_or_chat_calls"
+  ],
+  "layout_cases": [
+    {
+      "width": 320,
+      "hero": "passed",
+      "calculator": "passed"
+    },
+    {
+      "width": 390,
+      "hero": "passed",
+      "calculator": "passed"
+    },
+    {
+      "width": 768,
+      "hero": "passed",
+      "calculator": "passed"
+    },
+    {
+      "width": 1024,
+      "hero": "passed",
+      "calculator": "passed"
+    },
+    {
+      "width": 1440,
+      "hero": "passed",
+      "calculator": "passed"
+    },
+    {
+      "width": 1920,
+      "hero": "passed",
+      "calculator": "passed"
+    }
+  ],
+  "observations": {
+    "observed_hero_draws_in_650ms": 18,
+    "navigation_observation": {
+      "name": "http://127.0.0.1:8000/",
+      "entryType": "navigation",
+      "startTime": 0,
+      "duration": 888.4000000953674,
+      "navigationId": 3504,
+      "initiatorType": "navigation",
+      "deliveryType": "",
+      "nextHopProtocol": "http/1.1",
+      "renderBlockingStatus": "non-blocking",
+      "contentType": "text/html",
+      "contentEncoding": "",
+      "workerStart": 0,
+      "workerRouterEvaluationStart": 0,
+      "workerCacheLookupStart": 0,
+      "workerMatchedSourceType": "",
+      "workerFinalSourceType": "",
+      "redirectStart": 0,
+      "redirectEnd": 0,
+      "fetchStart": 1.1000001430511475,
+      "domainLookupStart": 1.1000001430511475,
+      "domainLookupEnd": 1.1000001430511475,
+      "connectStart": 1.1000001430511475,
+      "secureConnectionStart": 0,
+      "connectEnd": 1.1000001430511475,
+      "requestStart": 2.1000001430511475,
+      "responseStart": 4,
+      "firstInterimResponseStart": 0,
+      "finalResponseHeadersStart": 4,
+      "responseEnd": 4.700000047683716,
+      "transferSize": 2017,
+      "encodedBodySize": 1717,
+      "decodedBodySize": 1717,
+      "responseStatus": 200,
+      "serverTiming": [],
+      "unloadEventStart": 0,
+      "unloadEventEnd": 0,
+      "domInteractive": 10.400000095367432,
+      "domContentLoadedEventStart": 55.40000009536743,
+      "domContentLoadedEventEnd": 55.700000047683716,
+      "domComplete": 887.5,
+      "loadEventStart": 887.7000000476837,
+      "loadEventEnd": 888.4000000953674,
+      "type": "navigate",
+      "redirectCount": 0,
+      "activationStart": 0,
+      "criticalCHRestart": 0,
+      "notRestoredReasons": null,
+      "confidence": {
+        "randomizedTriggerRate": 0.4994798,
+        "value": "high"
+      }
+    },
+    "local_resource_bytes_observation": 4242740
+  },
+  "page_errors": [],
+  "console_errors": [],
+  "remote_runtime_requests": [],
+  "expected_fault_console_errors": [
+    "Failed to load resource: net::ERR_FAILED"
+  ],
+  "expected_fault_requests": [
+    "http://127.0.0.1:8000/static/showcase/assets/three-engine-DWzIwKT1.js"
+  ],
+  "forbidden_chat_requests": [],
+  "duration_seconds": 23.08,
+  "screenshots": [
+    "reports/screenshots/showcase/calculator-desktop.png",
+    "reports/screenshots/showcase/evidence-desktop.png",
+    "reports/screenshots/showcase/first-hero.png",
+    "reports/screenshots/showcase/hero-desktop.png",
+    "reports/screenshots/showcase/hero-mobile.png",
+    "reports/screenshots/showcase/review-evidence.png",
+    "reports/screenshots/showcase/review-experience.png",
+    "reports/screenshots/showcase/review-intelligence.png",
+    "reports/screenshots/showcase/review-planning.png",
+    "reports/screenshots/showcase/review-start.png",
+    "reports/screenshots/showcase/story-desktop.png"
+  ],
+  "limitations": [
+    "One local Windows/Edge environment; timings are observations, not Core Web Vitals certification.",
+    "Keyboard and reduced-motion checks are not a full accessibility audit.",
+    "Financial calculations use synthetic inputs; no LLM or investment performance is evaluated."
+  ],
+  "source_sha256": {
+    "frontend/package.json": "2fbb3f4b8bed49fa34344794ee7c2a5086a5d425373697aa94b04c048cec0d42",
+    "frontend/package-lock.json": "dd394d9ef706aafc7efdc8ed32d94afb1180eccfb16265df3ee8e69fbcdac268",
+    "frontend/index.html": "3c674b563b15a21cafa46747aea024899ea31e4170df4a0e87997e06a7599d71",
+    "frontend/vite.config.ts": "fe0fbee497897f9f37404c2554f1d9de96367f5e9456043855a5b29dc00d6724",
+    "frontend/src/App.tsx": "431336c0b5ca32196fedddb1612d5837a58e9834c3e759a51cac6fb0acf423c5",
+    "frontend/src/main.tsx": "fc400cf6024a7aaa373ad3ad5f17352466a4912ebe94150119bd3476e52d1806",
+    "frontend/src/components/SignalScene.tsx": "db5e361433bf4eb6e4d70e8528dd4d064d99a06a0440596d1043f8070082f6cf",
+    "frontend/src/styles.css": "b3f0ef7b55d92028d0bf62434f274c6cb3643adc93e58d3af6f8a7974edecd7a",
+    "frontend/src/components/signal-scene.css": "5942636f66f82ffccb46c1ef0faffaff6557d4570eda68bc4eadeeb5708a0fb5"
+  },
+  "built_assets_sha256": {
+    "web/showcase/asset-provenance.json": "fe9508ee08747a880d93b30c6f1bbbeaa572b33e239ac44bdeedc24b51ee7ed1",
+    "web/showcase/index.html": "bc36503e50fc49b85d10772d1017de0a67933f2a5b0d9c5405befbea7a4c0fd1",
+    "web/showcase/assets/index-BqIKCgQm.css": "4114b070097c5c3790dedff6c17fd53bd59330aad51c5e8e52d6b89af746b931",
+    "web/showcase/assets/index-F4_CuB8M.js": "a8a0f3266e5531bc769cf0a09faf06bd3141ba35305d7b3969a9b931ea69c580",
+    "web/showcase/assets/motion-engine-Da9GLdMh.js": "0ee94fba725a62e623774c995a4f2d985b4d5af3da46d33ff00b988673a1a090",
+    "web/showcase/assets/react-runtime-O0MJ1iOS.js": "d4542eedba0bf5a6e9b6396a6d5fe84bee2b805e8a256bd012e8ca12212b40ac",
+    "web/showcase/assets/rolldown-runtime-XKyaHtl9.js": "548d1dbf321e7d2ae804fcc158b588706a7c52f8ca175de1490c6ccb4dbe55b7",
+    "web/showcase/assets/three-engine-DWzIwKT1.js": "379416694a098f34d12046a7005393c84a5db0cf00ccad3190538056917b370b",
+    "web/showcase/fonts/inter-latin.woff2": "3100e775e8616cd2611beecfa23a4263d7037586789b43f035236a2e6fbd4c62",
+    "web/showcase/fonts/Inter-OFL.txt": "5b9321a4298cfeb6b34354164a1c3afc3db114569984c502b9b35d988fd58c57",
+    "web/showcase/fonts/outfit-latin.woff2": "6c18d579fd87c3776be068b762cbc83fde3acb543d49eabd3ade842eb987e887",
+    "web/showcase/fonts/Outfit-OFL.txt": "c676351bf8576b9aba743cd5eaa8c0e7ee0d51f805d720447b4df4ddb6a2e416",
+    "web/showcase/licenses/dependencies.json": "437df7910335e273e28e2e5d356544485a955bf7a9b556d30680e5c5ffd16a10",
+    "web/showcase/licenses/lucide-react-LICENSE.txt": "b495047bd93a9b06913511076f504daba17d5bbeb3e0650f3bb53a4220329c57",
+    "web/showcase/licenses/motion-LICENSE.txt": "1bf0dc3f7727723e5a032ed12164a47cf92c05204cb1a3485f123c24e2833ed1",
+    "web/showcase/licenses/react-dom-LICENSE.txt": "da6d3703ed11cbe42bd212c725957c98da23cbff1998c05fa4b3d976d1a58e93",
+    "web/showcase/licenses/react-LICENSE.txt": "da6d3703ed11cbe42bd212c725957c98da23cbff1998c05fa4b3d976d1a58e93",
+    "web/showcase/licenses/tailwindcss-LICENSE.txt": "60e0b68c0f35c078eef3a5d29419d0b03ff84ec1df9c3f9d6e39a519a5ae7985",
+    "web/showcase/licenses/three-LICENSE.txt": "8b378ebe60e2fe500158cb0ac71cb5e8b7d92953c2abcc63a0eb90499653b5bc",
+    "web/showcase/media/finance-coins.mp4": "e982288923993ef3a63cdbfd294393dbc3cfddccae0292e9abe106e396211f64",
+    "web/showcase/media/reference-motion.mp4": "8439ecb6330b5c7b59ccacd92eef966c3d5719d72204c3f45d7a4a18aa2575ec"
+  }
+}

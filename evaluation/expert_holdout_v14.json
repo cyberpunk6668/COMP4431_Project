@@ -1,0 +1,50 @@
+{
+  "version": "14.0.0-holdout-1",
+  "purpose": "Blind-to-ranker-author query holdout for the post-discovery lexical retriever. Evaluates retrieval only, not generated answer correctness.",
+  "construction": {
+    "author": "A separate evaluation agent in the same project team",
+    "held_out_from_ranker_tuning": true,
+    "split_role": "blind_holdout",
+    "blind_to_ranker_author_until_algorithm_freeze": true,
+    "blind_external_benchmark": false,
+    "independent_third_party_adjudication": false,
+    "created_after": "The original 40-query set was exposed and reclassified as discovery/dev.",
+    "freeze_policy": "Share only the case count and SHA256 before the ranker author freezes the algorithm. Run once after that freeze; retain every miss and false positive. Do not edit queries, gold labels, topics or the ranker in response to this set.",
+    "coverage": "24 new questions: 18 relevant, including 4 multi-topic questions; 6 irrelevant or outside the corpus; 12 Chinese and 12 English. New phrasing rather than copied chunk titles.",
+    "limitation": "Same-team manual gold labels and a small convenience sample. This is neither an external benchmark nor a measure of answer accuracy, citation entailment, market validity or predictive skill."
+  },
+  "metric_definitions": {
+    "recall_at_k": "Mean over relevant queries of |top-k IDs intersect gold IDs| / |gold IDs|.",
+    "mrr_at_k": "Mean reciprocal rank of the first gold ID among the first k results; zero when absent. Relevant queries only.",
+    "all_gold_hit_rate_at_k": "Fraction of relevant queries for which every labelled ID is in top-k; separates complete multi-topic retrieval from merely finding one source.",
+    "facet_recall_at_k": "Mean fraction of required claim facets covered by the retrieved documents' supports.",
+    "no_hit_abstention_rate": "Fraction of no-hit queries returning an empty list; its complement is the false-positive rate.",
+    "scores_are_not": "Answer accuracy, confidence, citation entailment, market validation or prediction success."
+  },
+  "cases": [
+    {"id":"holdout_01","language":"zh","kind":"synonym_paraphrase","query":"期权被反复转手，为何累计换手手数涨了，存续合约总数却没涨？","relevant_ids":["expert.volume_oi"],"required_facets":["volume_vs_oi"]},
+    {"id":"holdout_02","language":"en","kind":"synonym_paraphrase","query":"When protective puts dominate the options tape, is that a survey showing most investors are pessimists?","relevant_ids":["expert.put_call"],"required_facets":["put_call_limits"]},
+    {"id":"holdout_03","language":"zh","kind":"paraphrase","query":"期权OI在盘后清算、翌日发布，那我上午下载到的数应该对应哪一天，而不是下载瞬间吧？","relevant_ids":["expert.oi_cycle"],"required_facets":["oi_reporting_cycle"]},
+    {"id":"holdout_04","language":"en","kind":"paraphrase","query":"For an equity option, does a fatter implied-volatility estimate imply a selloff, or merely a larger possible move?","relevant_ids":["expert.volatility"],"required_facets":["iv_direction_limits"]},
+    {"id":"holdout_05","language":"zh","kind":"paraphrase","query":"现货横盘的几天里，期权还会因为期限缩短或股息利率变化而变价吗？","relevant_ids":["expert.pricing"],"required_facets":["option_price_factors"]},
+    {"id":"holdout_06","language":"en","kind":"synonym_paraphrase","query":"If I place an option order halfway between the best buying and selling quotes, am I assured a fill?","relevant_ids":["expert.spread"],"required_facets":["bid_ask_execution"]},
+    {"id":"holdout_07","language":"zh","kind":"paraphrase","query":"IBKR查昨天的期权数据也可能需要行情订阅吗？不能因为不是今天就默认所有账户都能取吧？","relevant_ids":["expert.history_permissions"],"required_facets":["historical_permissions"]},
+    {"id":"holdout_08","language":"en","kind":"synonym_paraphrase","query":"Does choosing last month let IBKR retrieve a lapsed equity-option series' native daily record?","relevant_ids":["expert.history_limits"],"required_facets":["expired_eod_limits"]},
+    {"id":"holdout_09","language":"zh","kind":"paraphrase","query":"券商重取同一天的期权历史成交合计，为什么可能少于当时的盘中累计，是否有交易过滤差异？","relevant_ids":["expert.history_volume"],"required_facets":["historical_volume_filtering"]},
+    {"id":"holdout_10","language":"en","kind":"synonym_paraphrase","query":"An hourly bid-and-offer candle stores averages and extrema. Are its endpoints a simultaneously available option quote?","relevant_ids":["expert.history_bars"],"required_facets":["historical_bar_semantics"]},
+    {"id":"holdout_11","language":"zh","kind":"paraphrase","query":"这份期权文件记录的是过去交易区间，刚刚上传成功能证明当前市场还维持当时状态吗？","relevant_ids":["expert.history_time"],"required_facets":["historical_time_basis"]},
+    {"id":"holdout_12","language":"en","kind":"synonym_paraphrase","query":"A volatility history requested for an equity ticker is not a dated Greek surface for every option strike, is it?","relevant_ids":["expert.history_iv"],"required_facets":["historical_contract_iv_limits"]},
+    {"id":"holdout_13","language":"zh","kind":"paraphrase","query":"前日只统计某个行权价的看涨看跌，后日又加了另一档；两天总手数变化还算固定期权样本的变化吗？","relevant_ids":["expert.contract_identity"],"required_facets":["contract_comparability"]},
+    {"id":"holdout_14","language":"en","kind":"paraphrase","query":"Do the IBKR historical TRADES candles themselves supply dated option open-interest observations, or must I obtain another series?","relevant_ids":["expert.history_oi"],"required_facets":["historical_oi_availability"]},
+    {"id":"holdout_15","language":"zh","kind":"cross_topic","query":"期权换手合约数和未平仓数是同一个数吗？如果看跌那边换手更多，也不能直接换算成看空人数吧？","relevant_ids":["expert.volume_oi","expert.put_call"],"required_facets":["volume_vs_oi","put_call_limits"]},
+    {"id":"holdout_16","language":"en","kind":"cross_topic","query":"An option premium rose while its implied volatility rose too; does this establish a bearish direction, and can we ignore the remaining lifetime and underlying price?","relevant_ids":["expert.volatility","expert.pricing"],"required_facets":["iv_direction_limits","option_price_factors"]},
+    {"id":"holdout_17","language":"zh","kind":"cross_topic","query":"拿券商过去一小时的期权买卖价条，能当成当前同步报价并保证在中间位置成交吗？","relevant_ids":["expert.history_bars","expert.spread","expert.history_time"],"required_facets":["historical_bar_semantics","bid_ask_execution","historical_time_basis"]},
+    {"id":"holdout_18","language":"en","kind":"cross_topic","query":"Before interpreting a change in option activity, should we keep the same strike-and-expiration membership and check whether historical filtering differs from the live tape?","relevant_ids":["expert.contract_identity","expert.history_volume"],"required_facets":["contract_comparability","historical_volume_filtering"]},
+    {"id":"holdout_19","language":"zh","kind":"no_hit_lexical_trap","query":"日历应用中如何显示海外会议的本地时间和日期？","relevant_ids":[],"required_facets":[]},
+    {"id":"holdout_20","language":"en","kind":"no_hit_lexical_trap","query":"Which permission lets a browser microphone stream audio through an API?","relevant_ids":[],"required_facets":[]},
+    {"id":"holdout_21","language":"zh","kind":"no_hit_lexical_trap","query":"两段Python程序输出不一样，怎么逐行比较和定位冲突？","relevant_ids":[],"required_facets":[]},
+    {"id":"holdout_22","language":"en","kind":"no_hit_out_of_corpus","query":"How do coupon reinvestment and duration affect the realized return of a corporate bond?","relevant_ids":[],"required_facets":[]},
+    {"id":"holdout_23","language":"zh","kind":"no_hit_lexical_trap","query":"游戏角色的攻击波动范围变大，代表平均伤害更高吗？","relevant_ids":[],"required_facets":[]},
+    {"id":"holdout_24","language":"en","kind":"no_hit_lexical_trap","query":"In a terminal, which call opens a file and which option closes the window?","relevant_ids":[],"required_facets":[]}
+  ]
+}

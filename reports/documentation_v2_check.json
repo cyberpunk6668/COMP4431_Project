@@ -1,0 +1,38 @@
+{
+  "checked_at": "2026-11-10T09:58:32.804433+00:00",
+  "status": "passed",
+  "version": "2.0",
+  "pdf_files": [
+    {
+      "path": "output/pdf/FinPilot_Technical_Documentation_ZH.pdf",
+      "pages": 10,
+      "bytes": 239314,
+      "sha256": "1fc627c46b9cf83f607e80955c87cc515918c2ee593db71500673e41ea673d4d",
+      "rendered_pages": 10
+    },
+    {
+      "path": "output/pdf/FinPilot_Functional_Report_ZH.pdf",
+      "pages": 15,
+      "bytes": 920690,
+      "sha256": "648c3d38c315487bf78c3005f9ee41d7378ec20a991762bd3e440c48a0149823",
+      "rendered_pages": 15
+    }
+  ],
+  "review": "All rendered pages reviewed using contact sheets; dense result tables and avatar figure inspected at full page size. No clipping, missing glyphs or overlapping elements observed.",
+  "evidence_counts": {
+    "v1_server_tests": 45,
+    "v1_retrieval_cases": 48,
+    "v1_browser_checks": 13,
+    "v2_server_tests": 56,
+    "v2_main_browser_checks": 17,
+    "v2_avatar_checks": 8,
+    "v2_mocked_ui_checks": 11,
+    "v2_layout_cases": 64,
+    "v2_local_http_checks": 3,
+    "v2_local_browser_checks": 4
+  },
+  "limits": [
+    "LoRA metrics describe source-conditioned structured copying, not broad factual accuracy.",
+    "Speech hardware still requires presentation-machine checks."
+  ]
+}

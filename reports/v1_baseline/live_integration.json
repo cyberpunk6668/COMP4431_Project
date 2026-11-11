@@ -1,0 +1,143 @@
+{
+  "checked_at": "2026-11-10T08:13:23.222853+00:00",
+  "model": "deepseek-flash",
+  "passed": 5,
+  "total": 5,
+  "results": [
+    {
+      "case": "zh_rag",
+      "question": "什么是分散投资？它能消除所有投资风险吗？",
+      "expected_mode": "deepseek",
+      "passed": true,
+      "latency_ms": 3596.35,
+      "answer": "分散投资是指把资金分配到不同资产类别（如股票、债券、现金）、不同发行方、行业和地区，以降低集中风险 [diversification]。\n\n它**不能消除所有投资风险**。分散主要降低的是\"押注单一标的\"的集中风险，但无法消除市场整体风险——当整个市场下跌时，多数资产可能同时受影响 [diversification]。另外，某些看似分散的产品其实仍较集中，例如行业 ETF 可能集中于单一行业，不一定构成充分分散 [diversification]。\n\n具体配置比例没有统一标准，取决于你的投资目标、资金使用期限和风险承受能力 [diversification][risk-tolerance]。需要注意，更高潜在收益伴随不确定性而非保证，本金可能损失，历史业绩也不代表未来 [risk-tolerance]。\n\n以上为教育性信息，不构成投资建议。如果你想进一步了解，可以告诉我你的资金大致使用期限（如短期必要支出还是长期闲置），我可以帮你梳理需要考虑的要点。",
+      "sources": [
+        {
+          "id": "diversification",
+          "title": "分散投资与资产配置 / Diversification",
+          "url": "https://www.investor.gov/introduction-investing/getting-started/asset-allocation",
+          "snippet": "资产配置是把资金分配到股票、债券和现金等资产类别；分散投资还应考虑行业、地区和单一发行人集中度。它可以降低部分集中风险，却不能保证盈利或消除市场整体下跌风险。买入一只聚焦单一行业的基金或 ETF 不一定实现充分分散。配置取决于目标、期限和承受损失的能力，不存在适合每个人的固定比例。"
+        },
+        {
+          "id": "risk-tolerance",
+          "title": "投资风险与期限 / Risk and time horizon",
+          "url": "https://www.investor.gov/introduction-investing/investing-basics/save-and-invest/gauge-your-risk-tolerance",
+          "snippet": "投资选择应结合资金何时使用、目标和承受本金损失的能力。潜在回报较高通常伴随更大不确定性，承担更多风险并不保证获得更多收益。短期必要开支需要考虑流动性和本金波动。历史业绩不能保证未来表现；声称高收益且无风险的产品应谨慎核查。助手提供教育信息，不作个股买卖、保本或收益承诺。"
+        }
+      ],
+      "mode": "deepseek"
+    },
+    {
+      "case": "en_rag",
+      "question": "Explain the difference between nominal annual interest compounded monthly and APY.",
+      "expected_mode": "deepseek",
+      "passed": true,
+      "latency_ms": 5083.38,
+      "answer": "**Nominal annual rate (compounded monthly) vs. APY**\n\nThese two numbers describe the same underlying interest but on different bases, so they are not interchangeable.\n\n- **Nominal annual rate (r), compounded monthly:** the stated yearly rate, applied as r/12 each month. It ignores the effect of interest earning interest within the year.\n- **APY / effective annual yield (y):** the actual growth over a full year once monthly compounding is included. Because each month's interest is added to the balance, the APY is higher than the nominal rate whenever compounding occurs more than once a year.\n\nThe relationship, using the simplified monthly-compounding model in the reference:\n\n- From nominal to APY: APY = (1 + r/12)^12 − 1 [effective-yield]\n- From APY to a monthly rate: monthly rate = (1 + y)^(1/12) − 1 [effective-yield]\n\n**Key practical point:** you cannot get the monthly rate by simply dividing the APY by 12 — that ignores compounding and understates the true monthly rate [effective-yield]. For example, a nominal 5% means 5 is entered as the rate (5%), not 0.05 [effective-yield].\n\n**Uncertainty and assumptions to keep in mind:**\n- The formulas above assume a simplified, fixed monthly-compounding model. Real bank disclosures may use actual day counts and account-specific terms, so the disclosed APY can differ slightly from this calculation [effective-yield].\n- The gap between nominal rate and APY grows with the rate and the compounding frequency; at low rates the difference is small, at higher rates it widens.\n\nIf you'd like the exact figures for a specific rate, use the deterministic calculator panel (or give me an explicit calculation command) rather than relying on an estimate — I won't invent precise results here.\n\nThis is educational information, not financial advice.",
+      "sources": [
+        {
+          "id": "effective-yield",
+          "title": "名义利率与有效年收益率 / Nominal rate and APY",
+          "url": "https://www.consumerfinance.gov/rules-policy/regulations/1030/a/",
+          "snippet": "APY reflects compounding and differs from a nominal annual rate. In a simplified monthly-compounding model, nominal rate r implies effective annual yield (1+r/12)^12-1. Given effective annual yield y, the equivalent monthly rate is (1+y)^(1/12)-1. The project form accepts nominal annual percentages: enter 5 for 5%, not 0.05%. Actual account disclosures may use day counts and product-specific rules."
+        }
+      ],
+      "mode": "deepseek"
+    },
+    {
+      "case": "deterministic_tool",
+      "question": "compound principal=10000 annual_rate=5 years=10 monthly_contribution=500",
+      "expected_mode": "calculator",
+      "passed": true,
+      "latency_ms": 0.36,
+      "answer": "期末金额 / Future value: 94111.23; 利息 / Interest: 24111.23\n\nFV = P(1+r)^n + C × ((1+r)^n - 1) / r; r=annual_rate/1200; n=12×years; r=0: FV=P+C×n\n\nFixed nominal annual rate, compounded monthly; contributions at month-end.\nSame currency throughout; no inflation, tax, fees, or market volatility. This is a scenario, not a guaranteed return.\nOnly final display values are rounded half-up to two decimals.",
+      "sources": [],
+      "mode": "calculator",
+      "calculation": {
+        "kind": "compound",
+        "summary": "期末金额 / Future value: 94111.23; 利息 / Interest: 24111.23",
+        "values": {
+          "future_value": "94111.23",
+          "total_contributions": "70000.00",
+          "interest": "24111.23",
+          "months": 120
+        },
+        "series": [
+          {
+            "period": 0,
+            "balance": "10000.00"
+          },
+          {
+            "period": 1,
+            "balance": "16651.05"
+          },
+          {
+            "period": 2,
+            "balance": "23642.37"
+          },
+          {
+            "period": 3,
+            "balance": "30991.39"
+          },
+          {
+            "period": 4,
+            "balance": "38716.40"
+          },
+          {
+            "period": 5,
+            "balance": "46836.63"
+          },
+          {
+            "period": 6,
+            "balance": "55372.31"
+          },
+          {
+            "period": 7,
+            "balance": "64344.69"
+          },
+          {
+            "period": 8,
+            "balance": "73776.11"
+          },
+          {
+            "period": 9,
+            "balance": "83690.06"
+          },
+          {
+            "period": 10,
+            "balance": "94111.23"
+          }
+        ],
+        "formula": "FV = P(1+r)^n + C × ((1+r)^n - 1) / r; r=annual_rate/1200; n=12×years; r=0: FV=P+C×n",
+        "assumptions": [
+          "Fixed nominal annual rate, compounded monthly; contributions at month-end.",
+          "Same currency throughout; no inflation, tax, fees, or market volatility. This is a scenario, not a guaranteed return.",
+          "Only final display values are rounded half-up to two decimals."
+        ]
+      }
+    },
+    {
+      "case": "live_data_boundary",
+      "question": "今天苹果的股价是多少？",
+      "expected_mode": "offline",
+      "passed": true,
+      "latency_ms": 0.01,
+      "sources": [],
+      "mode": "offline",
+      "answer": "本项目未接入实时行情或利率数据，无法验证当前数值。请查阅交易所、银行或监管机构的官方实时页面；我可以解释相关金融概念。",
+      "warning": "no_live_data"
+    },
+    {
+      "case": "out_of_domain",
+      "question": "How do I bake sourdough bread?",
+      "expected_mode": "offline",
+      "passed": true,
+      "latency_ms": 0.27,
+      "sources": [],
+      "mode": "offline",
+      "answer": "The knowledge base has insufficient relevant evidence. Please ask a specific finance question about compound interest, ETFs, bonds, budgeting, or risk. I will not invent an answer.",
+      "warning": "insufficient_evidence"
+    }
+  ],
+  "limits": "Small integration sample, not a guarantee of financial accuracy, adversarial robustness or production readiness."
+}

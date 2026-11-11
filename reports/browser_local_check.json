@@ -1,0 +1,15 @@
+{
+  "checked_at": "2026-11-10T09:56:24.958777+00:00",
+  "status": "passed",
+  "total": 4,
+  "checks": [
+    "actual_local_model_option_available",
+    "actual_model_selection_and_generation",
+    "thinking_idle_avatar_with_local_request",
+    "local_model_mode_and_verified_citation_rendering"
+  ],
+  "page_errors": [],
+  "elapsed_seconds": 14.24,
+  "answer": "要点：复利表示已产生的利息也继续计息。估算需要初始本金、追加投入、期限、利率及复利频率。本项目计算器采用名义年利率按月复利、每月月末追加投入：月利率 = 年利率 / 12；利率为零时直接累加本金和投入。结果是固定利率的假设场景，不代表市场预测，未计税、费用或通胀。实际有效年收益率不能直接除以 12 当作月利率。注意：适用范围、地区和产品条款可能不同，请打开官方来源核实；这不是收益承诺。来源：[compound-interest]\n仅供金融教育，不构成个人投资建议。",
+  "scope": "Actual browser and local model; no mocked backend and no DeepSeek request. One synthetic finance question, not an accuracy benchmark."
+}

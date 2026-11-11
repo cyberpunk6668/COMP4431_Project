@@ -1,0 +1,56 @@
+{
+  "checked_at": "2026-11-11T03:19:09.674634+00:00",
+  "status": "passed",
+  "scope": "Synthetic responses, real deterministic brief builders. No broker or model requests. Interface task checks, not a study with novice participants.",
+  "checks": [
+    "novice_default_and_no_auto_request",
+    "advanced_settings_collapsed",
+    "freshness_before_conclusions",
+    "four_plain_questions",
+    "per_hundred_contract_visual",
+    "technical_report_hidden",
+    "plain_evidence_labels_and_real_target",
+    "glossary_keyboard_details",
+    "professional_toggle_and_raw_data",
+    "reading_preference_persists",
+    "permission_error_explicit_delayed_retry",
+    "consent_preserved",
+    "missing_and_zero_have_no_fake_share_chart",
+    "unknown_feed_label",
+    "batch_items_and_partial_failure",
+    "optional_safe_model_explanation",
+    "mobile_containment",
+    "english_reopen"
+  ],
+  "viewports": [
+    {
+      "width": 320,
+      "height": 740,
+      "fixture_requests": 7,
+      "page_errors": []
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "fixture_requests": 7,
+      "page_errors": []
+    },
+    {
+      "width": 1440,
+      "height": 1000,
+      "fixture_requests": 7,
+      "page_errors": []
+    }
+  ],
+  "source_sha256": {
+    "web/index.html": "4c5c931442b8bd1c619a5018b49acba9c68cbb5bef440e97388195ea159ce5c3",
+    "web/options.js": "182225b0718d5a96a844c99877af7add39304acb0a2cc2b29ad4f885ab3ecd00",
+    "web/options.css": "da3d3039624084c601e19e8b656cbd10a49746a346a1e38cda01fcd17f0c67d9",
+    "app/options_brief.py": "7f6e5cf125b5bd3532ea3ad60645af4e79927be34226cd5d79b98d3c627af04c"
+  },
+  "screenshots": [
+    "reports/screenshots/options-v8/easy-1440.png",
+    "reports/screenshots/options-v8/easy-320.png",
+    "reports/screenshots/options-v8/easy-390.png"
+  ]
+}

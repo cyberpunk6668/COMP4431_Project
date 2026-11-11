@@ -1,0 +1,146 @@
+{
+  "checked_at": "2026-11-11T02:53:40.096136+00:00",
+  "scope": "Actual DeepSeek, synthetic anonymized aggregate inputs",
+  "successful_reports": 2,
+  "failures": [],
+  "comparison_status": "descriptive",
+  "cohorts": [
+    {
+      "market_data_status": "delayed",
+      "collective_status": "descriptive",
+      "findings": 3,
+      "conflicts": 2,
+      "capture_age_seconds": 8.494
+    },
+    {
+      "market_data_status": "delayed",
+      "collective_status": "descriptive",
+      "findings": 5,
+      "conflicts": 0,
+      "capture_age_seconds": 8.493
+    }
+  ],
+  "interpretation": {
+    "status": "ok",
+    "model": "deepseek-flash",
+    "report": {
+      "summary": {
+        "text": "本批仅含两个延迟快照队列 AAA（2026-12-02） 与 BBB（2026-12-02），二者双边报价覆盖与成交配对覆盖均完整，但报价为顺序采集而非同时。AAA（2026-12-02） 的成交结构高度集中于少数行权价，而持仓分布相对分散；BBB（2026-12-02） 的成交分布较均匀，但看跌成交占比明显高于 AAA（2026-12-02），且其持仓看跌占比与 AAA（2026-12-02） 相同。两者近值两侧平均 IV 与偏斜读数一致，说明相对定价差异并不随成交结构差异而同步变化。这些是描述性共存现象，不构成矛盾，也不能据此推断方向意图或未来价格。",
+        "evidence_ids": [
+          "g0.volume_hhi",
+          "g1.volume_hhi",
+          "g0.volume_put_share",
+          "g1.volume_put_share",
+          "g0.atm_iv",
+          "g1.atm_iv"
+        ]
+      },
+      "observations": [
+        {
+          "text": "AAA（2026-12-02） 的成交集中于少数行权价：最大档占比与前两档占比均较高，成交行权价集中度指数也偏高；但其持仓集中度指数与最大档、前两档持仓占比都明显更低。这说明本批样本中成交的集中形状与未平仓库存的分散形状并不一致，二者处于不同报告周期，不能据此判断新头寸建立。",
+          "evidence_ids": [
+            "g0.volume_top_share",
+            "g0.volume_top_two_share",
+            "g0.volume_hhi",
+            "g0.oi_top_share",
+            "g0.oi_top_two_share",
+            "g0.oi_hhi"
+          ]
+        },
+        {
+          "text": "BBB（2026-12-02） 的成交分布相对均匀，最大档与前两档成交占比均较低，成交集中度指数也低；其持仓集中度指数与 AAA（2026-12-02） 的持仓读数相同。两个队列在成交集中形状上差异明显，但库存集中形状相近，提示成交结构与库存结构可能由不同机制驱动，具体原因本批证据无法区分。",
+          "evidence_ids": [
+            "g1.volume_top_share",
+            "g1.volume_top_two_share",
+            "g1.volume_hhi",
+            "g1.oi_hhi",
+            "g0.oi_hhi"
+          ]
+        },
+        {
+          "text": "AAA（2026-12-02） 的看跌成交占比很低，而看跌持仓占比明显更高，二者之差为负；BBB（2026-12-02） 的看跌成交占比高，看跌持仓占比与 AAA（2026-12-02） 相同，二者之差为正。两个队列的成交与持仓看跌份额方向相反，但成交量是期间累计、持仓有独立统计周期，这种差异只能描述结构，不能揭示新增定位。",
+          "evidence_ids": [
+            "g0.volume_put_share",
+            "g0.oi_put_share",
+            "g0.positioning_gap",
+            "g1.volume_put_share",
+            "g1.oi_put_share",
+            "g1.positioning_gap"
+          ]
+        },
+        {
+          "text": "尽管 AAA（2026-12-02） 与 BBB（2026-12-02） 的看跌成交占比差异很大，两者的近值两侧平均 IV、偏斜读数与平值跨式权利金占比读数却一致。不同标的或不同队列的活动份额不同而 IV 相同，只是共存现象，不能据此认为定价应当分化或应对活动作出反应。",
+          "evidence_ids": [
+            "g0.atm_iv",
+            "g1.atm_iv",
+            "g0.skew_25_delta",
+            "g1.skew_25_delta",
+            "g0.atm_straddle_pct",
+            "g1.atm_straddle_pct",
+            "comparison.report_1_put_volume_share",
+            "comparison.report_2_put_volume_share"
+          ]
+        }
+      ],
+      "conflicts": [],
+      "scenarios": [
+        {
+          "condition": "若后续取得同一队列在另一采集时点的成交与持仓配对读数，且 AAA（2026-12-02） 的成交集中度下降而持仓集中度上升。",
+          "implication": "届时可重新评估成交集中形状与库存分散形状是否只是采样时点差异所致；当前快照无法区分顺序采集与结构变化。",
+          "evidence_ids": [
+            "g0.volume_hhi",
+            "g0.oi_hhi",
+            "g0.positioning_coverage"
+          ]
+        },
+        {
+          "condition": "若后续获得 BBB（2026-12-02） 的看跌成交占比回落至接近其看跌持仓占比的水平。",
+          "implication": "届时可重新审视 BBB（2026-12-02） 成交与持仓看跌份额之差是否稳定；当前仅能描述该差为正，不能推断其成因或持续性。",
+          "evidence_ids": [
+            "g1.volume_put_share",
+            "g1.oi_put_share",
+            "g1.positioning_gap"
+          ]
+        }
+      ],
+      "limitations": [
+        "两个队列均为延迟数据，且报价顺序采集而非同时，快照之间不可直接拼接。",
+        "成交量与未平仓量报告周期不同，成交量计买卖双方，无法据此识别新增定位或主动方向。",
+        "行权价集中度不构成支撑阻力、做市商定位、伽马敞口或最大痛点证据。",
+        "队列关系显示二者非同一标的，期限 IV 不可比，跨队列 IV 相同不应解读为定价应分化。",
+        "缺少明确基线，不对价差、IV 或活动作历史高低判断；绝对日期与期限被刻意隐去。"
+      ]
+    },
+    "text": "本批仅含两个延迟快照队列 AAA（2026-12-02） 与 BBB（2026-12-02），二者双边报价覆盖与成交配对覆盖均完整，但报价为顺序采集而非同时。AAA（2026-12-02） 的成交结构高度集中于少数行权价，而持仓分布相对分散；BBB（2026-12-02） 的成交分布较均匀，但看跌成交占比明显高于 AAA（2026-12-02），且其持仓看跌占比与 AAA（2026-12-02） 相同。两者近值两侧平均 IV 与偏斜读数一致，说明相对定价差异并不随成交结构差异而同步变化。这些是描述性共存现象，不构成矛盾，也不能据此推断方向意图或未来价格。\n\nAAA（2026-12-02） 的成交集中于少数行权价：最大档占比与前两档占比均较高，成交行权价集中度指数也偏高；但其持仓集中度指数与最大档、前两档持仓占比都明显更低。这说明本批样本中成交的集中形状与未平仓库存的分散形状并不一致，二者处于不同报告周期，不能据此判断新头寸建立。\n\nBBB（2026-12-02） 的成交分布相对均匀，最大档与前两档成交占比均较低，成交集中度指数也低；其持仓集中度指数与 AAA（2026-12-02） 的持仓读数相同。两个队列在成交集中形状上差异明显，但库存集中形状相近，提示成交结构与库存结构可能由不同机制驱动，具体原因本批证据无法区分。\n\nAAA（2026-12-02） 的看跌成交占比很低，而看跌持仓占比明显更高，二者之差为负；BBB（2026-12-02） 的看跌成交占比高，看跌持仓占比与 AAA（2026-12-02） 相同，二者之差为正。两个队列的成交与持仓看跌份额方向相反，但成交量是期间累计、持仓有独立统计周期，这种差异只能描述结构，不能揭示新增定位。\n\n尽管 AAA（2026-12-02） 与 BBB（2026-12-02） 的看跌成交占比差异很大，两者的近值两侧平均 IV、偏斜读数与平值跨式权利金占比读数却一致。不同标的或不同队列的活动份额不同而 IV 相同，只是共存现象，不能据此认为定价应当分化或应对活动作出反应。\n\n若后续取得同一队列在另一采集时点的成交与持仓配对读数，且 AAA（2026-12-02） 的成交集中度下降而持仓集中度上升。 届时可重新评估成交集中形状与库存分散形状是否只是采样时点差异所致；当前快照无法区分顺序采集与结构变化。\n\n若后续获得 BBB（2026-12-02） 的看跌成交占比回落至接近其看跌持仓占比的水平。 届时可重新审视 BBB（2026-12-02） 成交与持仓看跌份额之差是否稳定；当前仅能描述该差为正，不能推断其成因或持续性。\n\n两个队列均为延迟数据，且报价顺序采集而非同时，快照之间不可直接拼接。\n\n成交量与未平仓量报告周期不同，成交量计买卖双方，无法据此识别新增定位或主动方向。\n\n行权价集中度不构成支撑阻力、做市商定位、伽马敞口或最大痛点证据。\n\n队列关系显示二者非同一标的，期限 IV 不可比，跨队列 IV 相同不应解读为定价应分化。\n\n缺少明确基线，不对价差、IV 或活动作历史高低判断；绝对日期与期限被刻意隐去。",
+    "evidence": [
+      "comparison.report_1_put_volume_share",
+      "comparison.report_2_put_volume_share",
+      "g0.atm_iv",
+      "g0.atm_straddle_pct",
+      "g0.oi_hhi",
+      "g0.oi_put_share",
+      "g0.oi_top_share",
+      "g0.oi_top_two_share",
+      "g0.positioning_coverage",
+      "g0.positioning_gap",
+      "g0.skew_25_delta",
+      "g0.volume_hhi",
+      "g0.volume_put_share",
+      "g0.volume_top_share",
+      "g0.volume_top_two_share",
+      "g1.atm_iv",
+      "g1.atm_straddle_pct",
+      "g1.oi_hhi",
+      "g1.oi_put_share",
+      "g1.positioning_gap",
+      "g1.skew_25_delta",
+      "g1.volume_hhi",
+      "g1.volume_put_share",
+      "g1.volume_top_share",
+      "g1.volume_top_two_share"
+    ],
+    "basis": "descriptive_snapshot",
+    "generated_at": "2026-11-11T02:53:40.096136+00:00"
+  },
+  "status": "passed"
+}

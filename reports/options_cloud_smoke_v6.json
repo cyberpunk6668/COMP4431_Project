@@ -1,0 +1,15 @@
+{
+  "checked_at": "2026-11-11T02:03:41.798923+00:00",
+  "source": "synthetic aggregate inputs only",
+  "gateway_used": false,
+  "cloud_configured": true,
+  "quality_gate_passed": true,
+  "interpretation_status": "ok",
+  "reason": null,
+  "model": "deepseek-flash",
+  "selected_evidence": [
+    "put_call_volume",
+    "put_call_open_interest",
+    "atm_straddle"
+  ]
+}

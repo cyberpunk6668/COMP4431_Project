@@ -1,0 +1,511 @@
+{
+  "version": "1.1",
+  "reviewed_at": "2026-11-11",
+  "retrieval": "Lexical BM25 and Chinese character n-gram rankings fused by RRF. No embeddings, vector database or retrieval model fine-tuning.",
+  "support_policy": "supports is a reviewed claim-facet allowlist, not an entailment score. source_review separates publisher statements from project analytical inferences; no source authenticates user-supplied prices or supplies missing fields.",
+  "methodology": [
+    {
+      "title": "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks",
+      "url": "https://doi.org/10.48550/arXiv.2005.11401",
+      "note": "Conceptual RAG reference; our lexical implementation does not reproduce its dense retriever or joint fine-tuning."
+    },
+    {
+      "title": "The Probabilistic Relevance Framework: BM25 and Beyond",
+      "url": "https://doi.org/10.1561/1500000019"
+    },
+    {
+      "title": "Reciprocal rank fusion outperforms condorcet and individual rank learning methods",
+      "url": "https://doi.org/10.1145/1571941.1572114"
+    },
+    {
+      "title": "rank_bm25 implementation reference",
+      "url": "https://github.com/dorianbrown/rank_bm25/blob/master/rank_bm25.py",
+      "note": "Read-only GitHub source reviewed 2026-11-11. Local BM25 uses a positive log1p IDF and k1=1.2; this reference uses floored log IDF and default k1=1.5. This project does not copy its scores or claim identical results."
+    },
+    {
+      "title": "BEIR: A Heterogeneous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      "url": "https://doi.org/10.48550/arXiv.2104.08663",
+      "note": "Undermind metadata and abstract checked 2026-11-11 together with BM25 and RRF. Motivation for query-level retrieval evaluation only; the small local set is not the BEIR benchmark and does not establish general answer accuracy."
+    }
+  ],
+  "documents": [
+    {
+      "id": "expert.volume_oi",
+      "title": "成交量和未平仓量回答不同问题",
+      "text": "成交量统计期间交易的合约；未平仓量统计尚未结清的合约。开仓、平仓及交易对手组合会影响未平仓量，期间成交不能直接换算成新增持仓或资金流入。",
+      "text_en": "Volume counts contracts traded during a period; open interest counts outstanding contracts. Opening, closing and counterparty combinations affect open interest, so volume does not directly measure newly opened positions or fund inflow.",
+      "url": "https://www.optionseducation.org/news/open-interest-why-it-matters",
+      "publisher": "OCC / The Options Industry Council",
+      "reviewed_at": "2026-11-11",
+      "topics": [
+        "成交量",
+        "未平仓量",
+        "持仓量",
+        "volume",
+        "open interest",
+        "oi",
+        "资金流入",
+        "冲突",
+        "矛盾"
+      ],
+      "supports": [
+        "volume_vs_oi"
+      ],
+      "source_review": {
+        "checked_at": "2026-11-11",
+        "method": "official_page_read_only",
+        "section": "Open Interest: Why It Matters, October 2025; opening/closing examples",
+        "direct_support": "Volume counts session activity; OI counts contracts outstanding and reflects opening, closing, exercise and assignment.",
+        "analytical_inference": "Do not infer newly opened positions or cash inflow from gross contract volume.",
+        "boundaries": "Does not identify individual traders, beneficial owners or net money flow."
+      }
+    },
+    {
+      "id": "expert.put_call",
+      "title": "看跌成交占比不是看空人数",
+      "text": "看跌与看涨成交量统计合约活动。Cboe举例说明，提前行权相关交易可制造不含方向信息的看跌看涨比率尖峰。由合约计数的口径可知：它不是参与人数统计或观点投票，单靠看跌成交更多不能识别多数人看空或主动买卖意图。",
+      "text_en": "Put and call volume counts contract activity. Cboe documents nondirectional put/call spikes caused by early-exercise-related flow. Consequently, contract counts are not a count of people or an opinion poll; heavier put volume alone does not identify a bearish majority or aggressor intent.",
+      "url": "https://www.cboe.com/insights/posts/how-early-exercise-order-flow-impacts-equity-option-put-call-ratios",
+      "publisher": "Cboe Global Markets",
+      "reviewed_at": "2026-11-11",
+      "topics": [
+        "看跌",
+        "看涨",
+        "看空",
+        "看多",
+        "情绪",
+        "多数人",
+        "put",
+        "call",
+        "put call",
+        "put/call",
+        "sentiment",
+        "bearish",
+        "bullish",
+        "转向"
+      ],
+      "supports": [
+        "put_call_limits"
+      ],
+      "source_review": {
+        "checked_at": "2026-11-11",
+        "method": "official_page_read_only",
+        "section": "Cboe equity put/call discussion; deep-ITM exercise-related flow and nondirectional ratio spikes",
+        "direct_support": "Early-exercise-related activity can raise put/call ratios without directional information.",
+        "analytical_inference": "Contract counts are not unique-person counts or a poll; a put trade alone does not reveal aggressor intent.",
+        "boundaries": "Does not prove a particular sample is hedging, early exercise, bullish or bearish."
+      },
+      "supporting_sources": [
+        {
+          "url": "https://www.optionseducation.org/news/open-interest-why-it-matters",
+          "section": "Volume and opening/closing examples",
+          "role": "Defines the counted unit as contracts; unique-person and intent limits are analytical inferences."
+        }
+      ]
+    },
+    {
+      "id": "expert.oi_cycle",
+      "title": "未平仓量有独立报告日期",
+      "text": "未平仓量经过清算机构隔夜核对后发布，与即时成交报告不同。复盘应核对持仓对应日期和发布日期，不能将收到字段的时刻当成持仓发生时刻，也不能用今日持仓回填过去。",
+      "text_en": "Open interest is reconciled overnight by the clearing organization and published separately from trade reports. Review its as-of and publication dates; receipt time is not a position event, and current open interest must not fill earlier dates.",
+      "url": "https://www.interactivebrokers.com/campus/podcasts/ibkr-podcasts/what-is-option-open-interest-and-how-to-analyze/",
+      "publisher": "Interactive Brokers Campus",
+      "reviewed_at": "2026-11-11",
+      "topics": [
+        "未平仓",
+        "持仓日期",
+        "隔夜",
+        "结算",
+        "oi",
+        "asof",
+        "as-of",
+        "reporting",
+        "open interest"
+      ],
+      "supports": [
+        "oi_reporting_cycle"
+      ],
+      "source_review": {
+        "checked_at": "2026-11-11",
+        "method": "official_page_read_only",
+        "section": "Podcast episode 234; OCC overnight reconciliation and next-day release",
+        "direct_support": "OCC reconciles OI overnight, separately from real-time trade reporting.",
+        "analytical_inference": "Keep as-of/publication dates distinct from file receipt and do not backfill past OI with current values.",
+        "boundaries": "No universal publication clock is promised; the podcast is an edited interview, not exchange field-level specifications."
+      }
+    },
+    {
+      "id": "expert.volatility",
+      "title": "波动定价描述幅度而非涨跌方向",
+      "text": "期权价格受隐含波动率影响。较高波动估计对应更大价格波动的预期尺度，方向可以向上也可以向下；不能将隐含波动率直接读作必涨或必跌信号。",
+      "text_en": "Implied volatility affects option prices. A higher volatility estimate concerns the scale of price fluctuations in either direction, not a guaranteed upward or downward price signal.",
+      "url": "https://www.optionseducation.org/optionsoverview/options-pricing",
+      "publisher": "OCC / The Options Industry Council",
+      "reviewed_at": "2026-11-11",
+      "topics": [
+        "波动率",
+        "隐含波动",
+        "iv",
+        "volatility",
+        "定价",
+        "涨跌"
+      ],
+      "supports": [
+        "iv_direction_limits"
+      ],
+      "source_review": {
+        "checked_at": "2026-11-11",
+        "method": "official_page_read_only",
+        "section": "Major Factors Influencing Options Premium; implied volatility",
+        "direct_support": "Higher volatility concerns fluctuations in either direction and affects put and call premiums.",
+        "analytical_inference": "IV alone is not a guaranteed directional forecast.",
+        "boundaries": "No IV or forecast is inferred when contract-level observations are absent."
+      }
+    },
+    {
+      "id": "expert.pricing",
+      "title": "权利金变化有多种影响因素",
+      "text": "期权权利金受标的价格、行权价、剩余期限、隐含波动率、股息和利率影响。比较不同日期或到期日价格时，应保留这些条件；时间价值通常会随临近到期而衰减，价格变化不能只归因于市场观点。",
+      "text_en": "Option premiums depend on the underlying price, strike, remaining term, implied volatility, dividends and rates. Preserve those conditions in comparisons. Time value generally erodes toward expiry, so a price change cannot be assigned solely to investor opinion.",
+      "url": "https://www.optionseducation.org/optionsoverview/options-pricing",
+      "publisher": "OCC / The Options Industry Council",
+      "reviewed_at": "2026-11-11",
+      "topics": [
+        "权利金",
+        "时间价值",
+        "到期",
+        "行权价",
+        "价格变化",
+        "premium",
+        "theta",
+        "expiry",
+        "strike",
+        "pricing"
+      ],
+      "supports": [
+        "option_price_factors"
+      ],
+      "source_review": {
+        "checked_at": "2026-11-11",
+        "method": "official_page_read_only",
+        "section": "Major Factors Influencing Options Premium; time value",
+        "direct_support": "Underlying, strike, time, IV, dividends and rates affect premiums; time value generally erodes near expiry.",
+        "analytical_inference": "A premium difference alone does not identify a unique cause or investor opinion.",
+        "boundaries": "These are ceteris-paribus factors, not an attribution model for any observed price change."
+      }
+    },
+    {
+      "id": "expert.spread",
+      "title": "报价价差与成交价格要分开",
+      "text": "买价是愿意买入的报价，卖价是愿意卖出的报价。两者间距、可用数量和订单类型都会影响成交；较宽价差可能增加滑点风险，屏幕中间价不保证能够成交。",
+      "text_en": "Bid and ask are prices offered to buy and sell. Their gap, available size and order type affect execution. Wider spreads can increase slippage risk; a displayed midpoint does not guarantee a fill.",
+      "url": "https://www.optionseducation.org/news/understanding-the-bid-and-ask-prices-for-options",
+      "publisher": "OCC / The Options Industry Council",
+      "reviewed_at": "2026-11-11",
+      "topics": [
+        "买卖价差",
+        "价差",
+        "报价",
+        "流动性",
+        "滑点",
+        "bid",
+        "ask",
+        "spread",
+        "liquidity",
+        "midpoint"
+      ],
+      "supports": [
+        "bid_ask_execution"
+      ],
+      "source_review": {
+        "checked_at": "2026-11-11",
+        "method": "official_page_read_only",
+        "section": "Bid/ask definition; order queues, market/limit orders and slippage",
+        "direct_support": "Quoted prices, available size and order type affect execution; wide spreads can expose orders to slippage.",
+        "analytical_inference": "An arithmetic midpoint is not a guaranteed executable fill.",
+        "boundaries": "Does not guarantee that a displayed quote is current, available in full size or filled."
+      }
+    },
+    {
+      "id": "expert.history_permissions",
+      "title": "历史接口也有行情权限要求",
+      "text": "IBKR的API常见问题说明，历史行情条通常需要相应的流式Level 1行情订阅。查询过去日期不代表全部账户和品种都能免费取得；具体缺失原因仍须核对返回码与实际字段，不能只凭空响应断定权限不足。",
+      "text_en": "IBKR's API FAQ states that historical bars require corresponding streaming Level 1 subscriptions. Older dates do not establish free access for every account and instrument. Diagnose missing data using actual response codes and fields; an empty response alone does not prove an entitlement denial.",
+      "url": "https://www.interactivebrokers.com/docs/third-party-integrations/general-third-party-frequently-asked-questions",
+      "publisher": "Interactive Brokers",
+      "reviewed_at": "2026-11-11",
+      "topics": [
+        "历史权限",
+        "订阅",
+        "缺失",
+        "权限",
+        "subscription",
+        "permission",
+        "missing",
+        "ibkr",
+        "api"
+      ],
+      "supports": [
+        "historical_permissions"
+      ],
+      "source_review": {
+        "checked_at": "2026-11-11",
+        "method": "official_page_read_only",
+        "section": "Is there a fee involved to receive data from the API?",
+        "direct_support": "The FAQ states that historical API bars require streaming Level 1 market-data subscriptions.",
+        "analytical_inference": "A request for older dates is not evidence that every account or instrument is entitled.",
+        "boundaries": "An entitlement requirement is not proof that any particular empty response was caused by permissions; preserve actual error codes and returned fields."
+      }
+    },
+    {
+      "id": "expert.history_limits",
+      "title": "到期期权及原生日终数据存在限制",
+      "text": "IBKR列明已到期期权和期权日终历史数据不可用。分钟数据在权限允许时可另行取得；本地汇总只能标注已覆盖区间的计算摘要，不能冒充官方结算价或完整历史期权链。",
+      "text_en": "IBKR lists expired options and option end-of-day history as unavailable. Authorized intraday data may be summarized locally, but the result must be labelled a computed summary of covered intervals, not an official settlement or full historical chain.",
+      "url": "https://www.interactivebrokers.com/docs/tws-api/doc/md/market-data-limitations",
+      "publisher": "Interactive Brokers",
+      "reviewed_at": "2026-11-11",
+      "topics": [
+        "已到期",
+        "历史期权",
+        "日线",
+        "结算价",
+        "历史链",
+        "expired",
+        "eod",
+        "settlement",
+        "historical options"
+      ],
+      "supports": [
+        "expired_eod_limits"
+      ],
+      "source_review": {
+        "checked_at": "2026-11-11",
+        "method": "official_page_read_only",
+        "section": "Unavailable Historical Data",
+        "direct_support": "IBKR lists expired options and option EOD history as unavailable.",
+        "analytical_inference": "A locally aggregated intraday sample must be labelled derived, not represented as native EOD or a complete historical chain.",
+        "boundaries": "Does not support claims about trader counts, executable BBO, OI availability or per-contract historical Greeks."
+      }
+    },
+    {
+      "id": "expert.history_volume",
+      "title": "历史成交量与实时累计量口径可能不同",
+      "text": "IBKR历史成交经过过滤、调整及压缩，部分远离最佳报价的交易类型被过滤。因此历史成交量可能不同于实时累计量；比较时要保留来源和口径，不能把差别直接叫作新增成交或资金流向。",
+      "text_en": "IBKR historical trades are filtered, adjusted and compressed; some trade types away from the best quotes are excluded. Historical volume can differ from live cumulative volume. Preserve source definitions rather than interpreting their difference as new trades or fund flow.",
+      "url": "https://www.interactivebrokers.com/docs/tws-api/doc/md/market-data-limitations",
+      "publisher": "Interactive Brokers",
+      "reviewed_at": "2026-11-11",
+      "topics": [
+        "历史成交量",
+        "累计",
+        "口径",
+        "过滤",
+        "volume",
+        "filtered",
+        "cumulative",
+        "变化",
+        "比较"
+      ],
+      "supports": [
+        "historical_volume_filtering"
+      ],
+      "source_review": {
+        "checked_at": "2026-11-11",
+        "method": "official_page_read_only",
+        "section": "Historical Data Filtering",
+        "direct_support": "Historical trade filtering can make volume differ from real-time totals; adjusted historical queries may differ over time.",
+        "analytical_inference": "Retain data definitions; a difference between feeds is not measured new activity or fund flow.",
+        "boundaries": "Does not establish that the observed bars cover a complete session or that two daily samples are comparable."
+      }
+    },
+    {
+      "id": "expert.history_bars",
+      "title": "历史价格条不是同一时刻双边报价",
+      "text": "历史成交条记录区间成交高低开收和成交量。历史BID_ASK条的开收为时间平均买卖价，高低为区间报价极值；这些字段不是同刻可成交双边报价，不能直接计算即时买卖价差或即时隐含波动率。",
+      "text_en": "Trade bars summarize interval prices and volume. BID_ASK bars use time-average bid and ask for open and close and interval quote extremes for high and low. These fields are not a synchronized executable quote for instantaneous spread or implied-volatility calculations.",
+      "url": "https://www.interactivebrokers.com/docs/tws-api/doc/md/historical-bars",
+      "publisher": "Interactive Brokers",
+      "reviewed_at": "2026-11-11",
+      "topics": [
+        "历史价格",
+        "分钟",
+        "历史报价",
+        "bid_ask",
+        "bar",
+        "bars",
+        "ohlc",
+        "同步",
+        "双边",
+        "时间平均"
+      ],
+      "supports": [
+        "historical_bar_semantics"
+      ],
+      "source_review": {
+        "checked_at": "2026-11-11",
+        "method": "official_page_read_only",
+        "section": "Introduction; WhatToShow Values: TRADES and BID_ASK",
+        "direct_support": "TRADES contains interval trade OHLCV; BID_ASK contains averaged bid/ask and interval extremes.",
+        "analytical_inference": "Those bar summaries cannot be treated as synchronized executable quotes for instantaneous spread or IV.",
+        "boundaries": "Does not assert that a separately obtained timestamped quote is unavailable; no current quote is reconstructed."
+      }
+    },
+    {
+      "id": "expert.history_time",
+      "title": "交易日期、区间时间与导入时间不同",
+      "text": "历史请求指定结束时间、区间、时区和常规交易时段；更新中的价格条可能尚未结束。导入时间只是本地接收时间，不是交易发生时间。已结束历史区间只能描述所覆盖过去样本，不能据此断定此刻市场状态；还须核对区间完整性。",
+      "text_en": "Historical requests select end time, interval, timezone and regular-hours coverage; updating bars may be unfinished. Import time is local receipt, not the market event. Completed historical intervals describe the covered past sample and alone do not establish current market conditions; coverage still requires checking.",
+      "url": "https://www.interactivebrokers.com/docs/tws-api/doc/md/historical-bars",
+      "publisher": "Interactive Brokers",
+      "reviewed_at": "2026-11-11",
+      "topics": [
+        "历史时间",
+        "交易日",
+        "日期",
+        "时区",
+        "导入时间",
+        "timestamp",
+        "time",
+        "date",
+        "rth",
+        "历史"
+      ],
+      "supports": [
+        "historical_time_basis"
+      ],
+      "source_review": {
+        "checked_at": "2026-11-11",
+        "method": "official_page_read_only",
+        "section": "Request Historical Bars; Receive Historical Bars; Understanding Historical Updates",
+        "direct_support": "Requests select end time, duration, RTH and time format; keepUpToDate can update unfinished intervals.",
+        "analytical_inference": "Market interval time differs from local import time; completed historical observations alone do not establish current market conditions.",
+        "boundaries": "Does not certify exchange-calendar completeness or that every requested bar was returned."
+      }
+    },
+    {
+      "id": "expert.history_iv",
+      "title": "标的波动历史不能冒充合约历史希腊值",
+      "text": "IBKR历史隐含波动数据类型面向股票、指数和基金，不等于每份期权合约的历史隐含波动或希腊值。缺少合约历史字段时应说明缺失，不能复制当前模型字段到过去日期。",
+      "text_en": "IBKR's historical implied-volatility type supports stocks, indices and ETFs. It is not each option contract's historical implied volatility or Greeks. Missing contract history must not be filled with current model fields.",
+      "url": "https://www.interactivebrokers.com/docs/tws-api/doc/md/historical-bars",
+      "publisher": "Interactive Brokers",
+      "reviewed_at": "2026-11-11",
+      "topics": [
+        "历史波动",
+        "希腊值",
+        "greeks",
+        "historical volatility",
+        "历史iv",
+        "模型字段"
+      ],
+      "supports": [
+        "historical_contract_iv_limits"
+      ],
+      "source_review": {
+        "checked_at": "2026-11-11",
+        "method": "official_page_read_only",
+        "section": "OPTION_IMPLIED_VOLATILITY: Supported Products",
+        "direct_support": "The historical IV type lists ETFs, indices and stocks, rather than individual option contracts.",
+        "analytical_inference": "Do not substitute this underlying-level series or current model Greeks for absent historical contract values.",
+        "boundaries": "This statement concerns the documented TWS historical-bar type, not all vendors or possible separately estimated IV."
+      }
+    },
+    {
+      "id": "expert.contract_identity",
+      "title": "期权系列需要完整合约身份",
+      "text": "期权系列由标的、到期月份或日期、行权价和看涨看跌类型等条件区分。跨日期比较应确认相同合约范围及合约规格；收到合约范围改变时，总量变化不能直接解释成同样本市场活动变化。",
+      "text_en": "Option series differ by underlying, expiration, strike and call/put type. Across dates, verify the contract window and specifications. Changed sample membership prevents interpreting a total difference as a matched-sample change in activity.",
+      "url": "https://www.optionseducation.org/referencelibrary/optionsglossary?filter=S",
+      "publisher": "OCC / The Options Industry Council",
+      "reviewed_at": "2026-11-11",
+      "topics": [
+        "样本",
+        "共同合约",
+        "合约范围",
+        "样本变化",
+        "配对",
+        "contract",
+        "sample",
+        "common",
+        "比较",
+        "可比"
+      ],
+      "supports": [
+        "contract_comparability"
+      ],
+      "source_review": {
+        "checked_at": "2026-11-11",
+        "method": "official_page_read_only",
+        "section": "Series of options",
+        "direct_support": "An option series is defined by class, strike and expiration; the example distinguishes calls.",
+        "analytical_inference": "Compare the same contract membership and specifications across dates before interpreting aggregate differences.",
+        "boundaries": "Matched-sample comparability is a project analytical inference, not an OCC guarantee about imported sample completeness."
+      }
+    },
+    {
+      "id": "expert.history_oi",
+      "title": "历史成交条不提供按日持仓字段",
+      "text": "IBKR的reqHistoricalData历史成交条返回OHLC和成交量，文档未列期权OI历史条类型；流式接口另有看涨和看跌OI字段。这些历史条本身不能恢复按日OI，须另取有统计日期的OI来源。这只限制这里的历史条接口，不代表其他来源没有历史OI。",
+      "text_en": "IBKR reqHistoricalData trade bars supply OHLC and volume; the documented historical bar types do not include option OI. Streaming data has separate call/put OI fields. These bars alone do not reconstruct daily OI; a separately dated source is needed. This limits this bar interface, not all sources.",
+      "url": "https://www.interactivebrokers.com/docs/tws-api/doc/md/historical-bars",
+      "publisher": "Interactive Brokers",
+      "reviewed_at": "2026-11-11",
+      "topics": [
+        "历史持仓",
+        "历史oi",
+        "oi history",
+        "historical open interest",
+        "持仓缺失",
+        "historical oi"
+      ],
+      "supports": [
+        "historical_oi_availability"
+      ],
+      "supporting_sources": [
+        {
+          "url": "https://www.interactivebrokers.com/docs/tws-api/doc/md/streaming-data",
+          "section": "Option Call/Put Open Interest, generic tick 101, fields 27/28",
+          "role": "OI is a separate streaming field, not volume in a historical TRADES bar."
+        }
+      ],
+      "source_review": {
+        "checked_at": "2026-11-11",
+        "method": "official_page_read_only",
+        "section": "WhatToShow Values; TRADES; streaming OI tick fields",
+        "direct_support": "The complete documented bar-type list has no option OI type; TRADES fields are OHLCV, while streaming OI is separate.",
+        "analytical_inference": "Do not substitute trade volume or present-day OI for an absent dated historical OI observation.",
+        "boundaries": "Does not claim all IBKR interfaces or third-party vendors lack historical OI."
+      }
+    }
+  ],
+  "support_facets": [
+    "bid_ask_execution",
+    "contract_comparability",
+    "expired_eod_limits",
+    "historical_bar_semantics",
+    "historical_contract_iv_limits",
+    "historical_oi_availability",
+    "historical_permissions",
+    "historical_time_basis",
+    "historical_volume_filtering",
+    "iv_direction_limits",
+    "oi_reporting_cycle",
+    "option_price_factors",
+    "put_call_limits",
+    "volume_vs_oi"
+  ],
+  "source_review_summary": {
+    "reviewed_at": "2026-11-11",
+    "original_chunks_reviewed": 13,
+    "current_chunks": 14,
+    "method": "Read-only official OIC/OCC, Cboe and IBKR pages. No market/account/model requests.",
+    "changes": [
+      "Added explicit claim facets and per-chunk direct-support versus inference boundaries.",
+      "Kept historical bar semantics separate from expired/EOD restrictions.",
+      "Narrowed permission diagnosis and removed unsupported strategy attribution from put/call text.",
+      "Added historical-bar OI availability with separate streaming-field reference."
+    ],
+    "limitation": "Human-reviewed summaries and facet checks constrain citations; they are not automatic semantic entailment proofs or authentication of market files."
+  }
+}

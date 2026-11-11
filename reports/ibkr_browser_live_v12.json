@@ -1,0 +1,632 @@
+{
+  "checked_at": "2026-11-11T06:21:17.503879+00:00",
+  "status": "passed_limited",
+  "workflow_status": "passed",
+  "scope": "Real Edge desktop UI against the local server; actual IBKR AAPL collection/refresh requested as delayed and two model chat turns. No options/chat response mocking. Full quotes require complete timestamped BBO in both captures; partial fields remain limited.",
+  "privacy": "Fresh browser context. Only the session-list GET is replaced with owned-session metadata; all financial responses are real. Screenshots mask the session list. No credentials, account fields, session IDs, prompts or protocol payloads are recorded.",
+  "transport": "Actual loopback HTTP, desktop Edge 1440x1000",
+  "base": "http://127.0.0.1:8000",
+  "automatic_script_retries": 0,
+  "provider_call_count_note": "This browser test observes two requested model turns. Provider-internal calls are not directly visible; returned generation/repair attempts are reported separately.",
+  "captures": [
+    {
+      "source": "ibkr",
+      "symbol": "AAPL",
+      "expiry": "2026-11-11",
+      "received_at": "2026-11-11T06:21:31.689408+00:00",
+      "analyzed_at": "2026-11-11T06:21:31.689408+00:00",
+      "timestamp_basis": "local_callback_arrival",
+      "requested_market_data_type": 3,
+      "actual_feed": "delayed",
+      "option_feed_types": [
+        3
+      ],
+      "requested_contracts": 6,
+      "numeric_bbo_contracts": 0,
+      "timestamped_bbo_contracts": 0,
+      "qualified_bbo_contracts_at_capture": 0,
+      "verified_numeric_quote_coverage": 0.0,
+      "market_data_level": "limited",
+      "complete_bbo_evidence": false,
+      "underlying_verified_midpoint": false,
+      "underlying_reference_basis_verified": true,
+      "underlying_qualified_at_capture": false,
+      "underlying_example": {
+        "price": 348.51,
+        "bid": null,
+        "ask": null,
+        "last": null,
+        "close": 348.51,
+        "price_basis": "close",
+        "received_at": "2026-11-11T06:21:23.148904+00:00",
+        "quote_received_at": null,
+        "close_received_at": "2026-11-11T06:21:23.148904+00:00",
+        "market_data_type": 3,
+        "last_trade_at": null
+      },
+      "field_availability_contracts": {
+        "bid": 0,
+        "ask": 0,
+        "last": 0,
+        "close": 6,
+        "volume": 6,
+        "open_interest": 5,
+        "implied_volatility": 6,
+        "delta": 6
+      },
+      "greeks_bases": [
+        "model"
+      ],
+      "safe_option_examples": [
+        {
+          "strike": 345.0,
+          "bid": null,
+          "ask": null,
+          "last": null,
+          "close": 4.32,
+          "volume": 0.0,
+          "open_interest": null,
+          "implied_volatility": 0.2798883255443494,
+          "delta": 0.7663311269276699,
+          "gamma": 0.06070611034891201,
+          "vega": 0.05685832906469379,
+          "theta": -0.7286944501858099,
+          "right": "C",
+          "expiration": "2026-11-11",
+          "greeks_basis": "model",
+          "market_data_type": 3,
+          "received_at": "2026-11-11T06:21:28.101063+00:00",
+          "greeks_received_at": "2026-11-11T06:21:26.248789+00:00",
+          "volume_received_at": "2026-11-11T06:21:28.101063+00:00",
+          "close_received_at": "2026-11-11T06:21:28.101063+00:00"
+        },
+        {
+          "strike": 345.0,
+          "bid": null,
+          "ask": null,
+          "last": null,
+          "close": 0.75,
+          "volume": 0.0,
+          "open_interest": 1038.0,
+          "implied_volatility": 0.2798883255443494,
+          "delta": -0.2338113504305838,
+          "gamma": 0.06076053477983276,
+          "vega": 0.056864726220507755,
+          "theta": -0.6983887964793597,
+          "right": "P",
+          "expiration": "2026-11-11",
+          "greeks_basis": "model",
+          "market_data_type": 3,
+          "received_at": "2026-11-11T06:21:26.335995+00:00",
+          "greeks_received_at": "2026-11-11T06:21:26.248789+00:00",
+          "volume_received_at": "2026-11-11T06:21:26.335995+00:00",
+          "open_interest_received_at": "2026-11-11T06:21:26.103167+00:00",
+          "close_received_at": "2026-11-11T06:21:26.335995+00:00"
+        }
+      ],
+      "transport_diagnostics": {
+        "stage": "complete",
+        "requested_market_data_type": 3,
+        "received_market_data_types": [
+          3
+        ],
+        "entitlement_status": "realtime_unsubscribed_delayed_available",
+        "data_status": "limited_option_fields",
+        "broker_codes": [
+          2104,
+          2107,
+          2119,
+          2158,
+          10090,
+          10167
+        ],
+        "reference_basis": "close",
+        "underlying_fields": [
+          "close"
+        ],
+        "option_contracts_requested": 6,
+        "option_contracts_with_bid_ask": 0,
+        "option_contracts_with_last": 0,
+        "option_contracts_with_close": 6,
+        "option_contracts_with_open_interest": 5,
+        "observed_tick_types": [
+          27,
+          28,
+          66,
+          67,
+          68,
+          74,
+          75,
+          76,
+          80,
+          81,
+          82,
+          83
+        ],
+        "wait_seconds": 13.171,
+        "timestamp_basis": "local_callback_arrival",
+        "interface_status": "market_callbacks_received"
+      },
+      "limitations": [
+        "Underlying reference is not a verified positive bid/ask midpoint; last/close is a limited reference.",
+        "Some or all option contracts lack valid positive bid/ask quotes; OI/last/close/Greeks do not replace them.",
+        "Actual data is not consistently live; recently received delayed/frozen data is not current exchange pricing."
+      ],
+      "latency_note": "All receipt times, including close_received_at, are local callback times, not exchange timestamps or proof of end-to-end latency. Unknown last_trade_at remains unknown; receiving a prior close does not establish a trade time."
+    },
+    {
+      "source": "ibkr",
+      "symbol": "AAPL",
+      "expiry": "2026-11-11",
+      "received_at": "2026-11-11T06:21:44.738974+00:00",
+      "analyzed_at": "2026-11-11T06:21:44.738974+00:00",
+      "timestamp_basis": "local_callback_arrival",
+      "requested_market_data_type": 3,
+      "actual_feed": "delayed",
+      "option_feed_types": [
+        3
+      ],
+      "requested_contracts": 6,
+      "numeric_bbo_contracts": 0,
+      "timestamped_bbo_contracts": 0,
+      "qualified_bbo_contracts_at_capture": 0,
+      "verified_numeric_quote_coverage": 0.0,
+      "market_data_level": "limited",
+      "complete_bbo_evidence": false,
+      "underlying_verified_midpoint": false,
+      "underlying_reference_basis_verified": true,
+      "underlying_qualified_at_capture": false,
+      "underlying_example": {
+        "price": 348.51,
+        "bid": null,
+        "ask": null,
+        "last": null,
+        "close": 348.51,
+        "price_basis": "close",
+        "received_at": "2026-11-11T06:21:36.231375+00:00",
+        "quote_received_at": null,
+        "close_received_at": "2026-11-11T06:21:36.231375+00:00",
+        "market_data_type": 3,
+        "last_trade_at": null
+      },
+      "field_availability_contracts": {
+        "bid": 0,
+        "ask": 0,
+        "last": 0,
+        "close": 6,
+        "volume": 6,
+        "open_interest": 6,
+        "implied_volatility": 6,
+        "delta": 6
+      },
+      "greeks_bases": [
+        "model"
+      ],
+      "safe_option_examples": [
+        {
+          "strike": 345.0,
+          "bid": null,
+          "ask": null,
+          "last": null,
+          "close": 4.32,
+          "volume": 0.0,
+          "open_interest": 784.0,
+          "implied_volatility": 0.2798883255443494,
+          "delta": 0.7663311269276699,
+          "gamma": 0.06070611034891201,
+          "vega": 0.05685832906469379,
+          "theta": -0.7286944501858099,
+          "right": "C",
+          "expiration": "2026-11-11",
+          "greeks_basis": "model",
+          "market_data_type": 3,
+          "received_at": "2026-11-11T06:21:40.017111+00:00",
+          "greeks_received_at": "2026-11-11T06:21:38.236464+00:00",
+          "volume_received_at": "2026-11-11T06:21:40.017111+00:00",
+          "open_interest_received_at": "2026-11-11T06:21:37.558242+00:00",
+          "close_received_at": "2026-11-11T06:21:40.017111+00:00"
+        },
+        {
+          "strike": 345.0,
+          "bid": null,
+          "ask": null,
+          "last": null,
+          "close": 0.75,
+          "volume": 0.0,
+          "open_interest": 1038.0,
+          "implied_volatility": 0.2798883255443494,
+          "delta": -0.2338113504305838,
+          "gamma": 0.06076053477983276,
+          "vega": 0.056864726220507755,
+          "theta": -0.6983887964793597,
+          "right": "P",
+          "expiration": "2026-11-11",
+          "greeks_basis": "model",
+          "market_data_type": 3,
+          "received_at": "2026-11-11T06:21:37.837248+00:00",
+          "greeks_received_at": "2026-11-11T06:21:37.834696+00:00",
+          "volume_received_at": "2026-11-11T06:21:37.837248+00:00",
+          "open_interest_received_at": "2026-11-11T06:21:37.558242+00:00",
+          "close_received_at": "2026-11-11T06:21:37.837248+00:00"
+        }
+      ],
+      "transport_diagnostics": {
+        "stage": "complete",
+        "requested_market_data_type": 3,
+        "received_market_data_types": [
+          3
+        ],
+        "entitlement_status": "realtime_unsubscribed_delayed_available",
+        "data_status": "limited_option_fields",
+        "broker_codes": [
+          2104,
+          2107,
+          2158,
+          10090,
+          10167
+        ],
+        "reference_basis": "close",
+        "underlying_fields": [
+          "close"
+        ],
+        "option_contracts_requested": 6,
+        "option_contracts_with_bid_ask": 0,
+        "option_contracts_with_last": 0,
+        "option_contracts_with_close": 6,
+        "option_contracts_with_open_interest": 6,
+        "observed_tick_types": [
+          10,
+          11,
+          12,
+          27,
+          28,
+          66,
+          67,
+          68,
+          74,
+          75,
+          76,
+          80,
+          81,
+          82,
+          83
+        ],
+        "wait_seconds": 11.687,
+        "timestamp_basis": "local_callback_arrival",
+        "interface_status": "market_callbacks_received"
+      },
+      "limitations": [
+        "Underlying reference is not a verified positive bid/ask midpoint; last/close is a limited reference.",
+        "Some or all option contracts lack valid positive bid/ask quotes; OI/last/close/Greeks do not replace them.",
+        "Actual data is not consistently live; recently received delayed/frozen data is not current exchange pricing."
+      ],
+      "latency_note": "All receipt times, including close_received_at, are local callback times, not exchange timestamps or proof of end-to-end latency. Unknown last_trade_at remains unknown; receiving a prior close does not establish a trade time."
+    }
+  ],
+  "turns": [
+    {
+      "mode": "deepseek",
+      "warning": null,
+      "answer_excerpt": "这份样本来自显式重新采集，并与上次快照对照；解释本身不再额外采集行情。本地接收时间不能保证交易所行情的实时性。\n标的仅使用收盘参考价选择合约范围，不代表当前可成交报价；本地接收时间也不是收盘发生时间。\n其中含延迟或冻结资料，近期收到也不等于当前市场报价。\n\n这次是显式重新采集后的前后对照，不是模型再去抓行情。两次都是延迟行情，采集间隔很短；本地接收时间只说明数据到达本地的时间，不等于交易所时间，也不保证实时。\n\n能真正前后比较的只有两项：有效报价覆盖前后都为零，配对样本成交总数前后都为零，方向都是“不变”。其余指标要么前后都缺失，要么因为配对的行权价集合变了而不可比，所以不能据此说市场涨了或跌了。 [change.s0.quote_coverage] [change.s0.volume_total]\n\n看跌未平仓占比和未平仓总数在两次样本里数值不同，但对照明确标注配对行权价集合改变，因此这两个差值不成立，不能当成看跌持仓增加或资金流入。未平仓量本身有独立报告周期，即使可比也不等于新方向性持仓。 [change.s0.oi_put_share] [change.s0.oi_total]\n\n当前样本里，持仓配对覆盖完整，看跌持仓占比略低于看涨一侧，且持仓高度集中在少数行权价。但成交侧没有有效计数，看跌成交占比、价差、近平值波动率都缺失，所以只能描述持仓结构，不能推断交易方向或情绪。 [g0.oi_coverage] [g0.oi_put_share] [g0.oi_top_two_share] [g0.volume_put_share] [g0.median_spread] [g0.atm_iv]\n\n报价覆盖为零、有效报价合约为零，说明这次采集没有拿到可用的双边报价；这不能单独证明市场休市或订阅被拒，其他原因仍未知。没有合格报价，就无法判断屏幕价格是否可成交。 [g0.quality_quote_coverage] [g0.quality_valid_quote_contracts]\n\n若想得到可比较的结论，需要等报价覆盖恢复、成交计数出现，并保持前后配对的行权价集合一致；届时再看价差和波动率是否可比。在此之前，不宜把任何变化解读为方向信号。",
+      "server_reported_generation_attempts": 1,
+      "server_reported_schema_repair_attempts": 0,
+      "analysis_binding_matches": true,
+      "comparison_retained": true,
+      "realtime_guaranteed": false,
+      "citations": [
+        {
+          "id": "change.s0.quote_coverage",
+          "before": 0.0,
+          "after": 0.0,
+          "delta": 0.0,
+          "status": "comparable",
+          "matches_original": true
+        },
+        {
+          "id": "change.s0.volume_total",
+          "before": 0,
+          "after": 0,
+          "delta": 0,
+          "status": "comparable",
+          "matches_original": true
+        },
+        {
+          "id": "change.s0.oi_put_share",
+          "before": 0.42794612794612796,
+          "after": 0.48184474123539234,
+          "delta": null,
+          "status": "incomparable",
+          "matches_original": true
+        },
+        {
+          "id": "change.s0.oi_total",
+          "before": 2970,
+          "after": 4792,
+          "delta": null,
+          "status": "incomparable",
+          "matches_original": true
+        },
+        {
+          "id": "g0.oi_coverage",
+          "value": 1.0,
+          "matches_original": true
+        },
+        {
+          "id": "g0.oi_put_share",
+          "value": 0.48184474123539234,
+          "matches_original": true
+        },
+        {
+          "id": "g0.oi_top_two_share",
+          "value": 0.8537145242070117,
+          "matches_original": true
+        },
+        {
+          "id": "g0.volume_put_share",
+          "value": null,
+          "matches_original": true
+        },
+        {
+          "id": "g0.median_spread",
+          "value": null,
+          "matches_original": true
+        },
+        {
+          "id": "g0.atm_iv",
+          "value": null,
+          "matches_original": true
+        },
+        {
+          "id": "g0.quality_quote_coverage",
+          "value": 0.0,
+          "matches_original": true
+        },
+        {
+          "id": "g0.quality_valid_quote_contracts",
+          "value": 0,
+          "matches_original": true
+        }
+      ]
+    },
+    {
+      "mode": "deepseek",
+      "warning": null,
+      "answer_excerpt": "这份样本来自显式重新采集，并与上次快照对照；解释本身不再额外采集行情。本地接收时间不能保证交易所行情的实时性。\n标的仅使用收盘参考价选择合约范围，不代表当前可成交报价；本地接收时间也不是收盘发生时间。\n其中含延迟或冻结资料，近期收到也不等于当前市场报价。\n\n不能。这次前后对照里，真正可比的只有两项：有效报价覆盖前后都为零，配对样本成交总数前后都为零，方向都是“不变”。其余指标要么前后都缺失，要么因为配对的行权价集合变了而不可比，所以没有任何一项能支撑“市场转向”的说法。 [change.s0.quote_coverage] [change.s0.volume_total]\n\n看跌未平仓占比和未平仓总数在两次样本里数值不同，但对照明确标注配对行权价集合改变，因此这两个差值不成立，不能当成看跌持仓增加或资金流入。未平仓量本身有独立报告周期，即使可比也不等于新方向性持仓。 [change.s0.oi_put_share] [change.s0.oi_total]\n\n当前样本里，持仓配对覆盖完整，看跌持仓占比略低于看涨一侧，且持仓高度集中在少数行权价。但成交侧没有有效计数，看跌成交占比、价差、近平值波动率都缺失，所以只能描述持仓结构，不能推断交易方向或情绪。 [g0.oi_coverage] [g0.oi_put_share] [g0.oi_top_two_share] [g0.volume_put_share] [g0.median_spread] [g0.atm_iv]\n\n报价覆盖为零、有效报价合约为零，说明这次采集没有拿到可用的双边报价；这不能单独证明市场休市或订阅被拒，其他原因仍未知。没有合格报价，就无法判断屏幕价格是否可成交。 [g0.quality_quote_coverage] [g0.quality_valid_quote_contracts]\n\n若想得到可比较的结论，需要等报价覆盖恢复、成交计数出现，并保持前后配对的行权价集合一致；届时再看价差和波动率是否可比。在此之前，不宜把任何变化解读为方向信号。",
+      "server_reported_generation_attempts": 1,
+      "server_reported_schema_repair_attempts": 0,
+      "analysis_binding_matches": true,
+      "comparison_retained": true,
+      "realtime_guaranteed": false,
+      "citations": [
+        {
+          "id": "change.s0.quote_coverage",
+          "before": 0.0,
+          "after": 0.0,
+          "delta": 0.0,
+          "status": "comparable",
+          "matches_original": true
+        },
+        {
+          "id": "change.s0.volume_total",
+          "before": 0,
+          "after": 0,
+          "delta": 0,
+          "status": "comparable",
+          "matches_original": true
+        },
+        {
+          "id": "change.s0.oi_put_share",
+          "before": 0.42794612794612796,
+          "after": 0.48184474123539234,
+          "delta": null,
+          "status": "incomparable",
+          "matches_original": true
+        },
+        {
+          "id": "change.s0.oi_total",
+          "before": 2970,
+          "after": 4792,
+          "delta": null,
+          "status": "incomparable",
+          "matches_original": true
+        },
+        {
+          "id": "g0.oi_coverage",
+          "value": 1.0,
+          "matches_original": true
+        },
+        {
+          "id": "g0.oi_put_share",
+          "value": 0.48184474123539234,
+          "matches_original": true
+        },
+        {
+          "id": "g0.oi_top_two_share",
+          "value": 0.8537145242070117,
+          "matches_original": true
+        },
+        {
+          "id": "g0.volume_put_share",
+          "value": null,
+          "matches_original": true
+        },
+        {
+          "id": "g0.median_spread",
+          "value": null,
+          "matches_original": true
+        },
+        {
+          "id": "g0.atm_iv",
+          "value": null,
+          "matches_original": true
+        },
+        {
+          "id": "g0.quality_quote_coverage",
+          "value": 0.0,
+          "matches_original": true
+        },
+        {
+          "id": "g0.quality_valid_quote_contracts",
+          "value": 0,
+          "matches_original": true
+        }
+      ]
+    }
+  ],
+  "checks": [
+    "real_options_and_chat_responses",
+    "ui_refresh_button_then_ui_followup",
+    "draft_preserved",
+    "new_context_and_two_version_history",
+    "old_and_new_json_unchanged",
+    "local_comparison_values_and_all_citations_verified",
+    "two_deepseek_mode_replies",
+    "actual_data_level_distinguished_from_full_quotes",
+    "session_export_preserves_context",
+    "no_pageerror_or_horizontal_overflow",
+    "privacy_filtered_sidebar_and_masked_screenshots"
+  ],
+  "screenshots": [
+    "reports/screenshots/options-v12-live/ibkr-refresh-desktop.png",
+    "reports/screenshots/options-v12-live/ibkr-followup-desktop.png"
+  ],
+  "counters": {
+    "initial_analysis_http_requests": 1,
+    "refresh_ui_http_requests": 1,
+    "followup_ui_http_requests": 1,
+    "confirmed_deepseek_replies": 2
+  },
+  "browser": {
+    "channel": "msedge",
+    "version": "155.0.4283.45",
+    "headless": true,
+    "viewport": {
+      "width": 1440,
+      "height": 1000
+    }
+  },
+  "phase": "complete",
+  "app_version": "12.0.0",
+  "model": "deepseek-flash",
+  "old_analysis_id": "78a590cb-dfe6-4619-b4e0-11e4b95f13b4",
+  "old_fingerprint": "6404e04330a74dbfde643f31333c5871ec59d23ebda5d09366bb2a2d1f57f638",
+  "new_analysis_id": "d945bc88-ffa7-4735-94d3-7350eba1528e",
+  "comparison_status": "partial",
+  "local_changes": [
+    {
+      "id": "change.s0.quote_coverage",
+      "before": 0.0,
+      "after": 0.0,
+      "delta": 0.0,
+      "unit": "fraction",
+      "delta_unit": "percentage_points",
+      "status": "comparable",
+      "reason": null,
+      "direction": "unchanged"
+    },
+    {
+      "id": "change.s0.volume_put_share",
+      "before": null,
+      "after": null,
+      "delta": null,
+      "unit": "fraction",
+      "delta_unit": "percentage_points",
+      "status": "incomparable",
+      "reason": "missing_both",
+      "direction": "unavailable"
+    },
+    {
+      "id": "change.s0.oi_put_share",
+      "before": 0.42794612794612796,
+      "after": 0.48184474123539234,
+      "delta": null,
+      "unit": "fraction",
+      "delta_unit": "percentage_points",
+      "status": "incomparable",
+      "reason": "oi_pair_sample_changed",
+      "direction": "unavailable"
+    },
+    {
+      "id": "change.s0.volume_total",
+      "before": 0,
+      "after": 0,
+      "delta": 0,
+      "unit": "contracts",
+      "delta_unit": "contracts",
+      "status": "comparable",
+      "reason": null,
+      "direction": "unchanged"
+    },
+    {
+      "id": "change.s0.oi_total",
+      "before": 2970,
+      "after": 4792,
+      "delta": null,
+      "unit": "contracts",
+      "delta_unit": "contracts",
+      "status": "incomparable",
+      "reason": "oi_pair_sample_changed",
+      "direction": "unavailable"
+    },
+    {
+      "id": "change.s0.median_spread",
+      "before": null,
+      "after": null,
+      "delta": null,
+      "unit": "percent",
+      "delta_unit": "percentage_points",
+      "status": "incomparable",
+      "reason": "quote_contract_set_unverified",
+      "direction": "unavailable"
+    },
+    {
+      "id": "change.s0.atm_iv",
+      "before": null,
+      "after": null,
+      "delta": null,
+      "unit": "fraction",
+      "delta_unit": "volatility_points",
+      "status": "incomparable",
+      "reason": "atm_definition_missing",
+      "direction": "unavailable"
+    }
+  ],
+  "draft_preserved_during_refresh": true,
+  "ui_history_count_after_refresh": 2,
+  "comparison_dom_status_matches_local": true,
+  "old_snapshot_unchanged_after_refresh": true,
+  "market_data_level": "limited",
+  "full_quote_validation": false,
+  "old_snapshot_unchanged": true,
+  "history_count": 2,
+  "persisted_chat_turns": 2,
+  "server_reported_total_generation_attempts": 2,
+  "owned_session_removed": true,
+  "owned_immutable_analyses_retained": 2,
+  "page_errors": [],
+  "blocked_requests": [],
+  "elapsed_seconds": 37.976,
+  "limits": [
+    "Underlying reference is not a verified positive bid/ask midpoint; last/close is a limited reference.",
+    "Some or all option contracts lack valid positive bid/ask quotes; OI/last/close/Greeks do not replace them.",
+    "Actual data is not consistently live; recently received delayed/frozen data is not current exchange pricing."
+  ],
+  "semantic_review": {
+    "reviewed": true,
+    "status": "accepted_limited",
+    "reviewed_at": "2026-11-11T06:26:11.653206+00:00",
+    "scope": "Both actual final server-answer excerpts and locally resolved citations were manually reviewed. This acceptance concerns this captured limited-data sample, not universal model correctness or full market quotes.",
+    "findings": [
+      "No unsupported market-turn prediction or primary causal explanation was found in the reviewed answers.",
+      "The answers distinguish explicit zero paired-volume totals from undefined put-volume share, and reject OI deltas when the actual paired strike set changes.",
+      "Closing reference, delayed feed and local receipt times remain explicit; no closing reference is represented as current BBO or exchange trade time."
+    ],
+    "non_blocking_wording_limits": [
+      "The phrase 成交侧没有有效计数 is imprecise: volume fields were received as explicit zero, not missing; with a zero denominator the put-volume share is undefined. Read it as no non-zero paired activity to interpret.",
+      "The phrase 报价覆盖恢复 should be read as obtaining sufficient valid quotes. This run does not establish an earlier historical quote-coverage baseline or prove that quotes previously existed."
+    ]
+  },
+  "screenshots_privacy_review": "Both final screenshots were visually inspected: session-list masks are present, comparison values/missingness are shown consistently, and no credentials or account fields were observed.",
+  "prior_failed_report_archive": "tmp/ibkr-browser-live-v12-failed-20261111T062108743369Z.json",
+  "prior_failed_screenshot_archive": "tmp/ibkr-browser-live-v12-failed-20261111T062108743369Z-screenshots"
+}

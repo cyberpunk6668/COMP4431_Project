@@ -1,0 +1,14 @@
+/* Task-first workspace. Existing tools retain their own focus/dialog behavior. */
+.workspace-theme .workspace-welcome{display:block;min-height:0;padding:28px 0 18px;margin-bottom:10px;gap:0}
+.workspace-welcome .hero-copy{max-width:none}.workspace-welcome .workspace-kicker{font-size:10px;letter-spacing:.15em;color:var(--accent-text);margin:0 0 14px}
+.workspace-theme .workspace-welcome h1{font-size:clamp(27px,3vw,40px);line-height:1.25;letter-spacing:-.035em;margin:0 0 12px}
+.workspace-theme .workspace-welcome .hero-description{font-size:14px;line-height:1.8;margin:0;max-width:650px}
+.workspace-launcher{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:24px 0 0}
+.workspace-launcher-card{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:10px;min-width:0;text-align:left;text-decoration:none;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:14px;padding:19px 17px;font:inherit;cursor:pointer;transition:transform .2s,border-color .2s,box-shadow .2s}
+.workspace-launcher-card.featured{background:linear-gradient(130deg,var(--accent-soft),var(--surface));border-color:var(--line-strong)}
+.workspace-launcher-card .launcher-number{font-size:9px;letter-spacing:.12em;color:var(--muted)}.workspace-launcher-card strong{font-size:16px;font-weight:600}.workspace-launcher-card>span:last-of-type{font-size:12px;line-height:1.75;color:var(--muted);padding-right:10px}.workspace-launcher-card b{position:absolute;top:18px;right:14px;color:var(--accent-text);font-size:15px;font-weight:400}
+.workspace-launcher-card:hover{transform:translateY(-2px);border-color:var(--line-strong);box-shadow:var(--card-shadow)}.workspace-launcher-card:focus-visible{outline:2px solid var(--focus);outline-offset:3px}
+.options-entry-guide{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px;align-items:center;margin:10px 0 20px}.options-demo-entry{display:grid;gap:6px;padding:16px 18px;border:1px solid var(--line-strong);border-radius:12px;background:var(--accent-soft);text-decoration:none;color:var(--ink)}.options-demo-entry strong{font-size:14px}.options-demo-entry span,.options-entry-guide p{font-size:12px;line-height:1.8;color:var(--muted);margin:0}
+@media(max-width:760px){.workspace-launcher{grid-template-columns:1fr;margin-top:18px}.workspace-launcher-card{padding:16px}.workspace-launcher-card>span:last-of-type{padding-right:20px}.options-entry-guide{grid-template-columns:1fr;gap:10px}.workspace-theme .workspace-welcome{padding-top:16px}.workspace-theme .workspace-welcome h1{font-size:29px}}
+@media(prefers-reduced-motion:reduce){.workspace-launcher-card{transition:none}.workspace-launcher-card:hover{transform:none}}
+:root[data-motion="reduced"] .workspace-launcher-card{transition:none;transform:none}

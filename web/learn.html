@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#FAFAFA"><meta name="description" content="FinPilot 期权互动学习：用明确合成的情景读懂市场线索，在本地试算到期盈亏，再带着同一份数据追问。">
+  <title>FinPilot · 期权学习实验室</title>
+  <link rel="icon" href="/static/favicon.svg"><link rel="stylesheet" href="/static/learn.css">
+  <script defer src="/static/learn.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#scenario-section" data-copy="skip">跳到情景选择</a>
+  <header class="site-header wrap">
+    <a class="brand" href="/" aria-label="FinPilot 首页"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 2 9 5v10l-9 5-9-5V7Z"/></svg><span>FinPilot<span class="brand-dot">.</span><small>OPTIONS FIELD LAB</small></span></a>
+    <nav class="header-links" aria-label="Project navigation"><a href="/help" data-copy="help">使用指南</a><button id="lab-language" type="button" aria-label="Switch to English">EN</button><a class="outline-link" href="/workspace?view=options" data-copy="workspace">专业工作台 ↗</a></nav>
+  </header>
+  <main class="wrap">
+    <section class="intro" aria-labelledby="lab-title">
+      <div><p class="eyebrow">SMALL SCENARIOS. CLEARER QUESTIONS.</p><h1 id="lab-title" data-copy="title">期权里的线索，<br>从这里看明白。</h1><p class="intro-text" data-copy="intro">选一组教学情景，理解数字传递了什么，再亲手改变假设。无需券商账户，也不需要先懂所有术语。</p></div>
+      <aside class="intro-aside"><span class="micro-label">YOUR FIRST FIVE MINUTES</span><ol><li><b>01</b><span data-copy="journey1">看见线索</span></li><li><b>02</b><span data-copy="journey2">试算结果</span></li><li><b>03</b><span data-copy="journey3">带着依据追问</span></li></ol><p data-copy="journeyNote">学习如何提问与判断，不提供交易指令。</p></aside>
+    </section>
+    <div class="source-ribbon"><span class="source-pill" data-copy="synthetic">合成教学数据</span><p id="lab-source" data-copy="sourceIntro">以下数字用于解释概念，不是实时行情或投资建议。</p><span class="local-label" data-copy="localOnly">本地计算 · 无自动模型调用</span></div>
+    <p id="lab-error" class="error" role="alert" hidden></p><button id="lab-retry" class="text-button" type="button" data-copy="retry" hidden>重新读取情景</button>
+    <section id="scenario-section" class="section" aria-labelledby="scenario-title">
+      <div class="section-top"><div><p class="section-number">01 / OBSERVE</p><h2 id="scenario-title" data-copy="chooseTitle">先选一个你想弄清的问题。</h2></div><p data-copy="chooseHint">切换情景只读取本地示例，不连接 IBKR。</p></div>
+      <div id="lab-scenarios" class="scenario-grid" role="group" aria-label="Teaching scenarios"><p class="loading" data-copy="loading">正在读取教学情景…</p></div>
+      <section id="lab-story" class="story-panel" aria-live="polite" aria-busy="true">
+        <div class="story-heading"><div><span class="micro-label" data-copy="readout">THIS SAMPLE, IN PLAIN WORDS</span><h3 id="lab-scenario-title">—</h3><p id="lab-scenario-goal"></p></div><span class="data-tag" data-copy="synthetic">合成教学数据</span></div>
+        <div id="lab-metrics" class="metric-grid"></div>
+        <div id="lab-insights" class="insight-grid"></div>
+        <details id="lab-professional" class="professional"><summary><span data-copy="professional">展开专业数据与判断依据</span><span aria-hidden="true">＋</span></summary><p data-copy="professionalHint">同一份教学数据的详细报价。报价与 IV 都是预设假设，不是交易所返回值。</p><div class="table-scroll"><table id="lab-quotes"><caption data-copy="quoteCaption">合成示例合约的报价与活动</caption><thead></thead><tbody></tbody></table></div><div id="lab-evidence" class="evidence-list"></div></details>
+      </section>
+    </section>
+    <section id="trial-section" class="section" aria-labelledby="trial-title">
+      <div class="section-top"><div><p class="section-number">02 / EXPERIMENT</p><h2 id="trial-title" data-copy="trialTitle">如果到期价格变了，会怎样？</h2></div><p data-copy="trialHint">这是到期公式试算，不是价格预测，也不是提前卖出的估值。</p></div>
+      <div class="trial-layout">
+        <form id="lab-trial-form" class="trial-form"><fieldset id="lab-fields" disabled>
+          <label class="field" for="lab-strategy"><span data-copy="strategy">想了解的结构</span><select id="lab-strategy" name="strategy"><option value="long_call" data-copy="longCall">买入看涨期权</option><option value="long_put" data-copy="longPut">买入看跌期权</option><option value="call_debit_spread" data-copy="callSpread">看涨借记价差</option></select></label>
+          <p id="lab-strategy-note" class="field-note"></p>
+          <div class="field-pair"><label class="field" for="lab-strike"><span data-copy="strike">买入合约行权价（USD）</span><select id="lab-strike" name="strike"><option value="95">95</option><option value="100" selected>100</option><option value="105">105</option></select></label><label class="field" for="lab-contracts"><span data-copy="contracts">合约份数</span><input id="lab-contracts" name="contracts" type="number" inputmode="numeric" min="1" max="10" step="1" value="1" required></label></div>
+          <label id="lab-upper-field" class="field" for="lab-upper" hidden><span data-copy="upperStrike">卖出合约行权价（USD）</span><select id="lab-upper" name="upper_strike"><option value="100">100</option><option value="105" selected>105</option><option value="110">110</option></select></label>
+          <label class="field" for="lab-execution"><span data-copy="execution">权利金计算假设</span><select id="lab-execution" name="execution"><option value="natural" data-copy="natural">按买卖报价：买入用 ask，卖出用 bid</option><option value="midpoint" data-copy="midpoint">按中间价：不保证能成交</option></select></label>
+          <label class="field price-field" for="lab-price"><span data-copy="expiryPrice">假设到期时标的价格（USD）</span><input id="lab-price" name="expiry_price" type="number" inputmode="decimal" min="0" max="1000" step="0.01" value="105" required></label>
+          <input id="lab-price-range" type="range" min="0" max="200" step="1" value="105" aria-label="假设到期时标的价格">
+          <div class="range-labels"><span>0</span><span id="lab-range-max">200</span></div>
+          <button id="lab-calculate" class="button-primary" type="submit" data-copy="calculate">更新本地试算 ↗</button>
+          <p class="form-boundary" data-copy="trialBoundary">每份合约对应 100 股；所有盈亏为整组美元总额。费用、税费、提前行权与指派未计入。</p>
+        </fieldset></form>
+        <section id="lab-trial" class="trial-result" aria-live="polite" aria-busy="false">
+          <div class="result-heading"><div><span class="micro-label" data-copy="expiryOnly">AT EXPIRY / USD TOTAL</span><h3 data-copy="resultTitle">看清结果与代价。</h3></div><p id="lab-trial-status" role="status"></p></div>
+          <div class="pnl-primary"><span data-copy="trialPnl">假设价格下的到期盈亏</span><strong id="lab-pnl">—</strong><p id="lab-pnl-context"></p></div>
+          <div id="lab-trial-metrics" class="trial-metric-grid"></div>
+          <figure class="payoff-figure"><div class="chart-heading"><strong data-copy="chartTitle">到期价格与整组盈亏</strong><span class="chart-legend"><i></i><span data-copy="curveLegend">本地公式</span></span></div><svg id="lab-chart" viewBox="0 0 640 330" role="img" aria-labelledby="lab-chart-title lab-chart-desc"><title id="lab-chart-title">到期盈亏曲线</title><desc id="lab-chart-desc">选择情景后显示本地计算的到期盈亏，不代表发生概率。</desc></svg><figcaption data-copy="chartNote">横轴：标的到期价格（USD） · 纵轴：整组盈亏（USD）。曲线不包含发生概率。</figcaption></figure>
+          <details class="curve-details"><summary data-copy="tableAlternative">用表格查看曲线与计算假设</summary><div class="table-scroll"><table id="lab-curve-table"><thead></thead><tbody></tbody></table></div><ul id="lab-assumptions"></ul><p id="lab-formula" class="formula"></p></details>
+        </section>
+      </div>
+    </section>
+    <section id="followup-section" class="followup-section" aria-labelledby="followup-title">
+      <div><p class="section-number">03 / ASK WITH EVIDENCE</p><h2 id="followup-title" data-copy="followTitle">把这份演示，变成一个好问题。</h2><p data-copy="followDescription">保存当前情景与试算，进入一段独立聊天。助手读取同一份教学数据，问题由你核对后发送。</p><div class="question-chips" id="lab-questions"><button type="button" data-question="signal" data-copy="questionSignal">哪些线索能确认，哪些不能？</button><button type="button" data-question="risk" data-copy="questionRisk">这个试算的损失上限是什么？</button><button type="button" data-question="difference" data-copy="questionDifference">为什么到期涨了也可能亏钱？</button></div></div>
+      <div class="followup-actions"><button id="lab-save" class="button-secondary" type="button" disabled data-copy="save">保存这份演示</button><button id="lab-followup" class="button-primary" type="button" disabled data-copy="follow">带着这份演示追问 ↗</button><p id="lab-save-status" role="status" data-copy="saveBoundary">保存不请求模型；进入聊天也不会自动发送。</p></div>
+    </section>
+    <footer class="lab-footer"><span>FINPILOT / UNDERSTAND BEFORE YOU CONCLUDE</span><p data-copy="footer">合成情景用于学习。活动、报价与波动率只是不同线索，不能单独证明市场方向或保证收益。</p><a href="/demo" data-copy="archiveDemo">查看真实历史档案演示 ↗</a></footer>
+  </main>
+</body>
+</html>

@@ -32,6 +32,8 @@ from app.expert_knowledge import ExpertKnowledge
 from app.service import ChatService, _FINANCE_CONTEXT, _GENERAL_TASK, _follow_up
 from app.storage import Store
 from app.companion import CompanionBus, ConnectionInput, ActivityInput, StaleConnection, ActivityLimit, encode_event
+from app.options_lab import catalogue as lab_catalogue, build_scenario, evaluate as evaluate_lab, LabEvaluationRequest
+from app.project_help import CURRENT_VERSION as HELP_VERSION, MANUAL_VERSION
 
 
 class ChatRequest(BaseModel):
@@ -586,7 +588,8 @@ def create_app(settings: Settings | None = None, *, options_provider=None, histo
                 help_context = service.project_help.resolve(body.message,session["messages"],body.language)
                 if help_context is not None:
                     result = await service.answer(body.message,session["messages"],body.language,body.engine,project_context=help_context)
-                elif record is not None and uses_analysis_context(body.message):
+                elif record is not None and (uses_analysis_context(body.message) or record.get("lab_context") and re.search(
+                    r"盈亏|试算|到期|权利金|成本|最大(?:损失|收益)|行权|\b(?:payoff|break.even|premium|cost|expiry|expiration|strategy|maximum (?:loss|gain))\b", body.message,re.I)):
                     selected_chat = history_chat if record.get("analysis_kind") == "historical_options" else option_chat
                     result = await selected_chat.answer(body.message, session["messages"], body.language, body.engine, record)
                 else:
@@ -618,6 +621,36 @@ def create_app(settings: Settings | None = None, *, options_provider=None, histo
     def desktop_pet():
         return FileResponse(ROOT / "web" / "pet.html")
 
+    @app.get("/learn", include_in_schema=False)
+    def options_learning_page():
+        return FileResponse(ROOT / "web" / "learn.html")
+
+    @app.get("/api/options-lab/scenarios")
+    def options_learning_scenarios(language: Literal["zh","en"] = "zh"):
+        return lab_catalogue(language=language)
+
+    @app.get("/api/options-lab/scenarios/{scenario_id}")
+    def options_learning_scenario(scenario_id: str, language: Literal["zh","en"] = "zh"):
+        try:
+            return build_scenario(scenario_id,language=language)
+        except (KeyError,ValueError):
+            raise HTTPException(404,"Unknown teaching scenario") from None
+
+    @app.post("/api/options-lab/evaluate")
+    def options_learning_evaluate(body: LabEvaluationRequest):
+        try:
+            return evaluate_lab(body)
+        except ValueError as error:
+            raise HTTPException(422,"Invalid teaching calculation") from error
+
+    @app.post("/api/options-lab/save")
+    def options_learning_save(body: LabEvaluationRequest):
+        try:
+            result = evaluate_lab(body)
+        except ValueError as error:
+            raise HTTPException(422,"Invalid teaching calculation") from error
+        return {**result,"analysis_id":store.save_analysis(result)}
+
     @app.get("/help", include_in_schema=False)
     def project_manual_page():
         return FileResponse(ROOT / "web" / "help.html")
@@ -627,7 +660,7 @@ def create_app(settings: Settings | None = None, *, options_provider=None, histo
         manual = service.project_help
         topics = manual.catalogue(language=language)
         sample = topics[0] if topics else {}
-        return {"manual_version":sample.get("manual_version","16.0"),"current_version":16,"topics":topics}
+        return {"manual_version":sample.get("manual_version",MANUAL_VERSION),"current_version":HELP_VERSION,"topics":topics}
 
     @app.get("/api/project-help/search")
     def search_project_manual(q: str = "", language: Literal["zh","en"] = "zh", limit: int = 4):
@@ -636,7 +669,7 @@ def create_app(settings: Settings | None = None, *, options_provider=None, histo
         if re.search(r"\bsk-[a-zA-Z0-9_-]{16,}",q):
             raise HTTPException(422,"Remove credentials before searching the public manual")
         topics = service.project_help.search(q,language=language,limit=limit)
-        return {"manual_version":topics[0].get("manual_version","16.0") if topics else "16.0","topics":topics}
+        return {"manual_version":topics[0].get("manual_version",MANUAL_VERSION) if topics else MANUAL_VERSION,"topics":topics}
 
     @app.get("/api/project-help/topics/{topic_id}")
     def project_manual_topic(topic_id: str, language: Literal["zh","en"] = "zh"):

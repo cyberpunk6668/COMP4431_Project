@@ -16,12 +16,13 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
-from scripts.package_submission import (APPLICATION_VERSION, NATIVE_HOST_VERSION, V16_REQUIRED_FILES,
+from scripts.package_submission import (APPLICATION_VERSION, NATIVE_HOST_VERSION, V16_REQUIRED_FILES, V17_REQUIRED_FILES,
                                         PORTABLE, PORTABLE_BYTES, PORTABLE_SHA256, SECRET_PATTERNS, scan_stream)
 
-ZIP = ROOT / "dist" / "FinPilot_submission_v16.zip"
+ZIP = ROOT / "dist" / "FinPilot_submission_v17.zip"
 V15_ACCEPTANCE = ["native_companion_v15.json", "pet_cloud_v15.json", "python_regression_v15.json", "companion_acceptance_v15.json"]
 V16_ACCEPTANCE = ["project_help_ui_v16.json", "project_help_live_v16.json", "python_regression_v16.json"]
+V17_ACCEPTANCE = ["options_lab_ui_v17.json", "experience_ui_v17.json", "python_regression_v17.json", "options_lab_live_v17.json", "feature_audit_v17.json"]
 
 
 def archive_sha256(archive, name):
@@ -162,10 +163,13 @@ def main():
             scope = evidence.get("scope") or evidence.get("objective") or evidence.get("verification_scope")
             assert scope and isinstance(evidence.get("status"), str), filename
             declared_v15_evidence[filename] = {"status": evidence["status"], "scope": scope}
-        for relative in V16_REQUIRED_FILES:
+        for relative in [*V16_REQUIRED_FILES, *V17_REQUIRED_FILES]:
             assert "FinPilot/" + relative in names, relative
         reviewed_help = json.loads(archive.read("FinPilot/data/project_help.json"))
-        assert reviewed_help["current_version"] == 16 and reviewed_help["manual_version"] == "16.0"
+        assert reviewed_help["current_version"] == 17 and reviewed_help["manual_version"] == "17.0"
+        assert any(topic['id']=='help.learning' for topic in reviewed_help['documents'])
+        for relative in ['docs/options_learning_v17.md','docs/demo_v17.md']:
+            assert b'PENDING_V17' not in archive.read('FinPilot/'+relative)
         assert all(re.fullmatch(r"help\.[a-z_]+", topic["id"]) for topic in reviewed_help["documents"])
         assert len({topic["id"] for topic in reviewed_help["documents"]}) == len(reviewed_help["documents"])
         assert b"PENDING_V16_FINAL_VERIFICATION" not in archive.read("FinPilot/docs/project_help_v16.md")
@@ -175,6 +179,11 @@ def main():
             scope = evidence.get("scope") or evidence.get("objective") or evidence.get("verification_scope")
             assert scope and isinstance(evidence.get("status"), str), filename
             declared_v16_evidence[filename] = {"status": evidence["status"], "scope": scope}
+        declared_v17_evidence = {}
+        for filename in V17_ACCEPTANCE:
+            evidence = json.loads(archive.read("FinPilot/reports/" + filename))
+            assert isinstance(evidence.get('status'),str), filename
+            declared_v17_evidence[filename] = {'status':evidence['status'],'scope':evidence.get('scope')}
         assert "FinPilot/output/presentations/FinPilot_Demo_EN.pptx" in names, "PPTX missing"
         assert "FinPilot/output/presentations/FinPilot_Demo_EN_v2.pptx" in names, "Updated PPTX missing"
         manifest = json.loads(archive.read("FinPilot/models/finpilot-lora/training_manifest.json"))
@@ -220,10 +229,15 @@ assert c.get('/').status_code==200
 assert c.get('/static/showcase/media/reference-motion.mp4', headers={'Range': 'bytes=0-31'}).status_code==206
 assert c.get('/workspace').status_code==200
 assert c.get('/demo').status_code==200
-assert c.get('/api/health').json()['version']=='16.0.0'
+assert c.get('/api/health').json()['version']=='17.0.0'
+assert c.get('/learn').status_code==200
+assert len(c.get('/api/options-lab/scenarios').json()['scenarios'])==3
+lab=c.post('/api/options-lab/evaluate',json={'expiry_price':102}).json()
+assert lab['lab_context']['trial']['pnl']==-160 and 'analysis_id' not in lab
+assert lab['lab_context']['source']['kind']=='synthetic_demo' and lab['source']['kind']=='demo'
 assert c.get('/help').status_code==200
 help_catalogue=c.get('/api/project-help?language=zh').json()
-assert help_catalogue['current_version']==16 and help_catalogue['manual_version']=='16.0'
+assert help_catalogue['current_version']==17 and help_catalogue['manual_version']=='17.0'
 manual_entries={entry['id']:entry for entry in help_catalogue['topics']}
 assert len(manual_entries)==len(help_catalogue['topics']) and 'help.boundaries' in manual_entries
 assert all(re.fullmatch(r'help\\.[a-z_]+',key) for key in manual_entries)
@@ -338,7 +352,7 @@ assert c.put('/api/companion/connection',json={'session_id':None},headers={'Orig
 assert c.delete('/api/sessions/'+sid).json()['deleted'] is True
 assert c.get('/api/companion/connection').json()['session_id'] is None
 assert counts=={'model_calls':0,'broker_or_network_connections':0},counts
-print(json.dumps({'status':'passed',**counts,'application_version':'16.0.0','native_host_version':'15.0.0','isolated_database':True,'shared_report_inheritance_and_immutable_old_reply':True,'project_help_catalogue_search_unknown_exact_steps_persistence_and_bound_history':True,'ordinary_finance_science_and_calculator_routes_preserved':True}))
+print(json.dumps({'status':'passed',**counts,'application_version':'17.0.0','native_host_version':'15.0.0','isolated_database':True,'synthetic_lab_page_and_exact_payoff':True,'shared_report_inheritance_and_immutable_old_reply':True,'project_help_catalogue_search_unknown_exact_steps_persistence_and_bound_history':True,'ordinary_finance_science_and_calculator_routes_preserved':True}))
 """
             completed = subprocess.run([sys.executable, "-c", script], cwd=extracted, env=env, capture_output=True, text=True, timeout=30)
             assert completed.returncode == 0, completed.stderr
@@ -353,13 +367,14 @@ print(json.dumps({'status':'passed',**counts,'application_version':'16.0.0','nat
               "isolated_workflow": isolated_result,
               "v15_declared_evidence": declared_v15_evidence,
               "v16_declared_evidence": declared_v16_evidence,
-              "status_scope": "v16 package integrity and isolated offline backend workflows only. Application v16 uses the unchanged native host v15. Historical, UI and real-model report statuses above are preserved, not certified as passed by this check.",
+              "v17_declared_evidence": declared_v17_evidence,
+              "status_scope": "v17 package integrity and isolated offline backend workflows only. Application v17 uses the unchanged native host v15. Historical, UI and real-model report statuses above are preserved, not certified as passed by this check.",
               "checks": ["no_credential_patterns", "no_env_or_database", "expected_sources_and_updated_deck_present", "novice_options_and_acceptance_present", "actual_expirations_and_general_chat_acceptance_present", "snapshot_chat_and_acceptance_present", "historical_expert_rag_and_real_workflow_present", "trained_adapter_hash_matches", "isolated_extraction", "offline_startup_media_chat_calculator_batch_and_snapshot_followup", "offline_historical_archive_expert_retrieval_and_followup"],
               "limitation": "Uses current installed Python dependencies; does not simulate an OS with no Python or no package network."}
     report['checks'].extend(['historical_v14_guided_demo_three_viewports_report_present', 'historical_v14_real_archived_data_two_model_turns_and_support_audit_present', 'historical_v14_snapshot_expert_grounding_report_present', 'historical_v14_frozen_blind_retrieval_evaluation_present'])
     report['checks'].extend(['v15_desktop_source_and_exact_reviewed_portable', 'no_installed_or_unpacked_electron', 'pinned_sprite_integrity_and_separate_licenses', 'explicitly_scoped_v15_acceptance_reports_present', 'offline_v15_pet_connection_activity_inherited_report_and_delete_zero_model_or_broker'])
     report['checks'].extend(['v16_manual_sources_page_and_scoped_reports_present', 'offline_manual_catalogue_search_known_topic_unknown_paths_no_file_disclosure', 'offline_manual_exact_steps_and_source_whitelist', 'bound_historical_report_unchanged_and_help_metadata_persisted_without_financial_context', 'ordinary_finance_science_and_calculator_paths_preserved_zero_model_or_broker'])
-    (ROOT / "dist" / "package_check_v16.json").write_text(json.dumps(report, indent=2), encoding="utf-8")
+    (ROOT / "dist" / "package_check_v17.json").write_text(json.dumps(report, indent=2), encoding="utf-8")
     print(json.dumps(report, indent=2))
 
 

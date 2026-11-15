@@ -31,7 +31,7 @@
       const url=new URL(value,location.origin);if(url.origin!==location.origin||url.username||url.password)return null;
       if(url.pathname==='/help'&&!url.search&&(!url.hash||/^#help\.[a-z][a-z0-9_-]*$/.test(url.hash)))return url.pathname+url.hash;
       if(url.hash)return null;
-      if(['/','/demo','/pet','/docs'].includes(url.pathname)&&!url.search)return url.pathname;
+      if(['/','/learn','/demo','/pet','/docs'].includes(url.pathname)&&!url.search)return url.pathname;
       if(url.pathname==='/workspace'&&(!url.search||/^\?view=(calculator|history|options|knowledge)$/.test(url.search)||/^\?tool=(compound|loan|budget)$/.test(url.search)))return url.pathname+url.search;
     }catch{/* Invalid navigation remains plain text. */}return null;
   }
@@ -102,13 +102,15 @@
   function analysisParts(context,options={}) {
     const {t,time,value,reason,language}=tools(options),wrapper=element('section','message-analysis-context');
     wrapper.dataset.analysisId=context.analysis_id||'';
-    wrapper.append(element('h3','',context.analysis_kind==='historical_options'?t('period'):t('scope')));
+    const isLab=context.lab_context?.synthetic===true&&context.lab_context.source?.kind==='synthetic_demo';
+    wrapper.append(element('h3','',isLab?(language==='zh'?'合成教学区间':'Synthetic teaching period'):context.analysis_kind==='historical_options'?t('period'):t('scope')));
     if(options.renderMetadata)options.renderMetadata(wrapper,context);
     else {
     if(context.period)wrapper.append(element('strong','analysis-history-period',`${context.period.start||'—'} → ${context.period.end||'—'}`));
     wrapper.append(element('p','analysis-source',`${t('source')} · ${context.source_label||context.source||t('missing')}`),element('p','analysis-time',`${t('saved')} · ${time(context.captured_at)}`));
     if(Array.isArray(context.scopes))for(const scope of context.scopes) {
-      const text=[scope.symbol,scope.expiry,scope.market_data_status,scope.received_at?time(scope.received_at):null].filter(Boolean).join(' · ');
+      const feed=scope.market_data_status==='synthetic_demo'?(language==='zh'?'合成教学数据':'Synthetic teaching data'):scope.market_data_status;
+      const text=[scope.symbol,scope.expiry,feed,scope.received_at?time(scope.received_at):null].filter(Boolean).join(' · ');
       wrapper.append(element('p','analysis-scope',text));
       if(scope.reference_basis==='close')wrapper.append(element('small','analysis-reference-note',language==='zh'?'使用历史收盘参考选择样本，不是当前双边报价。':'Historical closing reference selected the sample; it is not current BBO.'));
     }
@@ -116,6 +118,17 @@
     if(context.analysis_kind!=='historical_options'){note.dataset.capturedAt=context.captured_at||'';note.dataset.stale=String(Boolean(context.stale));}wrapper.append(note);
     const stamp=Date.parse(context.captured_at||'');
     if(context.analysis_kind!=='historical_options'&&(context.stale||(Number.isFinite(stamp)&&Date.now()-stamp>30000)))wrapper.append(element('p','analysis-stale',t('stale')));
+    }
+    if(context.lab_context?.synthetic===true&&context.lab_context.source?.kind==='synthetic_demo'){
+      const lab=context.lab_context,trial=lab.trial||{},en=language==='en',panel=element('aside','lab-chat-context');
+      const strategy={long_call:en?'Long call':'买入看涨',long_put:en?'Long put':'买入看跌',call_debit_spread:en?'Call debit spread':'看涨借记价差'}[trial.strategy]||trial.strategy||'—';
+      panel.append(element('strong','',en?'Synthetic trial · saved assumptions':'合成教学试算 · 当时保存的假设'));
+      if(lab.scenario?.title)panel.append(element('p','',lab.scenario.title));
+      const list=element('dl','lab-chat-facts');
+      for(const [label,val] of [[en?'Position':'组合',strategy],[en?'Strike / share':'行权价 / 股',trial.strike],[en?'Upper strike / share':'较高行权价 / 股',trial.upper_strike],[en?'Assumed expiry price / share':'假设到期价格 / 股',trial.expiry_price],[en?'Contracts × 100':'张数 × 100',trial.contracts],[en?'Entry assumption':'入场报价假设',trial.execution==='midpoint'?(en?'Midpoint, fill not assured':'中间价，未保证成交'):(en?'Buy ask / sell bid':'买入按 ask／卖出按 bid')],[en?'Initial cost (USD)':'初始支出（美元）',trial.cost]]){
+        if(val===null||val===undefined)continue;const row=element('div');row.append(element('dt','',label),element('dd','',String(val)));list.append(row);
+      }
+      panel.append(list,element('small','',en?'Idealised same-expiry cash payoff. No fees, early close, exercise or assignment process. The price is an assumption, not a forecast.':'理想化同到期现金盈亏；不含费用、提前平仓或行权指派过程。价格是你设定的假设，不是预测。'));wrapper.append(panel);
     }
     const comparison=context.refresh_comparison;
     if(comparison) {

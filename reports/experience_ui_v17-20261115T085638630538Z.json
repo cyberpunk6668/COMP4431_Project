@@ -1,0 +1,48 @@
+{
+  "checked_at": "2026-11-15T08:56:39.346309+00:00",
+  "status": "failed",
+  "scope": "Actual Edge, real create_app and private SQLite. Offline deterministic explanations; no live model, broker, user DB or normal port 8000.",
+  "dotenv_loading_disabled": true,
+  "server_port": 50724,
+  "database": "F:\\桌面\\COMP4431_Project\\tmp\\experience-ui-v17\\20261115T085638630538Z\\owned.sqlite3",
+  "viewports": [
+    {
+      "width": 320,
+      "height": 740,
+      "status": "failed",
+      "checks": [
+        "home_primary_cta_opens_real_synthetic_learning_without_chat_or_gateway",
+        "real_same_expiry_spread_calculation_and_formula_curve",
+        "save_persists_exact_trial_new_owned_session_binding_prompt_only_old_local_id_not_read",
+        "explicit_send_real_offline_explanation_shows_saved_trial_source_time_evidence",
+        "controlled_chat_failure_retains_draft_and_real_retry_keeps_prior_answers",
+        "task_focused_welcome_and_learning_calculator_manual_entries",
+        "three_real_calculators_keyboard_tabs_and_changed_assumptions_hide_old_result",
+        "real_curated_knowledge_sources_readable_without_model"
+      ],
+      "error": "AssertionError: Locator expected to be disabled\nActual value: enabled \nCall log:\n  - Expect \"to_be_disabled\" with timeout 5000ms\n  - waiting for locator(\"#avatar-3d\")\n    9 × locator resolved to <button type=\"button\" id=\"avatar-3d\" aria-pressed=\"false\">…</button>\n      - unexpected value \"enabled\"\n",
+      "url": "http://127.0.0.1:50724/workspace",
+      "javascript_errors": [],
+      "external_requests": []
+    }
+  ],
+  "screenshots": "reports\\screenshots\\experience-v17\\20261115T085638630538Z",
+  "fault_injections": [
+    "one owned chat request returns controlled HTTP 503 per viewport"
+  ],
+  "error": "AssertionError: Locator expected to be disabled\nActual value: enabled \nCall log:\n  - Expect \"to_be_disabled\" with timeout 5000ms\n  - waiting for locator(\"#avatar-3d\")\n    9 × locator resolved to <button type=\"button\" id=\"avatar-3d\" aria-pressed=\"false\">…</button>\n      - unexpected value \"enabled\"\n",
+  "provider_attempts": [],
+  "broker_attempts": [],
+  "blocked_network_attempts": [],
+  "server_stopped": true,
+  "model_requests": 0,
+  "broker_requests": 0,
+  "user_database_reads": 0,
+  "source_sha256": {
+    "web/learn.js": "35c4af172ecece86f1a2d58d5b6627bc1c98f8d9e97bbbaa747df8a872b29d25",
+    "web/app.js": "026fc1fd5adb3acaddb050a8538bb690595ed4a8e6fd2cb9b0857e8564d65bc3",
+    "web/companion/messages.js": "1794cd74746f3217c686d4e4c0f2b6b267ba521c9bdb65d0f23bd48487fb9381",
+    "app/main.py": "ca3861844fecbb2ecae2666b46c70ecc6a417e8fa7d106f7f5e93da9b91ece1a",
+    "scripts/check_experience_ui_v17.py": "cf7031f0f7c4c3b14570437f487418d7a925f1fd3aa729446993b291c8802cb9"
+  }
+}

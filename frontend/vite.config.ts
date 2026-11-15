@@ -13,5 +13,5 @@ export default defineConfig({
       if (/\/node_modules\/(gsap|motion|framer-motion|motion-dom|motion-utils)\//.test(id)) return 'motion-engine';
     } } },
   },
-  server: { proxy: { '/api': 'http://127.0.0.1:8000', '/workspace': 'http://127.0.0.1:8000', '/docs': 'http://127.0.0.1:8000', '^/static/(?!showcase/)': 'http://127.0.0.1:8000' } },
+  server: { proxy: { '/api': 'http://127.0.0.1:8000', '/workspace': 'http://127.0.0.1:8000', '/learn': 'http://127.0.0.1:8000', '/help': 'http://127.0.0.1:8000', '/demo': 'http://127.0.0.1:8000', '/docs': 'http://127.0.0.1:8000', '^/static/(?!showcase/)': 'http://127.0.0.1:8000' } },
 });

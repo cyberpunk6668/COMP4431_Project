@@ -1,0 +1,46 @@
+{
+  "checked_at": "2026-11-15T08:55:28.467199+00:00",
+  "status": "failed",
+  "scope": "Actual Edge, real create_app and private SQLite. Offline deterministic explanations; no live model, broker, user DB or normal port 8000.",
+  "dotenv_loading_disabled": true,
+  "server_port": 63324,
+  "database": "F:\\桌面\\COMP4431_Project\\tmp\\experience-ui-v17\\20261115T085527783410Z\\owned.sqlite3",
+  "viewports": [
+    {
+      "width": 320,
+      "height": 740,
+      "status": "failed",
+      "checks": [
+        "home_primary_cta_opens_real_synthetic_learning_without_chat_or_gateway",
+        "real_same_expiry_spread_calculation_and_formula_curve",
+        "save_persists_exact_trial_new_owned_session_binding_prompt_only_old_local_id_not_read",
+        "explicit_send_real_offline_explanation_shows_saved_trial_source_time_evidence",
+        "controlled_chat_failure_retains_draft_and_real_retry_keeps_prior_answers",
+        "task_focused_welcome_and_learning_calculator_manual_entries"
+      ],
+      "error": "AssertionError: Locator expected to have attribute 'true'\nActual value: false \nCall log:\n  - Expect \"to_have_attribute\" with timeout 5000ms\n  - waiting for locator(\"#tab-loan\")\n    9 × locator resolved to <button role=\"tab\" id=\"tab-loan\" tabindex=\"-1\" class=\"calc-tab\" data-kind=\"loan\" data-i18n=\"loanTab\" aria-selected=\"false\">贷款月供</button>\n      - unexpected value \"false\"\n",
+      "url": "http://127.0.0.1:63324/workspace",
+      "javascript_errors": [],
+      "external_requests": []
+    }
+  ],
+  "screenshots": "reports\\screenshots\\experience-v17\\20261115T085527783410Z",
+  "fault_injections": [
+    "one owned chat request returns controlled HTTP 503 per viewport"
+  ],
+  "error": "AssertionError: Locator expected to have attribute 'true'\nActual value: false \nCall log:\n  - Expect \"to_have_attribute\" with timeout 5000ms\n  - waiting for locator(\"#tab-loan\")\n    9 × locator resolved to <button role=\"tab\" id=\"tab-loan\" tabindex=\"-1\" class=\"calc-tab\" data-kind=\"loan\" data-i18n=\"loanTab\" aria-selected=\"false\">贷款月供</button>\n      - unexpected value \"false\"\n",
+  "provider_attempts": [],
+  "broker_attempts": [],
+  "blocked_network_attempts": [],
+  "server_stopped": true,
+  "model_requests": 0,
+  "broker_requests": 0,
+  "user_database_reads": 0,
+  "source_sha256": {
+    "web/learn.js": "35c4af172ecece86f1a2d58d5b6627bc1c98f8d9e97bbbaa747df8a872b29d25",
+    "web/app.js": "026fc1fd5adb3acaddb050a8538bb690595ed4a8e6fd2cb9b0857e8564d65bc3",
+    "web/companion/messages.js": "1794cd74746f3217c686d4e4c0f2b6b267ba521c9bdb65d0f23bd48487fb9381",
+    "app/main.py": "ca3861844fecbb2ecae2666b46c70ecc6a417e8fa7d106f7f5e93da9b91ece1a",
+    "scripts/check_experience_ui_v17.py": "5519cfbf58c7622bc4173df8c557d600d09abca30a308fb43e4559eff16ec593"
+  }
+}

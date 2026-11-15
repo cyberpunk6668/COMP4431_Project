@@ -71,13 +71,21 @@ def _ngrams(text):
 
 
 class ExpertKnowledge:
-    def __init__(self, path: Path = DEFAULT_PATH):
+    def __init__(self, path: Path = DEFAULT_PATH, *, additional_path: Path | None = None):
         raw = json.loads(Path(path).read_text(encoding="utf-8"))
         documents = raw.get("documents") if isinstance(raw, dict) else raw
         if not isinstance(documents, list) or not documents:
             raise ValueError("Expert corpus must contain reviewed documents")
+        version = str(raw.get("version", "unversioned")) if isinstance(raw, dict) else "unversioned"
+        if additional_path is not None:
+            extra = json.loads(Path(additional_path).read_text(encoding="utf-8"))
+            additions = extra.get("documents") if isinstance(extra, dict) else extra
+            if not isinstance(additions, list) or not additions:
+                raise ValueError("Additional expert corpus must contain reviewed documents")
+            documents = [*documents, *additions]
+            version += "+" + (str(extra.get("version", "unversioned")) if isinstance(extra, dict) else "unversioned")
         self.documents = deepcopy(documents)
-        self.version = str(raw.get("version", "unversioned")) if isinstance(raw, dict) else "unversioned"
+        self.version = version
         self.corpus_sha256 = hashlib.sha256(json.dumps(documents, ensure_ascii=False, sort_keys=True, allow_nan=False).encode("utf-8")).hexdigest()
         seen = set()
         for doc in self.documents:

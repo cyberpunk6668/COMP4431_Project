@@ -1,0 +1,92 @@
+{
+  "checked_at": "2026-11-15T09:01:15.447873+00:00",
+  "status": "passed",
+  "scope": "Actual Edge viewports over a private, pure-calculation HTTP fixture.\n\nNo normal server, .env, user conversation, model, broker or native UI access.\nThe fixture returns the real authored scenarios/formulas, but it is not an\nacceptance of production persistence or the model/broker API wiring.\n",
+  "viewports": [
+    {
+      "width": 320,
+      "height": 740,
+      "status": "passed",
+      "checks": [
+        "three_local_scenarios_immediate_default_payoff_and_no_startup_writes",
+        "synthetic_provenance_and_source_time_always_visible",
+        "local_strike_break_even_price_domain_zero_label_spacing_and_full_table_scope",
+        "three_strategies_extreme_zero_thousand_and_fractional_domain_finite_current_marker_full_table_retained",
+        "plain_terms_disclosure_and_same_sample_professional_table",
+        "execution_assumption_changes_cost_and_payoff_without_model",
+        "all_three_structures_and_ordered_same_expiry_spread_controls",
+        "exact_position_total_units_real_curve_and_accessible_table",
+        "invalid_quantity_never_updates_or_saves_stale_result",
+        "late_older_trial_cannot_overwrite_current_input_result",
+        "failed_scenario_explicit_retry_and_no_stale_save",
+        "english_copy_preserves_inputs_and_position_arithmetic",
+        "keyboard_controls_and_reduced_motion_viewport",
+        "save_of_earlier_inputs_never_attaches_to_changed_trial",
+        "save_is_explicit_and_failed_binding_retains_one_owned_session",
+        "explicit_followup_binds_latest_saved_report_and_prefills_only_no_chat_or_old_reads",
+        "no_javascript_errors_or_external_network_assets"
+      ],
+      "external_model_calls": 0,
+      "broker_requests": 0,
+      "page_errors": []
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "status": "passed",
+      "checks": [
+        "three_local_scenarios_immediate_default_payoff_and_no_startup_writes",
+        "synthetic_provenance_and_source_time_always_visible",
+        "local_strike_break_even_price_domain_zero_label_spacing_and_full_table_scope",
+        "three_strategies_extreme_zero_thousand_and_fractional_domain_finite_current_marker_full_table_retained",
+        "plain_terms_disclosure_and_same_sample_professional_table",
+        "execution_assumption_changes_cost_and_payoff_without_model",
+        "all_three_structures_and_ordered_same_expiry_spread_controls",
+        "exact_position_total_units_real_curve_and_accessible_table",
+        "invalid_quantity_never_updates_or_saves_stale_result",
+        "late_older_trial_cannot_overwrite_current_input_result",
+        "failed_scenario_explicit_retry_and_no_stale_save",
+        "english_copy_preserves_inputs_and_position_arithmetic",
+        "keyboard_controls_and_reduced_motion_viewport",
+        "save_of_earlier_inputs_never_attaches_to_changed_trial",
+        "save_is_explicit_and_failed_binding_retains_one_owned_session",
+        "explicit_followup_binds_latest_saved_report_and_prefills_only_no_chat_or_old_reads",
+        "no_javascript_errors_or_external_network_assets"
+      ],
+      "external_model_calls": 0,
+      "broker_requests": 0,
+      "page_errors": []
+    },
+    {
+      "width": 1440,
+      "height": 1000,
+      "status": "passed",
+      "checks": [
+        "three_local_scenarios_immediate_default_payoff_and_no_startup_writes",
+        "synthetic_provenance_and_source_time_always_visible",
+        "local_strike_break_even_price_domain_zero_label_spacing_and_full_table_scope",
+        "three_strategies_extreme_zero_thousand_and_fractional_domain_finite_current_marker_full_table_retained",
+        "plain_terms_disclosure_and_same_sample_professional_table",
+        "execution_assumption_changes_cost_and_payoff_without_model",
+        "all_three_structures_and_ordered_same_expiry_spread_controls",
+        "exact_position_total_units_real_curve_and_accessible_table",
+        "invalid_quantity_never_updates_or_saves_stale_result",
+        "late_older_trial_cannot_overwrite_current_input_result",
+        "failed_scenario_explicit_retry_and_no_stale_save",
+        "english_copy_preserves_inputs_and_position_arithmetic",
+        "keyboard_controls_and_reduced_motion_viewport",
+        "save_of_earlier_inputs_never_attaches_to_changed_trial",
+        "save_is_explicit_and_failed_binding_retains_one_owned_session",
+        "explicit_followup_binds_latest_saved_report_and_prefills_only_no_chat_or_old_reads",
+        "no_javascript_errors_or_external_network_assets"
+      ],
+      "external_model_calls": 0,
+      "broker_requests": 0,
+      "page_errors": []
+    }
+  ],
+  "external_model_calls": 0,
+  "broker_requests": 0,
+  "user_database_reads": 0,
+  "checks_per_viewport": 17
+}

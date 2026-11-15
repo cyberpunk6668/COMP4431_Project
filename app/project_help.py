@@ -16,19 +16,20 @@ import unicodedata
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_PATH = ROOT / "data/project_help.json"
-CURRENT_VERSION = 16
-MANUAL_VERSION = "16.0"
+CURRENT_VERSION = 17
+MANUAL_VERSION = "17.0"
 METHOD = "reviewed_manual_rules"
 TOPIC_PREFIX = "/help#"
 SAFE_LINKS = frozenset({"/", "/workspace", "/workspace?view=options",
     "/workspace?view=history", "/workspace?view=calculator", "/workspace?view=knowledge",
     "/workspace?tool=compound", "/workspace?tool=loan", "/workspace?tool=budget",
-    "/demo", "/pet", "/docs"})
+    "/demo", "/learn", "/pet", "/docs"})
 SOURCE_FILES = frozenset({"README.md", "web/index.html", "web/app.js", "web/options.js",
     "web/history.js", "web/demo.html", "web/demo.js", "web/pet.html", "web/pet.js",
     "docs/desktop_pet_v15.md", "docs/history_rag_v13.md", "docs/innovation_rag_v14.md",
     "docs/ibkr_gateway_v12.md", "docs/options_chat_v10.md", "docs/options_refresh_v11.md",
-    "docs/options_analysis_v6.md", "docs/innovation_upgrade.md", "finetuning/README.md"})
+    "docs/options_analysis_v6.md", "docs/innovation_upgrade.md", "finetuning/README.md",
+    "web/learn.html", "web/learn.js", "web/learn.css", "docs/options_learning_v17.md"})
 
 
 def _normal(value: str) -> str:
@@ -52,6 +53,7 @@ _CAPABILITY = r"支持|功能|可以|能不能|能否|[能会有][^。?？]{0,50
 _CONTENT_TASK = r"^(?:请|帮我|please\s+)?(?:翻译|写(?:一段|一篇|个|代码)|编写|润色|总结这|translate\b|write\b|summari[sz]e\b|debug\b)"
 _SELF_INTRO = re.compile(r"^(?:(?:你好|您好)[,，!！\s]*)?(?:请)?(?:你是谁|介绍一下你自己|介绍你自己|自我介绍|你能做什么|你有哪些功能|你有什么功能|你的功能是什么|你能帮我做什么|你可以做什么)[?？!！。\s]*$|^(?:please\s+)?(?:who are you|introduce yourself|tell me about yourself|what can you do|how can you help(?: me)?|what are your features)[?.!\s]*$", re.I)
 _SELF_OPTIONS = re.compile(r"^(?:请问)?你(?:能|会|可以|能不能|可不可以)(?:分析期权|做期权分析|进行期权分析)(?:吗|么)?[?？!！。\s]*$|^(?:can|could) you (?:analy[sz]e options?|do options? analysis)[?.!\s]*$", re.I)
+_LEARNING_TOOL = r"期权互动(?:演示|学习)|学习实验室|到期盈亏试算|options? learning(?: lab)?|learning lab|interactive options? demo|expiry payoff (?:lab|trial|calculator)|options? (?:lab|playground)"
 _FOLLOWUP = re.compile(r"^(?:那|那么|然后)?(?:还有呢|接下来呢|下一步|然后呢|怎么做|具体(?:呢|步骤|怎么做)?|详细(?:一点|些|步骤)?|再详细一点|继续|再说(?:一点|一下)|怎么打开|在哪(?:里)?|英文呢|中文呢|可以详细解释吗)[?？!！。\s]*$|^(?:and then|what next|next step|more(?: details)?|please continue|continue|tell me more|how exactly|where is it|in english|in chinese)[?.!\s]*$", re.I)
 
 
@@ -164,11 +166,11 @@ class ProjectHelp:
         instructional = _has(_INSTRUCTION, q)
         capability = _has(_CAPABILITY, q)
         ui_question = _has(r"按钮|页面|界面|入口|菜单|设置|点击|点哪里|在哪里|在哪|填(?:写|入)|怎么选|如何选择|怎么用|如何使用|工作台|\b(?:button|page|menu|settings|where)\b|how.{0,8}use", q)
-        report_tutorial = _has(r"怎么(?:用|使用|操作|带|绑定|连接|切换|打开)|如何(?:使用|操作|带|绑定|连接|切换|打开)|怎样(?:使用|操作)|(?:怎样|如何|怎么)让\s*(?:ai|模型|助手).{0,8}(?:解释|解读)|(?:刷新并解释变化|一键刷新).{0,6}(?:会做什么|有什么作用|什么意思|作用是什么)|教程|入口|按钮|功能|在哪|哪里|how.{0,15}(?:use|open|bind|connect|switch|refresh)|\b(?:where|button|feature|tutorial)\b", q)
+        report_tutorial = _has(r"怎么(?:用|使用|操作|带|绑定|连接|切换|打开|保存)|如何(?:使用|操作|带|绑定|连接|切换|打开|保存)|怎样(?:使用|操作|保存)|(?:怎样|如何|怎么)让\s*(?:ai|模型|助手).{0,8}(?:解释|解读)|(?:刷新并解释变化|一键刷新).{0,6}(?:会做什么|有什么作用|什么意思|作用是什么)|教程|入口|按钮|功能|在哪|哪里|how.{0,15}(?:use|open|bind|connect|switch|refresh|save)|\b(?:where|button|feature|tutorial)\b", q)
         # A report-explanation imperative is real analysis, even with the app
         # name or a polite capability prefix. Product branding is not UI intent.
-        if not report_tutorial and (_has(r"本报告|这(?:份|个|批).{0,16}(?:报告|分析|期权|数据)|当前(?:报告|分析)|(?:this|current|the) (?:report|analysis|dataset)", q)
-                and _has(r"解释|解读|看跌|看涨|市场情绪|变化|explain|interpret|sentiment|change", q)
+        if not report_tutorial and (_has(r"本报告|这(?:份|个|批).{0,16}(?:报告|分析|期权|数据|试算|演示|情景)|当前(?:报告|分析|试算|情景)|已保存.{0,8}(?:试算|情景)|(?:this|current|the|saved) (?:report|analysis|dataset|trial|scenario|simulation)", q)
+                and _has(r"解释|解读|看跌|看涨|市场情绪|变化|盈亏|亏损|亏钱|盈利|成本|最大损失|explain|interpret|sentiment|change|payoff|break.?even|profit|loss|cost", q)
                 or _has(r"刷新后.{0,8}(?:变化|差异).{0,8}(?:解读|解释)|(?:interpret|explain).{0,20}(?:changes after|refreshed)", q)):
             return []
         if not product and not ui_question and _has(r"看(?:空|多)|涨跌|市场情绪|(?:成交|持仓).{0,12}(?:说明|意味着)|\b(?:bullish|bearish|sentiment|predict|forecast)\b", q):
@@ -177,6 +179,12 @@ class ProjectHelp:
         def add(name, condition):
             if condition:
                 found.append("help." + name)
+        # Only named-tool navigation is a learning tutorial. A calculation or
+        # explanation of the bound trial remains real report/financial chat.
+        learning_tool = _has(_LEARNING_TOOL, q)
+        learning_navigation = _has(r"怎么(?:用|使用|操作|进入|打开|保存)|如何(?:使用|操作|进入|打开|保存|选择)|怎样(?:使用|操作|进入|打开|保存)|打开|进入|教程|指南|入口|按钮|页面|界面|在哪|哪里|怎么选|\b(?:where|tutorial|guide|button|page)\b|how.{0,24}(?:use|open|save|select)|\b(?:open|launch|enter)\b", q)
+        learning_bare = bool(re.fullmatch(r"(?:" + _LEARNING_TOOL + r")[?？!！。\s]*", q, re.I))
+        add("learning", learning_tool and (learning_navigation or learning_bare))
         add("trading", _has(r"自动(?:交易|下单|买卖)|代(?:我|用户)(?:交易|下单)|执行(?:交易|订单)|auto(?:matic(?:ally)?|mated)?[ -]trad|trad\w*.{0,12}automat|place (?:(?:real|live|buy|sell)[ /-]+)*orders?", q)
             and (product or capability or _has(r"你|桌宠|助手|chatbot|assistant", q)))
         add("rag", _has(r"rag|检索增强|微调|fine[ -]?tun|lora|知识来源|回答依据", q)
@@ -217,7 +225,7 @@ class ProjectHelp:
         if not isinstance(history, (list, tuple)) or len(message) > 65:
             return []
         q = _normal(message)
-        targeted = _has(r"^(?:那|那么)?(?:历史(?:复盘)?|导出|模型|桌宠|计算器|语音|avatar|2d|3d)(?:呢|怎么用|在哪)?[?？。\s]*$|^(?:what about|and) (?:history|export|models?|the pet|voice|the calculator)[?.\s]*$", q)
+        targeted = _has(r"^(?:那|那么)?(?:历史(?:复盘)?|导出|模型|桌宠|计算器|语音|avatar|2d|3d|学习实验室|期权互动学习|期权互动演示)(?:呢|怎么用|在哪)?[?？。\s]*$|^(?:what about|and) (?:history|export|models?|the pet|voice|the calculator|the learning lab)[?.\s]*$", q)
         if not _FOLLOWUP.fullmatch(q) and not targeted:
             return []
         prior = []
@@ -242,7 +250,8 @@ class ProjectHelp:
         if targeted:
             for pattern, topic in ((r"历史|history", "history"), (r"导出|export", "export"),
                 (r"模型|model", "models"), (r"桌宠|pet", "pet"), (r"计算器|calculator", "calculator"),
-                (r"语音|voice", "voice"), (r"avatar|2d|3d", "avatar")):
+                (r"语音|voice", "voice"), (r"avatar|2d|3d", "avatar"),
+                (r"学习实验室|期权互动(?:学习|演示)|learning lab", "learning")):
                 if _has(pattern, q):
                     return ["help." + topic]
         return prior

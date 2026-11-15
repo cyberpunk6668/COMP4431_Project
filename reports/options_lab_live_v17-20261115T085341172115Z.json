@@ -1,0 +1,785 @@
+{
+  "checked_at": "2026-11-15T08:53:41.764257+00:00",
+  "status": "failed",
+  "scope": "Real DeepSeek through application HTTP routes (ASGI TestClient), private DB, synthetic teaching report; not current market, broker or native UI acceptance.",
+  "questions": [
+    "请用白话解释这份合成教学试算的成本、到期盈亏平衡和最大损失。保留教学日期、数据依据和适用边界。"
+  ],
+  "calls": [
+    {
+      "number": 1,
+      "json_output": true,
+      "returned": true,
+      "synthetic_only_raw_response": "{\"response\":[{\"kind\":\"explanation\",\"text\":\"这是一份明确标注的合成教学记录，教学输入日期和假想到期日都来自本地提示，所有行情、报价、波动率和持仓都是人为构造的，不是真实市场历史，也不是当前市场状况或收益预测。下面只解释本次保存的到期试算，不涉及任何实时行情。\",\"evidence_ids\":[\"h.lab.trial.cost\",\"h.lab.trial.expiry_price\"]},{\"kind\":\"explanation\",\"text\":\"所选试算是一笔买入看涨的到期现金盈亏：初始净支付就是整组的总成本，每股净权利金乘以固定乘数和每腿份数得到该成本。到期时，标的价高于执行价的部分构成到期现金值，再减去已付成本就是净盈亏；到期盈亏平衡标的价等于执行价加每股净权利金。按买入看涨的到期关系，最大损失限于已支付的权利金，理论最大收益没有上限。\",\"evidence_ids\":[\"h.lab.trial.cost\",\"h.lab.trial.net_premium\",\"h.lab.trial.strike\",\"h.lab.trial.break_even\",\"h.lab.trial.max_loss\",\"h.lab.trial.payoff\",\"h.lab.trial.pnl\",\"expert.expiry_long_call\"]},{\"kind\":\"limitation\",\"text\":\"这些数字是到期日的理想化现金试算，不是提前平仓估值，也不是价格预测、胜率或买卖建议。它假定组合保持完整、各腿同一到期日、固定乘数和等量份数，并且不含手续费、税费、融资、股息、滑点、行权或指派等额外影响；自然价与中间价只是成交假设，给定波动率也没有从权利金校准。\",\"evidence_ids\":[\"h.lab.trial.cost\",\"h.lab.trial.break_even\",\"h.lab.trial.max_loss\",\"h.lab.trial.pnl\"]},{\"kind\":\"next_check\",\"text\":\"复核时先确认这是合成教学样本而非真实记录，再核对所选执行价、假想到期价、份数和成本口径是否与保存参数一致，并确认比较的是同一合约范围。若关心当前情绪或当前可成交价格，这份合成数据无法回答，需要另取有明确来源和时点的资料。\",\"evidence_ids\":[\"h.lab.trial.strike\",\"h.lab.trial.expiry_price\",\"h.lab.trial.contracts\",\"expert.contract_identity\"]}]}",
+      "elapsed_seconds": 4.679,
+      "validation_error": "Quantities must come from local evidence"
+    },
+    {
+      "number": 2,
+      "json_output": true,
+      "returned": true,
+      "synthetic_only_raw_response": "{\"response\":[{\"kind\":\"explanation\",\"text\":\"这是一份明确标注的合成教学记录，教学输入日期和假想到期日都来自本地提示，所有行情、报价、波动率和持仓都是人为构造的，不是真实市场历史，也不是当前市场状况或收益预测。下面只解释本次保存的到期试算，不涉及任何实时行情。\",\"evidence_ids\":[\"h.lab.trial.cost\",\"h.lab.trial.expiry_price\"]},{\"kind\":\"explanation\",\"text\":\"所选试算是一笔买入看涨的到期现金盈亏：初始净支付就是整组的总成本，每股净权利金乘以固定乘数和每腿份数得到该成本。到期时，标的价高于执行价的部分构成到期现金值，再减去已付成本就是净盈亏；到期盈亏平衡标的价等于执行价加每股净权利金。按买入看涨的到期关系，最大损失限于已支付的权利金，理论最大收益没有上限。\",\"evidence_ids\":[\"h.lab.trial.cost\",\"h.lab.trial.net_premium\",\"h.lab.trial.strike\",\"h.lab.trial.break_even\",\"h.lab.trial.max_loss\",\"h.lab.trial.payoff\",\"h.lab.trial.pnl\",\"expert.expiry_long_call\"]},{\"kind\":\"limitation\",\"text\":\"这些数字是到期日的理想化现金试算，不是提前平仓估值，也不是价格预测、胜率或买卖建议。它假定组合保持完整、各腿同一到期日、固定乘数和等量份数，并且不含手续费、税费、融资、股息、滑点、行权或指派等额外影响；自然价与中间价只是成交假设，给定波动率也没有从权利金校准。\",\"evidence_ids\":[\"h.lab.trial.cost\",\"h.lab.trial.break_even\",\"h.lab.trial.max_loss\",\"h.lab.trial.pnl\",\"expert.pricing\"]},{\"kind\":\"next_check\",\"text\":\"复核时先确认这是合成教学样本而非真实记录，再核对所选执行价、假想到期价、份数和成本口径是否与保存参数一致。若关心当前情绪或当前可成交价格，这份合成数据无法回答，需要另取有明确来源和时点的资料。\",\"evidence_ids\":[\"h.lab.trial.strike\",\"h.lab.trial.expiry_price\",\"h.lab.trial.contracts\"]}]}",
+      "elapsed_seconds": 3.62,
+      "validation_error": "Quantities must come from local evidence"
+    }
+  ],
+  "turns": [
+    {
+      "question": "请用白话解释这份合成教学试算的成本、到期盈亏平衡和最大损失。保留教学日期、数据依据和适用边界。",
+      "checks": {
+        "actual_cloud_mode": false,
+        "same_bound_report": true,
+        "saved_inputs": true,
+        "synthetic_provenance": true,
+        "local_trial_references": true,
+        "bounded_generations": true,
+        "dated_notice": true
+      },
+      "passed": false,
+      "elapsed_seconds": 8.327,
+      "result": {
+        "session_id": "e843677a-8300-4539-b86f-67517e4c7b26",
+        "answer": "合成互动教学：看跌成交更集中。教学输入日期：2026-11-11T21:00:00Z；假想到期日：2026-12-18。所有行情和持仓均人为构造，不是真实市场历史、当前情绪或投资回报。以下试算只对应本次保存的参数。\n\n证据卡对应这次保存的合成到期试算，成本是初始净支付总额；盈亏平衡卡是标的每股价格，并不是整组成本。在已输入的到期价格假设下，净盈亏为负；这只是条件计算。 [h.lab.trial.expiry_price] [h.lab.trial.cost] [h.lab.trial.payoff] [h.lab.trial.pnl] [h.lab.trial.break_even] [h.lab.trial.max_loss] [expert.expiry_long_call]\n\n买入看涨的到期净盈亏是标的价高于执行价的部分，扣除已支付权利金，再按合约乘数和数量计算。到期盈亏平衡标的价为执行价加权利金；最大损失限于已支付权利金，理论最大收益无上限。这里的到期关系不等于提前平仓估值，实际交易仍有费用和行权处理。 [expert.expiry_long_call]\n\n所有报价、波动率和持仓均为合成输入；日期也是固定教学日期。到期试算假定组合保持完整，不含费用、实际行权、指派或提前平仓；不能用来判断当前市场或预测收益。",
+        "mode": "offline",
+        "sources": [
+          {
+            "id": "expert.expiry_long_call",
+            "title": "买入看涨：到期盈亏和成本",
+            "url": "https://www.optionseducation.org/strategies/all-strategies/long-call",
+            "publisher": "OCC / The Options Industry Council",
+            "reviewed_at": "2026-11-15",
+            "topics": [
+              "买入看涨",
+              "看涨期权",
+              "到期盈亏",
+              "盈亏平衡",
+              "最大损失",
+              "权利金",
+              "long call",
+              "expiry payoff",
+              "breakeven",
+              "maximum loss"
+            ],
+            "supports": [
+              "expiry_payoff"
+            ],
+            "snippet": "买入看涨的到期净盈亏是标的价高于执行价的部分，扣除已支付权利金，再按合约乘数和数量计算。到期盈亏平衡标的价为执行价加权利金；最大损失限于已支付权利金，理论最大收益无上限。这里的到期关系不等于提前平仓估值，实际交易仍有费用和行权处理。"
+          }
+        ],
+        "analysis_context": {
+          "analysis_kind": "historical_options",
+          "analysis_id": "f76a323e-0cd4-43eb-972e-150d576b0750",
+          "source": "demo",
+          "source_label": "Synthetic teaching example / 合成教学示例 · 演示用合成数据，不是真实市场历史",
+          "source_verified": false,
+          "verification_scope": null,
+          "historical_data": true,
+          "captured_at": "2026-11-15T08:53:41.781768+00:00",
+          "completed_at": "2026-11-15T08:53:41.781768+00:00",
+          "stale": false,
+          "snapshot_age_seconds": null,
+          "realtime_guaranteed": false,
+          "period": {
+            "start": "2026-11-09",
+            "end": "2026-11-11"
+          },
+          "notice": "合成互动教学：看跌成交更集中。教学输入日期：2026-11-11T21:00:00Z；假想到期日：2026-12-18。所有行情和持仓均人为构造，不是真实市场历史、当前情绪或投资回报。以下试算只对应本次保存的参数。",
+          "scopes": [
+            {
+              "id": "h0",
+              "symbol": "DEMO",
+              "expiry": "2026-12-18",
+              "received_at": "2026-11-15T08:53:41.781768+00:00",
+              "market_data_status": "synthetic_demo",
+              "time_status": "known",
+              "stale": false,
+              "snapshot_age_seconds": null,
+              "assessment_status": "synthetic"
+            }
+          ],
+          "lab_context": {
+            "version": "17.0",
+            "synthetic": true,
+            "source": {
+              "kind": "synthetic_demo",
+              "synthetic": true
+            },
+            "scenario": {
+              "id": "put_activity",
+              "title": "看跌成交更集中",
+              "subtitle": "成交增加，不等于看空人数增加",
+              "question": "看跌成交占比变大，能确认什么？",
+              "learning_goal": "区分成交活动、持仓和交易意图。"
+            },
+            "dataset_as_of": "2026-11-11T21:00:00Z",
+            "expiry": "2026-12-18",
+            "underlying_price": 100,
+            "currency": "USD",
+            "multiplier": 100,
+            "metrics": [
+              {
+                "id": "h.lab.put_volume_share",
+                "value": 0.6779661016949152,
+                "label": "样本看跌成交占比",
+                "unit": "fraction",
+                "meaning": "最后教学日，固定合约窗口内的看跌成交量占比。",
+                "limitation": "计数的是合约，不是看空人数、主动买卖或新开仓方向。"
+              },
+              {
+                "id": "h.lab.atm_spread_percent",
+                "value": 0.05714285714285714,
+                "label": "平值看涨价差 / 中间价",
+                "unit": "fraction",
+                "meaning": "合成买卖报价的宽度，除以该合约中间价。",
+                "limitation": "报价是虚构输入；中间价不保证成交，也不能把历史成交条当作同步报价。"
+              },
+              {
+                "id": "h.lab.protection_iv_gap",
+                "value": 3.0,
+                "label": "下方看跌与上方看涨 IV 差",
+                "unit": "percentage_points",
+                "meaning": "比较 95 看跌与 105 看涨的合成 IV；假定标的为 100、同一到期日。",
+                "limitation": "IV 是给定教学输入，未从这些权利金校准；不是下跌概率或因果判断。"
+              }
+            ],
+            "trial": {
+              "strike": 100,
+              "upper_strike": null,
+              "expiry_price": 102.0,
+              "contracts": 1,
+              "cost": 360.0,
+              "break_even": 103.6,
+              "max_loss": 360.0,
+              "max_gain": null,
+              "pnl": -160.0,
+              "payoff": 200.0,
+              "net_premium": 3.6,
+              "units": 100,
+              "multiplier": 100,
+              "pnl_percent_of_cost": -0.4444444444444444,
+              "scenario_id": "put_activity",
+              "strategy": "long_call",
+              "execution": "natural",
+              "language": "zh",
+              "currency": "USD",
+              "amount_basis": "position_total_USD",
+              "price_basis": "underlying_USD_per_share",
+              "outcome": "loss",
+              "formula": "[max(S_T - K, 0) - premium] × contracts × 100",
+              "max_gain_unlimited": true,
+              "assumptions": [
+                "这是合成教学的到期日理想化现金盈亏，不能用于估算提前平仓价值。",
+                "固定乘数 100，每腿等量 1 份，所有腿同一到期日；不包括现货持仓。",
+                "不含手续费、税费、融资、股息、滑点、行权/指派、分腿执行或提前指派的额外风险；组合必须保持完整。",
+                "natural 假设买入按 ask、卖出按 bid；midpoint 假设各腿按中间价成交，但不保证可实现。",
+                "图中价格范围不是未来价格预测；最大收益取决于公式而非图的最高点。"
+              ]
+            },
+            "notices": [
+              "所有历史日线、报价、IV 与持仓都是人为构造的示例，不是 IBKR 或任何交易所返回。",
+              "示例 IV 是给定输入，未由权利金校准；不提供胜率、预测或买卖建议。"
+            ]
+          },
+          "evidence_ids": [
+            "h.lab.trial.expiry_price",
+            "h.lab.trial.cost",
+            "h.lab.trial.payoff",
+            "h.lab.trial.pnl",
+            "h.lab.trial.break_even",
+            "h.lab.trial.max_loss"
+          ],
+          "expert_source_ids": [
+            "expert.expiry_long_call"
+          ],
+          "evidence": [
+            {
+              "id": "h.lab.trial.expiry_price",
+              "label": "假设标的到期价",
+              "value": 102.0,
+              "unit": "USD",
+              "description": "合成到期试算；固定乘数100、每腿1份。每股标的/报价美元；不是市场价格或提前平仓估值。",
+              "scope": "history",
+              "symbol": "DEMO",
+              "expiry": "2026-12-18",
+              "market_data_status": "synthetic_demo",
+              "trading_date": "2026-11-11",
+              "synthetic": true
+            },
+            {
+              "id": "h.lab.trial.cost",
+              "label": "初始净支付总额",
+              "value": 360.0,
+              "unit": "USD",
+              "description": "合成到期试算；固定乘数100、每腿1份。整组总美元；不是市场价格或提前平仓估值。",
+              "scope": "history",
+              "symbol": "DEMO",
+              "expiry": "2026-12-18",
+              "market_data_status": "synthetic_demo",
+              "trading_date": "2026-11-11",
+              "synthetic": true
+            },
+            {
+              "id": "h.lab.trial.payoff",
+              "label": "输入到期价下的到期现金值",
+              "value": 200.0,
+              "unit": "USD",
+              "description": "合成到期试算；固定乘数100、每腿1份。整组总美元；不是市场价格或提前平仓估值。",
+              "scope": "history",
+              "symbol": "DEMO",
+              "expiry": "2026-12-18",
+              "market_data_status": "synthetic_demo",
+              "trading_date": "2026-11-11",
+              "synthetic": true
+            },
+            {
+              "id": "h.lab.trial.pnl",
+              "label": "输入到期价下的净盈亏",
+              "value": -160.0,
+              "unit": "USD",
+              "description": "合成到期试算；固定乘数100、每腿1份。整组总美元；不是市场价格或提前平仓估值。",
+              "scope": "history",
+              "symbol": "DEMO",
+              "expiry": "2026-12-18",
+              "market_data_status": "synthetic_demo",
+              "trading_date": "2026-11-11",
+              "synthetic": true
+            },
+            {
+              "id": "h.lab.trial.break_even",
+              "label": "到期盈亏平衡标的价",
+              "value": 103.6,
+              "unit": "USD",
+              "description": "合成到期试算；固定乘数100、每腿1份。每股标的/报价美元；不是市场价格或提前平仓估值。",
+              "scope": "history",
+              "symbol": "DEMO",
+              "expiry": "2026-12-18",
+              "market_data_status": "synthetic_demo",
+              "trading_date": "2026-11-11",
+              "synthetic": true
+            },
+            {
+              "id": "h.lab.trial.max_loss",
+              "label": "理想化到期最大损失",
+              "value": 360.0,
+              "unit": "USD",
+              "description": "合成到期试算；固定乘数100、每腿1份。整组总美元；不是市场价格或提前平仓估值。",
+              "scope": "history",
+              "symbol": "DEMO",
+              "expiry": "2026-12-18",
+              "market_data_status": "synthetic_demo",
+              "trading_date": "2026-11-11",
+              "synthetic": true
+            }
+          ],
+          "grounding": {
+            "method": "reviewed_support_facets",
+            "scope": "bounded_rule_checks_not_general_entailment",
+            "required_query_facets": [
+              "expiry_payoff"
+            ],
+            "covered_facets": [
+              "expiry_payoff"
+            ],
+            "paragraphs": [
+              {
+                "part": 0,
+                "claim_facets": [
+                  "expiry_payoff"
+                ],
+                "expert_source_ids": [
+                  "expert.expiry_long_call"
+                ],
+                "supporting_sources": {
+                  "expiry_payoff": [
+                    "expert.expiry_long_call"
+                  ]
+                }
+              },
+              {
+                "part": 1,
+                "claim_facets": [
+                  "expiry_payoff"
+                ],
+                "expert_source_ids": [
+                  "expert.expiry_long_call"
+                ],
+                "supporting_sources": {
+                  "expiry_payoff": [
+                    "expert.expiry_long_call"
+                  ]
+                }
+              },
+              {
+                "part": 2,
+                "claim_facets": [],
+                "expert_source_ids": [],
+                "supporting_sources": {}
+              }
+            ]
+          },
+          "retrieval": {
+            "method": "bm25_char_ngram_rrf",
+            "embedding": false,
+            "knowledge_version": "1.1+options-lab-17.0",
+            "corpus_sha256": "fd2072f3266f1140d4f9481a92b88026a3ee4e598cc44ff82155bf636ed87566",
+            "hits": [
+              {
+                "id": "expert.expiry_long_call",
+                "title": "买入看涨：到期盈亏和成本",
+                "method": "bm25_char_ngram_rrf",
+                "embedding": false,
+                "knowledge_version": "1.1+options-lab-17.0",
+                "corpus_sha256": "fd2072f3266f1140d4f9481a92b88026a3ee4e598cc44ff82155bf636ed87566",
+                "query_normalization": "english_plural_and_reviewed_domain_aliases",
+                "query_expansions": [],
+                "rrf_score": 0.03278689,
+                "bm25_rank": 1,
+                "char_rank": 1,
+                "bm25_score": 15.221888,
+                "char_score": 0.380326,
+                "matched_terms": [
+                  "call",
+                  "long",
+                  "long call",
+                  "买入看涨",
+                  "到期",
+                  "到期盈亏",
+                  "最大损失",
+                  "盈亏平衡",
+                  "看涨"
+                ],
+                "matched_ngrams": [
+                  "买入",
+                  "买入看",
+                  "亏平",
+                  "亏平衡",
+                  "入看",
+                  "入看涨",
+                  "到期",
+                  "到期盈",
+                  "大损",
+                  "大损失",
+                  "平衡",
+                  "成本"
+                ],
+                "matched_topics": [
+                  "long call",
+                  "买入看涨",
+                  "到期盈亏",
+                  "最大损失",
+                  "盈亏平衡"
+                ],
+                "selection_reason": "query_facet",
+                "selected_facet": "expiry_payoff",
+                "question_rank": 1
+              },
+              {
+                "id": "expert.contract_identity",
+                "title": "期权系列需要完整合约身份",
+                "method": "bm25_char_ngram_rrf",
+                "embedding": false,
+                "knowledge_version": "1.1+options-lab-17.0",
+                "corpus_sha256": "fd2072f3266f1140d4f9481a92b88026a3ee4e598cc44ff82155bf636ed87566",
+                "query_normalization": "english_plural_and_reviewed_domain_aliases",
+                "query_expansions": [],
+                "rrf_score": 0.03125,
+                "bm25_rank": 4,
+                "char_rank": 4,
+                "bm25_score": 4.906957,
+                "char_score": 0.068749,
+                "matched_terms": [
+                  "call",
+                  "到期",
+                  "日期",
+                  "看涨"
+                ],
+                "matched_ngrams": [
+                  "到期",
+                  "日期",
+                  "看涨",
+                  "解释"
+                ],
+                "matched_topics": [],
+                "selection_reason": "lexical_rank",
+                "question_rank": 4
+              },
+              {
+                "id": "expert.history_oi",
+                "title": "历史成交条不提供按日持仓字段",
+                "method": "bm25_char_ngram_rrf",
+                "embedding": false,
+                "knowledge_version": "1.1+options-lab-17.0",
+                "corpus_sha256": "fd2072f3266f1140d4f9481a92b88026a3ee4e598cc44ff82155bf636ed87566",
+                "query_normalization": "english_plural_and_reviewed_domain_aliases",
+                "query_expansions": [],
+                "rrf_score": 0.03053613,
+                "bm25_rank": 5,
+                "char_rank": 6,
+                "bm25_score": 3.266019,
+                "char_score": 0.026852,
+                "matched_terms": [
+                  "call",
+                  "日期",
+                  "看涨"
+                ],
+                "matched_ngrams": [
+                  "日期",
+                  "看涨"
+                ],
+                "matched_topics": [],
+                "selection_reason": "lexical_rank",
+                "question_rank": 5
+              },
+              {
+                "id": "expert.pricing",
+                "title": "权利金变化有多种影响因素",
+                "method": "bm25_char_ngram_rrf",
+                "embedding": false,
+                "knowledge_version": "1.1+options-lab-17.0",
+                "corpus_sha256": "fd2072f3266f1140d4f9481a92b88026a3ee4e598cc44ff82155bf636ed87566",
+                "query_normalization": "english_plural_and_reviewed_domain_aliases",
+                "query_expansions": [],
+                "rrf_score": 0.03030999,
+                "bm25_rank": 7,
+                "char_rank": 5,
+                "bm25_score": 1.953451,
+                "char_score": 0.047765,
+                "matched_terms": [
+                  "到期",
+                  "日期"
+                ],
+                "matched_ngrams": [
+                  "保留",
+                  "到期",
+                  "日期"
+                ],
+                "matched_topics": [
+                  "到期"
+                ],
+                "selection_reason": "lexical_rank",
+                "question_rank": 6
+              }
+            ]
+          }
+        },
+        "generation_attempts": 2,
+        "schema_repair_attempts": 1,
+        "warning": "options_answer_validation_failed",
+        "active_analysis": {
+          "analysis_kind": "historical_options",
+          "analysis_id": "f76a323e-0cd4-43eb-972e-150d576b0750",
+          "source": "demo",
+          "source_label": "Synthetic teaching example / 合成教学示例 · 演示用合成数据，不是真实市场历史",
+          "source_verified": false,
+          "verification_scope": null,
+          "historical_data": true,
+          "captured_at": "2026-11-15T08:53:41.781768+00:00",
+          "completed_at": "2026-11-15T08:53:41.781768+00:00",
+          "stale": false,
+          "snapshot_age_seconds": null,
+          "realtime_guaranteed": false,
+          "period": {
+            "start": "2026-11-09",
+            "end": "2026-11-11"
+          },
+          "notice": "历史复盘区间：2026-11-09 — 2026-11-11。演示用合成数据，不是真实市场历史。导入时间是本地记录时间；以下内容不代表当前行情、当前市场情绪或预测。",
+          "scopes": [
+            {
+              "id": "h0",
+              "symbol": "DEMO",
+              "expiry": "2026-12-18",
+              "received_at": "2026-11-15T08:53:41.781768+00:00",
+              "market_data_status": "historical",
+              "time_status": "known",
+              "stale": false,
+              "snapshot_age_seconds": null,
+              "assessment_status": "historical"
+            }
+          ]
+        },
+        "analysis_history": [
+          {
+            "analysis_id": "f76a323e-0cd4-43eb-972e-150d576b0750",
+            "captured_at": "2026-11-15T08:53:41.781768+00:00",
+            "completed_at": "2026-11-15T08:53:41.781768+00:00",
+            "source": "demo",
+            "stale": false,
+            "scopes": [
+              {
+                "id": "h0",
+                "symbol": "DEMO",
+                "expiry": "2026-12-18",
+                "received_at": "2026-11-15T08:53:41.781768+00:00",
+                "market_data_status": "historical",
+                "time_status": "known"
+              }
+            ],
+            "attached_at": "2026-11-15T08:53:41.809039+00:00",
+            "is_current": true,
+            "previous_analysis_id": null,
+            "analysis_kind": "historical_options",
+            "period": {
+              "start": "2026-11-09",
+              "end": "2026-11-11"
+            },
+            "notice": "历史复盘区间：2026-11-09 — 2026-11-11。演示用合成数据，不是真实市场历史。导入时间是本地记录时间；以下内容不代表当前行情、当前市场情绪或预测。"
+          }
+        ]
+      }
+    }
+  ],
+  "broker_requests": 0,
+  "script_retries": 0,
+  "maximum_provider_requests": 2,
+  "normal_server_accessed": false,
+  "user_chat_database_read": false,
+  "database": "tmp\\options-lab-live-v17\\20261115T085341172115Z\\owned.sqlite3",
+  "manual_semantic_review": "pending",
+  "limits": [
+    "Finite schema, citation, numeric-card and selected-claim checks are not a universal financial correctness guarantee.",
+    "Scenario quotes, IV and dates are authored assumptions; no real investment performance is measured."
+  ],
+  "analysis_id": "f76a323e-0cd4-43eb-972e-150d576b0750",
+  "trial": {
+    "scenario_id": "put_activity",
+    "strategy": "long_call",
+    "strike": 100,
+    "upper_strike": null,
+    "expiry_price": 102.0,
+    "contracts": 1,
+    "execution": "natural",
+    "language": "zh",
+    "cost": 360.0,
+    "break_even": 103.6,
+    "max_loss": 360.0,
+    "max_gain": null,
+    "pnl": -160.0,
+    "payoff": 200.0,
+    "net_premium": 3.6,
+    "units": 100,
+    "multiplier": 100,
+    "currency": "USD",
+    "amount_basis": "position_total_USD",
+    "price_basis": "underlying_USD_per_share",
+    "max_gain_unlimited": true,
+    "outcome": "loss",
+    "pnl_percent_of_cost": -0.4444444444444444,
+    "curve": [
+      {
+        "price": 0.0,
+        "pnl": -360.0
+      },
+      {
+        "price": 5.0,
+        "pnl": -360.0
+      },
+      {
+        "price": 10.0,
+        "pnl": -360.0
+      },
+      {
+        "price": 15.0,
+        "pnl": -360.0
+      },
+      {
+        "price": 20.0,
+        "pnl": -360.0
+      },
+      {
+        "price": 25.0,
+        "pnl": -360.0
+      },
+      {
+        "price": 30.0,
+        "pnl": -360.0
+      },
+      {
+        "price": 35.0,
+        "pnl": -360.0
+      },
+      {
+        "price": 40.0,
+        "pnl": -360.0
+      },
+      {
+        "price": 45.0,
+        "pnl": -360.0
+      },
+      {
+        "price": 50.0,
+        "pnl": -360.0
+      },
+      {
+        "price": 55.0,
+        "pnl": -360.0
+      },
+      {
+        "price": 60.0,
+        "pnl": -360.0
+      },
+      {
+        "price": 65.0,
+        "pnl": -360.0
+      },
+      {
+        "price": 70.0,
+        "pnl": -360.0
+      },
+      {
+        "price": 75.0,
+        "pnl": -360.0
+      },
+      {
+        "price": 80.0,
+        "pnl": -360.0
+      },
+      {
+        "price": 85.0,
+        "pnl": -360.0
+      },
+      {
+        "price": 90.0,
+        "pnl": -360.0
+      },
+      {
+        "price": 95.0,
+        "pnl": -360.0
+      },
+      {
+        "price": 100.0,
+        "pnl": -360.0
+      },
+      {
+        "price": 102.0,
+        "pnl": -160.0
+      },
+      {
+        "price": 103.6,
+        "pnl": 0.0
+      },
+      {
+        "price": 105.0,
+        "pnl": 140.0
+      },
+      {
+        "price": 110.0,
+        "pnl": 640.0
+      },
+      {
+        "price": 115.0,
+        "pnl": 1140.0
+      },
+      {
+        "price": 120.0,
+        "pnl": 1640.0
+      },
+      {
+        "price": 125.0,
+        "pnl": 2140.0
+      },
+      {
+        "price": 130.0,
+        "pnl": 2640.0
+      },
+      {
+        "price": 135.0,
+        "pnl": 3140.0
+      },
+      {
+        "price": 140.0,
+        "pnl": 3640.0
+      },
+      {
+        "price": 145.0,
+        "pnl": 4140.0
+      },
+      {
+        "price": 150.0,
+        "pnl": 4640.0
+      },
+      {
+        "price": 155.0,
+        "pnl": 5140.0
+      },
+      {
+        "price": 160.0,
+        "pnl": 5640.0
+      },
+      {
+        "price": 165.0,
+        "pnl": 6140.0
+      },
+      {
+        "price": 170.0,
+        "pnl": 6640.0
+      },
+      {
+        "price": 175.0,
+        "pnl": 7140.0
+      },
+      {
+        "price": 180.0,
+        "pnl": 7640.0
+      },
+      {
+        "price": 185.0,
+        "pnl": 8140.0
+      },
+      {
+        "price": 190.0,
+        "pnl": 8640.0
+      },
+      {
+        "price": 195.0,
+        "pnl": 9140.0
+      },
+      {
+        "price": 200.0,
+        "pnl": 9640.0
+      }
+    ],
+    "legs": [
+      {
+        "right": "C",
+        "side": "long",
+        "strike": 100,
+        "premium": 3.6,
+        "price_basis": "ask",
+        "quantity": 1
+      }
+    ],
+    "formula": "[max(S_T - K, 0) - premium] × contracts × 100",
+    "decimal_strings": {
+      "cost": "360.00",
+      "break_even": "103.60",
+      "max_loss": "360.00",
+      "max_gain": null,
+      "pnl": "-160.00",
+      "payoff": "200.00",
+      "net_premium": "3.60"
+    },
+    "assumptions": [
+      "这是合成教学的到期日理想化现金盈亏，不能用于估算提前平仓价值。",
+      "固定乘数 100，每腿等量 1 份，所有腿同一到期日；不包括现货持仓。",
+      "不含手续费、税费、融资、股息、滑点、行权/指派、分腿执行或提前指派的额外风险；组合必须保持完整。",
+      "natural 假设买入按 ask、卖出按 bid；midpoint 假设各腿按中间价成交，但不保证可实现。",
+      "图中价格范围不是未来价格预测；最大收益取决于公式而非图的最高点。"
+    ],
+    "sources": [
+      {
+        "id": "oic.long_call",
+        "title": "OIC: Long Call",
+        "url": "https://www.optionseducation.org/strategies/all-strategies/long-call"
+      }
+    ]
+  },
+  "persisted_turns": 1,
+  "immutable_saved_context": true,
+  "source_sha256": {
+    "app/options_lab.py": "93da1c14761dacb99dc02d830f0f93b4c69947ac66218b680cb58e7ebf281750",
+    "app/history_chat.py": "94cdeb57f4b6973fabf823e6d61ca561aefffcfc3f836e5614fa8af07de333fb",
+    "app/main.py": "ca3861844fecbb2ecae2666b46c70ecc6a417e8fa7d106f7f5e93da9b91ece1a",
+    "app/expert_grounding.py": "360d83b1b7c2deba584a2dfc8311077494f1af90523e20720acffe47c4afe0a8",
+    "data/options_lab_knowledge.json": "c1382399f1a20bf29398fcc8247fd7d4e25f16193883a76ae1b761ab0a50555d"
+  }
+}

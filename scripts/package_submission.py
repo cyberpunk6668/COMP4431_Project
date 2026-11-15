@@ -7,9 +7,9 @@ import zipfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-APPLICATION_VERSION = "16.0.0"
+APPLICATION_VERSION = "17.0.0"
 NATIVE_HOST_VERSION = "15.0.0"
-OUTPUT = ROOT / "dist" / "FinPilot_submission_v16.zip"
+OUTPUT = ROOT / "dist" / "FinPilot_submission_v17.zip"
 DIRECTORIES = ["app", "web", "frontend", "data", "tests", "evaluation", "scripts", "docs", "finetuning", "models/finpilot-lora", "output/pdf", "output/presentations", "reports"]
 FILES = ["README.md", ".env.example", ".gitignore", "requirements.txt", "requirements-dev.txt", "requirements-ui-tests.txt", "requirements-ml.txt", "requirements-options.txt", "requirements-lock.txt", "start.ps1", "start-desktop.ps1", "pytest.ini", "COMP4431_GroupProject2027-1 (1).pdf"]
 DESKTOP_FILES = ["desktop/package.json", "desktop/package-lock.json", "desktop/main.cjs", "desktop/preload.cjs",
@@ -22,6 +22,10 @@ V16_REQUIRED_FILES = ["app/project_help.py", "app/project_help_chat.py", "data/p
                       "evaluation/project_help_cases_v16.json", "scripts/check_project_help_live_v16.py",
                       "reports/project_help_ui_v16.json", "reports/project_help_live_v16.json",
                       "reports/python_regression_v16.json"]
+V17_REQUIRED_FILES = ["app/options_lab.py", "data/options_lab_knowledge.json", "web/learn.html", "web/learn.js", "web/learn.css",
+                      "web/experience-v17.css", "docs/options_learning_v17.md", "docs/demo_v17.md",
+                      "reports/options_lab_ui_v17.json", "reports/experience_ui_v17.json", "reports/python_regression_v17.json", "reports/options_lab_live_v17.json",
+                      "reports/feature_audit_v17.json"]
 EXCLUDED_DIRS = {"__pycache__", "node_modules", "browser", "previews", ".pytest_cache", "checkpoints", "cache",
                  "win-unpacked", "artifacts", ".git", ".hg", ".svn", ".venv", ".venv-ml", "tmp"}
 SECRET_PATTERNS = [re.compile(rb"sk-[A-Za-z0-9_-]{20,}"),
@@ -55,9 +59,9 @@ def scan_stream(stream, label):
 
 def collect_paths():
     """Only known project trees, known desktop source, and one reviewed binary."""
-    for item in V16_REQUIRED_FILES:
+    for item in [*V16_REQUIRED_FILES, *V17_REQUIRED_FILES]:
         if not (ROOT / item).is_file():
-            raise FileNotFoundError(f"Required v16 deliverable missing: {item}")
+            raise FileNotFoundError(f"Required project deliverable missing: {item}")
     paths = [ROOT / item for item in FILES if (ROOT / item).is_file()]
     for item in DESKTOP_FILES:
         path = ROOT / item
@@ -104,7 +108,7 @@ def package():
               "desktop_portable": {"version": NATIVE_HOST_VERSION, "path": PORTABLE, "bytes": PORTABLE_BYTES, "sha256": PORTABLE_SHA256},
               "desktop_source_explicit_allowlist": True, "installed_or_unpacked_desktop_dependencies_excluded": True,
               "python_runtime_bundled": False, "requires_existing_finpilot_python_environment": True}
-    (OUTPUT.parent / "submission_manifest_v16.json").write_text(json.dumps(result, indent=2), encoding="utf-8")
+    (OUTPUT.parent / "submission_manifest_v17.json").write_text(json.dumps(result, indent=2), encoding="utf-8")
     print(json.dumps(result, indent=2))
 
 

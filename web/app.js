@@ -35,6 +35,9 @@ const translations = {
   }
 };
 
+
+Object.assign(translations.zh,{heroTitle:'先看懂，再继续追问。',heroDescription:'选一个任务开始。数据、公式和来源各自清楚，复杂问题一步一步来。',inputLabel:'你的问题',inputPlaceholder:'提问、解释报告，或问一个功能怎么用…',learnNav:'期权互动演示',learnEntry:'看懂一份期权',learnEntryHint:'合成情景、市场线索、到期盈亏试算；无需网关。',calculateEntry:'把计划算清楚',calculateEntryHint:'复利、贷款、预算，用固定公式核对假设。',guideEntry:'熟悉你的工具',guideEntryHint:'查真实入口和步骤，或直接问助手怎么用。',gatewayEntryHint:'下方是专业网关采集；首次使用可先看演示。只有提交采集才请求行情。'});
+Object.assign(translations.en,{heroTitle:'Understand first. Then ask more.',heroDescription:'Choose a task. Keep the data, calculations and sources clear, one step at a time.',inputLabel:'Your question',inputPlaceholder:'Ask a question, discuss a report, or learn how a feature works…',learnNav:'Options learning lab',learnEntry:'Understand an option sample',learnEntryHint:'Synthetic scenarios, market clues and expiry P/L. No Gateway needed.',calculateEntry:'Check a financial plan',calculateEntryHint:'Compounding, loans and budgets with fixed formulas.',guideEntry:'Get to know your tools',guideEntryHint:'Find real entry points and steps, or ask the assistant.',gatewayEntryHint:'The professional Gateway form is below. Start with the demo if you are new; market data is only requested on submission.'});
 Object.assign(translations.zh, {
   companion:'交互助手', companionIntro:'一起理解概念、核查来源，\n把每一步计划想清楚。', spatialMode:'立体', simpleMode:'简约',
   readLatest:'朗读最新回答', reduceMotion:'减少动态效果', avatarExplanation:'动作随对话与语音状态变化；说话动作为近似演绎。',
@@ -368,7 +371,9 @@ function addAnalysisMetadata(target, context) {
   if (context.analysis_kind === 'historical_options') {
     const zh = state.language === 'zh';
     const period = context.period || {};
-    target.append(element('strong', 'analysis-history-period', `${zh ? '历史复盘区间' : 'Historical period'} · ${period.start || '—'} → ${period.end || '—'}`),
+    const synthetic=context.lab_context?.synthetic===true&&context.lab_context.source?.kind==='synthetic_demo';
+    const periodLabel=synthetic?(zh?'合成教学区间':'Synthetic teaching period'):(zh?'历史复盘区间':'Historical period');
+    target.append(element('strong', 'analysis-history-period', `${periodLabel} · ${period.start || '—'} → ${period.end || '—'}`),
       element('p', 'analysis-source', `${zh ? '数据来源' : 'Data source'} · ${context.source_label || context.source || '—'}`),
       element('p', 'analysis-time', `${zh ? '本地保存时间（UTC）' : 'Locally saved at (UTC)'} · ${analysisTime(context.captured_at)}`),
       element('p', 'analysis-snapshot-note', context.notice || (zh ? '固定历史样本，不代表当前行情。' : 'A fixed historical sample, not current market data.')));
@@ -1314,6 +1319,7 @@ function bindEvents() {
   $('#language-toggle').addEventListener('click',()=>{if(conversationLocked())return;state.language=state.language==='zh'?'en':'zh';localStorage.setItem('finpilot-language',state.language);applyLanguage();shareCompanionPreferences();toast(t('changedLanguage'));});
   $('#sidebar-new').addEventListener('click',newConversation);$('#top-new').addEventListener('click',newConversation);
   $('#nav-chat').addEventListener('click',()=>{closeSidebar();$('#message-input').focus();});
+  $('#starter-calculator')?.addEventListener('click',()=>openCalculator());
   $('#nav-calculator').addEventListener('click',()=>openCalculator());$('#quick-calculate').addEventListener('click',()=>openCalculator());
   $('#nav-knowledge').addEventListener('click',openKnowledge);
   $$('[data-help-prompt]').forEach(button=>button.addEventListener('click',()=>{
@@ -1360,9 +1366,9 @@ async function initialize() {
   setSidebar(false,false);
   await Promise.allSettled([loadHealth(),loadModels(),loadSessions().catch(error=>showError(t('errorPrefix')+error.message))]);
   const saved=localStorage.getItem('finpilot-session');
-  if(saved&&state.sessions.some(session=>session.id===saved))await selectSession(saved);
   const requestedSession=new URLSearchParams(location.search).get('session');
   if(requestedSession&&/^[0-9a-f-]{36}$/i.test(requestedSession))await selectSession(requestedSession);
+  else if(!requestedSession&&saved&&state.sessions.some(session=>session.id===saved))await selectSession(saved);
   initializeCompanionConnection();
   const entry = new URLSearchParams(location.search);
   const engine = entry.get('engine');
@@ -1372,7 +1378,7 @@ async function initialize() {
     } else toast(state.language==='zh'?'所选模型尚未就绪，请先使用可用引擎。':'The selected model is not ready. Choose an available engine.');
   }
   const prompt = entry.get('prompt');
-  if (prompt) {
+  if (prompt && (!requestedSession || state.sessionId === requestedSession)) {
     const input=$('#message-input');input.value=prompt.slice(0,input.maxLength);
     input.dispatchEvent(new Event('input'));input.focus();
     toast(state.language==='zh'?'示例已填入，点击发送开始提问。':'Example ready. Choose Send to ask.');

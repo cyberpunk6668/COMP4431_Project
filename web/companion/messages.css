@@ -7,3 +7,6 @@
 .project-help-selection-note{padding:9px 11px;border-left:2px solid #c6aa66;background:#fcf8ec;color:#806127;font-size:11px}
 
 .project-help-canonical[hidden]{display:none!important}
+.lab-chat-context{margin:14px 0;padding:15px;border:1px solid #ded3b7;border-radius:10px;background:rgba(212,175,55,.07);color:inherit;font-size:12px;line-height:1.8}
+.lab-chat-context>p{margin:5px 0}.lab-chat-facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px 16px;margin:12px 0}.lab-chat-facts dt{font-size:11px;opacity:.75}.lab-chat-facts dd{margin:2px 0 0;font-weight:600;overflow-wrap:anywhere}.lab-chat-context small{display:block;font-size:11px;opacity:.85}
+@media(max-width:390px){.lab-chat-facts{grid-template-columns:1fr}}

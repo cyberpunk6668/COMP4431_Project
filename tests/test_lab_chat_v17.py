@@ -304,3 +304,42 @@ def test_lab_continuation_sends_structured_prior_summary_without_ui_citation_hea
     assert "[h." not in prior["previous_explanation"] and "[expert." not in prior["previous_explanation"]
     assert "2026-11-11" not in prior["previous_explanation"]
     assert history[1]["content"]==previous["answer"]
+
+
+def test_document_identity_nouns_cover_local_teaching_artifacts_without_position_counts():
+    for noun in ("记录","报告","样本","试算","演示","分析","说明","示例","数据","文档","教程"):
+        raw=model_reply("这是一份明确标注的合成教学"+noun+"。",[])
+        assert _validate(raw,_evidence(report()),{})[0]["text"]=="这是明确标注的合成教学"+noun+"。"
+    for text in ("这是一份期权合约。","这是一份看涨合约。","这是一份持仓。"):
+        with pytest.raises(ValueError,match="Quantities"):
+            _validate(model_reply(text,["h.lab.trial.contracts"]),_evidence(report()),{})
+
+
+@pytest.mark.parametrize("text,claim",[
+    ("到期时能拿到的现金值只覆盖执行价以上的部分，还要先扣掉这笔已付权利金，所以净结果仍可能是亏损。",True),
+    ("For a long call, cash payoff at expiry less the premium determines terminal profit.",True),
+    ("买入看涨的权利金抬高了盈亏平衡所需的标的价。",True),
+    ("成本卡和到期假设都来自所选参数，请确认是否一致。",False),
+])
+def test_cash_minus_premium_is_payoff_knowledge_while_parameter_labels_are_not(text,claim):
+    assert ("expiry_payoff" in claim_facets(text)) is claim
+
+
+@pytest.mark.parametrize("index,valid",[(0,True),(1,True),(2,True),(3,False)])
+def test_third_recorded_run_replays_artifact_identity_and_cash_minus_premium(index,valid):
+    recorded=json.loads((Path(__file__).parents[1]/"reports"/"options_lab_live_v17-20261115T090558232661Z.json").read_text(encoding="utf-8"))
+    which=index//2
+    ids={item["id"] for item in recorded["turns"][which]["result"]["analysis_context"]["retrieval"]["hits"]}
+    docs={doc["id"]:doc for doc in ExpertKnowledge(additional_path=DEFAULT_PATH.with_name("options_lab_knowledge.json")).documents if doc["id"] in ids}
+    saved=report(**{key:recorded["trial"][key] for key in ("scenario_id","strategy","strike","upper_strike","expiry_price","contracts","execution","language")})
+    raw=recorded["calls"][index]["synthetic_only_raw_response"]
+    if valid:
+        result=_validate(raw,_evidence(saved),docs,recorded["questions"][which],"synthetic_lab")
+        assert len(result)==4
+        if index==2:
+            assert "expert.expiry_long_call" in result[0]["evidence_ids"]
+    else:
+        # A valid knowledge definition must keep its relevant citation. A
+        # citation later in the answer cannot support this uncited paragraph.
+        with pytest.raises(ValueError,match="does not support.*expiry_payoff"):
+            _validate(raw,_evidence(saved),docs,recorded["questions"][which],"synthetic_lab")

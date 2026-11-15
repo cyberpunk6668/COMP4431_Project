@@ -1,0 +1,212 @@
+{
+  "schema_version": 1,
+  "reviewed_at": "2026-11-15T09:23:44Z",
+  "review_type": "independent_agent_reading_based_limited_semantic_review",
+  "scope": "Read all six original raw_answer values, the supplied local summaries, and both primary-source pages. No additional model inference API requests were made. This is an agent-assisted qualitative review, not independent human certification, an exhaustive legal review, or a general model-accuracy evaluation.",
+  "run_path": "reports/news_demo_live_20261115T092220459326Z.json",
+  "corpus_path": "data/news_demo_sources.json",
+  "run_corpus_sha256": "0e1a9940b98b7d7e28631cfb46a7e7e1e3057caed8b37cb627946fb81a3297f5",
+  "comparison_limits": [
+    "One repeat per question; three questions and six outputs cannot establish a population-level hallucination rate.",
+    "Both arms use the same configured DeepSeek API model and company-event system policy. This is not a test of the DeepSeek website or app.",
+    "A refusal to confirm an unavailable recent fact is not itself a hallucination.",
+    "The local corpus includes reviewed editorial limitations as well as summaries of official facts. Faithfully repeating an editorial limitation does not mean the official document explicitly made that statement.",
+    "A local review date of 2026-11-15 does not change the original event/publication dates or independently rule out intervening developments."
+  ],
+  "primary_sources_checked": [
+    {
+      "id": "nvda-ceo-transition-20261112",
+      "url": "https://nvidianews.nvidia.com/news/nvidia-announces-ceo-transition",
+      "title": "NVIDIA Announces CEO Transition",
+      "publication_date": "2026-11-12",
+      "relevant_locations": [
+        "Page date and opening bullets",
+        "Opening resignation and Kress appointment paragraphs",
+        "Harvey C. Jones appointment paragraph"
+      ],
+      "observations_zh": [
+        "新闻稿发布日期为2026-11-12。",
+        "新闻稿宣布黄仁勋辞去总裁、CEO及董事职务，并称立即生效；更精确的董事会接受及生效日期由8-K说明。",
+        "Kress获任临时CEO，继续兼任执行副总裁和CFO；董事会寻找永久CEO，并考虑内部及外部人选。",
+        "Harvey C. Jones获任公司首位董事长，因此将黄仁勋描述为此前董事长与该官方记录冲突。",
+        "此新闻稿没有给出违法或间谍活动的法律认定，也没有明示一条名为不能确立违法或间谍活动的免责声明。后一限制是项目对证据范围的分析。",
+        "此新闻稿没有给出辞任原因或下周股价的确定预测。"
+      ]
+    },
+    {
+      "id": "nvda-ceo-8k-20261111",
+      "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000082/nvda-20261111.htm",
+      "title": "NVIDIA Form 8-K, Item 5.02",
+      "event_date": "2026-11-11",
+      "signature_date": "2026-11-12",
+      "relevant_locations": [
+        "Cover Date of Report",
+        "Item 5.02 three personnel paragraphs",
+        "Item 9.01 Exhibit 99.1 description",
+        "Signature block"
+      ],
+      "observations_zh": [
+        "董事会于2026-11-11接受黄仁勋辞去总裁、CEO及董事职务，立即生效。",
+        "董事会任命Kress担任临时CEO，寻找新CEO；她继续担任执行副总裁和CFO。",
+        "Harvey C. Jones于2026-11-11获任董事长。",
+        "配套新闻稿及签署日期为2026-11-12；不应将签署日期或本地核对日期当作变更生效日期。",
+        "此文件不含下周股价预测或违法行为的法律认定。不能据此单独作出这些结论，是本次审阅的证据范围判断。"
+      ]
+    }
+  ],
+  "output_reviews": [
+    {
+      "question_id": "ceo_and_dates",
+      "arm": "baseline",
+      "request_order": 1,
+      "judgment": "reasonable_abstention_with_scope_wording_caveat",
+      "judgment_zh": "合理拒绝确认，未答出事件事实；不能据此判为幻觉。",
+      "supported_or_appropriate": [
+        "明确说明没有取得可引用的事件资料，不能确认2026-11-15的任职状况。",
+        "没有用黄仁勋长期担任CEO的背景知识直接断言他仍任当前CEO。",
+        "区分生效日期、公告日期与资料更新日期，并建议核对官方披露。"
+      ],
+      "issues": [
+        {
+          "type": "wording_scope",
+          "excerpt": "没有可核实的英伟达官方公告显示黄仁勋已离任CEO",
+          "assessment": "脱离上下文可能被读成客观不存在公告；结合前后无可用参考的限定，应按该回答自身无法核实理解，不能直接标为否认事件。",
+          "preferred_wording": "我未取得可核实的官方公告，因此无法确认。"
+        }
+      ],
+      "demo_use": "可展示未接资料时合理拒答与接入资料后可提供日期、角色和出处的差别；不可讲成该回答断言黄仁勋没有离任。"
+    },
+    {
+      "question_id": "ceo_and_dates",
+      "arm": "rag",
+      "request_order": 2,
+      "judgment": "core_event_facts_supported_with_temporal_and_provenance_caveats",
+      "judgment_zh": "核心人事事实及日期与两份原文一致；截至核对日的表述和编辑性限制的归属需更精确。",
+      "supported_or_appropriate": [
+        "2026-11-11接受辞任且立即生效，引用8-K，符合Item 5.02。",
+        "2026-11-12为新闻稿及签署日期，未与生效日期混同。",
+        "Kress为临时CEO并兼任执行副总裁、CFO；Harvey为董事长，角色分开。",
+        "永久继任者未公布被限定于公告时点，没有推断成此后永远未任命。",
+        "不推断股价或违法行为，结论的方向合理。"
+      ],
+      "issues": [
+        {
+          "type": "temporal_coverage",
+          "excerpt": "截至资料核对日 2026-11-15，黄仁勋已不再担任英伟达 CEO；目前由 Colette Kress 担任**临时** CEO",
+          "assessment": "原文支持11-11/12时点的人事变更；本地核对日不是此后至11-15不存在变更的独立证明。后文有公告时点限制，但开头的目前仍偏强。未发现与所审阅原文冲突的人事事实。",
+          "preferred_wording": "根据11月11日事件、11月12日发布的两份资料，Kress获任临时CEO；资料于11月15日核对，本语料未提供后续任命信息。"
+        },
+        {
+          "type": "editorial_provenance",
+          "assessment": "核对日、非实时搜索与SEC提交不等于独立认证属于项目元数据或方法论解释，不能统一视为8-K原文直接作出的声明。该答没有使用公告明确声明之类强归属用语，问题轻于第三题RAG。"
+        }
+      ],
+      "demo_use": "可以逐项展示日期及角色对齐；要补充资料覆盖截至哪份公告，不要承诺覆盖11月15日全部后续事件。"
+    },
+    {
+      "question_id": "interim_roles",
+      "arm": "rag",
+      "request_order": 3,
+      "judgment": "requested_role_facts_supported_with_temporal_caveat",
+      "judgment_zh": "临时CEO、兼任CFO及董事长的回答均与原文一致；核对日与事件覆盖仍需区分。",
+      "supported_or_appropriate": [
+        "准确说明Kress获任临时CEO，而非已获永久任命。",
+        "准确说明Kress继续担任执行副总裁及CFO。",
+        "准确说明Harvey C. Jones为董事长，而非CEO。",
+        "正确区分11-11事件日期、11-12公告日期和11-15本地核对日。",
+        "对永久继任者的描述限定于公告时点。"
+      ],
+      "issues": [
+        {
+          "type": "temporal_coverage",
+          "excerpt": "截至资料核对日 **2026-11-15**，Colette Kress 是**临时 CEO**，不是正式继任者",
+          "assessment": "该表述容易将11-15的本地审阅元数据理解成截至该日完整更新的人事记录。所审阅原文只直接确立11-11/12时点的任命，后文的公告时点限制应前置。"
+        }
+      ],
+      "demo_use": "适合展示角色区分与引用；讲稿使用据11月12日公告而不是我们证明截至15日没有新任命。"
+    },
+    {
+      "question_id": "interim_roles",
+      "arm": "baseline",
+      "request_order": 4,
+      "judgment": "reasonable_current_status_abstention_with_localized_factual_error",
+      "judgment_zh": "当前职务的拒答合理，但附带的旧背景知识中存在一项可定位的事实错误。",
+      "supported_or_appropriate": [
+        "没有接入带日期的材料时，明确拒绝确认Kress的当前职务。",
+        "没有将Kress编造为永久CEO，也没有断言黄仁勋截至11-15仍任CEO。",
+        "指出旧知识不能替代当期证据，方向合理。"
+      ],
+      "issues": [
+        {
+          "type": "localized_factual_error",
+          "excerpt": "董事长职务也由黄仁勋担任",
+          "evidence_source_id": "nvda-ceo-transition-20261112",
+          "evidence_locator": "Opening Harvey appointment bullet and Harvey appointment paragraph identify him as the company's first-ever board chair.",
+          "assessment": "官方将Harvey描述为首位董事长，与黄仁勋此前担任该董事长职务的背景陈述冲突。把这句话称作较早通用认知不能使其变为事实，也不能因结尾拒答而忽略这项局部错误。",
+          "bounded_claim_for_demo": "本次基线回答虽拒绝确认当前职务，但在附带背景中把黄仁勋写成此前董事长，这一点与官方首位董事长表述冲突。"
+        }
+      ],
+      "demo_use": "可展示一处有原文反证的局部错误；必须同时保留该回答对当前职务的合理拒答，不能讲成整篇回答都错或它断言黄仁勋仍任现CEO。"
+    },
+    {
+      "question_id": "evidence_limits",
+      "arm": "baseline",
+      "request_order": 5,
+      "judgment": "reasonable_general_framework_without_event_verification",
+      "judgment_zh": "合理的一般性边界说明，未核实本次具体事件；不能作为基线产生股价或违法幻觉的例子。",
+      "supported_or_appropriate": [
+        "明确说明没有收到本次事件原文，仅提供一般判断框架。",
+        "没有声称能从人事公告确定下周股价涨跌。",
+        "没有据辞任认定违法，没有编造原因、来源ID或法律结论。",
+        "将策略变化、市场解读与公告事实分开。"
+      ],
+      "issues": [
+        {
+          "type": "scope_limit",
+          "assessment": "该答案没有原文，因此不能把其一般框架当作对本次公告内容的逐条核实。部分法律措辞是宽泛说明，本复核不作法律认证。"
+        }
+      ],
+      "demo_use": "如实展示两边都没有给出确定预测或违法认定；RAG的差别在于可列出本次有出处的具体事实。"
+    },
+    {
+      "question_id": "evidence_limits",
+      "arm": "rag",
+      "request_order": 6,
+      "judgment": "substantively_reasonable_with_source_attribution_error",
+      "judgment_zh": "核心事件事实及不能由这两份文件确定股价或违法的结论合理；一处措辞混淆项目分析与官方明确声明。",
+      "supported_or_appropriate": [
+        "生效日期、公告日期、Kress临时CEO兼CFO、Harvey董事长及永久CEO搜寻均符合所审阅原文。",
+        "没有用人事变更单独确定下周股价方向。",
+        "没有将辞任当作违法自认，没有补造辞任原因或永久CEO人选。",
+        "永久继任者未公布被限定于公告时点。"
+      ],
+      "issues": [
+        {
+          "type": "source_attribution_wording_error",
+          "excerpt": "公告明确不能确立违法或间谍活动的法律结论",
+          "source_id_used_by_answer": "nvda-ceo-transition-20261112",
+          "assessment": "官方原文没有作出这一明示声明。项目摘要加入了该公告不能确立违法或间谍活动法律结论的证据边界分析，模型以公告明确开头并紧接官方来源引用，容易把编辑性限制呈现为公告明示内容。该句的不能据此认定违法这一实质方向合理；不应因此宣称整段法律边界判断错误，但必须标出归属措辞问题。",
+          "preferred_wording": "这两份文件仅披露人事变更，未提供相关法律认定；因此，仅依据本语料不能认定违法。这是对证据范围的分析，并非公告明示的一条结论。"
+        },
+        {
+          "type": "section_provenance_mixing",
+          "excerpt": "一、公告确认的事实（有来源支持）",
+          "assessment": "该节的资料性质条目混入11-15本地核对元数据及SEC提交不等于认证的方法论说明。应与公告直接披露的人事事实分开。"
+        },
+        {
+          "type": "overbroad_wording",
+          "excerpt": "把\"人事变动公告\"当作\"股价信号\"或\"违法证据\"，都是把**已确认事实**外推为**未支持的结论**",
+          "assessment": "将公告作为不确定市场分析中的一个输入，不等于声称它能确定涨跌；该句把股价信号一概排除，范围比本题需要更强。应改为不能单凭公告确定股价方向或证明违法。"
+        }
+      ],
+      "demo_use": "应同时展示核心边界判断与来源归属缺陷，说明RAG仍需审阅，不能宣称引用存在就能保证逐句忠实于原文。"
+    }
+  ],
+  "presentation_guidance_zh": [
+    "不输出笼统正确率，不把拒答计为幻觉。",
+    "可准确讲：本次基线两道人事题未确认最新事实；其中第二题在背景说明中错误地将黄仁勋写为此前董事长。",
+    "可准确讲：本次RAG两道人事题的主要角色与日期符合所审阅原文，但本地核对日与原文事件覆盖仍应区分。",
+    "可准确讲：边界题两边都拒绝由人事变更确定股价或认定违法；RAG还存在将项目证据分析写得像官方明示内容的归属问题。",
+    "保留原始六条回答及本复核，不将修订后的讲稿或编辑文本伪装为原始模型输出。"
+  ]
+}

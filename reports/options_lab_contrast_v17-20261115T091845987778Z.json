@@ -1,0 +1,924 @@
+{
+  "checked_at": "2026-11-15T09:18:45.987778+00:00",
+  "status": "passed",
+  "scope": "Limited normal-state /learn text colour-pair check. Actual Edge computed foreground/background CSS, sRGB relative luminance, threshold 4.5:1. Gradient endpoint samples. Not a whole-site WCAG certification.",
+  "exclusions": [
+    "Decorative borders/gridlines/sprites",
+    "Disabled and transient loading-opacity states",
+    "Unrelated workspace/theme/native UI",
+    "Font-size/readability and full accessibility conformance are not certified by colour checks"
+  ],
+  "selectors_checked": 63,
+  "minimum_ratio": 5.2306,
+  "checks": [
+    {
+      "selector": "body",
+      "foreground": "rgb(15, 23, 42)",
+      "font_size": "14px",
+      "background_samples": [
+        [
+          250.0,
+          250.0,
+          250.0
+        ]
+      ],
+      "minimum_ratio": 17.104,
+      "pass_4_5": true
+    },
+    {
+      "selector": ".brand small",
+      "foreground": "rgb(82, 97, 120)",
+      "font_size": "7px",
+      "background_samples": [
+        [
+          250.0,
+          250.0,
+          250.0
+        ]
+      ],
+      "minimum_ratio": 6.024,
+      "pass_4_5": true
+    },
+    {
+      "selector": ".header-links",
+      "foreground": "rgb(82, 97, 120)",
+      "font_size": "12px",
+      "background_samples": [
+        [
+          250.0,
+          250.0,
+          250.0
+        ]
+      ],
+      "minimum_ratio": 6.024,
+      "pass_4_5": true
+    },
+    {
+      "selector": ".header-links button",
+      "foreground": "rgb(82, 97, 120)",
+      "font_size": "11px",
+      "background_samples": [
+        [
+          250.0,
+          250.0,
+          250.0
+        ]
+      ],
+      "minimum_ratio": 6.024,
+      "pass_4_5": true
+    },
+    {
+      "selector": ".header-links .outline-link",
+      "foreground": "rgb(117, 85, 28)",
+      "font_size": "12px",
+      "background_samples": [
+        [
+          255.0,
+          255.0,
+          255.0
+        ]
+      ],
+      "minimum_ratio": 6.8347,
+      "pass_4_5": true
+    },
+    {
+      "selector": ".eyebrow",
+      "foreground": "rgb(117, 85, 28)",
+      "font_size": "9px",
+      "background_samples": [
+        [
+          250.0,
+          250.0,
+          250.0
+        ]
+      ],
+      "minimum_ratio": 6.5481,
+      "pass_4_5": true
+    },
+    {
+      "selector": ".section-number",
+      "foreground": "rgb(117, 85, 28)",
+      "font_size": "8px",
+      "background_samples": [
+        [
+          250.0,
+          250.0,
+          250.0
+        ]
+      ],
+      "minimum_ratio": 6.5481,
+      "pass_4_5": true
+    },
+    {
+      "selector": ".intro-text",
+      "foreground": "rgb(82, 97, 120)",
+      "font_size": "14px",
+      "background_samples": [
+        [
+          250.0,
+          250.0,
+          250.0
+        ]
+      ],
+      "minimum_ratio": 6.024,
+      "pass_4_5": true
+    },
+    {
+      "selector": ".micro-label",
+      "foreground": "rgb(117, 85, 28)",
+      "font_size": "8px",
+      "background_samples": [
+        [
+          250.0,
+          250.0,
+          250.0
+        ]
+      ],
+      "minimum_ratio": 6.5481,
+      "pass_4_5": true
+    },
+    {
+      "selector": ".intro-aside li",
+      "foreground": "rgb(71, 88, 110)",
+      "font_size": "12px",
+      "background_samples": [
+        [
+          250.0,
+          250.0,
+          250.0
+        ]
+      ],
+      "minimum_ratio": 6.9642,
+      "pass_4_5": true
+    },
+    {
+      "selector": ".intro-aside b",
+      "foreground": "rgb(117, 85, 28)",
+      "font_size": "9px",
+      "background_samples": [
+        [
+          250.0,
+          250.0,
+          250.0
+        ]
+      ],
+      "minimum_ratio": 6.5481,
+      "pass_4_5": true
+    },
+    {
+      "selector": ".intro-aside p",
+      "foreground": "rgb(82, 97, 120)",
+      "font_size": "10px",
+      "background_samples": [
+        [
+          250.0,
+          250.0,
+          250.0
+        ]
+      ],
+      "minimum_ratio": 6.024,
+      "pass_4_5": true
+    },
+    {
+      "selector": ".source-ribbon",
+      "foreground": "rgb(82, 97, 120)",
+      "font_size": "10px",
+      "background_samples": [
+        [
+          245.0,
+          246.0,
+          248.0
+        ]
+      ],
+      "minimum_ratio": 5.8147,
+      "pass_4_5": true
+    },
+    {
+      "selector": ".source-pill",
+      "foreground": "rgb(117, 85, 28)",
+      "font_size": "9px",
+      "background_samples": [
+        [
+          255.0,
+          250.0,
+          240.0
+        ]
+      ],
+      "minimum_ratio": 6.5693,
+      "pass_4_5": true
+    },
+    {
+      "selector": ".local-label",
+      "foreground": "rgb(82, 97, 120)",
+      "font_size": "9px",
+      "background_samples": [
+        [
+          245.0,
+          246.0,
+          248.0
+        ]
+      ],
+      "minimum_ratio": 5.8147,
+      "pass_4_5": true
+    },
+    {
+      "selector": ".section-top p:not(.section-number)",
+      "foreground": "rgb(82, 97, 120)",
+      "font_size": "10px",
+      "background_samples": [
+        [
+          250.0,
+          250.0,
+          250.0
+        ]
+      ],
+      "minimum_ratio": 6.024,
+      "pass_4_5": true
+    },
+    {
+      "selector": ".scenario-index",
+      "foreground": "rgb(117, 85, 28)",
+      "font_size": "9px",
+      "background_samples": [
+        [
+          255.0,
+          252.0,
+          243.0
+        ],
+        [
+          255.0,
+          255.0,
+          255.0
+        ]
+      ],
+      "minimum_ratio": 6.6623,
+      "pass_4_5": true
+    },
+    {
+      "selector": ".scenario-card small",
+      "foreground": "rgb(82, 97, 120)",
+      "font_size": "11px",
+      "background_samples": [
+        [
+          255.0,
+          252.0,
+          243.0
+        ],
+        [
+          255.0,
+          255.0,
+          255.0
+        ]
+      ],
+      "minimum_ratio": 6.1291,
+      "pass_4_5": true
+    },
+    {
+      "selector": ".story-heading p",
+      "foreground": "rgb(82, 97, 120)",
+      "font_size": "12px",
+      "background_samples": [
+        [
+          255.0,
+          255.0,
+          255.0
+        ]
+      ],
+      "minimum_ratio": 6.2877,
+      "pass_4_5": true
+    },
+    {
+      "selector": ".metric-card h4",
+      "foreground": "rgb(82, 97, 120)",
+      "font_size": "11px",
+      "background_samples": [
+        [
+          255.0,
+          255.0,
+          255.0
+        ]
+      ],
+      "minimum_ratio": 6.2877,
+      "pass_4_5": true
+    },
+    {
+      "selector": ".metric-card p",
+      "foreground": "rgb(82, 97, 120)",
+      "font_size": "10px",
+      "background_samples": [
+        [
+          255.0,
+          255.0,
+          255.0
+        ]
+      ],
+      "minimum_ratio": 6.2877,
+      "pass_4_5": true
+    },
+    {
+      "selector": ".metric-card .metric-unit",
+      "foreground": "rgb(82, 97, 120)",
+      "font_size": "10px",
+      "background_samples": [
+        [
+          255.0,
+          255.0,
+          255.0
+        ]
+      ],
+      "minimum_ratio": 6.2877,
+      "pass_4_5": true
+    },
+    {
+      "selector": ".term-help",
+      "foreground": "rgb(117, 85, 28)",
+      "font_size": "10px",
+      "background_samples": [
+        [
+          255.0,
+          255.0,
+          255.0
+        ]
+      ],
+      "minimum_ratio": 6.8347,
+      "pass_4_5": true
+    },
+    {
+      "selector": ".term-help p",
+      "foreground": "rgb(82, 97, 120)",
+      "font_size": "10px",
+      "background_samples": [
+        [
+          247.0,
+          248.0,
+          251.0
+        ]
+      ],
+      "minimum_ratio": 5.9208,
+      "pass_4_5": true
+    },
+    {
+      "selector": ".insight-card .insight-index",
+      "foreground": "rgb(117, 85, 28)",
+      "font_size": "9px",
+      "background_samples": [
+        [
+          255.0,
+          255.0,
+          255.0
+        ]
+      ],
+      "minimum_ratio": 6.8347,
+      "pass_4_5": true
+    },
+    {
+      "selector": ".insight-card p",
+      "foreground": "rgb(82, 97, 120)",
+      "font_size": "11px",
+      "background_samples": [
+        [
+          255.0,
+          255.0,
+          255.0
+        ]
+      ],
+      "minimum_ratio": 6.2877,
+      "pass_4_5": true
+    },
+    {
+      "selector": ".insight-limit",
+      "foreground": "rgb(82, 97, 120)",
+      "font_size": "10px",
+      "background_samples": [
+        [
+          255.0,
+          255.0,
+          255.0
+        ]
+      ],
+      "minimum_ratio": 6.2877,
+      "pass_4_5": true
+    },
+    {
+      "selector": ".insight-limit b",
+      "foreground": "rgb(82, 97, 120)",
+      "font_size": "10px",
+      "background_samples": [
+        [
+          255.0,
+          255.0,
+          255.0
+        ]
+      ],
+      "minimum_ratio": 6.2877,
+      "pass_4_5": true
+    },
+    {
+      "selector": ".professional>summary",
+      "foreground": "rgb(117, 85, 28)",
+      "font_size": "11px",
+      "background_samples": [
+        [
+          255.0,
+          255.0,
+          255.0
+        ]
+      ],
+      "minimum_ratio": 6.8347,
+      "pass_4_5": true
+    },
+    {
+      "selector": ".professional>p",
+      "foreground": "rgb(82, 97, 120)",
+      "font_size": "10px",
+      "background_samples": [
+        [
+          255.0,
+          255.0,
+          255.0
+        ]
+      ],
+      "minimum_ratio": 6.2877,
+      "pass_4_5": true
+    },
+    {
+      "selector": "caption",
+      "foreground": "rgb(82, 97, 120)",
+      "font_size": "10px",
+      "background_samples": [
+        [
+          255.0,
+          255.0,
+          255.0
+        ]
+      ],
+      "minimum_ratio": 6.2877,
+      "pass_4_5": true
+    },
+    {
+      "selector": "th",
+      "foreground": "rgb(82, 97, 120)",
+      "font_size": "10px",
+      "background_samples": [
+        [
+          247.0,
+          249.0,
+          251.0
+        ]
+      ],
+      "minimum_ratio": 5.9578,
+      "pass_4_5": true
+    },
+    {
+      "selector": "td",
+      "foreground": "rgb(75, 95, 121)",
+      "font_size": "10px",
+      "background_samples": [
+        [
+          255.0,
+          255.0,
+          255.0
+        ]
+      ],
+      "minimum_ratio": 6.5377,
+      "pass_4_5": true
+    },
+    {
+      "selector": ".evidence-list",
+      "foreground": "rgb(82, 97, 120)",
+      "font_size": "9px",
+      "background_samples": [
+        [
+          255.0,
+          255.0,
+          255.0
+        ]
+      ],
+      "minimum_ratio": 6.2877,
+      "pass_4_5": true
+    },
+    {
+      "selector": ".evidence-list code",
+      "foreground": "rgb(117, 85, 28)",
+      "font_size": "9px",
+      "background_samples": [
+        [
+          250.0,
+          246.0,
+          234.0
+        ]
+      ],
+      "minimum_ratio": 6.3254,
+      "pass_4_5": true
+    },
+    {
+      "selector": ".field",
+      "foreground": "rgb(71, 91, 118)",
+      "font_size": "11px",
+      "background_samples": [
+        [
+          255.0,
+          255.0,
+          255.0
+        ]
+      ],
+      "minimum_ratio": 6.94,
+      "pass_4_5": true
+    },
+    {
+      "selector": ".field input",
+      "foreground": "rgb(37, 55, 79)",
+      "font_size": "12px",
+      "background_samples": [
+        [
+          251.0,
+          252.0,
+          254.0
+        ]
+      ],
+      "minimum_ratio": 11.7702,
+      "pass_4_5": true
+    },
+    {
+      "selector": ".field-note",
+      "foreground": "rgb(82, 97, 120)",
+      "font_size": "10px",
+      "background_samples": [
+        [
+          255.0,
+          255.0,
+          255.0
+        ]
+      ],
+      "minimum_ratio": 6.2877,
+      "pass_4_5": true
+    },
+    {
+      "selector": ".price-field input",
+      "foreground": "rgb(117, 85, 28)",
+      "font_size": "23px",
+      "background_samples": [
+        [
+          253.0,
+          251.0,
+          245.0
+        ]
+      ],
+      "minimum_ratio": 6.6049,
+      "pass_4_5": true
+    },
+    {
+      "selector": ".range-labels",
+      "foreground": "rgb(82, 97, 120)",
+      "font_size": "9px",
+      "background_samples": [
+        [
+          255.0,
+          255.0,
+          255.0
+        ]
+      ],
+      "minimum_ratio": 6.2877,
+      "pass_4_5": true
+    },
+    {
+      "selector": ".button-primary",
+      "foreground": "rgb(255, 255, 255)",
+      "font_size": "12px",
+      "background_samples": [
+        [
+          141.0,
+          101.0,
+          32.0
+        ],
+        [
+          121.0,
+          85.0,
+          28.0
+        ]
+      ],
+      "minimum_ratio": 5.2306,
+      "pass_4_5": true
+    },
+    {
+      "selector": ".button-secondary",
+      "foreground": "rgb(117, 85, 28)",
+      "font_size": "12px",
+      "background_samples": [
+        [
+          255.0,
+          253.0,
+          247.0
+        ],
+        [
+          255.0,
+          253.0,
+          247.0
+        ]
+      ],
+      "minimum_ratio": 6.7192,
+      "pass_4_5": true
+    },
+    {
+      "selector": ".form-boundary",
+      "foreground": "rgb(82, 97, 120)",
+      "font_size": "9px",
+      "background_samples": [
+        [
+          255.0,
+          255.0,
+          255.0
+        ]
+      ],
+      "minimum_ratio": 6.2877,
+      "pass_4_5": true
+    },
+    {
+      "selector": ".result-heading>p",
+      "foreground": "rgb(117, 85, 28)",
+      "font_size": "10px",
+      "background_samples": [
+        [
+          255.0,
+          255.0,
+          255.0
+        ]
+      ],
+      "minimum_ratio": 6.8347,
+      "pass_4_5": true
+    },
+    {
+      "selector": ".pnl-primary>span",
+      "foreground": "rgb(82, 97, 120)",
+      "font_size": "11px",
+      "background_samples": [
+        [
+          247.0,
+          249.0,
+          252.0
+        ]
+      ],
+      "minimum_ratio": 5.9616,
+      "pass_4_5": true
+    },
+    {
+      "selector": ".pnl-primary p",
+      "foreground": "rgb(82, 97, 120)",
+      "font_size": "10px",
+      "background_samples": [
+        [
+          247.0,
+          249.0,
+          252.0
+        ]
+      ],
+      "minimum_ratio": 5.9616,
+      "pass_4_5": true
+    },
+    {
+      "selector": ".pnl-primary strong",
+      "foreground": "rgb(36, 115, 91)",
+      "font_size": "38px",
+      "background_samples": [
+        [
+          247.0,
+          249.0,
+          252.0
+        ]
+      ],
+      "minimum_ratio": 5.4129,
+      "pass_4_5": true
+    },
+    {
+      "selector": ".trial-metric span",
+      "foreground": "rgb(82, 97, 120)",
+      "font_size": "10px",
+      "background_samples": [
+        [
+          255.0,
+          255.0,
+          255.0
+        ]
+      ],
+      "minimum_ratio": 6.2877,
+      "pass_4_5": true
+    },
+    {
+      "selector": ".trial-metric strong",
+      "foreground": "rgb(49, 69, 96)",
+      "font_size": "18px",
+      "background_samples": [
+        [
+          255.0,
+          255.0,
+          255.0
+        ]
+      ],
+      "minimum_ratio": 9.764,
+      "pass_4_5": true
+    },
+    {
+      "selector": ".trial-metric small",
+      "foreground": "rgb(82, 97, 120)",
+      "font_size": "9px",
+      "background_samples": [
+        [
+          255.0,
+          255.0,
+          255.0
+        ]
+      ],
+      "minimum_ratio": 6.2877,
+      "pass_4_5": true
+    },
+    {
+      "selector": ".chart-heading>strong",
+      "foreground": "rgb(82, 97, 120)",
+      "font_size": "11px",
+      "background_samples": [
+        [
+          255.0,
+          255.0,
+          255.0
+        ]
+      ],
+      "minimum_ratio": 6.2877,
+      "pass_4_5": true
+    },
+    {
+      "selector": ".chart-legend",
+      "foreground": "rgb(82, 97, 120)",
+      "font_size": "9px",
+      "background_samples": [
+        [
+          255.0,
+          255.0,
+          255.0
+        ]
+      ],
+      "minimum_ratio": 6.2877,
+      "pass_4_5": true
+    },
+    {
+      "selector": "#lab-chart text",
+      "foreground": "rgb(82, 97, 120)",
+      "font_size": "11px",
+      "background_samples": [
+        [
+          255.0,
+          255.0,
+          255.0
+        ]
+      ],
+      "minimum_ratio": 6.2877,
+      "pass_4_5": true
+    },
+    {
+      "selector": ".payoff-figure figcaption",
+      "foreground": "rgb(82, 97, 120)",
+      "font_size": "9px",
+      "background_samples": [
+        [
+          255.0,
+          255.0,
+          255.0
+        ]
+      ],
+      "minimum_ratio": 6.2877,
+      "pass_4_5": true
+    },
+    {
+      "selector": ".curve-details",
+      "foreground": "rgb(82, 97, 120)",
+      "font_size": "10px",
+      "background_samples": [
+        [
+          255.0,
+          255.0,
+          255.0
+        ]
+      ],
+      "minimum_ratio": 6.2877,
+      "pass_4_5": true
+    },
+    {
+      "selector": ".curve-details summary",
+      "foreground": "rgb(117, 85, 28)",
+      "font_size": "10px",
+      "background_samples": [
+        [
+          255.0,
+          255.0,
+          255.0
+        ]
+      ],
+      "minimum_ratio": 6.8347,
+      "pass_4_5": true
+    },
+    {
+      "selector": ".formula",
+      "foreground": "rgb(82, 97, 120)",
+      "font_size": "10px",
+      "background_samples": [
+        [
+          247.0,
+          249.0,
+          252.0
+        ]
+      ],
+      "minimum_ratio": 5.9616,
+      "pass_4_5": true
+    },
+    {
+      "selector": ".followup-section p:not(.section-number)",
+      "foreground": "rgb(82, 97, 120)",
+      "font_size": "11px",
+      "background_samples": [
+        [
+          251.0,
+          248.0,
+          237.0
+        ],
+        [
+          255.0,
+          255.0,
+          255.0
+        ]
+      ],
+      "minimum_ratio": 5.9139,
+      "pass_4_5": true
+    },
+    {
+      "selector": ".question-chips button",
+      "foreground": "rgb(114, 83, 30)",
+      "font_size": "9px",
+      "background_samples": [
+        [
+          243.0,
+          231.0,
+          199.0
+        ],
+        [
+          243.0,
+          231.0,
+          199.0
+        ]
+      ],
+      "minimum_ratio": 5.7432,
+      "pass_4_5": true
+    },
+    {
+      "selector": ".lab-footer",
+      "foreground": "rgb(82, 97, 120)",
+      "font_size": "8px",
+      "background_samples": [
+        [
+          250.0,
+          250.0,
+          250.0
+        ]
+      ],
+      "minimum_ratio": 6.024,
+      "pass_4_5": true
+    },
+    {
+      "selector": ".lab-footer a",
+      "foreground": "rgb(117, 85, 28)",
+      "font_size": "10px",
+      "background_samples": [
+        [
+          250.0,
+          250.0,
+          250.0
+        ]
+      ],
+      "minimum_ratio": 6.5481,
+      "pass_4_5": true
+    },
+    {
+      "selector": ".error",
+      "foreground": "rgb(159, 76, 56)",
+      "font_size": "12px",
+      "background_samples": [
+        [
+          255.0,
+          245.0,
+          241.0
+        ]
+      ],
+      "minimum_ratio": 5.4931,
+      "pass_4_5": true
+    },
+    {
+      "selector": ".question-chips button[aria-pressed=true]",
+      "foreground": "rgb(114, 83, 30)",
+      "background": "rgb(243, 231, 199)",
+      "minimum_ratio": 5.7432,
+      "pass_4_5": true
+    }
+  ],
+  "css_sha256": "de52dd1072055f9fe7e08e3f9b331ccb3099592c4bdb4306bd1e1a1d687164bf",
+  "model_requests": 0,
+  "broker_requests": 0,
+  "user_database_reads": 0
+}

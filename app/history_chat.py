@@ -259,7 +259,7 @@ def _normalize_identity(content):
     for part in response["response"]:
         if isinstance(part, dict) and isinstance(part.get("text"), str):
             part["text"] = re.sub(r"同一份((?:看涨|看跌)?(?:期权)?合约)", r"该\1", part["text"])
-            part["text"] = re.sub(r"(?<=这是)一份(?=(?:明确标注的)?(?:合成教学|合成|历史|已保存的)?(?:记录|报告|样本))", "", part["text"])
+            part["text"] = re.sub(r"(?<=这是)一份(?=(?:明确标注的)?(?:合成教学|合成|历史|已保存的)?(?:期权)?(?:记录|报告|样本|试算|演示|分析|说明|示例|数据|文档|教程))", "", part["text"])
     return json.dumps(response, ensure_ascii=False)
 
 

@@ -10,8 +10,12 @@ ROOT = Path(__file__).resolve().parents[1]
 APPLICATION_VERSION = "17.0.0"
 NATIVE_HOST_VERSION = "15.0.0"
 OUTPUT = ROOT / "dist" / "FinPilot_submission_v17.zip"
-DIRECTORIES = ["app", "web", "frontend", "data", "tests", "evaluation", "scripts", "docs", "finetuning", "models/finpilot-lora", "output/pdf", "output/presentations", "reports"]
+DIRECTORIES = ["app", "web", "frontend", "data", "tests", "evaluation", "scripts", "docs", "finetuning", "models/finpilot-lora", "output/pdf", "reports"]
 FILES = ["README.md", ".env.example", ".gitignore", "requirements.txt", "requirements-dev.txt", "requirements-ui-tests.txt", "requirements-ml.txt", "requirements-options.txt", "requirements-lock.txt", "start.ps1", "start-desktop.ps1", "pytest.ini", "COMP4431_GroupProject2027-1 (1).pdf"]
+# Keep the two project demo decks, without copying unrelated presentation drafts,
+# exports and intermediate renders from the shared output directory.
+FILES += ["output/presentations/FinPilot_Demo_EN.pptx", "output/presentations/FinPilot_Demo_EN_v2.pptx"]
+FILES += ["start-options-demo.ps1", "start-options-demo.cmd"]
 DESKTOP_FILES = ["desktop/package.json", "desktop/package-lock.json", "desktop/main.cjs", "desktop/preload.cjs",
                  "desktop/geometry.cjs", "desktop/build.cjs", "desktop/README.md", "desktop/.gitignore", "desktop/tray.png"]
 PORTABLE = "desktop/artifacts/FinPilotPet-15.0.0-win-x64-portable.exe"
@@ -25,7 +29,7 @@ V16_REQUIRED_FILES = ["app/project_help.py", "app/project_help_chat.py", "data/p
 V17_REQUIRED_FILES = ["app/options_lab.py", "data/options_lab_knowledge.json", "web/learn.html", "web/learn.js", "web/learn.css",
                       "web/experience-v17.css", "docs/options_learning_v17.md", "docs/demo_v17.md",
                       "reports/options_lab_ui_v17.json", "reports/experience_ui_v17.json", "reports/python_regression_v17.json", "reports/options_lab_live_v17.json",
-                      "reports/feature_audit_v17.json"]
+                      "reports/feature_audit_v17.json", "reports/options_lab_semantic_review_v17.json"]
 EXCLUDED_DIRS = {"__pycache__", "node_modules", "browser", "previews", ".pytest_cache", "checkpoints", "cache",
                  "win-unpacked", "artifacts", ".git", ".hg", ".svn", ".venv", ".venv-ml", "tmp"}
 SECRET_PATTERNS = [re.compile(rb"sk-[A-Za-z0-9_-]{20,}"),

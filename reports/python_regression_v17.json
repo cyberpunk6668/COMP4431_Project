@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-11-15T08:53:16.919958+00:00",
+  "checked_at": "2026-11-15T09:10:43.681065+00:00",
   "status": "passed",
   "scope": "Complete pytest tests/ suite using the workspace .venv, controlled providers/transports; not real broker or cloud-model acceptance.",
   "command": [
@@ -12,24 +12,24 @@
   ],
   "runner": "Child calls pytest.main with a process-local dotenv/network guard before importing application code.",
   "counts": {
-    "tests": 888,
+    "tests": 937,
     "failures": 0,
     "errors": 0,
     "skipped": 0
   },
   "exit_code": 0,
   "timed_out": false,
-  "junit": "reports/tests_v17-20261115T085253223832Z.xml",
-  "log": "tmp/python-regression-v17/20261115T085253223832Z/pytest.log",
-  "default_database": "tmp/python-regression-v17/20261115T085253223832Z/default.sqlite3",
+  "junit": "reports/tests_v17-20261115T091018432569Z.xml",
+  "log": "tmp/python-regression-v17/20261115T091018432569Z/pytest.log",
+  "default_database": "tmp/python-regression-v17/20261115T091018432569Z/default.sqlite3",
   "source_sha256": {
     "app/__init__.py": "3a0c8bcc4aba90052ed4a6dc0ffb148787cf936a485b8dd7ec0afb712cb8a076",
     "app/companion.py": "7456bffbdb3803fa70c6c5e2de3bfbbcf0d2448fb31196fb53baadd8194b957b",
     "app/config.py": "b21790823a0f687981e7e78867222b48a6424a0d4a9385c14a7c89a7e7f68ace",
-    "app/expert_grounding.py": "360d83b1b7c2deba584a2dfc8311077494f1af90523e20720acffe47c4afe0a8",
+    "app/expert_grounding.py": "2afa391e54f21121c70e6b64661a889d1d27be62e124a2f8f98f615f2d6596ae",
     "app/expert_knowledge.py": "d9547f62c67a3afdcfb57e15385cae801d7cd76292ed10a388e57c36a91731fe",
     "app/finance.py": "28eb63445f2f0dd3b72130cb5e7d77b0e0c3ebc13cd07abf714fa2529299a9b3",
-    "app/history_chat.py": "94cdeb57f4b6973fabf823e6d61ca561aefffcfc3f836e5614fa8af07de333fb",
+    "app/history_chat.py": "f7a460c6cb0fd757d4dcb16a547bdfc275bbf23df89fa886b3463ee431326e44",
     "app/knowledge.py": "1234af8bc71b942fbceb25b0bec40fee9f87ee5c59817fa943e4ce6c799fa990",
     "app/llm.py": "a902db18df0db8346fea19c29837c521ba3cc34ffc15a927df31189ef486b357",
     "app/local_llm.py": "3c97066760ccbab63f49e66959931e90a62272a2cf4b438326e9e57bc1ae181b",
@@ -44,7 +44,7 @@
     "app/options_history.py": "675aaf321fda2623e1cc1c92e2f190638838c541ae434b5401a402ca297e95b3",
     "app/options_history_ibkr.py": "c92e02dcfc79ff28dd9ad5ef7d6ee06b9545270d2f8a10599adceddee0d8f45f",
     "app/options_ibkr.py": "ae488fad3c15ab760a54cc0d76bd29189c38ed4d2e1df73dce68cf0f6523ae54",
-    "app/options_lab.py": "93da1c14761dacb99dc02d830f0f93b4c69947ac66218b680cb58e7ebf281750",
+    "app/options_lab.py": "05b6615f93088c459fb968272691cf863dfc747d7af01a800d2eebf506e78599",
     "app/options_narrative.py": "cc07f11aa0839ff7d2966ace08b9a28f92008326e949ee2ddd5e380656dea578",
     "app/options_refresh.py": "a326f8e95f58ed247a15bc3c968cc2e9dd8b250bd3fba15116c95e827062356d",
     "app/options_service.py": "cab8ec8977188e6b3ac1a3b01dfbb0133fcc297353191ed7fe356c15e395c89b",
@@ -66,7 +66,7 @@
     "tests/test_ibkr_history_probe_v13.py": "5b89676b64c57839e80a16a254742e9c345c5668f0f3f2ec55c486c3504c86f6",
     "tests/test_ibkr_reference_context.py": "650fa6d8af1b478e0b59cf1578b4b97535af47256c916497a59cb329ffdec745",
     "tests/test_knowledge.py": "f193cc83383a3654300bc1fb9b3798f61ec3fdfaa7977bd0221a10a2d38e3074",
-    "tests/test_lab_chat_v17.py": "709dc41259d93908dbae43e0af4d0d5cefb0b1f380b636aa7ea30926ec0eeefa",
+    "tests/test_lab_chat_v17.py": "c5d54e871f3baf6132d92bb60486f76f6d994784528729d17f0ed32a3b2c1d29",
     "tests/test_llm.py": "5e65c7d198f3ce54e84432aa5ad49c934c48885b61655dcad0282e2012784be1",
     "tests/test_local_llm.py": "29675bef548f8c7aaecdee864eedbdf065222d3d5549da7da7722d8f7d8ccc36",
     "tests/test_options_analytics.py": "6cbf84b5005ddbcad8cbcecd8752811b629a111193377f334dcc4ffb9da5aada",
@@ -85,7 +85,7 @@
     "tests/test_options_history_ibkr.py": "0ab7fbd90408c4a3e329602c737b4870f46dff1433c4c807742fb377517cf529",
     "tests/test_options_ibkr.py": "e341e240421bd21760bec74647649d15680c65b8a3a4967c5ff3edf9bef54e12",
     "tests/test_options_ibkr_reference.py": "e0716c3d07f0e87fd0c73b24bff3802fbbfc494fa44496926769857c2bbaa7f2",
-    "tests/test_options_lab.py": "2e649eb63582c28d305f3930dc120eeff55b1a0eb29a1342ed61d1ec8b8a7a40",
+    "tests/test_options_lab.py": "96dc82a0602481b96655099bde06811cf3927b9808fb97b2992e616dcf72b893",
     "tests/test_options_lab_api.py": "87731a6ec476919f0de140241188a72d4e59ae9d967745e21b3f0ea6388eea80",
     "tests/test_options_novice_workflow.py": "116a42ccfa67f65b74d91561e866d2df83e15eccf7161f66d96603bf3145d731",
     "tests/test_options_refresh.py": "936e84ced783d36939a503f538b636885fef55b3886b07d862781ddeb8bf8adb",
@@ -104,7 +104,7 @@
     "external_model_requests": 0,
     "broker_requests": 0
   },
-  "elapsed_seconds": 23.736,
+  "elapsed_seconds": 25.252,
   "limits": [
     "Unit/API tests use mocks for models and broker transports.",
     "Native Windows and browser workflows are separate reports."

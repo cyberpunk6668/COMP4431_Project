@@ -146,6 +146,12 @@ def claim_facets(text: str, context_kind="snapshot") -> set[str]:
     # a strategy, an evidence-card label or a trial is not a knowledge claim.
     if _has(r"(?:到期(?:净)?盈亏|到期(?:现金)?(?:价值|值|收益)|最大(?:损失|亏损|收益|盈利)|盈亏平衡(?:价|点|标的价)?)[^。；;，,]{0,55}(?:等于|是(?!否)|为(?!什么|何)|取决于|限于|上限|无限|不限|净支付|权利金|加|减)|(?:maximum (?:loss|gain|profit)|break.?even|(?:expiry|expiration|terminal) (?:cash )?(?:payoff|profit|p/l))[^.;,]{0,85}(?:equals?|is |are |limited|unlimited|premium|debit|strike|minus|plus)", text):
         facets.add("expiry_payoff")
+    # A plain-language payoff definition may describe cash received at expiry
+    # before premium deduction without using the compact label "expiry payoff".
+    if _has(r"到期[^。；;]{0,18}现金(?:值|价值)[^。；;]{0,40}(?:扣(?:掉|除)|减去)[^。；;]{0,16}(?:权利金|初始成本|已付成本)|(?:expiry|expiration|terminal)[^.;]{0,45}(?:cash )?payoff[^.;]{0,60}(?:less|minus|deduct|subtract)[^.;]{0,25}(?:premium|paid cost|initial cost)|(?:cash )?payoff\s+at\s+(?:expiry|expiration)[^.;]{0,45}(?:less|minus|deduct|subtract)[^.;]{0,25}(?:premium|paid cost|initial cost)", text):
+        facets.add("expiry_payoff")
+    if _has(r"买入看涨|看涨期权|long call", text) and _has(r"权利金[^。；;]{0,40}(?:抬高|提高)[^。；;]{0,12}盈亏平衡|premium[^.;]{0,40}rais[^.;]{0,15}break.?even", text):
+        facets.add("expiry_payoff")
     if context_kind == "synthetic_lab" and _synthetic_metadata_provenance(text):
         facets.discard("historical_time_basis")
     return facets

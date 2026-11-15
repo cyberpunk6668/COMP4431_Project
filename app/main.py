@@ -34,6 +34,7 @@ from app.storage import Store
 from app.companion import CompanionBus, ConnectionInput, ActivityInput, StaleConnection, ActivityLimit, encode_event
 from app.options_lab import catalogue as lab_catalogue, build_scenario, evaluate as evaluate_lab, LabEvaluationRequest
 from app.project_help import CURRENT_VERSION as HELP_VERSION, MANUAL_VERSION
+from app.options_demo import create_demo_router
 
 
 class ChatRequest(BaseModel):
@@ -192,6 +193,7 @@ def create_app(settings: Settings | None = None, *, options_provider=None, histo
     app.state.history_chat = history_chat
     app.state.companion = companion
     app.state.project_help = service.project_help
+    app.include_router(create_demo_router(config, cloud))
 
     @app.middleware("http")
     async def local_security(request: Request, call_next):
@@ -211,13 +213,13 @@ def create_app(settings: Settings | None = None, *, options_provider=None, histo
                 return JSONResponse({"detail": "Request too large."}, status_code=413)
             path = request.url.path
             is_refresh = bool(re.fullmatch(r"/api/sessions/[^/]+/analysis/refresh", path))
-            if path in {"/api/chat", "/api/options/analyze", "/api/options/batch", "/api/options/history/import", "/api/options/history/demo", "/api/options/history/fetch"} or is_refresh:
+            if path in {"/api/chat", "/api/options-demo/run", "/api/options/analyze", "/api/options/batch", "/api/options/history/import", "/api/options/history/demo", "/api/options/history/fetch"} or is_refresh:
                 ip = request.client.host if request.client else "local"
                 queue = recent[(ip, "/api/options/refresh" if is_refresh else path)]
                 tick = time.monotonic()
                 while queue and queue[0] < tick - 60:
                     queue.popleft()
-                if len(queue) >= (20 if path == "/api/chat" else 6):
+                if len(queue) >= (20 if path in {"/api/chat", "/api/options-demo/run"} else 6):
                     return JSONResponse({"detail": "Too many requests. Please wait a minute."}, status_code=429)
                 queue.append(tick)
         response = await call_next(request)
@@ -616,6 +618,10 @@ def create_app(settings: Settings | None = None, *, options_provider=None, histo
     @app.get("/demo", include_in_schema=False)
     def innovation_demo():
         return FileResponse(ROOT / "web" / "demo.html")
+
+    @app.get("/options-demo", include_in_schema=False)
+    def options_data_demo():
+        return FileResponse(ROOT / "web" / "options-demo.html")
 
     @app.get("/pet", include_in_schema=False)
     def desktop_pet():

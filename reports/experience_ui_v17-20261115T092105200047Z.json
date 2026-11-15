@@ -1,0 +1,88 @@
+{
+  "checked_at": "2026-11-15T09:21:05.899977+00:00",
+  "status": "failed",
+  "scope": "Actual Edge, real create_app and private SQLite. Offline deterministic explanations; no live model, broker, user DB or normal port 8000.",
+  "dotenv_loading_disabled": true,
+  "server_port": 59815,
+  "database": "F:\\桌面\\COMP4431_Project\\tmp\\experience-ui-v17\\20261115T092105200047Z\\owned.sqlite3",
+  "viewports": [
+    {
+      "width": 320,
+      "height": 740,
+      "status": "passed",
+      "checks": [
+        "home_primary_cta_opens_real_synthetic_learning_without_chat_or_gateway",
+        "real_same_expiry_spread_calculation_and_formula_curve",
+        "save_persists_exact_trial_new_owned_session_binding_prompt_only_old_local_id_not_read",
+        "explicit_send_real_offline_explanation_shows_saved_trial_source_time_evidence",
+        "controlled_chat_failure_retains_draft_and_real_retry_keeps_prior_answers",
+        "task_focused_welcome_and_learning_calculator_manual_entries",
+        "three_real_calculators_keyboard_tabs_and_changed_assumptions_hide_old_result",
+        "real_curated_knowledge_sources_readable_without_model",
+        "model_availability_and_whale_legacy_2d_entries_no_implicit_generation",
+        "help_chip_prefills_then_manual_send_returns_real_reviewed_tutorial",
+        "professional_gateway_no_auto_collection_history_collapsed_except_explicit_deep_link",
+        "real_v17_learning_manual_steps_and_safe_learn_link",
+        "legacy_demo_initialization_does_not_read_workspace_or_companion_conversation",
+        "no_javascript_errors_external_assets_provider_or_gateway_calls"
+      ],
+      "javascript_errors": [],
+      "external_requests": [],
+      "api_calls": 42
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "status": "failed",
+      "checks": [
+        "home_primary_cta_opens_real_synthetic_learning_without_chat_or_gateway",
+        "real_same_expiry_spread_calculation_and_formula_curve",
+        "save_persists_exact_trial_new_owned_session_binding_prompt_only_old_local_id_not_read",
+        "explicit_send_real_offline_explanation_shows_saved_trial_source_time_evidence",
+        "controlled_chat_failure_retains_draft_and_real_retry_keeps_prior_answers",
+        "task_focused_welcome_and_learning_calculator_manual_entries",
+        "three_real_calculators_keyboard_tabs_and_changed_assumptions_hide_old_result",
+        "real_curated_knowledge_sources_readable_without_model",
+        "english_theme_persistence_and_language_change_preserves_current_draft_without_generation",
+        "model_availability_and_whale_legacy_2d_entries_no_implicit_generation",
+        "legacy_3d_renders_real_frame_or_explicit_reasoned_2d_fallback",
+        "help_chip_prefills_then_manual_send_returns_real_reviewed_tutorial",
+        "professional_gateway_no_auto_collection_history_collapsed_except_explicit_deep_link"
+      ],
+      "legacy_3d_status": {
+        "requestedMode": "3d",
+        "actualMode": "3d",
+        "renderer": "webgl2",
+        "state": "idle",
+        "reducedMotion": true,
+        "fallbackReason": null,
+        "frames": 1,
+        "destroyed": false,
+        "threeRevision": "187"
+      },
+      "error": "TimeoutError: Locator.fill: Timeout 15000ms exceeded.\nCall log:\n  - waiting for locator(\"#history-source-label\")\n    - locator resolved to <input type=\"text\" maxlength=\"160\" name=\"source_label\" id=\"history-source-label\" placeholder=\"例如：券商导出的日线记录\"/>\n    - fill(\"Synthetic integration fixture; not broker observations\")\n  - attempting fill action\n    2 × waiting for element to be visible, enabled and editable\n      - element is not visible\n    - retrying fill action\n    - waiting 20ms\n    2 × waiting for element to be visible, enabled and editable\n      - element is not visible\n    - retrying fill action\n      - waiting 100ms\n    30 × waiting for element to be visible, enabled and editable\n       - element is not visible\n     - retrying fill action\n       - waiting 500ms\n",
+      "url": "http://127.0.0.1:59815/workspace?view=history",
+      "javascript_errors": [],
+      "external_requests": []
+    }
+  ],
+  "screenshots": "reports\\screenshots\\experience-v17\\20261115T092105200047Z",
+  "fault_injections": [
+    "one owned chat request returns controlled HTTP 503 per viewport"
+  ],
+  "error": "TimeoutError: Locator.fill: Timeout 15000ms exceeded.\nCall log:\n  - waiting for locator(\"#history-source-label\")\n    - locator resolved to <input type=\"text\" maxlength=\"160\" name=\"source_label\" id=\"history-source-label\" placeholder=\"例如：券商导出的日线记录\"/>\n    - fill(\"Synthetic integration fixture; not broker observations\")\n  - attempting fill action\n    2 × waiting for element to be visible, enabled and editable\n      - element is not visible\n    - retrying fill action\n    - waiting 20ms\n    2 × waiting for element to be visible, enabled and editable\n      - element is not visible\n    - retrying fill action\n      - waiting 100ms\n    30 × waiting for element to be visible, enabled and editable\n       - element is not visible\n     - retrying fill action\n       - waiting 500ms\n",
+  "provider_attempts": [],
+  "broker_attempts": [],
+  "blocked_network_attempts": [],
+  "server_stopped": true,
+  "model_requests": 0,
+  "broker_requests": 0,
+  "user_database_reads": 0,
+  "source_sha256": {
+    "web/learn.js": "591848c0156c80448372f591c00e272480a976f20dbdf5712f30b77dd211ca61",
+    "web/app.js": "f94243ca084d268583eb9177ac30a1fce3f4b8fb4f1182a18dda7f829a041784",
+    "web/companion/messages.js": "65cbacc5c9fb22fcadfde3458ed1d3168999c2501e0325ac1146dd24dd261c81",
+    "app/main.py": "ca3861844fecbb2ecae2666b46c70ecc6a417e8fa7d106f7f5e93da9b91ece1a",
+    "scripts/check_experience_ui_v17.py": "98a5ae9b5376bb3b74eb25eae1cbef7f264cc40cd02ead77655bc12f7668a76d"
+  }
+}

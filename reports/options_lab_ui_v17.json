@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-11-15T09:01:15.447873+00:00",
+  "checked_at": "2026-11-15T09:17:57.419757+00:00",
   "status": "passed",
   "scope": "Actual Edge viewports over a private, pure-calculation HTTP fixture.\n\nNo normal server, .env, user conversation, model, broker or native UI access.\nThe fixture returns the real authored scenarios/formulas, but it is not an\nacceptance of production persistence or the model/broker API wiring.\n",
   "viewports": [

@@ -17,11 +17,11 @@
       "source_files": [
         {
           "path": "web/index.html",
-          "sha256": "227beb709f099939a52c062d23179ae551b98669a726ad1f993c737b6566bd44"
+          "sha256": "950dd620ed2ba97b04692317a87109b46c34193c9fc69cddc1830135be187578"
         },
         {
           "path": "web/demo.html",
-          "sha256": "a74d7e6a8876fa851bab9ac83b9e462117f91d30082a11d6c810746b777fced2"
+          "sha256": "7a58b0a2f40a74d9f3cd796fb559a8ab49e92747cf0a7a57d1390a010b5740c8"
         },
         {
           "path": "docs/desktop_pet_v15.md",
@@ -95,7 +95,7 @@
       "source_files": [
         {
           "path": "web/index.html",
-          "sha256": "227beb709f099939a52c062d23179ae551b98669a726ad1f993c737b6566bd44"
+          "sha256": "950dd620ed2ba97b04692317a87109b46c34193c9fc69cddc1830135be187578"
         },
         {
           "path": "web/options.js",
@@ -180,15 +180,15 @@
         },
         {
           "path": "web/learn.js",
-          "sha256": "35c4af172ecece86f1a2d58d5b6627bc1c98f8d9e97bbbaa747df8a872b29d25"
+          "sha256": "591848c0156c80448372f591c00e272480a976f20dbdf5712f30b77dd211ca61"
         },
         {
           "path": "web/learn.css",
-          "sha256": "9a958ad36a1dfd4a40b8eead8fe9e844c53e042bf1e6e7bd1332898824f0ba44"
+          "sha256": "de52dd1072055f9fe7e08e3f9b331ccb3099592c4bdb4306bd1e1a1d687164bf"
         },
         {
           "path": "docs/options_learning_v17.md",
-          "sha256": "81c296697f04ce6e91e6fee9eee446dddeafc657dea40f01d5403895fd13d9f5"
+          "sha256": "7eebb8a8899eca44368a4a685119d248f37d601c91bdbaace5559e0f1dac67ce"
         }
       ],
       "links": [
@@ -263,7 +263,7 @@
       "source_files": [
         {
           "path": "web/index.html",
-          "sha256": "227beb709f099939a52c062d23179ae551b98669a726ad1f993c737b6566bd44"
+          "sha256": "950dd620ed2ba97b04692317a87109b46c34193c9fc69cddc1830135be187578"
         },
         {
           "path": "web/history.js",
@@ -332,7 +332,7 @@
       "source_files": [
         {
           "path": "web/app.js",
-          "sha256": "734774e4b05816b476903d9bf67cfe7d510e18b24cb0b1a30b4bef9598fb9003"
+          "sha256": "f94243ca084d268583eb9177ac30a1fce3f4b8fb4f1182a18dda7f829a041784"
         },
         {
           "path": "web/pet.js",
@@ -404,11 +404,11 @@
       "source_files": [
         {
           "path": "web/app.js",
-          "sha256": "734774e4b05816b476903d9bf67cfe7d510e18b24cb0b1a30b4bef9598fb9003"
+          "sha256": "f94243ca084d268583eb9177ac30a1fce3f4b8fb4f1182a18dda7f829a041784"
         },
         {
           "path": "web/index.html",
-          "sha256": "227beb709f099939a52c062d23179ae551b98669a726ad1f993c737b6566bd44"
+          "sha256": "950dd620ed2ba97b04692317a87109b46c34193c9fc69cddc1830135be187578"
         },
         {
           "path": "finetuning/README.md",
@@ -466,7 +466,7 @@
       "source_files": [
         {
           "path": "web/index.html",
-          "sha256": "227beb709f099939a52c062d23179ae551b98669a726ad1f993c737b6566bd44"
+          "sha256": "950dd620ed2ba97b04692317a87109b46c34193c9fc69cddc1830135be187578"
         },
         {
           "path": "web/pet.html",
@@ -543,11 +543,11 @@
       "source_files": [
         {
           "path": "web/index.html",
-          "sha256": "227beb709f099939a52c062d23179ae551b98669a726ad1f993c737b6566bd44"
+          "sha256": "950dd620ed2ba97b04692317a87109b46c34193c9fc69cddc1830135be187578"
         },
         {
           "path": "web/app.js",
-          "sha256": "734774e4b05816b476903d9bf67cfe7d510e18b24cb0b1a30b4bef9598fb9003"
+          "sha256": "f94243ca084d268583eb9177ac30a1fce3f4b8fb4f1182a18dda7f829a041784"
         }
       ],
       "links": [
@@ -598,11 +598,11 @@
       "source_files": [
         {
           "path": "web/app.js",
-          "sha256": "734774e4b05816b476903d9bf67cfe7d510e18b24cb0b1a30b4bef9598fb9003"
+          "sha256": "f94243ca084d268583eb9177ac30a1fce3f4b8fb4f1182a18dda7f829a041784"
         },
         {
           "path": "web/index.html",
-          "sha256": "227beb709f099939a52c062d23179ae551b98669a726ad1f993c737b6566bd44"
+          "sha256": "950dd620ed2ba97b04692317a87109b46c34193c9fc69cddc1830135be187578"
         },
         {
           "path": "web/pet.html",
@@ -663,15 +663,15 @@
       "source_files": [
         {
           "path": "web/index.html",
-          "sha256": "227beb709f099939a52c062d23179ae551b98669a726ad1f993c737b6566bd44"
+          "sha256": "950dd620ed2ba97b04692317a87109b46c34193c9fc69cddc1830135be187578"
         },
         {
           "path": "web/app.js",
-          "sha256": "734774e4b05816b476903d9bf67cfe7d510e18b24cb0b1a30b4bef9598fb9003"
+          "sha256": "f94243ca084d268583eb9177ac30a1fce3f4b8fb4f1182a18dda7f829a041784"
         },
         {
           "path": "web/demo.html",
-          "sha256": "a74d7e6a8876fa851bab9ac83b9e462117f91d30082a11d6c810746b777fced2"
+          "sha256": "7a58b0a2f40a74d9f3cd796fb559a8ab49e92747cf0a7a57d1390a010b5740c8"
         },
         {
           "path": "docs/desktop_pet_v15.md",
@@ -857,11 +857,11 @@
       "source_files": [
         {
           "path": "web/index.html",
-          "sha256": "227beb709f099939a52c062d23179ae551b98669a726ad1f993c737b6566bd44"
+          "sha256": "950dd620ed2ba97b04692317a87109b46c34193c9fc69cddc1830135be187578"
         },
         {
           "path": "web/app.js",
-          "sha256": "734774e4b05816b476903d9bf67cfe7d510e18b24cb0b1a30b4bef9598fb9003"
+          "sha256": "f94243ca084d268583eb9177ac30a1fce3f4b8fb4f1182a18dda7f829a041784"
         }
       ],
       "links": [
@@ -995,11 +995,11 @@
       "source_files": [
         {
           "path": "web/index.html",
-          "sha256": "227beb709f099939a52c062d23179ae551b98669a726ad1f993c737b6566bd44"
+          "sha256": "950dd620ed2ba97b04692317a87109b46c34193c9fc69cddc1830135be187578"
         },
         {
           "path": "web/app.js",
-          "sha256": "734774e4b05816b476903d9bf67cfe7d510e18b24cb0b1a30b4bef9598fb9003"
+          "sha256": "f94243ca084d268583eb9177ac30a1fce3f4b8fb4f1182a18dda7f829a041784"
         }
       ],
       "links": [
@@ -1053,15 +1053,15 @@
       "source_files": [
         {
           "path": "web/index.html",
-          "sha256": "227beb709f099939a52c062d23179ae551b98669a726ad1f993c737b6566bd44"
+          "sha256": "950dd620ed2ba97b04692317a87109b46c34193c9fc69cddc1830135be187578"
         },
         {
           "path": "web/app.js",
-          "sha256": "734774e4b05816b476903d9bf67cfe7d510e18b24cb0b1a30b4bef9598fb9003"
+          "sha256": "f94243ca084d268583eb9177ac30a1fce3f4b8fb4f1182a18dda7f829a041784"
         },
         {
           "path": "web/demo.html",
-          "sha256": "a74d7e6a8876fa851bab9ac83b9e462117f91d30082a11d6c810746b777fced2"
+          "sha256": "7a58b0a2f40a74d9f3cd796fb559a8ab49e92747cf0a7a57d1390a010b5740c8"
         }
       ],
       "links": [
@@ -1115,7 +1115,7 @@
       "source_files": [
         {
           "path": "web/index.html",
-          "sha256": "227beb709f099939a52c062d23179ae551b98669a726ad1f993c737b6566bd44"
+          "sha256": "950dd620ed2ba97b04692317a87109b46c34193c9fc69cddc1830135be187578"
         },
         {
           "path": "web/pet.html",

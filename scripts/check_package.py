@@ -238,6 +238,7 @@ assert lab['lab_context']['source']['kind']=='synthetic_demo' and lab['source'][
 assert c.get('/help').status_code==200
 help_catalogue=c.get('/api/project-help?language=zh').json()
 assert help_catalogue['current_version']==17 and help_catalogue['manual_version']=='17.0'
+assert all(source['matches_reviewed'] for entry in help_catalogue['topics'] for source in entry['source_files'])
 manual_entries={entry['id']:entry for entry in help_catalogue['topics']}
 assert len(manual_entries)==len(help_catalogue['topics']) and 'help.boundaries' in manual_entries
 assert all(re.fullmatch(r'help\\.[a-z_]+',key) for key in manual_entries)

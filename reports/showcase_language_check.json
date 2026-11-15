@@ -1,0 +1,117 @@
+{
+  "status": "passed",
+  "checked_at": "2026-11-15T09:32:40.888019+00:00",
+  "base": "http://127.0.0.1:8000",
+  "browser": "Microsoft Edge, headless",
+  "checks": [
+    "entire_homepage_navigation_metadata_and_accessible_labels_are_english",
+    "all_four_learning_steps_and_illustration_labels_are_english",
+    "all_three_knowledge_examples_source_summaries_and_deep_link_prompts_are_english",
+    "switching_both_directions_preserves_inputs_results_selected_topic_and_expanded_summary",
+    "lazy_loaded_avatar_and_model_section_use_selected_language",
+    "speech_uses_selected_language_and_switching_stops_previous_language_without_playing_audio",
+    "selected_english_language_survives_reload",
+    "homepage_updates_when_another_tab_changes_language",
+    "learning_lab_inherits_language_and_browser_back_restores_changed_preference",
+    "workspace_inherits_language_and_returning_home_uses_updated_preference",
+    "both_languages_keep_navigation_hero_and_calculator_inside_six_viewport_widths",
+    "calculation_failure_message_and_retry_control_follow_selected_language",
+    "no_unhandled_browser_errors_remote_resources_or_paid_model_requests"
+  ],
+  "layouts": [
+    {
+      "language": "zh",
+      "width": 320,
+      "height": 568,
+      "status": "passed"
+    },
+    {
+      "language": "zh",
+      "width": 390,
+      "height": 844,
+      "status": "passed"
+    },
+    {
+      "language": "zh",
+      "width": 768,
+      "height": 1024,
+      "status": "passed"
+    },
+    {
+      "language": "zh",
+      "width": 1024,
+      "height": 900,
+      "status": "passed"
+    },
+    {
+      "language": "zh",
+      "width": 1440,
+      "height": 1000,
+      "status": "passed"
+    },
+    {
+      "language": "zh",
+      "width": 1920,
+      "height": 1080,
+      "status": "passed"
+    },
+    {
+      "language": "en",
+      "width": 320,
+      "height": 568,
+      "status": "passed"
+    },
+    {
+      "language": "en",
+      "width": 390,
+      "height": 844,
+      "status": "passed"
+    },
+    {
+      "language": "en",
+      "width": 768,
+      "height": 1024,
+      "status": "passed"
+    },
+    {
+      "language": "en",
+      "width": 1024,
+      "height": 900,
+      "status": "passed"
+    },
+    {
+      "language": "en",
+      "width": 1440,
+      "height": 1000,
+      "status": "passed"
+    },
+    {
+      "language": "en",
+      "width": 1920,
+      "height": 1080,
+      "status": "passed"
+    }
+  ],
+  "page_errors": [],
+  "chat_requests": [],
+  "external_requests": [],
+  "total": 13,
+  "duration_seconds": 10.01,
+  "sha256": {
+    "frontend/src/App.tsx": "4d10361dd0aa35569f243c6d8c153d3ad18d03798c40b0d405e30be0c531b907",
+    "frontend/src/i18n.tsx": "12c8c22ce5fab83508e9281e3ca6ce7fc6499aa19af4ea406b8e4f4fbcfa7665",
+    "frontend/src/styles.css": "84079180ce5e5dd6aaeec62e38a839b9f08568c0ff81755ac5dd08fc22768558",
+    "frontend/src/components/Hero.tsx": "48c82e1ad379e78f0d960b33b42fff90bff558265344883ab6685cde8d8e1ee8",
+    "frontend/src/components/hero.css": "f7bdd46b2a515cb2855a5b986f5220b4dd59728ae1ba5457b3852f8a5f1d4184",
+    "web/showcase/index.html": "c1c1c21ba429d616703a5604cf4072e45ebb5333da3148f32da88a5fc3dd2386"
+  },
+  "screenshots": [
+    "reports/screenshots/showcase-language/home-en-desktop.png",
+    "reports/screenshots/showcase-language/home-zh-desktop.png",
+    "reports/screenshots/showcase-language/home-en-mobile.png",
+    "reports/screenshots/showcase-language/home-zh-mobile.png",
+    "reports/screenshots/showcase-language/story-numbers-en-mobile.png",
+    "reports/screenshots/showcase-language/story-voice-en-mobile.png",
+    "reports/screenshots/showcase-language/sources-en-mobile.png"
+  ]
+}

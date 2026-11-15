@@ -3414,6 +3414,43 @@ html[data-motion="reduced"] *:after {
   }
 }
 
+/* Let story content determine its height; English tabs also need room to wrap. */
+@media (max-width:899px) {
+  .story-visual {
+    display: grid;
+    align-items: center;
+    height: auto;
+    min-height: 440px;
+    padding: 55px 20px;
+  }
+
+  .story-frame {
+    position: relative;
+    inset: auto;
+    min-height: 330px;
+  }
+
+  .source-scene { height: 330px; }
+}
+
+@media (max-width:680px) {
+  :lang(en) .evidence-topics {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  :lang(en) .evidence-topics > button {
+    display: block;
+    min-width: 0;
+    white-space: normal;
+    overflow-wrap: normal;
+    text-align: left;
+  }
+
+  :lang(en) .evidence-topics > button span { display: none; }
+}
+
 @media (prefers-reduced-motion:reduce) {
   html {
     scroll-behavior: auto;

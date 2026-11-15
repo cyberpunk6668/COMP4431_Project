@@ -1,0 +1,58 @@
+{
+  "status": "passed",
+  "checked_at": "20261115T092923Z",
+  "scope": "Actual create_app + private offline settings + real Edge viewports; no real model or gateway",
+  "viewports": [
+    {
+      "width": 1440,
+      "status": "passed",
+      "checks": [
+        "page_load_reads_scenario_only_no_analysis_or_cloud",
+        "one_click_actual_app_sample_calculation_rule_answer",
+        "matched_frame_changes_missing_not_zero_old_answer_and_evidence_immutable",
+        "preset_fills_only_explicit_send_reads_current_frame",
+        "user_text_is_escaped",
+        "failed_request_preserves_prior_frame_and_messages_allows_retry",
+        "reset_then_keyboard_one_click_replays_cleanly",
+        "viewport_fits_no_external_assets_or_javascript_errors"
+      ],
+      "model_requests": 0,
+      "gateway_requests": 0,
+      "page_errors": []
+    },
+    {
+      "width": 390,
+      "status": "passed",
+      "checks": [
+        "page_load_reads_scenario_only_no_analysis_or_cloud",
+        "one_click_actual_app_sample_calculation_rule_answer",
+        "matched_frame_changes_missing_not_zero_old_answer_and_evidence_immutable",
+        "preset_fills_only_explicit_send_reads_current_frame",
+        "user_text_is_escaped",
+        "failed_request_preserves_prior_frame_and_messages_allows_retry",
+        "reset_then_keyboard_one_click_replays_cleanly",
+        "viewport_fits_no_external_assets_or_javascript_errors"
+      ],
+      "model_requests": 0,
+      "gateway_requests": 0,
+      "page_errors": []
+    },
+    {
+      "width": 320,
+      "status": "passed",
+      "checks": [
+        "page_load_reads_scenario_only_no_analysis_or_cloud",
+        "one_click_actual_app_sample_calculation_rule_answer",
+        "matched_frame_changes_missing_not_zero_old_answer_and_evidence_immutable",
+        "preset_fills_only_explicit_send_reads_current_frame",
+        "user_text_is_escaped",
+        "failed_request_preserves_prior_frame_and_messages_allows_retry",
+        "reset_then_keyboard_one_click_replays_cleanly",
+        "viewport_fits_no_external_assets_or_javascript_errors"
+      ],
+      "model_requests": 0,
+      "gateway_requests": 0,
+      "page_errors": []
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "checked_at": "2026-11-15T09:31:13.458425+00:00",
+  "status": "passed",
+  "scope": "Read-only current localhost runtime: public health, pages, exact CSS, public manual hashes and deterministic teaching scenario. No chat/session/connection mutation, provider or broker request.",
+  "base_url": "http://127.0.0.1:8000",
+  "version": "17.0.0",
+  "routes": {
+    "/": 200,
+    "/workspace": 200,
+    "/learn": 200,
+    "/help": 200,
+    "/demo": 200,
+    "/pet": 200
+  },
+  "manual_topics": 17,
+  "source_pins_match": true,
+  "teaching_default_pnl": 140,
+  "css_sha256": "de52dd1072055f9fe7e08e3f9b331ccb3099592c4bdb4306bd1e1a1d687164bf",
+  "private_data_endpoints_accessed": false,
+  "mutations": 0
+}

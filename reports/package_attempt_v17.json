@@ -1,0 +1,8 @@
+{
+  "checked_at": "2026-11-15T09:34:45.492327+00:00",
+  "status": "failed_legacy_check_assertion",
+  "scope": "First v17 package isolated workflow; file integrity scan passed but old fixed knowledge count failed. No model or broker request.",
+  "archive_sha256": "4455a4a80919295a6b1492e4875b33a9573bfc401401064b6d09fb99fbd2c62a",
+  "failure": "Legacy checker expected 18 knowledge documents; concurrent curated company-news additions expanded the collection. Replaced fixed count with exact KnowledgeRetriever source-file cardinality, without removing metadata or workflow checks.",
+  "next_step": "Rebuild source snapshot including corrected checker and rerun isolated verification."
+}

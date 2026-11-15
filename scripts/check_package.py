@@ -207,6 +207,7 @@ from pathlib import Path
 from fastapi.testclient import TestClient
 from app.llm import DeepSeek
 from app.local_llm import LocalLoRA
+from app.knowledge import KnowledgeRetriever
 import httpx
 counts={'model_calls':0,'broker_or_network_connections':0}
 async def forbid_model(*args,**kwargs):
@@ -267,7 +268,9 @@ assert c.post('/api/options/analyze',json={'symbol':'AAPL'}).json()['detail']['c
 batch=c.post('/api/options/batch',json={'items':[{'symbol':'AAPL'},{'symbol':'MSFT'}]}).json()
 assert not batch['reports'] and len(batch['failures'])==2
 assert batch['plain_brief']['status']=='limited'
-assert c.get('/api/showcase').json()['document_count']==18
+showcase=c.get('/api/showcase').json()
+expected_documents=len(KnowledgeRetriever(Path('data/knowledge.json')).documents)
+assert showcase['document_count']==len(showcase['knowledge_sources'])==expected_documents
 r=c.post('/api/chat',json={'message':'什么是复利？'}).json()
 assert r['mode']=='offline' and r['sources']
 general=c.post('/api/chat',json={'message':'解释一下光合作用。'}).json()

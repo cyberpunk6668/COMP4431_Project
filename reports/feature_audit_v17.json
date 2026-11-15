@@ -1,0 +1,715 @@
+{
+  "checked_at": "2026-11-15T08:40:43.457766+00:00",
+  "status": "passed_with_explicit_scope_limits",
+  "scope": "Current-source complete controlled Python regression, two isolated real Edge browser suites, two final actual DeepSeek answers and bounded coding-agent reading review. Not general model accuracy, broker permissions, live market verification, native physical hardware or external licensed certification.",
+  "objective": "完善功能、说明与交互；期权专业信息对新手可理解，允许明确合成/历史数据演示，不加入收费或交易执行。",
+  "features": [
+    {
+      "id": "homepage",
+      "label": "首页展示与导航",
+      "initial_audit": "source_inspected_v17_work_not_yet_verified",
+      "source_files": [
+        {
+          "path": "frontend/src/components/Hero.tsx",
+          "exists_at_initial_audit": true,
+          "sha256_at_initial_audit": "50200af71d126065340183716627bd4670c52478363728cd5834f0abfa5ab6d3"
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "exists_at_initial_audit": true,
+          "sha256_at_initial_audit": "cb5e27886e08a90fa9d9dc7c905e680e36ecedcd9bba427dc8126eac42b9ade1"
+        }
+      ],
+      "finding": "期权入口直接进入复杂专业弹窗；需要优先展示互动学习，并保留专业次级入口。",
+      "acceptance_required": [
+        "首页/移动导航到达学习入口",
+        "固定公式演示和来源请求不发模型/行情",
+        "媒体失败/减少动态仍可导航"
+      ],
+      "v17_evidence": [
+        {
+          "report": "reports/experience_ui_v17-20261115T092152912387Z.json",
+          "scope": "Real home CTA reaches the authored learning page without model or Gateway requests."
+        },
+        {
+          "report": "reports/python_regression_v17-20261115T091018432569Z.json",
+          "scope": "Complete controlled Python regression; does not imply real broker/model/native hardware execution."
+        }
+      ],
+      "v17_status": "browser_verified_offline"
+    },
+    {
+      "id": "workspace",
+      "label": "工作台信息层级",
+      "initial_audit": "source_inspected_v17_work_not_yet_verified",
+      "source_files": [
+        {
+          "path": "web/index.html",
+          "exists_at_initial_audit": true,
+          "sha256_at_initial_audit": "bebfc202f928ba29defb032ed470638c2c59362064fc3438f928509d8f4fc7ba"
+        },
+        {
+          "path": "web/app.js",
+          "exists_at_initial_audit": true,
+          "sha256_at_initial_audit": "026fc1fd5adb3acaddb050a8538bb690595ed4a8e6fd2cb9b0857e8564d65bc3"
+        },
+        {
+          "path": "web/styles.css",
+          "exists_at_initial_audit": true,
+          "sha256_at_initial_audit": "5407355ecfc6414dc99b92f9020b7d053d7d01a81d49d18b540be8094839183a"
+        }
+      ],
+      "finding": "期权弹窗的默认历史导入位于专业表单之前；通用问题已支持但输入标签仍写金融问题。",
+      "acceptance_required": [
+        "演示与专业采集可清楚区分",
+        "历史深链仍打开正确区块",
+        "工具弹窗键盘关闭与焦点恢复",
+        "草稿及旧结果保留"
+      ],
+      "v17_evidence": [
+        {
+          "report": "reports/experience_ui_v17-20261115T092152912387Z.json",
+          "scope": "Welcome/tool entries, history deep link and draft-preserving recovery verified at all widths; language/theme reload persistence and language-change draft retention at 390/1440."
+        },
+        {
+          "report": "reports/python_regression_v17-20261115T091018432569Z.json",
+          "scope": "Complete controlled Python regression; does not imply real broker/model/native hardware execution."
+        }
+      ],
+      "v17_status": "browser_verified_offline_including_390_1440_preferences"
+    },
+    {
+      "id": "options_learning",
+      "label": "新手期权互动演示",
+      "initial_audit": "source_inspected_v17_work_not_yet_verified",
+      "source_files": [
+        {
+          "path": "web/learn.html",
+          "exists_at_initial_audit": true,
+          "sha256_at_initial_audit": "42c8ff9c08b005d4c079559232743149155ab4c3e3904bbff2167bede2d3afa3"
+        },
+        {
+          "path": "web/learn.js",
+          "exists_at_initial_audit": false,
+          "sha256_at_initial_audit": null
+        },
+        {
+          "path": "web/learn.css",
+          "exists_at_initial_audit": true,
+          "sha256_at_initial_audit": "9a958ad36a1dfd4a40b8eead8fe9e844c53e042bf1e6e7bd1332898824f0ba44"
+        },
+        {
+          "path": "app/options_lab.py",
+          "exists_at_initial_audit": true,
+          "sha256_at_initial_audit": "d7ef95335f2eb9bc99b88923e7574e80af4b614eff76f42a47701bc4188d27ab"
+        }
+      ],
+      "finding": "v17新增路径，初始审计时learn.js尚未完整落盘；本轮现有独立页面与真实应用浏览器证据。",
+      "acceptance_required": [
+        "三场景合成来源常显",
+        "观察/依据/局限分层",
+        "无网关与自动模型调用",
+        "当前试算可保存追问"
+      ],
+      "v17_evidence": [
+        {
+          "report": "reports/experience_ui_v17-20261115T092152912387Z.json",
+          "scope": "Three scenes, inputs, stale-response/save races, explicit follow-up and accessible mobile interactions verified."
+        },
+        {
+          "report": "reports/options_lab_ui_v17-20261115T091757419757Z.json",
+          "scope": "Three real Edge viewports, 17 controlled-fixture checks each; no model/broker/user DB access."
+        },
+        {
+          "report": "reports/python_regression_v17-20261115T091018432569Z.json",
+          "scope": "Complete controlled Python regression; does not imply real broker/model/native hardware execution."
+        },
+        {
+          "report": "reports/options_lab_contrast_v17.json",
+          "scope": "63 selected normal-state /learn text colour pairs passed; minimum 5.2306:1. Not whole-site WCAG or full accessibility certification."
+        }
+      ],
+      "v17_status": "browser_verified_offline_and_private_app"
+    },
+    {
+      "id": "professional_options",
+      "label": "专业期权采集与分析",
+      "initial_audit": "source_inspected_v17_work_not_yet_verified",
+      "source_files": [
+        {
+          "path": "web/options.js",
+          "exists_at_initial_audit": true,
+          "sha256_at_initial_audit": "0efe5d6630cf62b597fa2421558940dc56cc418f597dc989bc20f785b7aa7e4e"
+        },
+        {
+          "path": "app/options_service.py",
+          "exists_at_initial_audit": true,
+          "sha256_at_initial_audit": "cab8ec8977188e6b3ac1a3b01dfbb0133fcc297353191ed7fe356c15e395c89b"
+        },
+        {
+          "path": "app/options_analytics.py",
+          "exists_at_initial_audit": true,
+          "sha256_at_initial_audit": "168cdf93efeb303e31ed9d735d91809bb2b3736552ce4550f67dfbf03b8b833c"
+        }
+      ],
+      "finding": "既有范围/行情类型/来源/诊断保留，不能把教学路径替代专业功能。",
+      "acceptance_required": [
+        "实际到期日白名单",
+        "单组/最多4组部分失败",
+        "缺失不填零",
+        "请求/实际行情类型区分",
+        "当前批次追问与刷新记录"
+      ],
+      "v17_evidence": [
+        {
+          "report": "reports/experience_ui_v17-20261115T092152912387Z.json",
+          "scope": "Professional entry does not collect automatically; history default collapse/deep link verified. Broker permission and live quotes not exercised."
+        },
+        {
+          "report": "reports/python_regression_v17-20261115T091018432569Z.json",
+          "scope": "Complete controlled Python regression; does not imply real broker/model/native hardware execution."
+        }
+      ],
+      "v17_status": "entry_verified_gateway_out_of_scope"
+    },
+    {
+      "id": "history",
+      "label": "历史复盘与文件导入",
+      "initial_audit": "source_inspected_v17_work_not_yet_verified",
+      "source_files": [
+        {
+          "path": "web/history.js",
+          "exists_at_initial_audit": true,
+          "sha256_at_initial_audit": "f26d89481a550693ff7bc8b58a27bfcdfa0b95ebb3eeea1d47c04ea108e08af6"
+        },
+        {
+          "path": "app/options_history.py",
+          "exists_at_initial_audit": true,
+          "sha256_at_initial_audit": "675aaf321fda2623e1cc1c92e2f190638838c541ae434b5401a402ca297e95b3"
+        }
+      ],
+      "finding": "历史表单可用但默认过度前置；既有真实档案与合成样例必须继续分开。",
+      "acceptance_required": [
+        "CSV/JSON合法及非法导入",
+        "教学/导入/真实存档来源区分",
+        "不可比变化不强算",
+        "历史不能伪装实时刷新"
+      ],
+      "v17_evidence": [
+        {
+          "report": "reports/experience_ui_v17-20261115T092152912387Z.json",
+          "scope": "Owned CSV/JSON preview and actual import persistence, retained unverified provenance/missing OI, explicit new-session binding/prefill and actual offline explanation verified at 390/1440; no new broker acquisition."
+        },
+        {
+          "report": "reports/python_regression_v17-20261115T091018432569Z.json",
+          "scope": "Complete controlled Python regression; does not imply real broker/model/native hardware execution."
+        }
+      ],
+      "v17_status": "real_csv_json_import_persistence_binding_and_offline_chat_verified_390_1440"
+    },
+    {
+      "id": "payoff",
+      "label": "到期盈亏试算",
+      "initial_audit": "source_inspected_v17_work_not_yet_verified",
+      "source_files": [
+        {
+          "path": "app/options_lab.py",
+          "exists_at_initial_audit": true,
+          "sha256_at_initial_audit": "d7ef95335f2eb9bc99b88923e7574e80af4b614eff76f42a47701bc4188d27ab"
+        },
+        {
+          "path": "web/learn.js",
+          "exists_at_initial_audit": false,
+          "sha256_at_initial_audit": null
+        }
+      ],
+      "finding": "v17新增；不是概率预测、提前平仓报价或实际交易执行。",
+      "acceptance_required": [
+        "三策略独立手算",
+        "盈亏平衡与两端边界",
+        "合约数量/乘数/费用",
+        "非法数值与价差关系拒绝",
+        "图与可访问表数值一致"
+      ],
+      "v17_evidence": [
+        {
+          "report": "reports/experience_ui_v17-20261115T092152912387Z.json",
+          "scope": "Same-expiry three structures, full curve/table, position-total units, execution assumption, bounds and arithmetic verified."
+        },
+        {
+          "report": "reports/options_lab_ui_v17-20261115T091757419757Z.json",
+          "scope": "Three real Edge viewports, 17 controlled-fixture checks each; no model/broker/user DB access."
+        },
+        {
+          "report": "reports/python_regression_v17-20261115T091018432569Z.json",
+          "scope": "Complete controlled Python regression; does not imply real broker/model/native hardware execution."
+        },
+        {
+          "report": "reports/options_lab_contrast_v17.json",
+          "scope": "63 selected normal-state /learn text colour pairs passed; minimum 5.2306:1. Not whole-site WCAG or full accessibility certification."
+        }
+      ],
+      "v17_status": "browser_and_formula_fixture_verified"
+    },
+    {
+      "id": "chat",
+      "label": "问答与保存的分析追问",
+      "initial_audit": "source_inspected_v17_work_not_yet_verified",
+      "source_files": [
+        {
+          "path": "app/main.py",
+          "exists_at_initial_audit": true,
+          "sha256_at_initial_audit": "d7fd76a0f11ad2f13342f4efca426d7013ff876fed7ec2c34e87b6eba67bf5cf"
+        },
+        {
+          "path": "app/history_chat.py",
+          "exists_at_initial_audit": true,
+          "sha256_at_initial_audit": "4777a2d615176774c060a0a93ae41ba9c9764f197d08f19bc115b9ab86dc5af6"
+        },
+        {
+          "path": "web/app.js",
+          "exists_at_initial_audit": true,
+          "sha256_at_initial_audit": "026fc1fd5adb3acaddb050a8538bb690595ed4a8e6fd2cb9b0857e8564d65bc3"
+        }
+      ],
+      "finding": "已存在证据约束路径；v17须验证合成情景及试算能读取，旧回复保留原依据。",
+      "acceptance_required": [
+        "普通科学/金融问题不被教程劫持",
+        "合成试算引用h.lab证据",
+        "离线解释有用且如实标模式",
+        "HTML/未知引用不执行",
+        "会话导出和四条持久化ID"
+      ],
+      "v17_evidence": [
+        {
+          "report": "reports/experience_ui_v17-20261115T092152912387Z.json",
+          "scope": "Actual saved trial, source/time/evidence display, explicit send, private persistence and controlled-error retry verified."
+        },
+        {
+          "report": "reports/python_regression_v17-20261115T091018432569Z.json",
+          "scope": "Complete controlled Python regression; does not imply real broker/model/native hardware execution."
+        },
+        {
+          "report": "reports/options_lab_live_v17-20261115T090953481424Z.json",
+          "scope": "Two actual DeepSeek turns over a fixed synthetic long-call report, two generations, zero repairs, private persistence."
+        },
+        {
+          "report": "reports/options_lab_semantic_review_v17.json",
+          "scope": "Bounded reading review of actual text, numerical cards, saved snapshot and primary OIC definitions; no general accuracy or external licensed certification."
+        }
+      ],
+      "v17_status": "browser_offline_and_final_actual_provider_case_verified"
+    },
+    {
+      "id": "calculators",
+      "label": "三类财务计算器",
+      "initial_audit": "source_inspected_v17_work_not_yet_verified",
+      "source_files": [
+        {
+          "path": "app/finance.py",
+          "exists_at_initial_audit": true,
+          "sha256_at_initial_audit": "28eb63445f2f0dd3b72130cb5e7d77b0e0c3ebc13cd07abf714fa2529299a9b3"
+        },
+        {
+          "path": "web/app.js",
+          "exists_at_initial_audit": true,
+          "sha256_at_initial_audit": "026fc1fd5adb3acaddb050a8538bb690595ed4a8e6fd2cb9b0857e8564d65bc3"
+        }
+      ],
+      "finding": "已有复利/贷款/预算计算；不应包装成额外收益保证。",
+      "acceptance_required": [
+        "0利率复利与贷款独立手算",
+        "月末追加与百分数单位",
+        "预算负结余",
+        "非法边界",
+        "计算不请求模型"
+      ],
+      "v17_evidence": [
+        {
+          "report": "reports/experience_ui_v17-20261115T092152912387Z.json",
+          "scope": "All three real calculators, keyboard tabs, changed-assumption invalidation and displayed results verified."
+        },
+        {
+          "report": "reports/python_regression_v17-20261115T091018432569Z.json",
+          "scope": "Complete controlled Python regression; does not imply real broker/model/native hardware execution."
+        }
+      ],
+      "v17_status": "browser_verified_deterministic"
+    },
+    {
+      "id": "help",
+      "label": "项目手册与教程",
+      "initial_audit": "source_inspected_v17_work_not_yet_verified",
+      "source_files": [
+        {
+          "path": "app/project_help.py",
+          "exists_at_initial_audit": true,
+          "sha256_at_initial_audit": "514e8bc5d240b6aa4ae24f46c3f4b124c83ccc1fde039859b179a6db40824633"
+        },
+        {
+          "path": "data/project_help.json",
+          "exists_at_initial_audit": true,
+          "sha256_at_initial_audit": "01297956a8a77385fe4a70074c5321a74511d55c1f721ccfc9b408979c71503d"
+        },
+        {
+          "path": "web/help.js",
+          "exists_at_initial_audit": true,
+          "sha256_at_initial_audit": "d38a2a07c2be18cda9fe97d748299b61332598e40e8d1a5b7f10428b22acc5ac"
+        }
+      ],
+      "finding": "v16有16主题与固定来源；新增学习入口后须更新已审阅手册，不能只沿用旧pin。",
+      "acceptance_required": [
+        "学习入口和能力边界正确",
+        "普通报告解读不变教程",
+        "离线手册可读",
+        "固定白名单和敏感查询阻断",
+        "来源pin与当前代码匹配"
+      ],
+      "v17_evidence": [
+        {
+          "report": "reports/experience_ui_v17-20261115T092152912387Z.json",
+          "scope": "Help chip only prefills; explicit send returns actual project-help, including v17 learning steps and safe internal links."
+        },
+        {
+          "report": "reports/python_regression_v17-20261115T091018432569Z.json",
+          "scope": "Complete controlled Python regression; does not imply real broker/model/native hardware execution."
+        }
+      ],
+      "v17_status": "browser_verified_reviewed_project_help"
+    },
+    {
+      "id": "sources_models",
+      "label": "来源与模型选择",
+      "initial_audit": "source_inspected_v17_work_not_yet_verified",
+      "source_files": [
+        {
+          "path": "app/expert_knowledge.py",
+          "exists_at_initial_audit": true,
+          "sha256_at_initial_audit": "0c2d328de53f2e8b2132b60397e6b377663c0d5af57e0cf4f05ba28e9e1d07a4"
+        },
+        {
+          "path": "app/expert_grounding.py",
+          "exists_at_initial_audit": true,
+          "sha256_at_initial_audit": "f3f2509ea5282b050c9b2deeaba2f7ca0260cbd3927862290c072f4f3823a008"
+        },
+        {
+          "path": "app/local_llm.py",
+          "exists_at_initial_audit": true,
+          "sha256_at_initial_audit": "3c97066760ccbab63f49e66959931e90a62272a2cf4b438326e9e57bc1ae181b"
+        },
+        {
+          "path": "web/companion/messages.js",
+          "exists_at_initial_audit": true,
+          "sha256_at_initial_audit": "d9fdadbe593cf6f3a1087f39a96673e6714a8f6e298f2b2add955eb61670d2de"
+        }
+      ],
+      "finding": "RAG/LoRA/托管DeepSeek不同；新策略定义需lab专用资料，不能改变历史14条语料的旧统计含义。",
+      "acceptance_required": [
+        "真实引擎及降级标记",
+        "不把已配置当接口连通验证",
+        "lab来源覆盖相应策略",
+        "未知引用拒绝",
+        "无自动下载模型"
+      ],
+      "v17_evidence": [
+        {
+          "report": "reports/experience_ui_v17-20261115T092152912387Z.json",
+          "scope": "Reviewed sources readable without generation; actual model availability shown. This is not local-LoRA performance or model-accuracy proof."
+        },
+        {
+          "report": "reports/python_regression_v17-20261115T091018432569Z.json",
+          "scope": "Complete controlled Python regression; does not imply real broker/model/native hardware execution."
+        }
+      ],
+      "v17_status": "browser_entries_verified_model_performance_out_of_scope"
+    },
+    {
+      "id": "voice_avatar",
+      "label": "语音与形象",
+      "initial_audit": "source_inspected_v17_work_not_yet_verified",
+      "source_files": [
+        {
+          "path": "web/avatar.js",
+          "exists_at_initial_audit": true,
+          "sha256_at_initial_audit": "9c3005553c777ded6fd8edc845c9626c132fe8acb43b82790a908a6fb6693c5c"
+        },
+        {
+          "path": "web/companion/renderer.js",
+          "exists_at_initial_audit": true,
+          "sha256_at_initial_audit": "8167031081412fa43a9e1b3683cb402252ee97a9e1479b5f883c213d0d98ba46"
+        },
+        {
+          "path": "web/app.js",
+          "exists_at_initial_audit": true,
+          "sha256_at_initial_audit": "026fc1fd5adb3acaddb050a8538bb690595ed4a8e6fd2cb9b0857e8564d65bc3"
+        }
+      ],
+      "finding": "小屏助手默认已折叠，不能把它误判为待修bug；角色动作仅代表操作状态。",
+      "acceptance_required": [
+        "2D默认/旧机器人入口",
+        "资源失败诚实降级",
+        "隐藏/减少动态/销毁清理",
+        "语音拒绝/不支持仍可文字",
+        "语音识别只填草稿"
+      ],
+      "v17_evidence": [
+        {
+          "report": "reports/experience_ui_v17-20261115T092152912387Z.json",
+          "scope": "Whale-maid/legacy 2D entries verified; old robot actually rendered with WebGL2 for one reduced-motion frame at 390/1440. Actual microphone, audible voice, native physical interaction and new whale-maid 3D not certified."
+        },
+        {
+          "report": "reports/python_regression_v17-20261115T091018432569Z.json",
+          "scope": "Complete controlled Python regression; does not imply real broker/model/native hardware execution."
+        }
+      ],
+      "v17_status": "2d_entries_and_legacy_3d_frame_verified_mic_native_out_of_scope"
+    },
+    {
+      "id": "pet_sync",
+      "label": "桌宠与会话同步",
+      "initial_audit": "source_inspected_v17_work_not_yet_verified",
+      "source_files": [
+        {
+          "path": "desktop/main.cjs",
+          "exists_at_initial_audit": true,
+          "sha256_at_initial_audit": "61bcc4e7da536ed98fd871df34eb5cdb8744d46b02f3b8373351100479ff673e"
+        },
+        {
+          "path": "web/pet.js",
+          "exists_at_initial_audit": true,
+          "sha256_at_initial_audit": "381ba4fa7ce973402fb143fb874d104cc1a869f31ae466497fd2650bb6e7d70b"
+        },
+        {
+          "path": "web/companion/client.js",
+          "exists_at_initial_audit": true,
+          "sha256_at_initial_audit": "d18bf1f7a16dc164d6f55301fffb3f3c7232a1a2bdb9cf5495b25b6379cf5135"
+        },
+        {
+          "path": "app/companion.py",
+          "exists_at_initial_audit": true,
+          "sha256_at_initial_audit": "7456bffbdb3803fa70c6c5e2de3bfbbcf0d2448fb31196fb53baadd8194b957b"
+        }
+      ],
+      "finding": "旧原生验收仍含手工硬件限制；新网页不等于补齐物理拖动/穿透。",
+      "acceptance_required": [
+        "只共享明确连接SID",
+        "切换/删除/断线重连不串会话",
+        "教程/学习旧报告来源保留",
+        "新UI不扩大原生桥/CSP",
+        "退出桌宠保留后端"
+      ],
+      "v17_evidence": [
+        {
+          "report": "reports/python_regression_v17-20261115T091018432569Z.json",
+          "scope": "Complete controlled Python regression; does not imply real broker/model/native hardware execution."
+        }
+      ],
+      "v17_status": "controlled_regression_passed_native_hardware_not_retested"
+    },
+    {
+      "id": "legacy_demo",
+      "label": "历史证据三步演示",
+      "initial_audit": "source_inspected_v17_work_not_yet_verified",
+      "source_files": [
+        {
+          "path": "web/demo.html",
+          "exists_at_initial_audit": true,
+          "sha256_at_initial_audit": "a74d7e6a8876fa851bab9ac83b9e462117f91d30082a11d6c810746b777fced2"
+        },
+        {
+          "path": "web/demo.js",
+          "exists_at_initial_audit": true,
+          "sha256_at_initial_audit": "ef1d1ca0c084a3ca62986b41820d738b94f5c62f2abadd91fa1f36e9cac95405"
+        }
+      ],
+      "finding": "archive→experts→AI串行演示有用，但不是零模型即可理解的期权学习页。",
+      "acceptance_required": [
+        "原档案不变",
+        "检索分数非置信度",
+        "明确点击才请求模型",
+        "独立会话不读取其他聊天"
+      ],
+      "v17_evidence": [
+        {
+          "report": "reports/experience_ui_v17-20261115T092152912387Z.json",
+          "scope": "Initialization isolation verified at all widths; existing archive to real expert retrieval to offline answer and continuation with an independent SID verified at 390/1440. No live provider call."
+        },
+        {
+          "report": "reports/python_regression_v17-20261115T091018432569Z.json",
+          "scope": "Complete controlled Python regression; does not imply real broker/model/native hardware execution."
+        }
+      ],
+      "v17_status": "archive_retrieval_offline_continuation_and_isolated_sid_verified_390_1440"
+    }
+  ],
+  "priority_findings": [
+    {
+      "id": "P0-01",
+      "finding": "历史导入默认open在options-form之前，遮蔽主要任务",
+      "evidence": "web/index.html history-panel open precedes options-form/options-results",
+      "recommended_change": "新手学习与专业采集区分，历史默认折叠，历史深链仍展开"
+    },
+    {
+      "id": "P0-02",
+      "finding": "新手不能通过调整到期价格看到成本/盈亏边界",
+      "evidence": "原demo只支持档案→检索→模型，尚无策略盈亏交互",
+      "recommended_change": "增加合成情景、本地盈亏试算和保存追问"
+    },
+    {
+      "id": "P1-01",
+      "finding": "输入文案仍将问题限定为金融，而一般问题已支持",
+      "evidence": "web/index.html input label; app.js localized placeholders",
+      "recommended_change": "同步真实能力文案"
+    },
+    {
+      "id": "P1-02",
+      "finding": "首页旧机器人原创标签与署名鲸鱼娘的关系应清楚",
+      "evidence": "frontend/src/App.tsx Intelligence/Mentor; web/companion/licenses",
+      "recommended_change": "区分旧原创机器人和现成署名鲸鱼娘，勿混称素材原创"
+    }
+  ],
+  "already_correct_do_not_regress": [
+    "small-layout companion initially collapsed at <=1180",
+    "options successful report already scrolls into view",
+    "history deep-link explicitly opens history panel",
+    "shared chat omits analysis_id to inherit current binding"
+  ],
+  "prior_reports_are_historical": [
+    "reports/project_help_acceptance_v16.json",
+    "reports/companion_acceptance_v15.json"
+  ],
+  "external_calls": {
+    "scope": "This auditor's isolated formula/API/replay validation only; root live-provider runs have separate reports and counts.",
+    "llm": 0,
+    "ibkr": 0,
+    "normal_user_db": 0,
+    "cua": 0
+  },
+  "actual_synthetic_failure_replay": {
+    "source_report": "reports/options_lab_live_v17-20261115T085341172115Z.json",
+    "additional_provider_requests": 0,
+    "offline_outputs_replayed": 2,
+    "provider_raw_call_1": "Passes offline validation after bounded document-identity and local-assumption facet corrections; actual original source allowlist and same trial reused.",
+    "provider_raw_call_2": "Still rejected: expert.pricing is unrelated to an explicit excluded-cost list. The prior model repair is not silently accepted.",
+    "boundaries": "No actual contract amounts, percentages, multiples, unknown references or explicit market claims were whitelisted. Original provider failure reports retained.",
+    "note": "Further versioned provider failure reports and offline replays are preserved in tests/test_lab_chat_v17.py. Final current-source live answer evidence is recorded separately; prior repaired output is not reclassified as a final pass."
+  },
+  "verification_gap": "No pending work within recorded v17 scope. Actual CSV/JSON import, persistence/binding/chat, legacy archive/retrieval/offline continuation, preference persistence and old WebGL2 frame rendering now have 390/1440 browser evidence. Outside scope: actual microphone/audio capture, physical native pet/DPI/multi-monitor certification, real IBKR permissions/executable quotes, actual local-LoRA performance, general LLM accuracy and external licensed review. Package/source-bundle integrity remains separately recorded by release owner.",
+  "browser_validation": {
+    "learning_report": "reports/options_lab_ui_v17-20261115T091757419757Z.json",
+    "learning_checks_per_viewport": 17,
+    "application_report": "reports/experience_ui_v17-20261115T092152912387Z.json",
+    "application_checks_per_viewport": {
+      "320": 14,
+      "390": 19,
+      "1440": 19
+    },
+    "viewports": [
+      320,
+      390,
+      1440
+    ],
+    "actual_application": "create_app + private SQLite + offline explanations; ordinary port 8000 and user DB untouched",
+    "calls": {
+      "model": 0,
+      "broker": 0,
+      "user_database": 0
+    },
+    "controlled_errors": "One owned HTTP 503 chat failure per viewport; draft and old answers preserved",
+    "screenshot_folder": "reports/screenshots/experience-v17/20261115T092152912387Z",
+    "application_checks_total": 52,
+    "additional_390_1440_checks": [
+      "Owned CSV/JSON preview, actual import persistence, explicit new session binding and real offline explanation",
+      "Legacy demo archive to retrieval to offline answer and continuation, isolated session ID",
+      "Language/theme retained across reload; language changes preserve current draft",
+      "Legacy 3D actual WebGL2 renderer, one frame per width under reduced motion; not new whale-maid 3D or continuous animation performance"
+    ],
+    "legacy_3d": {
+      "widths": [
+        390,
+        1440
+      ],
+      "actual_mode": "3d",
+      "renderer": "webgl2",
+      "frames_each": 1,
+      "reduced_motion": true,
+      "scope": "Existing robot only. No new whale-maid 3D or physical native testing."
+    }
+  },
+  "staged_core_validation": {
+    "status": "historical_stage_record_superseded_by_final_full_suite",
+    "command": ".venv/Scripts/python.exe -m pytest -q tests/test_options_lab.py tests/test_options_lab_api.py tests/test_lab_chat_v17.py tests/test_history_chat.py tests/test_expert_grounding.py tests/test_expert_knowledge.py",
+    "environment": [
+      "PYTHON_DOTENV_DISABLED=1",
+      "FINPILOT_OFFLINE=true",
+      "FINPILOT_DB=random temporary sqlite3 path before importing main"
+    ],
+    "passed": 325,
+    "warnings": [
+      "Existing Starlette TestClient anyio.abc.BlockingPortal deprecation"
+    ],
+    "new_lab_chat_tests": 43,
+    "scope": [
+      "Closed synthetic inputs, independent three-strategy expiry examples, quantity scaling and bounds",
+      "Server-authored save/bind and persisted historical records under private temporary DB",
+      "Actual-cost/breakeven/max-loss offline explanation with h.lab numeric cards",
+      "Immutable per-answer bounded lab_context; no curve/quote-table/unfiltered extension in model payload",
+      "Default corpus remains 14; only synthetic labs use 3 additional reviewed OIC definitions",
+      "Unknown references, numeric prose, false current-market statements and selected explicit payoff contradictions rejected",
+      "Ordinary/project-help questions remain separate from bound trial explanation"
+    ],
+    "not_proven": [
+      "New actual LLM answer quality",
+      "Live or historical broker access",
+      "Browser/mobile/native interaction",
+      "Physical Windows drag, alpha hit-testing or multi-monitor behavior"
+    ],
+    "note": "325 is the intermediate six-file subset, not the final new-test count or final project total."
+  },
+  "current_python_validation": {
+    "report": "reports/python_regression_v17-20261115T091018432569Z.json",
+    "status": "passed",
+    "scope": "Entire tests/ suite; workspace .venv, independent DB, dotenv and process-local network guards before app import, controlled providers/transports.",
+    "tests": 937,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "new_lab_chat_tests": 67,
+    "external_model_requests": 0,
+    "broker_requests": 0,
+    "source_hashes": "Final app/tests hashes remain those recorded by the 937-test Python run; subsequent UI/CSS checks are represented by the latest browser and contrast reports."
+  },
+  "actual_provider_validation": {
+    "report": "reports/options_lab_live_v17-20261115T090953481424Z.json",
+    "semantic_review": "reports/options_lab_semantic_review_v17.json",
+    "status": "passed_bounded_two_turn_case",
+    "final_turns": 2,
+    "final_generation_requests": 2,
+    "final_schema_repair_requests": 0,
+    "all_generation_and_repair_requests": 16,
+    "all_schema_repair_requests": 7,
+    "earlier_requests": 14,
+    "prior_failed_and_diagnostic_reports_preserved": true,
+    "scope": "Two actual DeepSeek answers over one fixed synthetic long-call report through application routes and private DB. Not a general model accuracy estimate, probability calibration, strategy recommendation, broker access test or external human certification.",
+    "reviewer": "Independent coding sub-agent /root/experience_audit; reading-style review of the actual outputs, separate from generating those provider answers. Not user manual approval, a licensed financial review or external financial certification.",
+    "limits": [
+      "Only these Chinese long-call answers were directly reviewed; long put and call-debit-spread formulas are covered by deterministic tests, not this live-answer review.",
+      "The finite claim-facet checks are not general entailment or a model accuracy score.",
+      "No real market sentiment, historical market return, executable quote, IBKR permission, physical native pet or actual local-LoRA quality is certified."
+    ]
+  },
+  "contrast_validation": {
+    "report": "reports/options_lab_contrast_v17.json",
+    "status": "passed",
+    "selectors_checked": 63,
+    "minimum_ratio": 5.2306,
+    "threshold": 4.5,
+    "scope": "Limited normal-state /learn text foreground/background computed-color pairs and gradient endpoint samples; not whole-site WCAG certification.",
+    "exclusions": [
+      "Decorative borders, gridlines and sprites",
+      "Disabled or transient loading-opacity states",
+      "Unrelated workspace/theme/native UI",
+      "Font size, readability and full accessibility conformance"
+    ]
+  }
+}

@@ -9,7 +9,7 @@ const navigation = [
   { label: '学习路径', href: '#experience' },
   { label: '知识来源', href: '#evidence' },
   { label: '财务计算', href: '#planning' },
-  { label: '期权分析', href: '/workspace?view=options' },
+  { label: '期权互动演示', href: '/learn' },
   { label: '模型与教练', href: '#intelligence' },
 ];
 
@@ -197,10 +197,10 @@ export default function Hero({ paused, reduced, toggle }: { paused: boolean; red
         <span className="hero-title-line">把<span className="gold-text">金融</span></span>
         <span className="hero-title-line">看得更清楚</span>
       </h1>
-      <p className="hero-description" data-hero-enter="description">探索有来源的金融知识，用真实公式验证你的财务假设。</p>
+      <p className="hero-description" data-hero-enter="description">先用一份合成期权情景看懂市场线索，再改变价格、比较到期盈亏，带着依据继续追问。</p>
       <div className="hero-actions" data-hero-enter="actions">
-        <a className="button button-gold" href="/workspace">开始学习 <ArrowRight size={18} /></a>
-        <a className="button button-ghost" href="#experience">探索功能</a>
+        <a className="button button-gold" href="/learn">体验期权演示 <ArrowRight size={18} /></a>
+        <a className="button button-ghost" href="/workspace">打开完整工作台</a>
       </div>
     </div>
   </section>;

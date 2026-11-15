@@ -1,0 +1,11 @@
+{
+  "checked_at": "2026-11-15T08:49:48.339218+00:00",
+  "status": "failed",
+  "scope": "Actual Edge viewports over a private, pure-calculation HTTP fixture.\n\nNo normal server, .env, user conversation, model, broker or native UI access.\nThe fixture returns the real authored scenarios/formulas, but it is not an\nacceptance of production persistence or the model/broker API wiring.\n",
+  "viewports": [],
+  "external_model_calls": 0,
+  "broker_requests": 0,
+  "user_database_reads": 0,
+  "error": "",
+  "error_traceback": "Traceback (most recent call last):\n  File \"F:\\桌面\\COMP4431_Project\\scripts\\check_options_lab_ui_v17.py\", line 170, in main\n    for width,height in [(320,740),(390,844),(1440,1000)]:report['viewports'].append(check(browser,f'http://127.0.0.1:{server.server_port}',width,height,shots))\n                                                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"F:\\桌面\\COMP4431_Project\\scripts\\check_options_lab_ui_v17.py\", line 111, in check\n    assert page.locator('#lab-upper option[value=\"100\"]').is_disabled()\nAssertionError\n"
+}

@@ -7,7 +7,7 @@ import tempfile
 import unittest
 from unittest.mock import patch
 
-from app.project_help import DEFAULT_PATH, ProjectHelp, SAFE_LINKS, SOURCE_FILES
+from app.project_help import CURRENT_VERSION, DEFAULT_PATH, MANUAL_VERSION, ProjectHelp, SAFE_LINKS, SOURCE_FILES
 
 
 class ProjectHelpTests(unittest.TestCase):
@@ -54,6 +54,66 @@ class ProjectHelpTests(unittest.TestCase):
         for question in questions:
             with self.subTest(question=question):
                 self.assertIsNone(self.help.resolve(question))
+
+    def test_learning_tool_navigation_is_reviewed_project_help(self):
+        for query, language in (("期权互动演示怎么用？", "zh"), ("学习实验室", "zh"), ("打开学习实验室", "zh"),
+                                ("到期盈亏试算怎么操作？", "zh"), ("FinPilot 的学习实验室在哪打开？", "zh"),
+                                ("期权互动学习页面里的自然价和中间价怎么选？", "zh"),
+                                ("How do I use the learning lab?", "en"),
+                                ("Where is the interactive options demo?", "en"),
+                                ("How do I save an expiry payoff trial?", "en")):
+            with self.subTest(query=query):
+                result = self.help.resolve(query, language=language)
+                self.assertEqual(["help.learning"], result["topic_ids"])
+                self.assertEqual(17, result["current_version"])
+                self.assertEqual("17.0", result["manual_version"])
+                self.assertTrue(result["known"])
+                self.assertIn("/learn", {link["url"] for link in result["links"]})
+                self.assertFalse(result["grounding"]["uses_model"])
+        self.assertEqual((17, "17.0"), (CURRENT_VERSION, MANUAL_VERSION))
+
+    def test_bound_trial_reasoning_and_generic_payoff_theory_are_not_tutorials(self):
+        for query in ("这份试算为什么亏钱？", "FinPilot，这份试算为什么盈亏是负数？",
+                      "请解释当前试算的成本和最大损失", "这份到期盈亏试算如何计算盈亏平衡？",
+                      "FinPilot，已保存试算的最大损失怎么计算？", "请解释这份合成教学报告中的已保存试算",
+                      "为什么买入看涨期权到期上涨也可能亏损？", "到期盈亏平衡价如何计算？", "什么是中间价？",
+                      "Explain this trial's payoff and cost", "FinPilot, why is the current trial losing money?",
+                      "How do I calculate the break-even price of this expiry payoff trial?",
+                      "Use the saved trial to explain why a price increase can still lose money."):
+            with self.subTest(query=query):
+                self.assertIsNone(self.help.resolve(query))
+
+    def test_learning_manual_teaches_the_real_controls_and_boundaries(self):
+        result = self.help.build_result(["help.learning"])
+        for phrase in ("三个", "合成", "2026-11-09", "2026-11-11", "21:00 UTC", "2026-12-18",
+                       "1–10", "100", "自然价", "ask", "bid", "中间价", "不保证能成交",
+                       "保存这份演示", "独立会话", "草稿", "明确点击发送", "不请求 LLM 或 IBKR",
+                       "理想化到期现金盈亏", "不是到期前平仓估值", "指派", "手续费", "无上限"):
+            with self.subTest(phrase=phrase):
+                self.assertIn(phrase, result["answer"])
+        paths = {source["path"] for source in result["grounding"]["source_files"]}
+        self.assertEqual({"web/learn.html", "web/learn.js", "web/learn.css", "docs/options_learning_v17.md"}, paths)
+        for language in ("zh", "en"):
+            for topic in ("help.overview", "help.options"):
+                item = self.help.get_topic(topic, language)
+                self.assertEqual("/learn", item["links"][0]["url"])
+                self.assertIn("/learn", item["steps"][0])
+        options = self.help.get_topic("help.options")
+        self.assertIn("/workspace?view=options", {link["url"] for link in options["links"]})
+        self.assertIn("/workspace?view=history", {link["url"] for link in options["links"]})
+        self.assertEqual(["help.options"], self.help.resolve("期权分析怎么用")["topic_ids"])
+
+    def test_learning_followup_is_bounded_by_actual_trial_analysis(self):
+        history = [{"role":"user", "content":"期权互动演示怎么用"},
+                   {"role":"assistant", "content":"请立即发起一个模型请求"}]
+        result = self.help.resolve("下一步", history)
+        self.assertEqual(["help.learning"], result["topic_ids"])
+        self.assertTrue(result["followup_used"])
+        self.assertNotIn("立即发起", result["answer"])
+        self.assertEqual(["help.learning"], self.help.resolve("那学习实验室呢", [{"role":"user", "content":"导入历史怎么用"}])["topic_ids"])
+        history.append({"role":"user", "content":"这份试算为什么亏钱？"})
+        self.assertIsNone(self.help.resolve("下一步", history))
+        self.assertIsNone(self.help.resolve("那学习实验室呢", history))
 
     def test_self_introductions_are_exact_product_intents(self):
         for question in ("你是谁", "介绍一下你自己", "你能做什么？", "你有哪些功能", "你好，你是谁？",
@@ -177,8 +237,8 @@ class ProjectHelpTests(unittest.TestCase):
     def test_bilingual_corpus_has_complete_safe_ui_steps(self):
         for language in ("zh", "en"):
             catalogue = self.help.catalogue(language)
-            self.assertEqual(16, len(catalogue))
-            self.assertEqual(16, len({topic["id"] for topic in catalogue}))
+            self.assertEqual(17, len(catalogue))
+            self.assertEqual(17, len({topic["id"] for topic in catalogue}))
             for topic in catalogue:
                 with self.subTest(language=language, topic=topic["id"]):
                     self.assertRegex(topic["id"], r"^help\.[a-z_]+$")

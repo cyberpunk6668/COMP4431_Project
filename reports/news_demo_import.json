@@ -1,0 +1,29 @@
+{
+  "status": "imported",
+  "checked_at": "2026-11-15T09:24:47.740504+00:00",
+  "sqlite": "F:\\桌面\\COMP4431_Project\\data\\news_evidence.sqlite3",
+  "knowledge": "F:\\桌面\\COMP4431_Project\\data\\knowledge.json",
+  "archive": "F:\\桌面\\COMP4431_Project\\data\\news_sources",
+  "document_count": 20,
+  "sources": [
+    {
+      "id": "nvda-ceo-transition-20261112",
+      "url": "https://nvidianews.nvidia.com/news/nvidia-announces-ceo-transition",
+      "published_at": "2026-11-12",
+      "event_date": "2026-11-11",
+      "updated_at": "2026-11-15",
+      "fetched_at": "2026-11-15T09:20:41.022343+00:00",
+      "raw_sha256": "1f0747f87b07a430b659d85d01672a5b83bcf336831ab0283d31ae5707a67226"
+    },
+    {
+      "id": "nvda-ceo-8k-20261111",
+      "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000082/nvda-20261111.htm",
+      "published_at": "2026-11-12",
+      "event_date": "2026-11-11",
+      "updated_at": "2026-11-15",
+      "fetched_at": "2026-11-15T09:20:41.539878+00:00",
+      "raw_sha256": "9a2ed73a5291c54ef66a38b9fdf6b9ad9d8a39d6eeeeabb975e1d1642ddbe4ca"
+    }
+  ],
+  "limits": "Anchor checks detect incomplete pages, not semantic truth. Summaries are reviewed against primary sources; rerunning is not a fresh review or proof of the latest CEO. Restart running servers to reload JSON knowledge."
+}

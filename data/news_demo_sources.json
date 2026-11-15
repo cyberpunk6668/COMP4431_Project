@@ -1,0 +1,83 @@
+{
+  "reviewed_at": "2026-11-15",
+  "description": "Agent-reviewed bilingual company-event summaries checked against primary sources. Import downloads and archives primary sources; it does not automatically discover new facts or refresh the reviewed summaries.",
+  "documents": [
+    {
+      "id": "nvda-ceo-transition-20261112",
+      "title": "英伟达 CEO 过渡公告 2026年11月12日 / NVIDIA CEO transition announcement",
+      "url": "https://nvidianews.nvidia.com/news/nvidia-announces-ceo-transition",
+      "publisher": "NVIDIA Newsroom",
+      "category": "company_news",
+      "published_at": "2026-11-12",
+      "event_date": "2026-11-11",
+      "updated_at": "2026-11-15",
+      "keywords": [
+        "英伟达",
+        "英偉達",
+        "黄仁勋",
+        "黃仁勳",
+        "nvidia",
+        "nvda",
+        "jensen huang",
+        "jen-hsun huang",
+        "colette kress",
+        "colette m. kress",
+        "kress",
+        "克雷斯",
+        "harvey jones",
+        "harvey c. jones"
+      ],
+      "text_zh": "资料核对日为2026-11-15，这是11月12日公告的已下载快照，不是实时搜索结果；核对日期不证明截至11月15日已排除后续任命。英伟达于2026-11-12发布 CEO 过渡公告：黄仁勋辞去总裁、首席执行官及董事职位。Colette Kress 出任临时 CEO，并继续担任执行副总裁和 CFO；董事会启动正式 CEO 搜寻，同时考虑内部和外部人选。这份公告没有宣布正式继任者。Harvey C. Jones 出任公司首任董事长。公告日期是11月12日；董事会接受辞任且立即生效的事件日期应参考配套 SEC 8-K 所记载的2026-11-11，不能将两种日期混为一谈。本地解读边界（项目判断，非公告中的明确声明）：该公告未披露可确立违法或间谍活动法律结论的材料，也未提供当前股价或未来涨跌的确定依据。正式继任者未公布仅描述此公告时点，不能据此断言此后始终未任命。",
+      "text_en": "Reviewed on 2026-11-15; this is a downloaded November 12 release snapshot, not live search. The review date does not establish absence of subsequent appointments through November 15. NVIDIA published its CEO transition announcement on 2026-11-12: Jensen Huang resigned as President, CEO and director. Colette Kress became interim CEO while retaining her Executive Vice President and CFO roles. The board began a permanent CEO search considering internal and external candidates; this announcement names no permanent successor. Harvey C. Jones became the first-ever board chair. The publication date is November 12; the accompanying SEC 8-K records board acceptance and immediate effectiveness on November 11, 2026. Keep event and publication dates separate. Project-authored interpretation, not an explicit declaration by the issuer: the release supplies neither evidence establishing legal findings of wrongdoing or espionage nor current prices or certain future price direction. No permanent successor being named describes this announcement's time, not all subsequent dates.",
+      "review_checks": [
+        "NVIDIA Announces CEO Transition",
+        "November 12, 2026",
+        "Colette Kress",
+        "Interim Chief Executive Officer",
+        "Chief Financial Officer",
+        "Harvey C. Jones",
+        "internal and external candidates",
+        "first-ever"
+      ]
+    },
+    {
+      "id": "nvda-ceo-8k-20261111",
+      "title": "英伟达 SEC 8-K 人事变更 2026年11月11日生效 / NVIDIA Form 8-K Item 5.02",
+      "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000082/nvda-20261111.htm",
+      "publisher": "NVIDIA filing with SEC EDGAR",
+      "category": "company_news",
+      "published_at": "2026-11-12",
+      "event_date": "2026-11-11",
+      "updated_at": "2026-11-15",
+      "keywords": [
+        "英伟达",
+        "英偉達",
+        "黄仁勋",
+        "黃仁勳",
+        "nvidia",
+        "nvda",
+        "jensen huang",
+        "jen-hsun huang",
+        "colette kress",
+        "colette m. kress",
+        "kress",
+        "克雷斯",
+        "harvey jones",
+        "harvey c. jones"
+      ],
+      "text_zh": "资料核对日为2026-11-15，这是 SEC EDGAR 上公司提交的8-K快照；核对日期不证明11月12日以后没有后续人事变动。报告事件日期为2026-11-11；文件签署及配套新闻稿日期为2026-11-12。Item 5.02载明董事会于2026-11-11接受 Jen-Hsun Huang（黄仁勋）辞去总裁、CEO及董事，立即生效；随后任命 Colette M. Kress 为临时 CEO，她继续担任执行副总裁和 CFO，董事会寻找新 CEO。同日 Harvey C. Jones 被任命为董事长。临时 CEO、正式 CEO 和董事长是不同角色，不能把 Jones 写成 CEO，也不能把 Kress 写成已获正式永久任命。本地解读边界（项目判断，非公司或SEC的明确声明）：这份8-K未提供当前股价、未来股价预测或违法行为的法律定论。公司向 SEC 提交文件不等于 SEC 对所有陈述作独立事实认证。",
+      "text_en": "Reviewed on 2026-11-15; a snapshot of NVIDIA's company-filed SEC EDGAR Form 8-K. Review on November 15 does not establish absence of subsequent leadership changes after November 12. The reported event date is 2026-11-11; the signature and accompanying release are dated 2026-11-12. Item 5.02 says the board accepted Jen-Hsun Huang's resignation as President, CEO and director on November 11, effective immediately. The board appointed Colette M. Kress interim CEO while searching for a new CEO; she retained her Executive Vice President and CFO roles. Harvey C. Jones was appointed board chair on November 11. Interim CEO, permanent CEO and board chair are distinct roles: Jones is not named CEO, and Kress is not named a permanent appointee. Project-authored interpretation, not an explicit declaration by the issuer or SEC: the filing supplies neither current prices, future price predictions nor legal findings of wrongdoing. A company filing with the SEC is not independent SEC certification of every statement.",
+      "review_checks": [
+        "FORM 8-K",
+        "November 11, 2026",
+        "November 12, 2026",
+        "Item 5.02.",
+        "accepted the resignation",
+        "effective immediately",
+        "Colette M. Kress",
+        "interim Chief Executive Officer",
+        "Harvey C. Jones"
+      ]
+    }
+  ]
+}

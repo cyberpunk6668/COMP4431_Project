@@ -17,7 +17,7 @@ class KnowledgeTests(unittest.TestCase):
     def test_source_metadata_is_complete_and_uses_primary_https_urls(self):
         from urllib.parse import urlparse
         allowed = {"www.investor.gov", "www.consumerfinance.gov", "consumer.gov", "www.federalreserveeducation.org",
-                   "www.fdic.gov", "www.hkma.gov.hk", "consumer.ftc.gov", "www.sec.gov"}
+                   "www.fdic.gov", "www.hkma.gov.hk", "consumer.ftc.gov", "www.sec.gov", "nvidianews.nvidia.com"}
         for doc in self.retriever.documents:
             with self.subTest(doc=doc["id"]):
                 parsed = urlparse(doc["url"])

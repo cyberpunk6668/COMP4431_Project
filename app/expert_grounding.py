@@ -18,6 +18,7 @@ SUPPORT_FACETS = frozenset({
     "expired_eod_limits", "historical_volume_filtering", "historical_bar_semantics",
     "historical_time_basis", "historical_contract_iv_limits", "contract_comparability",
     "historical_oi_availability",
+    "expiry_payoff",
 })
 
 EXPERT_GROUNDING_INSTRUCTIONS = """Expert passages have a reviewed supports list.
@@ -40,7 +41,39 @@ def _has(pattern, text):
     return bool(re.search(pattern, text, re.I))
 
 
-def claim_facets(text: str) -> set[str]:
+def _without_local_exclusions(text):
+    """Do not mistake an explicit omitted-cost list for a pricing relation.
+
+    Only finite list items after an exclusion verb are masked for the pricing /
+    execution detectors. Other clauses, actual effect/guarantee statements and
+    all original text remain subject to the normal claim and quantity checks.
+    """
+    if not _has(r"试算|本例|教学|(?:this|selected|our).{0,25}(?:trial|calculation|example)|synthetic|expiry trial", text):
+        return text
+    zh_item = r"(?:手续费|税费|交易费用|费用|融资|股息|利率|滑点|行权|指派|提前指派|分腿执行|提前平仓|保证金)"
+    en_item = r"(?:fees?|tax(?:es)?|costs?|funding|dividends?|interest|slippage|exercise|assignment|early assignment|legging|early closing)"
+    text = re.sub(r"(?:不含|不包括|未计入|排除)" + zh_item + r"(?:[、，,或及和\s]*" + zh_item + r")*(?:等(?:额外)?(?:影响|风险|成本))?", "", text)
+    text = re.sub(r"\b(?:excludes?|does not include|not including)\s+" + en_item + r"(?:[,/\s]*(?:and |or )?" + en_item + r")*", "", text, flags=re.I)
+    # This states the application's entered fill assumptions, not a general
+    # assertion that a midpoint quote can actually be executed.
+    return re.sub(r"(?:自然价|natural)\s*(?:与|和|及|/|and)\s*(?:中间价|midpoint)\s*(?:只是|仅是|仅为|都只是)(?:成交|执行|填单)假设", "", text, flags=re.I)
+
+
+def _synthetic_metadata_provenance(text):
+    """Identify only a local authored-record disclaimer, not historical theory.
+
+    Active solely in the server-approved synthetic-lab context. A paragraph
+    introducing general historical intervals, broker timing or receipt/event
+    distinctions still requires the historical-time source even if it also
+    mentions a synthetic lesson.
+    """
+    authored = _has(r"合成(?:教学)?(?:记录|样本|数据)|人为构造|人造输入|固定教学日期|synthetic (?:teaching )?(?:record|sample|data)|authored inputs", text)
+    deny_current = _has(r"不(?:是|代表|反映|说明|等于|能.{0,8}(?:判断|预测)).{0,14}(?:当前|现在|此刻)|not.{0,18}(?:current|present)|cannot.{0,18}(?:current|predict)", text)
+    general_history = _has(r"历史(?:区间|请求|成交条|数据只能|数据不能)|导入时间|接收时间|historical (?:interval|request|bar)|ingestion time|receipt time", text)
+    return authored and deny_current and not general_history
+
+
+def claim_facets(text: str, context_kind="snapshot") -> set[str]:
     """Recognize explicit knowledge relations, including their negations.
 
     A negation such as 'put volume is not bearish headcount' IS a knowledge
@@ -50,6 +83,7 @@ def claim_facets(text: str) -> set[str]:
     if not isinstance(text, str):
         return set()
     text = text[:6000]
+    pricing_text = _without_local_exclusions(text)
     facets = set()
     volume = _has(r"成交(?:量|计数|统计)|期间成交|\bvolume\b", text)
     oi = _has(r"未平仓|持仓|(?<![A-Za-z])OI(?![A-Za-z])|open interest|outstanding contracts", text)
@@ -73,9 +107,9 @@ def claim_facets(text: str) -> set[str]:
         facets.add("oi_reporting_cycle")
     if _has(r"隐含波动|波动率|\bIV\b|implied volatility", text) and _has(r"(?:波动|预期)(?:幅度|尺度)|涨跌方向|不.{0,15}(?:指明|预测|表示).{0,10}方向|either direction|magnitude|fluctuations?|not.{0,15}(?:predict|specify).{0,10}direction", text):
         facets.add("iv_direction_limits")
-    if (_has(r"期权(?:价格|定价)|权利金|option (?:price|premium)|premiums?", text) and _has(r"剩余期限|时间价值|股息|利率|dividend|interest rate|remaining term|time value", text)) or _has(r"时间价值.{0,30}(?:衰减|侵蚀|到期)|time value.{0,30}(?:erod|decay|expir)", text):
+    if (_has(r"期权(?:价格|定价)|权利金|option (?:price|premium)|premiums?", pricing_text) and _has(r"剩余期限|时间价值|股息|利率|dividend|interest rate|remaining term|time value", pricing_text)) or _has(r"时间价值.{0,30}(?:衰减|侵蚀|到期)|time value.{0,30}(?:erod|decay|expir)", pricing_text):
         facets.add("option_price_factors")
-    if _has(r"宽.{0,5}价差|价差.{0,8}(?:越大|较大|变宽)|(?:中间价|midpoint).{0,25}(?:保证|成交|fill)|(?:wider?|large) spreads?.{0,30}(?:slippage|execut|liquidity)|滑点", text):
+    if _has(r"宽.{0,5}价差|价差.{0,8}(?:越大|较大|变宽)|(?:中间价|midpoint).{0,25}(?:保证|成交|fill)|(?:wider?|large) spreads?.{0,30}(?:slippage|execut|liquidity)|滑点", pricing_text):
         facets.add("bid_ask_execution")
     if historic and _has(r"(?:需要|要求|绕过).{0,15}(?:订阅|权限)|(?:订阅|权限).{0,15}(?:需要|要求)|免费|requires?.{0,25}subscription|bypass.{0,20}permission|free access", text):
         facets.add("historical_permissions")
@@ -102,10 +136,24 @@ def claim_facets(text: str) -> set[str]:
         facets.add("contract_comparability")
     if _has(r"(?:确认|核对).{0,40}(?:合约范围|合约规格).{0,12}(?:是否一致|是否相同|一致|匹配).{0,40}(?:只有|仅).{0,15}可比.{0,20}(?:变化|方向|解读)", text):
         facets.add("contract_comparability")
+    if _has(r"(?:确认|核对)(?:比较|对比)的?(?:是|是否为|是否是)(?:同一|相同)(?:合约范围|合约规格|样本范围)", text):
+        facets.add("contract_comparability")
     if oi and _has(r"reqHistoricalData|whatToShow|历史(?:接口|数据类型|持仓)|历史(?:成交|TRADES)条接口|OI历史条|historical (?:API|type|open interest)|historical bars?", text) and _has(r"不提供|不包含|没有.{0,20}(?:字段|类型)|未列|不支持|不可用|无法|缺少|不能恢复|does not|no.{0,15}(?:type|field)|not.{0,20}(?:available|provide|support)|unavailable", text):
         facets.add("historical_oi_availability")
     if oi and _has(r"历史(?:成交|TRADES)条.{0,100}(?:本身不提供|不提供按日|不包含)[^，。；;：:]{0,12}(?:未平仓|持仓)(?:量)?(?:字段|数据|历史条)", text):
         facets.add("historical_oi_availability")
+    # Deliberately limited to explicit terminal-payoff relations. Merely naming
+    # a strategy, an evidence-card label or a trial is not a knowledge claim.
+    if _has(r"(?:到期(?:净)?盈亏|到期(?:现金)?(?:价值|值|收益)|最大(?:损失|亏损|收益|盈利)|盈亏平衡(?:价|点|标的价)?)[^。；;，,]{0,55}(?:等于|是(?!否)|为(?!什么|何)|取决于|限于|上限|无限|不限|净支付|权利金|加|减)|(?:maximum (?:loss|gain|profit)|break.?even|(?:expiry|expiration|terminal) (?:cash )?(?:payoff|profit|p/l))[^.;,]{0,85}(?:equals?|is |are |limited|unlimited|premium|debit|strike|minus|plus)", text):
+        facets.add("expiry_payoff")
+    # A plain-language payoff definition may describe cash received at expiry
+    # before premium deduction without using the compact label "expiry payoff".
+    if _has(r"到期[^。；;]{0,18}现金(?:值|价值)[^。；;]{0,40}(?:扣(?:掉|除)|减去)[^。；;]{0,16}(?:权利金|初始成本|已付成本)|(?:expiry|expiration|terminal)[^.;]{0,45}(?:cash )?payoff[^.;]{0,60}(?:less|minus|deduct|subtract)[^.;]{0,25}(?:premium|paid cost|initial cost)|(?:cash )?payoff\s+at\s+(?:expiry|expiration)[^.;]{0,45}(?:less|minus|deduct|subtract)[^.;]{0,25}(?:premium|paid cost|initial cost)", text):
+        facets.add("expiry_payoff")
+    if _has(r"买入看涨|看涨期权|long call", text) and _has(r"权利金[^。；;]{0,40}(?:抬高|提高)[^。；;]{0,12}盈亏平衡|premium[^.;]{0,40}rais[^.;]{0,15}break.?even", text):
+        facets.add("expiry_payoff")
+    if context_kind == "synthetic_lab" and _synthetic_metadata_provenance(text):
+        facets.discard("historical_time_basis")
     return facets
 
 
@@ -115,6 +163,8 @@ def required_query_facets(question, context_kind="snapshot") -> set[str]:
     oi = _has(r"未平仓|持仓|(?<![A-Za-z])OI(?![A-Za-z])|open interest", text)
     volume = _has(r"成交量|成交计数|\bvolume\b", text)
     historical = context_kind in {"historical", "historical_options", "historical_ibkr", "historical_import", "historical_demo"}
+    if context_kind == "synthetic_lab" and _has(r"真实历史|历史(?:区间|数据|请求|成交条)|historical (?:data|interval|request|bar)", text):
+        historical = True
     ibkr_history_question = _has(r"IBKR|reqHistoricalData|whatToShow|\bAPI\b|网关|历史接口", text)
     if oi and volume and _has(r"为什么|为何|区别|不同|矛盾|冲突|why|differ|conflict|compare", text):
         result.add("volume_vs_oi")
@@ -136,6 +186,8 @@ def required_query_facets(question, context_kind="snapshot") -> set[str]:
         result.add("expired_eod_limits")
     if historical and _has(r"希腊值|greeks|历史IV|historical (?:contract )?(?:IV|implied volatility)", text):
         result.add("historical_contract_iv_limits")
+    if context_kind == "synthetic_lab" and _has(r"试算|到期|盈亏|成本|权利金|收益|损失|亏损|执行价|行权价|trial|payoff|break.?even|cost|premium|max(?:imum)? (?:loss|gain)|strike", text):
+        result.add("expiry_payoff")
     return result
 
 
@@ -144,7 +196,27 @@ def _docs(retrieved):
     return {item["id"]: item for item in values if isinstance(item, dict) and isinstance(item.get("id"), str)}
 
 
-def retrieve_expert_context(knowledge, question, context_kind="snapshot", context_facets=(), limit=6):
+def _validate_expiry_relation(text, cited_sources):
+    """Reject a few explicit terminal-payoff contradictions, not general math.
+
+    The numerical formula remains server computed. These checks are deliberately
+    bounded to reviewed strategy passages and affirmative relation wording;
+    they do not turn the facet allowlist into a general entailment guarantee.
+    """
+    strategies = {doc.get("strategy") for doc in cited_sources if "expiry_payoff" in doc.get("supports", [])}
+    if not strategies:
+        return
+    if _has(r"(?:最大(?:损失|亏损))(?:是|为|会|将|可以|可能|理论上|没有)*\s*(?:无限|无上限|不受限|不限)|maximum loss\s+(?:is|can be)\s+(?:unlimited|unbounded)", text):
+        raise ValueError("Reviewed debit strategies do not have unlimited maximum loss")
+    if strategies <= {"long_put", "call_debit_spread"} and _has(r"最大(?:收益|盈利)(?:是|为|会|将|可以|可能|理论上)*\s*(?:无限|无上限|不受限|不限)|maximum (?:gain|profit)\s+(?:is|can be)\s+(?:unlimited|unbounded)", text):
+        raise ValueError("Reviewed put or debit-spread maximum gain is finite")
+    if strategies == {"long_call"} and _has(r"盈亏平衡(?:标的)?价(?:为|是|等于)执行价减|break.?even\s+is\s+(?:the\s+)?strike\s+minus", text):
+        raise ValueError("Long-call breakeven adds premium")
+    if strategies == {"long_put"} and _has(r"盈亏平衡(?:标的)?价(?:为|是|等于)执行价加|break.?even\s+is\s+(?:the\s+)?strike\s+plus", text):
+        raise ValueError("Long-put breakeven subtracts premium")
+
+
+def retrieve_expert_context(knowledge, question, context_kind="snapshot", context_facets=(), limit=6, *, preferred_ids=()):
     """Fuse real lexical results with transparent reviewed-facet completion.
 
     A corpus lookup has NO BM25/character rank or RRF score. Real query ranks
@@ -165,6 +237,9 @@ def retrieve_expert_context(knowledge, question, context_kind="snapshot", contex
             continue
         candidates = [doc for doc in ranked if facet in doc.get("supports", [])]
         candidates += [doc for key, doc in sorted(corpus.items()) if key not in by_id and facet in doc.get("supports", [])]
+        # A server-selected strategy can identify its own reviewed definition.
+        # This preference never creates a source or changes its support facets.
+        candidates.sort(key=lambda doc: doc["id"] not in preferred_ids)
         if not candidates or len(selected) >= limit:
             continue
         doc = deepcopy(candidates[0])
@@ -198,8 +273,8 @@ def validate_expert_grounding(parts, retrieved, question="", context_kind="snaps
     audits, covered = [], set()
     for index, part in enumerate(parts):
         where = f"paragraph {index+1}: "
-        facets = claim_facets(part.get("text", ""))
-        if (context_kind in {"historical_import", "historical_demo"} and "historical_oi_availability" in facets
+        facets = claim_facets(part.get("text", ""), context_kind)
+        if (context_kind in {"historical_import", "historical_demo", "synthetic_lab"} and "historical_oi_availability" in facets
                 and not _has(r"IBKR|reqHistoricalData|whatToShow|\bAPI\b|网关|历史接口", str(question))):
             raise ValueError(where + "Imported missing fields do not establish an IBKR historical API cause")
         cited = [key for key in part.get("evidence_ids", []) if str(key).startswith("expert.")]
@@ -211,6 +286,8 @@ def validate_expert_grounding(parts, retrieved, question="", context_kind="snaps
         missing = facets - support
         if missing:
             raise ValueError(where + "Expert citation does not support claim facets: " + ",".join(sorted(missing)))
+        if "expiry_payoff" in facets:
+            _validate_expiry_relation(part.get("text", ""), [sources[key] for key in cited])
         unrelated = [key for key in cited if not set(sources[key].get("supports", [])) & facets]
         if unrelated:
             # Echo only known, schema-shaped source IDs. Neither model prose nor
@@ -244,7 +321,7 @@ def _original_parts(content, *, indexed=False):
     return safe if indexed else [part for _, part in safe]
 
 
-def expert_citation_repair_plan(parts, retrieved, allowed_ids):
+def expert_citation_repair_plan(parts, retrieved, allowed_ids, *, context_kind="snapshot"):
     """Return citation-only guidance for every safely parsed original paragraph.
 
     Does not edit text, citations or answers. Candidates must already be in the
@@ -263,7 +340,7 @@ def expert_citation_repair_plan(parts, retrieved, allowed_ids):
     allowed = {key for key in (allowed_ids or ()) if isinstance(key, str)} if not isinstance(allowed_ids, str) else set()
     plans = []
     for index, part in indexed:
-        facets = claim_facets(part["text"])
+        facets = claim_facets(part["text"], context_kind)
         raw_refs = part.get("evidence_ids", [])
         malformed = not isinstance(raw_refs, list)
         if not malformed:
@@ -291,16 +368,16 @@ def expert_citation_repair_plan(parts, retrieved, allowed_ids):
     return plans
 
 
-def expert_repair_allowance(content, retrieved) -> set[str]:
+def expert_repair_allowance(content, retrieved, *, context_kind="snapshot") -> set[str]:
     """Permit rebinding existing recognized claims to already supplied sources."""
-    facets = set().union(*(claim_facets(part["text"]) for part in _original_parts(content)))
+    facets = set().union(*(claim_facets(part["text"], context_kind) for part in _original_parts(content)))
     return {key for key, doc in _docs(retrieved).items() if set(doc.get("supports", [])) & facets}
 
 
-def validate_repair_claims(original_content, candidate_parts, retrieved=None):
+def validate_repair_claims(original_content, candidate_parts, retrieved=None, *, context_kind="snapshot"):
     """A source-format repair cannot introduce a new recognized knowledge topic."""
-    original = set().union(*(claim_facets(part["text"]) for part in _original_parts(original_content)))
-    candidate = set().union(*(claim_facets(part.get("text", "")) for part in candidate_parts))
+    original = set().union(*(claim_facets(part["text"], context_kind) for part in _original_parts(original_content)))
+    candidate = set().union(*(claim_facets(part.get("text", ""), context_kind) for part in candidate_parts))
     if candidate - original:
         raise ValueError("Schema repair introduced new expert claim facets: " + ",".join(sorted(candidate-original)))
     return {"original_facets": sorted(original), "retained_facets": sorted(candidate)}

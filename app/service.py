@@ -39,6 +39,23 @@ Do not ask for passwords or API keys. Answer harmless parts of a request when ot
 would be unsafe. Keep ordinary answers relevant; do not append a finance disclaimer to them.
 """
 
+COMPANY_NEWS_SYSTEM = """Company-event references are dated local snapshots, not live search.
+State the reference date when answering a current leadership question. Distinguish the
+event/effective date, publication date and local knowledge update/retrieval date; these
+dates can differ. Distinguish interim appointments from permanent appointments and
+separate executive roles from board roles. Do not replace dated evidence with older
+general knowledge or claim the snapshot establishes later developments. If a later
+appointment, reason for departure or legal conclusion is not established, say so.
+Do not infer a future stock price, a trading outcome or proven wrongdoing from a
+leadership change. Cite each supported company-event claim with its supplied source ID.
+A local review/retrieval date does not prove that leadership remained unchanged until
+that date. If the question asks about a date later than the source event/publication,
+report the latest source-dated appointment and explicitly leave later status unverified.
+Distinguish project-authored interpretations and evidence limits in summaries from
+explicit publisher statements. Never say the issuer or SEC declared an analytical
+caution merely because a local summary includes that caution.
+"""
+
 _FINANCE_CONTEXT = re.compile(
     r"投资|金融|理财|银行|财务|基金|股票|股价|期权|债券|证券|股息|利息|贷款|房贷|存款|复利|汇率|利率|"
     r"\b(?:financ\w*|invest\w*|bank\w*|stock\w*|shares?|etfs?|options?|bonds?|securities|"
@@ -67,6 +84,39 @@ def _follow_up(message: str) -> bool:
     ))
 
 
+def _company_news_follow_up(message: str) -> bool:
+    """Recognize short role/date follow-ups without making every CEO query anaphoric.
+
+    Explicit new subjects such as 'Microsoft CEO' do not match. This intentionally
+    limited lexical rule is context routing, not entity resolution or fact checking.
+    """
+    text = message.strip()
+    if len(text) >= 100 or _GENERAL_TASK.search(text):
+        return False
+    chinese_start = re.match(
+        r"^(?:(?:那|那么|所以|请问)[，,\s]*)?(?:她|他|其|该公司|这家公司|"
+        r"这次(?:交接|离任|变更)?|此次|这份公告|"
+        r"(?:正式|永久|临时)(?:继任者|接班人|CEO|首席执行官)|"
+        r"(?:公告|生效|离任)(?:日期|时间)|董事长)", text, re.I,
+    )
+    role_or_date = re.search(
+        r"兼任|继任|接班|临时|正式|永久|任职|离任|辞任|辞职|董事|公告|生效|日期|时间|"
+        r"谁|\b(?:ceo|cfo)\b", text, re.I,
+    )
+    english = re.match(
+        r"^(?:(?:so|then)[,\s]+)?(?:"
+        r"(?:is|was|does|did|will|can)\s+(?:she|he)\b|"
+        r"who\s+is\s+(?:the\s+)?(?:permanent|interim)\s+(?:successor|ceo)\b|"
+        r"(?:what|when)\s+(?:is|was|did)\s+(?:the\s+)?(?:appointment|resignation|announcement|effective date)\b"
+        r")", text, re.I,
+    )
+    english_topic = re.search(
+        r"\b(?:ceo|cfo|successor|interim|permanent|resign\w*|appoint\w*|announcement|"
+        r"effective|date|chair\w*|board)\b", text, re.I,
+    )
+    return bool(chinese_start and role_or_date or english and english_topic)
+
+
 def _live_quote_request(message: str, financial: bool) -> bool:
     if not re.search(r"实时|今日|今天|现在|最新|\b(?:current|live|today|latest|now)\b", message, re.I):
         return False
@@ -89,6 +139,24 @@ class ChatService:
         self.documents = {d["id"]: d for d in retriever.documents}
         self.project_help = project_help if project_help is not None else ProjectHelp()
         self.help_chat = ProjectHelpChat(self.project_help,provider,settings,local_provider)
+
+    def _company_news_sources(self, message: str, history: list) -> list[dict]:
+        """Recover only company-news evidence from an uninterrupted user topic.
+
+        Assistant text can contain unsupported claims, so it is never a retrieval
+        key. Stop at a new user topic instead of scanning past it to older news.
+        """
+        if not (_company_news_follow_up(message) or _follow_up(message)):
+            return []
+        users = [item["content"] for item in history if item.get("role") == "user"]
+        for previous in reversed(users[-4:]):
+            matches = self.retriever.search(previous, limit=3)
+            news = [source for source in matches if source.get("category") == "company_news"]
+            if news:
+                return news
+            if not (_company_news_follow_up(previous) or _follow_up(previous)):
+                break
+        return []
 
     async def answer(self, message: str, history: list, language: str, engine: str = "deepseek", *, project_context=None) -> dict:
         zh = language == "zh"
@@ -117,10 +185,12 @@ class ChatService:
         if not sources and _follow_up(message) and not general_task:
             previous = next((x["content"] for x in reversed(history) if x["role"] == "user"), "")
             sources = self.retriever.search(previous + " " + message, limit=3)
+        if not sources and not general_task:
+            sources = self._company_news_sources(message, history)
         for source in sources:
             document = self.documents.get(source["id"], {})
             source["snippet"] = document.get("text_zh" if zh else "text_en", source.get("snippet", ""))
-        public = [{k: s[k] for k in ("id", "title", "url", "snippet") if k in s} for s in sources]
+        public = [{k: s[k] for k in ("id", "title", "url", "snippet", "category", "updated_at") if k in s} for s in sources]
         warning = "offline_requested" if self.settings.offline else "api_key_missing"
         local = engine == "local"
         provider = self.local_provider if local else self.provider
@@ -130,6 +200,8 @@ class ChatService:
         if can_generate:
             context = "\n\n".join(f"[{s['id']}] {s.get('snippet', '')}" if local else f"[{s['id']}] {s['title']}\n{s.get('text', s.get('snippet', ''))}" for s in sources)
             instructions = (LOCAL_SYSTEM if local else SYSTEM) if sources else GENERAL_SYSTEM
+            if any(source.get("category") == "company_news" for source in sources):
+                instructions += "\n" + COMPANY_NEWS_SYSTEM
             evidence = f"\nReference DATA:\n{context}" if sources else ""
             messages = [{"role": "system", "content": instructions + f"\nRequested language: {language}" + evidence}]
             messages.extend({"role": h["role"], "content": h["content"][:600 if local else 2500]} for h in history[-2 if local else -8:])

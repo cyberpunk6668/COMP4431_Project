@@ -1,0 +1,46 @@
+{
+  "version": "options-lab-17.0",
+  "reviewed_at": "2026-11-15",
+  "scope": "Only merged for server-authored synthetic option lessons. These reviewed definitions do not verify input prices or predict a market outcome.",
+  "documents": [
+    {
+      "id": "expert.expiry_long_call",
+      "title": "买入看涨：到期盈亏和成本",
+      "text": "买入看涨的到期净盈亏是标的价高于执行价的部分，扣除已支付权利金，再按合约乘数和数量计算。到期盈亏平衡标的价为执行价加权利金；最大损失限于已支付权利金，理论最大收益无上限。这里的到期关系不等于提前平仓估值，实际交易仍有费用和行权处理。",
+      "text_en": "For a long call, expiry profit is positive underlying price above the strike, less the paid premium, scaled by multiplier and contracts. Breakeven is strike plus premium; maximum loss is the paid premium and theoretical maximum gain is unlimited. This terminal relationship is not a pre-expiry closing valuation; actual trading still involves costs and exercise handling.",
+      "url": "https://www.optionseducation.org/strategies/all-strategies/long-call",
+      "publisher": "OCC / The Options Industry Council",
+      "reviewed_at": "2026-11-15",
+      "topics": ["买入看涨", "看涨期权", "到期盈亏", "盈亏平衡", "最大损失", "权利金", "long call", "expiry payoff", "breakeven", "maximum loss"],
+      "supports": ["expiry_payoff"],
+      "strategy": "long_call",
+      "source_review": "Reviewed OIC Max Loss, Max Gain and Breakeven sections. Local multiplier and contract scaling are arithmetic assumptions; OIC does not authenticate synthetic quotes."
+    },
+    {
+      "id": "expert.expiry_long_put",
+      "title": "买入看跌：到期盈亏和成本",
+      "text": "买入看跌的到期净盈亏是执行价高于标的价的部分，扣除已支付权利金，再按合约乘数和数量计算。到期盈亏平衡标的价为执行价减权利金；最大损失限于已支付权利金。标的价降到零时，最大收益为执行价减权利金后按合约乘数和数量计算；这不是无限收益，也不是下跌预测。这里的到期关系不等于提前平仓估值。",
+      "text_en": "For a long put, expiry profit is positive strike above the underlying price, less the paid premium, scaled by multiplier and contracts. Breakeven is strike minus premium and maximum loss is the paid premium. At an underlying price of zero, maximum gain is strike minus premium, scaled by multiplier and contracts; it is finite, not a fall forecast. This terminal relationship is not a pre-expiry closing valuation.",
+      "url": "https://www.optionseducation.org/strategies/all-strategies/long-put",
+      "publisher": "OCC / The Options Industry Council",
+      "reviewed_at": "2026-11-15",
+      "topics": ["买入看跌", "看跌期权", "到期盈亏", "盈亏平衡", "最大损失", "权利金", "long put", "expiry payoff", "breakeven", "maximum loss"],
+      "supports": ["expiry_payoff"],
+      "strategy": "long_put",
+      "source_review": "Reviewed OIC Max Loss, Max Gain and Breakeven sections. Local multiplier and contract scaling are arithmetic assumptions; OIC does not authenticate synthetic quotes."
+    },
+    {
+      "id": "expert.expiry_call_debit_spread",
+      "title": "看涨借记价差：到期盈亏和成本",
+      "text": "看涨借记价差买入较低执行价的看涨期权，同时卖出同到期的较高执行价看涨期权。到期净盈亏为买入腿现金值减卖出腿现金值，再扣除净支付权利金，按合约乘数和等量合约计算。最大损失限于初始净支付；最大收益为执行价间距减净支付权利金后按数量计算；到期盈亏平衡标的价为较低执行价加每股净支付。该关系假设组合完整持有至到期，不模拟实际行权、指派或分腿执行。",
+      "text_en": "A call debit spread buys a lower-strike call and sells a higher-strike call with the same expiry. Expiry profit is the long-leg cash payoff less the short-leg cash payoff and net debit, scaled by multiplier and equal contracts. Maximum loss is the initial net debit; maximum gain is strike width minus net premium, scaled by quantity; breakeven is the lower strike plus per-share net debit. This assumes an intact position at expiry and does not simulate actual exercise, assignment or legging.",
+      "url": "https://www.optionseducation.org/strategies/all-strategies/bull-call-spread-debit-call-spread",
+      "publisher": "OCC / The Options Industry Council",
+      "reviewed_at": "2026-11-15",
+      "topics": ["看涨借记价差", "借记价差", "到期盈亏", "盈亏平衡", "最大损失", "call debit spread", "bull call spread", "expiry payoff", "breakeven", "maximum gain"],
+      "supports": ["expiry_payoff"],
+      "strategy": "call_debit_spread",
+      "source_review": "Reviewed OIC Max Loss, Max Gain, Breakeven, Assignment Risk and Expiration Risk sections. Local calculation is idealized cash payoff and does not implement exercise mechanics."
+    }
+  ]
+}

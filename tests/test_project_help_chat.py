@@ -58,6 +58,26 @@ def test_model_reads_this_product_manual_but_cannot_write_its_instructions():
     assert "analysis_context" not in result and "calculation" not in result
 
 
+@pytest.mark.parametrize("question,language",[
+    ("到期盈亏试算怎么操作？","zh"),
+    ("How do I use the learning lab?","en"),
+])
+def test_learning_tutorial_uses_closed_reviewed_steps_in_the_selected_language(question,language):
+    service,model=setup()
+    result=ask(service,question,language=language)
+    context=result["project_help"]
+    assert context["topic_ids"]==["help.learning"] and context["manual_version"]=="17.0"
+    assert context["selector"]["status"]=="validated" and len(model.calls)==1
+    assert context["steps"]==service.project_help.get_topic("help.learning",language)["steps"]
+    assert result["answer"]==service.project_help.build_result(["help.learning"],language)["answer"]
+    assert any(link["url"]=="/learn" for link in context["links"])
+    assert "analysis_context" not in result and "calculation" not in result
+    payload=json.loads(model.calls[0][0][-1]["content"].split("\n",1)[1])
+    assert payload["manual_version"]=="17.0" and payload["required_topic_ids"]==["help.learning"]
+    assert payload["requested_language"]==language
+    assert all(set(topic)=={"id","title","summary","steps","links","restrictions"} for topic in payload["candidates"])
+
+
 @pytest.mark.parametrize("output",[
     '<script>window.__executed=true</script>',
     '{"topic_ids":["help.nonexistent"]}',
@@ -123,9 +143,9 @@ def test_secret_guard_precedes_project_help_and_model():
 def test_api_manual_precedes_bound_financial_analysis_and_survives_reload(tmp_path):
     app=create_app(Settings(api_key="",offline=True,db_path=tmp_path/"test.sqlite3"))
     with TestClient(app) as client:
-        assert client.get('/api/health').json()['version']=='16.0.0'
+        assert client.get('/api/health').json()['version']=='17.0.0'
         catalogue=client.get('/api/project-help').json()
-        assert catalogue['current_version']==16 and len(catalogue['topics'])>=15
+        assert catalogue['current_version']==17 and catalogue['manual_version']=='17.0' and len(catalogue['topics'])==17
         for topic in catalogue['topics']:
             assert client.get('/api/project-help/topics/'+topic['id']).json()['id']==topic['id']
         assert client.get('/api/project-help/topics/not-real').status_code==404
@@ -164,3 +184,30 @@ def test_general_questions_and_real_calculation_do_not_become_project_tutorials(
     assert service.project_help.resolve('什么是期权？') is None
     result=ask(service,'compound principal=1000 annual_rate=5 years=2')
     assert result['mode']=='calculator' and not model.calls
+
+
+def test_learning_tutorial_preserves_bound_demo_then_actual_trial_question_reads_it(tmp_path):
+    app=create_app(Settings(api_key="",offline=True,db_path=tmp_path/"learning.sqlite3"))
+    with TestClient(app) as client:
+        saved=client.post('/api/options-lab/save',json={
+            'scenario_id':'put_activity','strategy':'long_call','strike':100,
+            'upper_strike':None,'expiry_price':105,'contracts':1,'execution':'natural','language':'zh'
+        })
+        assert saved.status_code==200
+        report=saved.json()
+        aid=report['analysis_id']
+        assert report['lab_context']['trial']['pnl']==140
+        sid=client.post('/api/sessions',json={}).json()['id']
+        assert client.put('/api/sessions/'+sid+'/analysis',json={'analysis_id':aid}).status_code==200
+        before=app.state.store.get_analysis(aid)
+        tutorial=client.post('/api/chat',json={'session_id':sid,'message':'到期盈亏试算怎么操作？'}).json()
+        assert tutorial['mode']=='project-help' and tutorial['project_help']['topic_ids']==['help.learning']
+        assert tutorial['active_analysis']['analysis_id']==aid and tutorial['generation_attempts']==0
+        assert tutorial.get('analysis_context') is None
+        actual=client.post('/api/chat',json={'session_id':sid,'message':'这份试算为什么盈亏是140美元？'}).json()
+        assert actual['mode']=='offline' and actual['analysis_context']['analysis_id']==aid
+        assert actual.get('project_help') is None and actual['generation_attempts']==0
+        assert app.state.store.get_analysis(aid)==before
+        session=client.get('/api/sessions/'+sid).json()
+        assert session['active_analysis_id']==aid and len(session['messages'])==4
+        assert len({message['id'] for message in session['messages']})==4

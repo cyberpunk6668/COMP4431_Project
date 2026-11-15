@@ -1,7 +1,7 @@
 {
-  "current_version": 16,
-  "manual_version": "16.0",
-  "reviewed_at": "2026-11-11",
+  "current_version": 17,
+  "manual_version": "17.0",
+  "reviewed_at": "2026-11-15",
   "scope": "Hand-reviewed public product manual; fixed UI/document provenance hashes only, not arbitrary repository retrieval.",
   "documents": [
     {
@@ -26,9 +26,18 @@
         {
           "path": "docs/desktop_pet_v15.md",
           "sha256": "fc995f92b9f44f78368388a8145c6b924ebc6414c606f7983ffc183c649ad9e5"
+        },
+        {
+          "path": "web/learn.html",
+          "sha256": "42c8ff9c08b005d4c079559232743149155ab4c3e3904bbff2167bede2d3afa3"
         }
       ],
       "links": [
+        {
+          "url": "/learn",
+          "zh": "期权互动学习",
+          "en": "Interactive options learning"
+        },
         {
           "url": "/workspace",
           "zh": "打开工作台",
@@ -42,11 +51,12 @@
       ],
       "zh": {
         "title": "FinPilot 使用起点",
-        "summary": "FinPilot 是面向学习的中英双语金融助手，组合聊天、固定公式计算、期权样本分析、专家依据与 2D 桌宠。",
+        "summary": "FinPilot 是面向学习的中英双语金融助手，组合聊天、固定公式计算、期权互动学习与样本分析、专家依据及 2D 桌宠。",
         "steps": [
-          "打开工作台，在聊天框输入问题；选择语言与回答引擎，点击发送。",
-          "初次体验可打开三步演示：加载已保存的真实历史样本，查看专家依据，再明确点击 AI 解释。",
-          "需要计算或期权资料时使用侧栏对应入口；每条回答核对实际模式、时间、数值与来源。"
+          "第一次接触期权可先打开「期权互动学习」（/learn），从三个明确标为合成的教学情景观察线索，再改变到期价格或策略，查看本地试算。",
+          "需要进一步解释时，在学习页明确保存当前演示并进入独立追问会话；核对草稿、语言与回答引擎后点击发送。打开页面、试算、保存和进入聊天不会自动调用模型或 IBKR。",
+          "在完整工作台可以自由聊天、使用计算器、专业期权采集及历史复盘；已有三步演示仍可回放已保存的真实历史档案并明确请求 AI 解释。",
+          "每条分析或回答都应核对实际模式、数据日期、数值与来源，区分合成教学、真实历史和实际收到的行情类型。"
         ],
         "restrictions": [
           "项目不会自动交易、后台轮询行情或保证判断正确。",
@@ -56,11 +66,12 @@
       },
       "en": {
         "title": "Start using FinPilot",
-        "summary": "FinPilot is a bilingual educational finance assistant combining chat, fixed-formula calculators, option-sample analysis, expert evidence and a 2D desktop companion.",
+        "summary": "FinPilot is a bilingual educational finance assistant combining chat, fixed-formula calculators, interactive options learning and sample analysis, expert evidence and a 2D desktop companion.",
         "steps": [
-          "Open the workspace, enter a question, choose the language and answer engine, then select Send.",
-          "For a first tour, open the three-step demo: load a saved real historical sample, inspect expert evidence, then explicitly request an AI explanation.",
-          "Use the sidebar for calculators or options. Check the actual mode, timestamps, numbers and sources on each answer."
+          "New to options? Open Interactive options learning (/learn): inspect three clearly synthetic teaching scenarios, change the expiry price or strategy, and read the local trial.",
+          "For an explanation, explicitly save the current demo and enter its separate follow-up conversation. Review the draft, language and engine before selecting Send. Opening the page, calculating, saving and entering chat do not automatically call a model or IBKR.",
+          "The full workspace retains general chat, calculators, professional options collection and historical review. The existing three-step demo still replays a saved real historical archive before an explicit AI explanation.",
+          "Check the actual mode, data dates, numbers and sources on each analysis or answer. Distinguish synthetic teaching data, real historical records and the feed type actually received."
         ],
         "restrictions": [
           "The project does not place trades, poll quotes in the background or guarantee correct conclusions.",
@@ -93,9 +104,18 @@
         {
           "path": "docs/options_analysis_v6.md",
           "sha256": "48af31252193e5adfa80b51520d5dceb905918b42355d249da9e86da6134730e"
+        },
+        {
+          "path": "web/learn.html",
+          "sha256": "42c8ff9c08b005d4c079559232743149155ab4c3e3904bbff2167bede2d3afa3"
         }
       ],
       "links": [
+        {
+          "url": "/learn",
+          "zh": "期权互动学习",
+          "en": "Interactive options learning"
+        },
         {
           "url": "/workspace?view=options",
           "zh": "打开期权分析",
@@ -111,6 +131,7 @@
         "title": "使用期权分析",
         "summary": "从所选合约样本出发，先核对数据时间与覆盖，再看分布、可比性和冲突线索。",
         "steps": [
+          "新手先打开「期权互动学习」（/learn），用三个合成情景观察成交分布、报价差和保护成本，再试算到期盈亏；这里不是实际市场行情。",
           "打开侧栏「期权分析」，填写公司或基金代码；到期日从该标的实际期权链读取。",
           "可选「把几个标的或日期放在一起比较」，每行一组，最多 4 组；在高级设置调整范围和请求行情类型。",
           "点击「帮我读懂这批期权」后先看「易懂解读」，需要时展开「专业详情」和诊断；要继续聊天，点击「针对这批数据追问」并发送问题。"
@@ -125,6 +146,7 @@
         "title": "Use options analysis",
         "summary": "Start with the selected contract sample: check timing and coverage before distributions, comparability and conflicting clues.",
         "steps": [
+          "Start with Interactive options learning (/learn) if you are new: inspect volume distribution, quote width and protection cost in three synthetic scenarios, then try an expiry-payoff calculation. These are not market quotes.",
           "Open Options analysis in the sidebar and enter a stock or fund symbol. Expirations come from that symbol’s actual option chain.",
           "Choose comparison mode for several symbols or dates: one group per line, up to four. Advanced settings control the strike range and requested feed type.",
           "Select the analysis button, read Plain-language view first, then inspect Technical details and diagnostics. To continue in chat, choose the report follow-up button and send a question."
@@ -133,6 +155,93 @@
           "Gateway collection requires an available IB Gateway/API connection and appropriate market-data permissions. Requesting live data does not establish that live data arrived.",
           "Selecting AI interpretation sends aggregate metrics to a model; market-data licence conditions still apply.",
           "Sample volume or open-interest shares are not counts of bullish or bearish people and do not alone establish market-wide sentiment or predict prices. Missing quotes remain missing."
+        ]
+      }
+    },
+    {
+      "id": "help.learning",
+      "keywords": [
+        "期权互动演示",
+        "期权互动学习",
+        "学习实验室",
+        "到期盈亏试算",
+        "自然价",
+        "中间价",
+        "options learning",
+        "learning lab",
+        "interactive options demo",
+        "expiry payoff trial",
+        "options playground"
+      ],
+      "source_files": [
+        {
+          "path": "web/learn.html",
+          "sha256": "42c8ff9c08b005d4c079559232743149155ab4c3e3904bbff2167bede2d3afa3"
+        },
+        {
+          "path": "web/learn.js",
+          "sha256": "35c4af172ecece86f1a2d58d5b6627bc1c98f8d9e97bbbaa747df8a872b29d25"
+        },
+        {
+          "path": "web/learn.css",
+          "sha256": "9a958ad36a1dfd4a40b8eead8fe9e844c53e042bf1e6e7bd1332898824f0ba44"
+        },
+        {
+          "path": "docs/options_learning_v17.md",
+          "sha256": "81c296697f04ce6e91e6fee9eee446dddeafc657dea40f01d5403895fd13d9f5"
+        }
+      ],
+      "links": [
+        {
+          "url": "/learn",
+          "zh": "期权互动学习",
+          "en": "Interactive options learning"
+        },
+        {
+          "url": "/workspace?view=history",
+          "zh": "真实历史与导入",
+          "en": "Real history and imports"
+        },
+        {
+          "url": "/workspace?view=options",
+          "zh": "专业期权采集",
+          "en": "Professional options collection"
+        }
+      ],
+      "zh": {
+        "title": "期权互动学习与到期盈亏试算",
+        "summary": "在 /learn 用三个合成教学情景先读线索，再做本地到期试算；需要解释时显式保存同一份演示并进入独立聊天。",
+        "steps": [
+          "打开「期权互动学习」（/learn），选择看跌活动集中、报价变宽或看跌保护更贵的情景。先读观察、数字依据与局限，需要时展开专业数据。",
+          "核对合成记录的教学日期 2026-11-09 至 2026-11-11、报价展示时间 2026-11-11 21:00 UTC 与假设到期日 2026-12-18；这些日期不是采集真实行情的证明。",
+          "在「想了解的结构」选择买入看涨、买入看跌或看涨借记价差；选择行权价，填写 1–10 份合约及 0–1000 USD 的假设标的到期价格。合约乘数固定为 100，价差保持同到期、等数量两腿，卖出腿行权价高于买入腿。",
+          "权利金可选按买卖报价（自然价：买入使用 ask、卖出使用 bid），或按 bid/ask 中间价。点击「更新本地试算」，比较整组成本、到期盈亏、盈亏平衡价格及最大损失；中间价并不保证能成交。",
+          "若要问助手，先核对当前试算，再点击「保存这份演示」；点击「带着这份演示追问」也会先保存，再建立独立会话并绑定该报告。进入聊天只填好问题草稿，核对后明确点击发送；不会覆盖原有聊天会话。",
+          "改变参数不会改写已保存报告或旧回答；更新试算后须保存新版本。真实历史档案、自己的文件及 IBKR 专业采集分别从完整工作台的历史复盘和期权分析进入。"
+        ],
+        "restrictions": [
+          "三个情景、报价、IV 与活动数字均为预设合成教学数据，不代表实时或历史市场证据。成交占比不是看空人数，报价变宽或保护较贵也不能单独预测涨跌。",
+          "结果是保持完整组合的理想化到期现金盈亏，不是到期前平仓估值或概率预测；不模拟行权、指派、提前行权、分腿处理、手续费、税费、融资、股息和滑点。买入看涨的理论最大收益无上限，图表最高点不等于最大收益。",
+          "打开学习页、切换情景、更新本地试算、保存演示和建立追问会话都不请求 LLM 或 IBKR；只有在聊天里明确发送问题才使用所选回答引擎，离线模式仍可读取已保存的试算依据。",
+          "学习页不下单、不自动刷新行情、不自动发送聊天，也不把合成日期标成真实行情采集时间。"
+        ]
+      },
+      "en": {
+        "title": "Interactive options learning and expiry-payoff trials",
+        "summary": "Use three synthetic teaching scenarios at /learn to inspect clues and calculate local expiry payoffs; explicitly save the same demo before opening a separate follow-up conversation.",
+        "steps": [
+          "Open Interactive options learning (/learn). Choose concentrated put activity, wider quotes, or more expensive put protection. Read the observations, numeric evidence and limits before expanding the detailed data.",
+          "Check the synthetic teaching dates, 2026-11-09 through 2026-11-11, the quote-display timestamp 2026-11-11 21:00 UTC, and assumed expiry 2026-12-18. These timestamps do not establish that market data was collected.",
+          "Choose a long call, long put or call debit spread. Select strikes, enter 1–10 contracts and an assumed underlying price at expiry from 0–1000 USD. The multiplier is fixed at 100. A spread uses equal-quantity legs with the same expiry and a higher short-call strike.",
+          "Choose natural bid/ask pricing (buy at ask, sell at bid) or the bid/ask midpoint. Select Update local trial and compare total-position cost, expiry P/L, break-even price and maximum loss. Midpoint fills are not guaranteed.",
+          "To ask the assistant, inspect the current trial and select Save this demo. Ask about this demo also saves it first, creates a separate conversation and binds that report. Entering chat only prefills a draft: review it and explicitly select Send. Existing conversations are not replaced.",
+          "Editing inputs does not rewrite a saved report or old answers; save a new version after updating the trial. Real historical archives, file imports and professional IBKR collection remain in the workspace history and options views."
+        ],
+        "restrictions": [
+          "All three scenarios, quotes, IV and activity numbers are authored synthetic teaching data, not evidence of current or historical market conditions. Put-volume share is not a count of bearish people; wide quotes or expensive protection alone do not predict direction.",
+          "Results are idealized expiry cash payoffs for an intact position, not pre-expiry closing valuations or probability forecasts. Exercise, assignment, early exercise, legging, fees, taxes, financing, dividends and slippage are excluded. A long call has theoretically unlimited maximum gain; the highest plotted point is not that maximum.",
+          "Opening the page, switching scenarios, recalculating, saving and creating a follow-up conversation make no LLM or IBKR request. The selected answer engine is used only after an explicit chat send; offline replies can still read saved trial evidence.",
+          "The learning page places no trades, starts no automatic market refresh and sends no automatic chat message. Synthetic dates are not labelled as real quote-collection times."
         ]
       }
     },

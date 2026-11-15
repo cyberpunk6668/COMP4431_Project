@@ -22,6 +22,10 @@ from playwright.sync_api import expect, sync_playwright
 ROOT = Path(__file__).resolve().parents[1]
 REPORT = ROOT / "reports" / "showcase_language_check.json"
 SCREENSHOTS = ROOT / "reports" / "screenshots" / "showcase-language"
+CANONICAL_SCREENSHOTS = (
+    "home-en-desktop.png", "home-zh-desktop.png", "home-en-mobile.png", "home-zh-mobile.png",
+    "story-numbers-en-mobile.png", "story-voice-en-mobile.png", "sources-en-mobile.png",
+)
 CJK = re.compile(r"[\u3400-\u9fff]")
 INPUTS = ("#calc-principal", "#calc-monthly", "#calc-rate", "#calc-years")
 
@@ -116,6 +120,12 @@ def layout(page, language: str, width: int, height: int) -> dict:
         }""")
         assert bounds["sceneTop"] >= bounds["headerBottom"] + 3, (language, width, index, "story_header_overlap", bounds)
         assert bounds["sceneBottom"] <= bounds["footerTop"] - 3, (language, width, index, "story_footer_overlap", bounds)
+        if language == "en" and width == 320 and index in (2, 3):
+            name = "numbers" if index == 2 else "voice"
+            page.locator(".story-visual").screenshot(
+                path=str(SCREENSHOTS / f"story-{name}-en-mobile.png"), animations="disabled",
+                style=".skip-link { visibility: hidden !important; }",
+            )
     tabs = page.locator(".evidence-demo").evaluate("""element => {
         const card = element.getBoundingClientRect();
         return Array.from(element.querySelectorAll('.evidence-topics > button')).map(button => {
@@ -124,6 +134,11 @@ def layout(page, language: str, width: int, height: int) -> dict:
         });
     }""")
     assert all(tab["left"] >= 0 and tab["right"] <= tab["cardWidth"] + 1 for tab in tabs), (language, width, "clipped_evidence_tabs", tabs)
+    if language == "en" and width == 320:
+        page.locator(".evidence-demo").screenshot(
+            path=str(SCREENSHOTS / "sources-en-mobile.png"), animations="disabled",
+            style=".skip-link { visibility: hidden !important; }",
+        )
     page.locator("#planning").scroll_into_view_if_needed()
     assert page.evaluate("document.documentElement.scrollWidth <= innerWidth + 1"), (language, width, "planning")
     at_top(page)
@@ -305,9 +320,9 @@ def main() -> int:
     finally:
         report["total"] = len(checks)
         report["duration_seconds"] = round(time.perf_counter() - start, 2)
-        audited = ("frontend/src/App.tsx", "frontend/src/i18n.tsx", "frontend/src/components/Hero.tsx", "frontend/src/components/hero.css", "web/showcase/index.html")
+        audited = ("frontend/src/App.tsx", "frontend/src/i18n.tsx", "frontend/src/styles.css", "frontend/src/components/Hero.tsx", "frontend/src/components/hero.css", "web/showcase/index.html")
         report["sha256"] = {path: hashlib.sha256((ROOT / path).read_bytes()).hexdigest() for path in audited if (ROOT / path).is_file()}
-        report["screenshots"] = sorted(path.relative_to(ROOT).as_posix() for path in SCREENSHOTS.glob("*.png"))
+        report["screenshots"] = [(SCREENSHOTS / name).relative_to(ROOT).as_posix() for name in CANONICAL_SCREENSHOTS if (SCREENSHOTS / name).is_file()]
         REPORT.write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
         print(f"{report['status']}: {len(checks)} checks, {len(layouts)} layouts, {report['duration_seconds']} seconds")
         print(REPORT)

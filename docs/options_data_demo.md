@@ -198,6 +198,8 @@ POST /api/options-demo/run
 
 Windows 一键启动器的实际启动、同进程复用、离线隔离、外部端口保护、停止虚拟环境 Python 子进程及释放端口均有 [独立验证记录](../reports/options_demo_launcher.json)。浏览器脚本使用真实应用、私有离线状态和 Edge 的 **320、390、1440** 三种视口；另外用受控响应检查云模型成功与本地回退的界面区别。浏览器脚本不执行真实模型推理或网关采集，不能拿它的云模式截图充当真实模型调用证据。具体结果和截图按脚本输出的时间戳保存在 `reports/options_demo_browser_*.json` 与 `reports/screenshots/options-data-demo/`。
 
+最终浏览器记录见 [三视口与引擎交互报告](../reports/options_demo_browser_20261115T093143Z.json)，包含三种宽度各八项流程检查和四项受控模型界面检查；[桌面离线预览](../reports/screenshots/options-data-demo/20261115T093143Z/replay-1440.png) 与 [手机离线预览](../reports/screenshots/options-data-demo/20261115T093143Z/replay-390.png) 仅展示本地规则模式。
+
 可复现命令如下；浏览器检查需先安装项目既有的 `requirements-ui-tests.txt` 及其浏览器依赖：
 
 ```powershell

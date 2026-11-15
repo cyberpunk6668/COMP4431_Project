@@ -1,0 +1,27 @@
+{
+  "checked_at": "2026-11-15T09:27:35.870247+00:00",
+  "status": "passed",
+  "scope": "Public reviewed product-manual source SHA pins and bounded catalogue only; not arbitrary repository retrieval or financial correctness proof.",
+  "checks": [
+    {
+      "language": "zh",
+      "topics": 17,
+      "all_source_pins_match": true
+    },
+    {
+      "language": "en",
+      "topics": 17,
+      "all_source_pins_match": true
+    }
+  ],
+  "unique_public_sources": 20,
+  "updated_source_pins": [
+    "docs/options_learning_v17.md",
+    "web/app.js",
+    "web/demo.html",
+    "web/index.html",
+    "web/learn.css",
+    "web/learn.js"
+  ],
+  "manual_sha256": "cf88605838fc2b9d8c126f5cca5a8bf4afd87b5e5962f023cbbcf679832288b8"
+}

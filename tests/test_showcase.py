@@ -25,3 +25,19 @@ def test_showcase_metadata_uses_sources_without_credentials(tmp_path):
     assert not data["training"]["completed"] and data["training"]["steps"] == 0
     assert "api_key" not in r.text and not re.search(r"sk-[A-Za-z0-9_-]{20,}", r.text)
     assert c.get("/api/sessions").json()["sessions"] == []
+
+
+def test_showcase_sources_expose_reviewed_bilingual_text_without_changing_legacy_fields(tmp_path):
+    config = Settings(api_key="", offline=True, db_path=tmp_path / "db", adapter_path=tmp_path / "missing")
+    c = TestClient(create_app(config))
+    sources = {source["id"]: source for source in c.get("/api/showcase").json()["knowledge_sources"]}
+
+    for document in KnowledgeRetriever(config.knowledge_path).documents:
+        source = sources[document["id"]]
+        title_zh, title_en = document["title"].split(" / ", 1)
+        assert source["title"] == document["title"]
+        assert source["snippet"] == document["text_zh"]
+        assert source["title_zh"] == title_zh and source["title_en"] == title_en
+        assert source["snippet_zh"] == document["text_zh"]
+        assert source["snippet_en"] == document["text_en"]
+        assert not re.search(r"[\u3400-\u9fff]", source["title_en"] + source["snippet_en"])

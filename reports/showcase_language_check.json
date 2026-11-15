@@ -1,0 +1,143 @@
+{
+  "status": "passed",
+  "checked_at": "2026-11-15T09:32:03.372264+00:00",
+  "base": "http://127.0.0.1:8000",
+  "browser": "Microsoft Edge, headless",
+  "checks": [
+    "entire_homepage_navigation_metadata_and_accessible_labels_are_english",
+    "all_four_learning_steps_and_illustration_labels_are_english",
+    "all_three_knowledge_examples_source_summaries_and_deep_link_prompts_are_english",
+    "switching_both_directions_preserves_inputs_results_selected_topic_and_expanded_summary",
+    "lazy_loaded_avatar_and_model_section_use_selected_language",
+    "speech_uses_selected_language_and_switching_stops_previous_language_without_playing_audio",
+    "selected_english_language_survives_reload",
+    "homepage_updates_when_another_tab_changes_language",
+    "learning_lab_inherits_language_and_browser_back_restores_changed_preference",
+    "workspace_inherits_language_and_returning_home_uses_updated_preference",
+    "both_languages_keep_navigation_hero_and_calculator_inside_six_viewport_widths",
+    "calculation_failure_message_and_retry_control_follow_selected_language",
+    "no_unhandled_browser_errors_remote_resources_or_paid_model_requests"
+  ],
+  "layouts": [
+    {
+      "language": "zh",
+      "width": 320,
+      "height": 568,
+      "status": "passed"
+    },
+    {
+      "language": "zh",
+      "width": 390,
+      "height": 844,
+      "status": "passed"
+    },
+    {
+      "language": "zh",
+      "width": 768,
+      "height": 1024,
+      "status": "passed"
+    },
+    {
+      "language": "zh",
+      "width": 1024,
+      "height": 900,
+      "status": "passed"
+    },
+    {
+      "language": "zh",
+      "width": 1440,
+      "height": 1000,
+      "status": "passed"
+    },
+    {
+      "language": "zh",
+      "width": 1920,
+      "height": 1080,
+      "status": "passed"
+    },
+    {
+      "language": "en",
+      "width": 320,
+      "height": 568,
+      "status": "passed"
+    },
+    {
+      "language": "en",
+      "width": 390,
+      "height": 844,
+      "status": "passed"
+    },
+    {
+      "language": "en",
+      "width": 768,
+      "height": 1024,
+      "status": "passed"
+    },
+    {
+      "language": "en",
+      "width": 1024,
+      "height": 900,
+      "status": "passed"
+    },
+    {
+      "language": "en",
+      "width": 1440,
+      "height": 1000,
+      "status": "passed"
+    },
+    {
+      "language": "en",
+      "width": 1920,
+      "height": 1080,
+      "status": "passed"
+    }
+  ],
+  "page_errors": [],
+  "chat_requests": [],
+  "external_requests": [],
+  "total": 13,
+  "duration_seconds": 8.77,
+  "sha256": {
+    "frontend/src/App.tsx": "4d10361dd0aa35569f243c6d8c153d3ad18d03798c40b0d405e30be0c531b907",
+    "frontend/src/i18n.tsx": "12c8c22ce5fab83508e9281e3ca6ce7fc6499aa19af4ea406b8e4f4fbcfa7665",
+    "frontend/src/components/Hero.tsx": "48c82e1ad379e78f0d960b33b42fff90bff558265344883ab6685cde8d8e1ee8",
+    "frontend/src/components/hero.css": "f7bdd46b2a515cb2855a5b986f5220b4dd59728ae1ba5457b3852f8a5f1d4184",
+    "web/showcase/index.html": "b5c4a6e94e9d431da19da4fe6efaacd1f0b02ec2613c0512ecb273f560e977d7"
+  },
+  "screenshots": [
+    "reports/screenshots/showcase-language/english-evidence-1440.png",
+    "reports/screenshots/showcase-language/english-evidence-320.png",
+    "reports/screenshots/showcase-language/english-evidence-390.png",
+    "reports/screenshots/showcase-language/english-evidence-viewport-320.png",
+    "reports/screenshots/showcase-language/english-intelligence-1440.png",
+    "reports/screenshots/showcase-language/english-intelligence-320.png",
+    "reports/screenshots/showcase-language/english-intelligence-390.png",
+    "reports/screenshots/showcase-language/english-planning-1440.png",
+    "reports/screenshots/showcase-language/english-planning-320.png",
+    "reports/screenshots/showcase-language/english-planning-390.png",
+    "reports/screenshots/showcase-language/english-story-0-1440.png",
+    "reports/screenshots/showcase-language/english-story-0-320.png",
+    "reports/screenshots/showcase-language/english-story-0-390.png",
+    "reports/screenshots/showcase-language/english-story-1-1440.png",
+    "reports/screenshots/showcase-language/english-story-1-320.png",
+    "reports/screenshots/showcase-language/english-story-1-390.png",
+    "reports/screenshots/showcase-language/english-story-2-1440.png",
+    "reports/screenshots/showcase-language/english-story-2-320.png",
+    "reports/screenshots/showcase-language/english-story-2-390.png",
+    "reports/screenshots/showcase-language/english-story-3-1440.png",
+    "reports/screenshots/showcase-language/english-story-3-320.png",
+    "reports/screenshots/showcase-language/english-story-3-390.png",
+    "reports/screenshots/showcase-language/fixed-evidence-1024.png",
+    "reports/screenshots/showcase-language/fixed-evidence-320.png",
+    "reports/screenshots/showcase-language/fixed-evidence-390.png",
+    "reports/screenshots/showcase-language/fixed-evidence-768.png",
+    "reports/screenshots/showcase-language/fixed-experience-1024.png",
+    "reports/screenshots/showcase-language/fixed-experience-320.png",
+    "reports/screenshots/showcase-language/fixed-experience-390.png",
+    "reports/screenshots/showcase-language/fixed-experience-768.png",
+    "reports/screenshots/showcase-language/home-en-desktop.png",
+    "reports/screenshots/showcase-language/home-en-mobile.png",
+    "reports/screenshots/showcase-language/home-zh-desktop.png",
+    "reports/screenshots/showcase-language/home-zh-mobile.png"
+  ]
+}

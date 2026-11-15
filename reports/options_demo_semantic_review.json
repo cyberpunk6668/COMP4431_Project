@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "status": "limited_manual_review",
+  "reviewed_on": "2026-11-15",
+  "reviewer": "Independent reading pass by delegated coding agent; not a licensed financial reviewer",
+  "source_report": "reports/options_demo_live_20261115T092732Z.json",
+  "scope": "Read both actual generated answers and their original paragraph citations against the six raw rows, locally supplied evidence, limitations and previous-frame comparisons. Independently recomputed volume sums, IV differences, ATM midpoint premiums and valid bid/ask counts from the saved raw input; did not call a model or gateway during this review.",
+  "overall_observation": "No material invented market observation, news, trading instruction or unsupported forecast was identified in these two saved answers. Both identify synthetic teaching provenance, retain partial-sample limits and distinguish volume from people or new positions. This finding applies only to the reviewed outputs.",
+  "answers": [
+    {
+      "frame": 0,
+      "assessment": "Supported sample observations and relevant paragraph citations within this fixture",
+      "independent_raw_checks": {
+        "call_volume": 800,
+        "put_volume": 1200,
+        "put_call_volume_ratio": 1.5,
+        "put95_minus_call105_iv_percentage_points": 8,
+        "atm100_call_plus_put_midpoint_usd_per_share": 4.8,
+        "valid_bid_ask_contracts": 6,
+        "sample_contracts": 6
+      },
+      "paragraph_review": [
+        "Paragraph one correctly describes activity weighted toward puts. scope, put_call_volume, volume_put and volume_call directly support the selected sample and count direction; the supplied limitations support the distinction from people and aggressor direction.",
+        "Paragraph two cites iv_skew_25_delta and atm_straddle for relative pricing. It does not convert IV or premium into a forecast, probability or executable price. The matched wings are 95-put and 105-call, as stated in the evidence; they are not an equal-strike pair.",
+        "Paragraph three cites open_interest_ratio, quote_coverage, missing_bbo and scope. The raw OI batch is independently assumed and unchanged, all six starting BBOs are present, and the answer does not extrapolate coverage to the whole market."
+      ]
+    },
+    {
+      "frame": 1,
+      "assessment": "Comparison directions and missing-data statements supported within this fixed matched sample",
+      "independent_raw_checks": {
+        "call_volume": 1000,
+        "put_volume": 2000,
+        "put_call_volume_ratio": 2,
+        "put95_minus_call105_iv_percentage_points": 12,
+        "atm100_call_plus_put_midpoint_usd_per_share": 5.4,
+        "valid_bid_ask_contracts": 5,
+        "sample_contracts": 6,
+        "missing_bid_ask_contract": "105 put; bid, ask and last remain null"
+      },
+      "paragraph_review": [
+        "Paragraph one establishes synthetic, local coverage and the matching expiry/strike comparison scope. Its cited scope and metric IDs are relevant; the actual previous-frame before/after values were supplied to this model call.",
+        "Paragraph two correctly states ratio increase from 1.5 to 2, wing-IV difference widening from 8 to 12 percentage points, ATM premium/spot increase from 4.8% to 5.4%, and BBO coverage decline from 6/6 to 5/6. Prose cites all four corresponding local metric IDs. The limitation concerning new positions and trading direction comes from the supplied limitations rather than a separately retrieved expert citation.",
+        "Paragraph three's OI, missing BBO, IV and straddle citations match its claims. It preserves missing quotes as null, does not infer general market liquidity deterioration, and avoids forecasts or probabilities."
+      ]
+    }
+  ],
+  "known_limitations": [
+    "The second answer says approximately quarter-delta in Chinese (四分之一德尔塔). This descriptor matches supplied 25-delta/absolute delta 0.25 input and is not a fabricated value, but the current regular expressions allow this Chinese fraction despite the prompt requesting no numerical prose. Do not claim perfect numerical-language suppression.",
+    "Schema, evidence-ID membership, common number patterns and selected contradiction checks are limited format guards, not a full semantic verifier. An existing citation ID alone cannot prove arbitrary model text true.",
+    "The UI result flattens evidence IDs across the answer; paragraph-level relevance was checked here against the preserved raw response JSON. Local evidence and supplied limitations are not independent external expert-source verification.",
+    "No general model accuracy, investment suitability, complete option-chain coverage, future-run reliability or real IBKR/live-feed capability is certified by this review. The teaching data remain synthetic.",
+    "An earlier two-call model run failed validation and remains separately preserved in reports/options_demo_live_20261115T092629Z.json. Reviewing the later successful pair does not erase those failures."
+  ],
+  "integration_review": {
+    "file": "tests/test_options_demo_integration.py",
+    "finding": "Reviewed the actual-app test: it injects a forbidden gateway and provider, serves the page and static assets, checks no-store/CSP behavior and cross-origin restrictions, replays both frames and verifies an existing chat remains unchanged. No functional blocker identified within that scope; it is not browser visual verification.",
+    "command": ".\\.venv\\Scripts\\python.exe -m pytest tests/test_options_demo.py tests/test_options_demo_integration.py -q",
+    "result": "38 passed, 1 existing Starlette/AnyIO deprecation warning; no live requests made by the test suite"
+  }
+}

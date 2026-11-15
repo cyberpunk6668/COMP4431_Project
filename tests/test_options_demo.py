@@ -203,6 +203,9 @@ def test_explicit_cloud_receives_partial_raw_data_and_returns_auditable_mode():
     json.dumps({"response": [{"text": "这就是当前市场表现。", "evidence_ids": ["scope"]}]}),
     json.dumps({"response": [{"text": "合成样本包含八份。", "evidence_ids": ["scope"]}]}),
     json.dumps({"response": [{"text": "合成样本。", "evidence_ids": []}]}),
+    json.dumps({"response": [{"text": "合成样本已连接IBKR。", "evidence_ids": ["scope"]}]}),
+    json.dumps({"response": [{"text": "合成样本中看涨成交更多。", "evidence_ids": ["put_call_volume"]}]}),
+    json.dumps({"response": [{"text": "合成样本中看跌IV低于看涨。", "evidence_ids": ["iv_skew_25_delta"]}]}),
 ])
 def test_invalid_model_output_falls_back_without_claiming_success(raw):
     provider = Provider(raw)

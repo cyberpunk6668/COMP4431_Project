@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-11-15T09:10:43.681065+00:00",
+  "checked_at": "2026-11-15T09:28:25.573474+00:00",
   "status": "passed",
   "scope": "Complete pytest tests/ suite using the workspace .venv, controlled providers/transports; not real broker or cloud-model acceptance.",
   "command": [
@@ -12,16 +12,16 @@
   ],
   "runner": "Child calls pytest.main with a process-local dotenv/network guard before importing application code.",
   "counts": {
-    "tests": 937,
+    "tests": 1006,
     "failures": 0,
     "errors": 0,
     "skipped": 0
   },
   "exit_code": 0,
   "timed_out": false,
-  "junit": "reports/tests_v17-20261115T091018432569Z.xml",
-  "log": "tmp/python-regression-v17/20261115T091018432569Z/pytest.log",
-  "default_database": "tmp/python-regression-v17/20261115T091018432569Z/default.sqlite3",
+  "junit": "reports/tests_v17-20261115T092756871447Z.xml",
+  "log": "tmp/python-regression-v17/20261115T092756871447Z/pytest.log",
+  "default_database": "tmp/python-regression-v17/20261115T092756871447Z/default.sqlite3",
   "source_sha256": {
     "app/__init__.py": "3a0c8bcc4aba90052ed4a6dc0ffb148787cf936a485b8dd7ec0afb712cb8a076",
     "app/companion.py": "7456bffbdb3803fa70c6c5e2de3bfbbcf0d2448fb31196fb53baadd8194b957b",
@@ -34,13 +34,14 @@
     "app/llm.py": "a902db18df0db8346fea19c29837c521ba3cc34ffc15a927df31189ef486b357",
     "app/local_llm.py": "3c97066760ccbab63f49e66959931e90a62272a2cf4b438326e9e57bc1ae181b",
     "app/local_prompt.py": "4aaf25de5a187cc90329c27284f588f14f92f3758c25fd7dc6a93b6c71433667",
-    "app/main.py": "ca3861844fecbb2ecae2666b46c70ecc6a417e8fa7d106f7f5e93da9b91ece1a",
+    "app/main.py": "4992fc7db62f64071ff76353b4f2fa9b800528f2a4adb136f2b84184cf9a30f4",
     "app/options_analytics.py": "168cdf93efeb303e31ed9d735d91809bb2b3736552ce4550f67dfbf03b8b833c",
     "app/options_brief.py": "7f6e5cf125b5bd3532ea3ad60645af4e79927be34226cd5d79b98d3c627af04c",
     "app/options_changes.py": "581f3a7f95351121ccf3801ceb5ecccb565165012843a1bc8bacaf23e18245d6",
     "app/options_chat.py": "32796db7a31a0c7565d5ac1f3633be773c2ea575bde3c8dd4d7e95140e47d478",
     "app/options_claims.py": "92635137fde703a998086e7dc75ad3cc09e710042f2fb470cb686f763cd04048",
     "app/options_collective.py": "f9dd10379c8ddd4e403d721241f32bab1f092364392ba60ad05009871a2dfd57",
+    "app/options_demo.py": "25333c36ce0f0b9d62f83152b58014a4400254a8179d8e87d592c55a571d26f8",
     "app/options_history.py": "675aaf321fda2623e1cc1c92e2f190638838c541ae434b5401a402ca297e95b3",
     "app/options_history_ibkr.py": "c92e02dcfc79ff28dd9ad5ef7d6ee06b9545270d2f8a10599adceddee0d8f45f",
     "app/options_ibkr.py": "ae488fad3c15ab760a54cc0d76bd29189c38ed4d2e1df73dce68cf0f6523ae54",
@@ -50,7 +51,7 @@
     "app/options_service.py": "cab8ec8977188e6b3ac1a3b01dfbb0133fcc297353191ed7fe356c15e395c89b",
     "app/project_help.py": "709325c26d8731f268a9b50a51f619986f544d2ba749415b7d2506344f00138b",
     "app/project_help_chat.py": "053f23e53c97bdd8b4f212cc0463bfd10d05bb3f631ee260c59f361acf464163",
-    "app/service.py": "0b776a66481774249429fe0e2bede6775b6b7a43d88fb992a15c3cdd339457d6",
+    "app/service.py": "6a5c39853ad28609637765732d05745f27c929a4bc5d7d712f06c0ef4ed1a128",
     "app/storage.py": "a4aedbe00b528e9394fd341095a3e60177c13463ccd6062c9d754ac6e0051282",
     "tests/test_analysis_storage.py": "294dec8836a3f9d5bcb4ac55b9640c6db94fae6bb97658b024633a432e570cd4",
     "tests/test_api.py": "c55b69551ce02b2c280e0ff873a57c48c11dae650c0967719f24357656c65451",
@@ -65,10 +66,13 @@
     "tests/test_ibkr_diagnostics_api.py": "bb10729cf554b738fc0caef26f3a827a5773afcbd0f4204b1ec942abf699b7d4",
     "tests/test_ibkr_history_probe_v13.py": "5b89676b64c57839e80a16a254742e9c345c5668f0f3f2ec55c486c3504c86f6",
     "tests/test_ibkr_reference_context.py": "650fa6d8af1b478e0b59cf1578b4b97535af47256c916497a59cb329ffdec745",
-    "tests/test_knowledge.py": "f193cc83383a3654300bc1fb9b3798f61ec3fdfaa7977bd0221a10a2d38e3074",
+    "tests/test_knowledge.py": "79d1affc0b10462d06f13755448b02c621eeb60d4a3367e4b800f759af4d024c",
     "tests/test_lab_chat_v17.py": "c5d54e871f3baf6132d92bb60486f76f6d994784528729d17f0ed32a3b2c1d29",
     "tests/test_llm.py": "5e65c7d198f3ce54e84432aa5ad49c934c48885b61655dcad0282e2012784be1",
     "tests/test_local_llm.py": "29675bef548f8c7aaecdee864eedbdf065222d3d5549da7da7722d8f7d8ccc36",
+    "tests/test_news_demo_runner.py": "c13a5907a76594b2d057958bce1d0fee92171c478cea194843245bc202ec6560",
+    "tests/test_news_grounding.py": "ed6002f73970bf134328f9fcaf5d2e8d47992eea984317f3d3a286b3dcd3c4d1",
+    "tests/test_news_import.py": "b85fe03470b333929a0b992b1a64f41929fc076ce0db1636cefeae9617909e02",
     "tests/test_options_analytics.py": "6cbf84b5005ddbcad8cbcecd8752811b629a111193377f334dcc4ffb9da5aada",
     "tests/test_options_brief.py": "bfa2677a0c19461c0841c704f6546596610ed56a23b9174f91e7705329376960",
     "tests/test_options_changes.py": "952f8144ef147a9ad912e6ac9d6650b5184ec538ea23f39ec2a9b34d3a05a9bb",
@@ -78,6 +82,8 @@
     "tests/test_options_collective.py": "7ce8c9f4dcc362beae0b00e121ae1fa3147a0d40c08060568138633a790b1da3",
     "tests/test_options_collective_workflow.py": "ea9a5b5eca97b976cb5b33f744a5aab87c0dbb71d42a755faade714178488663",
     "tests/test_options_delayed_notice.py": "62028f15c2990b8f888dcddb0284db34432c58ac15c681e0bf1c4c51b50d604e",
+    "tests/test_options_demo.py": "9adb7ba3cf2a19ceb98c600add93a2e465ac57ae679b3545020846f8d5ad298e",
+    "tests/test_options_demo_integration.py": "73671e2dc51e03824206b8a409eeeed32fcf4588ef76f00832fbd569678ca204",
     "tests/test_options_expert_v14.py": "48cb7ed19277e3e4feedcdde8020f4071e54f72f492eb26a1c51aa5108e18fe2",
     "tests/test_options_expirations_api.py": "eb7ffc3ba1f8014eacb0e6d96e13802ba2b3c29d18c4dae315cb3d01bb50476c",
     "tests/test_options_history.py": "a0948475d3c48e016245184f24708d133d79fbee64ad0d794b5f4b73414d8721",
@@ -95,7 +101,7 @@
     "tests/test_project_help.py": "82442f269861b6f35b0352447effe06ea08ba51bbb66713cd25f78724d4e753d",
     "tests/test_project_help_chat.py": "2077d062d6e631c70957c0cdfed9c6488c8092eca7fa11394a1b40cd25a146e1",
     "tests/test_service_general.py": "2930b42bd4200d5dcb92569a0d4eb0aad4506a6a75ac1fe643af5aabfd2e74ff",
-    "tests/test_showcase.py": "d26b8117e2ab4dfc68ffb7fbb35586c507dad4de04a76529dca3f0e9aa822db7"
+    "tests/test_showcase.py": "d8dabcf9f2c9045b10d6f3207001701126baf6b5432a1b4f76fbbed7e938ebc4"
   },
   "user_dotenv_or_chat_database_read": false,
   "network_guard": {
@@ -104,7 +110,7 @@
     "external_model_requests": 0,
     "broker_requests": 0
   },
-  "elapsed_seconds": 25.252,
+  "elapsed_seconds": 28.707,
   "limits": [
     "Unit/API tests use mocks for models and broker transports.",
     "Native Windows and browser workflows are separate reports."

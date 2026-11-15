@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "status": "passed",
+  "scope": "Windows launcher: synthetic options replay, no real IBKR or model requests",
+  "checked_date": "2026-11-15",
+  "files": ["start-options-demo.cmd", "start-options-demo.ps1"],
+  "test_ports": [8028, 8029],
+  "checks": {
+    "powershell_parser": true,
+    "cmd_uses_absolute_windows_powershell_path": true,
+    "cmd_start_with_chinese_workspace_path": true,
+    "exact_scenario_identity_verified": true,
+    "synthetic_replay_source_verified": true,
+    "gateway_connected_false": true,
+    "offline_forces_cloud_configured_false": true,
+    "local_run_did_not_call_model": true,
+    "isolated_database_created": true,
+    "repeat_cmd_launch_reuses_same_owned_pid": true,
+    "different_offline_flag_rejected": true,
+    "cmd_stop_handles_python_venv_redirector_child": true,
+    "stop_removes_socket_listener": true,
+    "stop_removes_owned_process_record": true,
+    "foreign_port_rejected_without_altering_listener": true,
+    "final_cmd_start_reuse_stop_cycle": true,
+    "test_ports_cleaned": true
+  },
+  "method": {
+    "start": "start-options-demo.cmd -Port 8028 -Offline -NoBrowser",
+    "reuse": "Repeat start and compare saved PID",
+    "mode_mismatch": "Invoke PS1 on 8028 without -Offline and verify explicit rejection",
+    "stop": "start-options-demo.cmd -Port 8028 -Stop; verify no listening socket or ownership record remains",
+    "foreign_port": "Hold loopback 8029 with a scoped .NET TcpListener, invoke launcher, verify occupied-port rejection and listener remains bound, then dispose listener",
+    "api": "GET scenario and POST run with local engine; inspect source, configuration and provenance only",
+    "final_cycle": "Real Windows PowerShell through CMD: start, reuse, stop on 8028"
+  },
+  "limits": [
+    "Browser opening was suppressed by -NoBrowser; this report does not verify page layout.",
+    "Cloud and live IBKR behavior are outside this launcher test.",
+    "Different machines and nonstandard Python installations were not exhaustively tested."
+  ]
+}

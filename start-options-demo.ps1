@@ -22,10 +22,21 @@ function Read-OwnedServer {
         $record = Get-Content -LiteralPath $statePath -Raw -Encoding UTF8 | ConvertFrom-Json
         if ($record.project_root -ne $projectRoot -or $record.port -ne $Port) { return $null }
         $serverProcess = Get-Process -Id ([int]$record.pid) -ErrorAction Stop
-        if ($serverProcess.StartTime.ToUniversalTime().ToString('o') -ne $record.started_at) { return $null }
+        $recordedTicks = $record.started_at_ticks
+        if (-not $recordedTicks) { $recordedTicks = ([DateTime]$record.started_at).ToUniversalTime().Ticks }
+        if ($serverProcess.StartTime.ToUniversalTime().Ticks -ne $recordedTicks) { return $null }
         if ([IO.Path]::GetFullPath($serverProcess.Path) -ne $record.python_path) { return $null }
         return [PSCustomObject]@{ Process = $serverProcess; Record = $record }
     } catch { return $null }
+}
+
+function Get-OwnedUvicornChildren($parentProcess) {
+    # Windows venv python.exe may be a redirector. Its real Python child owns
+    # the listening socket; stopping only the redirector leaves an orphan.
+    $expectedArguments = '(?i)-m\s+uvicorn\s+app\.main:app\s+--host\s+127\.0\.0\.1\s+--port\s+' + $Port + '(?:\s|$)'
+    return @(Get-CimInstance Win32_Process -Filter "ParentProcessId=$($parentProcess.Id)" | Where-Object {
+        $_.CommandLine -match $expectedArguments -and $_.Name -match '^python(?:w)?\.exe$'
+    })
 }
 
 function Test-ScenarioReady {
@@ -47,7 +58,29 @@ try {
     $owned = Read-OwnedServer
     if ($Stop) {
         if (-not $owned) { throw "No owned demo process was found for port $Port. No process was stopped." }
-        Stop-Process -Id $owned.Process.Id -ErrorAction Stop
+        foreach ($child in @(Get-OwnedUvicornChildren $owned.Process)) {
+            # An exact parent relationship and uvicorn command identify only
+            # this launcher's server, never a broad process-name/port match.
+            $childProcess = Get-Process -Id $child.ProcessId -ErrorAction SilentlyContinue
+            if ($childProcess -and $childProcess.Path -eq $child.ExecutablePath -and
+                [Math]::Abs(($childProcess.StartTime.ToUniversalTime() - $child.CreationDate.ToUniversalTime()).TotalMilliseconds) -lt 1) {
+                Stop-Process -Id $childProcess.Id -ErrorAction SilentlyContinue
+                $childProcess.WaitForExit(2000) | Out-Null
+                $remainingChild = Get-Process -Id $childProcess.Id -ErrorAction SilentlyContinue
+                if ($remainingChild -and $remainingChild.StartTime.ToUniversalTime().Ticks -eq $childProcess.StartTime.ToUniversalTime().Ticks) {
+                    throw "Could not stop the owned uvicorn child. Its process record was retained."
+                }
+            }
+        }
+        $remainingParent = Get-Process -Id $owned.Process.Id -ErrorAction SilentlyContinue
+        if ($remainingParent -and $remainingParent.StartTime.ToUniversalTime().Ticks -eq $owned.Process.StartTime.ToUniversalTime().Ticks) {
+            Stop-Process -Id $remainingParent.Id -ErrorAction SilentlyContinue
+            $remainingParent.WaitForExit(2000) | Out-Null
+            $stillRunning = Get-Process -Id $remainingParent.Id -ErrorAction SilentlyContinue
+            if ($stillRunning -and $stillRunning.StartTime.ToUniversalTime().Ticks -eq $owned.Process.StartTime.ToUniversalTime().Ticks) {
+                throw "Could not stop the owned Python launcher. Its process record was retained."
+            }
+        }
         Remove-Item -LiteralPath $statePath -Force
         Write-Host "Stopped this project's options-demo process on port $Port."
         return
@@ -99,6 +132,7 @@ try {
             pid = $serverProcess.Id
             python_path = $Python
             started_at = $serverProcess.StartTime.ToUniversalTime().ToString('o')
+            started_at_ticks = $serverProcess.StartTime.ToUniversalTime().Ticks
             offline = [bool]$Offline
             stdout = $stdoutPath
             stderr = $stderrPath
@@ -121,7 +155,7 @@ try {
     if ($Offline) { Write-Host 'Offline rehearsal: local rule explanations; no model API requests.' }
     else { Write-Host 'Model mode follows .env. Explicit demo actions may call DeepSeek when configured; opening the page does not call a model.' }
     Write-Host "Logs: $logDirectory"
-    Write-Host "To stop: powershell -NoProfile -ExecutionPolicy Bypass -File `"$(Join-Path $projectRoot 'start-options-demo.ps1')`" -Port $Port -Stop"
+    Write-Host "To stop from the project directory: .\start-options-demo.cmd -Port $Port -Stop"
     if (-not $NoBrowser) { Start-Process -FilePath "$baseUrl/options-demo" | Out-Null }
 } finally {
     if ($launcherLock) { $launcherLock.Dispose() }

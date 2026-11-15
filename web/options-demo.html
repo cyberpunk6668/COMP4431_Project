@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#fafafa">
+  <meta name="description" content="FinPilot 期权数据演示：回放明确标注的合成样本，计算指标，再让助手读取依据。">
+  <title>FinPilot · 期权数据演示</title>
+  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/static/options-demo.css">
+  <script src="/static/options-demo.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#demo-controls">跳到演示控制</a>
+  <header class="page-header shell">
+    <a class="brand" href="/" aria-label="FinPilot 首页"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 2 9 5v10l-9 5-9-5V7Z"/></svg><span>FinPilot<span class="brand-dot">.</span><small>OPTIONS DATA DEMO</small></span></a>
+    <nav aria-label="其他功能"><a href="/learn">互动学习 ↗</a><a href="http://127.0.0.1:8000/workspace?view=options" target="_blank" rel="noopener">原服务网关 · 8000 ↗</a></nav>
+  </header>
+  <main class="shell">
+    <section class="hero" aria-labelledby="page-title">
+      <div class="hero-copy">
+        <p class="eyebrow">SAMPLE → ANALYSIS → CONVERSATION</p>
+        <h1 id="page-title">让期权数据，<br>成为有依据的回答。</h1>
+        <p class="hero-description">从一小部分期权数据出发，看清交易活动、相对定价与数据缺口。播放下一帧，再问问助手发生了什么变化。</p>
+        <div class="source-badge" id="demo-source-badge"><span aria-hidden="true"></span>模拟网关回放 · 非实时行情</div>
+        <p class="hero-boundary">AAPL 合成教学样本 · 不连接 IBKR · 不下单</p>
+      </div>
+      <aside class="flow-card" aria-label="演示的数据处理过程">
+        <div class="flow-top"><span>READ-ONLY PIPELINE</span><span class="flow-tag">REPLAY</span></div>
+        <div class="flow-item"><span class="flow-icon" aria-hidden="true">01</span><div><strong>读取样本</strong><p>同一到期日 · 三个行权价 · 六个合约</p></div><span class="flow-arrow" aria-hidden="true">↓</span></div>
+        <div class="flow-item"><span class="flow-icon" aria-hidden="true">02</span><div><strong>本地计算</strong><p>使用项目的期权指标计算逻辑</p></div><span class="flow-arrow" aria-hidden="true">↓</span></div>
+        <div class="flow-item"><span class="flow-icon" aria-hidden="true">03</span><div><strong>带着依据解释</strong><p>本地规则说明 / 可选 DeepSeek</p></div></div>
+        <p class="flow-caption">模拟行情输入，实际执行数据计算。</p>
+      </aside>
+    </section>
+
+    <section id="demo-controls" class="control-panel" aria-label="演示控制">
+      <div class="control-copy"><strong>准备好，从第一帧开始。</strong><span id="demo-control-hint">一次点击，完成样本读取、指标计算与本地说明。</span></div>
+      <div class="control-actions"><button id="demo-start" type="button" class="button primary" disabled>一键演示 <span aria-hidden="true">↗</span></button><button id="demo-next" type="button" class="button secondary" disabled>播放下一帧 <span aria-hidden="true">→</span></button><button id="demo-reset" type="button" class="reset-button" disabled>重新开始</button></div>
+      <div class="engine-row"><label for="demo-engine">回答引擎</label><select id="demo-engine" disabled><option value="local">本地规则 · 离线稳定</option><option value="deepseek" disabled>DeepSeek · 真实模型请求</option></select><span id="demo-engine-notice">正在读取引擎配置…</span></div>
+    </section>
+    <p id="demo-status" class="request-status" role="status" aria-live="polite">正在读取本地演示配置，不会自动请求模型或网关。</p>
+    <p id="demo-error" class="request-error" role="alert" hidden></p>
+
+    <ol class="stage-rail" aria-label="演示进度">
+      <li id="demo-stage-data"><span>01</span><div><strong>读取六个合约</strong><small>保留原始样本与缺失字段</small></div><i aria-hidden="true">✓</i></li>
+      <li id="demo-stage-analysis"><span>02</span><div><strong>计算四项指标</strong><small>每个数字都有本地依据</small></div><i aria-hidden="true">✓</i></li>
+      <li id="demo-stage-chat"><span>03</span><div><strong>解释与追问</strong><small>每条回答绑定当时的帧</small></div><i aria-hidden="true">✓</i></li>
+    </ol>
+
+    <div id="demo-empty" class="empty-state"><div class="empty-symbol" aria-hidden="true">∑</div><div><h2>先看到输入，再理解结论。</h2><p>第一帧展示成交和定价结构；第二帧增加看跌成交、改变相对定价，并保留一处报价缺失。点击「一键演示」开始。</p></div><span class="empty-label">2 帧固定教学数据</span></div>
+
+    <div id="demo-result" class="result" hidden>
+      <section class="snapshot-strip" aria-label="当前回放样本">
+        <div class="snapshot-title"><span id="demo-frame-label" class="frame-label">第一帧</span><strong id="demo-scope">AAPL · 合成教学样本</strong><span class="snapshot-source">合成教学回放 · 非实时</span><span id="demo-expiry"></span></div>
+        <dl class="snapshot-times"><div><dt>样本教学时点（UTC）</dt><dd id="demo-recorded-at">—</dd></div><div><dt>本次处理时间（北京时间）</dt><dd id="demo-processed-at">—</dd></div></dl>
+      </section>
+
+      <section class="metrics-section" aria-label="当前样本的本地计算结果"><div id="demo-metrics" class="metric-grid"></div><p class="metric-footnote">指标只描述所示合约；看跌成交更多不等于更多人看空，定价也不是涨跌概率。</p></section>
+
+      <section id="demo-changes-section" class="changes-panel" aria-labelledby="changes-title" hidden><div class="section-heading"><div><p class="eyebrow">SAME SAMPLE · NEXT FRAME</p><h2 id="changes-title">变化来自哪里？</h2></div><span class="mini-badge">同标的 / 同到期 / 同合约</span></div><div id="demo-changes" class="change-grid"></div><p class="small-note">这是预先设计的帧间变化；不能据此解释真实市场走势或因果关系。缺失报价继续保持缺失。</p></section>
+
+      <div class="workspace-grid">
+        <section class="data-panel panel" aria-labelledby="data-title">
+          <div class="section-heading"><div><p class="eyebrow">01 · INPUT</p><h2 id="data-title">助手读到了什么？</h2></div><span class="mini-badge">合成数据</span></div>
+          <p class="panel-description" id="demo-data-description">三个行权价各一份看涨与看跌合约；只分析这六个合约。</p>
+          <div class="underlying-line"><span>合成标的参考价</span><strong id="demo-underlying">—</strong><span>USD / 股</span></div>
+          <div class="table-scroll" tabindex="0" role="region" aria-label="六个期权合约的教学样本，可横向滚动">
+            <table id="demo-quotes"><caption class="sr-only">当前帧合成期权样本。报价按每股计，成交量和持仓量按合约计；缺失不等于零。</caption><thead><tr><th scope="col">行权价</th><th scope="col">类型</th><th scope="col">Bid</th><th scope="col">Ask</th><th scope="col">成交量</th><th scope="col">持仓量</th><th scope="col">IV</th></tr></thead><tbody></tbody></table>
+          </div>
+          <p class="table-note">报价 / 行权价：USD / 股；计数：份合约；IV：年化隐含波动率。所有值均为合成输入，不能作为可成交报价。</p>
+          <details id="demo-evidence-details" class="evidence-details"><summary>展开本地数值依据 <span id="demo-evidence-count"></span></summary><div id="demo-evidence" class="evidence-list"></div></details>
+          <details class="limitations-details"><summary>样本范围与分析限制</summary><ul id="demo-limitations"></ul></details>
+        </section>
+
+        <section class="chat-panel panel" aria-labelledby="chat-title">
+          <div class="section-heading"><div><p class="eyebrow">02 · EXPLANATION</p><h2 id="chat-title">把数字讲清楚。</h2></div><span id="demo-answer-mode" class="mini-badge">本地规则说明</span></div>
+          <p class="panel-description">问题只读取当前帧。回答标注实际生成方式；播放下一帧后，之前的回答仍保留原始时点。</p>
+          <div id="demo-messages" class="messages" role="log" aria-label="演示问答记录" aria-live="polite" aria-relevant="additions"></div>
+          <form id="demo-chat-form">
+            <fieldset id="demo-chat-fields" disabled>
+              <legend class="sr-only">针对当前帧继续提问</legend>
+              <label for="demo-question">针对当前帧追问</label>
+              <div id="demo-presets" class="presets" aria-label="建议问题"></div>
+              <textarea id="demo-question" rows="3" maxlength="1000" placeholder="例如：看跌成交更多，是否就代表市场会下跌？"></textarea>
+              <div class="chat-actions"><button id="demo-ask-local" class="button secondary" type="submit">本地解释这个问题</button><span id="demo-submit-note">不会请求模型</span></div>
+              <div class="cloud-action"><p id="demo-cloud-notice">回答引擎在页面上方切换。选择 DeepSeek 后，发送会把当前合成样本摘要与问题交给真实模型，可能产生 API 费用；不重新采集行情。</p></div>
+            </fieldset>
+          </form>
+        </section>
+      </div>
+    </div>
+    <aside class="real-path"><div><strong>演示回放，与真实网关链路。</strong><p>本页复用期权指标计算逻辑，输入来自固定合成样本。一键启动的独立演示服务禁用 IBKR；真实采集请在原来已配置网关的服务中打开（通常为 8000 端口）。数据是否实时取决于实际返回的行情类型与权限。</p></div><a href="http://127.0.0.1:8000/workspace?view=options" target="_blank" rel="noopener">打开原服务 · 8000 ↗</a></aside>
+  </main>
+  <footer class="page-footer shell"><span>FINPILOT · OPTIONS DATA DEMO</span><p>课程教学演示。样例数据不能用于当前市场判断，分析不构成交易建议。</p><a href="/demo">历史资料演示 ↗</a></footer>
+</body>
+</html>

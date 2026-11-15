@@ -69,7 +69,7 @@
 
 .brand svg { color: #d4af37; fill: rgb(212 175 55 / 20%); }
 .desktop-nav, .header-actions { display: flex; align-items: center; }
-.desktop-nav { gap: clamp(1.1rem, 2.8vw, 2.5rem); }
+.desktop-nav { gap: clamp(.75rem, 1.4vw, 1.6rem); }
 .desktop-nav a {
   position: relative;
   padding-block: .7rem;
@@ -92,6 +92,21 @@
 }
 
 .header-actions { gap: .75rem; }
+.language-toggle {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  padding: .45rem .65rem;
+  border: 1px solid rgb(15 23 42 / 18%);
+  border-radius: 999px;
+  background: rgb(255 255 255 / 75%);
+  color: #0f172a;
+  font-size: .8125rem;
+  font-weight: 650;
+}
+.language-toggle:hover { background: white; border-color: #a67d1f; }
 .motion-button, .menu-toggle {
   display: inline-grid;
   place-items: center;
@@ -186,6 +201,19 @@
 }
 .hero-actions { display: flex; align-items: center; gap: 1rem; }
 
+:lang(en) .hero-description { max-width: 36rem; }
+:lang(en) .hero-title { max-width: 12em; }
+
+@media (min-width: 1024px) and (max-width: 1199px) {
+  .header-inner { gap: .65rem; }
+  .header-inner .brand { font-size: 1.2rem; gap: .4rem; }
+  .header-inner .brand svg { width: 26px; height: 26px; }
+  .desktop-nav { gap: .75rem; }
+  .desktop-nav a { font-size: .75rem; }
+  .header-actions { gap: .25rem; }
+  .nav-workspace { padding: .7rem .9rem; font-size: .75rem; }
+}
+
 @media (max-width: 1023px) {
   .desktop-nav, .nav-workspace { display: none; }
   .menu-toggle { display: inline-grid; }
@@ -216,10 +244,21 @@
   .brand { font-size: 1.2rem; }
   .brand svg { width: 28px; height: 28px; }
   .hero-title { max-width: 9em; font-size: clamp(3rem, 15vw, 3.75rem); }
+  :lang(en) .hero-title { font-size: clamp(2.5rem, 11vw, 3.5rem); line-height: 1.08; }
   .hero-poster, .hero-video { object-position: 55% bottom; }
   .hero-description { max-width: 22rem; }
   .hero-actions { flex-direction: column; width: min(100%, 13rem); gap: .65rem; }
   .hero-actions .button { width: 100%; padding-block: .875rem; }
+}
+
+@media (max-width: 365px) {
+  .header-inner { gap: .25rem; }
+  .header-inner .brand { font-size: 1.05rem; gap: .35rem; }
+  .header-inner .brand svg { width: 24px; height: 24px; }
+  .header-actions { gap: 0; }
+  .motion-button, .menu-toggle { width: 2.5rem; height: 2.75rem; }
+  .language-toggle { padding-inline: .4rem; }
+  :lang(en) .hero-description { font-size: 1rem; }
 }
 
 @media (max-height: 610px) {

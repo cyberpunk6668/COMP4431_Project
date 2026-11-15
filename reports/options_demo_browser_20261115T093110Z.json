@@ -1,0 +1,59 @@
+{
+  "status": "failed",
+  "checked_at": "20261115T093110Z",
+  "scope": "Actual create_app + private offline settings + real Edge viewports; no real model or gateway",
+  "viewports": [
+    {
+      "width": 1440,
+      "status": "passed",
+      "checks": [
+        "page_load_reads_scenario_only_no_analysis_or_cloud",
+        "one_click_actual_app_sample_calculation_rule_answer",
+        "matched_frame_changes_missing_not_zero_old_answer_and_evidence_immutable",
+        "preset_fills_only_explicit_send_reads_current_frame",
+        "user_text_is_escaped",
+        "failed_request_preserves_prior_frame_and_messages_allows_retry",
+        "reset_then_keyboard_one_click_replays_cleanly",
+        "viewport_fits_no_external_assets_or_javascript_errors"
+      ],
+      "model_requests": 0,
+      "gateway_requests": 0,
+      "page_errors": []
+    },
+    {
+      "width": 390,
+      "status": "passed",
+      "checks": [
+        "page_load_reads_scenario_only_no_analysis_or_cloud",
+        "one_click_actual_app_sample_calculation_rule_answer",
+        "matched_frame_changes_missing_not_zero_old_answer_and_evidence_immutable",
+        "preset_fills_only_explicit_send_reads_current_frame",
+        "user_text_is_escaped",
+        "failed_request_preserves_prior_frame_and_messages_allows_retry",
+        "reset_then_keyboard_one_click_replays_cleanly",
+        "viewport_fits_no_external_assets_or_javascript_errors"
+      ],
+      "model_requests": 0,
+      "gateway_requests": 0,
+      "page_errors": []
+    },
+    {
+      "width": 320,
+      "status": "passed",
+      "checks": [
+        "page_load_reads_scenario_only_no_analysis_or_cloud",
+        "one_click_actual_app_sample_calculation_rule_answer",
+        "matched_frame_changes_missing_not_zero_old_answer_and_evidence_immutable",
+        "preset_fills_only_explicit_send_reads_current_frame",
+        "user_text_is_escaped",
+        "failed_request_preserves_prior_frame_and_messages_allows_retry",
+        "reset_then_keyboard_one_click_replays_cleanly",
+        "viewport_fits_no_external_assets_or_javascript_errors"
+      ],
+      "model_requests": 0,
+      "gateway_requests": 0,
+      "page_errors": []
+    }
+  ],
+  "error": "Locator expected to contain text '校验'\nActual value: 请分析这批期权样本的成交结构、隐含波动率差与数据限制。FinPilot第一帧 · 2026/11/13 15:00:00 UTC本地回退说明当前六份合约中，看跌成交 1200 份，看涨成交 800 份，看跌 / 看涨比为 1.5。约 25Δ 看跌减看涨 IV 为 8 个波动率百分点，平值跨式中价占标的价 4.8%。这些是局部交易活动与相对定价线索，不能换算为看空人数或涨跌概率。当前有效报价覆盖 100%。全部数值均为合成，不代表当前市场；样本不能替代完整期权链。模型输出未通过检查，显示本地规则。 原因：模型输出未通过格式或引用检查。 数据来源：合成教学回放；实际 IBKR 请求：无。本次已发起模型请求。本条依据所选样本范围样本看跌 / 看涨成交量样本看跌成交量样本看涨成交量约 25Δ 看跌减看涨 IV平值跨式中价 / 标的价有效双边报价覆盖 \nCall log:\n  - Expect \"to_contain_text\" with timeout 5000ms\n  - waiting for locator(\"#demo-messages .message-pair\").last\n    9 × locator resolved to <article data-frame=\"0\" class=\"message-pair\">…</article>\n      - unexpected value \"请分析这批期权样本的成交结构、隐含波动率差与数据限制。FinPilot第一帧 · 2026/11/13 15:00:00 UTC本地回退说明当前六份合约中，看跌成交 1200 份，看涨成交 800 份，看跌 / 看涨比为 1.5。约 25Δ 看跌减看涨 IV 为 8 个波动率百分点，平值跨式中价占标的价 4.8%。这些是局部交易活动与相对定价线索，不能换算为看空人数或涨跌概率。当前有效报价覆盖 100%。全部数值均为合成，不代表当前市场；样本不能替代完整期权链。模型输出未通过检查，显示本地规则。 原因：模型输出未通过格式或引用检查。 数据来源：合成教学回放；实际 IBKR 请求：无。本次已发起模型请求。本条依据所选样本范围样本看跌 / 看涨成交量样本看跌成交量样本看涨成交量约 25Δ 看跌减看涨 IV平值跨式中价 / 标的价有效双边报价覆盖\"\n"
+}

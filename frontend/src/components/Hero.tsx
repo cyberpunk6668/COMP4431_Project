@@ -2,15 +2,16 @@ import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 import gsap from 'gsap';
 import { ArrowRight, Hexagon, Menu, Pause, Play, Shield, X } from 'lucide-react';
+import { useLanguage } from '../i18n';
 import './hero.css';
 
 const navigation = [
-  { label: '首页', href: '#hero' },
-  { label: '学习路径', href: '#experience' },
-  { label: '知识来源', href: '#evidence' },
-  { label: '财务计算', href: '#planning' },
-  { label: '期权互动演示', href: '/learn' },
-  { label: '模型与教练', href: '#intelligence' },
+  { label: '首页', en: 'Home', href: '#hero' },
+  { label: '学习路径', en: 'Learning path', href: '#experience' },
+  { label: '知识来源', en: 'Sources', href: '#evidence' },
+  { label: '财务计算', en: 'Calculators', href: '#planning' },
+  { label: '期权互动演示', en: 'Options demo', href: '/learn' },
+  { label: '模型与教练', en: 'Models & coach', href: '#intelligence' },
 ];
 
 const videoURL = '/static/showcase/media/reference-motion.mp4';
@@ -19,13 +20,15 @@ const introGroups = ['header', 'eyebrow', 'heading', 'description', 'actions'] a
 type VideoState = 'loading' | 'ready' | 'fallback' | 'static';
 
 export function Brand() {
-  return <a className="brand" href="/" aria-label="FinPilot 首页">
+  const { t } = useLanguage();
+  return <a className="brand" href="/" aria-label={t('FinPilot 首页', 'FinPilot home')}>
     <Hexagon size={32} strokeWidth={2} aria-hidden="true" />
     <span>FINPILOT</span>
   </a>;
 }
 
 function Header({ paused, reduced, toggle }: { paused: boolean; reduced: boolean; toggle: () => void }) {
+  const { language, setLanguage, t } = useLanguage();
   const [open, setOpen] = useState(false);
   const menuButton = useRef<HTMLButtonElement>(null);
   const menu = useRef<HTMLDivElement>(null);
@@ -71,17 +74,23 @@ function Header({ paused, reduced, toggle }: { paused: boolean; reduced: boolean
   return <header className="site-header" data-hero-enter="header">
     <div className="header-inner wrap">
       <Brand />
-      <nav className="desktop-nav" aria-label="主导航">
-        {navigation.map(link => <a key={link.href} href={link.href} aria-current={link.href === '#hero' ? 'page' : undefined}>{link.label}</a>)}
+      <nav className="desktop-nav" aria-label={t('主导航', 'Main navigation')}>
+        {navigation.map(link => <a key={link.href} href={link.href} aria-current={link.href === '#hero' ? 'page' : undefined}>{t(link.label, link.en)}</a>)}
       </nav>
       <div className="header-actions">
         <button className="motion-button" data-testid="motion-toggle" onClick={toggle} disabled={reduced}
-          aria-pressed={stopped} aria-label={reduced ? '系统已减少动态效果' : paused ? '恢复动态效果' : '暂停动态效果'}>
+          aria-pressed={stopped} aria-label={reduced ? t('系统已减少动态效果', 'Motion reduced by system preference') : paused ? t('恢复动态效果', 'Resume animations') : t('暂停动态效果', 'Pause animations')}>
           {stopped ? <Play size={16} /> : <Pause size={16} />}
         </button>
-        <a className="nav-workspace button-gold" href="/workspace">进入工作台 <ArrowRight size={16} /></a>
+        <button className="language-toggle" type="button" data-testid="language-toggle"
+          aria-label={language === 'zh' ? 'Switch to English' : '切换为中文'}
+          title={language === 'zh' ? 'Switch to English' : '切换为中文'}
+          onClick={() => setLanguage(language === 'zh' ? 'en' : 'zh')}>
+          <span lang={language === 'zh' ? 'en' : 'zh-CN'}>{language === 'zh' ? 'EN' : '中文'}</span>
+        </button>
+        <a className="nav-workspace button-gold" href="/workspace">{t('进入工作台', 'Workspace')} <ArrowRight size={16} /></a>
         <button className="menu-toggle" ref={menuButton} data-testid="menu-toggle" aria-expanded={open}
-          aria-controls="mobile-navigation" aria-label={open ? '关闭导航' : '打开导航'} onClick={() => setOpen(value => !value)}>
+          aria-controls="mobile-navigation" aria-label={open ? t('关闭导航', 'Close navigation') : t('打开导航', 'Open navigation')} onClick={() => setOpen(value => !value)}>
           {open ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
@@ -90,9 +99,9 @@ function Header({ paused, reduced, toggle }: { paused: boolean; reduced: boolean
       {open && <motion.div ref={menu} id="mobile-navigation" data-testid="mobile-navigation" className="mobile-navigation"
         initial={{ opacity: stopped ? 1 : 0, y: stopped ? 0 : -20 }} animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: stopped ? 0 : -20 }} transition={{ duration: stopped ? 0 : .2 }}>
-        <nav aria-label="移动端导航">
-          {navigation.map(link => <a key={link.href} href={link.href} onClick={() => { setOpen(false); menuButton.current?.focus({ preventScroll: true }); }}>{link.label}</a>)}
-          <a className="mobile-workspace button-gold" href="/workspace">进入工作台 <ArrowRight size={16} /></a>
+        <nav aria-label={t('移动端导航', 'Mobile navigation')}>
+          {navigation.map(link => <a key={link.href} href={link.href} onClick={() => { setOpen(false); menuButton.current?.focus({ preventScroll: true }); }}>{t(link.label, link.en)}</a>)}
+          <a className="mobile-workspace button-gold" href="/workspace">{t('进入工作台', 'Workspace')} <ArrowRight size={16} /></a>
         </nav>
       </motion.div>}
     </AnimatePresence>
@@ -151,6 +160,7 @@ function VideoBackground({ stopped, reduced, onState }: { stopped: boolean; redu
 }
 
 export default function Hero({ paused, reduced, toggle }: { paused: boolean; reduced: boolean; toggle: () => void }) {
+  const { language, t } = useLanguage();
   const section = useRef<HTMLElement>(null);
   const timeline = useRef<gsap.core.Timeline | null>(null);
   const completed = useRef(false);
@@ -192,15 +202,14 @@ export default function Hero({ paused, reduced, toggle }: { paused: boolean; red
     <VideoBackground stopped={stopped} reduced={reduced} onState={setVideoState} />
     <Header paused={paused} reduced={reduced} toggle={toggle} />
     <div className="hero-copy wrap">
-      <p className="hero-eyebrow" data-hero-enter="eyebrow"><Shield size={14} /> 有据可查 · 有数可算</p>
+      <p className="hero-eyebrow" data-hero-enter="eyebrow"><Shield size={14} /> {t('有据可查 · 有数可算', 'Traceable sources · Clear calculations')}</p>
       <h1 id="hero-heading" className="hero-title" data-hero-enter="heading" tabIndex={-1}>
-        <span className="hero-title-line">把<span className="gold-text">金融</span></span>
-        <span className="hero-title-line">看得更清楚</span>
+        {language === 'zh' ? <><span className="hero-title-line">把<span className="gold-text">金融</span></span><span className="hero-title-line">看得更清楚</span></> : <><span className="hero-title-line">See <span className="gold-text">finance</span></span>{' '}<span className="hero-title-line">more clearly</span></>}
       </h1>
-      <p className="hero-description" data-hero-enter="description">先用一份合成期权情景看懂市场线索，再改变价格、比较到期盈亏，带着依据继续追问。</p>
+      <p className="hero-description" data-hero-enter="description">{t('先用一份合成期权情景看懂市场线索，再改变价格、比较到期盈亏，带着依据继续追问。', 'Explore a synthetic options scenario, change the price and compare payoffs at expiry. Follow the evidence and keep asking.')}</p>
       <div className="hero-actions" data-hero-enter="actions">
-        <a className="button button-gold" href="/learn">体验期权演示 <ArrowRight size={18} /></a>
-        <a className="button button-ghost" href="/workspace">打开完整工作台</a>
+        <a className="button button-gold" href="/learn">{t('体验期权演示', 'Try the options demo')} <ArrowRight size={18} /></a>
+        <a className="button button-ghost" href="/workspace">{t('打开完整工作台', 'Open the workspace')}</a>
       </div>
     </div>
   </section>;

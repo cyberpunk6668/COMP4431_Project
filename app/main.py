@@ -270,7 +270,10 @@ def create_app(settings: Settings | None = None, *, options_provider=None, histo
         return {
             "document_count": len(retriever.documents),
             "knowledge_sources": [{"id": d["id"], "title": d["title"], "url": d["url"],
+                                   "title_zh": d["title"].split(" / ", 1)[0].strip(),
+                                   "title_en": d["title"].split(" / ", 1)[-1].strip(),
                                    "category": d.get("category", "education"), "snippet": d.get("text_zh", ""),
+                                   "snippet_zh": d.get("text_zh", ""), "snippet_en": d.get("text_en", ""),
                                    "updated_at": d.get("updated_at")} for d in retriever.documents],
             "training": {"completed": bool(evidence_verified), "steps": training.get("steps", 0) if evidence_verified else 0,
                          "epochs": training.get("epochs", 0) if evidence_verified else 0,

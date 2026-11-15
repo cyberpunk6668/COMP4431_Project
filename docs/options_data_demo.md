@@ -12,7 +12,7 @@
 
 <http://127.0.0.1:8018/options-demo>
 
-然后点击页面上的 **「一键演示」**。页面默认根据模型配置选择引擎；先看引擎与调用提示，再点击。一次操作依次呈现部分期权数据、计算指标与对应解释，无需现场登录 IB Gateway。
+然后点击页面上的 **「一键演示」**（云模型模式下显示「一键演示 · DeepSeek」）。页面默认根据模型配置选择引擎；先看引擎与调用提示，再点击。一次操作依次呈现部分期权数据、计算指标与对应解释，无需现场登录 IB Gateway。
 
 本机环境未安装时，只需要先按项目 README 完成一次环境安装：
 
@@ -41,9 +41,9 @@ python -m venv .venv
 ## 2. 展示前的准备
 
 1. 启动页面，确认顶部标记为合成数据、模拟网关回放，真实网关未连接。
-2. 选择本次要讲的模式：真实 DeepSeek 展示真实模型读取样本；本地规则模式用于稳定彩排。两者都使用同一份合成输入。
+2. 选择本次要讲的模式：「DeepSeek · 真实模型请求」展示真实模型读取样本；「本地规则 · 离线稳定」用于稳定彩排。两者都使用同一份合成输入。
 3. 先完整试走一次「一键演示 → 播放下一帧 → 预设问题」。正式开始前点击「重新开始」，清空当前展示；此操作重置页面，不改数据文件。
-4. 需要真实模型时，提前核验页面实际显示模型成功。超时、配置缺失或输出校验失败后的本地说明，只能称为本地降级结果。模型请求可能产生费用；不要把尚未执行的请求当作已成功。
+4. 需要真实模型时，提前核验回答实际显示「DeepSeek 实际生成」。若显示「本地规则说明」或「本地回退说明」，只能按相应本地模式讲解。下一帧和每次提问都会使用当前选定引擎，可能各产生一次模型请求与费用；不要把尚未执行的请求当作已成功。
 
 推荐投屏使用桌面浏览器，放大到观众能读清样本表和回答。数据来源标识应保持可见，不用“已连接”“实时刷新”等词替代“回放”。
 
@@ -187,3 +187,31 @@ POST /api/options-demo/run
 - [IBKR：延迟行情与 TWS API](https://www.interactivebrokers.com/support/faq/content/tws-api-compatible-delayed-data-29091333)：可用的延迟数据与实时订阅不是一回事，需要明确选择相应模式。
 - [IBKR：Market Data Types](https://interactivebrokers.github.io/tws-api/market_data_type.html)：实时、冻结、延迟、延迟冻结的类型枚举；样本中出现类型编号不能证明实际网关连接。
 - [OIC：Technical Information FAQ](https://www.optionseducation.org/referencelibrary/faq/technical-information)：Put/Call 和隐含波动率等定义；这些定义不把给定样本转化为确定的涨跌预测。
+
+## 9. 验证与证据
+
+本次服务端完整 Python 回归 **1,006 项通过**；期权数据 demo 的后端与真实应用集成检查 **38 项通过**。检查中保留一项既有 Starlette/AnyIO 弃用警告。它们验证程序行为，不是金融分析准确率：完整记录见 [回归 XML](../reports/tests_options_data_demo.xml)，demo 集成范围也记在 [有限复核报告](../reports/options_demo_semantic_review.json) 中。
+
+实际 DeepSeek 验证累计 **4 次请求，零新增 IBKR 请求**。首次两条回答未通过输出校验，已保留在 [首次运行记录](../reports/options_demo_live_20261115T092629Z.json)；随后两条回答通过本次检查，见 [成功运行记录](../reports/options_demo_live_20261115T092732Z.json)。独立代理对后两答与原始六行输入做了 [有限阅读式复核](../reports/options_demo_semantic_review.json)，重新核算成交量、IV 差、跨式中价和报价覆盖；未发现该两答存在重大的虚构行情观察或无依据预测。这个结论只适用于保存的两条回答，不认证下一次回答、一般模型准确率或投资适用性。
+
+输出检查覆盖 JSON 结构、已给定的证据 ID、常见数字写法及部分矛盾模式。**这些检查不是完整语义验证，也不是全面金融正确性保证。** 例如成功回答中的中文“四分之一德尔塔”与给定 25Δ 输入一致，但现有规则并未拦截所有中文数字语法，不能宣传为“彻底杜绝数字幻觉”。
+
+Windows 一键启动器的实际启动、同进程复用、离线隔离、外部端口保护、停止虚拟环境 Python 子进程及释放端口均有 [独立验证记录](../reports/options_demo_launcher.json)。浏览器脚本使用真实应用、私有离线状态和 Edge 的 **320、390、1440** 三种视口；另外用受控响应检查云模型成功与本地回退的界面区别。浏览器脚本不执行真实模型推理或网关采集，不能拿它的云模式截图充当真实模型调用证据。具体结果和截图按脚本输出的时间戳保存在 `reports/options_demo_browser_*.json` 与 `reports/screenshots/options-data-demo/`。
+
+可复现命令如下；浏览器检查需先安装项目既有的 `requirements-ui-tests.txt` 及其浏览器依赖：
+
+```powershell
+# demo 后端与真实应用集成：不访问云模型或 IBKR
+.\.venv\Scripts\python.exe -m pytest tests/test_options_demo.py tests/test_options_demo_integration.py -q
+
+# 真实应用、离线数据、三个响应式视口；云模式界面部分使用受控响应
+.\.venv\Scripts\python.exe scripts/check_options_demo_browser.py
+
+# 默认只做本地预检，不发模型请求
+.\.venv\Scripts\python.exe scripts/check_options_demo_live.py
+
+# 显式真实模型验证：配置可用时发送两次可能收费的请求，不访问 IBKR
+.\.venv\Scripts\python.exe scripts/check_options_demo_live.py --live
+```
+
+每次模型或浏览器运行会生成新的带时间戳报告。保留失败记录；不能用后续成功覆盖前次失败，也不能把合成数据验证写成实时网关验收。

@@ -373,6 +373,11 @@
         {
           "report": "reports/python_regression_v17-20261115T091018432569Z.json",
           "scope": "Complete controlled Python regression; does not imply real broker/model/native hardware execution."
+        },
+        {
+          "report": "reports/manual_sources_v17.json",
+          "status": "passed",
+          "scope": "Final 17 bilingual topics and all public source SHA pins match."
         }
       ],
       "v17_status": "browser_verified_reviewed_project_help"
@@ -711,5 +716,22 @@
       "Unrelated workspace/theme/native UI",
       "Font size, readability and full accessibility conformance"
     ]
+  },
+  "manual_sources_validation": {
+    "report": "reports/manual_sources_v17.json",
+    "status": "passed",
+    "topics_per_language": 17,
+    "unique_public_sources": 20,
+    "scope": "Public reviewed handbook source hashes only, not financial correctness."
+  },
+  "current_workspace_compatibility": {
+    "regression": "reports/python_regression_v17-20261115T092756871447Z.json",
+    "source_stability": "reports/python_compatibility_v17-20261115T092756767508Z.json",
+    "tests": 1006,
+    "failures": 0,
+    "app_tests_and_public_json_stable": true,
+    "entire_checkout_static_during_tests": false,
+    "reason": "Another task added scripts/check_showcase_language.py during the run. No app/tests/public-JSON change; no external model or broker request. The earlier 937 test freeze remains separately preserved.",
+    "external_news_and_gateway_replay_additions": "Preserved as concurrent workspace changes; their live model results are not included in the options-lab total of 16."
   }
 }

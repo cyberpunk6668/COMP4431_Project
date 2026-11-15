@@ -29,7 +29,8 @@ V16_REQUIRED_FILES = ["app/project_help.py", "app/project_help_chat.py", "data/p
 V17_REQUIRED_FILES = ["app/options_lab.py", "data/options_lab_knowledge.json", "web/learn.html", "web/learn.js", "web/learn.css",
                       "web/experience-v17.css", "docs/options_learning_v17.md", "docs/demo_v17.md",
                       "reports/options_lab_ui_v17.json", "reports/experience_ui_v17.json", "reports/python_regression_v17.json", "reports/options_lab_live_v17.json",
-                      "reports/feature_audit_v17.json", "reports/options_lab_semantic_review_v17.json"]
+                      "reports/feature_audit_v17.json", "reports/options_lab_semantic_review_v17.json",
+                      "reports/options_lab_contrast_v17.json", "reports/manual_sources_v17.json", "reports/runtime_v17.json"]
 EXCLUDED_DIRS = {"__pycache__", "node_modules", "browser", "previews", ".pytest_cache", "checkpoints", "cache",
                  "win-unpacked", "artifacts", ".git", ".hg", ".svn", ".venv", ".venv-ml", "tmp"}
 SECRET_PATTERNS = [re.compile(rb"sk-[A-Za-z0-9_-]{20,}"),
@@ -97,6 +98,7 @@ def collect_paths():
 
 def package():
     paths = collect_paths()
+    frozen = {path.relative_to(ROOT).as_posix(): file_sha256(path) for path in paths}
     for path in paths:
         with path.open("rb") as stream:
             scan_stream(stream, path.relative_to(ROOT).as_posix())
@@ -105,10 +107,26 @@ def package():
     with zipfile.ZipFile(partial, "w", zipfile.ZIP_DEFLATED) as archive:
         for path in paths:
             archive.write(path, "FinPilot/" + path.relative_to(ROOT).as_posix())
+    # Other local tasks can edit the shared checkout while a ZIP is being
+    # assembled. Publish only when its exact bytes match one stable source set.
+    current = collect_paths()
+    if {p.relative_to(ROOT).as_posix() for p in current} != set(frozen):
+        raise RuntimeError("Project file set changed during packaging; partial archive retained. Retry after edits finish.")
+    if any(file_sha256(path) != frozen[path.relative_to(ROOT).as_posix()] for path in paths):
+        raise RuntimeError("Project source changed during packaging; partial archive retained. Retry after edits finish.")
+    with zipfile.ZipFile(partial) as archive:
+        for name, digest in frozen.items():
+            with archive.open("FinPilot/" + name) as stream:
+                packaged_digest = hashlib.file_digest(stream, "sha256").hexdigest()
+            if packaged_digest != digest:
+                raise RuntimeError(f"Packaged bytes do not match the frozen source: {name}")
     partial.replace(OUTPUT)
+    source_manifest = OUTPUT.parent / "source_manifest_v17.json"
+    source_manifest.write_text(json.dumps({"application_version":APPLICATION_VERSION,"source_sha256":frozen},indent=2),encoding="utf-8")
     result = {"file": OUTPUT.name, "files": len(set(paths)), "bytes": OUTPUT.stat().st_size,
               "application_version": APPLICATION_VERSION, "native_host_version": NATIVE_HOST_VERSION,
               "sha256": file_sha256(OUTPUT), "secrets_excluded": True, "local_database_excluded": True,
+              "stable_source_snapshot_verified": True, "source_manifest": source_manifest.name,
               "desktop_portable": {"version": NATIVE_HOST_VERSION, "path": PORTABLE, "bytes": PORTABLE_BYTES, "sha256": PORTABLE_SHA256},
               "desktop_source_explicit_allowlist": True, "installed_or_unpacked_desktop_dependencies_excluded": True,
               "python_runtime_bundled": False, "requires_existing_finpilot_python_environment": True}

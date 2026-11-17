@@ -4,94 +4,79 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#fafafa">
-  <meta name="description" content="FinPilot 期权数据演示：回放明确标注的合成样本，计算指标，再让助手读取依据。">
-  <title>FinPilot · 期权数据演示</title>
+  <meta name="description" content="FinPilot 标的波动与风险解读：通过期权样本理解隐含波动率、两翼相对定价和平值跨式成本，查看有依据的解释。">
+  <title>FinPilot · 标的波动与风险解读</title>
   <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="/static/options-demo.css">
-  <script src="/static/options-demo.js" defer></script>
+  <link rel="stylesheet" href="/static/options-demo.css?v=20261116-entry-fix">
+  <script src="/static/options-demo.js?v=20261116-entry-fix" defer></script>
 </head>
 <body>
-  <a class="skip-link" href="#demo-controls">跳到演示控制</a>
+  <a class="skip-link" href="#demo-controls">跳到分析操作</a>
   <header class="page-header shell">
-    <a class="brand" href="/" aria-label="FinPilot 首页"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 2 9 5v10l-9 5-9-5V7Z"/></svg><span>FinPilot<span class="brand-dot">.</span><small>OPTIONS DATA DEMO</small></span></a>
+    <a class="brand" href="/" aria-label="FinPilot 首页"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 2 9 5v10l-9 5-9-5V7Z"/></svg><span>FinPilot<span class="brand-dot">.</span><small>OPTIONS ANALYSIS</small></span></a>
     <nav aria-label="其他功能"><a href="/learn">互动学习 ↗</a><a href="http://127.0.0.1:8000/workspace?view=options" target="_blank" rel="noopener">原服务网关 · 8000 ↗</a></nav>
   </header>
   <main class="shell">
     <section class="hero" aria-labelledby="page-title">
       <div class="hero-copy">
-        <p class="eyebrow">SAMPLE → ANALYSIS → CONVERSATION</p>
-        <h1 id="page-title">让期权数据，<br>成为有依据的回答。</h1>
-        <p class="hero-description">从一小部分期权数据出发，看清交易活动、相对定价与数据缺口。播放下一帧，再问问助手发生了什么变化。</p>
-        <div class="source-badge" id="demo-source-badge"><span aria-hidden="true"></span>模拟网关回放 · 非实时行情</div>
-        <p class="hero-boundary">AAPL 合成教学样本 · 不连接 IBKR · 不下单</p>
+        <p class="eyebrow">OPTIONS → VOLATILITY → UNDERSTANDING</p>
+        <h1 id="page-title">从期权价格，<br>理解标的波动。</h1>
+        <p class="hero-description">解释隐含波动率、两翼相对定价和平值跨式成本，理解期权样本反映的风险定价。一次分析，获得有依据的整体解读。</p>
+        <div class="source-badge" id="demo-source-badge"><span aria-hidden="true"></span>合成样本 · 非实时行情</div>
+        <p class="hero-boundary">AAPL · 未连接 IBKR · 只读分析</p>
       </div>
-      <aside class="flow-card" aria-label="演示的数据处理过程">
-        <div class="flow-top"><span>READ-ONLY PIPELINE</span><span class="flow-tag">REPLAY</span></div>
-        <div class="flow-item"><span class="flow-icon" aria-hidden="true">01</span><div><strong>读取样本</strong><p>同一到期日 · 三个行权价 · 六个合约</p></div><span class="flow-arrow" aria-hidden="true">↓</span></div>
-        <div class="flow-item"><span class="flow-icon" aria-hidden="true">02</span><div><strong>本地计算</strong><p>使用项目的期权指标计算逻辑</p></div><span class="flow-arrow" aria-hidden="true">↓</span></div>
-        <div class="flow-item"><span class="flow-icon" aria-hidden="true">03</span><div><strong>带着依据解释</strong><p>本地规则说明 / 可选 DeepSeek</p></div></div>
-        <p class="flow-caption">模拟行情输入，实际执行数据计算。</p>
-      </aside>
     </section>
 
-    <section id="demo-controls" class="control-panel" aria-label="演示控制">
-      <div class="control-copy"><strong>准备好，从第一帧开始。</strong><span id="demo-control-hint">一次点击，完成样本读取、指标计算与本地说明。</span></div>
-      <div class="control-actions"><button id="demo-start" type="button" class="button primary" disabled>一键演示 <span aria-hidden="true">↗</span></button><button id="demo-next" type="button" class="button secondary" disabled>播放下一帧 <span aria-hidden="true">→</span></button><button id="demo-reset" type="button" class="reset-button" disabled>重新开始</button></div>
-      <div class="engine-row"><label for="demo-engine">回答引擎</label><select id="demo-engine" disabled><option value="local">本地规则 · 离线稳定</option><option value="deepseek" disabled>DeepSeek · 真实模型请求</option></select><span id="demo-engine-notice">正在读取引擎配置…</span></div>
+    <section id="demo-controls" class="control-panel" aria-label="分析操作">
+      <div class="control-copy"><strong>读取数据，理解波动。</strong><span id="demo-control-hint">一次读取样本，解释风险定价与数据边界。</span></div>
+      <div class="control-actions"><button id="demo-start" type="button" class="button primary" disabled>一键分析 <span aria-hidden="true">↗</span></button><button id="demo-reset" type="button" class="reset-button" disabled>清空分析</button></div>
+      <details id="demo-settings" class="analysis-settings"><summary>回答设置 <span id="demo-engine-summary">正在读取配置…</span></summary><div class="engine-row"><label for="demo-engine">回答引擎</label><select id="demo-engine" disabled><option value="local">本地规则 · 离线稳定</option><option value="deepseek" disabled>DeepSeek · 真实模型请求</option></select></div></details><span id="demo-engine-notice" class="engine-notice">正在读取引擎配置…</span>
     </section>
-    <p id="demo-status" class="request-status" role="status" aria-live="polite">正在读取本地演示配置，不会自动请求模型或网关。</p>
+    <p id="demo-status" class="request-status" role="status" aria-live="polite">正在读取分析配置；开始分析后才运行所选引擎。</p>
     <p id="demo-error" class="request-error" role="alert" hidden></p>
 
-    <ol class="stage-rail" aria-label="演示进度">
-      <li id="demo-stage-data"><span>01</span><div><strong>读取六个合约</strong><small>保留原始样本与缺失字段</small></div><i aria-hidden="true">✓</i></li>
-      <li id="demo-stage-analysis"><span>02</span><div><strong>计算四项指标</strong><small>每个数字都有本地依据</small></div><i aria-hidden="true">✓</i></li>
-      <li id="demo-stage-chat"><span>03</span><div><strong>解释与追问</strong><small>每条回答绑定当时的帧</small></div><i aria-hidden="true">✓</i></li>
+    <ol class="stage-rail" aria-label="分析进度">
+      <li id="demo-stage-data"><span>01</span><div><strong>读取期权样本</strong><small>确认范围与定价输入</small></div><i aria-hidden="true">✓</i></li>
+      <li id="demo-stage-analysis"><span>02</span><div><strong>理解波动定价</strong><small>解释波动率与相对成本</small></div><i aria-hidden="true">✓</i></li>
+      <li id="demo-stage-chat"><span>03</span><div><strong>获得风险解读</strong><small>说明含义及不能确定的背景</small></div><i aria-hidden="true">✓</i></li>
     </ol>
 
-    <div id="demo-empty" class="empty-state"><div class="empty-symbol" aria-hidden="true">∑</div><div><h2>先看到输入，再理解结论。</h2><p>第一帧展示成交和定价结构；第二帧增加看跌成交、改变相对定价，并保留一处报价缺失。点击「一键演示」开始。</p></div><span class="empty-label">2 帧固定教学数据</span></div>
+    <div id="demo-empty" class="empty-state"><div class="empty-symbol" aria-hidden="true">↗</div><div><h2>期权价格里，包含哪些波动信息？</h2><p>点击「一键分析」，获得一次完整解释：隐含波动率代表什么、不同方向的相对定价有何差异，以及这些信息不能证明什么。</p></div><span class="empty-label">AAPL 合成样本</span></div>
 
     <div id="demo-result" class="result" hidden>
-      <section class="snapshot-strip" aria-label="当前回放样本">
-        <div class="snapshot-title"><span id="demo-frame-label" class="frame-label">第一帧</span><strong id="demo-scope">AAPL · 合成教学样本</strong><span class="snapshot-source">合成教学回放 · 非实时</span><span id="demo-expiry"></span></div>
-        <dl class="snapshot-times"><div><dt>样本教学时点（UTC）</dt><dd id="demo-recorded-at">—</dd></div><div><dt>本次处理时间（北京时间）</dt><dd id="demo-processed-at">—</dd></div></dl>
-      </section>
+      <div class="analysis-layout">
+        <aside class="insight-panel panel" aria-label="样本与风险定价概览">
+          <section id="demo-overview" class="sample-overview" aria-labelledby="overview-title"><p class="eyebrow">01 · OPTIONS DATA</p><h2 id="overview-title">已读取期权样本</h2><div class="overview-scope"><strong id="demo-scope">AAPL · 所选合约</strong><span id="demo-frame-label" class="frame-label">起始批次</span></div><p id="demo-overview-description">同一到期日的看涨与看跌合约。</p><span class="snapshot-source">合成样本 · 非实时 · 未连接 IBKR</span></section>
+          <section class="phenomena-section" aria-labelledby="phenomena-title"><p class="eyebrow">02 · RISK PRICING</p><h2 id="phenomena-title">期权价格反映了什么？</h2><div id="demo-phenomena" class="phenomena-list"></div><p id="demo-quality-note" class="quality-note"></p><p class="insight-boundary">当前样本只能提供局部风险定价线索，不能确认整个市场的宏观状态或具体事件原因。</p></section>
+        </aside>
 
-      <section class="metrics-section" aria-label="当前样本的本地计算结果"><div id="demo-metrics" class="metric-grid"></div><p class="metric-footnote">指标只描述所示合约；看跌成交更多不等于更多人看空，定价也不是涨跌概率。</p></section>
-
-      <section id="demo-changes-section" class="changes-panel" aria-labelledby="changes-title" hidden><div class="section-heading"><div><p class="eyebrow">SAME SAMPLE · NEXT FRAME</p><h2 id="changes-title">变化来自哪里？</h2></div><span class="mini-badge">同标的 / 同到期 / 同合约</span></div><div id="demo-changes" class="change-grid"></div><p class="small-note">这是预先设计的帧间变化；不能据此解释真实市场走势或因果关系。缺失报价继续保持缺失。</p></section>
-
-      <div class="workspace-grid">
-        <section class="data-panel panel" aria-labelledby="data-title">
-          <div class="section-heading"><div><p class="eyebrow">01 · INPUT</p><h2 id="data-title">助手读到了什么？</h2></div><span class="mini-badge">合成数据</span></div>
-          <p class="panel-description" id="demo-data-description">三个行权价各一份看涨与看跌合约；只分析这六个合约。</p>
-          <div class="underlying-line"><span>合成标的参考价</span><strong id="demo-underlying">—</strong><span>USD / 股</span></div>
-          <div class="table-scroll" tabindex="0" role="region" aria-label="六个期权合约的教学样本，可横向滚动">
-            <table id="demo-quotes"><caption class="sr-only">当前帧合成期权样本。报价按每股计，成交量和持仓量按合约计；缺失不等于零。</caption><thead><tr><th scope="col">行权价</th><th scope="col">类型</th><th scope="col">Bid</th><th scope="col">Ask</th><th scope="col">成交量</th><th scope="col">持仓量</th><th scope="col">IV</th></tr></thead><tbody></tbody></table>
-          </div>
-          <p class="table-note">报价 / 行权价：USD / 股；计数：份合约；IV：年化隐含波动率。所有值均为合成输入，不能作为可成交报价。</p>
-          <details id="demo-evidence-details" class="evidence-details"><summary>展开本地数值依据 <span id="demo-evidence-count"></span></summary><div id="demo-evidence" class="evidence-list"></div></details>
-          <details class="limitations-details"><summary>样本范围与分析限制</summary><ul id="demo-limitations"></ul></details>
-        </section>
-
-        <section class="chat-panel panel" aria-labelledby="chat-title">
-          <div class="section-heading"><div><p class="eyebrow">02 · EXPLANATION</p><h2 id="chat-title">把数字讲清楚。</h2></div><span id="demo-answer-mode" class="mini-badge">本地规则说明</span></div>
-          <p class="panel-description">问题只读取当前帧。回答标注实际生成方式；播放下一帧后，之前的回答仍保留原始时点。</p>
-          <div id="demo-messages" class="messages" role="log" aria-label="演示问答记录" aria-live="polite" aria-relevant="additions"></div>
-          <form id="demo-chat-form">
+        <section id="demo-chat-panel" class="chat-panel panel" aria-labelledby="chat-title">
+          <div class="section-heading"><div><p class="eyebrow">03 · UNDERSTAND THE UNDERLYING</p><h2 id="chat-title">理解标的的波动与风险。</h2></div><span id="demo-answer-mode" class="mini-badge">本地规则说明</span></div>
+          <p class="panel-description">助手解释价格中反映的波动含义与相对定价，同时说明缺少哪些背景；本页不生成交易信号。</p>
+          <div id="demo-messages" class="messages" role="log" aria-label="分析问答记录" aria-live="polite" aria-relevant="additions"></div>
+          <details id="demo-followup" class="optional-followup"><summary>继续了解（可选）</summary><p>本次解读已完成；需要进一步了解时，再主动发送问题。</p><form id="demo-chat-form">
             <fieldset id="demo-chat-fields" disabled>
-              <legend class="sr-only">针对当前帧继续提问</legend>
-              <label for="demo-question">针对当前帧追问</label>
+              <legend class="sr-only">针对当前批次继续提问</legend>
+              <label for="demo-question">你想进一步了解什么？</label>
               <div id="demo-presets" class="presets" aria-label="建议问题"></div>
-              <textarea id="demo-question" rows="3" maxlength="1000" placeholder="例如：看跌成交更多，是否就代表市场会下跌？"></textarea>
+              <textarea id="demo-question" rows="3" maxlength="1000" placeholder="例如：隐含波动率代表什么，能说明标的的哪些风险？"></textarea>
               <div class="chat-actions"><button id="demo-ask-local" class="button secondary" type="submit">本地解释这个问题</button><span id="demo-submit-note">不会请求模型</span></div>
-              <div class="cloud-action"><p id="demo-cloud-notice">回答引擎在页面上方切换。选择 DeepSeek 后，发送会把当前合成样本摘要与问题交给真实模型，可能产生 API 费用；不重新采集行情。</p></div>
+              <details class="cloud-action"><summary>回答方式与数据使用</summary><p id="demo-cloud-notice">在「回答设置」中选择引擎。DeepSeek 会读取当前合成样本与问题，可能产生 API 费用；追问不会重新采集行情。</p></details>
             </fieldset>
-          </form>
+          </form></details>
         </section>
       </div>
+
+      <details id="demo-analysis-details" class="analysis-details"><summary><span>查看分析依据</span><small>汇总指标 · 数据时间 · 分析范围</small></summary><div class="analysis-details-body">
+        <section class="batch-controls" aria-label="可选批次比较"><div><strong>批次比较（可选）</strong><p>读取另一批相同范围的合成样本，使用当前引擎重新解释变化。</p></div><button id="demo-next" type="button" class="button secondary" disabled>读取下一批 <span aria-hidden="true">→</span></button></section>
+        <section class="snapshot-strip" aria-label="样本时间与范围"><div class="snapshot-title"><strong>当前样本范围</strong><span id="demo-expiry"></span></div><dl class="snapshot-times"><div><dt>样本时点（UTC）</dt><dd id="demo-recorded-at">—</dd></div><div><dt>本次处理时间（北京时间）</dt><dd id="demo-processed-at">—</dd></div></dl></section>
+        <section class="metrics-section" aria-label="当前样本的本地计算结果"><div id="demo-metrics" class="metric-grid"></div><p class="metric-footnote">指标只描述所选样本的风险定价；隐含波动率不是已实现波动率，跨式中价也不是发生概率。</p></section>
+        <section id="demo-changes-section" class="changes-panel" aria-labelledby="changes-title" hidden><div class="section-heading"><div><p class="eyebrow">SAME CONTRACTS · BATCH COMPARISON</p><h2 id="changes-title">前后变化对比</h2></div><span class="mini-badge">同标的 / 同到期 / 同合约</span></div><div id="demo-changes" class="change-grid"></div><p class="small-note">仅比较相同范围的合成样本，不能据此判断真实市场走势或因果关系；缺失报价保持缺失。</p></section>
+        <section class="data-panel" aria-labelledby="data-title"><div class="section-heading"><h2 id="data-title">汇总依据与分析范围</h2><span class="mini-badge">合成数据</span></div><p class="panel-description">分析仅适用于当前选定样本；未返回的字段保持缺失。</p><details id="demo-evidence-details" class="evidence-details"><summary>展开本地数值依据 <span id="demo-evidence-count"></span></summary><div id="demo-evidence" class="evidence-list"></div></details><details class="limitations-details"><summary>样本范围与分析限制</summary><ul id="demo-limitations"></ul></details></section>
+      </div></details>
     </div>
-    <aside class="real-path"><div><strong>演示回放，与真实网关链路。</strong><p>本页复用期权指标计算逻辑，输入来自固定合成样本。一键启动的独立演示服务禁用 IBKR；真实采集请在原来已配置网关的服务中打开（通常为 8000 端口）。数据是否实时取决于实际返回的行情类型与权限。</p></div><a href="http://127.0.0.1:8000/workspace?view=options" target="_blank" rel="noopener">打开原服务 · 8000 ↗</a></aside>
+    <aside class="real-path"><div><strong>数据来源与网关接入</strong><p>当前使用固定合成样本，未启用 IBKR 采集。网关采集请在已配置的服务中打开（通常为 8000 端口）；行情类型与可用字段以实际返回结果为准。</p></div><a href="http://127.0.0.1:8000/workspace?view=options" target="_blank" rel="noopener">打开网关分析 · 8000 ↗</a></aside>
   </main>
-  <footer class="page-footer shell"><span>FINPILOT · OPTIONS DATA DEMO</span><p>课程教学演示。样例数据不能用于当前市场判断，分析不构成交易建议。</p><a href="/demo">历史资料演示 ↗</a></footer>
+  <footer class="page-footer shell"><span>FINPILOT · OPTIONS ANALYSIS</span><p>合成样本不能用于当前市场判断，分析不构成交易建议。</p><a href="/demo">历史资料分析 ↗</a></footer>
 </body>
 </html>

@@ -80,6 +80,24 @@ def test_default_local_replay_never_calls_network_or_gateway(monkeypatch):
     assert provider.calls == 0
 
 
+def test_default_interpretation_leads_with_volatility_and_keeps_market_boundaries():
+    result = asyncio.run(run_demo(DemoRequest(), settings(), NoProvider()))
+    answer = result["answer"]
+    assert answer["text"].startswith("隐含波动率")
+    assert "风险溢价" in answer["text"]
+    assert "没有从报价重新反推" in answer["text"]
+    assert "下行侧的波动率定价相对更高" in answer["text"]
+    assert "不能判断整体波动率是否异常高低" in answer["text"]
+    assert "不能推出全市场宏观结论" in answer["text"]
+    assert "平值跨式" in answer["text"] and "发生概率或保证的未来波动区间" in answer["text"]
+    assert "put_call_volume" not in answer["evidence_ids"]
+    principles = {item["id"]: item for item in result["evidence"] if item["id"].startswith("knowledge.")}
+    assert set(principles) == {"knowledge.iv_definition", "knowledge.skew_limits", "knowledge.straddle_limits"}
+    assert all(item["source_kind"] == "interpretation_reference" for item in principles.values())
+    assert all(item["source_url"].startswith("https://") for item in principles.values())
+    assert set(principles) <= set(answer["evidence_ids"])
+
+
 @pytest.mark.parametrize(("frame", "puts", "calls", "ratio", "iv", "atm", "coverage"), [
     (0, 1200, 800, 1.5, 8, 4.8, 100),
     (1, 2000, 1000, 2, 12, 5.4, 83.3333),
@@ -109,6 +127,52 @@ def test_missing_quotes_stay_null_and_do_not_become_zero_or_last_price():
     assert row["volume"] == 350
     assert result["quality"]["valid_quote_contracts"] == 5
     assert metric(result, "volume_put") == 2000
+
+
+def test_default_overview_distinguishes_no_activity_from_missing_volume(monkeypatch):
+    from app import options_demo
+
+    original = options_demo.replay_snapshot
+    volume = 0
+
+    def changed_snapshot(frame):
+        snapshot = original(frame)
+        for row in snapshot["quotes"]:
+            row.update(volume=volume, bid=None, ask=None)
+        return snapshot
+
+    monkeypatch.setattr(options_demo, "replay_snapshot", changed_snapshot)
+    zero = asyncio.run(run_demo(DemoRequest(question="请分析这批样本的成交结构"), settings(), NoProvider()))
+    assert "未观察到看涨或看跌成交活动" in zero["answer"]["text"]
+    assert "未返回有效双边报价" in zero["answer"]["text"]
+    assert metric(zero, "volume_put") == metric(zero, "volume_call") == 0
+
+    volume = None
+    missing = asyncio.run(run_demo(DemoRequest(question="请分析这批样本的成交结构"), settings(), NoProvider()))
+    assert "成交量字段不完整" in missing["answer"]["text"]
+    assert "未观察到看涨或看跌成交活动" not in missing["answer"]["text"]
+    assert metric(missing, "volume_put") is None
+    assert missing["answer"]["mode"] == "local"
+
+
+def test_volatility_interpretation_does_not_replace_missing_pricing_with_zero(monkeypatch):
+    from app import options_demo
+
+    original = options_demo.replay_snapshot
+
+    def missing_pricing(frame):
+        snapshot = original(frame)
+        for row in snapshot["quotes"]:
+            row.update(implied_volatility=None, bid=None, ask=None)
+        return snapshot
+
+    monkeypatch.setattr(options_demo, "replay_snapshot", missing_pricing)
+    result = asyncio.run(run_demo(DemoRequest(), settings(), NoProvider()))
+    assert metric(result, "iv_skew_25_delta") is None
+    assert metric(result, "atm_straddle") is None
+    assert "缺少可比的两翼隐含波动率" in result["answer"]["text"]
+    assert "没有足够的有效输入计算平值跨式成本" in result["answer"]["text"]
+    assert "下行侧的波动率定价相对更高" not in result["answer"]["text"]
 
 
 def test_replay_uses_teaching_clock_without_rewriting_old_dates():
@@ -153,8 +217,11 @@ def test_request_cannot_turn_replay_into_an_unbounded_gateway_request(body):
 @pytest.mark.parametrize(("question", "frame", "fragment"), [
     ("看跌成交更多，能说明多数人在看空吗？", 0, "份数不是人数"),
     ("缺少报价会怎样影响分析？", 1, "保留为空"),
-    ("哪些变化可以比较？", 0, "当前只有起始帧"),
-    ("请帮我规划出国旅行", 0, "本地演示只支持"),
+    ("哪些变化可以比较？", 0, "当前只有起始批次"),
+    ("请帮我规划出国旅行", 0, "本地规则支持"),
+    ("隐含波动率能直接说明股价会涨还是跌吗？", 0, "隐含波动率通常"),
+    ("平值跨式成本是未来价格波动的概率吗？", 0, "不是年化波动率、发生概率"),
+    ("这部分期权数据不能说明哪些市场背景？", 0, "不能代表整个市场或宏观经济状态"),
 ])
 def test_local_answer_limits_and_topics_are_visible(question, frame, fragment):
     result = asyncio.run(run_demo(DemoRequest(question=question, frame=frame), settings(), NoProvider()))
@@ -170,10 +237,10 @@ def test_explicit_cloud_without_configuration_is_visible_local_fallback():
 
 
 VALID_ANSWER = {"response": [
-    {"text": "合成教学样本中的成交活动偏向看跌合约；这描述的是所选范围的份数，不能换算为看空人数。",
-     "evidence_ids": ["scope", "put_call_volume"]},
-    {"text": "样本两翼的相对定价存在差异；它不能用于预测未来价格方向。",
-     "evidence_ids": ["iv_skew_25_delta"]},
+    {"text": "隐含波动率描述期权价格中的波动幅度定价，不给出涨跌方向；这里使用合成模型输入。",
+     "evidence_ids": ["scope", "knowledge.iv_definition"]},
+    {"text": "所选两翼的相对波动率定价存在差异；局部样本无法确定整体市场原因。",
+     "evidence_ids": ["iv_skew_25_delta", "knowledge.skew_limits"]},
 ]}
 
 
@@ -192,6 +259,11 @@ def test_explicit_cloud_receives_partial_raw_data_and_returns_auditable_mode():
     assert supplied["previous_frame_comparison"][0]["before"] == 1.5
     assert supplied["previous_frame_comparison"][0]["after"] == 2
     assert supplied["current_partial_raw_sample"]["quotes"][-1]["bid"] is None
+    principles = {item["id"]: item for item in supplied["current_evidence"] if item["id"].startswith("knowledge.")}
+    assert "knowledge.iv_definition" in principles
+    assert "risk pricing" in call["messages"][0]["content"]
+    assert "did NOT solve IV" in call["messages"][0]["content"]
+    assert principles["knowledge.iv_definition"]["supporting_url"].startswith("https://www.bis.org/")
     assert "api_key" not in json.dumps(supplied)
 
 

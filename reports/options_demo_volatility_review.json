@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "status": "limited_manual_review",
+  "reviewed_date": "2026-11-16",
+  "source_report": "reports/options_demo_live_20261116T131603Z.json",
+  "scope": "Independent reading of one saved default volatility-analysis answer, its original paragraph citations, the supplied raw synthetic sample and interpretation principles.",
+  "actual_model_requests": 1,
+  "reviewed_responses": 1,
+  "gateway_requests": 0,
+  "overall_finding": "No material unsupported volatility claim, invented market event, trading signal or macro-causal conclusion identified in this saved response. This is a limited review, not general financial-accuracy certification.",
+  "raw_input_checks": {
+    "selected_put_wing": {"strike": 95, "delta": -0.25, "implied_volatility": 0.32},
+    "selected_call_wing": {"strike": 105, "delta": 0.25, "implied_volatility": 0.24},
+    "put_minus_call_iv_percentage_points": 8,
+    "atm_strike": 100,
+    "atm_call_midpoint": 2.5,
+    "atm_put_midpoint": 2.3,
+    "atm_straddle_midpoint": 4.8,
+    "underlying_reference_price": 100,
+    "atm_midpoint_percent_of_reference": 4.8,
+    "valid_two_sided_quotes": 6,
+    "requested_contracts": 6,
+    "method": "Recomputed selected-wing IV difference, bid/ask midpoints and quote count directly from saved raw rows; no model-generated figures were used as calculation inputs."
+  },
+  "paragraph_review": [
+    {
+      "paragraph": 1,
+      "original_evidence_ids": ["scope", "knowledge.iv_definition"],
+      "finding": "Supported in the supplied context. IV is described as an annualized price-implied pricing parameter containing expectation and risk-pricing factors. The answer distinguishes it from realized historical volatility, an actual future probability and price direction. It correctly says this sample's IV was supplied as synthetic input rather than recalibrated from its quotes.",
+      "causation_check": "The paragraph does not claim options caused the underlying's realized volatility."
+    },
+    {
+      "paragraph": 2,
+      "original_evidence_ids": ["iv_skew_25_delta", "atm_straddle", "knowledge.skew_limits", "knowledge.straddle_limits"],
+      "finding": "The selected put-wing IV exceeds the selected call-wing IV in the raw sample. The relative downside volatility-pricing description is consistent with that sign; it is not a claim that raw put premiums are generally higher. The same-expiry ATM call and put midpoint sum is correctly treated as an option-pricing cost clue, not annualized volatility, a probability or a guaranteed future price range.",
+      "citation_check": "Both local measurements and the relevant interpretation principles are cited in this paragraph."
+    },
+    {
+      "paragraph": 3,
+      "original_evidence_ids": ["scope", "quote_coverage", "knowledge.skew_limits"],
+      "finding": "Appropriately declines to infer hedging demand, panic, an event cause, a historical high/low IV level, price direction or trade advice. The supplied current payload contains no historical benchmark, news, macro series or order-flow evidence; the answer does not invent those inputs or turn this partial synthetic sample into a whole-market macro diagnosis.",
+      "citation_note": "scope and knowledge.skew_limits support the scope and interpretation limits. quote_coverage is tangential to the claimed absence of historical/news/macro/order-flow inputs; quote coverage alone cannot establish that absence. The saved payload itself confirms those inputs were not provided."
+    }
+  ],
+  "source_principles_reviewed": ["knowledge.iv_definition", "knowledge.skew_limits", "knowledge.straddle_limits"],
+  "provenance_check": "The saved answer is marked deepseek, model_called is true, gateway_connected is false and source_kind remains synthetic_replay. The prose itself also preserves synthetic provenance.",
+  "limits": [
+    "Only this saved response and its original paragraph reference lists were reviewed; no prediction or accuracy rate was measured.",
+    "The reference text was compared as supplied in the model payload. This review does not independently re-certify every referenced webpage.",
+    "Given IV fields were not inverted from the option quotes; no arbitrage consistency, market calibration or real-world pricing accuracy is certified.",
+    "Valid references and format checks do not establish complete semantic correctness for later responses.",
+    "No real IBKR connection, real-time market-data availability or market macro claim was validated."
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "status": "failed",
+  "checked_at": "20261116T131626Z",
+  "scope": "Actual create_app + private offline settings + real Edge viewports; no real model or gateway",
+  "viewports": [],
+  "error": "Locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\".message-pair[data-frame=\\\"0\\\"]\").first.locator(\".answer-evidence button\").filter(has_text=\"样本看跌 / 看涨成交量\")\n"
+}

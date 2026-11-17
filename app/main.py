@@ -227,7 +227,12 @@ def create_app(settings: Settings | None = None, *, options_provider=None, histo
         response.headers["X-Frame-Options"] = "DENY"
         response.headers["Referrer-Policy"] = "no-referrer"
         response.headers["Content-Security-Policy"] = "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'"
-        if request.url.path.startswith("/api/"):
+        # HTML and these unversioned client assets must be fetched again after
+        # local updates; an older document can retain obsolete navigation links.
+        fresh_client = request.url.path in {
+            "/static/options-demo.js", "/static/options-demo.css", "/static/app.js",
+        }
+        if request.url.path.startswith("/api/") or fresh_client or response.headers.get("content-type", "").startswith("text/html"):
             response.headers["Cache-Control"] = "no-store"
         return response
 

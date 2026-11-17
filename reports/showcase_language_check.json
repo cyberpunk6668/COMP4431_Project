@@ -1,7 +1,7 @@
 {
   "status": "passed",
-  "checked_at": "2026-11-15T09:32:40.888019+00:00",
-  "base": "http://127.0.0.1:8000",
+  "checked_at": "2026-11-16T13:49:31.171577+00:00",
+  "base": "http://127.0.0.1:8018",
   "browser": "Microsoft Edge, headless",
   "checks": [
     "entire_homepage_navigation_metadata_and_accessible_labels_are_english",
@@ -96,14 +96,14 @@
   "chat_requests": [],
   "external_requests": [],
   "total": 13,
-  "duration_seconds": 10.01,
+  "duration_seconds": 9.84,
   "sha256": {
-    "frontend/src/App.tsx": "4d10361dd0aa35569f243c6d8c153d3ad18d03798c40b0d405e30be0c531b907",
+    "frontend/src/App.tsx": "0aac5dc20413cab65b50fa2e5bfb9370fce8d304cfaebf80d459fd57ad9d1f5d",
     "frontend/src/i18n.tsx": "12c8c22ce5fab83508e9281e3ca6ce7fc6499aa19af4ea406b8e4f4fbcfa7665",
     "frontend/src/styles.css": "84079180ce5e5dd6aaeec62e38a839b9f08568c0ff81755ac5dd08fc22768558",
-    "frontend/src/components/Hero.tsx": "48c82e1ad379e78f0d960b33b42fff90bff558265344883ab6685cde8d8e1ee8",
+    "frontend/src/components/Hero.tsx": "9447356d2978b3758d35096e38fc5f597022f000f524a1234345c67aa0b081b8",
     "frontend/src/components/hero.css": "f7bdd46b2a515cb2855a5b986f5220b4dd59728ae1ba5457b3852f8a5f1d4184",
-    "web/showcase/index.html": "c1c1c21ba429d616703a5604cf4072e45ebb5333da3148f32da88a5fc3dd2386"
+    "web/showcase/index.html": "c256355df0d47d84165d5794beaf2a4aa62af4fb71848e77c5298d221affde7b"
   },
   "screenshots": [
     "reports/screenshots/showcase-language/home-en-desktop.png",

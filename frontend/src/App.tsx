@@ -164,7 +164,8 @@ function Closing() {
         <nav aria-label={t("页脚导航", "Footer navigation")}>
           <a href="/workspace">{t("知识工作台", "Knowledge workspace")}</a>
           <a href="/workspace?tool=compound">{t("财务计算器", "Financial calculator")}</a>
-          <a href="/learn">{t("期权互动演示", "Interactive options demo")}</a>
+          <a href="/options-demo">{t("期权风险解读", "Options analysis")}</a>
+          <a href="/learn">{t("期权互动学习", "Options lab")}</a>
           <a href="/help">{t("使用指南", "User guide")}</a>
           <a href="/demo">{t("历史证据演示", "Historical evidence demo")}</a>
           <a href="/docs">{t("API 文档", "API documentation")}</a>

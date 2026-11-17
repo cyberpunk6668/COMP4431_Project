@@ -10,7 +10,7 @@ const navigation = [
   { label: '学习路径', en: 'Learning path', href: '#experience' },
   { label: '知识来源', en: 'Sources', href: '#evidence' },
   { label: '财务计算', en: 'Calculators', href: '#planning' },
-  { label: '期权互动演示', en: 'Options demo', href: '/learn' },
+  { label: '期权风险解读', en: 'Options analysis', href: '/options-demo' },
   { label: '模型与教练', en: 'Models & coach', href: '#intelligence' },
 ];
 
@@ -206,9 +206,9 @@ export default function Hero({ paused, reduced, toggle }: { paused: boolean; red
       <h1 id="hero-heading" className="hero-title" data-hero-enter="heading" tabIndex={-1}>
         {language === 'zh' ? <><span className="hero-title-line">把<span className="gold-text">金融</span></span><span className="hero-title-line">看得更清楚</span></> : <><span className="hero-title-line">See <span className="gold-text">finance</span></span>{' '}<span className="hero-title-line">more clearly</span></>}
       </h1>
-      <p className="hero-description" data-hero-enter="description">{t('先用一份合成期权情景看懂市场线索，再改变价格、比较到期盈亏，带着依据继续追问。', 'Explore a synthetic options scenario, change the price and compare payoffs at expiry. Follow the evidence and keep asking.')}</p>
+      <p className="hero-description" data-hero-enter="description">{t('从期权合成样本理解波动与风险定价，查看带依据的分析解释，也可进入工作台使用金融问答与财务计算。', 'Read a synthetic options sample for an evidence-based explanation of volatility and risk pricing. Explore financial questions and calculations in the workspace.')}</p>
       <div className="hero-actions" data-hero-enter="actions">
-        <a className="button button-gold" href="/learn">{t('体验期权演示', 'Try the options demo')} <ArrowRight size={18} /></a>
+        <a className="button button-gold" href="/options-demo" data-testid="hero-options-analysis">{t('开始期权分析', 'Analyze options')} <ArrowRight size={18} /></a>
         <a className="button button-ghost" href="/workspace">{t('打开完整工作台', 'Open the workspace')}</a>
       </div>
     </div>

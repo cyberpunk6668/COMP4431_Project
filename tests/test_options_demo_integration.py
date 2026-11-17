@@ -57,3 +57,20 @@ def test_replay_respects_app_cross_origin_security_and_input_limits(tmp_path):
         # A page reload or catalogue read must never start analysis automatically.
         for asset in ("options-demo.js", "options-demo.css"):
             assert client.get(f"/static/{asset}").status_code == 200
+
+
+def test_analysis_and_learning_are_distinct_routes_and_refresh_local_client(tmp_path):
+    with make_client(tmp_path) as client:
+        analysis, learning = client.get("/options-demo"), client.get("/learn")
+        assert 'id="demo-start"' in analysis.text and 'id="lab-scenarios"' not in analysis.text
+        assert 'id="lab-scenarios"' in learning.text and 'id="demo-start"' not in learning.text
+        for response in (analysis, learning, client.get("/"), client.get("/workspace")):
+            assert response.headers["cache-control"] == "no-store"
+        for name in ("options-demo.js", "options-demo.css", "app.js"):
+            asset = client.get(f"/static/{name}?v=20261116-entry-fix")
+            assert asset.status_code == 200
+            assert asset.headers["cache-control"] == "no-store"
+        workspace = client.get("/workspace").text
+        assert 'id="starter-options-analysis" href="/options-demo"' in workspace
+        assert 'id="nav-options-insights" href="/options-demo"' in workspace
+        assert 'id="nav-learn" href="/learn"' in workspace

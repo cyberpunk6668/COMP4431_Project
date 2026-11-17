@@ -267,7 +267,8 @@ def main() -> int:
             checks.append("homepage_updates_when_another_tab_changes_language")
 
             at_top(page)
-            page.locator('.hero-actions a[href="/learn"]').click()
+            # Learning is a separate footer entry; the main CTA opens analysis.
+            page.locator('a[href="/learn"]').first.click()
             expect(page.locator("html")).to_have_attribute("lang", "en")
             expect(page.locator("#lab-language")).to_be_enabled(timeout=20000)
             page.locator("#lab-language").click()

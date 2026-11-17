@@ -1,4 +1,4 @@
-"""Local preflight by default; --live makes exactly two explicit model requests."""
+"""Local preflight by default; --live uses one request per selected sample."""
 import argparse
 import asyncio
 from datetime import datetime, timezone
@@ -26,7 +26,7 @@ class Trace:
         return record["raw_answer"]
 
 
-async def main(live):
+async def main(live, frame=None):
     config = Settings()
     stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     report = {"checked_at": stamp, "mode": "live" if live else "preflight",
@@ -35,9 +35,11 @@ async def main(live):
         report.update(status="skipped", reason="Model is not configured or offline mode is enabled")
     else:
         trace = Trace(DeepSeek(config))
-        for frame, question in ((0, QUESTIONS[0]), (1, QUESTIONS[2])):
-            result = await run_demo(DemoRequest(frame=frame, engine="deepseek" if live else "local",
-                                               question=question), config, trace)
+        cases = (0, 1) if frame is None else (frame,)
+        for sample_frame in cases:
+            # Each sample is independent: one question and one answer, no history.
+            result = await run_demo(DemoRequest(frame=sample_frame, engine="deepseek" if live else "local",
+                                               question=QUESTIONS[0]), config, trace)
             report["results"].append(result)
             if live and result["answer"]["mode"] != "deepseek":
                 report["status"] = "failed"
@@ -52,6 +54,7 @@ async def main(live):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--live", action="store_true", help="Send two billable requests to the configured model")
+    parser.add_argument("--live", action="store_true", help="Send one billable request per selected sample")
+    parser.add_argument("--frame", type=int, choices=(0, 1), help="Check only this sample, with one question and one answer")
     arguments = parser.parse_args()
-    raise SystemExit(asyncio.run(main(arguments.live)))
+    raise SystemExit(asyncio.run(main(arguments.live, arguments.frame)))

@@ -11,7 +11,10 @@ APPLICATION_VERSION = "17.0.0"
 NATIVE_HOST_VERSION = "15.0.0"
 OUTPUT = ROOT / "dist" / "FinPilot_submission_v17.zip"
 DIRECTORIES = ["app", "web", "frontend", "data", "tests", "evaluation", "scripts", "docs", "finetuning", "models/finpilot-lora", "output/pdf", "reports"]
-FILES = ["README.md", ".env.example", ".gitignore", "requirements.txt", "requirements-dev.txt", "requirements-ui-tests.txt", "requirements-ml.txt", "requirements-options.txt", "requirements-lock.txt", "start.ps1", "start-desktop.ps1", "pytest.ini", "COMP4431_GroupProject2027-1 (1).pdf"]
+# Runtime retrieval reads the reviewed JSON corpus. Raw third-party downloads
+# are local audit caches and can contain unreviewed scripts or token strings.
+RAW_CACHES = {"data/news_sources"}
+FILES = ["README.md", ".env.example", ".gitignore", "requirements.txt", "requirements-dev.txt", "requirements-ui-tests.txt", "requirements-ml.txt", "requirements-options.txt", "requirements-lock.txt", "start.ps1", "start-finpilot.bat", "start-desktop.ps1", "pytest.ini", "COMP4431_GroupProject2027-1.pdf"]
 # Keep the two project demo decks, without copying unrelated presentation drafts,
 # exports and intermediate renders from the shared output directory.
 FILES += ["output/presentations/FinPilot_Demo_EN.pptx", "output/presentations/FinPilot_Demo_EN_v2.pptx"]
@@ -19,8 +22,8 @@ FILES += ["start-options-demo.ps1", "start-options-demo.cmd"]
 DESKTOP_FILES = ["desktop/package.json", "desktop/package-lock.json", "desktop/main.cjs", "desktop/preload.cjs",
                  "desktop/geometry.cjs", "desktop/build.cjs", "desktop/README.md", "desktop/.gitignore", "desktop/tray.png"]
 PORTABLE = "desktop/artifacts/FinPilotPet-15.0.0-win-x64-portable.exe"
-PORTABLE_BYTES = 109966509
-PORTABLE_SHA256 = "64b4f47bc9d7522c9c62c6f3a63903a5fcca952865d84f92dcd5892cb92b80f0"
+PORTABLE_BYTES = 109961117
+PORTABLE_SHA256 = "fa2986cdc8c4955045830bd1b099b0453e279cffdf8142675c3c7225d64d4a1d"
 V16_REQUIRED_FILES = ["app/project_help.py", "app/project_help_chat.py", "data/project_help.json",
                       "web/help.html", "web/help.js", "web/help.css", "docs/project_help_v16.md",
                       "evaluation/project_help_cases_v16.json", "scripts/check_project_help_live_v16.py",
@@ -64,10 +67,10 @@ def scan_stream(stream, label):
 
 def collect_paths():
     """Only known project trees, known desktop source, and one reviewed binary."""
-    for item in [*V16_REQUIRED_FILES, *V17_REQUIRED_FILES]:
+    for item in [*FILES, *V16_REQUIRED_FILES, *V17_REQUIRED_FILES]:
         if not (ROOT / item).is_file():
             raise FileNotFoundError(f"Required project deliverable missing: {item}")
-    paths = [ROOT / item for item in FILES if (ROOT / item).is_file()]
+    paths = [ROOT / item for item in FILES]
     for item in DESKTOP_FILES:
         path = ROOT / item
         if not path.is_file():
@@ -79,6 +82,7 @@ def collect_paths():
             # Prune before descent, avoiding enumeration/copy of installed Node,
             # unpacked Electron, caches, VCS and symlink/junction targets.
             directories[:] = [name for name in directories if name not in EXCLUDED_DIRS
+                              and (Path(current) / name).relative_to(ROOT).as_posix() not in RAW_CACHES
                               and not (Path(current) / name).is_symlink()
                               and (Path(current) / name).resolve().is_relative_to(ROOT.resolve())]
             for name in filenames:
@@ -126,6 +130,7 @@ def package():
     result = {"file": OUTPUT.name, "files": len(set(paths)), "bytes": OUTPUT.stat().st_size,
               "application_version": APPLICATION_VERSION, "native_host_version": NATIVE_HOST_VERSION,
               "sha256": file_sha256(OUTPUT), "secrets_excluded": True, "local_database_excluded": True,
+              "raw_source_caches_excluded": sorted(RAW_CACHES),
               "stable_source_snapshot_verified": True, "source_manifest": source_manifest.name,
               "desktop_portable": {"version": NATIVE_HOST_VERSION, "path": PORTABLE, "bytes": PORTABLE_BYTES, "sha256": PORTABLE_SHA256},
               "desktop_source_explicit_allowlist": True, "installed_or_unpacked_desktop_dependencies_excluded": True,

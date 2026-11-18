@@ -1,0 +1,28 @@
+{
+  "status": "passed",
+  "checked_at": "2026-11-18T00:38:02.647623+00:00",
+  "scope": "Real Edge + private offline API + fault injection; no model or broker",
+  "cases": [
+    {
+      "mode": "denied",
+      "checks": [
+        "home_and_language_switch",
+        "workspace_theme_language_chat_persistence_and_new_session",
+        "learning_catalogue_trial_and_language_switch",
+        "reviewed_help_catalogue"
+      ],
+      "page_errors": []
+    },
+    {
+      "mode": "full",
+      "checks": [
+        "home_and_language_switch",
+        "workspace_theme_language_chat_persistence_and_new_session",
+        "learning_catalogue_trial_and_language_switch",
+        "reviewed_help_catalogue"
+      ],
+      "page_errors": []
+    }
+  ],
+  "forbidden_attempts": []
+}

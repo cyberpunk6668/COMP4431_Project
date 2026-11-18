@@ -1,0 +1,130 @@
+{
+  "checked_at": "2026-11-18T00:47:24.854516+00:00",
+  "status": "passed_with_explicit_limits",
+  "scope": "Current checkout, local offline backend and real Edge UI; rebuilds included. Existing user changes preserved; no real model or IBKR calls.",
+  "python": {
+    "tests": 1063,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "new_regression_cases": 24,
+    "dependency_deprecation_warnings": 1
+  },
+  "verification": {
+    "typescript_vite_build": "passed",
+    "desktop_node_tests": 4,
+    "desktop_asar_matches_source": true,
+    "ui_widths": [
+      320,
+      390,
+      1440
+    ],
+    "storage_failures_tested": [
+      "access_denied",
+      "quota_exceeded"
+    ],
+    "html_static_assets_missing": 0,
+    "pip_check": "passed",
+    "git_diff_check": "passed"
+  },
+  "fixed": [
+    {
+      "problem": "Malformed provider response could escape as an internal error",
+      "files": [
+        "app/llm.py",
+        "tests/test_llm.py"
+      ]
+    },
+    {
+      "problem": "Cancelled local generation could leak its pending reply into a later conversation",
+      "files": [
+        "app/local_llm.py",
+        "tests/test_local_llm.py"
+      ]
+    },
+    {
+      "problem": "Leading whitespace caused standalone calculator command parsing to fail",
+      "files": [
+        "app/finance.py",
+        "tests/test_finance.py"
+      ]
+    },
+    {
+      "problem": "Blocked or full browser storage broke pages or rolled back successful chat state",
+      "files": [
+        "web/storage.js",
+        "frontend/src/storage.ts",
+        "scripts/check_storage_resilience.py"
+      ]
+    },
+    {
+      "problem": "Negative-coordinate desktop regions expanded mouse interception beyond the visible region",
+      "files": [
+        "desktop/geometry.cjs",
+        "desktop/tests/geometry.test.cjs"
+      ]
+    },
+    {
+      "problem": "Malformed Origin headers triggered 500; cross-scheme origins were accepted",
+      "files": [
+        "app/main.py",
+        "tests/test_api_security.py"
+      ]
+    },
+    {
+      "problem": "Malformed successful options response overwrote the existing report/chat before rendering failed",
+      "files": [
+        "web/options-demo.js",
+        "scripts/check_options_demo_browser.py"
+      ]
+    },
+    {
+      "problem": "Submission silently omitted the renamed course PDF and main batch launcher; README named an old ZIP",
+      "files": [
+        "scripts/package_submission.py",
+        "tests/test_package_submission.py",
+        "README.md"
+      ]
+    },
+    {
+      "problem": "Main package included unreviewed raw HTML cache and failed its credential scanner; raw cache is now excluded while the reviewed runtime JSON remains included",
+      "files": [
+        "scripts/package_submission.py",
+        "tests/test_package_submission.py"
+      ],
+      "reproduced_packaging_failure": {
+        "code": "possible_credential_in_raw_cache",
+        "file": "data/news_sources/nvda-ceo-transition-20261112-1f0747f87b07.html",
+        "credential_value_printed": false,
+        "scanner_remains_enabled": true
+      }
+    },
+    {
+      "problem": "Manual source provenance had drifted from the shipped files; instructions were rechecked and reviewed hashes refreshed",
+      "files": [
+        "data/project_help.json",
+        "tests/test_manual_release.py"
+      ],
+      "isolated_workflow_preflight": "passed"
+    }
+  ],
+  "remaining_limits": [
+    "No mathematical guarantee of zero bugs; no guarantee of financial answer correctness.",
+    "Real DeepSeek connectivity, real IBKR permissions/data and real local-model inference were not rerun during this audit.",
+    "Native physical drag, tray, microphone/audio and multi-monitor behavior require manual hardware testing.",
+    "README team member names, student IDs and responsibilities still require real team information.",
+    "Existing older ZIPs and acceptance reports are historical; use the rebuilt main v17 submission and its new package check."
+  ],
+  "evidence": {
+    "python": "reports/tests_project_audit_20261118.xml",
+    "experience_ui": "reports/experience_ui_v17-20261118T003840502408Z.json",
+    "options_ui": "reports/options_demo_browser_20261118T003819Z.json",
+    "options_languages": "reports/options_demo_language_20261118T003841007005Z.json",
+    "storage_faults": "reports/storage_resilience_20261118T003802012664Z.json",
+    "desktop_build": "reports/desktop_build_bug_audit_20261118.json",
+    "launcher": "reports/launcher_audit_20261118.json",
+    "package_sources": "reports/package_sources_audit_20261118.json",
+    "retrieval": "reports/evaluation.json"
+  },
+  "package_verification": "See dist/package_check_v17.json after the main v17 package is rebuilt and independently extracted."
+}

@@ -11,6 +11,7 @@ $ErrorActionPreference = 'Stop'
 $projectRoot = [IO.Path]::GetFullPath($PSScriptRoot)
 $baseUrl = "http://127.0.0.1:$Port"
 $expectedScenario = 'options-gateway-replay-v1'
+$expectedContract = 'options-demo.v2'
 $runtimeDirectory = Join-Path $projectRoot 'tmp\options-demo'
 $logDirectory = Join-Path $projectRoot 'output\options-demo'
 $statePath = Join-Path $runtimeDirectory "server-$Port.json"
@@ -39,13 +40,65 @@ function Get-OwnedUvicornChildren($parentProcess) {
     })
 }
 
+function Get-BackendSignature {
+    # Static files are read on demand, but Python code remains in memory.
+    # A source update must restart an owned server even if its API is compatible.
+    $backendDirectory = Join-Path $projectRoot 'app'
+    $sources = @(Get-ChildItem -LiteralPath $backendDirectory -Filter '*.py' -File -Recurse | Sort-Object FullName)
+    $entries = @($sources | ForEach-Object {
+        $_.FullName.Substring($projectRoot.Length).Replace('\', '/') + ':' + (Get-FileHash -LiteralPath $_.FullName -Algorithm SHA256).Hash
+    })
+    $hasher = [Security.Cryptography.SHA256]::Create()
+    try {
+        return ([BitConverter]::ToString($hasher.ComputeHash([Text.Encoding]::UTF8.GetBytes(($entries -join "`n"))))).Replace('-', '').ToLowerInvariant()
+    } finally { $hasher.Dispose() }
+}
+
 function Test-ScenarioReady {
     try {
-        $metadata = Invoke-RestMethod -Uri "$baseUrl/api/options-demo/scenario" -TimeoutSec 1
-        return ($metadata.scenario.id -eq $expectedScenario -and
+        $metadata = Invoke-RestMethod -Uri "$baseUrl/api/options-demo/scenario?language=en" -TimeoutSec 1
+        return ($metadata.api_contract -eq $expectedContract -and
+                $metadata.language -eq 'en' -and
+                'en' -in $metadata.supported_languages -and
+                'zh' -in $metadata.supported_languages -and
+                $metadata.display_catalogue.frames.Count -eq 2 -and
+                $metadata.scenario.id -eq $expectedScenario -and
                 $metadata.source_kind -eq 'synthetic_replay' -and
                 $metadata.gateway_connected -eq $false)
     } catch { return $false }
+}
+
+function Stop-OwnedServer($owned) {
+    $verified = Read-OwnedServer
+    if (-not $verified -or $verified.Process.Id -ne $owned.Process.Id -or
+        $verified.Process.StartTime.ToUniversalTime().Ticks -ne $owned.Process.StartTime.ToUniversalTime().Ticks) {
+        throw 'The owned process changed. No process was stopped.'
+    }
+    foreach ($child in @(Get-OwnedUvicornChildren $owned.Process)) {
+        # A venv redirector and its exact uvicorn child belong to this launch.
+        $childProcess = Get-Process -Id $child.ProcessId -ErrorAction SilentlyContinue
+        if ($childProcess -and $childProcess.Path -eq $child.ExecutablePath -and
+            [Math]::Abs(($childProcess.StartTime.ToUniversalTime() - $child.CreationDate.ToUniversalTime()).TotalMilliseconds) -lt 1) {
+            $childTicks = $childProcess.StartTime.ToUniversalTime().Ticks
+            Stop-Process -Id $childProcess.Id -ErrorAction SilentlyContinue
+            $childProcess.WaitForExit(2000) | Out-Null
+            $remainingChild = Get-Process -Id $childProcess.Id -ErrorAction SilentlyContinue
+            if ($remainingChild -and $remainingChild.StartTime.ToUniversalTime().Ticks -eq $childTicks) {
+                throw 'Could not stop the owned uvicorn child. Its process record was retained.'
+            }
+        }
+    }
+    $remainingParent = Get-Process -Id $owned.Process.Id -ErrorAction SilentlyContinue
+    if ($remainingParent -and $remainingParent.StartTime.ToUniversalTime().Ticks -eq $owned.Process.StartTime.ToUniversalTime().Ticks) {
+        $parentTicks = $remainingParent.StartTime.ToUniversalTime().Ticks
+        Stop-Process -Id $remainingParent.Id -ErrorAction SilentlyContinue
+        $remainingParent.WaitForExit(2000) | Out-Null
+        $stillRunning = Get-Process -Id $remainingParent.Id -ErrorAction SilentlyContinue
+        if ($stillRunning -and $stillRunning.StartTime.ToUniversalTime().Ticks -eq $parentTicks) {
+            throw 'Could not stop the owned Python launcher. Its process record was retained.'
+        }
+    }
+    Remove-Item -LiteralPath $statePath -Force
 }
 
 # Serialize repeated double-clicks; this file is a local lock, not a process ID.
@@ -58,30 +111,7 @@ try {
     $owned = Read-OwnedServer
     if ($Stop) {
         if (-not $owned) { throw "No owned demo process was found for port $Port. No process was stopped." }
-        foreach ($child in @(Get-OwnedUvicornChildren $owned.Process)) {
-            # An exact parent relationship and uvicorn command identify only
-            # this launcher's server, never a broad process-name/port match.
-            $childProcess = Get-Process -Id $child.ProcessId -ErrorAction SilentlyContinue
-            if ($childProcess -and $childProcess.Path -eq $child.ExecutablePath -and
-                [Math]::Abs(($childProcess.StartTime.ToUniversalTime() - $child.CreationDate.ToUniversalTime()).TotalMilliseconds) -lt 1) {
-                Stop-Process -Id $childProcess.Id -ErrorAction SilentlyContinue
-                $childProcess.WaitForExit(2000) | Out-Null
-                $remainingChild = Get-Process -Id $childProcess.Id -ErrorAction SilentlyContinue
-                if ($remainingChild -and $remainingChild.StartTime.ToUniversalTime().Ticks -eq $childProcess.StartTime.ToUniversalTime().Ticks) {
-                    throw "Could not stop the owned uvicorn child. Its process record was retained."
-                }
-            }
-        }
-        $remainingParent = Get-Process -Id $owned.Process.Id -ErrorAction SilentlyContinue
-        if ($remainingParent -and $remainingParent.StartTime.ToUniversalTime().Ticks -eq $owned.Process.StartTime.ToUniversalTime().Ticks) {
-            Stop-Process -Id $remainingParent.Id -ErrorAction SilentlyContinue
-            $remainingParent.WaitForExit(2000) | Out-Null
-            $stillRunning = Get-Process -Id $remainingParent.Id -ErrorAction SilentlyContinue
-            if ($stillRunning -and $stillRunning.StartTime.ToUniversalTime().Ticks -eq $owned.Process.StartTime.ToUniversalTime().Ticks) {
-                throw "Could not stop the owned Python launcher. Its process record was retained."
-            }
-        }
-        Remove-Item -LiteralPath $statePath -Force
+        Stop-OwnedServer $owned
         Write-Host "Stopped this project's options-demo process on port $Port."
         return
     }
@@ -90,9 +120,13 @@ try {
         if ([bool]$owned.Record.offline -ne [bool]$Offline) {
             throw "The demo is already running with different -Offline settings. Run this script with -Port $Port -Stop, then launch again."
         }
-        if (-not (Test-ScenarioReady)) {
-            throw "The owned demo is not ready or uses an older build. Run this script with -Port $Port -Stop, then retry. Logs: $logDirectory"
+        if ($owned.Record.source_signature -ne (Get-BackendSignature) -or -not (Test-ScenarioReady)) {
+            Write-Host "Updating this project's outdated options service on port $Port."
+            Stop-OwnedServer $owned
+            $owned = $null
         }
+    }
+    if ($owned) {
         Write-Host "Reusing this project's existing options demo: $baseUrl/options-demo"
     } else {
         $listener = Get-NetTCPConnection -State Listen -LocalPort $Port -ErrorAction SilentlyContinue
@@ -111,6 +145,7 @@ try {
         $stamp = Get-Date -Format 'yyyyMMdd-HHmmss-fff'
         $stdoutPath = Join-Path $logDirectory "$stamp-$Port.stdout.log"
         $stderrPath = Join-Path $logDirectory "$stamp-$Port.stderr.log"
+        $sourceSignature = Get-BackendSignature
         # Child-only overrides: preserve the caller's environment and .env file.
         $environmentBefore = @{}
         foreach ($name in @('FINPILOT_DB', 'IBKR_ENABLED', 'FINPILOT_OFFLINE')) {
@@ -134,6 +169,7 @@ try {
             started_at = $serverProcess.StartTime.ToUniversalTime().ToString('o')
             started_at_ticks = $serverProcess.StartTime.ToUniversalTime().Ticks
             offline = [bool]$Offline
+            source_signature = $sourceSignature
             stdout = $stdoutPath
             stderr = $stderrPath
         }

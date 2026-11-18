@@ -68,3 +68,9 @@ def test_explicit_command():
     assert parse_calculation("What is compound interest?") is None
     with pytest.raises(ValueError):
         parse_calculation("loan principal=100 years=2 annual_rate=3 years=3")
+
+
+@pytest.mark.parametrize("prefix", ["  ", "\t", "\n "])
+def test_explicit_command_accepts_surrounding_whitespace(prefix):
+    request = parse_calculation(prefix + "loan principal=1200 annual_rate=0 years=1  ")
+    assert calculate(request)["values"]["monthly_payment"] == "100.00"

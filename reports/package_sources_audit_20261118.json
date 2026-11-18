@@ -1,0 +1,32 @@
+{
+  "checked_at": "2026-11-18T00:47:24.864238+00:00",
+  "status": "passed",
+  "scope": "Current submission source selection only; no ZIP generated and no payload credential scan performed.",
+  "application_version": "17.0.0",
+  "archive_name": "FinPilot_submission_v17.zip",
+  "selected_file_count": 1338,
+  "required_files": {
+    "start-finpilot.bat": true,
+    "start.ps1": true,
+    "start-desktop.ps1": true,
+    "start-options-demo.ps1": true,
+    "start-options-demo.cmd": true,
+    "COMP4431_GroupProject2027-1.pdf": true,
+    ".env.example": true,
+    "requirements.txt": true,
+    "app/main.py": true,
+    "web/options-demo.html": true,
+    "web/options-demo-i18n.js": true,
+    "desktop/main.cjs": true,
+    "web/showcase/index.html": true
+  },
+  "private_runtime_files_excluded": true,
+  "required_root_files_missing": [],
+  "desktop_reviewed_binary_hash_verified_by_collect_paths": true,
+  "archive_generated": false,
+  "desktop_binary_note": "Rebuilt portable verified against updated byte count and SHA-256; ASAR source equality is recorded in desktop_build_bug_audit_20261118.json.",
+  "desktop_rebuilt_binary_verified": true,
+  "raw_source_caches_excluded": [
+    "data/news_sources"
+  ]
+}

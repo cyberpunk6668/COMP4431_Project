@@ -36,3 +36,28 @@ def test_absolute_provider_deadline(monkeypatch):
     monkeypatch.setattr(httpx, "AsyncClient", SlowClient)
     with pytest.raises(ProviderError, match="network_or_timeout"):
         asyncio.run(DeepSeek(Settings(api_key="test-only", timeout=0.01)).complete([]))
+
+
+@pytest.mark.parametrize("payload", [
+    None, [], {"choices": None}, {"choices": []}, {"choices": {}},
+    {"choices": [None]}, {"choices": [[]]},
+    {"choices": [{"finish_reason": "stop", "message": None}]},
+    {"choices": [{"finish_reason": "stop", "message": []}]},
+])
+def test_malformed_success_payload_is_a_provider_error(monkeypatch, payload):
+    class Client:
+        def __init__(self, **kwargs):
+            pass
+
+        async def __aenter__(self):
+            return self
+
+        async def __aexit__(self, *args):
+            pass
+
+        async def post(self, *args, **kwargs):
+            return httpx.Response(200, json=payload)
+
+    monkeypatch.setattr(httpx, "AsyncClient", Client)
+    with pytest.raises(ProviderError, match="invalid_response"):
+        asyncio.run(DeepSeek(Settings(api_key="test-only")).complete([]))

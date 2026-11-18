@@ -16,6 +16,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from app.config import Settings
 from app.main import create_app
+from scripts.check_options_demo_language import assert_product_presentation, assert_simulated_record
 
 
 class NoGateway:
@@ -40,17 +41,22 @@ def check_view(browser, url, width, shots):
     expect(page.locator("#demo-engine")).to_be_enabled()
     expect(page.locator("#demo-engine")).to_have_value("local")
     expect(page.locator("#demo-start")).to_be_enabled()
+    assert_product_presentation(page, "zh")
     assert not runs
     checks.append("page_load_reads_scenario_only_no_analysis_or_cloud")
-    page.locator("#demo-start").click()
+    with page.expect_response(lambda response: response.url.endswith("/api/options-demo/run") and response.request.method == "POST") as first_response:
+        page.locator("#demo-start").click()
     expect(page.locator("#demo-result")).to_be_visible()
     expect(page.locator("#demo-quotes")).to_have_count(0)
     expect(page.locator('[data-metric="put_call_volume"] .metric-value')).to_contain_text("1.5")
     expect(page.locator('[data-metric="iv_skew_25_delta"]')).to_contain_text("百分点")
     expect(page.locator("#demo-messages .message-pair")).to_have_count(1)
     expect(page.locator("#demo-answer-mode")).to_contain_text("本地")
+    assert_simulated_record(first_response.value.json())
+    assert_product_presentation(page, "zh", has_result=True)
     assert runs[-1]["frame"] == 0 and runs[-1]["engine"] == "local"
     checks.append("one_click_actual_app_sample_calculation_rule_answer")
+    checks.append("result_style_copy_keeps_visible_simulated_source_and_honest_local_engine")
     expect(page.locator("#demo-overview")).to_be_visible()
     expect(page.locator("#demo-phenomena")).to_contain_text("波动")
     expect(page.locator('[data-phenomenon="iv_meaning"]')).to_have_count(1)
@@ -65,6 +71,7 @@ def check_view(browser, url, width, shots):
     page.locator("#demo-next").click()
     expect(page.locator("#demo-quality-note")).to_contain_text("缺")
     expect(page.locator("#demo-changes-section")).to_be_visible()
+    expect(page.locator("#demo-frame-label")).to_have_text("更新分析")
     expect(page.locator('[data-change="put_call_volume"]')).to_contain_text("2")
     expect(page.locator('[data-metric="iv_skew_25_delta"] .metric-value')).to_contain_text("12")
     expect(page.locator("#demo-quality-note")).to_contain_text("缺")
@@ -96,6 +103,22 @@ def check_view(browser, url, width, shots):
     expect(page.locator('[data-metric="iv_skew_25_delta"] .metric-value')).to_contain_text("12")
     expect(page.locator("#demo-start")).to_be_enabled()
     checks.append("failed_request_preserves_prior_frame_and_messages_allows_retry")
+    # A 200 response can still contain a broken nested field. Reject it before
+    # clearing conversation state, including when Analyze again was requested.
+    initial = context.request.post(url + "/api/options-demo/run", data={"frame": 0, "engine": "local"}).json()
+    for field, broken in (("metrics", [None]), ("evidence", [None]),
+                          ("changes", [None]), ("limitations", {}),
+                          ("snapshot", {"quotes": [None]}),
+                          ("answer", {"text": "Incomplete answer", "evidence_ids": {}})):
+        invalid = deepcopy(initial)
+        invalid[field] = broken
+        page.route("**/api/options-demo/run", lambda route, _request, payload=invalid: route.fulfill(json=payload), times=1)
+        page.locator("#demo-start").click()
+        expect(page.locator("#demo-error")).to_contain_text("分析数据不完整")
+        expect(page.locator("#demo-messages .message-pair")).to_have_count(4)
+        expect(page.locator('[data-metric="iv_skew_25_delta"] .metric-value')).to_contain_text("12")
+        expect(page.locator("#demo-start")).to_be_enabled()
+    checks.append("malformed_success_response_preserves_previous_result_and_conversation")
     page.locator("#demo-reset").click()
     expect(page.locator("#demo-result")).to_be_hidden()
     expect(page.locator("#demo-error")).to_be_hidden()
@@ -122,8 +145,9 @@ def check_model_controls(browser, url):
     metadata = context.request.get(url + "/api/options-demo/scenario").json()
     metadata.update(cloud_configured=True, configured_model="controlled-ui-provider")
     result = context.request.post(url + "/api/options-demo/run", data={"frame": 0, "engine": "local"}).json()
+    assert_simulated_record(result)
     page = context.new_page()
-    page.route("**/api/options-demo/scenario", lambda route: route.fulfill(json=metadata))
+    page.route("**/api/options-demo/scenario*", lambda route: route.fulfill(json=metadata))
     requests = []
 
     def model_response(route):
@@ -145,18 +169,24 @@ def check_model_controls(browser, url):
     assert not requests
     expect(page.locator("#demo-engine-notice")).to_contain_text("请求真实模型")
     page.locator("#demo-start").click()
-    expect(page.locator("#demo-answer-mode")).to_contain_text("DeepSeek")
+    expect(page.locator("#demo-answer-mode")).to_have_text("DeepSeek 实际生成")
+    expect(page.locator("#demo-status")).to_contain_text("已请求模型")
+    expect(page.locator(".answer-source-note")).to_contain_text("本次已发起模型请求")
+    expect(page.locator(".answer-source-note")).to_contain_text("未连接 IBKR")
     assert len(requests) == 1
     page.locator("#demo-followup > summary").click()
     page.locator("#demo-question").fill("解释当前样本")
     page.locator("#demo-ask-local").click()
     expect(page.locator("#demo-messages .message-pair")).to_have_count(2)
     expect(page.locator("#demo-messages .message-pair").last).to_contain_text("格式或引用检查")
-    expect(page.locator("#demo-answer-mode")).to_contain_text("本地")
+    expect(page.locator("#demo-answer-mode")).to_have_text("本地规则回退")
+    expect(page.locator("#demo-messages .message-pair").last.locator(".message-mode")).to_have_text("本地规则回退")
+    expect(page.locator("#demo-source-badge")).to_have_text("模拟数据 · 非实时行情")
     context.close()
     return {"status": "passed", "provider": "controlled UI fixtures, not real model inference",
             "checks": ["configured_engine_default_without_auto_call", "explicit_click_uses_selected_engine",
-                       "inflight_controls_locked", "model_success_and_validation_fallback_distinguished"],
+                       "inflight_controls_locked", "model_success_and_validation_fallback_distinguished",
+                       "result_copy_preserves_simulation_and_actual_attempt_vs_fallback_provenance"],
             "actual_model_requests": 0}
 
 
@@ -177,6 +207,7 @@ def check_entry_routes(browser, url, shots):
             expect(page).to_have_url(url + "/options-demo")
             expect(page.locator("#demo-start")).to_be_enabled()
             expect(page.locator("#lab-scenarios")).to_have_count(0)
+            assert_product_presentation(page, language)
 
         page.goto(url + "/")
         primary = page.get_by_test_id("hero-options-analysis")
@@ -210,7 +241,8 @@ def check_entry_routes(browser, url, shots):
         assert not server_errors, server_errors
         results.append({"width": width, "language": language, "status": "passed",
                         "checks": ["home_primary_analysis", "home_navigation_analysis", "learning_is_separate",
-                                   "workspace_primary_analysis", "workspace_sidebar_analysis", "options_dialog_analysis"],
+                                   "workspace_primary_analysis", "workspace_sidebar_analysis", "options_dialog_analysis",
+                                   "localized_visible_simulated_source_at_every_analysis_entry"],
                         "model_requests": 0, "gateway_requests": 0})
         context.close()
     return results

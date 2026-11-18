@@ -203,8 +203,12 @@ def create_app(settings: Settings | None = None, *, options_provider=None, histo
         if request.method in {"POST", "PUT", "PATCH", "DELETE"}:
             origin = request.headers.get("origin")
             if origin:
-                parsed = urlsplit(origin)
-                if parsed.scheme not in {"http", "https"} or parsed.netloc != request.url.netloc:
+                try:
+                    parsed = urlsplit(origin)
+                    same_origin = parsed.scheme == request.url.scheme and parsed.netloc == request.url.netloc
+                except ValueError:
+                    same_origin = False
+                if not same_origin:
                     return JSONResponse({"detail": "Cross-origin mutation blocked."}, status_code=403)
             if request.headers.get("sec-fetch-site") == "cross-site":
                 return JSONResponse({"detail": "Cross-site mutation blocked."}, status_code=403)
@@ -230,7 +234,7 @@ def create_app(settings: Settings | None = None, *, options_provider=None, histo
         # HTML and these unversioned client assets must be fetched again after
         # local updates; an older document can retain obsolete navigation links.
         fresh_client = request.url.path in {
-            "/static/options-demo.js", "/static/options-demo.css", "/static/app.js",
+            "/static/options-demo.js", "/static/options-demo.css", "/static/options-demo-i18n.js", "/static/app.js",
         }
         if request.url.path.startswith("/api/") or fresh_client or response.headers.get("content-type", "").startswith("text/html"):
             response.headers["Cache-Control"] = "no-store"

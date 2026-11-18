@@ -86,6 +86,12 @@ class LocalLoRA:
                     if result.get("finish_reason") != "stop" or not isinstance(content, str) or not content.strip():
                         raise ProviderError("local_model_unavailable")
                     return content.strip()
+            except asyncio.CancelledError:
+                # The worker uses ordered JSON lines with no request IDs. Once
+                # a sent request is cancelled, its pending response cannot be
+                # reused safely by another conversation.
+                await self.close()
+                raise
             except (TimeoutError, OSError, RuntimeError, ProviderError):
                 await self.close()
                 raise ProviderError("local_model_unavailable") from None

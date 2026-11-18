@@ -1,0 +1,7 @@
+{
+  "status": "failed",
+  "checked_at": "20261118T003725Z",
+  "scope": "Actual create_app + private offline settings + real Edge viewports; no real model or gateway",
+  "viewports": [],
+  "error": "Locator expected to contain text '分析数据不完整'\nActual value: Cannot read properties of null (reading 'id') \nCall log:\n  - Expect \"to_contain_text\" with timeout 5000ms\n  - waiting for locator(\"#demo-error\")\n    9 × locator resolved to <p role=\"alert\" id=\"demo-error\" class=\"request-error\">Cannot read properties of null (reading 'id')</p>\n      - unexpected value \"Cannot read properties of null (reading 'id')\"\n"
+}

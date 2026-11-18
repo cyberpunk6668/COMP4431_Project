@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "status": "limited_manual_review",
+  "reviewed_date": "2026-11-17",
+  "scope": "Independent reading of the saved English answer, its original paragraph citations, supplied synthetic rows and interpretation principles. No model calls or live market checks were performed for this review.",
+  "successful_report": "reports/options_demo_live_en_20261117T085243Z.json",
+  "preserved_failed_report": "reports/options_demo_live_en_20261117T085004Z.json",
+  "actual_model_requests_across_these_runs": 2,
+  "reviewed_successful_responses": 1,
+  "gateway_requests": 0,
+  "overall_finding": "The successful saved response is English and broadly grounded in the supplied volatility-pricing sample. No invented price, news event, market regime, buy/sell instruction or macro-causal conclusion was identified. A wing-matching phrase is ambiguous, and the final paragraph's missing_bbo reference does not support its claim about missing contextual datasets. This is a limited review, not a general financial-accuracy certification.",
+  "language_and_provenance": {
+    "requested_language": "en",
+    "answer_language": "en",
+    "contains_CJK_characters": false,
+    "answer_characters": 947,
+    "answer_words_by_whitespace": 141,
+    "mode": "deepseek",
+    "model_called": true,
+    "gateway_connected": false,
+    "source_kind": "synthetic_replay",
+    "finding": "The prose clearly states that the sample is synthetic, uses supplied IV inputs and is not live market data. The English notice does not mislabel local rules as model success."
+  },
+  "independent_raw_input_checks": {
+    "put_wing": {"strike": 95, "delta": -0.25, "implied_volatility": 0.32},
+    "call_wing": {"strike": 105, "delta": 0.25, "implied_volatility": 0.24},
+    "put_minus_call_IV_percentage_points": 8,
+    "ATM_strike": 100,
+    "ATM_call_midpoint": 2.5,
+    "ATM_put_midpoint": 2.3,
+    "ATM_straddle_midpoint": 4.8,
+    "valid_bid_ask_quote_contracts": 6,
+    "method": "Selected the actual 95-put and 105-call rows from the saved snapshot and recomputed the IV difference. Recomputed the 100-strike leg midpoints and their sum directly from bid/ask rows."
+  },
+  "paragraph_review": [
+    {
+      "paragraph": 1,
+      "original_evidence_ids": ["scope", "knowledge.iv_definition"],
+      "finding": "The annualized price-implied volatility explanation is consistent with the supplied principle. It distinguishes pricing from realized volatility, physical probability and direction, and preserves that these IV inputs are synthetic. It does not claim that options caused realized stock volatility."
+    },
+    {
+      "paragraph": 2,
+      "original_evidence_ids": ["iv_skew_25_delta", "atm_straddle", "knowledge.skew_limits", "knowledge.straddle_limits"],
+      "finding": "The positive selected put-minus-call IV difference and the ATM call-plus-put premium interpretation match the raw rows and cited principles. The response does not turn the straddle cost into a probability or guaranteed future range, or the skew into proof of fear, hedging demand or an event cause.",
+      "wording_issue": "The phrase matched-strike wings is ambiguous. The selected put and call are at different strikes, 95 and 105, with matched absolute delta and the same expiration. Delta-matched wings would be more precise. The referenced local evidence exposes those strike identities; this review does not treat the phrase as evidence that the legs share a strike."
+    },
+    {
+      "paragraph": 3,
+      "original_evidence_ids": ["scope", "missing_bbo"],
+      "finding": "The partial-sample limit is supported by scope. The saved request indeed contains no historical benchmark, news or order-flow datasets, so the contextual absence claim is factually consistent with the input.",
+      "citation_scope_issue": "missing_bbo measures missing bid/ask quotes, which are zero in this saved initial sample. It cannot establish that historical, news or order-flow data is absent. That claim is supported by inspecting the request and limitations payload, not by this reference. The citation weakness is preserved rather than counted as fully grounded paragraph-level attribution."
+    }
+  ],
+  "failed_run_accounting": {
+    "finding": "The initial English attempt remains a failed validation run with one actual provider request and a visible local fallback. The successful second run is a separate provider request, not a claim of first-attempt reliability. The failed raw answer included limitations as an evidence ID even though that is a payload field rather than an allowed evidence record."
+  },
+  "limits": [
+    "Only one successful saved output was reviewed. No general accuracy, forecasting performance or professional suitability rating was measured.",
+    "A correct response-language check and valid evidence IDs do not guarantee semantic correctness or citation relevance.",
+    "The saved answer contains the supported phrase one expiry; current quantitative wording checks are limited patterns, not a complete natural-language quantity verifier.",
+    "The supplied principles were read as provided. This review does not independently re-certify every external reference webpage.",
+    "Synthetic IV inputs were not calibrated from the quote rows. Arbitrage consistency and real-world pricing accuracy were not assessed.",
+    "No IBKR connection, real-time market availability or whole-market macro conclusion was validated."
+  ]
+}

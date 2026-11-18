@@ -1,0 +1,38 @@
+{
+  "start": {
+    "languages": [
+      "zh",
+      "en"
+    ],
+    "contract": "options-demo.v2",
+    "language": "en",
+    "pid": 104376,
+    "offline": true
+  },
+  "reuse": {
+    "same_start": true,
+    "same_pid": true
+  },
+  "stop": {
+    "no_state": true,
+    "no_listener": true
+  },
+  "stale_owned_replacement": {
+    "new_pid": 73136,
+    "contract": "options-demo.v2",
+    "old_process_stopped": true,
+    "old_pid": 109284,
+    "replaced": true
+  },
+  "foreign_port_refusal": {
+    "fixture_pid": 89944,
+    "message": "Port 8029 is occupied by a service that this launcher does not own. No process was stopped. Choose another -Port (for example 8019).",
+    "fixture_unchanged": true,
+    "no_state": true,
+    "refused": true
+  },
+  "final_cleanup": {
+    "no_state": true,
+    "no_listener": true
+  }
+}

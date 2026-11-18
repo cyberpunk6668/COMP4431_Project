@@ -1,0 +1,7 @@
+{
+  "status": "failed",
+  "checked_at": "20261118T003711Z",
+  "scope": "Actual create_app + private offline settings + real Edge viewports; no real model or gateway",
+  "viewports": [],
+  "error": "LocatorAssertions.to_contain_text: Object of type Request is not JSON serializable"
+}

@@ -1,8 +1,12 @@
 # 期权数据分析功能：标的波动与风险解读
 
-这个功能读取给定的期权样本，解释期权价格中的波动预期、两翼相对定价和平值期权成本，让一般投资者理解标的风险信息。主线是高层次的风险定价解读，不是买卖信号，也不把局部样本当成整个市场的宏观结论。默认界面不展示逐合约表格或合约可视化；汇总指标和数值依据放在「查看分析依据」中，需要时再展开。
+这个功能读取选定的期权数据，生成波动与风险分析结果，解释期权价格中的波动预期、两翼相对定价和平值期权成本，让一般投资者理解标的风险信息。主线是高层次的风险定价解读，不是买卖信号，也不把局部数据当成整个市场的宏观结论。默认界面不展示逐合约表格或合约可视化；汇总指标和数值依据放在「查看分析依据」中，需要时再展开。
 
 入口为 `/options-demo`，与既有 `/learn` 的盈亏试算和 `/demo` 的历史资料检索分开。页面加载不请求模型；点击「一键分析」或提问时按页面选定的模式运行。配置了可用 DeepSeek 时，可以让真实模型读取样本；没有密钥或选择本地模式时，提供明确标注的本地规则解读。
+
+页面右上角的 **EN / 中文** 切换界面语言，并与首页、工作台及学习页共用语言偏好；刷新页面后保留选择。默认问题、后续分析回答、本地降级说明、指标和依据随选择使用中文或英文。切换本身不请求模型；已有问题和回答保留生成时的原文并标注原始语言，数值依据的标签按当前界面语言显示。请求进行中语言按钮暂时禁用，其他标签页的语言变更在当前回答完成后应用。
+
+主展示使用「期权分析概览」及「AAPL · 波动与风险分析」等结果文案。回答直接说明分析发现与含义，不再以 “teaching sample” 开场或重复教学说明。顶部保留「模拟数据 · 非实时行情」简短来源标识，详细输入来源仍可核对；只有真实模型成功返回的回答才标为 DeepSeek 生成，本地规则和模型降级保持独立标识。
 
 **数据始终是预设的合成样本，网关行为始终是模拟回放。** AAPL 只是教学标识；报价、成交量、IV、持仓量和日期都不代表真实 AAPL 行情。本页不能证明 IBKR 已连接、账户有实时订阅，或模型正在分析当前市场。真实模型调用与真实市场数据是两回事。
 
@@ -16,8 +20,8 @@
 | --- | --- | --- | --- |
 | 0:00–0:25 | 暂时不点击，先介绍开发背景。 | 一般投资者理解期权信息的困难，以及 AI 的作用。 | “Options information can be hard for everyday investors to understand. Prices, volatility, and risk can seem confusing. We built this feature to help people use AI to turn that information into a simple picture of the stock’s risk.” |
 | 0:25–0:40 | 点击 **「一键分析 · DeepSeek」**，等待一次分析回答。 | 系统读取当前样本，解释价格中的风险信息。 | “With one click, the system reads the selected options data and explains the risk information priced into these options in simple words.” |
-| 0:40–1:15 | 指向**波动与风险概览**和 **AI 回答**；保持「查看分析依据」收起，不发送新问题。 | 波动率的含义、下行侧相对定价，以及不能推出的结论。 | “The AI explains implied volatility: how much movement is priced into options, not which way the stock will move. In this sample, downside options have higher implied volatility than upside options. This alone does not tell us why. Option costs give another pricing clue, not a promise of future moves.” |
-| 1:15–1:40 | 停留在当前回答，结束展示。 | 帮助理解信息，同时保留样本范围和结论边界。 | “The goal is a clearer view of the information, not a buy or sell signal. Users can understand what these prices may reflect, what the data cannot prove, and why that matters. This sample cannot explain the whole market or its causes.” |
+| 0:40–1:15 | 指向**波动与风险概览**和 **AI 回答**；保持「查看分析依据」收起，不发送新问题。 | 波动率的含义、下行侧相对定价，以及不能推出的结论。 | “The AI explains implied volatility: how much movement is priced into options, not which way the stock will move. Here, downside options have higher implied volatility than upside options. This alone does not tell us why. Option costs give another pricing clue, not a promise of future moves.” |
+| 1:15–1:40 | 停留在当前回答，结束展示。 | 帮助理解信息，同时保留数据范围和结论边界。 | “The goal is a clearer view of the information, not a buy or sell signal. Users can understand what these prices may reflect, what the data cannot prove, and why that matters. These inputs alone cannot explain the whole market or its causes.” |
 
 展示到这里结束，不追加第二轮问题。观众要求核对时，可在展示后展开「查看分析依据」，只查看与当前解读相关的汇总依据。
 
@@ -57,11 +61,13 @@ python -m venv .venv
 .\start-options-demo.cmd -Offline
 ```
 
-默认端口 8018 不占用原工作台的 8000。分析服务的数据库和进程记录保存在 `tmp/options-demo/`，日志保存在 `output/options-demo/`。独立进程禁用实际 IBKR 访问，不改变原服务的网关配置，也不读取原有用户会话。重复启动会核对服务身份和本启动器的进程记录后复用；关闭浏览器不会自动停止后端。
+默认端口 8018 不占用原工作台的 8000。分析服务的数据库和进程记录保存在 `tmp/options-demo/`，日志保存在 `output/options-demo/`。独立进程禁用实际 IBKR 访问，不改变原服务的网关配置，也不读取原有用户会话。重复启动会核对服务身份、后端源码、接口版本和中英文能力：兼容且源码未更新的服务直接复用；本启动器拥有的旧版本服务会自动重启；不停止其他程序。这样修改模型提示词后，也不会继续运行旧的内存代码。关闭浏览器不会自动停止后端。
+
+若旧服务收到新版页面的 `language` 参数，会返回 HTTP 422。页面现在会在启用分析前检查 `options-demo.v2` 接口及语言数据，发现旧版时显示明确的重启提示。双击最新 `start-options-demo.cmd` 可以更新其拥有的 8018 服务；若访问的是 `8000/options-demo`，则需重启原项目的 `start.ps1` 服务。两者是不同进程，只更新其中一个不会更新另一个。
 
 ## 2. 展示前的准备
 
-1. 启动页面，确认来源标记为「合成样本 · 非实时行情」，当前未连接 IBKR。
+1. 启动页面，确认顶部来源标记为「模拟数据 · 非实时行情」；连接情况可在「数据来源与网关接入」中核对。
 2. 选择本次要讲的模式：「DeepSeek · 真实模型请求」展示真实模型读取样本；「本地规则 · 离线稳定」用于稳定彩排。两者都使用同一份合成输入。
 3. 先完整试走一次「一键分析 → 查看波动与风险解读 → 结束」。正式展示只保留这一轮，不点击预设问题、发送或读取下一批，也不展开详细依据。开始前点击「清空分析」，清空当前分析记录；此操作重置页面，不改数据文件。
 4. 需要真实模型时，提前核验回答实际显示「DeepSeek 实际生成」。若显示「本地规则说明」或「本地回退说明」，只能按相应本地模式讲解。主流程的一次点击只触发一次分析请求，可能产生模型请求费用；不要把尚未执行的请求当作已成功。
@@ -212,6 +218,10 @@ POST /api/options-demo/run
 - [OIC：Understanding Volatility and Options Skew](https://www.optionseducation.org/news/april-webinar-key-takeaways-understanding-volatility-and-options-skew)：理解 IV 水平需要比较背景；两翼差异提供相对定价线索，不能单独证明某种投资者需求或情绪。
 
 ## 9. 验证与证据
+
+2026-11-17 已补齐本页的中英文语言链路：页面文案、无障碍属性、预设问题、请求语言、规则解释、降级说明和数值依据均支持中文／英文。**1025 项 Python 回归通过**，见[回归记录](../reports/tests_options_language_fix.xml)；桌面、390px、320px 三种宽度及请求中语言变更、跨标签与同标签返回同步共 [30 项浏览器检查通过](../reports/options_demo_language_20261117T085830150485Z.json)。已有回答原文和数值不会因切换而改写，切换不产生模型请求。
+
+英文真实模型累计两次请求：首次因为输出过长且引用了未提供的证据 ID 而降级，见[首次记录](../reports/options_demo_live_en_20261117T085004Z.json)；精简提示及明确允许的证据列表后，[单次英文分析通过](../reports/options_demo_live_en_20261117T085243Z.json)。[有限复核](../reports/options_demo_language_model_review.json)保留了措辞及引用相关性的局限，不认证一般金融准确率。当前用户页面已刷新并实际切换到英文，右上角「中文」按钮可以切回中文。
 
 2026-11-16 已修复旧首页与工作台把分析入口指向 `/learn` 的问题，补齐 Vite 的 `/options-demo` 代理并重建生产首页。HTML 和相关未哈希脚本不再复用旧缓存，当前已打开的浏览器标签页已主动刷新并看到「一键分析 · DeepSeek」。完整 Python 回归 **1013 项通过**，见[回归记录](../reports/tests_options_entry_fix.xml)；中英文、桌面和手机的首页主按钮／导航／工作台入口以及学习页分流通过[入口检查](../reports/options_demo_browser_20261116T134931Z.json)，主页语言切换另通过[13 项检查、12 个布局](../reports/showcase_language_check.json)。这些入口检查不调用真实模型或 IBKR。
 

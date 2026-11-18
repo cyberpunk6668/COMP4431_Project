@@ -1,0 +1,138 @@
+{
+  "status": "passed",
+  "checked_at": "20261118T003841007005Z",
+  "scope": "Actual app, private database, offline providers, real Edge viewports; controlled cloud and old-backend errors",
+  "viewports": [
+    {
+      "width": 1440,
+      "status": "passed",
+      "checks": [
+        "inherits_shared_english_preference_localized_metadata_and_accessibility_without_auto_analysis",
+        "single_click_sends_english_once_and_returns_real_local_english_answer_with_no_contract_visuals",
+        "english_result_labels_preserve_visible_simulated_source_and_local_engine_truth",
+        "expanded_settings_metrics_references_units_sources_limits_and_forms_are_english",
+        "english_preset_prefills_only_then_explicit_send_uses_selected_language",
+        "chinese_result_labels_preserve_visible_simulated_source_and_local_engine_truth",
+        "switch_preserves_generated_text_and_labels_original_answer_language_without_extra_model_call",
+        "chinese_and_english_preferences_survive_reload_without_automatic_analysis",
+        "cross_tab_preference_sync_without_unrequested_analysis",
+        "learning_page_language_change_applies_on_browser_back_no_auto_analysis_or_page_errors"
+      ],
+      "actual_model_requests": 0,
+      "broker_requests": 0,
+      "analysis_requests": 3,
+      "page_errors": []
+    },
+    {
+      "width": 390,
+      "status": "passed",
+      "checks": [
+        "inherits_shared_english_preference_localized_metadata_and_accessibility_without_auto_analysis",
+        "single_click_sends_english_once_and_returns_real_local_english_answer_with_no_contract_visuals",
+        "english_result_labels_preserve_visible_simulated_source_and_local_engine_truth",
+        "expanded_settings_metrics_references_units_sources_limits_and_forms_are_english",
+        "english_preset_prefills_only_then_explicit_send_uses_selected_language",
+        "chinese_result_labels_preserve_visible_simulated_source_and_local_engine_truth",
+        "switch_preserves_generated_text_and_labels_original_answer_language_without_extra_model_call",
+        "chinese_and_english_preferences_survive_reload_without_automatic_analysis",
+        "cross_tab_preference_sync_without_unrequested_analysis",
+        "learning_page_language_change_applies_on_browser_back_no_auto_analysis_or_page_errors"
+      ],
+      "actual_model_requests": 0,
+      "broker_requests": 0,
+      "analysis_requests": 3,
+      "page_errors": []
+    },
+    {
+      "width": 320,
+      "status": "passed",
+      "checks": [
+        "inherits_shared_english_preference_localized_metadata_and_accessibility_without_auto_analysis",
+        "single_click_sends_english_once_and_returns_real_local_english_answer_with_no_contract_visuals",
+        "english_result_labels_preserve_visible_simulated_source_and_local_engine_truth",
+        "expanded_settings_metrics_references_units_sources_limits_and_forms_are_english",
+        "english_preset_prefills_only_then_explicit_send_uses_selected_language",
+        "chinese_result_labels_preserve_visible_simulated_source_and_local_engine_truth",
+        "switch_preserves_generated_text_and_labels_original_answer_language_without_extra_model_call",
+        "chinese_and_english_preferences_survive_reload_without_automatic_analysis",
+        "cross_tab_preference_sync_without_unrequested_analysis",
+        "learning_page_language_change_applies_on_browser_back_no_auto_analysis_or_page_errors"
+      ],
+      "actual_model_requests": 0,
+      "broker_requests": 0,
+      "analysis_requests": 3,
+      "page_errors": []
+    }
+  ],
+  "controlled_cloud_and_pending": {
+    "status": "passed",
+    "scope": "controlled cloud UI responses, actual offline fallback",
+    "checks": [
+      "language_locked_while_request_in_flight",
+      "cross_tab_change_queued_until_response_completes",
+      "response_retains_requested_language_after_queued_switch",
+      "explicit_english_payload_and_cloud_mode",
+      "unconfigured_fallback_english",
+      "server_failure_english_preserves_answers",
+      "result_labels_keep_model_attempts_and_unconfigured_local_fallback_distinct"
+    ],
+    "actual_model_requests": 0,
+    "broker_requests": 0
+  },
+  "stale_backend_guards": {
+    "status": "passed",
+    "scope": "controlled old-service catalogue and FastAPI 422 responses",
+    "cases": [
+      {
+        "language": "en",
+        "case": "legacy_catalogue_without_language_contract",
+        "status": "passed",
+        "checks": [
+          "old_service_detected_before_analysis",
+          "analysis_disabled_without_any_post",
+          "localized_restart_guidance_language_control_remains_usable"
+        ],
+        "actual_model_requests": 0,
+        "broker_requests": 0
+      },
+      {
+        "language": "en",
+        "case": "language_field_rejected_by_old_post_schema",
+        "status": "passed",
+        "checks": [
+          "language_422_has_actionable_restart_guidance",
+          "validation_input_is_not_echoed",
+          "prior_answer_preserved_without_hidden_retry"
+        ],
+        "actual_model_requests": 0,
+        "broker_requests": 0
+      },
+      {
+        "language": "zh",
+        "case": "legacy_catalogue_without_language_contract",
+        "status": "passed",
+        "checks": [
+          "old_service_detected_before_analysis",
+          "analysis_disabled_without_any_post",
+          "localized_restart_guidance_language_control_remains_usable"
+        ],
+        "actual_model_requests": 0,
+        "broker_requests": 0
+      },
+      {
+        "language": "zh",
+        "case": "language_field_rejected_by_old_post_schema",
+        "status": "passed",
+        "checks": [
+          "language_422_has_actionable_restart_guidance",
+          "validation_input_is_not_echoed",
+          "prior_answer_preserved_without_hidden_retry"
+        ],
+        "actual_model_requests": 0,
+        "broker_requests": 0
+      }
+    ],
+    "actual_model_requests": 0,
+    "broker_requests": 0
+  }
+}

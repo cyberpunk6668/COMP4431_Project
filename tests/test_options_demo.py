@@ -2,6 +2,7 @@
 import asyncio
 from copy import deepcopy
 import json
+import re
 
 from fastapi import FastAPI
 from fastapi.testclient import TestClient
@@ -11,7 +12,7 @@ from app.config import Settings
 from app.llm import ProviderError
 from app.options_analytics import analyze_option_snapshot
 from app.options_demo import (
-    BASE_TIME, DemoRequest, SCENARIO_ID, build_demo_frame,
+    API_CONTRACT, BASE_TIME, DemoRequest, SCENARIO_ID, build_demo_frame,
     create_demo_router, replay_snapshot, run_demo,
 )
 
@@ -62,6 +63,25 @@ def test_scenario_exposes_honest_identity_and_safe_configuration():
     assert result["frames"][0]["recorded_at"] == BASE_TIME.isoformat()
 
 
+def test_public_contract_identifies_language_capability_and_accepts_english_payload():
+    """A current static client can detect an older still-running API process."""
+    client = client_for()
+    properties = client.get("/openapi.json").json()["components"]["schemas"]["DemoRequest"]["properties"]
+    assert properties["language"]["enum"] == ["zh", "en"]
+    for language in ("zh", "en"):
+        metadata = client.get("/api/options-demo/scenario", params={"language": language}).json()
+        assert metadata["api_contract"] == API_CONTRACT == "options-demo.v2"
+        assert metadata["supported_languages"] == ["zh", "en"]
+        assert metadata["language"] == language
+        assert [item["frame"] for item in metadata["display_catalogue"]["frames"]] == [0, 1]
+        response = client.post("/api/options-demo/run", json={"frame": 0, "engine": "local", "language": language})
+        assert response.status_code == 200
+        result = response.json()
+        assert result["api_contract"] == metadata["api_contract"]
+        assert result["language"] == result["answer"]["language"] == language
+        assert result["provenance"]["model_called"] is False
+
+
 def test_default_local_replay_never_calls_network_or_gateway(monkeypatch):
     from app.options_ibkr import IBKROptionsProvider
 
@@ -85,7 +105,7 @@ def test_default_interpretation_leads_with_volatility_and_keeps_market_boundarie
     answer = result["answer"]
     assert answer["text"].startswith("隐含波动率")
     assert "风险溢价" in answer["text"]
-    assert "没有从报价重新反推" in answer["text"]
+    assert "没有从这些报价重新反推" in result["limitations"][-1]
     assert "下行侧的波动率定价相对更高" in answer["text"]
     assert "不能判断整体波动率是否异常高低" in answer["text"]
     assert "不能推出全市场宏观结论" in answer["text"]
@@ -237,7 +257,7 @@ def test_explicit_cloud_without_configuration_is_visible_local_fallback():
 
 
 VALID_ANSWER = {"response": [
-    {"text": "隐含波动率描述期权价格中的波动幅度定价，不给出涨跌方向；这里使用合成模型输入。",
+    {"text": "隐含波动率描述期权价格中的波动幅度定价，包含风险定价因素，不给出涨跌方向。",
      "evidence_ids": ["scope", "knowledge.iv_definition"]},
     {"text": "所选两翼的相对波动率定价存在差异；局部样本无法确定整体市场原因。",
      "evidence_ids": ["iv_skew_25_delta", "knowledge.skew_limits"]},
@@ -263,6 +283,9 @@ def test_explicit_cloud_receives_partial_raw_data_and_returns_auditable_mode():
     assert "knowledge.iv_definition" in principles
     assert "risk pricing" in call["messages"][0]["content"]
     assert "did NOT solve IV" in call["messages"][0]["content"]
+    assert "95 put with the 105 call: DIFFERENT strikes" in call["messages"][0]["content"]
+    assert "Never call that wing comparison matched-strike, same-strike" in call["messages"][0]["content"]
+    assert "put DO share the 100 strike and expiration" in call["messages"][0]["content"]
     assert principles["knowledge.iv_definition"]["supporting_url"].startswith("https://www.bis.org/")
     assert "api_key" not in json.dumps(supplied)
 
@@ -278,6 +301,7 @@ def test_explicit_cloud_receives_partial_raw_data_and_returns_auditable_mode():
     json.dumps({"response": [{"text": "合成样本已连接IBKR。", "evidence_ids": ["scope"]}]}),
     json.dumps({"response": [{"text": "合成样本中看涨成交更多。", "evidence_ids": ["put_call_volume"]}]}),
     json.dumps({"response": [{"text": "合成样本中看跌IV低于看涨。", "evidence_ids": ["iv_skew_25_delta"]}]}),
+    json.dumps({"response": [{"text": "两翼隐含波动率比较使用相同行权价。", "evidence_ids": ["iv_skew_25_delta"]}]}),
 ])
 def test_invalid_model_output_falls_back_without_claiming_success(raw):
     provider = Provider(raw)
@@ -304,3 +328,174 @@ def test_replay_snapshot_is_new_mutable_data_every_time():
     assert replay_snapshot(0)["quotes"][0]["volume"] == 200
     with pytest.raises(ValueError):
         replay_snapshot(True)
+
+
+def test_english_catalogue_localizes_all_display_metadata_without_generation():
+    provider = NoProvider()
+    client = client_for(settings(True), provider)
+    english = client.get("/api/options-demo/scenario?language=en").json()
+    chinese = client.get("/api/options-demo/scenario?language=zh").json()
+    assert english["language"] == "en"
+    assert english["questions"][0] == "What do these option prices tell us about AAPL's volatility and risk?"
+    assert english["frames"][0]["label"] == "Initial sample"
+    assert not re.search(r"[\u3400-\u9fff]", json.dumps(english, ensure_ascii=False))
+    for en_frame, zh_frame in zip(english["display_catalogue"]["frames"], chinese["display_catalogue"]["frames"]):
+        assert en_frame["frame"] == zh_frame["frame"]
+        assert {item["id"]: item["value"] for item in en_frame["metrics"]} == {
+            item["id"]: item["value"] for item in zh_frame["metrics"]
+        }
+        assert {item["id"] for item in en_frame["evidence"]} == {item["id"] for item in zh_frame["evidence"]}
+        assert en_frame["provenance_label"].startswith("Synthetic sample")
+    assert provider.calls == 0
+
+
+def test_english_local_analysis_preserves_numbers_source_and_recorded_time():
+    english = asyncio.run(run_demo(DemoRequest(language="en", frame=1), settings(), NoProvider()))
+    chinese = asyncio.run(run_demo(DemoRequest(frame=1), settings(), NoProvider()))
+    assert english["answer"]["language"] == english["language"] == "en"
+    assert english["answer"]["text"].startswith("Implied volatility")
+    assert "synthetic" in english["answer"]["notice"]
+    assert "risk premiums" in english["answer"]["text"]
+    assert not re.search(r"[\u3400-\u9fff]", json.dumps(english, ensure_ascii=False))
+    for key in ("put_call_volume", "iv_skew_25_delta", "atm_straddle", "quote_coverage"):
+        assert metric(english, key) == metric(chinese, key)
+    assert english["provenance"]["recorded_at"] == chinese["provenance"]["recorded_at"]
+    assert english["provenance"]["gateway_connected"] is False
+    assert english["provenance"]["model_called"] is False
+    assert english["snapshot"]["quotes"][-1]["bid"] is None
+
+
+def test_english_missing_iv_and_quotes_remain_missing_not_zero(monkeypatch):
+    from app import options_demo
+    original = options_demo.replay_snapshot
+
+    def missing(frame):
+        result = original(frame)
+        for row in result["quotes"]:
+            row.update(implied_volatility=None, bid=None, ask=None)
+        return result
+
+    monkeypatch.setattr(options_demo, "replay_snapshot", missing)
+    result = asyncio.run(run_demo(DemoRequest(language="en"), settings(), NoProvider()))
+    assert metric(result, "iv_skew_25_delta") is None
+    assert metric(result, "atm_straddle") is None
+    assert "Comparable wing-IV inputs are missing" in result["answer"]["text"]
+    assert "Valid inputs are insufficient" in result["answer"]["text"]
+    assert "relatively higher downside" not in result["answer"]["text"]
+
+
+VALID_ANSWER_EN = {"response": [
+    {"text": "Implied volatility describes movement priced into options, including risk pricing, rather than future price direction.",
+     "evidence_ids": ["scope", "knowledge.iv_definition"]},
+    {"text": "The selected put wing has higher relative volatility pricing, but the partial sample cannot establish a whole-market cause.",
+     "evidence_ids": ["iv_skew_25_delta", "knowledge.skew_limits"]},
+]}
+
+
+def test_english_cloud_uses_requested_language_and_localized_grounding():
+    provider = Provider(json.dumps(VALID_ANSWER_EN))
+    result = asyncio.run(run_demo(DemoRequest(language="en", engine="deepseek"), settings(True), provider))
+    assert result["answer"]["mode"] == "deepseek"
+    assert result["answer"]["language"] == "en"
+    assert len(provider.calls) == 1
+    messages = provider.calls[0]["messages"]
+    assert "ENGLISH ONLY" in messages[0]["content"]
+    assert "in Chinese" not in messages[0]["content"]
+    assert "95 put with the 105 call: DIFFERENT strikes" in messages[0]["content"]
+    assert "Never call that wing comparison matched-strike, same-strike" in messages[0]["content"]
+    payload = json.loads(messages[1]["content"])
+    assert payload["requested_language"] == "en"
+    assert payload["question"] == "What do these option prices tell us about AAPL's volatility and risk?"
+    assert set(payload["allowed_evidence_ids"]) == {entry["id"] for entry in payload["current_evidence"]}
+    assert not re.search(r"[\u3400-\u9fff]", json.dumps(payload, ensure_ascii=False))
+    assert "not a successful" not in result["answer"]["notice"]
+
+
+@pytest.mark.parametrize("raw", [
+    json.dumps(VALID_ANSWER, ensure_ascii=False),
+    json.dumps({"response": [{"text": "Synthetic data has six contracts.", "evidence_ids": ["scope"]}]}),
+    json.dumps({"response": [{"text": "Synthetic sample IV is 99 percent.", "evidence_ids": ["scope"]}]}),
+    json.dumps({"response": [{"text": "Synthetic data suggests you should buy puts.", "evidence_ids": ["scope"]}]}),
+    json.dumps({"response": [{"text": "Synthetic put IV is lower than call IV.", "evidence_ids": ["iv_skew_25_delta"]}]}),
+    json.dumps({"response": [{"text": "This is the current market performance.", "evidence_ids": ["scope"]}]}),
+    json.dumps({"response": [{"text": "The same-strike wing comparison shows higher put IV.", "evidence_ids": ["iv_skew_25_delta"]}]}),
+])
+def test_english_invalid_model_answers_fall_back_in_english(raw):
+    result = asyncio.run(run_demo(DemoRequest(language="en", engine="deepseek"), settings(True), Provider(raw)))
+    assert result["answer"]["mode"] == "local_fallback"
+    assert result["answer"]["fallback_reason"] == "model_validation_failed"
+    assert result["answer"]["language"] == "en"
+    assert not re.search(r"[\u3400-\u9fff]", json.dumps(result, ensure_ascii=False))
+
+
+@pytest.mark.parametrize("online", [True, False])
+def test_english_provider_failure_or_missing_configuration_has_english_notice(online):
+    provider = Provider(error=ProviderError("authentication_failed"))
+    result = asyncio.run(run_demo(DemoRequest(language="en", engine="deepseek"), settings(online), provider))
+    assert result["answer"]["mode"] == "local_fallback"
+    assert result["provenance"]["model_called"] is online
+    assert len(provider.calls) == int(online)
+    assert "local rules" in result["answer"]["notice"]
+    assert not re.search(r"[\u3400-\u9fff]", result["answer"]["notice"])
+
+
+def test_language_is_validated_on_get_and_post():
+    client = client_for()
+    assert client.get("/api/options-demo/scenario?language=fr").status_code == 422
+    assert client.post("/api/options-demo/run", json={"language": "fr"}).status_code == 422
+    assert client.post("/api/options-demo/run", json={"language": None}).status_code == 422
+
+
+@pytest.mark.parametrize("language", ["zh", "en"])
+def test_default_local_analysis_focuses_on_results_with_separate_source_disclosure(language):
+    result = asyncio.run(run_demo(DemoRequest(language=language), settings(), NoProvider()))
+    text = result["answer"]["text"]
+    assert not re.search(r"教学|演示|合成|模拟|synthetic|teaching|demo|replay|simulated|IBKR", text, re.I)
+    assert result["quality"]["source_kind"] == result["provenance"]["source_kind"] == "synthetic_replay"
+    assert result["provenance"]["gateway_connected"] is False
+    assert ("合成" if language == "zh" else "synthetic") in result["answer"]["notice"]
+    assert "IBKR" in result["provenance"]["label"]
+    assert "IBKR" in result["limitations"][0]
+
+
+@pytest.mark.parametrize(("language", "raw"), [("zh", VALID_ANSWER), ("en", VALID_ANSWER_EN)])
+def test_model_analysis_without_repeated_provenance_is_accepted(language, raw):
+    provider = Provider(json.dumps(raw, ensure_ascii=False))
+    result = asyncio.run(run_demo(DemoRequest(language=language, engine="deepseek"), settings(True), provider))
+    assert result["answer"]["mode"] == "deepseek"
+    assert not re.search(r"合成|教学|synthetic|teaching", result["answer"]["text"], re.I)
+    assert result["answer"]["evidence_ids"]
+    assert "IBKR" in result["answer"]["notice"]
+    assert result["provenance"]["model_called"] is True
+    assert len(provider.calls) == 1
+
+
+@pytest.mark.parametrize(("language", "question", "disclosure"), [
+    ("zh", "这些期权数据来自哪里，连接 IBKR 了吗？", "当前数据来自合成输入，不是真实行情，也不是实时行情；未连接 IBKR。"),
+    ("en", "Where do these option quotes come from? Is IBKR connected?", "The inputs are synthetic, not live market data. IBKR is not connected."),
+])
+@pytest.mark.parametrize("engine", ["local", "deepseek"])
+def test_source_questions_explicitly_disclose_synthetic_non_live_disconnected_data(language, question, disclosure, engine):
+    provider = Provider(json.dumps({"response": [{"text": disclosure, "evidence_ids": ["scope"]}]}, ensure_ascii=False))
+    result = asyncio.run(run_demo(DemoRequest(language=language, question=question, engine=engine), settings(True), provider))
+    assert result["answer"]["mode"] == engine
+    text = result["answer"]["text"]
+    if language == "zh":
+        assert "合成" in text and "不是实时行情" in text
+        assert "未连接 IBKR" in text or "没有连接 IBKR" in text
+    else:
+        assert "synthetic" in text and "not live" in text
+        assert "IBKR is not connected" in text
+    assert len(provider.calls) == int(engine == "deepseek")
+
+
+@pytest.mark.parametrize(("language", "question", "raw"), [
+    ("zh", "这些期权数据是真实行情吗？", VALID_ANSWER),
+    ("en", "Is this live market data?", VALID_ANSWER_EN),
+])
+def test_model_source_answer_cannot_omit_source_disclosure(language, question, raw):
+    result = asyncio.run(run_demo(DemoRequest(language=language, engine="deepseek", question=question), settings(True), Provider(json.dumps(raw, ensure_ascii=False))))
+    assert result["answer"]["mode"] == "local_fallback"
+    assert result["answer"]["fallback_reason"] == "model_validation_failed"
+    assert ("合成" if language == "zh" else "synthetic") in result["answer"]["text"]
+    assert "IBKR" in result["answer"]["text"]

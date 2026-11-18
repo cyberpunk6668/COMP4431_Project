@@ -275,7 +275,7 @@
   let retainingPreviousResult = false;
   let filter = 'all';
   let chainSerial = 0;
-  let readingMode = localStorage.getItem('finpilot-options-reading') === 'professional' ? 'professional' : 'simple';
+  let readingMode = window.FinPilotStorage.getItem('finpilot-options-reading') === 'professional' ? 'professional' : 'simple';
   const expirationCache = new Map();
   const expirationControllers = new Set();
   let expirationQueue = Promise.resolve();
@@ -1120,7 +1120,7 @@
 
   function setReadingMode(mode) {
     readingMode = mode;
-    localStorage.setItem('finpilot-options-reading', mode);
+    window.FinPilotStorage.setItem('finpilot-options-reading', mode);
     document.getElementById('options-view-simple').setAttribute('aria-pressed', String(mode === 'simple'));
     document.getElementById('options-view-professional').setAttribute('aria-pressed', String(mode === 'professional'));
     dialog.dataset.reading = mode;

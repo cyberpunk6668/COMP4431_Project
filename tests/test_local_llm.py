@@ -76,3 +76,47 @@ def test_local_mode_is_explicit_and_tool_path_preserved(tmp_path):
 def test_training_and_runtime_instructions_do_not_drift():
     from finetuning.build_dataset import SYSTEM
     assert SYSTEM == LOCAL_SYSTEM
+
+
+def test_cancelled_generation_closes_worker_before_next_conversation(tmp_path, monkeypatch):
+    async def scenario():
+        reading = asyncio.Event()
+
+        class Output:
+            async def readline(self):
+                reading.set()
+                await asyncio.Event().wait()
+
+        class Input:
+            def write(self, value):
+                pass
+
+            async def drain(self):
+                pass
+
+        class Worker:
+            returncode = None
+            stdout = Output()
+            stdin = Input()
+            terminated = False
+
+            def terminate(self):
+                self.terminated = True
+                self.returncode = 0
+
+            async def wait(self):
+                return self.returncode
+
+        provider = LocalLoRA(Settings(adapter_path=tmp_path))
+        monkeypatch.setattr(provider, "status", lambda: {"available": True})
+        worker = Worker()
+        provider.process = worker
+        task = asyncio.create_task(provider.complete([{"role": "user", "content": "first session"}]))
+        await reading.wait()
+        task.cancel()
+        with pytest.raises(asyncio.CancelledError):
+            await task
+        assert provider.process is None and worker.terminated
+        assert not provider.lock.locked()
+
+    asyncio.run(scenario())

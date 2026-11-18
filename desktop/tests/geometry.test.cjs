@@ -10,6 +10,11 @@ test('interactive regions cannot exceed the work area or inject nonfinite positi
   assert.equal(finiteRect({x:NaN,y:0,width:50,height:50},100,100),null);
   assert.equal(finiteRect({x:0,y:0,width:-3,height:50},100,100),null);
   assert.deepEqual(finiteRect({x:90,y:95,width:99,height:99},100,100),{x:90,y:95,width:10,height:5});
+  assert.deepEqual(finiteRect({x:-20,y:-30,width:50,height:60},100,100),{x:0,y:0,width:30,height:30});
+  const offscreen=finiteRect({x:-60,y:-70,width:50,height:60},100,100);
+  assert.deepEqual(offscreen,{x:0,y:0,width:0,height:0});
+  assert(!contains(offscreen,0,0));
+  assert(!contains({x:20,y:20,width:10,height:10},30,25));
   assert(contains({x:20,y:20,width:10,height:10},25,25));assert(!contains({x:20,y:20,width:10,height:10},10,10));
 });
 test('restored pet coordinates remain visible after a screen or size change',()=>{

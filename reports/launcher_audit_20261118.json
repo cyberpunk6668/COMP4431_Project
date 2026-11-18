@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "port": 18018,
+  "checks": [
+    "owned_start",
+    "english_v2_contract",
+    "local_analysis",
+    "owned_server_reuse",
+    "owned_stop_no_remaining_listener"
+  ],
+  "model_requests": 0,
+  "broker_requests": 0
+}

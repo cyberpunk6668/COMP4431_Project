@@ -1,7 +1,7 @@
 {
   "current_version": 17,
   "manual_version": "17.0",
-  "reviewed_at": "2026-11-15",
+  "reviewed_at": "2026-11-18",
   "scope": "Hand-reviewed public product manual; fixed UI/document provenance hashes only, not arbitrary repository retrieval.",
   "documents": [
     {
@@ -17,11 +17,11 @@
       "source_files": [
         {
           "path": "web/index.html",
-          "sha256": "950dd620ed2ba97b04692317a87109b46c34193c9fc69cddc1830135be187578"
+          "sha256": "d17801fd7d43750b910f24e0d3f8a7436394a81e74af539b70635778a1389355"
         },
         {
           "path": "web/demo.html",
-          "sha256": "7a58b0a2f40a74d9f3cd796fb559a8ab49e92747cf0a7a57d1390a010b5740c8"
+          "sha256": "a314aa0fac6697d9242665c5a0af25f4795d2668f50d8b4a8432e438104ef42c"
         },
         {
           "path": "docs/desktop_pet_v15.md",
@@ -29,7 +29,7 @@
         },
         {
           "path": "web/learn.html",
-          "sha256": "42c8ff9c08b005d4c079559232743149155ab4c3e3904bbff2167bede2d3afa3"
+          "sha256": "a598c47ccb2757e983eeb81c6df5109ab037714d0a24434685de451898ce9a20"
         }
       ],
       "links": [
@@ -95,11 +95,11 @@
       "source_files": [
         {
           "path": "web/index.html",
-          "sha256": "950dd620ed2ba97b04692317a87109b46c34193c9fc69cddc1830135be187578"
+          "sha256": "d17801fd7d43750b910f24e0d3f8a7436394a81e74af539b70635778a1389355"
         },
         {
           "path": "web/options.js",
-          "sha256": "0efe5d6630cf62b597fa2421558940dc56cc418f597dc989bc20f785b7aa7e4e"
+          "sha256": "2ce87a897afdeb105fd457ce22a47c0d18c0d8c17929efb19f5f2f827092d00b"
         },
         {
           "path": "docs/options_analysis_v6.md",
@@ -107,7 +107,7 @@
         },
         {
           "path": "web/learn.html",
-          "sha256": "42c8ff9c08b005d4c079559232743149155ab4c3e3904bbff2167bede2d3afa3"
+          "sha256": "a598c47ccb2757e983eeb81c6df5109ab037714d0a24434685de451898ce9a20"
         }
       ],
       "links": [
@@ -176,11 +176,11 @@
       "source_files": [
         {
           "path": "web/learn.html",
-          "sha256": "42c8ff9c08b005d4c079559232743149155ab4c3e3904bbff2167bede2d3afa3"
+          "sha256": "a598c47ccb2757e983eeb81c6df5109ab037714d0a24434685de451898ce9a20"
         },
         {
           "path": "web/learn.js",
-          "sha256": "591848c0156c80448372f591c00e272480a976f20dbdf5712f30b77dd211ca61"
+          "sha256": "452f41b5f2a09ae6e0e6617eca39d65b39446eaaa57843e697d3a1cb64365bbb"
         },
         {
           "path": "web/learn.css",
@@ -263,7 +263,7 @@
       "source_files": [
         {
           "path": "web/index.html",
-          "sha256": "950dd620ed2ba97b04692317a87109b46c34193c9fc69cddc1830135be187578"
+          "sha256": "d17801fd7d43750b910f24e0d3f8a7436394a81e74af539b70635778a1389355"
         },
         {
           "path": "web/history.js",
@@ -332,7 +332,7 @@
       "source_files": [
         {
           "path": "web/app.js",
-          "sha256": "f94243ca084d268583eb9177ac30a1fce3f4b8fb4f1182a18dda7f829a041784"
+          "sha256": "ff4c02802b1ba371a48ade35421ebfbfd2ef90fb90325d79f51603be2e6ab4a9"
         },
         {
           "path": "web/pet.js",
@@ -404,11 +404,11 @@
       "source_files": [
         {
           "path": "web/app.js",
-          "sha256": "f94243ca084d268583eb9177ac30a1fce3f4b8fb4f1182a18dda7f829a041784"
+          "sha256": "ff4c02802b1ba371a48ade35421ebfbfd2ef90fb90325d79f51603be2e6ab4a9"
         },
         {
           "path": "web/index.html",
-          "sha256": "950dd620ed2ba97b04692317a87109b46c34193c9fc69cddc1830135be187578"
+          "sha256": "d17801fd7d43750b910f24e0d3f8a7436394a81e74af539b70635778a1389355"
         },
         {
           "path": "finetuning/README.md",
@@ -466,7 +466,7 @@
       "source_files": [
         {
           "path": "web/index.html",
-          "sha256": "950dd620ed2ba97b04692317a87109b46c34193c9fc69cddc1830135be187578"
+          "sha256": "d17801fd7d43750b910f24e0d3f8a7436394a81e74af539b70635778a1389355"
         },
         {
           "path": "web/pet.html",
@@ -543,11 +543,11 @@
       "source_files": [
         {
           "path": "web/index.html",
-          "sha256": "950dd620ed2ba97b04692317a87109b46c34193c9fc69cddc1830135be187578"
+          "sha256": "d17801fd7d43750b910f24e0d3f8a7436394a81e74af539b70635778a1389355"
         },
         {
           "path": "web/app.js",
-          "sha256": "f94243ca084d268583eb9177ac30a1fce3f4b8fb4f1182a18dda7f829a041784"
+          "sha256": "ff4c02802b1ba371a48ade35421ebfbfd2ef90fb90325d79f51603be2e6ab4a9"
         }
       ],
       "links": [
@@ -598,11 +598,11 @@
       "source_files": [
         {
           "path": "web/app.js",
-          "sha256": "f94243ca084d268583eb9177ac30a1fce3f4b8fb4f1182a18dda7f829a041784"
+          "sha256": "ff4c02802b1ba371a48ade35421ebfbfd2ef90fb90325d79f51603be2e6ab4a9"
         },
         {
           "path": "web/index.html",
-          "sha256": "950dd620ed2ba97b04692317a87109b46c34193c9fc69cddc1830135be187578"
+          "sha256": "d17801fd7d43750b910f24e0d3f8a7436394a81e74af539b70635778a1389355"
         },
         {
           "path": "web/pet.html",
@@ -663,15 +663,15 @@
       "source_files": [
         {
           "path": "web/index.html",
-          "sha256": "950dd620ed2ba97b04692317a87109b46c34193c9fc69cddc1830135be187578"
+          "sha256": "d17801fd7d43750b910f24e0d3f8a7436394a81e74af539b70635778a1389355"
         },
         {
           "path": "web/app.js",
-          "sha256": "f94243ca084d268583eb9177ac30a1fce3f4b8fb4f1182a18dda7f829a041784"
+          "sha256": "ff4c02802b1ba371a48ade35421ebfbfd2ef90fb90325d79f51603be2e6ab4a9"
         },
         {
           "path": "web/demo.html",
-          "sha256": "7a58b0a2f40a74d9f3cd796fb559a8ab49e92747cf0a7a57d1390a010b5740c8"
+          "sha256": "a314aa0fac6697d9242665c5a0af25f4795d2668f50d8b4a8432e438104ef42c"
         },
         {
           "path": "docs/desktop_pet_v15.md",
@@ -788,7 +788,7 @@
       "source_files": [
         {
           "path": "web/options.js",
-          "sha256": "0efe5d6630cf62b597fa2421558940dc56cc418f597dc989bc20f785b7aa7e4e"
+          "sha256": "2ce87a897afdeb105fd457ce22a47c0d18c0d8c17929efb19f5f2f827092d00b"
         },
         {
           "path": "docs/ibkr_gateway_v12.md",
@@ -857,11 +857,11 @@
       "source_files": [
         {
           "path": "web/index.html",
-          "sha256": "950dd620ed2ba97b04692317a87109b46c34193c9fc69cddc1830135be187578"
+          "sha256": "d17801fd7d43750b910f24e0d3f8a7436394a81e74af539b70635778a1389355"
         },
         {
           "path": "web/app.js",
-          "sha256": "f94243ca084d268583eb9177ac30a1fce3f4b8fb4f1182a18dda7f829a041784"
+          "sha256": "ff4c02802b1ba371a48ade35421ebfbfd2ef90fb90325d79f51603be2e6ab4a9"
         }
       ],
       "links": [
@@ -995,11 +995,11 @@
       "source_files": [
         {
           "path": "web/index.html",
-          "sha256": "950dd620ed2ba97b04692317a87109b46c34193c9fc69cddc1830135be187578"
+          "sha256": "d17801fd7d43750b910f24e0d3f8a7436394a81e74af539b70635778a1389355"
         },
         {
           "path": "web/app.js",
-          "sha256": "f94243ca084d268583eb9177ac30a1fce3f4b8fb4f1182a18dda7f829a041784"
+          "sha256": "ff4c02802b1ba371a48ade35421ebfbfd2ef90fb90325d79f51603be2e6ab4a9"
         }
       ],
       "links": [
@@ -1053,15 +1053,15 @@
       "source_files": [
         {
           "path": "web/index.html",
-          "sha256": "950dd620ed2ba97b04692317a87109b46c34193c9fc69cddc1830135be187578"
+          "sha256": "d17801fd7d43750b910f24e0d3f8a7436394a81e74af539b70635778a1389355"
         },
         {
           "path": "web/app.js",
-          "sha256": "f94243ca084d268583eb9177ac30a1fce3f4b8fb4f1182a18dda7f829a041784"
+          "sha256": "ff4c02802b1ba371a48ade35421ebfbfd2ef90fb90325d79f51603be2e6ab4a9"
         },
         {
           "path": "web/demo.html",
-          "sha256": "7a58b0a2f40a74d9f3cd796fb559a8ab49e92747cf0a7a57d1390a010b5740c8"
+          "sha256": "a314aa0fac6697d9242665c5a0af25f4795d2668f50d8b4a8432e438104ef42c"
         }
       ],
       "links": [
@@ -1115,7 +1115,7 @@
       "source_files": [
         {
           "path": "web/index.html",
-          "sha256": "950dd620ed2ba97b04692317a87109b46c34193c9fc69cddc1830135be187578"
+          "sha256": "d17801fd7d43750b910f24e0d3f8a7436394a81e74af539b70635778a1389355"
         },
         {
           "path": "web/pet.html",

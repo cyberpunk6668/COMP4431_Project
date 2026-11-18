@@ -5,6 +5,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowRight, ArrowUpRight, AudioLines, BookOpen, Check, ChevronDown, ExternalLink, Layers3, Pause, ShieldCheck, Volume2 } from 'lucide-react';
 import Hero, { Brand } from './components/Hero';
 import { useLanguage } from './i18n';
+import { readPreference, writePreference } from './storage';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -183,11 +184,11 @@ export default function App() {
   const { language, t } = useLanguage();
   const root = useRef<HTMLDivElement>(null);
   const reduced = useMotionPreference();
-  const [paused, setPaused] = useState(() => localStorage.getItem('finpilot-showcase-paused') === 'true');
+  const [paused, setPaused] = useState(() => readPreference('finpilot-showcase-paused') === 'true');
   const [data, setData] = useState<Showcase | null>(null);
   const stopped = paused || reduced;
   useEffect(() => { const controller = new AbortController(); fetch('/api/showcase', { signal: controller.signal }).then(response => { if (!response.ok) throw new Error('metadata unavailable'); return response.json(); }).then(value => setData(value)).catch(() => {}); return () => controller.abort(); }, []);
-  useEffect(() => { document.documentElement.dataset.motion = stopped ? 'reduced' : 'full'; localStorage.setItem('finpilot-showcase-paused', String(paused)); return () => { delete document.documentElement.dataset.motion; }; }, [paused, stopped]);
+  useEffect(() => { document.documentElement.dataset.motion = stopped ? 'reduced' : 'full'; writePreference('finpilot-showcase-paused', String(paused)); return () => { delete document.documentElement.dataset.motion; }; }, [paused, stopped]);
   useLayoutEffect(() => {
     const frame = requestAnimationFrame(() => ScrollTrigger.refresh());
     return () => cancelAnimationFrame(frame);

@@ -372,7 +372,7 @@ print(json.dumps({'status':'passed',**counts,'application_version':'17.0.0','nat
               "v15_declared_evidence": declared_v15_evidence,
               "v16_declared_evidence": declared_v16_evidence,
               "v17_declared_evidence": declared_v17_evidence,
-              "status_scope": "v17 package integrity and isolated offline backend workflows only. Application v17 uses the unchanged native host v15. Historical, UI and real-model report statuses above are preserved, not certified as passed by this check.",
+              "status_scope": "v17 package integrity and isolated offline backend workflows only. Includes the allowlisted native host v15 binary; native visual and hardware behavior is not certified by this check. Historical, UI and real-model report statuses above are preserved, not certified as passed by this check.",
               "checks": ["no_credential_patterns", "no_env_or_database", "expected_sources_and_updated_deck_present", "novice_options_and_acceptance_present", "actual_expirations_and_general_chat_acceptance_present", "snapshot_chat_and_acceptance_present", "historical_expert_rag_and_real_workflow_present", "trained_adapter_hash_matches", "isolated_extraction", "offline_startup_media_chat_calculator_batch_and_snapshot_followup", "offline_historical_archive_expert_retrieval_and_followup"],
               "limitation": "Uses current installed Python dependencies; does not simulate an OS with no Python or no package network."}
     report['checks'].extend(['historical_v14_guided_demo_three_viewports_report_present', 'historical_v14_real_archived_data_two_model_turns_and_support_audit_present', 'historical_v14_snapshot_expert_grounding_report_present', 'historical_v14_frozen_blind_retrieval_evaluation_present'])

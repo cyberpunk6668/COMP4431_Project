@@ -1,0 +1,68 @@
+{
+  "status": "failed",
+  "checked_at": "20261117T141347685269Z",
+  "scope": "Actual app, private database, offline providers, real Edge viewports; controlled cloud and old-backend errors",
+  "viewports": [
+    {
+      "width": 1440,
+      "status": "passed",
+      "checks": [
+        "inherits_shared_english_preference_localized_metadata_and_accessibility_without_auto_analysis",
+        "single_click_sends_english_once_and_returns_real_local_english_answer_with_no_contract_visuals",
+        "english_result_labels_preserve_visible_simulated_source_and_local_engine_truth",
+        "expanded_settings_metrics_references_units_sources_limits_and_forms_are_english",
+        "english_preset_prefills_only_then_explicit_send_uses_selected_language",
+        "chinese_result_labels_preserve_visible_simulated_source_and_local_engine_truth",
+        "switch_preserves_generated_text_and_labels_original_answer_language_without_extra_model_call",
+        "chinese_and_english_preferences_survive_reload_without_automatic_analysis",
+        "cross_tab_preference_sync_without_unrequested_analysis",
+        "learning_page_language_change_applies_on_browser_back_no_auto_analysis_or_page_errors"
+      ],
+      "actual_model_requests": 0,
+      "broker_requests": 0,
+      "analysis_requests": 3,
+      "page_errors": []
+    },
+    {
+      "width": 390,
+      "status": "passed",
+      "checks": [
+        "inherits_shared_english_preference_localized_metadata_and_accessibility_without_auto_analysis",
+        "single_click_sends_english_once_and_returns_real_local_english_answer_with_no_contract_visuals",
+        "english_result_labels_preserve_visible_simulated_source_and_local_engine_truth",
+        "expanded_settings_metrics_references_units_sources_limits_and_forms_are_english",
+        "english_preset_prefills_only_then_explicit_send_uses_selected_language",
+        "chinese_result_labels_preserve_visible_simulated_source_and_local_engine_truth",
+        "switch_preserves_generated_text_and_labels_original_answer_language_without_extra_model_call",
+        "chinese_and_english_preferences_survive_reload_without_automatic_analysis",
+        "cross_tab_preference_sync_without_unrequested_analysis",
+        "learning_page_language_change_applies_on_browser_back_no_auto_analysis_or_page_errors"
+      ],
+      "actual_model_requests": 0,
+      "broker_requests": 0,
+      "analysis_requests": 3,
+      "page_errors": []
+    },
+    {
+      "width": 320,
+      "status": "passed",
+      "checks": [
+        "inherits_shared_english_preference_localized_metadata_and_accessibility_without_auto_analysis",
+        "single_click_sends_english_once_and_returns_real_local_english_answer_with_no_contract_visuals",
+        "english_result_labels_preserve_visible_simulated_source_and_local_engine_truth",
+        "expanded_settings_metrics_references_units_sources_limits_and_forms_are_english",
+        "english_preset_prefills_only_then_explicit_send_uses_selected_language",
+        "chinese_result_labels_preserve_visible_simulated_source_and_local_engine_truth",
+        "switch_preserves_generated_text_and_labels_original_answer_language_without_extra_model_call",
+        "chinese_and_english_preferences_survive_reload_without_automatic_analysis",
+        "cross_tab_preference_sync_without_unrequested_analysis",
+        "learning_page_language_change_applies_on_browser_back_no_auto_analysis_or_page_errors"
+      ],
+      "actual_model_requests": 0,
+      "broker_requests": 0,
+      "analysis_requests": 3,
+      "page_errors": []
+    }
+  ],
+  "error": "Locator expected to contain text '已请求模型'\nActual value: 界面语言已切换。已有回答保留原文；下一次分析或提问使用当前语言。 \nCall log:\n  - Expect \"to_contain_text\" with timeout 5000ms\n  - waiting for locator(\"#demo-status\")\n    9 × locator resolved to <p role=\"status\" id=\"demo-status\" data-busy=\"false\" aria-live=\"polite\" class=\"request-status\">界面语言已切换。已有回答保留原文；下一次分析或提问使用当前语言。</p>\n      - unexpected value \"界面语言已切换。已有回答保留原文；下一次分析或提问使用当前语言。\"\n"
+}

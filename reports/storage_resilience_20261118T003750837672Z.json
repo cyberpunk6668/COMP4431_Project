@@ -1,0 +1,8 @@
+{
+  "status": "failed",
+  "checked_at": "2026-11-18T00:37:51.467768+00:00",
+  "scope": "Real Edge + private offline API + fault injection; no model or broker",
+  "cases": [],
+  "error": "Locator expected to be visible\nActual value: None\nError: strict mode violation: locator(\"#planning svg\") resolved to 3 elements:\n    1) <svg role=\"img\" viewBox=\"0 0 600 260\" aria-label=\"假设余额随年份变化\">…</svg> aka get_by_role(\"img\", name=\"假设余额随年份变化\")\n    2) <svg width=\"15\" height=\"15\" fill=\"none\" stroke-width=\"2\" aria-hidden=\"true\" viewBox=\"0 0 24 24\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" xmlns=\"http://www.w3.org/2000/svg\" class=\"lucide lucide-shield-check\">…</svg> aka locator(\".lucide.lucide-shield-check\").first\n    3) <svg width=\"16\" height=\"16\" fill=\"none\" stroke-width=\"2\" aria-hidden=\"true\" viewBox=\"0 0 24 24\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" xmlns=\"http://www.w3.org/2000/svg\" class=\"lucide lucide-arrow-up-right\">…</svg> aka get_by_role(\"link\", name=\"打开完整计算器\")\n \nCall log:\n  - Expect \"to_be_visible\" with timeout 5000ms\n  - waiting for locator(\"#planning svg\")\n",
+  "forbidden_attempts": []
+}

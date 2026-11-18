@@ -33,9 +33,16 @@ class DeepSeek:
                 codes = {401: "authentication_failed", 402: "insufficient_balance", 429: "rate_limited"}
                 raise ProviderError(codes.get(response.status_code, "provider_unavailable"))
             payload = response.json()
-            choice = payload["choices"][0]
+            if not isinstance(payload, dict):
+                raise ProviderError("invalid_response")
+            choices = payload.get("choices")
+            if not isinstance(choices, list) or not choices or not isinstance(choices[0], dict):
+                raise ProviderError("invalid_response")
+            choice = choices[0]
             if choice.get("finish_reason") != "stop":
                 raise ProviderError("incomplete_response")
+            if not isinstance(choice.get("message"), dict):
+                raise ProviderError("invalid_response")
             content = choice["message"]["content"]
             if not isinstance(content, str) or not content.strip():
                 raise ProviderError("empty_response")

@@ -3,20 +3,20 @@
 const $ = (selector, root = document) => root.querySelector(selector);
 const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
 // Apply the light redesign once and retain theme choices made after migration.
-if (localStorage.getItem('finpilot-workspace-skin') !== 'coinwise-v5') {
-  localStorage.setItem('finpilot-theme', 'light');
-  localStorage.setItem('finpilot-workspace-skin', 'coinwise-v5');
+if (window.FinPilotStorage.getItem('finpilot-workspace-skin') !== 'coinwise-v5') {
+  window.FinPilotStorage.setItem('finpilot-theme', 'light');
+  window.FinPilotStorage.setItem('finpilot-workspace-skin', 'coinwise-v5');
 }
 const motionMedia = matchMedia('(prefers-reduced-motion: reduce)');
 const activeAnimations = new Set();
-const state = { language: localStorage.getItem('finpilot-language') === 'en' ? 'en' : 'zh', sessionId: null, messages: [], sessions: [], busy: false, health: null, calculatorKind: 'compound', recognition: null, recording: false, toastTimer: null, lastAnswer: null };
+const state = { language: window.FinPilotStorage.getItem('finpilot-language') === 'en' ? 'en' : 'zh', sessionId: null, messages: [], sessions: [], busy: false, health: null, calculatorKind: 'compound', recognition: null, recording: false, toastTimer: null, lastAnswer: null };
 Object.assign(state, {
-  theme: localStorage.getItem('finpilot-theme') === 'dark' ? 'dark' : 'light',
-  engine: localStorage.getItem('finpilot-engine') || 'deepseek', models: [],
-  avatarCharacter: localStorage.getItem('finpilot-avatar-character') === 'robot' ? 'robot' : 'whale',
-  avatarMode: localStorage.getItem('finpilot-avatar-character') === 'robot' && localStorage.getItem('finpilot-avatar-mode') !== '2d' ? '3d' : '2d',
+  theme: window.FinPilotStorage.getItem('finpilot-theme') === 'dark' ? 'dark' : 'light',
+  engine: window.FinPilotStorage.getItem('finpilot-engine') || 'deepseek', models: [],
+  avatarCharacter: window.FinPilotStorage.getItem('finpilot-avatar-character') === 'robot' ? 'robot' : 'whale',
+  avatarMode: window.FinPilotStorage.getItem('finpilot-avatar-character') === 'robot' && window.FinPilotStorage.getItem('finpilot-avatar-mode') !== '2d' ? '3d' : '2d',
   avatarState: 'idle', avatar: null, speech: null, speechStarted: false, avatarRenderStatus: null,
-  reducedMotion: localStorage.getItem('finpilot-reduced-motion') === 'true',
+  reducedMotion: window.FinPilotStorage.getItem('finpilot-reduced-motion') === 'true',
   panelExpanded: innerWidth > 1180, smallLayout: innerWidth <= 1180,
   osReducedMotion: motionMedia.matches, calculationSequence: 0, menuOpen: false,
   analysisContext: null, analysisHistory: [], contextBusy: false, refreshing: false, sessionSequence: 0, drafts: new Map(),
@@ -260,7 +260,7 @@ function initializeCompanionConnection() {
       if(isCurrentSharedSession()) {
         const changed=state.language!==connection.language;
         state.language=connection.language;state.engine=connection.engine;
-        localStorage.setItem('finpilot-language',state.language);localStorage.setItem('finpilot-engine',state.engine);
+        window.FinPilotStorage.setItem('finpilot-language',state.language);window.FinPilotStorage.setItem('finpilot-engine',state.engine);
         if(changed)applyLanguage();else{renderModelOptions();setHealthBadge();renderModelSwitchStatus();}
       }
       state.companionActivities=connection.activities||[];refreshCompanionActivity();
@@ -277,7 +277,7 @@ function initializeCompanionConnection() {
 async function connectCurrentCompanion() {
   if(conversationLocked()||!state.companionClient)return;
   try {
-    if(!state.sessionId){const session=await api('/api/sessions',{method:'POST',body:JSON.stringify({title:companionText('桌宠对话','Companion conversation')})});state.sessionId=session.id;localStorage.setItem('finpilot-session',session.id);await loadSessions();}
+    if(!state.sessionId){const session=await api('/api/sessions',{method:'POST',body:JSON.stringify({title:companionText('桌宠对话','Companion conversation')})});state.sessionId=session.id;window.FinPilotStorage.setItem('finpilot-session',session.id);await loadSessions();}
     await state.companionClient.connect(state.sessionId,{language:state.language,engine:state.engine});renderCompanionConnection();
   }catch(error){showError(error.message);}
 }
@@ -537,7 +537,7 @@ async function attachOptionAnalysisReport(report, prompt) {
       state.sessionId = session.id; state.messages = []; state.lastAnswer = null;
       state.analysisContext = linked.active_analysis;
       state.analysisHistory = []; syncAnalysisHistory(undefined, linked.active_analysis);
-      localStorage.setItem('finpilot-session', session.id);
+      window.FinPilotStorage.setItem('finpilot-session', session.id);
       cancelSpeech(); settleAvatar(); renderMessages();
       await loadSessions().catch(() => {});
     }
@@ -707,7 +707,7 @@ function syncAssistantPanel() {
 
 function setAvatarMode(mode) {
   state.avatarMode = state.avatarCharacter === 'whale' ? '2d' : mode;
-  if (state.avatarCharacter === 'robot') localStorage.setItem('finpilot-avatar-mode', state.avatarMode);
+  if (state.avatarCharacter === 'robot') window.FinPilotStorage.setItem('finpilot-avatar-mode', state.avatarMode);
   $('#avatar-2d').setAttribute('aria-pressed', String(state.avatarMode === '2d'));
   $('#avatar-3d').setAttribute('aria-pressed', String(state.avatarMode === '3d'));
   $('.avatar-mode-control').hidden = state.avatarCharacter === 'whale';
@@ -719,8 +719,8 @@ function setAvatarMode(mode) {
 function setAvatarCharacter(character) {
   if (!['whale','robot'].includes(character)) return;
   state.avatar?.destroy(); state.avatar = null; state.avatarRenderStatus = null;
-  state.avatarCharacter = character; localStorage.setItem('finpilot-avatar-character',character);
-  state.avatarMode = character === 'whale' ? '2d' : localStorage.getItem('finpilot-avatar-mode') === '2d' ? '2d' : '3d';
+  state.avatarCharacter = character; window.FinPilotStorage.setItem('finpilot-avatar-character',character);
+  state.avatarMode = character === 'whale' ? '2d' : window.FinPilotStorage.getItem('finpilot-avatar-mode') === '2d' ? '2d' : '3d';
   $('#avatar-stage').replaceChildren(); setAvatarMode(state.avatarMode); mountAvatar();
 }
 
@@ -789,7 +789,7 @@ function changeModel(engine) {
   if (conversationLocked() || !state.models.some(model => model.id === engine && model.available)) { renderModelOptions(); return; }
   if (state.engine === engine) return;
   state.engine = engine; state.modelChanged = true;
-  localStorage.setItem('finpilot-engine', engine);
+  window.FinPilotStorage.setItem('finpilot-engine', engine);
   renderModelOptions(); setHealthBadge(); renderModelSwitchStatus(); renderAnalysisContext();
   animateElement($('.model-detail'), [{ opacity:.6, transform:'translateY(5px)' }, { opacity:1, transform:'translateY(0)' }]);
   animateElement($('.composer-context'), [{ backgroundColor:'rgba(219,168,90,.18)' }, { backgroundColor:'rgba(219,168,90,0)' }], { duration:450 });
@@ -924,7 +924,7 @@ async function selectSession(id) {
     state.analysisContext = session.active_analysis || null; state.analysisHistory = []; syncAnalysisHistory(session.analysis_history); restoreDraft();
     cancelSpeech(); settleAvatar();
     showError(''); renderMessages(); renderSessions(); closeSidebar();
-    localStorage.setItem('finpilot-session', session.id);
+    window.FinPilotStorage.setItem('finpilot-session', session.id);
     refreshCompanionActivity(); renderCompanionConnection();
   } catch (error) { showError(t('errorPrefix') + error.message); }
   finally { setContextBusy(false); }
@@ -934,7 +934,7 @@ function resetConversation() {
   saveDraft(); state.sessionSequence += 1;
   state.sessionId = null; state.messages = []; state.lastAnswer = null; state.analysisContext = null; state.analysisHistory = [];
   state.drafts.delete('__new__'); renderAnalysisContext();
-  localStorage.removeItem('finpilot-session');
+  window.FinPilotStorage.removeItem('finpilot-session');
   $('#message-input').value = ''; $('#message-input').style.height = '';
   showError(''); renderMessages(); renderSessions(); closeSidebar();
   cancelSpeech(); settleAvatar();
@@ -1123,7 +1123,7 @@ async function sendMessage(event) {
     syncAnalysisHistory(result.analysis_history);
     state.drafts.delete(state.sessionId || '__new__');
     input.value = ''; input.style.height = '';
-    localStorage.setItem('finpilot-session', state.sessionId);
+    window.FinPilotStorage.setItem('finpilot-session', state.sessionId);
     state.lastAnswer = result.answer;
     renderMessages({ animateLast:true }); renderAnalysisContext();
     settleAvatar();
@@ -1295,15 +1295,15 @@ function readAloud(text) {
 }
 
 function bindEvents() {
-  $('#theme-toggle').addEventListener('click',()=>{state.theme=state.theme==='dark'?'light':'dark';localStorage.setItem('finpilot-theme',state.theme);applyTheme();});
+  $('#theme-toggle').addEventListener('click',()=>{state.theme=state.theme==='dark'?'light':'dark';window.FinPilotStorage.setItem('finpilot-theme',state.theme);applyTheme();});
   $('#avatar-collapse').addEventListener('click',()=>{state.panelExpanded=!state.panelExpanded;syncAssistantPanel();});
   $('#avatar-2d').addEventListener('click',()=>setAvatarMode('2d'));
   $('#avatar-3d').addEventListener('click',()=>setAvatarMode('3d'));
   $('#avatar-character').addEventListener('change',event=>setAvatarCharacter(event.target.value));
   $('#companion-connect').addEventListener('click',connectCurrentCompanion);
   $('#companion-disconnect').addEventListener('click',()=>state.companionClient?.disconnect().catch(error=>showError(error.message)));
-  $('#reduce-motion').addEventListener('change',event=>{state.reducedMotion=event.target.checked;localStorage.setItem('finpilot-reduced-motion',String(state.reducedMotion));applyMotionPreference();});
-  $('#workspace-motion-toggle')?.addEventListener('click',()=>{state.reducedMotion=!state.reducedMotion;localStorage.setItem('finpilot-reduced-motion',String(state.reducedMotion));applyMotionPreference();});
+  $('#reduce-motion').addEventListener('change',event=>{state.reducedMotion=event.target.checked;window.FinPilotStorage.setItem('finpilot-reduced-motion',String(state.reducedMotion));applyMotionPreference();});
+  $('#workspace-motion-toggle')?.addEventListener('click',()=>{state.reducedMotion=!state.reducedMotion;window.FinPilotStorage.setItem('finpilot-reduced-motion',String(state.reducedMotion));applyMotionPreference();});
   motionMedia.addEventListener('change', event=>{state.osReducedMotion=event.matches;applyMotionPreference();});
   document.addEventListener('visibilitychange',()=>{if(document.hidden)for(const animation of [...activeAnimations])animation.cancel();});
   $('#avatar-read-last').addEventListener('click',()=>{const body=$$('.message.assistant .message-body').at(-1);if(body)readAloud(body.textContent);});
@@ -1316,7 +1316,7 @@ function bindEvents() {
   $('#chat-form').addEventListener('submit',sendMessage);
   $('#message-input').addEventListener('keydown',event=>{if(event.key==='Enter'&&!event.shiftKey&&!event.isComposing){event.preventDefault();sendMessage();}});
   $('#message-input').addEventListener('input',event=>{const input=event.target;input.style.height='auto';input.style.height=`${Math.min(200,input.scrollHeight)}px`;});
-  $('#language-toggle').addEventListener('click',()=>{if(conversationLocked())return;state.language=state.language==='zh'?'en':'zh';localStorage.setItem('finpilot-language',state.language);applyLanguage();shareCompanionPreferences();toast(t('changedLanguage'));});
+  $('#language-toggle').addEventListener('click',()=>{if(conversationLocked())return;state.language=state.language==='zh'?'en':'zh';window.FinPilotStorage.setItem('finpilot-language',state.language);applyLanguage();shareCompanionPreferences();toast(t('changedLanguage'));});
   $('#sidebar-new').addEventListener('click',newConversation);$('#top-new').addEventListener('click',newConversation);
   $('#nav-chat').addEventListener('click',()=>{closeSidebar();$('#message-input').focus();});
   $('#starter-calculator')?.addEventListener('click',()=>openCalculator());
@@ -1365,7 +1365,7 @@ async function initialize() {
   bindEvents();initVoice();applyLanguage();applyMotionPreference();setAvatarMode(state.avatarMode);mountAvatar();
   setSidebar(false,false);
   await Promise.allSettled([loadHealth(),loadModels(),loadSessions().catch(error=>showError(t('errorPrefix')+error.message))]);
-  const saved=localStorage.getItem('finpilot-session');
+  const saved=window.FinPilotStorage.getItem('finpilot-session');
   const requestedSession=new URLSearchParams(location.search).get('session');
   if(requestedSession&&/^[0-9a-f-]{36}$/i.test(requestedSession))await selectSession(requestedSession);
   else if(!requestedSession&&saved&&state.sessions.some(session=>session.id===saved))await selectSession(saved);
@@ -1374,7 +1374,7 @@ async function initialize() {
   const engine = entry.get('engine');
   if (['deepseek','local'].includes(engine)) {
     if (state.models.some(model=>model.id===engine&&model.available)) {
-      state.engine=engine;localStorage.setItem('finpilot-engine',engine);renderModelOptions();setHealthBadge();
+      state.engine=engine;window.FinPilotStorage.setItem('finpilot-engine',engine);renderModelOptions();setHealthBadge();
     } else toast(state.language==='zh'?'所选模型尚未就绪，请先使用可用引擎。':'The selected model is not ready. Choose an available engine.');
   }
   const prompt = entry.get('prompt');

@@ -66,7 +66,7 @@ def test_analysis_and_learning_are_distinct_routes_and_refresh_local_client(tmp_
         assert 'id="lab-scenarios"' in learning.text and 'id="demo-start"' not in learning.text
         for response in (analysis, learning, client.get("/"), client.get("/workspace")):
             assert response.headers["cache-control"] == "no-store"
-        for name in ("options-demo.js", "options-demo.css", "app.js"):
+        for name in ("options-demo.js", "options-demo.css", "options-demo-i18n.js", "app.js"):
             asset = client.get(f"/static/{name}?v=20261116-entry-fix")
             assert asset.status_code == 200
             assert asset.headers["cache-control"] == "no-store"

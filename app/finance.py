@@ -74,7 +74,8 @@ def calculate(req: CalculationRequest) -> dict:
 
 def parse_calculation(message: str) -> CalculationRequest | None:
     """Explicit tool commands, not arbitrary language-to-financial-parameter guessing."""
-    match = re.match(r"^/?(compound|loan|budget|复利|贷款|预算)(?:\s|$)", message.strip(), re.I)
+    message = message.strip()
+    match = re.match(r"^/?(compound|loan|budget|复利|贷款|预算)(?:\s|$)", message, re.I)
     if not match:
         return None
     kind = {"复利": "compound", "贷款": "loan", "预算": "budget"}.get(match[1].lower(), match[1].lower())

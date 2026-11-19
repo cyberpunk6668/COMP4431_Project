@@ -16,3 +16,6 @@ dist/
 node_modules/
 frontend/*.tsbuildinfo
 *.log
+
+# Temporary presentation chart conversion candidates.
+/.chart-data-*/

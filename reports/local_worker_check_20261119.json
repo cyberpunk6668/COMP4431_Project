@@ -1,0 +1,22 @@
+{
+  "checked_at": "2026-11-19T08:41:09.355024+00:00",
+  "scope": "Actual cached local-model inference via ChatService; no user DB, cloud API or broker",
+  "availability": {
+    "available": true,
+    "reason": "ready",
+    "base_model": "Qwen/Qwen3-0.6B",
+    "trained_at": "2026-11-10T09:45:05.645101+00:00",
+    "training_steps": 108,
+    "worker_loaded": false
+  },
+  "status": "passed",
+  "cloud_requests": 0,
+  "broker_requests": 0,
+  "mode": "local-lora",
+  "warning": null,
+  "answer": "Key points: Compounding earns interest on earlier interest. Projections need initial principal, contributions, horizon, rate and compounding frequency. This project's calculator assumes a nominal annual rate compounded monthly and contributions at month-end: monthly rate = annual rate / 12. At zero interest, add principal and contributions directly. This is a fixed-rate scenario excluding tax, fees and inflation, not a market forecast. An effective annual yield cannot simply be divided by 12.\n\nCaveat: Scope, jurisdiction and product terms can differ. Check the official source; this is not a promise of returns.\n\nSource: [compound-interest]\nFor financial education, not personal investment advice.",
+  "source_ids": [
+    "compound-interest"
+  ],
+  "seconds": 40.99
+}

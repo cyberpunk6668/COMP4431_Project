@@ -1,0 +1,177 @@
+{
+  "checked_at_utc": "2026-11-19T08:49:08.578899+00:00",
+  "status": "passed_with_explicit_limits",
+  "original_project": "F:\\桌面\\COMP4431_Project",
+  "compact_project": "F:\\桌面\\COMP4431_Project_non_env",
+  "fixed": [
+    {
+      "problem": "Malformed or noncanonical Host headers could cause 500 or be accepted as a local authority",
+      "scope": "both projects",
+      "files": [
+        "app/main.py",
+        "tests/test_input_boundaries.py"
+      ]
+    },
+    {
+      "problem": "Calculator commands separated by newlines, tabs or Unicode whitespace were rejected",
+      "scope": "both projects",
+      "files": [
+        "app/finance.py",
+        "tests/test_input_boundaries.py"
+      ]
+    },
+    {
+      "problem": "Options gateway links hard-coded port 8000 and could open another project/service",
+      "scope": "both projects",
+      "files": [
+        "web/options-demo.html",
+        "web/options-demo-i18n.js",
+        "tests/test_input_boundaries.py"
+      ]
+    },
+    {
+      "problem": "Clean Windows installs missed the time-zone database used by options and historical workflows",
+      "scope": "both projects",
+      "files": [
+        "requirements.txt",
+        "requirements-lock.txt",
+        "start-finpilot.bat"
+      ]
+    },
+    {
+      "problem": "PowerShell 5.1 lost quotes inside Python -c probes, and native warnings could abort successful setup",
+      "scope": "compact runtime; original start.ps1 native-warning handling also repaired",
+      "files": [
+        "scripts/runtime.ps1",
+        "scripts/runtime_probe.py",
+        "tests/test_bootstrap_contract.py"
+      ]
+    },
+    {
+      "problem": "Cross-host PowerShell module autoload could fail file hashing or archive extraction",
+      "scope": "compact runtime and desktop",
+      "files": [
+        "scripts/runtime.ps1",
+        "scripts/node-runtime.ps1"
+      ]
+    },
+    {
+      "problem": "Electron npm installation could succeed without downloading electron.exe",
+      "scope": "compact desktop",
+      "files": [
+        "scripts/node-runtime.ps1",
+        "start-desktop.ps1"
+      ]
+    },
+    {
+      "problem": "Incomplete ML installs or mismatched interpreter, adapter or cache could appear ready",
+      "scope": "compact ML",
+      "files": [
+        "app/local_llm.py",
+        "setup-local-model.ps1",
+        "scripts/check_local_model.py",
+        "tests/test_ml_bootstrap.py"
+      ]
+    },
+    {
+      "problem": "Custom-port backend stop omitted owned ports outside defaults; source/runtime cache could overlap",
+      "scope": "compact runtime",
+      "files": [
+        "scripts/runtime.ps1",
+        "tests/test_bootstrap_contract.py"
+      ]
+    }
+  ],
+  "verification": {
+    "original_isolated_python": {
+      "counts": {
+        "tests": 1097,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "report": "reports/python_regression_v17-20261119T084146122933Z.json",
+      "junit": "reports/tests_v17-20261119T084146122933Z.xml",
+      "network_guard": {
+        "dotenv_loading_disabled": true,
+        "blocked_attempts": [],
+        "external_model_requests": 0,
+        "broker_requests": 0
+      }
+    },
+    "original_three_viewport_ui": {
+      "status": "passed",
+      "report": "reports/experience_ui_v17-20261119T083229312909Z.json"
+    },
+    "original_options_language": {
+      "status": "passed",
+      "report": "reports/options_demo_language_20261119T084146699638Z.json"
+    },
+    "original_real_cached_local_inference": {
+      "status": "passed",
+      "mode": "local-lora",
+      "seconds": 40.99,
+      "report": "reports/local_worker_check_20261119.json"
+    },
+    "compact_fresh_runtime_pytest": {
+      "tests": 94,
+      "failures": 0,
+      "errors": 0,
+      "junit": "reports/tests_compact_20261119.xml"
+    },
+    "compact_latest_runtime_targeted_recheck": {
+      "tests": 10,
+      "status": "passed",
+      "scope": "PowerShell bootstrap after final installer process change"
+    },
+    "compact_three_viewport_ui": {
+      "status": "passed",
+      "widths": [
+        320,
+        390,
+        1440
+      ],
+      "flow_groups": 18,
+      "report": "reports/compact_browser_20261119T084210081345Z.json"
+    },
+    "compact_desktop_bootstrap": {
+      "status": "passed",
+      "guard_tests": 11,
+      "source_cache_tests": 5,
+      "node_contract_tests": 4,
+      "report": "reports/desktop_bootstrap_compact_20261119.json"
+    },
+    "compact_batch_launch": {
+      "status": "passed",
+      "checks": [
+        "fresh dependency setup",
+        "batch entry point",
+        "offline owned start",
+        "local options calculation",
+        "owned reuse",
+        "custom-port stop",
+        "no remaining owned listener"
+      ]
+    },
+    "compact_dependency_check": "passed",
+    "powershell_syntax_check": "passed",
+    "git_diff_check": "passed"
+  },
+  "compact_distribution": {
+    "logical_bytes": 23578098,
+    "MiB": 22.49,
+    "files": 279,
+    "virtualenvs_or_node_modules_in_source": false,
+    "original_private_configuration_or_database_copied": false,
+    "runtime_location": "%LOCALAPPDATA%/FinPilot/runtimes/compact-<project-path-hash>",
+    "api_key": "User-provided; not copied from original"
+  },
+  "limits": [
+    "No guarantee of zero defects or correctness of all generated financial answers.",
+    "Real DeepSeek and IBKR account permissions/data were not exercised.",
+    "Native physical dragging, tray, click-through, microphone/audio and multiple displays were not certified.",
+    "Compact ML download/setup was checked with controlled cases and Plan/CheckOnly; GB-sized optional ML installation and compact CPU inference were not performed.",
+    "The missing-Python official-installer fallback was inspected and checksum-pinned but not executed, because a compatible Python already exists.",
+    "Existing older submission ZIPs are previous snapshots and were not rebuilt in this audit."
+  ]
+}

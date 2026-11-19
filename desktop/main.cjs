@@ -5,16 +5,19 @@ const {app,BrowserWindow,Tray,Menu,ipcMain,screen,shell,dialog,nativeImage}=requ
 const fs=require('node:fs');
 const path=require('node:path');
 const {ROUTES,localBase,finiteRect,contains,position}=require('./geometry.cjs');
+const {readOwnership,projectProfile,writeJSONAtomic,writePetReady,createLifecycleGuard}=require('./lifecycle.cjs');
 const arg=name=>process.argv.find(v=>v.startsWith(`--${name}=`))?.slice(name.length+3);
-let base;
-try {base=localBase(arg('base-url')||process.env.FINPILOT_BASE_URL||'http://127.0.0.1:8000');}
-catch {app.whenReady().then(()=>{dialog.showErrorBox('FinPilot','The backend must use http://127.0.0.1:<port>.');app.quit();});}
+let base,ownership,startupError;
+try {base=localBase(arg('base-url')||process.env.FINPILOT_BASE_URL||'http://127.0.0.1:8000');ownership=readOwnership(process.argv,base);}
+catch(error){startupError=error;}
 if(arg('pet-data-dir'))app.setPath('userData',path.resolve(arg('pet-data-dir')));
-const primaryInstance=app.requestSingleInstanceLock();
+else if(ownership)app.setPath('userData',projectProfile(app.getPath('appData'),ownership.identity.project_root));
+const primaryInstance=app.requestSingleInstanceLock({base,project:ownership?.identity.project_root||null});
 if(!primaryInstance)app.quit();
-let win,tray,display,settings={},rects=[],panelOpen=false,dragging=false,dragLease=0,forceThrough=false,poll,saveTimer,ignored=true;
+let win,tray,display,settings={},rects=[],panelOpen=false,dragging=false,dragLease=0,forceThrough=false,poll,saveTimer,ignored=true,lifecycle,settingsLoaded=false;
 const settingsFile=()=>path.join(app.getPath('userData'),'companion-window.json');
-function persist(){clearTimeout(saveTimer);saveTimer=setTimeout(()=>{try{fs.mkdirSync(app.getPath('userData'),{recursive:true});fs.writeFileSync(settingsFile(),JSON.stringify(settings,null,2));}catch{}},150);}
+function saveSettings(){if(settingsLoaded){try{writeJSONAtomic(settingsFile(),settings);}catch{}}}
+function persist(){clearTimeout(saveTimer);saveTimer=setTimeout(saveSettings,150);}
 function readSettings(){try{const raw=JSON.parse(fs.readFileSync(settingsFile(),'utf8'));settings={scale:[150,200,250,300].includes(raw.scale)?raw.scale:200,position:raw.position,displayId:raw.displayId,roaming:raw.roaming===true};}catch{settings={scale:200,roaming:false};}}
 function layout(reason='layout'){
   if(!win||win.isDestroyed())return;
@@ -25,7 +28,7 @@ function show(){if(!win)return;win.showInactive();layout('show');}
 function reset(){settings.position=null;display=screen.getPrimaryDisplay();settings.displayId=display.id;win.setBounds(display.workArea);layout('reset');persist();show();}
 function scale(value){if(![150,200,250,300].includes(value))return;settings.scale=value;settings.position=position(settings.position,display.workArea,value);layout('scale');persist();}
 function setPanel(value){panelOpen=value;win.setFocusable(value);if(value){forceThrough=false;win.setIgnoreMouseEvents(false);ignored=false;win.focus();}else{win.blur();}layout('panel');}
-function quit(){clearInterval(poll);clearTimeout(saveTimer);try{fs.mkdirSync(app.getPath('userData'),{recursive:true});fs.writeFileSync(settingsFile(),JSON.stringify(settings,null,2));}catch{}app.quit();}
+function quit(){app.quit();}
 function menu(){return Menu.buildFromTemplate([
   {label:'FinPilot · 鲸鱼娘金融助手',enabled:false},{type:'separator'},
   {label:'显示桌宠 / Show pet',click:show},{label:'隐藏桌宠 / Hide pet',click:()=>win.hide()},
@@ -41,8 +44,13 @@ function menu(){return Menu.buildFromTemplate([
 function allowedEvent(event){return win&&!win.isDestroyed()&&event.sender===win.webContents&&(()=>{try{return new URL(event.senderFrame.url).origin===base;}catch{return false;}})();}
 async function start(){
   readSettings();
+  settingsLoaded=true;
+  lifecycle=createLifecycleGuard({base,ownership,onExit:()=>quit()});
+  lifecycle.start();
   const health=await fetch(base+'/api/health',{signal:AbortSignal.timeout(5000)}).then(r=>r.ok?r.json():Promise.reject(Error('health')));
+  if(app.isQuitting)return;
   if(health.application!=='FinPilot')throw Error('The selected service is not FinPilot.');
+  if(ownership&&health.project_run_token!==ownership.token)throw Error('The selected service belongs to another project run.');
   display=screen.getAllDisplays().find(d=>d.id===settings.displayId)||screen.getPrimaryDisplay();
   settings.displayId=display.id;
   win=new BrowserWindow({...display.workArea,show:false,frame:false,transparent:true,backgroundColor:'#00000000',resizable:false,movable:false,skipTaskbar:true,alwaysOnTop:true,hasShadow:false,focusable:false,minimizable:false,maximizable:false,fullscreenable:false,webPreferences:{preload:path.join(__dirname,'preload.cjs'),contextIsolation:true,sandbox:true,nodeIntegration:false,webSecurity:true,spellcheck:false,backgroundThrottling:true}});
@@ -52,7 +60,11 @@ async function start(){
   win.webContents.session.setPermissionRequestHandler((_contents,_permission,callback)=>callback(false));
   win.on('close',event=>{if(!app.isQuitting){event.preventDefault();win.hide();}});
   win.on('show',()=>layout('show'));
-  win.webContents.on('did-finish-load',()=>{layout('initial');show();});
+  win.webContents.on('did-finish-load',()=>{
+    if(app.isQuitting)return;
+    layout('initial');show();
+    if(ownership)try{writePetReady(ownership,process.pid);}catch(error){console.error('FinPilot companion readiness failed:',String(error.message).slice(0,180));quit();}
+  });
   ipcMain.on('pet:ready',event=>{if(allowedEvent(event))layout('initial');});
   ipcMain.on('pet:rects',(event,value)=>{if(!allowedEvent(event)||!Array.isArray(value))return;const a=display.workArea;rects=value.slice(0,64).map(r=>finiteRect(r,a.width,a.height)).filter(Boolean);});
   ipcMain.on('pet:position',(event,value)=>{if(!allowedEvent(event))return;settings.position=position(value,display.workArea,settings.scale);settings.displayId=display.id;persist();});
@@ -75,11 +87,11 @@ async function start(){
     if(next!==ignored){win.setIgnoreMouseEvents(next);ignored=next;}
   },40);
   tray=new Tray(nativeImage.createFromPath(path.join(__dirname,'tray.png')));tray.setToolTip('FinPilot · 鲸鱼娘金融助手');tray.setContextMenu(menu());tray.on('double-click',show);tray.on('click',show);
-  // No backend process is spawned or terminated by the host; the launcher owns
-  // startup and deliberately leaves the shared Python service running.
+  // The launcher owns backend shutdown. This host only watches that lifetime
+  // and exits itself; it never terminates arbitrary processes or the backend.
   await win.loadURL(base+'/pet');
 }
 app.on('second-instance',()=>{show();if(win)win.webContents.send('pet:command',{type:'notice',text:'桌宠已经在运行 / The companion is already running.'});});
-app.on('before-quit',()=>{app.isQuitting=true;clearInterval(poll);clearTimeout(saveTimer);});
+app.on('before-quit',()=>{app.isQuitting=true;lifecycle?.stop();clearInterval(poll);clearTimeout(saveTimer);saveSettings();if(tray&&!tray.isDestroyed())tray.destroy();});
 app.on('window-all-closed',()=>{});
-if(primaryInstance&&base)app.whenReady().then(start).catch(error=>{dialog.showErrorBox('FinPilot 桌宠未启动',`请先运行项目后端或使用 start-desktop.ps1。\n${String(error.message).slice(0,180)}`);app.quit();});
+if(primaryInstance)app.whenReady().then(()=>{if(startupError)throw startupError;return start();}).catch(error=>{if(app.isQuitting)return;if(ownership||arg('lifecycle-file'))console.error('FinPilot companion did not start:',String(error.message).slice(0,180));else dialog.showErrorBox('FinPilot 桌宠未启动',`请先运行项目后端或使用 start-desktop.ps1。\n${String(error.message).slice(0,180)}`);app.quit();});

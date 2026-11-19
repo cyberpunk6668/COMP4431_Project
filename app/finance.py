@@ -81,8 +81,8 @@ def parse_calculation(message: str) -> CalculationRequest | None:
     kind = {"复利": "compound", "贷款": "loan", "预算": "budget"}.get(match[1].lower(), match[1].lower())
     tail = message[match.end():].strip()
     pairs = re.findall(r"([a-z_]+)\s*=\s*([+-]?(?:\d+(?:\.\d+)?|\.\d+))", tail, re.I)
-    residue = re.sub(r"([a-z_]+)\s*=\s*([+-]?(?:\d+(?:\.\d+)?|\.\d+))", "", tail, flags=re.I).strip(" ,，;")
-    if residue or not pairs or len({k.lower() for k, _ in pairs}) != len(pairs):
+    residue = re.sub(r"([a-z_]+)\s*=\s*([+-]?(?:\d+(?:\.\d+)?|\.\d+))", "", tail, flags=re.I)
+    if re.search(r"[^\s,，;]", residue) or not pairs or len({k.lower() for k, _ in pairs}) != len(pairs):
         raise ValueError("Use the calculator panel or: compound principal=10000 annual_rate=5 years=10 monthly_contribution=500")
     params = {k.lower(): v for k, v in pairs}
     if "years" in params:

@@ -1,7 +1,7 @@
 {
   "current_version": 17,
   "manual_version": "17.0",
-  "reviewed_at": "2026-11-18",
+  "reviewed_at": "2026-11-19",
   "scope": "Hand-reviewed public product manual; fixed UI/document provenance hashes only, not arbitrary repository retrieval.",
   "documents": [
     {
@@ -25,7 +25,7 @@
         },
         {
           "path": "docs/desktop_pet_v15.md",
-          "sha256": "fc995f92b9f44f78368388a8145c6b924ebc6414c606f7983ffc183c649ad9e5"
+          "sha256": "bba40f4ba855f10886060c4af4b2402c2122d3a9d870abe222a4e02dec699ff9"
         },
         {
           "path": "web/learn.html",
@@ -478,7 +478,7 @@
         },
         {
           "path": "docs/desktop_pet_v15.md",
-          "sha256": "fc995f92b9f44f78368388a8145c6b924ebc6414c606f7983ffc183c649ad9e5"
+          "sha256": "bba40f4ba855f10886060c4af4b2402c2122d3a9d870abe222a4e02dec699ff9"
         }
       ],
       "links": [
@@ -498,7 +498,7 @@
         "summary": "小鲸与工作台共用已明确选定的聊天和金融后端；网页预览与 Windows 原生宿主的能力不同。",
         "steps": [
           "在工作台新建或打开目标会话，在助手区域点击「连接当前会话」；桌宠只同步明确连接的会话。",
-          "Windows 桌宠使用项目启动脚本 start-desktop.ps1；双击角色或按回车打开聊天，单击只播放本地互动。",
+          "项目主启动器会自动打开 Windows 悬浮 2D 助手；start-desktop.ps1 可启动同一项目而不打开浏览器。双击角色或按回车打开聊天，单击只播放本地互动。",
           "聊天气泡可追问报告或打开计算器、历史复盘和完整工作台；菜单可调整大小、恢复位置或隐藏，Windows 托盘可恢复与退出。",
           "不再共享时点击「断开」；删除被连接会话或重启服务也会清除连接。"
         ],
@@ -507,7 +507,7 @@
           "便携 EXE 仍需要项目 Python 环境和后端；浏览器 /pet 预览不具备系统置顶、托盘或原生点击穿透。",
           "鲸鱼娘是非官方 2D 角色，仅用于课程及个人非商业演示；动画状态不表示市场涨跌或判断可靠性。",
           "原生宿主不提供麦克风语音输入；漫游默认关闭，动画、连接与 SSE 重连不自动请求模型或行情。",
-          "默认退出桌宠只关闭宿主，不停止共享后端，也不结束用户原先启动的服务。"
+          "关闭项目启动窗口、按 Ctrl+C 或执行 stop-finpilot.cmd 会一起停止本次后端和助手；后端退出也会关闭助手。只关闭浏览器不停止项目；托盘「退出桌宠」只关闭助手。独立启动的旧服务不会被接管。"
         ]
       },
       "en": {
@@ -515,7 +515,7 @@
         "summary": "The pet shares an explicitly selected chat and the existing finance backend. Browser preview and Windows native host have different capabilities.",
         "steps": [
           "Open or create the intended workspace chat and select Connect current chat in the companion panel. Only that explicitly connected chat is synchronized.",
-          "Start the Windows pet with the project start-desktop.ps1 script. Double-click the character or press Enter to open chat; a single click plays only a local interaction.",
+          "The main project launcher automatically opens the Windows floating 2D assistant. start-desktop.ps1 starts the same project without opening a browser. Double-click the character or press Enter to open chat; a single click plays only a local interaction.",
           "Use its bubble for report questions or shortcuts to calculators, history and the full workspace. Its menu controls size, position and hiding; the Windows tray restores or exits it.",
           "Select Disconnect when finished. Deleting the linked chat or restarting the service also clears the connection."
         ],
@@ -524,7 +524,7 @@
           "The portable EXE still requires the project Python environment and backend. Browser /pet preview has no native always-on-top, tray or system click-through capability.",
           "The unofficial whale maid is 2D and limited to course/personal noncommercial demonstrations. Animation states do not indicate market direction or confidence.",
           "The native host does not offer microphone input. Roaming defaults off; animation, connection and SSE reconnection do not automatically request models or market data.",
-          "Exiting the pet closes the host by default without stopping the shared backend or a service started earlier by the user."
+          "Closing the project launch window, pressing Ctrl+C or running stop-finpilot.cmd stops its backend and assistant together. Backend exit also closes the assistant. Closing a browser leaves the project running; tray Quit pet closes only the assistant. Separately started services are not taken over."
         ]
       }
     },
@@ -610,7 +610,7 @@
         },
         {
           "path": "docs/desktop_pet_v15.md",
-          "sha256": "fc995f92b9f44f78368388a8145c6b924ebc6414c606f7983ffc183c649ad9e5"
+          "sha256": "bba40f4ba855f10886060c4af4b2402c2122d3a9d870abe222a4e02dec699ff9"
         }
       ],
       "links": [
@@ -675,7 +675,7 @@
         },
         {
           "path": "docs/desktop_pet_v15.md",
-          "sha256": "fc995f92b9f44f78368388a8145c6b924ebc6414c606f7983ffc183c649ad9e5"
+          "sha256": "bba40f4ba855f10886060c4af4b2402c2122d3a9d870abe222a4e02dec699ff9"
         }
       ],
       "links": [
@@ -736,7 +736,7 @@
         },
         {
           "path": "docs/desktop_pet_v15.md",
-          "sha256": "fc995f92b9f44f78368388a8145c6b924ebc6414c606f7983ffc183c649ad9e5"
+          "sha256": "bba40f4ba855f10886060c4af4b2402c2122d3a9d870abe222a4e02dec699ff9"
         }
       ],
       "links": [
@@ -1123,7 +1123,7 @@
         },
         {
           "path": "docs/desktop_pet_v15.md",
-          "sha256": "fc995f92b9f44f78368388a8145c6b924ebc6414c606f7983ffc183c649ad9e5"
+          "sha256": "bba40f4ba855f10886060c4af4b2402c2122d3a9d870abe222a4e02dec699ff9"
         }
       ],
       "links": [

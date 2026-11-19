@@ -1,0 +1,50 @@
+{
+  "checked_at_utc": "2026-11-19T10:28:57.281019+00:00",
+  "status": "passed_with_ui_limits",
+  "behavior": [
+    "main launcher automatically starts floating 2D assistant",
+    "launch window close, Ctrl+C, explicit stop and backend exit stop the owned assistant",
+    "same-project duplicate launch shows existing pet or reopens one explicitly exited; backend stays",
+    "headless-to-desktop mode change explicitly requires Stop first",
+    "browser is launched by parent PowerShell outside owned Job"
+  ],
+  "validation": {
+    "full_python_passed": 1133,
+    "compact_python_passed": 130,
+    "desktop_node_passed_per_project": 45,
+    "windows_process_cases_per_project": 16,
+    "powershell_bootstrap_checks": 11,
+    "desktop_cache_sync_checks": 5,
+    "shared_source_identical": true,
+    "test_sessions_stopped": true
+  },
+  "process_reports": {
+    "full": "reports/project_lifecycle_20261119T102547447255Z.json",
+    "compact": "reports/project_lifecycle_20261119T102634828389Z.json"
+  },
+  "native_ui": {
+    "full_window_observed": true,
+    "compact_window_observed": true,
+    "full_stop_command_closed_window_and_reaped_seven_owned_processes": true,
+    "compact_backend_termination_closed_window_and_reaped_seven_owned_processes": true,
+    "manual_menu_reopen_ui_completed": false,
+    "interrupted_by_user_escape": true,
+    "further_computer_use_stopped": true,
+    "physical_terminal_close_not_automated": true
+  },
+  "limits": [
+    "Old already-running portable instance remains untouched; restart using the updated main launcher to receive the new lifecycle behavior.",
+    "Historic v15 portable executable was not rebuilt; launchers use current source.",
+    "Browser handoff protocol and process isolation tested; no fresh-browser UI certification."
+  ],
+  "source_sha256": {
+    "scripts/project_lifecycle.py": "b99d7b7fedbd120316694f0c2648966c7deca81285970fa34a0fc0e2f1ad959f",
+    "scripts/run-project.ps1": "683703aa39d8fa2c4430a974475c219700340b60bf80cf121494a9cdd8112eca",
+    "scripts/check_project_lifecycle.py": "4ada7e8a950fda9f51a35bd418dd9fac09ccf94a9668845d1f46189f0ca5e971",
+    "desktop/main.cjs": "dfdbc2057f9713b1b7746416769bc1b4e24aa485cc15b3303be318e12636293e",
+    "desktop/lifecycle.cjs": "d03fa79140204d5db9219268b8dc1be0e85fee898ea3d6396588468fdb87d00f",
+    "desktop/package.json": "8621d53322c078b3d0dab629e2f337d81d2d5b911962ec9b166f1caff2b38596",
+    "desktop/tests/lifecycle.test.cjs": "991f7e009d01a6765ebc913982134b556c9d524e793d9e5e949f9089226f493e",
+    "desktop/tests/host-lifecycle.test.cjs": "78c23a64b7f7682c03cb8b1dbddddfbd63c849c6c4dc7617e93cee19516c0897"
+  }
+}

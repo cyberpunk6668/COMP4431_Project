@@ -28,7 +28,7 @@ def source_tree(tmp_path, monkeypatch):
 
 def test_collect_includes_launchers_and_renamed_course_instructions(source_tree):
     selected = {path.relative_to(source_tree).as_posix() for path in package.collect_paths()}
-    assert {"start-finpilot.bat", "start.ps1", "start-desktop.ps1",
+    assert {"start-finpilot.bat", "start-finpilot.ps1", "stop-finpilot.cmd", "start.ps1", "start-desktop.ps1",
             "start-options-demo.ps1", "start-options-demo.cmd",
             "COMP4431_GroupProject2027-1.pdf"} <= selected
     assert "COMP4431_GroupProject2027-1 (1).pdf" not in selected

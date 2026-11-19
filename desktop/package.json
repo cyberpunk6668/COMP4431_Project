@@ -19,7 +19,7 @@
     "productName": "FinPilotPet",
     "copyright": "FinPilot course project; character credits in application",
     "directories": {"output": "artifacts"},
-    "files": ["main.cjs", "preload.cjs", "geometry.cjs", "tray.png", "README.md", "package.json"],
+    "files": ["main.cjs", "preload.cjs", "geometry.cjs", "lifecycle.cjs", "tray.png", "README.md", "package.json"],
     "artifactName": "FinPilotPet-${version}-win-x64-portable.${ext}",
     "win": {"target": "portable", "signAndEditExecutable": false},
     "portable": {"requestExecutionLevel": "user"},

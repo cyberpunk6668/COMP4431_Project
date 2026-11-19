@@ -1,0 +1,25 @@
+{
+  "status": "failed",
+  "checked_at_utc": "20261119T100958027924Z",
+  "scope": "Real Windows supervisor, private console, HTTP backend and headless fake pet/child; no native pet UI or model/broker",
+  "diagnostics": "C:\\Users\\ROG\\AppData\\Local\\Temp\\finpilot-lifecycle-check-osho55f0",
+  "cases": [
+    {
+      "name": "startup_order_duplicate_reuse_cli_stop_and_descendant_cleanup",
+      "status": "passed",
+      "controlled_processes": 6
+    },
+    {
+      "name": "backend_exit_closes_pet_and_its_child",
+      "status": "passed"
+    },
+    {
+      "name": "kill_on_job_close_cleans_entire_tree_after_owner_termination",
+      "status": "passed"
+    }
+  ],
+  "real_model_requests": 0,
+  "broker_requests": 0,
+  "error": "Traceback (most recent call last):\n  File \"<string>\", line 9, in <module>\nPermissionError: [WinError 5] 拒绝访问。\n",
+  "cleanup_errors": []
+}

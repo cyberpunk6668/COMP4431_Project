@@ -14,13 +14,15 @@ DIRECTORIES = ["app", "web", "frontend", "data", "tests", "evaluation", "scripts
 # Runtime retrieval reads the reviewed JSON corpus. Raw third-party downloads
 # are local audit caches and can contain unreviewed scripts or token strings.
 RAW_CACHES = {"data/news_sources"}
-FILES = ["README.md", ".env.example", ".gitignore", "requirements.txt", "requirements-dev.txt", "requirements-ui-tests.txt", "requirements-ml.txt", "requirements-options.txt", "requirements-lock.txt", "start.ps1", "start-finpilot.bat", "start-desktop.ps1", "pytest.ini", "COMP4431_GroupProject2027-1.pdf"]
+FILES = ["README.md", ".env.example", ".gitignore", "requirements.txt", "requirements-dev.txt", "requirements-ui-tests.txt", "requirements-ml.txt", "requirements-options.txt", "requirements-lock.txt", "start.ps1", "start-finpilot.bat", "start-finpilot.ps1", "stop-finpilot.cmd", "start-desktop.ps1", "pytest.ini", "COMP4431_GroupProject2027-1.pdf"]
 # Keep the two project demo decks, without copying unrelated presentation drafts,
 # exports and intermediate renders from the shared output directory.
 FILES += ["output/presentations/FinPilot_Demo_EN.pptx", "output/presentations/FinPilot_Demo_EN_v2.pptx"]
 FILES += ["start-options-demo.ps1", "start-options-demo.cmd"]
+FILES += ["scripts/launcher.ps1", "scripts/run-project.ps1", "scripts/node-runtime.ps1",
+          "scripts/runtime_probe.py", "scripts/project_lifecycle.py"]
 DESKTOP_FILES = ["desktop/package.json", "desktop/package-lock.json", "desktop/main.cjs", "desktop/preload.cjs",
-                 "desktop/geometry.cjs", "desktop/build.cjs", "desktop/README.md", "desktop/.gitignore", "desktop/tray.png"]
+                 "desktop/geometry.cjs", "desktop/lifecycle.cjs", "desktop/build.cjs", "desktop/README.md", "desktop/.gitignore", "desktop/tray.png"]
 PORTABLE = "desktop/artifacts/FinPilotPet-15.0.0-win-x64-portable.exe"
 PORTABLE_BYTES = 109961117
 PORTABLE_SHA256 = "fa2986cdc8c4955045830bd1b099b0453e279cffdf8142675c3c7225d64d4a1d"

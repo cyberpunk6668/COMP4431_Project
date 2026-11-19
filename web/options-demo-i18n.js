@@ -37,7 +37,7 @@
     ['分析适用于所选期权范围；未返回的字段保持缺失。', 'The analysis applies to the selected options. Unavailable fields remain missing.'],
     ['展开本地数值依据', 'Expand local numerical evidence'], ['数据范围与分析限制', 'Data scope and limitations'],
     ['数据来源与网关接入', 'Data source and gateway access'],
-    ['当前使用固定模拟数据，未连接 IBKR。网关采集请在已配置的服务中打开（通常为 8000 端口）；行情类型与可用字段以实际返回结果为准。', 'This analysis uses fixed simulated data and is not connected to IBKR. Open the configured gateway service, usually on port 8000, for collection. Feed type and available fields depend on its actual response.'],
+    ['当前使用固定模拟数据，未连接 IBKR。链接打开当前服务的网关工作台；实际采集须先启用并配置 IBKR，独立风险页服务默认禁用采集。其他服务请使用其启动器显示的地址。', 'This analysis uses fixed simulated data and is not connected to IBKR. The link opens this service’s gateway workspace. Collection requires IBKR configuration and is disabled in the standalone risk service. Use the address printed by its launcher for another service.'],
     ['打开网关分析 ↗', 'Open gateway analysis ↗'],
     ['分析用于理解波动与风险，不构成交易建议。', 'Analysis helps explain volatility and risk and is not trading advice.'], ['历史资料分析 ↗', 'Historical analysis ↗'],
   ];

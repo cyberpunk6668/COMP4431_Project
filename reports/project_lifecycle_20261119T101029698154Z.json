@@ -1,0 +1,45 @@
+{
+  "status": "passed",
+  "checked_at_utc": "20261119T101029698154Z",
+  "scope": "Real Windows supervisor, private console, HTTP backend and headless fake pet/child; no native pet UI or model/broker",
+  "diagnostics": "C:\\Users\\ROG\\AppData\\Local\\Temp\\finpilot-lifecycle-check-w02lw4et",
+  "cases": [
+    {
+      "name": "startup_order_duplicate_reuse_cli_stop_and_descendant_cleanup",
+      "status": "passed",
+      "controlled_processes": 6
+    },
+    {
+      "name": "backend_exit_closes_pet_and_its_child",
+      "status": "passed"
+    },
+    {
+      "name": "kill_on_job_close_cleans_entire_tree_after_owner_termination",
+      "status": "passed"
+    },
+    {
+      "name": "ctrl_c_on_owned_hidden_console_cleans_project",
+      "status": "passed"
+    },
+    {
+      "name": "manual_pet_quit_keeps_backend_until_project_stop",
+      "status": "passed"
+    },
+    {
+      "name": "occupied_unowned_service_is_not_adopted_or_stopped",
+      "status": "passed"
+    },
+    {
+      "name": "different_project_and_wrong_root_stop_are_isolated",
+      "status": "passed",
+      "wrong_root_exit_code": 0
+    },
+    {
+      "name": "backend_startup_failure_leaves_no_pet_or_owned_child",
+      "status": "passed"
+    }
+  ],
+  "real_model_requests": 0,
+  "broker_requests": 0,
+  "cleanup_errors": []
+}

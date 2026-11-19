@@ -1,5 +1,6 @@
 """Local-only demo API and static client. Run with uvicorn on loopback."""
 import asyncio
+import os
 import json
 import re
 import time
@@ -197,8 +198,13 @@ def create_app(settings: Settings | None = None, *, options_provider=None, histo
 
     @app.middleware("http")
     async def local_security(request: Request, call_next):
-        host = request.url.hostname
-        if host not in {"127.0.0.1", "localhost", "::1", "testserver"}:
+        # Validate the raw HTTP authority before parsing request.url: malformed
+        # IPv6 brackets can otherwise raise ValueError, while userinfo or path
+        # suffixes can be parsed as a permitted hostname and bypass this guard.
+        host_headers = request.headers.getlist("host")
+        authority = host_headers[0] if len(host_headers) == 1 else ""
+        local_authority = re.fullmatch(r"(?:127\.0\.0\.1|localhost|\[::1\]|testserver)(?::([0-9]{1,5}))?", authority, re.I)
+        if not local_authority or (local_authority[1] is not None and not 1 <= int(local_authority[1]) <= 65535):
             return JSONResponse({"detail": "This application is configured for local use only."}, status_code=400)
         if request.method in {"POST", "PUT", "PATCH", "DELETE"}:
             origin = request.headers.get("origin")
@@ -243,6 +249,7 @@ def create_app(settings: Settings | None = None, *, options_provider=None, histo
     @app.get("/api/health")
     def health():
         return dict(application="FinPilot", status="ok", mode="deepseek" if config.online else "offline", model=config.model,
+                    project_run_token=os.getenv("FINPILOT_PROJECT_RUN_TOKEN"),
                     knowledge_documents=len(retriever.documents), version=__version__,
                     provider_verified=False, local_model=local_provider.status(), avatar_modes=["3d", "2d"],
                     note="Mode indicates configuration, not a live provider connectivity test.")

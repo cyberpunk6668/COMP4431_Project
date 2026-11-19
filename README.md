@@ -10,7 +10,7 @@ COMP4431 Artificial Intelligence（2026/27）课程项目。FinPilot 将可追�
 
 ### 团队信息
 
-| 成员 | 英文姓名 | 学号 
+| 成员 | 英文姓名 | 学号 | 贡献比例 |
 | --- | --- | --- | --- |
 | 1 | Li Hengxian | 24118129d | 25% |
 | 2 | Liang Zishen | 24099982d | 25% |
@@ -37,7 +37,7 @@ python -m venv .venv
 if (-not (Test-Path -LiteralPath '.env')) { Copy-Item -LiteralPath '.env.example' -Destination '.env' }
 ```
 
-Windows 通常没有系统 IANA 时区数据库，因此这里显式安装已在本机验证的 `tzdata==2025.3`，供纽约交易日判断、互动学习及历史复盘使用。当前 `requirements.txt` 尚未列入此项，按上述完整命令准备环境即可。首次安装需要网络。
+Windows 通常没有系统 IANA 时区数据库；运行依赖已包含 `tzdata==2025.3`，供纽约交易日判断、互动学习及历史复盘使用。首次安装需要网络。
 
 ### 2. 选择运行模式
 
@@ -49,19 +49,31 @@ Windows 通常没有系统 IANA 时区数据库，因此这里显式安装已在
 
 ### 3. 启动服务
 
-```powershell
-.\.venv\Scripts\python.exe -m uvicorn app.main:app --host 127.0.0.1 --port 8000
-```
-
-打开 [FinPilot 首页](http://127.0.0.1:8000)。在运行服务的终端按 `Ctrl+C` 停止。不要直接用浏览器打开 `web/index.html`，页面需要后端接口。
-
-完成环境准备后，也可以双击根目录的 **`start-finpilot.bat`** 启动。它会检查或创建 `.venv`、补装缺失的核心依赖、准备 `.env`，并使用 8000–8010 中第一个可用端口；**以启动窗口显示的地址为准**。Windows 时区依赖仍按上文准备。需要重新安装核心依赖时运行：
+双击根目录 **`start-finpilot.bat`**，或运行：
 
 ```powershell
-.\start-finpilot.bat --install
+.\start-finpilot.bat
 ```
 
-仅运行已编译的网页不需要 Node.js；浏览器语音、3D 和实际网关采集另有环境要求，见后文。
+启动器检查或创建 `.venv`、补装缺失的核心依赖、准备 `.env`，随后启动后端、悬浮 2D 对话助手和浏览器。默认使用 8000–8010 中第一个可用端口，**以启动窗口显示的地址为准**。缺少桌宠运行依赖时自动下载锁定版本的 Node/Electron；依赖和桌宠偏好缓存于 `%LOCALAPPDATA%\FinPilot\runtimes\full-<项目路径摘要>\`，后续复用。
+
+**启动窗口需保持打开。关闭该窗口、按 `Ctrl+C` 或双击 `stop-finpilot.cmd`，会同时结束本次项目后端和助手。** 后端异常退出也会关闭助手；关闭浏览器页面不会停止项目。同一项目重复启动会复用现有运行实例，不重复创建助手；修改配置、代码或切换 `-NoDesktop` 模式时，请先停止再重启。独立运行的旧服务不会被接管或结束。
+
+```powershell
+# 指定端口，不打开浏览器，仍启动助手
+.\start-finpilot.bat -Port 8001 -NoBrowser
+
+# 仅使用网页，不启动桌面助手
+.\start-finpilot.bat -NoDesktop
+
+# 停止本项目通过启动器开启的服务与助手
+.\stop-finpilot.cmd
+
+# 重新安装核心依赖
+.\start-finpilot.bat -Install
+```
+
+仅运行已编译的网页（`-NoDesktop`）不需要 Node.js。直接执行 `uvicorn` 供后端开发使用，不会自动创建桌面助手。不要直接打开 `web/index.html`，页面需要后端接口。浏览器语音、3D 和实际网关采集另有环境要求，见后文。
 
 ### 单独启动期权风险解读
 
@@ -98,7 +110,7 @@ Windows 通常没有系统 IANA 时区数据库，因此这里显式安装已在
 | [历史复盘](http://127.0.0.1:8000/workspace?view=history) | 导入 CSV/JSON、回放历史档案、检索专家依据 | 区分自有文件、合成示例和已保存的真实历史资料 |
 | [三步历史演示](http://127.0.0.1:8000/demo) | 加载历史档案 → 检索依据 → 明确请求 AI 解释 | 独立会话；加载档案不采集新行情 |
 | [使用指南](http://127.0.0.1:8000/help) | 搜索当前 17 个双语手册主题 | 手册版本 17.0；页面搜索不请求模型或 IBKR |
-| [网页桌宠](http://127.0.0.1:8000/pet) | 查看角色与指定会话的聊天界面 | 原生桌面窗口需另行启动 |
+| [网页桌宠](http://127.0.0.1:8000/pet) | 查看角色与指定会话的聊天界面 | 主启动器默认同时启动原生悬浮窗口 |
 | [API 文档](http://127.0.0.1:8000/docs) | 本地接口说明与请求测试 | 机器可读契约为 `/openapi.json` |
 
 ### 推荐体验流程
@@ -124,18 +136,18 @@ Windows 通常没有系统 IANA 时区数据库，因此这里显式安装已在
 
 ### Windows 桌宠
 
-先完成主环境安装，再运行：
+主启动器默认自动打开桌宠。只需要后端与桌宠、不打开浏览器时，也可运行：
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File .\start-desktop.ps1
 
-# 主服务使用其他端口时，明确指定同一端口
+# 首次启动时选择端口；同一项目已有实例时复用现有实例
 powershell -NoProfile -ExecutionPolicy Bypass -File .\start-desktop.ps1 -Port 8001
 ```
 
-启动器会复用已核对的 FinPilot 服务，或启动本项目的 Python 后端。单击播放本地互动，双击或按 Enter 打开聊天；在工作台点击「连接当前会话」后，桌宠可继续该会话。连接、同步和动画不会自动调用模型或采集行情。通过托盘退出桌宠后，Python 后端仍可能继续运行。
+单击播放本地互动，双击或按 Enter 打开聊天；在工作台点击「连接当前会话」后，桌宠可继续该会话。连接、同步和动画不会自动调用模型或采集行情。关闭项目启动窗口会结束后台与助手；通过托盘「退出桌宠」则只关闭助手，后台保留到项目停止。
 
-**Portable EXE 需要项目 Python 后端及其依赖，未内置 Python、基座模型或 API Key。** 从源码开发或缺少便携程序时，按 [桌宠说明](desktop/README.md) 安装 Node 依赖并构建。鲸鱼娘使用 2D 动作素材，原有机器人支持 2D/3D 展示。
+默认启动器运行当前宿主源码，以包含最新生命周期修复；旧的 v15 Portable EXE 是历史构建，不用于本次联动启动。**Portable EXE 未内置 Python 后端、基座模型或 API Key。** 开发与重建见 [桌宠说明](desktop/README.md)。鲸鱼娘使用 2D 动作素材，原有机器人支持 2D/3D 展示。
 
 ## 模型与配置
 
@@ -235,18 +247,18 @@ dist/                   本机生成的提交包与校验结果
 
 ### 最近一次完整审查
 
-下表记录 **2026-11-18** 的实际检查结果；历史版本文档中的旧测试数字仅对应当时阶段。
+下表记录 **2026-11-19** 的实际检查结果；历史版本文档中的旧测试数字仅对应当时阶段。
 
 | 检查范围 | 结果 | 证据 |
 | --- | --- | --- |
-| Python 回归 | 1063 项通过，含 24 项新增回归 | [JUnit](reports/tests_project_audit_20261118.xml) |
-| 完整体验 | Edge 320 / 390 / 1440 三种宽度通过 | [界面报告](reports/experience_ui_v17-20261118T003840502408Z.json) |
-| 期权风险页与双语 | 主流程、损坏响应保护、语言切换通过 | [流程报告](reports/options_demo_browser_20261118T003819Z.json)、[语言报告](reports/options_demo_language_20261118T003841007005Z.json) |
+| Python 回归 | 1097 项通过，本轮新增 34 项边界回归 | [JUnit](reports/tests_v17-20261119T084146122933Z.xml) |
+| 完整体验 | Edge 320 / 390 / 1440 三种宽度通过 | [界面报告](reports/experience_ui_v17-20261119T083229312909Z.json) |
+| 期权风险页与双语 | 主流程、损坏响应保护、语言切换通过 | [流程报告](reports/options_demo_browser_20261119T083229Z.json)、[语言报告](reports/options_demo_language_20261119T084146699638Z.json) |
 | 浏览器存储异常 | 禁用存储、容量不足两种故障注入通过 | [存储报告](reports/storage_resilience_20261118T003802012664Z.json) |
-| 前端与桌宠构建 | TypeScript/Vite 通过；桌宠 4 项 Node 测试通过，ASAR 与源码一致 | [审查汇总](reports/project_audit_20261118.json)、[桌宠构建](reports/desktop_build_bug_audit_20261118.json) |
+| 前端与桌宠构建 | TypeScript/Vite 通过；桌宠 4 项 Node 测试通过，ASAR 与源码一致 | [审查汇总](reports/project_audit_20261119.json)、[桌宠构建](reports/desktop_build_bug_audit_20261118.json) |
 | 独立启动与提交包 | 启动、复用、停止及提交包独立解压验证通过 | [启动器报告](reports/launcher_audit_20261118.json)；包验证生成于 `dist/package_check_v17.json` |
 
-本轮完整审查未重新调用真实 DeepSeek、IBKR 或实际本地模型推理，也未认证物理拖动、托盘、语音、透明区域命中或多屏硬件行为。测试通过不保证绝对没有 bug、模型首答正确或金融判断可靠。更早的真实模型和网关验收保留在对应版本文档及报告中。
+本轮实际完成一次缓存本地 LoRA 离线生成；未重新调用真实 DeepSeek 或 IBKR，也未认证物理拖动、托盘、语音、透明区域命中或多屏硬件行为。测试通过不保证绝对没有 bug、模型首答正确或金融判断可靠。更早的真实模型和网关验收保留在对应版本文档及报告中。
 
 ### 重建首页和桌宠
 
